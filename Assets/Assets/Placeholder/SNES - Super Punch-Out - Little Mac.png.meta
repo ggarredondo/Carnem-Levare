@@ -1,0 +1,1266 @@
+fileFormatVersion: 2
+guid: 5b092f414e9d6e1449100fb1ff9d837d
+TextureImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 11
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMasterTextureLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 0
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 16384
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Server
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: SNES - Super Punch-Out - Little Mac_0
+      rect:
+        serializedVersion: 2
+        x: 15
+        y: 534
+        width: 87
+        height: 136
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f3dbc77065a8d7541b8f33b4a20e5060
+      internalID: -647680390
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SNES - Super Punch-Out - Little Mac_1
+      rect:
+        serializedVersion: 2
+        x: 94
+        y: 590
+        width: 15
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: caeee6ed4a73bb84ca495e9604c0aae1
+      internalID: -1223207484
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SNES - Super Punch-Out - Little Mac_2
+      rect:
+        serializedVersion: 2
+        x: 120
+        y: 534
+        width: 79
+        height: 136
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b08a383918bae034fa2f542b3fad2762
+      internalID: 1555737526
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SNES - Super Punch-Out - Little Mac_3
+      rect:
+        serializedVersion: 2
+        x: 202
+        y: 534
+        width: 104
+        height: 136
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cc05dc30be5ee0d40ac41e33a7b688af
+      internalID: 689871509
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SNES - Super Punch-Out - Little Mac_4
+      rect:
+        serializedVersion: 2
+        x: 307
+        y: 534
+        width: 88
+        height: 136
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 94f6c1a87aea85049a11daada202fb66
+      internalID: -71135411
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SNES - Super Punch-Out - Little Mac_5
+      rect:
+        serializedVersion: 2
+        x: 401
+        y: 567
+        width: 22
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4f0ba17b170cd1f47914ea298e291ed2
+      internalID: -1257987418
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SNES - Super Punch-Out - Little Mac_6
+      rect:
+        serializedVersion: 2
+        x: 431
+        y: 569
+        width: 21
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2b39805f6a35c2f4b9fccbb3c81c940b
+      internalID: -881826569
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SNES - Super Punch-Out - Little Mac_7
+      rect:
+        serializedVersion: 2
+        x: 464
+        y: 569
+        width: 24
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e61e086892b37d24e8b4d0242000c477
+      internalID: 1541179419
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SNES - Super Punch-Out - Little Mac_8
+      rect:
+        serializedVersion: 2
+        x: 498
+        y: 571
+        width: 25
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6d2b75279c7b1b6438e14fd6935d4a10
+      internalID: 2047520817
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SNES - Super Punch-Out - Little Mac_9
+      rect:
+        serializedVersion: 2
+        x: 530
+        y: 568
+        width: 27
+        height: 23
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 82f2162ac086c9c45a619e04c55b616a
+      internalID: 1617828993
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SNES - Super Punch-Out - Little Mac_10
+      rect:
+        serializedVersion: 2
+        x: 574
+        y: 568
+        width: 40
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8a4cd4116f570a946961314a1541335c
+      internalID: -1421430175
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SNES - Super Punch-Out - Little Mac_11
+      rect:
+        serializedVersion: 2
+        x: 629
+        y: 567
+        width: 48
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0f19ebf78e8cd664fae2650cad745331
+      internalID: 136304689
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SNES - Super Punch-Out - Little Mac_12
+      rect:
+        serializedVersion: 2
+        x: 403
+        y: 534
+        width: 23
+        height: 25
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2ef13b8d4e5f5a7458ee409ff2268caa
+      internalID: 449872904
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SNES - Super Punch-Out - Little Mac_13
+      rect:
+        serializedVersion: 2
+        x: 431
+        y: 535
+        width: 26
+        height: 25
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6a7434e54863e0c42a26c410b7e0bad6
+      internalID: -935037125
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SNES - Super Punch-Out - Little Mac_14
+      rect:
+        serializedVersion: 2
+        x: 470
+        y: 535
+        width: 23
+        height: 27
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e149a3817cb267049bb2669493b77a9b
+      internalID: -1456392483
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SNES - Super Punch-Out - Little Mac_15
+      rect:
+        serializedVersion: 2
+        x: 496
+        y: 544
+        width: 27
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: dc5cf984ed1073c42b7f446fdff9acf4
+      internalID: 374270680
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SNES - Super Punch-Out - Little Mac_16
+      rect:
+        serializedVersion: 2
+        x: 531
+        y: 542
+        width: 23
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f7fa2a2ebacdac945923a1d29e2d6745
+      internalID: -605638048
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SNES - Super Punch-Out - Little Mac_17
+      rect:
+        serializedVersion: 2
+        x: 566
+        y: 534
+        width: 23
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2f2006bff71704848b88047cfbdf6e21
+      internalID: -1524941878
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SNES - Super Punch-Out - Little Mac_18
+      rect:
+        serializedVersion: 2
+        x: 596
+        y: 535
+        width: 24
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: faa1404b8809855459df383020da006e
+      internalID: -532026704
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SNES - Super Punch-Out - Little Mac_19
+      rect:
+        serializedVersion: 2
+        x: 632
+        y: 540
+        width: 25
+        height: 25
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 634665b29c466d14bb0113b17e42abd4
+      internalID: -951719529
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SNES - Super Punch-Out - Little Mac_20
+      rect:
+        serializedVersion: 2
+        x: 663
+        y: 537
+        width: 29
+        height: 25
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2e9b046c08ee6e94da97a20d56f3ef95
+      internalID: 1345052278
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SNES - Super Punch-Out - Little Mac_21
+      rect:
+        serializedVersion: 2
+        x: 697
+        y: 539
+        width: 27
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6c4416c5921ae444d94839a9f6952aa3
+      internalID: 963789761
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SNES - Super Punch-Out - Little Mac_22
+      rect:
+        serializedVersion: 2
+        x: 8
+        y: 429
+        width: 63
+        height: 97
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 876628ca14d6a1948b1c75fafe002973
+      internalID: -1284397066
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SNES - Super Punch-Out - Little Mac_23
+      rect:
+        serializedVersion: 2
+        x: 73
+        y: 429
+        width: 56
+        height: 96
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3e720ea272e725f4db409bb159d85cb5
+      internalID: -799946900
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SNES - Super Punch-Out - Little Mac_24
+      rect:
+        serializedVersion: 2
+        x: 136
+        y: 429
+        width: 74
+        height: 93
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1976155553cf6c047b9996f39facd371
+      internalID: -139851510
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SNES - Super Punch-Out - Little Mac_25
+      rect:
+        serializedVersion: 2
+        x: 212
+        y: 429
+        width: 107
+        height: 72
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 717767a63d0ae874faa95f5fd03b32bb
+      internalID: 996757190
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SNES - Super Punch-Out - Little Mac_26
+      rect:
+        serializedVersion: 2
+        x: 328
+        y: 429
+        width: 66
+        height: 98
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: af45b1e6eaa98f140b7eaca8c4e9c83e
+      internalID: -522657184
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SNES - Super Punch-Out - Little Mac_27
+      rect:
+        serializedVersion: 2
+        x: 401
+        y: 429
+        width: 54
+        height: 93
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 45429c510ea56cf46a2056eec6eb76fb
+      internalID: -443576026
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SNES - Super Punch-Out - Little Mac_28
+      rect:
+        serializedVersion: 2
+        x: 467
+        y: 429
+        width: 79
+        height: 98
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ac50432514cfc474d9495ddfbc5c118b
+      internalID: -1582390727
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SNES - Super Punch-Out - Little Mac_29
+      rect:
+        serializedVersion: 2
+        x: 551
+        y: 429
+        width: 68
+        height: 98
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e6228a17f407f094f81b66055617cd6f
+      internalID: 1172521447
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SNES - Super Punch-Out - Little Mac_30
+      rect:
+        serializedVersion: 2
+        x: 626
+        y: 429
+        width: 86
+        height: 96
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 46368c639224a8347bd9be7296401b7f
+      internalID: 1332349503
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SNES - Super Punch-Out - Little Mac_31
+      rect:
+        serializedVersion: 2
+        x: 14
+        y: 292
+        width: 76
+        height: 75
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e8287420da453d14f8ad1b93978874c4
+      internalID: 676297449
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SNES - Super Punch-Out - Little Mac_32
+      rect:
+        serializedVersion: 2
+        x: 102
+        y: 292
+        width: 81
+        height: 98
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9693ca665ad721344bbf3259654d1bcb
+      internalID: 377949794
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SNES - Super Punch-Out - Little Mac_33
+      rect:
+        serializedVersion: 2
+        x: 186
+        y: 292
+        width: 64
+        height: 131
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bbef590c34cb4164e913d2f45191d94f
+      internalID: -392786945
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SNES - Super Punch-Out - Little Mac_34
+      rect:
+        serializedVersion: 2
+        x: 255
+        y: 292
+        width: 65
+        height: 123
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5ced088403b9f534ea3301bdf6db675a
+      internalID: -2124522152
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SNES - Super Punch-Out - Little Mac_35
+      rect:
+        serializedVersion: 2
+        x: 330
+        y: 292
+        width: 73
+        height: 97
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 743ed70ddd11d304fa5c6ba40355b478
+      internalID: 1857275549
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SNES - Super Punch-Out - Little Mac_36
+      rect:
+        serializedVersion: 2
+        x: 407
+        y: 292
+        width: 58
+        height: 95
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9b6a20e959d6c524a9bbf111827c0af9
+      internalID: 1567467786
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SNES - Super Punch-Out - Little Mac_37
+      rect:
+        serializedVersion: 2
+        x: 473
+        y: 292
+        width: 58
+        height: 96
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5d1584bde8b2344408549d871c27afc7
+      internalID: -323632522
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SNES - Super Punch-Out - Little Mac_38
+      rect:
+        serializedVersion: 2
+        x: 537
+        y: 292
+        width: 49
+        height: 99
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: be880ca6a586e374a8cd5d7456c4262e
+      internalID: -57739366
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SNES - Super Punch-Out - Little Mac_39
+      rect:
+        serializedVersion: 2
+        x: 592
+        y: 292
+        width: 88
+        height: 74
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b5b69239f1bb3f24bac7f52d41f9d08c
+      internalID: -268182725
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SNES - Super Punch-Out - Little Mac_40
+      rect:
+        serializedVersion: 2
+        x: 687
+        y: 292
+        width: 92
+        height: 73
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 77b73966216d56d47bdc0241bc12b1d6
+      internalID: -1325513855
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SNES - Super Punch-Out - Little Mac_41
+      rect:
+        serializedVersion: 2
+        x: 10
+        y: 139
+        width: 66
+        height: 108
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a14147876d6d1814b95237954737b1bb
+      internalID: -913501033
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SNES - Super Punch-Out - Little Mac_42
+      rect:
+        serializedVersion: 2
+        x: 86
+        y: 139
+        width: 67
+        height: 146
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a17db5599c02b5a4e9d72476f110b191
+      internalID: -288301998
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SNES - Super Punch-Out - Little Mac_43
+      rect:
+        serializedVersion: 2
+        x: 156
+        y: 139
+        width: 70
+        height: 137
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8cb3cbc5a014fee40a61f51579423b44
+      internalID: -51545403
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SNES - Super Punch-Out - Little Mac_44
+      rect:
+        serializedVersion: 2
+        x: 232
+        y: 139
+        width: 78
+        height: 132
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ee15920159e789548bab74711ad05722
+      internalID: -694137294
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SNES - Super Punch-Out - Little Mac_45
+      rect:
+        serializedVersion: 2
+        x: 319
+        y: 139
+        width: 60
+        height: 112
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1aa9782f0a2041041b4edaa233edfb8a
+      internalID: 686385803
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SNES - Super Punch-Out - Little Mac_46
+      rect:
+        serializedVersion: 2
+        x: 381
+        y: 139
+        width: 74
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1ebb10d94c325a3469a4b64e03655847
+      internalID: 1581886359
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SNES - Super Punch-Out - Little Mac_47
+      rect:
+        serializedVersion: 2
+        x: 469
+        y: 139
+        width: 73
+        height: 136
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6afa5181452d2a547a04619fa535f4ad
+      internalID: -319308405
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SNES - Super Punch-Out - Little Mac_48
+      rect:
+        serializedVersion: 2
+        x: 10
+        y: 10
+        width: 78
+        height: 96
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 124681e7c256eb4439e5ff1b0d9665bd
+      internalID: -60086698
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SNES - Super Punch-Out - Little Mac_49
+      rect:
+        serializedVersion: 2
+        x: 90
+        y: 10
+        width: 78
+        height: 118
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e65688af875b5a24589701d9cc4bc2e4
+      internalID: 1558940987
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SNES - Super Punch-Out - Little Mac_50
+      rect:
+        serializedVersion: 2
+        x: 174
+        y: 10
+        width: 102
+        height: 120
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1d956950fb1a7a744975e65b984fa3fa
+      internalID: 53241183
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SNES - Super Punch-Out - Little Mac_51
+      rect:
+        serializedVersion: 2
+        x: 283
+        y: 10
+        width: 70
+        height: 124
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e925ab179189f474186ac392d2eca1e7
+      internalID: 1816028487
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    nameFileIdTable:
+      SNES - Super Punch-Out - Little Mac_4: -71135411
+      SNES - Super Punch-Out - Little Mac_1: -1223207484
+      SNES - Super Punch-Out - Little Mac_7: 1541179419
+      SNES - Super Punch-Out - Little Mac_22: -1284397066
+      SNES - Super Punch-Out - Little Mac_12: 449872904
+      SNES - Super Punch-Out - Little Mac_24: -139851510
+      SNES - Super Punch-Out - Little Mac_23: -799946900
+      SNES - Super Punch-Out - Little Mac_31: 676297449
+      SNES - Super Punch-Out - Little Mac_16: -605638048
+      SNES - Super Punch-Out - Little Mac_37: -323632522
+      SNES - Super Punch-Out - Little Mac_18: -532026704
+      SNES - Super Punch-Out - Little Mac_39: -268182725
+      SNES - Super Punch-Out - Little Mac_13: -935037125
+      SNES - Super Punch-Out - Little Mac_41: -913501033
+      SNES - Super Punch-Out - Little Mac_17: -1524941878
+      SNES - Super Punch-Out - Little Mac_30: 1332349503
+      SNES - Super Punch-Out - Little Mac_32: 377949794
+      SNES - Super Punch-Out - Little Mac_8: 2047520817
+      SNES - Super Punch-Out - Little Mac_11: 136304689
+      SNES - Super Punch-Out - Little Mac_9: 1617828993
+      SNES - Super Punch-Out - Little Mac_44: -694137294
+      SNES - Super Punch-Out - Little Mac_46: 1581886359
+      SNES - Super Punch-Out - Little Mac_14: -1456392483
+      SNES - Super Punch-Out - Little Mac_33: -392786945
+      SNES - Super Punch-Out - Little Mac_48: -60086698
+      SNES - Super Punch-Out - Little Mac_49: 1558940987
+      SNES - Super Punch-Out - Little Mac_3: 689871509
+      SNES - Super Punch-Out - Little Mac_42: -288301998
+      SNES - Super Punch-Out - Little Mac_40: -1325513855
+      SNES - Super Punch-Out - Little Mac_0: -647680390
+      SNES - Super Punch-Out - Little Mac_50: 53241183
+      SNES - Super Punch-Out - Little Mac_43: -51545403
+      SNES - Super Punch-Out - Little Mac_20: 1345052278
+      SNES - Super Punch-Out - Little Mac_19: -951719529
+      SNES - Super Punch-Out - Little Mac_29: 1172521447
+      SNES - Super Punch-Out - Little Mac_27: -443576026
+      SNES - Super Punch-Out - Little Mac_26: -522657184
+      SNES - Super Punch-Out - Little Mac_25: 996757190
+      SNES - Super Punch-Out - Little Mac_28: -1582390727
+      SNES - Super Punch-Out - Little Mac_2: 1555737526
+      SNES - Super Punch-Out - Little Mac_35: 1857275549
+      SNES - Super Punch-Out - Little Mac_51: 1816028487
+      SNES - Super Punch-Out - Little Mac_34: -2124522152
+      SNES - Super Punch-Out - Little Mac_47: -319308405
+      SNES - Super Punch-Out - Little Mac_6: -881826569
+      SNES - Super Punch-Out - Little Mac_15: 374270680
+      SNES - Super Punch-Out - Little Mac_38: -57739366
+      SNES - Super Punch-Out - Little Mac_36: 1567467786
+      SNES - Super Punch-Out - Little Mac_5: -1257987418
+      SNES - Super Punch-Out - Little Mac_21: 963789761
+      SNES - Super Punch-Out - Little Mac_45: 686385803
+      SNES - Super Punch-Out - Little Mac_10: -1421430175
+  spritePackingTag: 
+  pSDRemoveMatte: 0
+  pSDShowRemoveMatteOption: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
