@@ -158,8 +158,8 @@ Material:
     - _METALNESS: 0
     - _Metallic: 0
     - _OcclusionStrength: 1
-    - _Outline: 1
-    - _Outline_Fade: 0
+    - _Outline: 0.55
+    - _Outline_Fade: 0.1
     - _Parallax: 0.005
     - _QueueControl: 0
     - _QueueOffset: 0
