@@ -1206,7 +1206,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f2cebe24abcdb24cafe9ba435a3c5b6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 1800
+  speed: 1200
   cameraSpeed: 5
   cameraRotationSpeed: 70
   cameraBouncingSpeed: 0.5

@@ -59,8 +59,8 @@ public class PlayerController : MonoBehaviour
 
         directionMovement = new Vector2(0, 0);
 
-        widthResolutionLimits = new Vector2(Screen.currentResolution.width / widthApertureMovement, Screen.currentResolution.width - Screen.currentResolution.width / widthApertureMovement);
-        heightResolutionLimits = new Vector2(Screen.currentResolution.height / heightApertureMovement, initialPlayerPosition.y);
+        widthResolutionLimits = new Vector2(Screen.width / widthApertureMovement, Screen.width - Screen.width / widthApertureMovement);
+        heightResolutionLimits = new Vector2(Screen.height / heightApertureMovement, initialPlayerPosition.y);
 
         counter = 0;
         sign = 1;
@@ -165,6 +165,7 @@ public class PlayerController : MonoBehaviour
         {
             //Move the player
             rb.velocity = (Vector3) directionMovement * speed;
+
 
             //Limit the player movement, using the actual resolution to adecuate the movement for all monitors
             playerTransform.position = new Vector3(Mathf.Clamp(playerTransform.position.x, widthResolutionLimits.x, widthResolutionLimits.y),
