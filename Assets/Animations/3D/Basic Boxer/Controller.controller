@@ -11,7 +11,7 @@ AnimatorStateMachine:
   m_ChildStates:
   - serializedVersion: 1
     m_State: {fileID: 1543031060515992590}
-    m_Position: {x: 340, y: 80, z: 0}
+    m_Position: {x: 330, y: 80, z: 0}
   m_ChildStateMachines: []
   m_AnyStateTransitions: []
   m_EntryTransitions: []
@@ -31,27 +31,15 @@ AnimatorController:
   m_Name: Controller
   serializedVersion: 5
   m_AnimatorParameters:
+  - m_Name: load
+    m_Type: 1
+    m_DefaultFloat: 0
+    m_DefaultInt: 0
+    m_DefaultBool: 0
+    m_Controller: {fileID: 0}
   - m_Name: speed
     m_Type: 1
     m_DefaultFloat: 1
-    m_DefaultInt: 0
-    m_DefaultBool: 0
-    m_Controller: {fileID: 0}
-  - m_Name: horizontal
-    m_Type: 1
-    m_DefaultFloat: 0
-    m_DefaultInt: 0
-    m_DefaultBool: 0
-    m_Controller: {fileID: 0}
-  - m_Name: vertical
-    m_Type: 1
-    m_DefaultFloat: 0
-    m_DefaultInt: 0
-    m_DefaultBool: 0
-    m_Controller: {fileID: 0}
-  - m_Name: style
-    m_Type: 1
-    m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
     m_Controller: {fileID: 0}
@@ -103,7 +91,7 @@ BlendTree:
   m_Name: Blend Tree
   m_Childs:
   - serializedVersion: 2
-    m_Motion: {fileID: 7400000, guid: 1f80195f474c8f84c9adcbc7e86c4ad7, type: 2}
+    m_Motion: {fileID: 7400000, guid: 85d203129e589384aa0d7b7a06a88136, type: 2}
     m_Threshold: -1
     m_Position: {x: 0, y: 0}
     m_TimeScale: 1
@@ -111,7 +99,7 @@ BlendTree:
     m_DirectBlendParameter: style
     m_Mirror: 0
   - serializedVersion: 2
-    m_Motion: {fileID: 7400000, guid: 6c11fa37dd53051489fb2cc79d3711be, type: 2}
+    m_Motion: {fileID: 7400000, guid: 453fa649e0b998c4b96da02d69463c13, type: 2}
     m_Threshold: 0
     m_Position: {x: 0, y: 0}
     m_TimeScale: 1
@@ -119,14 +107,14 @@ BlendTree:
     m_DirectBlendParameter: style
     m_Mirror: 0
   - serializedVersion: 2
-    m_Motion: {fileID: 7400000, guid: 489564c6b39397e42a2e7ccee2918549, type: 2}
+    m_Motion: {fileID: 7400000, guid: db7c6b6f83fda784eb71accbc0f75787, type: 2}
     m_Threshold: 1
     m_Position: {x: 0, y: 0}
     m_TimeScale: 1
     m_CycleOffset: 0
     m_DirectBlendParameter: style
     m_Mirror: 0
-  m_BlendParameter: style
+  m_BlendParameter: load
   m_BlendParameterY: speed
   m_MinThreshold: -1
   m_MaxThreshold: 1
