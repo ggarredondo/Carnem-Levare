@@ -54,7 +54,6 @@ public class PlayerController : MonoBehaviour
     /// </summary>
     public void MoveControl(InputAction.CallbackContext context)
     {
-        //Obtain de direction from the left stick
         left_stick = context.ReadValue<Vector2>().normalized;
     }
 
