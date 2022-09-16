@@ -2132,6 +2132,7 @@ GameObject:
   - component: {fileID: 543450652840633296}
   - component: {fileID: 892879934}
   - component: {fileID: 919132148839315821}
+  - component: {fileID: 919132148839315822}
   - component: {fileID: 919132148839315820}
   m_Layer: 0
   m_Name: Basic Boxer
@@ -2154,6 +2155,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   load: 0
   speed: 1
+  movementSpeed: 3
+  playerMovementDetectzone: 0.1
 --- !u!143 &919132148839315821
 CharacterController:
   m_ObjectHideFlags: 0
@@ -2172,6 +2175,85 @@ CharacterController:
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 1, z: 0}
+--- !u!114 &919132148839315822
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 919132148839315818}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Actions: {fileID: -944628639613478452, guid: 2e18e44ef06392d4db8c0a1717b171aa,
+    type: 3}
+  m_NotificationBehavior: 2
+  m_UIInputModule: {fileID: 0}
+  m_DeviceLostEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_DeviceRegainedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ControlsChangedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ActionEvents:
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 919132148839315820}
+        m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
+        m_MethodName: MoveControl
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 21e7cf7f-b0cf-4b92-8e5e-6f5895e619ea
+    m_ActionName: Main Movement/Movement
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 919132148839315820}
+        m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
+        m_MethodName: CameraControl
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 1030c10a-7653-4297-8512-07b6268ef811
+    m_ActionName: Main Movement/CameraMovement
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: eae9d122-0c45-49c1-8ae0-abfab8c74b50
+    m_ActionName: Main Movement/Right Jab
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 60f7e98c-e28e-44f5-8238-041783e0c44c
+    m_ActionName: Main Movement/Left Jab
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 6f6c8496-ad55-4a5b-b196-c474aff84dcb
+    m_ActionName: Main Movement/Right Special
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: eb6c9e9b-9855-49aa-b21b-39ffbc961e31
+    m_ActionName: Main Movement/Left Special
+  m_NeverAutoSwitchControlSchemes: 0
+  m_DefaultControlScheme: 
+  m_DefaultActionMap: Main Movement
+  m_SplitScreenIndex: -1
+  m_Camera: {fileID: 0}
 --- !u!33 &990011522262831680
 MeshFilter:
   m_ObjectHideFlags: 0
