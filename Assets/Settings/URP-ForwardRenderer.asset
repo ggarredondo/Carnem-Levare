@@ -72,7 +72,7 @@ MonoBehaviour:
   m_Active: 1
   settings:
     passTag: Toon Shading
-    Event: 1000
+    Event: 550
     filterSettings:
       RenderQueueType: 0
       LayerMask:

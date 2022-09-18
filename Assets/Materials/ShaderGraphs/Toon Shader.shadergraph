@@ -1962,10 +1962,10 @@
     "m_Guid": {
         "m_GuidSerialized": "8881b99a-59a0-49e1-965d-b47137b6baeb"
     },
-    "m_Name": "Outline",
+    "m_Name": "Outline Size",
     "m_DefaultRefNameVersion": 1,
-    "m_RefNameGeneratedByDisplayName": "Outline",
-    "m_DefaultReferenceName": "_Outline",
+    "m_RefNameGeneratedByDisplayName": "Outline Size",
+    "m_DefaultReferenceName": "_Outline_Size",
     "m_OverrideReferenceName": "",
     "m_GeneratePropertyBlock": true,
     "m_UseCustomSlotLabel": false,
@@ -4585,7 +4585,7 @@
     "m_Type": "UnityEditor.ShaderGraph.Vector1MaterialSlot",
     "m_ObjectId": "906f4ba6abd5431eab707b7c911abcc4",
     "m_Id": 0,
-    "m_DisplayName": "Outline",
+    "m_DisplayName": "Outline Size",
     "m_SlotType": 1,
     "m_Hidden": false,
     "m_ShaderOutputName": "Out",
