@@ -11,18 +11,15 @@ public class PlayerController : MonoBehaviour
     private Vector3 initialPlayerPosition;
 
     private float horizontal = 0f, vertical = 0f;
-    private const float vertical_min = -1f, vertical_max = 0f;
+    private const float vertical_min = -1f, vertical_max = 0f, horizontal_min = -1f, horizontal_max = 1f;
 
     [Header("Animation Parameters")]
     [Range(-2f, 2f)] public float speed = 1f;
-    [Range(-1f, 1f)] public float load = 0f;
+    [Range(0f, 1f)] public float load = 0f;
 
     [Header("Movement Parameters")]
     [Range(0f, 10f)] public float movementSpeed = 1f;
     [Range(0f, 10f)] public float returnSpeed = 1f;
-
-    [Range(0f, 10f)] public float translateSpeed = 1f;
-    [Range(0f, 2f)] public float playerTranslateDetectzone;
 
     private void Awake()
     {
@@ -47,8 +44,8 @@ public class PlayerController : MonoBehaviour
     {
         anim.SetFloat("load", load);
         anim.SetFloat("speed", speed);
-        anim.SetFloat("vertical", vertical);
         anim.SetFloat("horizontal", horizontal);
+        anim.SetFloat("vertical", vertical);
     }
 
     //***CONTROLS***
@@ -70,45 +67,18 @@ public class PlayerController : MonoBehaviour
     {
         // If left stick is pushed, character moves according to the stick
         if (left_stick.magnitude > 0f)
+        {
+            horizontal += left_stick.x * Time.deltaTime * movementSpeed;
             vertical += left_stick.y * Time.deltaTime * movementSpeed;
+        }
 
         else // If left stick isn't being pushed, character returns to center
-            vertical += Time.deltaTime * returnSpeed;
-        vertical = Mathf.Clamp(vertical, vertical_min, vertical_max);
-    }
-
-    /// <summary>
-    /// Translates the player actor from left to right according to left stick
-    /// </summary>
-    private void PlayerTranslate()
-    {
-        Vector3 movement = new Vector3(left_stick.x  * translateSpeed, 0, 0);
-        transform.Translate(movement * Time.deltaTime);
-    }
-
-    /// <summary>
-    /// The player and camera come back to the initial position after user moves it
-    /// </summary>
-    private void PlayerTranslateComeback()
-    {
-        //Translates the player to the initial point if the player is not moving
-        //There must be a detect zone because we can't reach the initial point exactly
-        if (NearVectors(transform.position, initialPlayerPosition, playerTranslateDetectzone) && left_stick == new Vector2(0, 0))
         {
-            Vector3 playerMoveDir = (transform.position - initialPlayerPosition) * translateSpeed;
-            transform.Translate(playerMoveDir *  Time.deltaTime);
+            horizontal += left_stick.x * Time.deltaTime * returnSpeed;
+            vertical += Time.deltaTime * returnSpeed;
         }
-    }
 
-    /// <summary>
-    /// Check if the distance between vectors is greater than a value
-    /// </summary>
-    /// <param name="actualPosition">The actual point</param>
-    /// <param name="target">The target point that defines the distance</param>
-    /// <param name="detectzone">The value to be greather than</param>
-    /// <returns></returns>
-    private bool NearVectors(Vector3 actualPosition, Vector3 target, float detectzone)
-    {
-        return Vector3.Distance(actualPosition, target) > detectzone;
+        horizontal = Mathf.Clamp(horizontal, horizontal_min, horizontal_max);
+        vertical = Mathf.Clamp(vertical, vertical_min, vertical_max);
     }
 }
