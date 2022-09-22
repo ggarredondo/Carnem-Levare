@@ -6,9 +6,7 @@ using UnityEngine.InputSystem;
 public class PlayerController : MonoBehaviour
 {
     private Animator anim;
-
     private Vector2 left_stick;
-    private Vector3 initialPlayerPosition;
 
     private float horizontal = 0f, vertical = 0f;
     private const float vertical_min = -1f, vertical_max = 0f, horizontal_min = -1f, horizontal_max = 1f;
@@ -26,15 +24,13 @@ public class PlayerController : MonoBehaviour
         anim = GetComponent<Animator>();
     }
 
-    private void Start()
-    {
-        initialPlayerPosition = transform.position;
-    }
-
     void Update()
     {
         Animation();
         PlayerMovement();
+        Debug.Log("Left stick magnitude: " + left_stick.magnitude);
+        Debug.Log("Horizontal: " + horizontal);
+        Debug.Log("Vertical: " + vertical);
     }
 
     /// <summary>
@@ -46,6 +42,7 @@ public class PlayerController : MonoBehaviour
         anim.SetFloat("speed", speed);
         anim.SetFloat("horizontal", horizontal);
         anim.SetFloat("vertical", vertical);
+        anim.SetBool("is_walking", left_stick.magnitude > 0f);
     }
 
     //***CONTROLS***
