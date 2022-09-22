@@ -24,15 +24,6 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Right Jab",
-                    "type": "Button",
-                    "id": "eae9d122-0c45-49c1-8ae0-abfab8c74b50",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
                     "name": "Left Jab",
                     "type": "Button",
                     "id": "60f7e98c-e28e-44f5-8238-041783e0c44c",
@@ -42,9 +33,9 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Right Special",
+                    "name": "Right Jab",
                     "type": "Button",
-                    "id": "6f6c8496-ad55-4a5b-b196-c474aff84dcb",
+                    "id": "eae9d122-0c45-49c1-8ae0-abfab8c74b50",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -58,6 +49,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "Right Special",
+                    "type": "Button",
+                    "id": "6f6c8496-ad55-4a5b-b196-c474aff84dcb",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -67,17 +67,6 @@
                     "path": "<Gamepad>/leftStick",
                     "interactions": "",
                     "processors": "StickDeadzone",
-                    "groups": "",
-                    "action": "Movement",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "ef4e68c5-93fd-49fc-ae6f-b5b777640720",
-                    "path": "<Gamepad>/dpad",
-                    "interactions": "",
-                    "processors": "",
                     "groups": "",
                     "action": "Movement",
                     "isComposite": false,
@@ -107,23 +96,23 @@
                 },
                 {
                     "name": "",
-                    "id": "037d21b1-ecc3-48d8-9143-93c8231d5156",
-                    "path": "<Gamepad>/leftShoulder",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Left Jab",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
                     "id": "147dfe10-d56f-4f57-9a0a-3c01ffcf6b6f",
                     "path": "<Gamepad>/rightTrigger",
                     "interactions": "Press",
                     "processors": "",
                     "groups": "",
                     "action": "Right Special",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "037d21b1-ecc3-48d8-9143-93c8231d5156",
+                    "path": "<Gamepad>/leftShoulder",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Left Jab",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },

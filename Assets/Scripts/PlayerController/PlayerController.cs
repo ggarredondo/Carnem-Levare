@@ -6,55 +6,59 @@ using UnityEngine.InputSystem;
 public class PlayerController : MonoBehaviour
 {
     private Animator anim;
-    private Vector2 left_stick;
+    private Vector2 movement_value, direction;
+    private float left_jab_value, right_jab_value;
+    private bool is_attacking;
 
     [Header("Animation Parameters")]
-    [Range(-2f, 2f)] public float speed = 1f;
+    public float speed = 1f;
     [Range(0f, 1f)] public float load = 0f;
 
     [Header("Movement Parameters")]
-    [Range(0f, 10f)] public float movementSpeed = 1f;
+    public float movementSpeed = 1f;
 
     private void Awake()
     {
         anim = GetComponent<Animator>();
     }
 
+    private void Start()
+    {
+        direction = Vector2.zero;
+    }
+
     void Update()
     {
-        Animation();
-        Debug.Log("Left stick magnitude: " + left_stick.magnitude);
+        SetAnimationParameters();
     }
 
+    //***INPUT***
+
+
+    public void Movement(InputAction.CallbackContext context){ movement_value = context.ReadValue<Vector2>(); }
+    public void LeftJab(InputAction.CallbackContext context) { left_jab_value = context.ReadValue<float>(); }
+    public void RightJab(InputAction.CallbackContext context) { right_jab_value = context.ReadValue<float>();  }
+
+    //***ANIMATION***
+
     /// <summary>
-    /// Set animation parameters for the animator
+    /// Sets animation parameters for the animator.
     /// </summary>
-    private void Animation()
+    private void SetAnimationParameters()
     {
+        is_attacking = anim.GetCurrentAnimatorStateInfo(0).IsTag("Attacking");
+        anim.SetBool("is_attacking", is_attacking);
         anim.SetFloat("load", load);
         anim.SetFloat("speed", speed);
-        anim.SetFloat("horizontal", left_stick.x);
-        anim.SetFloat("vertical", left_stick.y);
-        anim.SetBool("is_moving", left_stick.magnitude > 0f);
-    }
 
-    //***CONTROLS***
+        // MOVEMENT
+        // Softens the movement by establishing the direction as a point that approaches the stick/mouse target.
+        direction = Vector2.MoveTowards(direction, movement_value, movementSpeed * Time.deltaTime);
+        anim.SetFloat("horizontal", direction.x);
+        anim.SetFloat("vertical", direction.y);
 
-    /// <summary>
-    /// Obtain the direction movement from the left stick
-    /// </summary>
-    public void MoveControl(InputAction.CallbackContext context)
-    {
-        left_stick = context.ReadValue<Vector2>().normalized;
-    }
-
-    //***MOVEMENT_FUNCTIONS***
-
-    /// <summary>
-    /// Modifies animator parameters to move the player through animations
-    /// </summary>
-    private void PlayerMovement()
-    {
-        // nothing yet
+        // ATTACKS
+        anim.SetFloat("left_jab", left_jab_value);
+        anim.SetFloat("right_jab", right_jab_value);
     }
 }
