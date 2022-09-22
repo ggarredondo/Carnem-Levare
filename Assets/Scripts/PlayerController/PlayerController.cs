@@ -8,16 +8,12 @@ public class PlayerController : MonoBehaviour
     private Animator anim;
     private Vector2 left_stick;
 
-    private float horizontal = 0f, vertical = 0f;
-    private const float vertical_min = -1f, vertical_max = 0f, horizontal_min = -1f, horizontal_max = 1f;
-
     [Header("Animation Parameters")]
     [Range(-2f, 2f)] public float speed = 1f;
     [Range(0f, 1f)] public float load = 0f;
 
     [Header("Movement Parameters")]
     [Range(0f, 10f)] public float movementSpeed = 1f;
-    [Range(0f, 10f)] public float returnSpeed = 1f;
 
     private void Awake()
     {
@@ -27,10 +23,7 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         Animation();
-        PlayerMovement();
         Debug.Log("Left stick magnitude: " + left_stick.magnitude);
-        Debug.Log("Horizontal: " + horizontal);
-        Debug.Log("Vertical: " + vertical);
     }
 
     /// <summary>
@@ -40,9 +33,9 @@ public class PlayerController : MonoBehaviour
     {
         anim.SetFloat("load", load);
         anim.SetFloat("speed", speed);
-        anim.SetFloat("horizontal", horizontal);
-        anim.SetFloat("vertical", vertical);
-        anim.SetBool("is_walking", left_stick.magnitude > 0f);
+        anim.SetFloat("horizontal", left_stick.x);
+        anim.SetFloat("vertical", left_stick.y);
+        anim.SetBool("is_moving", left_stick.magnitude > 0f);
     }
 
     //***CONTROLS***
@@ -62,20 +55,6 @@ public class PlayerController : MonoBehaviour
     /// </summary>
     private void PlayerMovement()
     {
-        // If left stick is pushed, character moves according to the stick
-        if (left_stick.magnitude > 0f)
-        {
-            horizontal += left_stick.x * Time.deltaTime * movementSpeed;
-            vertical += left_stick.y * Time.deltaTime * movementSpeed;
-        }
-
-        else // If left stick isn't being pushed, character returns to center
-        {
-            horizontal += left_stick.x * Time.deltaTime * returnSpeed;
-            vertical += Time.deltaTime * returnSpeed;
-        }
-
-        horizontal = Mathf.Clamp(horizontal, horizontal_min, horizontal_max);
-        vertical = Mathf.Clamp(vertical, vertical_min, vertical_max);
+        // nothing yet
     }
 }

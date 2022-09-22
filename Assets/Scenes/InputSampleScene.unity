@@ -762,8 +762,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 1
   load: 0.5
-  movementSpeed: 4
-  returnSpeed: 4
+  movementSpeed: 1
 --- !u!95 &387559348
 Animator:
   serializedVersion: 4
