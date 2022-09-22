@@ -7,7 +7,7 @@ public class PlayerController : MonoBehaviour
 {
     private Animator anim;
     private Vector2 movement_value, direction;
-    private float left_jab_value, right_jab_value;
+    private float left_jab_value, right_jab_value, left_special_value, right_special_value;
     private bool is_attacking;
 
     [Header("Animation Parameters")]
@@ -34,10 +34,11 @@ public class PlayerController : MonoBehaviour
 
     //***INPUT***
 
-
     public void Movement(InputAction.CallbackContext context){ movement_value = context.ReadValue<Vector2>(); }
     public void LeftJab(InputAction.CallbackContext context) { left_jab_value = context.ReadValue<float>(); }
-    public void RightJab(InputAction.CallbackContext context) { right_jab_value = context.ReadValue<float>();  }
+    public void RightJab(InputAction.CallbackContext context) { right_jab_value = context.ReadValue<float>(); }
+    public void LeftSpecial(InputAction.CallbackContext context) { left_special_value = context.ReadValue<float>(); }
+    public void RightSpecial(InputAction.CallbackContext context) { right_special_value = context.ReadValue<float>(); }
 
     //***ANIMATION***
 
@@ -60,5 +61,7 @@ public class PlayerController : MonoBehaviour
         // ATTACKS
         anim.SetFloat("left_jab", left_jab_value);
         anim.SetFloat("right_jab", right_jab_value);
+        anim.SetFloat("left_special", left_special_value);
+        anim.SetFloat("right_special", right_special_value);
     }
 }
