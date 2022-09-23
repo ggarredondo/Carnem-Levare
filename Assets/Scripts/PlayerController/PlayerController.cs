@@ -34,7 +34,12 @@ public class PlayerController : MonoBehaviour
 
     //***INPUT***
 
-    public void Movement(InputAction.CallbackContext context){ movement_value = context.ReadValue<Vector2>(); }
+    public void Movement(InputAction.CallbackContext context)
+    { 
+        movement_value = context.ReadValue<Vector2>();
+        movement_value.y = Mathf.Clamp(movement_value.y, -1f, 0f); // -1 is crouching, 0 is standing. Doesn't make sense to consider 1 as a value.
+    }
+
     public void LeftJab(InputAction.CallbackContext context) { left_jab_value = context.ReadValue<float>(); }
     public void RightJab(InputAction.CallbackContext context) { right_jab_value = context.ReadValue<float>(); }
     public void LeftSpecial(InputAction.CallbackContext context) { left_special_value = context.ReadValue<float>(); }
