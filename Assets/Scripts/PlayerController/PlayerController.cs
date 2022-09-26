@@ -76,5 +76,10 @@ public class PlayerController : MonoBehaviour
     //***PUBLIC METHODS***
 
     public Animator getAnimator { get { return anim; } }
+    public float getLeftJabValue { get { return left_jab_value; } }
+    public float getRightJabValue { get { return right_jab_value; } }
+    public float getLeftSpecialValue { get { return left_special_value; } }
+    public float getRightSpecialValue { get { return right_special_value; } }
+
     public bool isWalking { get { return direction.x != 0f && !is_attacking; } }
 }
