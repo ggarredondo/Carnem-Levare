@@ -10,6 +10,8 @@ public class PlayerController : MonoBehaviour
     private float left_jab_value, right_jab_value, left_special_value, right_special_value;
     private bool is_attacking;
 
+    public Transform TargetEnemy;
+
     [Header("Animation Parameters")]
     public float speed = 1f;
     [Range(0f, 1f)] public float load = 0f;
@@ -62,6 +64,7 @@ public class PlayerController : MonoBehaviour
         direction = Vector2.MoveTowards(direction, movement_value, movementSpeed * Time.deltaTime);
         anim.SetFloat("horizontal", direction.x);
         anim.SetFloat("vertical", direction.y);
+        transform.LookAt(new Vector3(TargetEnemy.position.x, transform.position.y, TargetEnemy.position.z)); // Rotate towards enemy.
 
         // ATTACKS
         anim.SetFloat("left_jab", left_jab_value);
@@ -69,4 +72,9 @@ public class PlayerController : MonoBehaviour
         anim.SetFloat("left_special", left_special_value);
         anim.SetFloat("right_special", right_special_value);
     }
+
+    //***PUBLIC METHODS***
+
+    public Animator getAnimator { get { return anim; } }
+    public bool isWalking { get { return direction.x != 0f && !is_attacking; } }
 }
