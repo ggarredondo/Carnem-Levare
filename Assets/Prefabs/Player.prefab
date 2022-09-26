@@ -25,7 +25,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4706402254168931376}
   m_LocalRotation: {x: -0, y: -1, z: -0, w: 0}
-  m_LocalPosition: {x: 0.007541895, y: 1, z: 0.6843529}
+  m_LocalPosition: {x: 0, y: 1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -410,7 +410,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4706402255246442002}
-  m_LocalRotation: {x: 0.023928162, y: 0.000859845, z: -0.000020580535, w: 0.99971336}
+  m_LocalRotation: {x: 0.02834416, y: -0.00000001996594, z: 4.4059031e-10, w: 0.99959826}
   m_LocalPosition: {x: 0, y: 1.6199999, z: -3.6999998}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -547,7 +547,7 @@ MonoBehaviour:
   m_LookaheadTime: 0
   m_LookaheadSmoothing: 30
   m_LookaheadIgnoreY: 0
-  m_HorizontalDamping: 0
+  m_HorizontalDamping: 1
   m_VerticalDamping: 0
   m_ScreenX: 0.5
   m_ScreenY: 0.5
@@ -630,7 +630,8 @@ MonoBehaviour:
   playerController: {fileID: 4706402254706946820}
   vcam: {fileID: 4706402255246442000}
   cameraAceleration: 1
-  cameraRotation: 0
+  MAX_DAMPING: 2
+  cameraRotation: 1
 --- !u!1001 &4706402254103989476
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -5,7 +5,6 @@ public class CameraFollow : MonoBehaviour
 {
 
     //Max value of the damping parameter (Virtual camera)
-    const float MAX_DAMPING = 20;
     const float CAMERA_SPEED_DIVIDER = 1000;
     const float INITIAL_REDUCE_DAMPING = 1;
 
@@ -15,6 +14,7 @@ public class CameraFollow : MonoBehaviour
 
     [Header("Camera Paramneters")]
     [Range(0f, 1f)] public float cameraAceleration;
+    public float MAX_DAMPING = 20;
     public bool cameraRotation;
 
     private float damping;
