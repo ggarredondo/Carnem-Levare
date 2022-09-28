@@ -12,7 +12,7 @@ public class CameraFollow : MonoBehaviour
     public PlayerController playerController;
     public CinemachineVirtualCamera vcam;
 
-    [Header("Camera Paramneters")]
+    [Header("Camera Parameters")]
     [Range(0f, 1f)] public float cameraAceleration;
     public float MAX_DAMPING = 20;
     public bool cameraRotation;
