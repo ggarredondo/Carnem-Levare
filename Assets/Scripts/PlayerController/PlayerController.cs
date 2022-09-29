@@ -40,7 +40,6 @@ public class PlayerController : MonoBehaviour
     { 
         movement_value = context.ReadValue<Vector2>();
         movement_value.y = Mathf.Clamp(movement_value.y, -1f, 0f); // -1 is crouching, 0 is standing. Doesn't make sense to consider 1 as a value.
-        Debug.Log(movement_value); // <----- DELETE
     }
 
     public void LeftJab(InputAction.CallbackContext context) { left_jab_value = context.ReadValue<float>(); }
