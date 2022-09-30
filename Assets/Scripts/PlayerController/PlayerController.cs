@@ -7,8 +7,8 @@ public class PlayerController : MonoBehaviour
 {
     private Animator anim;
     private Vector2 movement_value, direction;
-    private float left_jab_value, right_jab_value, left_special_value, right_special_value, block_value;
-    private bool is_attacking;
+    private float left_special_value, right_special_value;
+    private bool is_attacking, pressed_block, pressed_left_jab, pressed_right_jab, pressed_left_dodge, pressed_right_dodge;
 
     public Transform TargetEnemy;
 
@@ -42,11 +42,13 @@ public class PlayerController : MonoBehaviour
         movement_value.y = Mathf.Clamp(movement_value.y, -1f, 0f); // -1 is crouching, 0 is standing. Doesn't make sense to consider 1 as a value.
     }
 
-    public void LeftJab(InputAction.CallbackContext context) { left_jab_value = context.ReadValue<float>(); }
-    public void RightJab(InputAction.CallbackContext context) { right_jab_value = context.ReadValue<float>(); }
+    public void LeftJab(InputAction.CallbackContext context) { pressed_left_jab = context.ReadValue<float>() > 0f; }
+    public void RightJab(InputAction.CallbackContext context) { pressed_right_jab = context.ReadValue<float>() > 0f; }
     public void LeftSpecial(InputAction.CallbackContext context) { left_special_value = context.ReadValue<float>(); }
     public void RightSpecial(InputAction.CallbackContext context) { right_special_value = context.ReadValue<float>(); }
-    public void Block (InputAction.CallbackContext context) { block_value = context.ReadValue<float>();  }
+    public void Block (InputAction.CallbackContext context) { pressed_block = context.ReadValue<float>() > 0f; }
+    public void LeftDodge(InputAction.CallbackContext context) { pressed_left_dodge = context.performed; }
+    public void RightDodge(InputAction.CallbackContext context) { pressed_right_dodge = context.performed; }
 
     //***ANIMATION***
 
@@ -56,7 +58,7 @@ public class PlayerController : MonoBehaviour
     private void SetAnimationParameters()
     {
         is_attacking = anim.GetCurrentAnimatorStateInfo(0).IsTag("Attacking") && !anim.IsInTransition(0);
-        anim.SetBool("cant_attack", is_attacking || block_value > 0f);
+        anim.SetBool("cant_attack", is_attacking || pressed_block);
         anim.SetFloat("load", load);
         anim.SetFloat("speed", speed);
 
@@ -68,13 +70,13 @@ public class PlayerController : MonoBehaviour
         transform.LookAt(new Vector3(TargetEnemy.position.x, transform.position.y, TargetEnemy.position.z)); // Rotate towards enemy.
 
         // ATTACKS
-        anim.SetFloat("left_jab", left_jab_value);
-        anim.SetFloat("right_jab", right_jab_value);
+        anim.SetBool("left_jab", pressed_left_jab);
+        anim.SetBool("right_jab", pressed_right_jab);
         anim.SetFloat("left_special", left_special_value);
         anim.SetFloat("right_special", right_special_value);
 
         // OTHER
-        anim.SetFloat("block", block_value);
+        anim.SetBool("block", pressed_block);
     }
 
     //***PUBLIC METHODS***
