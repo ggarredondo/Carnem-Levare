@@ -6,10 +6,9 @@ public class AudioManager : MonoBehaviour
     [Range(0f, 100f)] public float globalVolume = 1f;
     public Sound[] sounds;
 
-    // Handle volume for testing
     private void Update()
     {
-        AudioListener.volume = globalVolume;
+        AudioListener.volume = globalVolume; // Handle volume for testing
     }
 
     void Awake()
