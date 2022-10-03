@@ -7,7 +7,7 @@ public class PlayerController : MonoBehaviour
 {
     private Animator anim;
     private Vector2 movement_value, direction;
-    private float left_special_value, right_special_value;
+    private float last_left_special_value, left_special_value, last_right_special_value, right_special_value;
     private bool is_attacking, pressed_block, pressed_left_jab, pressed_right_jab, pressed_left_dodge, pressed_right_dodge;
 
     public Transform TargetEnemy;
@@ -26,6 +26,7 @@ public class PlayerController : MonoBehaviour
 
     private void Start()
     {
+        movement_value = Vector2.zero;
         direction = Vector2.zero;
     }
 
@@ -72,8 +73,14 @@ public class PlayerController : MonoBehaviour
         // ATTACKS
         anim.SetBool("left_jab", pressed_left_jab);
         anim.SetBool("right_jab", pressed_right_jab);
+
+        //if (last_left_special_value > 0f) left_special_value = 0f; // Ensure you can't spam special punches by holding.
         anim.SetFloat("left_special", left_special_value);
+        //last_left_special_value = left_special_value;
+
+        //if(last_right_special_value > 0f) right_special_value = 0f;
         anim.SetFloat("right_special", right_special_value);
+        //last_right_special_value = right_special_value;
 
         // OTHER
         anim.SetBool("block", pressed_block);
