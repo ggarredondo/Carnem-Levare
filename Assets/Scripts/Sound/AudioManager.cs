@@ -3,13 +3,7 @@ using System;
 
 public class AudioManager : MonoBehaviour
 {
-    [Range(0f, 100f)] public float globalVolume = 1f;
     public Sound[] sounds;
-
-    private void Update()
-    {
-        AudioListener.volume = globalVolume; // Handle volume for testing
-    }
 
     void Awake()
     {
