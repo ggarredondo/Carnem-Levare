@@ -43,20 +43,20 @@
                 },
                 {
                     "name": "Left Special",
-                    "type": "Button",
+                    "type": "PassThrough",
                     "id": "eb6c9e9b-9855-49aa-b21b-39ffbc961e31",
                     "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": "",
+                    "interactions": "Tap",
                     "initialStateCheck": false
                 },
                 {
                     "name": "Right Special",
-                    "type": "Button",
+                    "type": "PassThrough",
                     "id": "6f6c8496-ad55-4a5b-b196-c474aff84dcb",
                     "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": "",
+                    "interactions": "Tap",
                     "initialStateCheck": false
                 },
                 {
@@ -69,21 +69,12 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Left Dodge",
+                    "name": "Dodge",
                     "type": "Button",
-                    "id": "e1dc33a1-e54b-4f43-9e93-8f4571c2507d",
+                    "id": "3aa39275-5d72-4db2-9e3b-6c40825cbe3e",
                     "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": "MultiTap",
-                    "initialStateCheck": false
-                },
-                {
-                    "name": "Right Dodge",
-                    "type": "Button",
-                    "id": "b00a2fba-31b8-40b0-9c31-c01973702f3f",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "MultiTap",
+                    "interactions": "",
                     "initialStateCheck": false
                 }
             ],
@@ -167,23 +158,12 @@
                 },
                 {
                     "name": "",
-                    "id": "f61c4c3f-6109-4a13-8a16-30c3be2136b2",
-                    "path": "<Gamepad>/leftStick/left",
+                    "id": "06a762c9-e1d0-4709-8e88-467c79a41f48",
+                    "path": "<Gamepad>/buttonEast",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Left Dodge",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "d0c8a543-7a45-434c-9aec-5dfe4d3f8bd3",
-                    "path": "<Gamepad>/leftStick/right",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Right Dodge",
+                    "action": "Dodge",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
