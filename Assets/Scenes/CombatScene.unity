@@ -3597,6 +3597,21 @@ PrefabInstance:
       propertyPath: TargetEnemy
       value: 
       objectReference: {fileID: 1468407249}
+    - target: {fileID: 4706402254706946820, guid: 730b6f15cbfa96c4db1930def4556da9,
+        type: 3}
+      propertyPath: rightJabSpeed
+      value: 0.9
+      objectReference: {fileID: 0}
+    - target: {fileID: 4706402254706946820, guid: 730b6f15cbfa96c4db1930def4556da9,
+        type: 3}
+      propertyPath: leftSpecialSpeed
+      value: 0.9
+      objectReference: {fileID: 0}
+    - target: {fileID: 4706402254706946820, guid: 730b6f15cbfa96c4db1930def4556da9,
+        type: 3}
+      propertyPath: rightSpecialSpeed
+      value: 0.9
+      objectReference: {fileID: 0}
     - target: {fileID: 4706402254706946823, guid: 730b6f15cbfa96c4db1930def4556da9,
         type: 3}
       propertyPath: m_RootOrder

@@ -12,8 +12,9 @@ public class PlayerController : MonoBehaviour
     public Transform TargetEnemy;
 
     [Header("Animation Parameters")]
-    public float speed = 1f;
+    public float generalSpeed = 1f;
     [Range(0f, 1f)] public float load = 0f;
+    public float leftJabSpeed = 1f, rightJabSpeed = 1f, leftSpecialSpeed = 1f, rightSpecialSpeed = 1f, dodgeSpeed = 1f;
 
     [Header("Movement Parameters")]
     public float movementSpeed = 1f;
@@ -47,8 +48,8 @@ public class PlayerController : MonoBehaviour
         movement_value.y = Mathf.Clamp(movement_value.y, -1f, 0f); // -1 is crouching, 0 is standing. Doesn't make sense to consider 1 as a value.
     }
 
-    public void LeftJab(InputAction.CallbackContext context) { anim.SetBool("left_jab", context.ReadValue<float>() > 0f); }
-    public void RightJab(InputAction.CallbackContext context) { anim.SetBool("right_jab", context.ReadValue<float>() > 0f); }
+    public void LeftJab(InputAction.CallbackContext context) { anim.SetBool("left_jab", context.started); }
+    public void RightJab(InputAction.CallbackContext context) { anim.SetBool("right_jab", context.started); }
     public void LeftSpecial(InputAction.CallbackContext context) { anim.SetBool("left_special", context.started); }
     public void RightSpecial(InputAction.CallbackContext context) { anim.SetBool("right_special", context.started); }
     public void Block (InputAction.CallbackContext context) { anim.SetBool("block", context.ReadValue<float>() > 0f); }
@@ -68,8 +69,14 @@ public class PlayerController : MonoBehaviour
         anim.SetBool("is_attacking", is_attacking);
         anim.SetBool("is_dodging", is_dodging);
         anim.SetBool("cant_attack", is_attacking || is_blocking || is_dodging);
+        
+        // Animation modifiers
         anim.SetFloat("load", load);
-        anim.SetFloat("speed", speed);
+        anim.SetFloat("left_jab_speed", leftJabSpeed * generalSpeed);
+        anim.SetFloat("right_jab_speed", rightJabSpeed * generalSpeed);
+        anim.SetFloat("left_special_speed", leftSpecialSpeed * generalSpeed);
+        anim.SetFloat("right_special_speed", rightSpecialSpeed * generalSpeed);
+        anim.SetFloat("dodge_speed", dodgeSpeed * generalSpeed);
 
         // MOVEMENT
         // Softens the movement by establishing the direction as a point that approaches the stick/mouse position.
