@@ -18,7 +18,7 @@ public class PlayerController : MonoBehaviour
 
     [Header("Movement Parameters")]
     public float movementSpeed = 1f;
-    [Range(0f, 1f)] public float attackingModifier = 0f; // The player may move slower when attacking.
+    [Range(0f, 1f)] public float attackingModifier = 0f, blockingModifier = 0f; // The player may move slower when attacking.
     private float current_movementSpeed;
 
     private void Awake()
@@ -52,6 +52,8 @@ public class PlayerController : MonoBehaviour
     public void RightJab(InputAction.CallbackContext context) { anim.SetBool("right_jab", context.started); }
     public void LeftSpecial(InputAction.CallbackContext context) { anim.SetBool("left_special", context.started); }
     public void RightSpecial(InputAction.CallbackContext context) { anim.SetBool("right_special", context.started); }
+    public void LeftSpecialStrong(InputAction.CallbackContext context) { /* Debug.Log(context.performed); */ }
+    public void RightSpecialStrong(InputAction.CallbackContext context) { /* Debug.Log(context.performed); */ }
     public void Block (InputAction.CallbackContext context) { anim.SetBool("block", context.ReadValue<float>() > 0f); }
     public void Dodge(InputAction.CallbackContext context) { anim.SetBool("dodge", context.ReadValue<float>() > 0f); }
 
@@ -80,7 +82,8 @@ public class PlayerController : MonoBehaviour
 
         // MOVEMENT
         // Softens the movement by establishing the direction as a point that approaches the stick/mouse position.
-        current_movementSpeed = movementSpeed - movementSpeed * attackingModifier * System.Convert.ToSingle(is_attacking);
+        current_movementSpeed = movementSpeed - movementSpeed * attackingModifier * System.Convert.ToSingle(is_attacking)
+            - movementSpeed * blockingModifier * System.Convert.ToSingle(is_blocking);
         direction = Vector2.MoveTowards(direction, movement_value, current_movementSpeed * Time.deltaTime);
         anim.SetFloat("horizontal", direction.x);
         anim.SetFloat("vertical", direction.y);
