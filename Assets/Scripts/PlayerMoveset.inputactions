@@ -7,21 +7,21 @@
             "actions": [
                 {
                     "name": "Movement",
-                    "type": "PassThrough",
+                    "type": "Value",
                     "id": "21e7cf7f-b0cf-4b92-8e5e-6f5895e619ea",
                     "expectedControlType": "Vector2",
-                    "processors": "",
+                    "processors": "NormalizeVector2",
                     "interactions": "",
-                    "initialStateCheck": false
+                    "initialStateCheck": true
                 },
                 {
                     "name": "CameraMovement",
-                    "type": "PassThrough",
+                    "type": "Value",
                     "id": "1030c10a-7653-4297-8512-07b6268ef811",
                     "expectedControlType": "Vector2",
                     "processors": "",
                     "interactions": "",
-                    "initialStateCheck": false
+                    "initialStateCheck": true
                 },
                 {
                     "name": "Left Jab",
@@ -43,7 +43,7 @@
                 },
                 {
                     "name": "Left Special",
-                    "type": "PassThrough",
+                    "type": "Button",
                     "id": "eb6c9e9b-9855-49aa-b21b-39ffbc961e31",
                     "expectedControlType": "Button",
                     "processors": "",
@@ -52,7 +52,7 @@
                 },
                 {
                     "name": "Right Special",
-                    "type": "PassThrough",
+                    "type": "Button",
                     "id": "6f6c8496-ad55-4a5b-b196-c474aff84dcb",
                     "expectedControlType": "Button",
                     "processors": "",

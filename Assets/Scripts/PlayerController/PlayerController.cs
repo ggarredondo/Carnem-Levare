@@ -17,9 +17,10 @@ public class PlayerController : MonoBehaviour
     public float leftJabSpeed = 1f, rightJabSpeed = 1f, leftSpecialSpeed = 1f, rightSpecialSpeed = 1f, dodgeSpeed = 1f;
 
     [Header("Movement Parameters")]
-    public float movementSpeed = 1f;
-    [Range(0f, 1f)] public float attackingModifier = 0f, blockingModifier = 0f; // The player may move slower when attacking.
+    public float movementSpeed = 8f;
+    [Range(0f, 1f)] public float attackingModifier = 0f, blockingModifier = 0f; // The player may move slower when attacking or blocking.
     private float current_movementSpeed;
+    [Range(-1f, 0f)] public float duckingRange = -1f;
 
     private void Awake()
     {
@@ -45,7 +46,7 @@ public class PlayerController : MonoBehaviour
     public void Movement(InputAction.CallbackContext context)
     { 
         movement_value = context.ReadValue<Vector2>();
-        movement_value.y = Mathf.Clamp(movement_value.y, -1f, 0f); // -1 is crouching, 0 is standing. Doesn't make sense to consider 1 as a value.
+        movement_value.y = Mathf.Clamp(movement_value.y, duckingRange, 0f); // -1 is crouching, 0 is standing. Doesn't make sense to consider 1 as a value.
     }
 
     public void LeftJab(InputAction.CallbackContext context) { anim.SetBool("left_jab", context.started); }

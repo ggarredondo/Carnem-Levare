@@ -3617,7 +3617,7 @@ PrefabInstance:
     - target: {fileID: 4706402254706946820, guid: 730b6f15cbfa96c4db1930def4556da9,
         type: 3}
       propertyPath: blockingModifier
-      value: 0.4
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4706402254706946820, guid: 730b6f15cbfa96c4db1930def4556da9,
         type: 3}
