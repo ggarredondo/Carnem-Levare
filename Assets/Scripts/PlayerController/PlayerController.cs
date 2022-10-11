@@ -55,8 +55,8 @@ public class PlayerController : MonoBehaviour
     public void RightSpecial(InputAction.CallbackContext context) { anim.SetBool("right_special", context.started); }
     public void LeftSpecialStrong(InputAction.CallbackContext context) { /* Debug.Log(context.performed); */ }
     public void RightSpecialStrong(InputAction.CallbackContext context) { /* Debug.Log(context.performed); */ }
-    public void Block (InputAction.CallbackContext context) { anim.SetBool("block", context.ReadValue<float>() > 0f); }
-    public void Dodge(InputAction.CallbackContext context) { anim.SetBool("dodge", context.ReadValue<float>() > 0f); }
+    public void Block (InputAction.CallbackContext context) { anim.SetBool("block", context.performed); }
+    public void Dodge(InputAction.CallbackContext context) { anim.SetBool("dodge", context.performed); }
 
     //***ANIMATION***
 
