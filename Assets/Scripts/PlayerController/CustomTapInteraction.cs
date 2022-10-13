@@ -1,27 +1,32 @@
+using UnityEngine;
 using UnityEngine.InputSystem;
-//#if UNITY_EDITOR
-//using UnityEngine.InputSystem.Editor;
-//#endif
+using UnityEditor;
 
+#if UNITY_EDITOR
+[InitializeOnLoad]
+#endif
 public class CustomTapInteraction : IInputInteraction
 {
     private const float durationDefault = 0.2f, pressPointDefault = 0.5f;
 
-    /// <summary>
-    /// The time in seconds within which the control needs to be pressed and released to perform the interaction.
-    /// </summary>
-    public float duration = durationDefault;
-
-    /// <summary>
-    /// The press point required to perform the interaction.
-    /// </summary>
-    public float pressPoint = pressPointDefault;
-
-    // The system will use the previously defined defaults in case either value is zero or less.
-    private float durationOrDefault => duration > 0f ? duration : durationDefault;
+    public float duration = durationDefault; // The time in seconds within which the control needs to be pressed and released to perform the interaction.
+    public float pressPoint = pressPointDefault; // The press point required to perform the interaction.
+    
+    private float durationOrDefault => duration > 0f ? duration : durationDefault; // If either value is zero or less, use defaults.
     private float pressPointOrDefault => pressPoint > 0f ? pressPoint : pressPointDefault;
 
     private double m_TapStartTime = 0.0;
+
+    /// <summary>
+    /// Static constructor to register the interaction and make it available in the Input Action Asset Editor window.
+    /// </summary>
+    static CustomTapInteraction() { InputSystem.RegisterInteraction<CustomTapInteraction>(); }
+
+    /// <summary>
+    /// Called when the game loads. Will also execute static constructor.
+    /// </summary>
+    [RuntimeInitializeOnLoadMethod]
+    private static void Initialize() {}
 
     public void Process(ref InputInteractionContext context)
     {
@@ -51,19 +56,11 @@ public class CustomTapInteraction : IInputInteraction
                     context.Canceled();
                 break;
 
-            //case InputActionPhase.Performed:
-            //    context.Canceled();
-            //    break;
+            case InputActionPhase.Performed:
+                context.Canceled();
+                break;
         }
     }
 
     public void Reset() { m_TapStartTime = 0.0; }
 }
-
-//#if UNITY_EDITOR
-//internal class CustomTapInteractionEditor : InputParameterEditor<CustomTapInteraction>
-//{
-//    protected override void OnEnable() { InputSystem.RegisterInteraction<CustomTapInteraction>(); }
-//    public override void OnGUI() { }
-//}
-//#endif

@@ -1441,42 +1441,6 @@ AnimatorController:
     m_IKPass: 1
     m_SyncedLayerAffectsTiming: 0
     m_Controller: {fileID: 9100000}
-  - serializedVersion: 5
-    m_Name: Torso Override
-    m_StateMachine: {fileID: 3269850905370842113}
-    m_Mask: {fileID: 31900000, guid: 7a67ebc870c99df4dbb401a645cf6263, type: 2}
-    m_Motions:
-    - serializedVersion: 2
-      m_State: {fileID: -1989881239781987009}
-      m_Motion: {fileID: -4197316869347917975}
-    - serializedVersion: 2
-      m_State: {fileID: -4575860320199907494}
-      m_Motion: {fileID: -1944000710178465605}
-    - serializedVersion: 2
-      m_State: {fileID: -3356859780714560140}
-      m_Motion: {fileID: -8303289895356478443}
-    - serializedVersion: 2
-      m_State: {fileID: 421632313408585391}
-      m_Motion: {fileID: 8047700951513216207}
-    - serializedVersion: 2
-      m_State: {fileID: -1776509431900132454}
-      m_Motion: {fileID: 665169670828484893}
-    - serializedVersion: 2
-      m_State: {fileID: 1451771131654574503}
-      m_Motion: {fileID: -5294554074493614212}
-    - serializedVersion: 2
-      m_State: {fileID: 953024676005635545}
-      m_Motion: {fileID: 7400052, guid: 7a46c22df1db93045bcd15eea924d9c8, type: 3}
-    - serializedVersion: 2
-      m_State: {fileID: -1123232146686315473}
-      m_Motion: {fileID: 7400050, guid: 7a46c22df1db93045bcd15eea924d9c8, type: 3}
-    m_Behaviours: []
-    m_BlendingMode: 0
-    m_SyncedLayerIndex: 0
-    m_DefaultWeight: 1
-    m_IKPass: 1
-    m_SyncedLayerAffectsTiming: 0
-    m_Controller: {fileID: 9100000}
 --- !u!1102 &421632313408585391
 AnimatorState:
   serializedVersion: 6
@@ -1598,7 +1562,7 @@ BlendTree:
   m_Name: Blend Tree
   m_Childs:
   - serializedVersion: 2
-    m_Motion: {fileID: 7400016, guid: 7934f1476fe2c6e458c230f491769c34, type: 3}
+    m_Motion: {fileID: 7400024, guid: 7934f1476fe2c6e458c230f491769c34, type: 3}
     m_Threshold: -1
     m_Position: {x: 0, y: 0}
     m_TimeScale: 1
@@ -1606,7 +1570,7 @@ BlendTree:
     m_DirectBlendParameter: speed
     m_Mirror: 0
   - serializedVersion: 2
-    m_Motion: {fileID: 7400016, guid: 7934f1476fe2c6e458c230f491769c34, type: 3}
+    m_Motion: {fileID: 7400024, guid: 7934f1476fe2c6e458c230f491769c34, type: 3}
     m_Threshold: 0
     m_Position: {x: 0, y: 0}
     m_TimeScale: 1
