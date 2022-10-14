@@ -51,7 +51,7 @@ public class CustomTapInteraction : IInputInteraction
 
             case InputActionPhase.Started:
                 if (context.time - m_TapStartTime <= durationOrDefault && context.ReadValue<float>() <= 0f)
-                    context.Performed();
+                    context.PerformedAndStayPerformed();
                 else
                     context.Canceled();
                 break;

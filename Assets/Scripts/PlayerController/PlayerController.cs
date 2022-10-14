@@ -8,6 +8,7 @@ public class PlayerController : MonoBehaviour
     private Animator anim;
     private Vector2 movement_value, direction;
     private bool is_attacking, is_blocking, is_dodging;
+    private bool tapped_left_jab, tapped_right_jab, tapped_left_special, tapped_right_special;
 
     public Transform TargetEnemy;
 
@@ -49,10 +50,10 @@ public class PlayerController : MonoBehaviour
         movement_value.y = Mathf.Clamp(movement_value.y, duckingRange, 0f); // -1 is crouching, 0 is standing. Doesn't make sense to consider 1 as a value.
     }
 
-    public void LeftJab(InputAction.CallbackContext context) { anim.SetBool("left_jab", context.started); }
-    public void RightJab(InputAction.CallbackContext context) { anim.SetBool("right_jab", context.started); }
-    public void LeftSpecial(InputAction.CallbackContext context) { anim.SetBool("left_special", context.started); }
-    public void RightSpecial(InputAction.CallbackContext context) { anim.SetBool("right_special", context.started); }
+    public void LeftJab(InputAction.CallbackContext context) { tapped_left_jab = context.performed; }
+    public void RightJab(InputAction.CallbackContext context) { tapped_right_jab = context.performed; }
+    public void LeftSpecial(InputAction.CallbackContext context) { tapped_left_special = context.performed; }
+    public void RightSpecial(InputAction.CallbackContext context) { tapped_right_special = context.performed; }
     public void LeftSpecialStrong(InputAction.CallbackContext context) { /* Debug.Log(context.performed); */ }
     public void RightSpecialStrong(InputAction.CallbackContext context) { /* Debug.Log(context.performed); */ }
     public void Block (InputAction.CallbackContext context) { anim.SetBool("block", context.performed); }
@@ -80,6 +81,12 @@ public class PlayerController : MonoBehaviour
         anim.SetFloat("left_special_speed", leftSpecialSpeed * generalSpeed);
         anim.SetFloat("right_special_speed", rightSpecialSpeed * generalSpeed);
         anim.SetFloat("dodge_speed", dodgeSpeed * generalSpeed);
+
+        // ATTACKS
+        anim.SetBool("left_jab", tapped_left_jab); tapped_left_jab = false; // Must reset so that the player doesn't get stuck in a punching animation.
+        anim.SetBool("right_jab", tapped_right_jab); tapped_right_jab = false;
+        anim.SetBool("left_special", tapped_left_special); tapped_left_special = false;
+        anim.SetBool("right_special", tapped_right_special); tapped_right_special = false;
 
         // MOVEMENT
         // Softens the movement by establishing the direction as a point that approaches the stick/mouse position.
