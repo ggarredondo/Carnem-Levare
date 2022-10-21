@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2400374521240445253}
   - component: {fileID: -4476728132895952727}
   m_Layer: 0
-  m_Name: Jab
+  m_Name: Hook
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -44,12 +44,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9c101ac1060691f4fb04457c1a701efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  crouchLeftAnimation: {fileID: 7400030, guid: 0c9ce63e9f8dd6e43a0807e55303f9cf, type: 3}
-  leftAnimation: {fileID: 7400004, guid: 7934f1476fe2c6e458c230f491769c34, type: 3}
-  crouchRightAnimation: {fileID: 7400032, guid: 0c9ce63e9f8dd6e43a0807e55303f9cf,
+  crouchLeftAnimation: {fileID: 7400016, guid: 7934f1476fe2c6e458c230f491769c34, type: 3}
+  leftAnimation: {fileID: 7400016, guid: 7934f1476fe2c6e458c230f491769c34, type: 3}
+  crouchRightAnimation: {fileID: 7400014, guid: 7934f1476fe2c6e458c230f491769c34,
     type: 3}
-  rightAnimation: {fileID: 7400006, guid: 7934f1476fe2c6e458c230f491769c34, type: 3}
-  type: 0
+  rightAnimation: {fileID: 7400014, guid: 7934f1476fe2c6e458c230f491769c34, type: 3}
+  type: 1
   damage: 0
   speed: 1
   cooldown: 0

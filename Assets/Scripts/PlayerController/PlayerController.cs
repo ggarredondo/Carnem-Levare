@@ -15,7 +15,7 @@ public class PlayerController : MonoBehaviour
     [Header("Animation Parameters")]
     public float generalSpeed = 1f;
     [Range(0f, 1f)] public float load = 0f;
-    public float leftJabSpeed = 1f, rightJabSpeed = 1f, leftSpecialSpeed = 1f, rightSpecialSpeed = 1f, dodgeSpeed = 1f;
+    private float leftJabSpeed = 1f, rightJabSpeed = 1f, leftSpecialSpeed = 1f, rightSpecialSpeed = 1f, dodgeSpeed = 1f;
 
     [Header("Movement Parameters")]
     public float movementSpeed = 8f;
