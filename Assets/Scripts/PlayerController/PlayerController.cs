@@ -6,9 +6,9 @@ using UnityEngine.InputSystem;
 public class PlayerController : MonoBehaviour
 {
     private Animator anim;
-    private Vector2 movement_value, direction;
-    private bool is_attacking, is_blocking, is_dodging;
-    private bool tapped_left_jab, tapped_right_jab, tapped_left_special, tapped_right_special;
+    private Vector2 movementValue, direction;
+    private bool isAttacking, isBlocking, cantAttack;
+    private bool tappedLeftNormal, tappedRightNormal, tappedLeftSpecial, tappedRightSpecial;
 
     public Transform TargetEnemy;
 
@@ -23,6 +23,12 @@ public class PlayerController : MonoBehaviour
     private float current_movementSpeed;
     [Range(-1f, 0f)] public float duckingRange = -1f;
 
+    [Header("Attack Parameters")]
+    public Move leftNormalSlot;
+    public Move rightNormalSlot;
+    public Move leftSpecialSlot;
+    public Move rightSpecialSlot;
+
     private void Awake()
     {
         anim = GetComponent<Animator>();
@@ -30,11 +36,11 @@ public class PlayerController : MonoBehaviour
 
     private void Start()
     {
-        movement_value = Vector2.zero;
+        movementValue = Vector2.zero;
         direction = Vector2.zero;
-        is_attacking = false;
-        is_blocking = false;
-        is_dodging = false;
+        isAttacking = false;
+        isBlocking = false;
+        cantAttack = false;
     }
 
     void Update()
@@ -46,16 +52,14 @@ public class PlayerController : MonoBehaviour
 
     public void Movement(InputAction.CallbackContext context)
     { 
-        movement_value = context.ReadValue<Vector2>();
-        movement_value.y = Mathf.Clamp(movement_value.y, duckingRange, 0f); // -1 is crouching, 0 is standing. Doesn't make sense to consider 1 as a value.
+        movementValue = context.ReadValue<Vector2>();
+        movementValue.y = Mathf.Clamp(movementValue.y, duckingRange, 0f); // -1 is crouching, 0 is standing. Doesn't make sense to consider 1 as a value.
     }
 
-    public void LeftJab(InputAction.CallbackContext context) { tapped_left_jab = context.performed; }
-    public void RightJab(InputAction.CallbackContext context) { tapped_right_jab = context.performed; }
-    public void LeftSpecial(InputAction.CallbackContext context) { tapped_left_special = context.performed; }
-    public void RightSpecial(InputAction.CallbackContext context) { tapped_right_special = context.performed; }
-    public void LeftSpecialStrong(InputAction.CallbackContext context) { /* Debug.Log(context.performed); */ }
-    public void RightSpecialStrong(InputAction.CallbackContext context) { /* Debug.Log(context.performed); */ }
+    public void LeftJab(InputAction.CallbackContext context) { tappedLeftNormal = context.performed; }
+    public void RightJab(InputAction.CallbackContext context) { tappedRightNormal = context.performed; }
+    public void LeftSpecial(InputAction.CallbackContext context) { tappedLeftSpecial = context.performed; }
+    public void RightSpecial(InputAction.CallbackContext context) { tappedRightSpecial = context.performed; }
     public void Block (InputAction.CallbackContext context) { anim.SetBool("block", context.performed); }
     public void Dodge(InputAction.CallbackContext context) { anim.SetBool("dodge", context.performed); }
 
@@ -67,12 +71,9 @@ public class PlayerController : MonoBehaviour
     private void SetAnimationParameters()
     {
         // Values that must be updated frame by frame to allow certain animations to play out accordingly.
-        is_attacking = anim.GetCurrentAnimatorStateInfo(0).IsTag("Attacking") && !anim.IsInTransition(0);
-        is_blocking = anim.GetCurrentAnimatorStateInfo(0).IsTag("Blocking") && !anim.IsInTransition(0);
-        is_dodging = anim.GetCurrentAnimatorStateInfo(0).IsTag("Dodging") && !anim.IsInTransition(0);
-        anim.SetBool("is_attacking", is_attacking);
-        anim.SetBool("is_dodging", is_dodging);
-        anim.SetBool("cant_attack", is_attacking || is_blocking || is_dodging);
+        isAttacking = anim.GetCurrentAnimatorStateInfo(0).IsTag("Attacking") && !anim.IsInTransition(0);
+        isBlocking = anim.GetCurrentAnimatorStateInfo(0).IsTag("Blocking") && !anim.IsInTransition(0);
+        anim.SetBool("cant_attack", cantAttack);
         
         // Animation modifiers
         anim.SetFloat("load", load);
@@ -83,16 +84,16 @@ public class PlayerController : MonoBehaviour
         anim.SetFloat("dodge_speed", dodgeSpeed * generalSpeed);
 
         // ATTACKS
-        anim.SetBool("left_jab", tapped_left_jab); tapped_left_jab = false; // Must reset so that the player doesn't get stuck in a punching animation.
-        anim.SetBool("right_jab", tapped_right_jab); tapped_right_jab = false;
-        anim.SetBool("left_special", tapped_left_special); tapped_left_special = false;
-        anim.SetBool("right_special", tapped_right_special); tapped_right_special = false;
+        anim.SetBool("left_jab", tappedLeftNormal); tappedLeftNormal = false; // Must reset so that the player doesn't get stuck in a punching animation.
+        anim.SetBool("right_jab", tappedRightNormal); tappedRightNormal = false;
+        anim.SetBool("left_special", tappedLeftSpecial); tappedLeftSpecial = false;
+        anim.SetBool("right_special", tappedRightSpecial); tappedRightSpecial = false;
 
         // MOVEMENT
         // Softens the movement by establishing the direction as a point that approaches the stick/mouse position.
-        current_movementSpeed = movementSpeed - movementSpeed * attackingModifier * System.Convert.ToSingle(is_attacking)
-            - movementSpeed * blockingModifier * System.Convert.ToSingle(is_blocking);
-        direction = Vector2.MoveTowards(direction, movement_value, current_movementSpeed * Time.deltaTime);
+        current_movementSpeed = movementSpeed - movementSpeed * attackingModifier * System.Convert.ToSingle(isAttacking)
+            - movementSpeed * blockingModifier * System.Convert.ToSingle(isBlocking);
+        direction = Vector2.MoveTowards(direction, movementValue, current_movementSpeed * Time.deltaTime);
         anim.SetFloat("horizontal", direction.x);
         anim.SetFloat("vertical", direction.y);
         transform.LookAt(new Vector3(TargetEnemy.position.x, transform.position.y, TargetEnemy.position.z)); // Rotate towards enemy.
@@ -102,5 +103,5 @@ public class PlayerController : MonoBehaviour
 
     public Animator getAnimator { get { return anim; } }
 
-    public bool isWalking { get { return direction.x != 0f && !is_attacking; } }
+    public bool isWalking { get { return direction.x != 0f && !isAttacking; } }
 }

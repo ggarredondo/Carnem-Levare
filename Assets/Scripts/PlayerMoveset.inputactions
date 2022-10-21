@@ -24,7 +24,7 @@
                     "initialStateCheck": true
                 },
                 {
-                    "name": "Left Jab",
+                    "name": "Left Normal",
                     "type": "Button",
                     "id": "60f7e98c-e28e-44f5-8238-041783e0c44c",
                     "expectedControlType": "Button",
@@ -33,7 +33,7 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Right Jab",
+                    "name": "Right Normal",
                     "type": "Button",
                     "id": "eae9d122-0c45-49c1-8ae0-abfab8c74b50",
                     "expectedControlType": "Button",
@@ -57,24 +57,6 @@
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "Tap",
-                    "initialStateCheck": false
-                },
-                {
-                    "name": "Left Special Strong",
-                    "type": "Button",
-                    "id": "40479226-32af-4c36-8be5-50129770de51",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "Hold",
-                    "initialStateCheck": false
-                },
-                {
-                    "name": "Right Special Strong",
-                    "type": "Button",
-                    "id": "930f6f8f-29d7-4fd5-ab53-901d3f978a7a",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "Hold",
                     "initialStateCheck": false
                 },
                 {
@@ -126,7 +108,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Right Jab",
+                    "action": "Right Normal",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -148,7 +130,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Left Jab",
+                    "action": "Left Normal",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -182,28 +164,6 @@
                     "processors": "",
                     "groups": "",
                     "action": "Dodge",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "25de551e-8078-4ee9-b5ce-b8603bf4cb47",
-                    "path": "<Gamepad>/leftTrigger",
-                    "interactions": "",
-                    "processors": "AxisDeadzone",
-                    "groups": "",
-                    "action": "Left Special Strong",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "f118bb39-e3ea-4525-aaf7-bb70dcb2d8b5",
-                    "path": "<Gamepad>/rightTrigger",
-                    "interactions": "",
-                    "processors": "AxisDeadzone",
-                    "groups": "",
-                    "action": "Right Special Strong",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
