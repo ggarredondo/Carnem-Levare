@@ -6,16 +6,17 @@ using UnityEngine.InputSystem;
 public class PlayerController : MonoBehaviour
 {
     private Animator anim;
+    private AnimatorOverrideController animOverride;
+
     private Vector2 movementValue, direction;
     private bool isAttacking, isBlocking, cantAttack;
-    private bool tappedLeftNormal, tappedRightNormal, tappedLeftSpecial, tappedRightSpecial;
 
     public Transform TargetEnemy;
 
     [Header("Animation Parameters")]
     public float generalSpeed = 1f;
     [Range(0f, 1f)] public float load = 0f;
-    private float leftJabSpeed = 1f, rightJabSpeed = 1f, leftSpecialSpeed = 1f, rightSpecialSpeed = 1f, dodgeSpeed = 1f;
+    private float leftNormalSpeed = 1f, rightNormalSpeed = 1f, leftSpecialSpeed = 1f, rightSpecialSpeed = 1f, dodgeSpeed = 1f;
 
     [Header("Movement Parameters")]
     public float movementSpeed = 8f;
@@ -32,6 +33,13 @@ public class PlayerController : MonoBehaviour
     private void Awake()
     {
         anim = GetComponent<Animator>();
+        animOverride = new AnimatorOverrideController(anim.runtimeAnimatorController);
+    }
+
+    private void UpdateLeftNormalSlot()
+    {
+        // animOverride add leftNormalSlot clips to animOverride clips
+        anim.runtimeAnimatorController = animOverride;
     }
 
     private void Start()
@@ -56,10 +64,10 @@ public class PlayerController : MonoBehaviour
         movementValue.y = Mathf.Clamp(movementValue.y, duckingRange, 0f); // -1 is crouching, 0 is standing. Doesn't make sense to consider 1 as a value.
     }
 
-    public void LeftJab(InputAction.CallbackContext context) { tappedLeftNormal = context.performed; }
-    public void RightJab(InputAction.CallbackContext context) { tappedRightNormal = context.performed; }
-    public void LeftSpecial(InputAction.CallbackContext context) { tappedLeftSpecial = context.performed; }
-    public void RightSpecial(InputAction.CallbackContext context) { tappedRightSpecial = context.performed; }
+    public void LeftNormal(InputAction.CallbackContext context) { anim.SetBool("left_normal", context.performed); }
+    public void RightNormal(InputAction.CallbackContext context) { anim.SetBool("right_normal", context.performed); }
+    public void LeftSpecial(InputAction.CallbackContext context) { anim.SetBool("left_special", context.performed); }
+    public void RightSpecial(InputAction.CallbackContext context) { anim.SetBool("right_special", context.performed); }
     public void Block (InputAction.CallbackContext context) { anim.SetBool("block", context.performed); }
     public void Dodge(InputAction.CallbackContext context) { anim.SetBool("dodge", context.performed); }
 
@@ -77,17 +85,11 @@ public class PlayerController : MonoBehaviour
         
         // Animation modifiers
         anim.SetFloat("load", load);
-        anim.SetFloat("left_jab_speed", leftJabSpeed * generalSpeed);
-        anim.SetFloat("right_jab_speed", rightJabSpeed * generalSpeed);
+        anim.SetFloat("left_normal_speed", leftNormalSpeed * generalSpeed);
+        anim.SetFloat("right_normal_speed", rightNormalSpeed * generalSpeed);
         anim.SetFloat("left_special_speed", leftSpecialSpeed * generalSpeed);
         anim.SetFloat("right_special_speed", rightSpecialSpeed * generalSpeed);
         anim.SetFloat("dodge_speed", dodgeSpeed * generalSpeed);
-
-        // ATTACKS
-        anim.SetBool("left_jab", tappedLeftNormal); tappedLeftNormal = false; // Must reset so that the player doesn't get stuck in a punching animation.
-        anim.SetBool("right_jab", tappedRightNormal); tappedRightNormal = false;
-        anim.SetBool("left_special", tappedLeftSpecial); tappedLeftSpecial = false;
-        anim.SetBool("right_special", tappedRightSpecial); tappedRightSpecial = false;
 
         // MOVEMENT
         // Softens the movement by establishing the direction as a point that approaches the stick/mouse position.

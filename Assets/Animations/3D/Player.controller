@@ -416,7 +416,7 @@ BlendTree:
   m_Name: Blend Tree
   m_Childs:
   - serializedVersion: 2
-    m_Motion: {fileID: 7400014, guid: 7934f1476fe2c6e458c230f491769c34, type: 3}
+    m_Motion: {fileID: 7400000, guid: f20ddd9e2a4053a4b9852358911b3b4f, type: 2}
     m_Threshold: -1
     m_Position: {x: 0, y: 0}
     m_TimeScale: 1
@@ -424,7 +424,7 @@ BlendTree:
     m_DirectBlendParameter: speed
     m_Mirror: 0
   - serializedVersion: 2
-    m_Motion: {fileID: 7400014, guid: 7934f1476fe2c6e458c230f491769c34, type: 3}
+    m_Motion: {fileID: 7400000, guid: 7c07cd5f4914ba2418339577c66370f1, type: 2}
     m_Threshold: 0
     m_Position: {x: 0, y: 0}
     m_TimeScale: 1
@@ -585,7 +585,7 @@ BlendTree:
   m_Name: Blend Tree
   m_Childs:
   - serializedVersion: 2
-    m_Motion: {fileID: 7400032, guid: 0c9ce63e9f8dd6e43a0807e55303f9cf, type: 3}
+    m_Motion: {fileID: 7400000, guid: a911ef89a0b15aa428fd42dfb2a53323, type: 2}
     m_Threshold: -1
     m_Position: {x: 0, y: 0}
     m_TimeScale: 1
@@ -593,7 +593,7 @@ BlendTree:
     m_DirectBlendParameter: speed
     m_Mirror: 0
   - serializedVersion: 2
-    m_Motion: {fileID: 7400006, guid: 7934f1476fe2c6e458c230f491769c34, type: 3}
+    m_Motion: {fileID: 7400000, guid: 942fd45d680be724fa17a409ef364cbe, type: 2}
     m_Threshold: 0
     m_Position: {x: 0, y: 0}
     m_TimeScale: 1
@@ -652,10 +652,10 @@ AnimatorState:
   m_TimeParameterActive: 0
   m_Motion: {fileID: 7360555065276560709}
   m_Tag: Blocking
-  m_SpeedParameter: left_jab_speed
+  m_SpeedParameter: left_normal_speed
   m_MirrorParameter: 
   m_CycleOffsetParameter: 
-  m_TimeParameter: left_jab_speed
+  m_TimeParameter: left_normal_speed
 --- !u!206 &-4417515039121597980
 BlendTree:
   m_ObjectHideFlags: 1
@@ -665,7 +665,7 @@ BlendTree:
   m_Name: Blend Tree
   m_Childs:
   - serializedVersion: 2
-    m_Motion: {fileID: 7400016, guid: 7934f1476fe2c6e458c230f491769c34, type: 3}
+    m_Motion: {fileID: 7400000, guid: 9b2592e486754c347a66a1522291df52, type: 2}
     m_Threshold: -1
     m_Position: {x: 0, y: 0}
     m_TimeScale: 1
@@ -673,7 +673,7 @@ BlendTree:
     m_DirectBlendParameter: speed
     m_Mirror: 0
   - serializedVersion: 2
-    m_Motion: {fileID: 7400016, guid: 7934f1476fe2c6e458c230f491769c34, type: 3}
+    m_Motion: {fileID: 7400000, guid: f7df541c44f44b644bc40a610b493186, type: 2}
     m_Threshold: 0
     m_Position: {x: 0, y: 0}
     m_TimeScale: 1
@@ -793,7 +793,7 @@ AnimatorStateTransition:
     m_ConditionEvent: cant_attack
     m_EventTreshold: 0
   - m_ConditionMode: 1
-    m_ConditionEvent: left_jab
+    m_ConditionEvent: left_normal
     m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: -3356859780714560140}
@@ -821,7 +821,7 @@ AnimatorStateTransition:
     m_ConditionEvent: cant_attack
     m_EventTreshold: 0
   - m_ConditionMode: 1
-    m_ConditionEvent: right_jab
+    m_ConditionEvent: right_normal
     m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 421632313408585391}
@@ -860,7 +860,7 @@ AnimatorState:
   m_TimeParameterActive: 0
   m_Motion: {fileID: -844158167434791079}
   m_Tag: Attacking
-  m_SpeedParameter: left_jab_speed
+  m_SpeedParameter: left_normal_speed
   m_MirrorParameter: 
   m_CycleOffsetParameter: 
   m_TimeParameter: 
@@ -963,7 +963,7 @@ AnimatorState:
   m_TimeParameterActive: 0
   m_Motion: {fileID: -8563610686731332460}
   m_Tag: 
-  m_SpeedParameter: left_jab_speed
+  m_SpeedParameter: left_normal_speed
   m_MirrorParameter: 
   m_CycleOffsetParameter: 
   m_TimeParameter: 
@@ -1155,15 +1155,15 @@ BlendTree:
   m_Name: Blend Tree
   m_Childs:
   - serializedVersion: 2
-    m_Motion: {fileID: 7400030, guid: 0c9ce63e9f8dd6e43a0807e55303f9cf, type: 3}
+    m_Motion: {fileID: 7400000, guid: 30a83967f82980e49b74a0a9fe2e2f7e, type: 2}
     m_Threshold: -1
     m_Position: {x: 0, y: -1}
-    m_TimeScale: 0.7
+    m_TimeScale: 1
     m_CycleOffset: 0
     m_DirectBlendParameter: speed
     m_Mirror: 0
   - serializedVersion: 2
-    m_Motion: {fileID: 7400004, guid: 7934f1476fe2c6e458c230f491769c34, type: 3}
+    m_Motion: {fileID: 7400000, guid: 86ab08e4cb4e6ae48957371e28abc53e, type: 2}
     m_Threshold: 0
     m_Position: {x: 0, y: 0}
     m_TimeScale: 1
@@ -1312,13 +1312,13 @@ AnimatorController:
   m_Name: Player
   serializedVersion: 5
   m_AnimatorParameters:
-  - m_Name: left_jab_speed
+  - m_Name: left_normal_speed
     m_Type: 1
     m_DefaultFloat: 1
     m_DefaultInt: 0
     m_DefaultBool: 0
     m_Controller: {fileID: 9100000}
-  - m_Name: right_jab_speed
+  - m_Name: right_normal_speed
     m_Type: 1
     m_DefaultFloat: 1
     m_DefaultInt: 0
@@ -1366,13 +1366,13 @@ AnimatorController:
     m_DefaultInt: 0
     m_DefaultBool: 0
     m_Controller: {fileID: 9100000}
-  - m_Name: left_jab
+  - m_Name: left_normal
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
     m_Controller: {fileID: 9100000}
-  - m_Name: right_jab
+  - m_Name: right_normal
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
@@ -1450,7 +1450,7 @@ AnimatorState:
   m_TimeParameterActive: 0
   m_Motion: {fileID: -4791358708612148938}
   m_Tag: Attacking
-  m_SpeedParameter: right_jab_speed
+  m_SpeedParameter: right_normal_speed
   m_MirrorParameter: 
   m_CycleOffsetParameter: 
   m_TimeParameter: 
@@ -1471,7 +1471,7 @@ AnimatorStateTransition:
   m_Mute: 0
   m_IsExit: 0
   serializedVersion: 3
-  m_TransitionDuration: 0.2
+  m_TransitionDuration: 0.1
   m_TransitionOffset: 0
   m_ExitTime: 0.75
   m_HasExitTime: 0
