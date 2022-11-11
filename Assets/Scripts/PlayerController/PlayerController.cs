@@ -46,6 +46,7 @@ public class PlayerController : MonoBehaviour
         isAttacking = false;
         isBlocking = false;
         cantAttack = false;
+        UpdateAllAttackAnimations();
     }
 
     void Update()
@@ -81,6 +82,38 @@ public class PlayerController : MonoBehaviour
         overrides.Add(new KeyValuePair<AnimationClip, AnimationClip>(animatorDefaults.Where(clip => clip.name == og_clip).SingleOrDefault(), new_clip));
         animOverride.ApplyOverrides(overrides);
         anim.runtimeAnimatorController = animOverride;
+    }
+
+    public void UpdateLeftNormalAnimations()
+    {
+        UpdateAnimator("LeftNormalCrouchClip", leftNormalSlot.crouchLeftAnimation);
+        UpdateAnimator("LeftNormalClip", leftNormalSlot.leftAnimation);
+    }
+
+    public void UpdateRightNormalAnimations()
+    {
+        UpdateAnimator("RightNormalCrouchClip", rightNormalSlot.crouchRightAnimation);
+        UpdateAnimator("RightNormalClip", rightNormalSlot.rightAnimation);
+    }
+
+    public void UpdateLeftSpecialAnimations()
+    {
+        UpdateAnimator("LeftSpecialCrouchClip", leftSpecialSlot.crouchLeftAnimation);
+        UpdateAnimator("LeftSpecialClip", leftSpecialSlot.leftAnimation);
+    }
+
+    public void UpdateRightSpecialAnimations()
+    {
+        UpdateAnimator("RightSpecialCrouchClip", rightSpecialSlot.crouchRightAnimation);
+        UpdateAnimator("RightSpecialClip", rightSpecialSlot.rightAnimation);
+    }
+
+    public void UpdateAllAttackAnimations()
+    {
+        UpdateLeftNormalAnimations();
+        UpdateRightNormalAnimations();
+        UpdateLeftSpecialAnimations();
+        UpdateRightSpecialAnimations();
     }
 
     /// <summary>
