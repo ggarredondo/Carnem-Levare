@@ -289,14 +289,20 @@ MonoBehaviour:
   TargetEnemy: {fileID: 0}
   generalSpeed: 1
   load: 0.5
+  dodgeSpeed: 1
   movementSpeed: 8
   attackingModifier: 0
   blockingModifier: 0
   duckingRange: -1
-  leftNormalSlot: {fileID: 0}
-  rightNormalSlot: {fileID: 0}
-  leftSpecialSlot: {fileID: 0}
-  rightSpecialSlot: {fileID: 0}
+  leftNormalSlot: {fileID: -4476728132895952727, guid: cd4612b1a708e5046ae35c3be7591360,
+    type: 3}
+  rightNormalSlot: {fileID: -4476728132895952727, guid: cd4612b1a708e5046ae35c3be7591360,
+    type: 3}
+  leftSpecialSlot: {fileID: -4476728132895952727, guid: a353a5b06242cb6489e78a3ce9c641a2,
+    type: 3}
+  rightSpecialSlot: {fileID: -4476728132895952727, guid: a353a5b06242cb6489e78a3ce9c641a2,
+    type: 3}
+  slotClipDefaults: []
 --- !u!114 &4706402254706946843
 MonoBehaviour:
   m_ObjectHideFlags: 0

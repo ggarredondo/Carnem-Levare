@@ -2,11 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using System.Linq;
 
 public class PlayerController : MonoBehaviour
 {
     private Animator anim;
     private AnimatorOverrideController animOverride;
+    private AnimationClip[] animatorDefaults;
 
     private Vector2 movementValue, direction;
     private bool isAttacking, isBlocking, cantAttack;
@@ -16,13 +18,13 @@ public class PlayerController : MonoBehaviour
     [Header("Animation Parameters")]
     public float generalSpeed = 1f;
     [Range(0f, 1f)] public float load = 0f;
-    private float leftNormalSpeed = 1f, rightNormalSpeed = 1f, leftSpecialSpeed = 1f, rightSpecialSpeed = 1f, dodgeSpeed = 1f;
+    public float dodgeSpeed = 1f;
 
     [Header("Movement Parameters")]
     public float movementSpeed = 8f;
     [Range(0f, 1f)] public float attackingModifier = 0f, blockingModifier = 0f; // The player may move slower when attacking or blocking.
     private float current_movementSpeed;
-    [Range(-1f, 0f)] public float duckingRange = -1f;
+    [Range(-1f, 0f)] public float duckingRange = -1f; // -1: can duck all the way down. 0: can't duck at all.
 
     [Header("Attack Parameters")]
     public Move leftNormalSlot;
@@ -33,13 +35,8 @@ public class PlayerController : MonoBehaviour
     private void Awake()
     {
         anim = GetComponent<Animator>();
+        animatorDefaults = anim.runtimeAnimatorController.animationClips;
         animOverride = new AnimatorOverrideController(anim.runtimeAnimatorController);
-    }
-
-    private void UpdateLeftNormalSlot()
-    {
-        // animOverride add leftNormalSlot clips to animOverride clips
-        anim.runtimeAnimatorController = animOverride;
     }
 
     private void Start()
@@ -74,6 +71,19 @@ public class PlayerController : MonoBehaviour
     //***ANIMATION***
 
     /// <summary>
+    /// Updates specific animation from animator in real time.
+    /// </summary>
+    /// <param name="og_clip">Name of the animation clip to be updated</param>
+    /// <param name="new_clip">New animation clip</param>
+    public void UpdateAnimator(string og_clip, AnimationClip new_clip)
+    {
+        List<KeyValuePair<AnimationClip, AnimationClip>> overrides = new List<KeyValuePair<AnimationClip, AnimationClip>>();
+        overrides.Add(new KeyValuePair<AnimationClip, AnimationClip>(animatorDefaults.Where(clip => clip.name == og_clip).SingleOrDefault(), new_clip));
+        animOverride.ApplyOverrides(overrides);
+        anim.runtimeAnimatorController = animOverride;
+    }
+
+    /// <summary>
     /// Sets general animation parameters for the animator.
     /// </summary>
     private void SetAnimationParameters()
@@ -85,10 +95,10 @@ public class PlayerController : MonoBehaviour
         
         // Animation modifiers
         anim.SetFloat("load", load);
-        anim.SetFloat("left_normal_speed", leftNormalSpeed * generalSpeed);
-        anim.SetFloat("right_normal_speed", rightNormalSpeed * generalSpeed);
-        anim.SetFloat("left_special_speed", leftSpecialSpeed * generalSpeed);
-        anim.SetFloat("right_special_speed", rightSpecialSpeed * generalSpeed);
+        anim.SetFloat("left_normal_speed", leftNormalSlot.animationSpeed * generalSpeed);
+        anim.SetFloat("right_normal_speed", rightNormalSlot.animationSpeed * generalSpeed);
+        anim.SetFloat("left_special_speed", leftSpecialSlot.animationSpeed * generalSpeed);
+        anim.SetFloat("right_special_speed", rightSpecialSlot.animationSpeed * generalSpeed);
         anim.SetFloat("dodge_speed", dodgeSpeed * generalSpeed);
 
         // MOVEMENT

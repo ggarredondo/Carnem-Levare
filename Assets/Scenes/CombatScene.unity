@@ -3611,47 +3611,19 @@ PrefabInstance:
       objectReference: {fileID: 1468407249}
     - target: {fileID: 4706402254706946820, guid: 730b6f15cbfa96c4db1930def4556da9,
         type: 3}
+      propertyPath: animOverride
+      value: 
+      objectReference: {fileID: 22100000, guid: 7974433367a7562439c48c6364490cf4,
+        type: 2}
+    - target: {fileID: 4706402254706946820, guid: 730b6f15cbfa96c4db1930def4556da9,
+        type: 3}
       propertyPath: rightJabSpeed
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4706402254706946820, guid: 730b6f15cbfa96c4db1930def4556da9,
         type: 3}
-      propertyPath: leftNormalSlot
-      value: 
-      objectReference: {fileID: -4476728132895952727, guid: cd4612b1a708e5046ae35c3be7591360,
-        type: 3}
-    - target: {fileID: 4706402254706946820, guid: 730b6f15cbfa96c4db1930def4556da9,
-        type: 3}
-      propertyPath: leftSpecialSlot
-      value: 
-      objectReference: {fileID: -4476728132895952727, guid: a353a5b06242cb6489e78a3ce9c641a2,
-        type: 3}
-    - target: {fileID: 4706402254706946820, guid: 730b6f15cbfa96c4db1930def4556da9,
-        type: 3}
-      propertyPath: rightNormalSlot
-      value: 
-      objectReference: {fileID: -4476728132895952727, guid: cd4612b1a708e5046ae35c3be7591360,
-        type: 3}
-    - target: {fileID: 4706402254706946820, guid: 730b6f15cbfa96c4db1930def4556da9,
-        type: 3}
-      propertyPath: blockingModifier
-      value: 0.2
-      objectReference: {fileID: 0}
-    - target: {fileID: 4706402254706946820, guid: 730b6f15cbfa96c4db1930def4556da9,
-        type: 3}
       propertyPath: leftSpecialSpeed
       value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4706402254706946820, guid: 730b6f15cbfa96c4db1930def4556da9,
-        type: 3}
-      propertyPath: rightSpecialSlot
-      value: 
-      objectReference: {fileID: -4476728132895952727, guid: a353a5b06242cb6489e78a3ce9c641a2,
-        type: 3}
-    - target: {fileID: 4706402254706946820, guid: 730b6f15cbfa96c4db1930def4556da9,
-        type: 3}
-      propertyPath: attackingModifier
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4706402254706946820, guid: 730b6f15cbfa96c4db1930def4556da9,
         type: 3}
