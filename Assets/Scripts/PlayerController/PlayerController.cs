@@ -18,7 +18,6 @@ public class PlayerController : MonoBehaviour
     [Header("Animation Parameters")]
     public float generalSpeed = 1f;
     [Range(0f, 1f)] public float load = 0f;
-    public float dodgeSpeed = 1f;
 
     [Header("Movement Parameters")]
     public float movementSpeed = 8f;
@@ -33,7 +32,7 @@ public class PlayerController : MonoBehaviour
     public Move rightNormalSlot;
     public Move leftSpecialSlot;
     public Move rightSpecialSlot;
-    public float attackCooldown = 0f; // Time before the player can attack again.
+    public float attackCooldown = 0.4f; // Time before the player can attack again.
 
     private void Awake()
     {
@@ -71,7 +70,6 @@ public class PlayerController : MonoBehaviour
     public void LeftSpecial(InputAction.CallbackContext context) { anim.SetBool("left_special", context.performed); }
     public void RightSpecial(InputAction.CallbackContext context) { anim.SetBool("right_special", context.performed); }
     public void Block(InputAction.CallbackContext context) { anim.SetBool("block", context.performed); }
-    public void Dodge(InputAction.CallbackContext context) { anim.SetBool("dodge", context.performed); }
 
     //***ANIMATION***
 
@@ -153,7 +151,6 @@ public class PlayerController : MonoBehaviour
         anim.SetFloat("right_normal_speed", rightNormalSlot.animationSpeed * generalSpeed);
         anim.SetFloat("left_special_speed", leftSpecialSlot.animationSpeed * generalSpeed);
         anim.SetFloat("right_special_speed", rightSpecialSlot.animationSpeed * generalSpeed);
-        anim.SetFloat("dodge_speed", dodgeSpeed * generalSpeed);
 
         // MOVEMENT
         // Softens the movement by establishing the direction as a point that approaches the stick/mouse position.
