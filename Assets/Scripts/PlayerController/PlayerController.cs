@@ -33,7 +33,7 @@ public class PlayerController : MonoBehaviour
     public Move rightNormalSlot;
     public Move leftSpecialSlot;
     public Move rightSpecialSlot;
-    public float attackCooldown = 0f; // Time before the player can attack again
+    public float attackCooldown = 0f; // Time before the player can attack again.
 
     private void Awake()
     {
@@ -143,7 +143,7 @@ public class PlayerController : MonoBehaviour
         // Values that must be updated frame by frame to allow certain animations to play out accordingly.
         isAttacking = anim.GetCurrentAnimatorStateInfo(0).IsTag("Attacking") && !anim.IsInTransition(0);
         isBlocking = anim.GetCurrentAnimatorStateInfo(0).IsTag("Blocking") && !anim.IsInTransition(0);
-        // The player can attack if the attack animation hasn't been playing for less than *attackCooldown* seconds
+        // The player can attack if the attack animation hasn't been playing for less than *attackCooldown* seconds.
         canAttack = !(isAttacking && (anim.GetCurrentAnimatorStateInfo(0).normalizedTime < attackCooldown));
         anim.SetBool("can_attack", canAttack);
         
