@@ -31,9 +31,4 @@ public class Move : MonoBehaviour
     /// The damage it deals to the opponent's stamina, if it hits.
     /// </summary>
     public float damage;
-
-    /// <summary>
-    /// Time before another move can be performed.
-    /// </summary>
-    public float cooldown;
 }

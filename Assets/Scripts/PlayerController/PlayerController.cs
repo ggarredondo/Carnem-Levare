@@ -11,7 +11,7 @@ public class PlayerController : MonoBehaviour
     private AnimationClip[] animatorDefaults;
 
     private Vector2 movementValue, direction;
-    private bool isAttacking, isBlocking, cantAttack;
+    private bool isAttacking, isBlocking, canAttack;
 
     public Transform TargetEnemy;
 
@@ -27,10 +27,13 @@ public class PlayerController : MonoBehaviour
     [Range(-1f, 0f)] public float duckingRange = -1f; // -1: can duck all the way down. 0: can't duck at all.
 
     [Header("Attack Parameters")]
+    // The player has four attack slots to define their moveset.
+    // Two attacks from the left (left arm, left leg), two attacks from the right.
     public Move leftNormalSlot;
     public Move rightNormalSlot;
     public Move leftSpecialSlot;
     public Move rightSpecialSlot;
+    public float attackCooldown = 0f; // Time before the player can attack again
 
     private void Awake()
     {
@@ -45,7 +48,7 @@ public class PlayerController : MonoBehaviour
         direction = Vector2.zero;
         isAttacking = false;
         isBlocking = false;
-        cantAttack = false;
+        canAttack = true;
         UpdateAllAttackAnimations();
     }
 
@@ -55,6 +58,7 @@ public class PlayerController : MonoBehaviour
     }
 
     //***INPUT***
+    // Meant for Unity Input System events
 
     public void Movement(InputAction.CallbackContext context)
     { 
@@ -66,7 +70,7 @@ public class PlayerController : MonoBehaviour
     public void RightNormal(InputAction.CallbackContext context) { anim.SetBool("right_normal", context.performed); }
     public void LeftSpecial(InputAction.CallbackContext context) { anim.SetBool("left_special", context.performed); }
     public void RightSpecial(InputAction.CallbackContext context) { anim.SetBool("right_special", context.performed); }
-    public void Block (InputAction.CallbackContext context) { anim.SetBool("block", context.performed); }
+    public void Block(InputAction.CallbackContext context) { anim.SetBool("block", context.performed); }
     public void Dodge(InputAction.CallbackContext context) { anim.SetBool("dodge", context.performed); }
 
     //***ANIMATION***
@@ -76,7 +80,7 @@ public class PlayerController : MonoBehaviour
     /// </summary>
     /// <param name="og_clip">Name of the animation clip to be updated</param>
     /// <param name="new_clip">New animation clip</param>
-    public void UpdateAnimator(string og_clip, AnimationClip new_clip)
+    private void UpdateAnimator(string og_clip, AnimationClip new_clip)
     {
         List<KeyValuePair<AnimationClip, AnimationClip>> overrides = new List<KeyValuePair<AnimationClip, AnimationClip>>();
         overrides.Add(new KeyValuePair<AnimationClip, AnimationClip>(animatorDefaults.Where(clip => clip.name == og_clip).SingleOrDefault(), new_clip));
@@ -84,30 +88,45 @@ public class PlayerController : MonoBehaviour
         anim.runtimeAnimatorController = animOverride;
     }
 
+    /// <summary>
+    /// Update left normal slot animations in real time.
+    /// </summary>
     public void UpdateLeftNormalAnimations()
     {
         UpdateAnimator("LeftNormalCrouchClip", leftNormalSlot.crouchLeftAnimation);
         UpdateAnimator("LeftNormalClip", leftNormalSlot.leftAnimation);
     }
 
+    /// <summary>
+    /// Update right normal slot animations in real time.
+    /// </summary>
     public void UpdateRightNormalAnimations()
     {
         UpdateAnimator("RightNormalCrouchClip", rightNormalSlot.crouchRightAnimation);
         UpdateAnimator("RightNormalClip", rightNormalSlot.rightAnimation);
     }
 
+    /// <summary>
+    /// Update left special slot animations in real time.
+    /// </summary>
     public void UpdateLeftSpecialAnimations()
     {
         UpdateAnimator("LeftSpecialCrouchClip", leftSpecialSlot.crouchLeftAnimation);
         UpdateAnimator("LeftSpecialClip", leftSpecialSlot.leftAnimation);
     }
 
+    /// <summary>
+    /// Update right special slot animations in real time.
+    /// </summary>
     public void UpdateRightSpecialAnimations()
     {
         UpdateAnimator("RightSpecialCrouchClip", rightSpecialSlot.crouchRightAnimation);
         UpdateAnimator("RightSpecialClip", rightSpecialSlot.rightAnimation);
     }
-
+    
+    /// <summary>
+    /// Updates all attack animations in real time.
+    /// </summary>
     public void UpdateAllAttackAnimations()
     {
         UpdateLeftNormalAnimations();
@@ -124,7 +143,9 @@ public class PlayerController : MonoBehaviour
         // Values that must be updated frame by frame to allow certain animations to play out accordingly.
         isAttacking = anim.GetCurrentAnimatorStateInfo(0).IsTag("Attacking") && !anim.IsInTransition(0);
         isBlocking = anim.GetCurrentAnimatorStateInfo(0).IsTag("Blocking") && !anim.IsInTransition(0);
-        anim.SetBool("cant_attack", cantAttack);
+        // The player can attack if the attack animation hasn't been playing for less than *attackCooldown* seconds
+        canAttack = !(isAttacking && (anim.GetCurrentAnimatorStateInfo(0).normalizedTime < attackCooldown));
+        anim.SetBool("can_attack", canAttack);
         
         // Animation modifiers
         anim.SetFloat("load", load);
