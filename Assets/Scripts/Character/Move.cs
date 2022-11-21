@@ -3,7 +3,8 @@ using UnityEngine;
 public enum Power: uint
 {
     Light = 0,
-    Strong = 1
+    Medium = 1,
+    Strong = 2
 }
 
 /// <summary>
