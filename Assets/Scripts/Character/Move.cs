@@ -1,10 +1,17 @@
 using UnityEngine;
 
-public enum Type
+public enum Power: uint
 {
-    Light,
-    Medium,
-    Strong
+    Light = 0,
+    Medium = 1,
+    Strong = 2
+}
+
+public enum Side: int
+{
+    Left = -1,
+    Center = 0,
+    Right = 1
 }
 
 /// <summary>
@@ -23,9 +30,14 @@ public class Move : MonoBehaviour
 
     [Header("Attack Values")]
     /// <summary>
-    /// Type of move, classified by Light, Medium or Strong.
+    /// Move's power, classified by Light, Medium and Strong. Used to choose between hurt animations.
     /// </summary>
-    public Type type;
+    public Power power;
+
+    /// <summary>
+    /// Move's direction, from left to right (including center). Used to choose between hurt animations.
+    /// </summary>
+    public Side side;
 
     /// <summary>
     /// The damage it deals to the opponent's stamina, if it hits.

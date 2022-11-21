@@ -32,7 +32,7 @@ public class PlayerController : MonoBehaviour
     public Move rightNormalSlot;
     public Move leftSpecialSlot;
     public Move rightSpecialSlot;
-    public float attackCooldown = 0.4f; // Time before the player can attack again.
+    public float attackCooldown = 0.4f; // Time before the player can attack again (between different moves).
 
     private void Awake()
     {
