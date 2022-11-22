@@ -15,13 +15,9 @@ public class PlayerController : MonoBehaviour
 
     public Transform TargetEnemy;
 
-    [Header("Animation Parameters")]
-    public float generalSpeed = 1f;
-    [Range(0f, 1f)] public float load = 0f;
-
     [Header("Movement Parameters")]
     public float movementSpeed = 8f;
-    [Range(0f, 1f)] public float attackingModifier = 0f, blockingModifier = 0f; // The player may move slower when attacking or blocking.
+    [Range(0f, 1f)] public float attackingModifier = 0f, blockingModifier = 0f; // The player may move slower when attacking or blocking, or not move at all.
     private float current_movementSpeed;
     [Range(-1f, 0f)] public float duckingRange = -1f; // -1: can duck all the way down. 0: can't duck at all.
 
@@ -32,6 +28,7 @@ public class PlayerController : MonoBehaviour
     public Move rightNormalSlot;
     public Move leftSpecialSlot;
     public Move rightSpecialSlot;
+    public float attackSpeed = 1f;
     public float attackCooldown = 0.4f; // Time before the player can attack again (between different moves).
 
     private void Awake()
@@ -48,6 +45,10 @@ public class PlayerController : MonoBehaviour
         isAttacking = false;
         isBlocking = false;
         canAttack = true;
+        leftNormalSlot.LeftOrRight(Direction.Left);
+        rightNormalSlot.LeftOrRight(Direction.Right);
+        leftSpecialSlot.LeftOrRight(Direction.Left);
+        rightSpecialSlot.LeftOrRight(Direction.Right);
         UpdateAllAttackAnimations();
     }
 
@@ -144,13 +145,12 @@ public class PlayerController : MonoBehaviour
         // The player can attack if the attack animation hasn't been playing for less than *attackCooldown* seconds.
         canAttack = !(isAttacking && (anim.GetCurrentAnimatorStateInfo(0).normalizedTime < attackCooldown));
         anim.SetBool("can_attack", canAttack);
-        
+
         // Animation modifiers
-        anim.SetFloat("load", load);
-        anim.SetFloat("left_normal_speed", leftNormalSlot.animationSpeed * generalSpeed);
-        anim.SetFloat("right_normal_speed", rightNormalSlot.animationSpeed * generalSpeed);
-        anim.SetFloat("left_special_speed", leftSpecialSlot.animationSpeed * generalSpeed);
-        anim.SetFloat("right_special_speed", rightSpecialSlot.animationSpeed * generalSpeed);
+        anim.SetFloat("left_normal_speed", leftNormalSlot.animationSpeed * attackSpeed);
+        anim.SetFloat("right_normal_speed", rightNormalSlot.animationSpeed * attackSpeed);
+        anim.SetFloat("left_special_speed", leftSpecialSlot.animationSpeed * attackSpeed);
+        anim.SetFloat("right_special_speed", rightSpecialSlot.animationSpeed * attackSpeed);
 
         // MOVEMENT
         // Softens the movement by establishing the direction as a point that approaches the stick/mouse position.

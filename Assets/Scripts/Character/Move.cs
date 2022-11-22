@@ -7,6 +7,14 @@ public enum Power: uint
     Strong = 2
 }
 
+public enum Direction: int
+{
+    Left = -2,
+    Descending = -1,
+    Ascending = 1,
+    Right = 2
+}
+
 /// <summary>
 /// Specification of an attack performed by a player or NPC.
 /// </summary>
@@ -28,7 +36,23 @@ public class Move : MonoBehaviour
     public Power power;
 
     /// <summary>
+    /// Move's direction. Whether it's coming from the Left, the middle or the Right. And if it's coming from the middle, 
+    /// whether it's Descending or Ascending.
+    /// </summary>
+    public Direction direction;
+
+    /// <summary>
     /// The damage it deals to the opponent's stamina, if it hits.
     /// </summary>
     public float damage;
+
+    /// <summary>
+    /// Assign left or right to horizontal moves. Only works if the move isn't descending or ascending.
+    /// </summary>
+    /// <param name="dir">Left/Right direction.</param>
+    public void LeftOrRight(Direction dir)
+    {
+        if (direction != Direction.Descending && direction != Direction.Ascending)
+            direction = dir;
+    }
 }
