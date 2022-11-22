@@ -146,7 +146,7 @@ public class PlayerController : MonoBehaviour
         isAttacking = anim.GetCurrentAnimatorStateInfo(0).IsTag("Attacking") && !anim.IsInTransition(0);
         isBlocking = anim.GetCurrentAnimatorStateInfo(0).IsTag("Blocking") && !anim.IsInTransition(0);
         // The player can't attack if the attack animation has been playing for less than *attackCooldown* seconds.
-        canAttack = !(isAttacking && anim.GetCurrentAnimatorStateInfo(0).normalizedTime < attackCooldown);
+        canAttack = !(isAttacking && (anim.GetCurrentAnimatorStateInfo(0).normalizedTime < attackCooldown));
         anim.SetBool("can_attack", canAttack);
 
         // Animation modifiers
