@@ -135,7 +135,7 @@ public class PlayerController : MonoBehaviour
     }
 
     /// <summary>
-    /// Sets general animation parameters for the animator.
+    /// Sets animation parameters for the animator.
     /// </summary>
     private void SetAnimationParameters()
     {

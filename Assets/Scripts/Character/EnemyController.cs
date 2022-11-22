@@ -4,17 +4,36 @@ using UnityEngine;
 
 public class EnemyController : MonoBehaviour
 {
+    private Animator anim;
+
     public Transform TargetPlayer;
 
-    // Start is called before the first frame update
-    void Start()
+    [Header("Movement Parameters")]
+    [Range(-1f, 1f)] public float horizontal = 0f;
+    [Range(-1f, 0f)] public float vertical = 0f;
+
+    private void Awake()
+    {
+        anim = GetComponent<Animator>();
+    }
+
+    private void Start()
     {
         
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Update()
     {
-        transform.LookAt(new Vector3(TargetPlayer.position.x, transform.position.y, TargetPlayer.position.z));
+        SetAnimationParameters();
+    }
+
+    /// <summary>
+    /// Sets general animation parameters for the animator.
+    /// </summary>
+    private void SetAnimationParameters()
+    {
+        anim.SetFloat("horizontal", horizontal);
+        anim.SetFloat("vertical", vertical);
+        transform.LookAt(new Vector3(TargetPlayer.position.x, transform.position.y, TargetPlayer.position.z)); // Rotate towards player
     }
 }
