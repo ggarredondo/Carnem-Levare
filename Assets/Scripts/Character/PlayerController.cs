@@ -31,7 +31,9 @@ public class PlayerController : MonoBehaviour
     public float attackSpeed = 1f;
     // Time before the player can attack again (normalized time).
     // 0 means the player can attack again immediately. 1 means the player must wait for the entire animation to play out.
-    // This variable is meant for transitions between different move slots. Move slots can't transition directly to themselves.
+    // 0.5 means the player must wait for half the attack animation to play out before attacking again. Etc.
+    // This variable is meant for transitions between different move slots. Move slots can't transition directly to themselves,
+    // spamming the same move will always require the entire animation to play out.
     [Range(0f, 1f)] public float attackCooldown = 0.4f;
 
     private void Awake()
@@ -76,6 +78,8 @@ public class PlayerController : MonoBehaviour
     public void Block(InputAction.CallbackContext context) { anim.SetBool("block", context.performed); }
 
     //***ANIMATION***
+
+    #region ------UPDATE ANIMATOR IN REAL TIME CODE------
 
     /// <summary>
     /// Updates specific animation from animator in real time.
@@ -136,6 +140,8 @@ public class PlayerController : MonoBehaviour
         UpdateLeftSpecialAnimations();
         UpdateRightSpecialAnimations();
     }
+
+    #endregion
 
     /// <summary>
     /// Sets animation parameters for the animator.
