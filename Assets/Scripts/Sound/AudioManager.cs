@@ -1,9 +1,12 @@
 using UnityEngine;
 using System;
+using System.Collections.Generic;
 
 public class AudioManager : MonoBehaviour
 {
     public Sound[] sounds;
+
+    private List<Sound> currentSounds = new List<Sound>();
 
     void Awake()
     {
@@ -110,7 +113,44 @@ public class AudioManager : MonoBehaviour
     {
         foreach (Sound sound in sounds)
         {
-            sound.source.Pause();
+            if (sound.source.isPlaying)
+            {
+                sound.source.Pause();
+                currentSounds.Add(sound);
+            }
+        }
+    }
+
+    /// <summary>
+    /// Play all the sounds that have been paused
+    /// </summary>
+    public void ResumeAllSounds()
+    {
+        foreach (Sound sound in currentSounds)
+        {
+            sound.source.UnPause();
+        }
+    }
+
+    /// <summary>
+    /// Play all the sounds that have been paused
+    /// </summary>
+    public void MuteAllSounds()
+    {
+        foreach (Sound sound in sounds)
+        {
+            sound.source.mute = true;
+        }
+    }
+
+    /// <summary>
+    /// Play all the sounds that have been paused
+    /// </summary>
+    public void UnMuteAllSounds()
+    {
+        foreach (Sound sound in sounds)
+        {
+            sound.source.mute = false;
         }
     }
 

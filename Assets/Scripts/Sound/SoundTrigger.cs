@@ -24,19 +24,4 @@ public class SoundTrigger : StateMachineBehaviour
         if (stateInfo.IsName("Right Special"))
             sfxManager.Play("Right Special");
     }
-
-    public override void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
-    {
-        if (stateInfo.IsName("Left Jab"))
-            sfxManager.Stop("Left Jab");
-
-        if (stateInfo.IsName("Right Jab"))
-            sfxManager.Stop("Right Jab");
-
-        if (stateInfo.IsName("Left Special"))
-            sfxManager.Stop("Left Special");
-
-        if (stateInfo.IsName("Right Special"))
-            sfxManager.Stop("Right Special");
-    }
 }

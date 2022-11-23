@@ -1,0 +1,16 @@
+<Gamepad>/buttonSouth : , 
+<Gamepad>/buttonWest : Q
+<Gamepad>/buttonNorth : /
+<Gamepad>/buttonEast : .
+<Gamepad>/leftShoulder : f
+<Gamepad>/rightShoulder : z
+<Gamepad>/leftTrigger : k
+<Gamepad>/rightTrigger : b
+<Gamepad>/leftStickPress : e
+<Gamepad>/rightStickPress : \
+<Gamepad>/select : B
+<Gamepad>/start : V
+<Gamepad>/dpad/left : P
+<Gamepad>/dpad/up : O
+<Gamepad>/dpad/right : I
+<Gamepad>/dpad/down : U
