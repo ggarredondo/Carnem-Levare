@@ -4,7 +4,7 @@ using UnityEngine.UI;
 
 public class SoundMenu : MonoBehaviour
 {
-    private AudioSavior audioMixer;
+    private AudioSaver audioMixer;
     private AudioManager sfxManager;
 
     [Header("Sliders")]
@@ -18,10 +18,10 @@ public class SoundMenu : MonoBehaviour
     private void Awake()
     {
         sfxManager = GameObject.FindGameObjectWithTag("SFX").GetComponent<AudioManager>();
-        audioMixer = GameObject.FindGameObjectWithTag("AUDIO").GetComponent<AudioSavior>();
+        audioMixer = GameObject.FindGameObjectWithTag("AUDIO").GetComponent<AudioSaver>();
 
         //Initilize Sliders
-        globalSlider.value = audioMixer.globalVolume * globalSlider.maxValue / AudioSavior.GLOBAL_MAX;
+        globalSlider.value = audioMixer.globalVolume * globalSlider.maxValue / AudioSaver.GLOBAL_MAX;
         musicSlider.value = audioMixer.musicVolume * musicSlider.maxValue;
         sfxSlider.value = audioMixer.sfxVolume * sfxSlider.maxValue;
 
@@ -38,7 +38,7 @@ public class SoundMenu : MonoBehaviour
 
         if (tmp != null)
         {
-            audioMixer.globalVolume = tmp.value * AudioSavior.GLOBAL_MAX / tmp.maxValue;
+            audioMixer.globalVolume = tmp.value * AudioSaver.GLOBAL_MAX / tmp.maxValue;
 
             if (sound != "NO")
                 sfxManager.Play(sound);

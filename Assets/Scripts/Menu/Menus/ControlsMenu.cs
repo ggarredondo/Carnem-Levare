@@ -37,7 +37,7 @@ public class ControlsMenu : MonoBehaviour
         Debug.Log(callback.action.bindings[0].overridePath);
 
         GameObject children = currentGameObject.transform.GetChild(0).gameObject;
-        children.GetComponent<TMP_Text>().text = ControlSavior.mapping[callback.action.bindings[0].overridePath];
+        children.GetComponent<TMP_Text>().text = ControlSaver.mapping[callback.action.bindings[0].overridePath];
         callback.Dispose();
 
         globalMenuManager.DisablePopUpMenu();
@@ -47,7 +47,7 @@ public class ControlsMenu : MonoBehaviour
 
     public void SaveRemapping()
     {
-        ControlSavior.ApplyChanges(player);
+        ControlSaver.ApplyChanges(player);
     }
 
     private void LoadRemapping()
@@ -58,7 +58,7 @@ public class ControlsMenu : MonoBehaviour
         {
             string buttonText = buttons.GetChild(i).gameObject.GetComponent<TMP_Text>().text;
             string buttonAction = player.actions.FindActionMap(currentActionMap).FindAction(buttonText).bindings[0].effectivePath;
-            buttons.GetChild(i).transform.GetChild(0).GetComponent<TMP_Text>().text = ControlSavior.mapping[buttonAction];
+            buttons.GetChild(i).transform.GetChild(0).GetComponent<TMP_Text>().text = ControlSaver.mapping[buttonAction];
         }
     }
 }

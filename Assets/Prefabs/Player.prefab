@@ -81,8 +81,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4706402254675848940}
-  m_LocalRotation: {x: 0.023928162, y: 0.000859845, z: -0.000020580535, w: 0.99971336}
-  m_LocalPosition: {x: 0, y: 1.6199999, z: -3.6999998}
+  m_LocalRotation: {x: 0.028344182, y: -0.000000017233031, z: 4.8865106e-10, w: 0.99959826}
+  m_LocalPosition: {x: 0, y: 1.62, z: -3.7}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -112,7 +112,7 @@ Camera:
     y: 0
     width: 1
     height: 1
-  near clip plane: 3
+  near clip plane: 2
   far clip plane: 1000
   field of view: 25
   orthographic: 0
@@ -287,8 +287,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   TargetEnemy: {fileID: 0}
-  generalSpeed: 1
-  load: 0.5
   movementSpeed: 8
   attackingModifier: 0
   blockingModifier: 0
@@ -301,6 +299,7 @@ MonoBehaviour:
     type: 3}
   rightSpecialSlot: {fileID: -4476728132895952727, guid: a353a5b06242cb6489e78a3ce9c641a2,
     type: 3}
+  attackSpeed: 1
   attackCooldown: 0.4
 --- !u!114 &4706402254706946843
 MonoBehaviour:
@@ -428,6 +427,70 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: d6656a04-0c7c-49b4-a8bb-803cfa729f0b
     m_ActionName: Main Movement/Parry[/XInputControllerWindows/buttonSouth]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 12629714-7bd3-4252-a238-67c8108a2f19
+    m_ActionName: Main Movement/Start[/XInputControllerWindows/start]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 43b1c6d1-bf32-4a5f-bd03-64a48d271164
+    m_ActionName: UI/Navigate[/XInputControllerWindows/leftStick/up,/XInputControllerWindows/rightStick/up,/XInputControllerWindows/leftStick/down,/XInputControllerWindows/rightStick/down,/XInputControllerWindows/leftStick/left,/XInputControllerWindows/rightStick/left,/XInputControllerWindows/leftStick/right,/XInputControllerWindows/rightStick/right,/XInputControllerWindows/dpad,/Keyboard/w,/Keyboard/upArrow,/Keyboard/s,/Keyboard/downArrow,/Keyboard/a,/Keyboard/leftArrow,/Keyboard/d,/Keyboard/rightArrow]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 557da4a0-71ba-4977-8939-ba192679ccb2
+    m_ActionName: UI/Submit[/Keyboard/enter,/XInputControllerWindows/buttonSouth]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: b1818f8e-9d55-4ed9-a999-ad402d0fd3ae
+    m_ActionName: UI/Cancel[/Keyboard/escape,/XInputControllerWindows/buttonEast]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 2c979ec9-0295-4408-9b86-b54f08c5d1ec
+    m_ActionName: UI/Point[/Mouse/position,/Pen/position]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 2f1c4f06-6b88-4b25-9a46-7e8f342e15ec
+    m_ActionName: UI/Click[/Mouse/leftButton,/Pen/tip]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: bfd69d19-a1de-4e6c-bb2d-90da8e8264f5
+    m_ActionName: UI/ScrollWheel[/Mouse/scroll]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 168b09a6-c2cc-485f-88d2-933ec3821ee2
+    m_ActionName: UI/MiddleClick[/Mouse/middleButton]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: dfb43fe3-3fc4-42fa-b786-c55e452dbc2e
+    m_ActionName: UI/RightClick[/Mouse/rightButton]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 67bce8ba-30ad-4b68-bf9a-6dfbab03ff5e
+    m_ActionName: UI/TrackedDevicePosition
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: bd3f1563-4e05-4718-885e-45a3c81af735
+    m_ActionName: UI/TrackedDeviceOrientation
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 81c68746-bf81-4b05-b324-dc30292c7fc9
+    m_ActionName: UI/Back[/XInputControllerWindows/buttonEast]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: debe3281-b854-4fcc-8d58-01d2c6b8c183
+    m_ActionName: UI/Interact[/XInputControllerWindows/buttonSouth]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 5e7f77e5-348b-432c-88a7-1af564f8d047
+    m_ActionName: UI/Start[/XInputControllerWindows/start]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 9f113389-b2c1-4efc-a4a2-12f846df9185
+    m_ActionName: UI/ChangeRightMenu[/XInputControllerWindows/rightShoulder]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: c8a8b268-8f79-435f-b09d-c94ab022cb32
+    m_ActionName: UI/ChangeLeftMenu[/XInputControllerWindows/leftShoulder]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Main Movement
@@ -469,8 +532,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4706402255246442002}
-  m_LocalRotation: {x: 0.02834414, y: 0.000000012322561, z: -3.4941297e-10, w: 0.99959826}
-  m_LocalPosition: {x: 0, y: 1.6199999, z: -3.6999998}
+  m_LocalRotation: {x: 0.028344182, y: -0.000000017233031, z: 4.8865106e-10, w: 0.99959826}
+  m_LocalPosition: {x: 0, y: 1.62, z: -3.7}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -501,7 +564,7 @@ MonoBehaviour:
   m_Lens:
     FieldOfView: 25
     OrthographicSize: 1.55
-    NearClipPlane: 3
+    NearClipPlane: 2
     FarClipPlane: 1000
     Dutch: 0
     LensShift: {x: 0, y: 0}

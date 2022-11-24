@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class VisualSavior : MonoBehaviour
+public class VisualSaver : MonoBehaviour
 {
     [Header("Visual Mixer")]
     public bool fullscreen;

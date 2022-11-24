@@ -4,7 +4,7 @@ using UnityEngine.InputSystem;
 using System.IO;
 
 
-public class ControlSavior : MonoBehaviour
+public class ControlSaver : MonoBehaviour
 {
     [SerializeField] PlayerInput firstPlayer;
     public static Dictionary<string, string> mapping = new Dictionary<string, string>();

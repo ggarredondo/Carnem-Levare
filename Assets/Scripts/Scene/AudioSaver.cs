@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class AudioSavior : MonoBehaviour
+public class AudioSaver : MonoBehaviour
 {
     public const float GLOBAL_MAX = 5f;
 

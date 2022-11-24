@@ -5,7 +5,7 @@ using TMPro;
 
 public class VisualsMenu : MonoBehaviour
 {
-    private VisualSavior visualMixer;
+    private VisualSaver visualMixer;
 
     [Header("Toggle")]
     [SerializeField] private Toggle fullscreenToggle;
@@ -17,7 +17,7 @@ public class VisualsMenu : MonoBehaviour
 
     private void Awake()
     {
-        visualMixer = GameObject.FindGameObjectWithTag("VISUAL").GetComponent<VisualSavior>();
+        visualMixer = GameObject.FindGameObjectWithTag("VISUAL").GetComponent<VisualSaver>();
 
         //Initilize Toggles
         fullscreenToggle.isOn = visualMixer.fullscreen;

@@ -179,7 +179,7 @@ GameObject:
   - component: {fileID: 391515105}
   - component: {fileID: 391515106}
   m_Layer: 0
-  m_Name: VisualSavior
+  m_Name: VisualSaver
   m_TagString: VISUAL
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -227,7 +227,7 @@ GameObject:
   - component: {fileID: 427088440}
   - component: {fileID: 427088441}
   m_Layer: 0
-  m_Name: AudioSavior
+  m_Name: AudioSaver
   m_TagString: AUDIO
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -704,7 +704,7 @@ GameObject:
   - component: {fileID: 1817402130}
   - component: {fileID: 1817402129}
   m_Layer: 0
-  m_Name: ControlSavior
+  m_Name: ControlSaver
   m_TagString: CONTROLS
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -917,6 +917,10 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: c8a8b268-8f79-435f-b09d-c94ab022cb32
     m_ActionName: UI/ChangeLeftMenu[/XInputControllerWindows/leftShoulder]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 12629714-7bd3-4252-a238-67c8108a2f19
+    m_ActionName: Main Movement/Start[/XInputControllerWindows/start]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: UI
