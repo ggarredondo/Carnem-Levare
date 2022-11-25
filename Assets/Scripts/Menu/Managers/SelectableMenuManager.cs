@@ -20,8 +20,13 @@ public class SelectableMenuManager : MenuManager
     /// </summary>
     private void OnDisable()
     {
-        menus[actualActiveMenu].setFirstButton(EventSystem.current.currentSelectedGameObject);
-        firstMenu = actualActiveMenu;
+        GameObject tmp = EventSystem.current.currentSelectedGameObject;
+
+        if (tmp != null)
+        {
+            menus[actualActiveMenu].setFirstButton(EventSystem.current.currentSelectedGameObject);
+            firstMenu = actualActiveMenu;
+        }
     }
 
     /// <summary>
@@ -99,16 +104,4 @@ public class SelectableMenuManager : MenuManager
         returnButton.navigation = navigation;
 
     }
-
-    /// <summary>
-    /// Math module operation, the c# on unity not working as expected
-    /// </summary>
-    /// <param name="a"></param>
-    /// <param name="b"></param>
-    /// <returns></returns>
-    private int Mod(int a, int b)
-    {
-        return (a % b + b) % b;
-    }
-
 }

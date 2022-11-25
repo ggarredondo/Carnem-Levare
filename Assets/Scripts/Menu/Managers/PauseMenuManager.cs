@@ -9,14 +9,19 @@ public class PauseMenuManager : MenuManager
 
     private AudioSaver audioMixer;
     private AudioManager musicManager;
+    private AudioManager sfxManager;
     private bool pauseMenuActivated = false;
 
-    private void Start()
+    protected override void Awake()
     {
+        base.Awake();
+
         DisableActiveMenu();
+
         playerController.uiInputModule = GameObject.FindGameObjectWithTag("UI").GetComponent<InputSystemUIInputModule>();
         audioMixer = GameObject.FindGameObjectWithTag("AUDIO").GetComponent<AudioSaver>();
         musicManager = GameObject.FindGameObjectWithTag("MUSIC").GetComponent<AudioManager>();
+        sfxManager = GameObject.FindGameObjectWithTag("SFX").GetComponent<AudioManager>();
 
         musicManager.Play("Fight");
     }
@@ -47,7 +52,7 @@ public class PauseMenuManager : MenuManager
         ChangeMenu(firstMenu);
         pauseMenuActivated = true;
         playerController.SwitchCurrentActionMap("UI");
-        audioMixer.PauseAll();
+        sfxManager.PauseAllSounds();
     }
 
     /// <summary>
@@ -61,7 +66,7 @@ public class PauseMenuManager : MenuManager
         playerController.SwitchCurrentActionMap("Main Movement");
 
         if (resumeSounds)
-            audioMixer.ResumeAll();
+            sfxManager.ResumeAllSounds();
     }
 
     /// <summary>

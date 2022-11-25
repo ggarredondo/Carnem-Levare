@@ -13,7 +13,7 @@ public class MenuManager : MonoBehaviour
 
     protected int actualActiveMenu;
 
-    private void Awake()
+    protected virtual void Awake()
     {
         actualActiveMenu = firstMenu;
         SetActiveMenuById(actualActiveMenu, true);
@@ -48,6 +48,22 @@ public class MenuManager : MonoBehaviour
     }
 
     /// <summary>
+    /// Get the index of the menus array by the menu name
+    /// </summary>
+    /// <param name="name">The menu name</param>
+    /// <returns></returns>
+    private int GetIdByName(string name)
+    {
+        int tmp = 0;
+
+        for (int i = 0; i < menus.Length; i++)
+            if (menus[i].GetName() == name)
+                tmp = i;
+
+        return tmp;
+    }
+
+    /// <summary>
     /// Disable the actual active menu, used by the pause menu
     /// </summary>
     protected void DisableActiveMenu()
@@ -66,22 +82,6 @@ public class MenuManager : MonoBehaviour
             SetActiveMenuById(parentId, true);
         }
     } 
-
-    /// <summary>
-    /// Get the index of the menus array by the menu name
-    /// </summary>
-    /// <param name="name">The menu name</param>
-    /// <returns></returns>
-    private int GetIdByName(string name)
-    {
-        int tmp = 0;
-
-        for (int i = 0; i < menus.Length; i++)
-            if (menus[i].GetName() == name)
-                tmp = i;
-
-        return tmp;
-    }
 
     /// <summary>
     /// Change the actual menu
@@ -170,5 +170,16 @@ public class MenuManager : MonoBehaviour
         if (RaycastMouse().Count != 0)
             if (RaycastMouse()[0].gameObject.name == "Handle")
                 EventSystem.current.SetSelectedGameObject(RaycastMouse()[0].gameObject.transform.parent.parent.gameObject);
+    }
+
+    /// <summary>
+    /// Math module operation, the c# on unity not working as expected
+    /// </summary>
+    /// <param name="a"></param>
+    /// <param name="b"></param>
+    /// <returns></returns>
+    protected int Mod(int a, int b)
+    {
+        return (a % b + b) % b;
     }
 }
