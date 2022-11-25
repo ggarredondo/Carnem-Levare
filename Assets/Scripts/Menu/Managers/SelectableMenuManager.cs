@@ -33,7 +33,7 @@ public class SelectableMenuManager : MenuManager
     /// <param name="context"></param>
     public void MoveToRightMenu(InputAction.CallbackContext context)
     {
-        if (context.performed)
+        if (context.performed && gameObject.activeSelf)
         {
             CleanOldButtons(actualActiveMenu);
             int newActualMenu = Mod(actualActiveMenu + 1, selectableButtons.Length);
@@ -48,7 +48,7 @@ public class SelectableMenuManager : MenuManager
     /// <param name="context"></param>
     public void MoveToLeftMenu(InputAction.CallbackContext context)
     {
-        if (context.performed)
+        if (context.performed && gameObject.activeSelf)
         {
             CleanOldButtons(actualActiveMenu);
             int newActualMenu = Mod(actualActiveMenu - 1, selectableButtons.Length);
