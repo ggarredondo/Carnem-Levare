@@ -12,7 +12,7 @@ public class PlayerController : MonoBehaviour
     private Vector2 movementValue, direction;
     private bool isAttacking, isBlocking, canAttack;
 
-    public Transform TargetEnemyCamera;
+    public Transform TargetEnemy;
 
     [Header("Movement Parameters")]
     public float movementSpeed = 8f;
@@ -168,7 +168,7 @@ public class PlayerController : MonoBehaviour
         direction = Vector2.MoveTowards(direction, movementValue, current_movementSpeed * Time.deltaTime);
         anim.SetFloat("horizontal", direction.x);
         anim.SetFloat("vertical", direction.y);
-        transform.LookAt(new Vector3(TargetEnemyCamera.position.x, transform.position.y, TargetEnemyCamera.position.z)); // Rotate towards enemy.
+        transform.LookAt(new Vector3(TargetEnemy.position.x, transform.position.y, TargetEnemy.position.z)); // Rotate towards enemy.
     }
 
     //***PUBLIC METHODS***
