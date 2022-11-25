@@ -20,9 +20,7 @@ public class SelectableMenuManager : MenuManager
     /// </summary>
     private void OnDisable()
     {
-        GameObject tmp = EventSystem.current.currentSelectedGameObject;
-
-        if (tmp != null)
+        if (EventSystem.current != null)
         {
             menus[actualActiveMenu].setFirstButton(EventSystem.current.currentSelectedGameObject);
             firstMenu = actualActiveMenu;
