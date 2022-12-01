@@ -49,11 +49,6 @@ public class PlayerController : MonoBehaviour
         isAttacking = false;
         isBlocking = false;
         canAttack = true;
-
-        leftNormalSlot.LeftOrRight(Direction.Left);
-        rightNormalSlot.LeftOrRight(Direction.Right);
-        leftSpecialSlot.LeftOrRight(Direction.Left);
-        rightSpecialSlot.LeftOrRight(Direction.Right);
         UpdateAllAttackAnimations();
     }
 
