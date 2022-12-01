@@ -133,6 +133,9 @@ MonoBehaviour:
   TargetPlayer: {fileID: 0}
   horizontal: 0
   vertical: 0
+  hurt: 0
+  target: 0
+  power: 0
 --- !u!1001 &7481606168323393295
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -148,17 +151,17 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: df8e8b4e49896f543828b277b6764350,
         type: 3}
       propertyPath: m_LocalScale.x
-      value: 1.1
+      value: 1.15
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: df8e8b4e49896f543828b277b6764350,
         type: 3}
       propertyPath: m_LocalScale.y
-      value: 1.1
+      value: 1.15
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: df8e8b4e49896f543828b277b6764350,
         type: 3}
       propertyPath: m_LocalScale.z
-      value: 1.1
+      value: 1.15
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: df8e8b4e49896f543828b277b6764350,
         type: 3}
