@@ -3,7 +3,6 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using System.IO;
 
-
 public class ControlSaver : MonoBehaviour
 {
     [SerializeField] PlayerInput firstPlayer;

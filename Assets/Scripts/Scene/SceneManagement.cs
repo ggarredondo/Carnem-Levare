@@ -29,7 +29,7 @@ public class SceneManagement : MonoBehaviour
 
     void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        audioSavior.GetComponent<AudioSaver>().ApplyChanges();
+        AudioSaver.ApplyChanges();
     }
     
     /// <summary>

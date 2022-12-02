@@ -820,10 +820,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a700ed0722cfa674b95f24486216b1bb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fullscreen: 1
-  vsync: 1
-  resolution: 1920x1080
-  quality: 2
 --- !u!1 &406762919
 GameObject:
   m_ObjectHideFlags: 0
@@ -855,8 +851,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   activeSave:
     saveName: Settings
-    audioSettings: {fileID: 0}
-    visualSettings: {fileID: 0}
+    globalVolume: 1
+    musicVolume: 1
+    sfxVolume: 1
+    mute: 0
+    fullscreen: 1
+    vsync: 0
+    resolution: 1920x1080
+    quality: 0
 --- !u!4 &406762921
 Transform:
   m_ObjectHideFlags: 0
@@ -999,10 +1001,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e154c1e9c97884f44ac3a899bf652adf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  globalVolume: 1
-  musicVolume: 0
-  sfxVolume: 1
-  mute: 0
 --- !u!1 &458864194
 GameObject:
   m_ObjectHideFlags: 0

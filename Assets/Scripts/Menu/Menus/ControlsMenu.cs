@@ -60,7 +60,7 @@ public class ControlsMenu : MonoBehaviour
             }
 
             children.GetComponent<TMP_Text>().text = fontPath;
-            SaveRemapping();
+            ControlSaver.ApplyChanges(player);
         }
         else
         {
@@ -70,11 +70,6 @@ public class ControlsMenu : MonoBehaviour
 
         callback.Dispose();
         player.actions.FindActionMap(player.defaultActionMap).Enable();
-    }
-
-    public void SaveRemapping()
-    {
-        ControlSaver.ApplyChanges(player);
     }
 
     private void LoadRemapping()

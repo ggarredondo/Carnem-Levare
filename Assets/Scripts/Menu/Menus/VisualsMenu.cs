@@ -5,7 +5,6 @@ using TMPro;
 
 public class VisualsMenu : MonoBehaviour
 {
-    private VisualSaver visualMixer;
 
     [Header("Toggle")]
     [SerializeField] private Toggle fullscreenToggle;
@@ -17,11 +16,9 @@ public class VisualsMenu : MonoBehaviour
 
     private void Awake()
     {
-        visualMixer = GameObject.FindGameObjectWithTag("VISUAL").GetComponent<VisualSaver>();
-
         //Initilize Toggles
-        fullscreenToggle.isOn = visualMixer.fullscreen;
-        vsyncToggle.isOn = visualMixer.vsync == 1;
+        fullscreenToggle.isOn = VisualSaver.fullscreen;
+        vsyncToggle.isOn = VisualSaver.vsync == 1;
 
         //Initialize resolution Dropdown
         List<string> options = new List<string>();
@@ -37,7 +34,7 @@ public class VisualsMenu : MonoBehaviour
 
         resolutionDropdown.ClearOptions();
         resolutionDropdown.AddOptions(options);
-        resolutionDropdown.value = resolutionDropdown.options.FindIndex(option => option.text == visualMixer.resolution);
+        resolutionDropdown.value = resolutionDropdown.options.FindIndex(option => option.text == VisualSaver.resolution);
 
         //Initialize quality Dropdown
         List<string> quality = new List<string>();
@@ -48,32 +45,32 @@ public class VisualsMenu : MonoBehaviour
 
         qualityDropdown.ClearOptions();
         qualityDropdown.AddOptions(quality);
-        qualityDropdown.value = qualityDropdown.options.FindIndex(option => option.text == quality[visualMixer.quality]);
+        qualityDropdown.value = qualityDropdown.options.FindIndex(option => option.text == quality[VisualSaver.quality]);
     }
 
     public void Vsync()
     {
         vsyncToggle.isOn = !vsyncToggle.isOn;
-        visualMixer.vsync = vsyncToggle.isOn ? 1 : 0;
-        visualMixer.ApplyChanges();
+        VisualSaver.vsync = vsyncToggle.isOn ? 1 : 0;
+        VisualSaver.ApplyChanges();
     }
 
     public void FullScreen()
     {
         fullscreenToggle.isOn = !fullscreenToggle.isOn;
-        visualMixer.fullscreen = fullscreenToggle.isOn;
-        visualMixer.ApplyChanges();
+        VisualSaver.fullscreen = fullscreenToggle.isOn;
+        VisualSaver.ApplyChanges();
     }
 
     public void ChangeResolution()
     {
-        visualMixer.resolution = resolutionDropdown.options[resolutionDropdown.value].text;
-        visualMixer.ApplyChanges();
+        VisualSaver.resolution = resolutionDropdown.options[resolutionDropdown.value].text;
+        VisualSaver.ApplyChanges();
     }
 
     public void ChangeQuality()
     {
-        visualMixer.quality = qualityDropdown.value;
-        visualMixer.ApplyChanges();
+        VisualSaver.quality = qualityDropdown.value;
+        VisualSaver.ApplyChanges();
     }
 }

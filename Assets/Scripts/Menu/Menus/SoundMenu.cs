@@ -4,7 +4,6 @@ using UnityEngine.UI;
 
 public class SoundMenu : MonoBehaviour
 {
-    private AudioSaver audioMixer;
     private AudioManager sfxManager;
 
     [Header("Sliders")]
@@ -18,15 +17,14 @@ public class SoundMenu : MonoBehaviour
     private void Awake()
     {
         sfxManager = GameObject.FindGameObjectWithTag("SFX").GetComponent<AudioManager>();
-        audioMixer = GameObject.FindGameObjectWithTag("AUDIO").GetComponent<AudioSaver>();
 
         //Initilize Sliders
-        globalSlider.value = audioMixer.globalVolume * globalSlider.maxValue / AudioSaver.GLOBAL_MAX;
-        musicSlider.value = audioMixer.musicVolume * musicSlider.maxValue;
-        sfxSlider.value = audioMixer.sfxVolume * sfxSlider.maxValue;
+        globalSlider.value = AudioSaver.globalVolume * globalSlider.maxValue / AudioSaver.GLOBAL_MAX;
+        musicSlider.value = AudioSaver.musicVolume * musicSlider.maxValue;
+        sfxSlider.value = AudioSaver.sfxVolume * sfxSlider.maxValue;
 
         //Initialize Mute Toggle
-        muteToggle.isOn = audioMixer.mute;
+        muteToggle.isOn = AudioSaver.mute;
     }
 
     /// <summary>
@@ -38,13 +36,13 @@ public class SoundMenu : MonoBehaviour
 
         if (tmp != null)
         {
-            audioMixer.globalVolume = tmp.value * AudioSaver.GLOBAL_MAX / tmp.maxValue;
+            AudioSaver.globalVolume = tmp.value * AudioSaver.GLOBAL_MAX / tmp.maxValue;
 
             if (sound != "NO")
                 sfxManager.Play(sound);
         }
 
-        audioMixer.ApplyChanges();
+        AudioSaver.ApplyChanges();
     }
 
     /// <summary>
@@ -56,13 +54,13 @@ public class SoundMenu : MonoBehaviour
 
         if (tmp != null)
         {
-            audioMixer.sfxVolume = tmp.value / tmp.maxValue;
+            AudioSaver.sfxVolume = tmp.value / tmp.maxValue;
 
             if (sound != "NO")
                 sfxManager.Play(sound);
         }
 
-        audioMixer.ApplyChanges();
+        AudioSaver.ApplyChanges();
     }
 
     /// <summary>
@@ -74,19 +72,19 @@ public class SoundMenu : MonoBehaviour
 
         if (tmp != null)
         {
-            audioMixer.musicVolume = tmp.value / tmp.maxValue;
+            AudioSaver.musicVolume = tmp.value / tmp.maxValue;
 
             if (sound != "NO")
                 sfxManager.Play(sound);
         }
 
-        audioMixer.ApplyChanges();
+        AudioSaver.ApplyChanges();
     }
 
     public void Mute()
     {
         muteToggle.isOn = !muteToggle.isOn;
-        audioMixer.mute = muteToggle.isOn;
-        audioMixer.ApplyChanges();
+        AudioSaver.mute = muteToggle.isOn;
+        AudioSaver.ApplyChanges();
     }
 }

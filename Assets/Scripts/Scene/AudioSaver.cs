@@ -5,15 +5,15 @@ public class AudioSaver : MonoBehaviour
     public const float GLOBAL_MAX = 5f;
 
     [Header("Audio Mixer")]
-    [Range(0f, GLOBAL_MAX)] public float globalVolume = 1f;
-    [Range(0f, 1f)] public float musicVolume = 1f;
-    [Range(0f, 1f)] public float sfxVolume = 1f;
-    public bool mute = false;
+    [Range(0f, GLOBAL_MAX)] public static float globalVolume = 1f;
+    [Range(0f, 1f)] public static float musicVolume = 1f;
+    [Range(0f, 1f)] public static float sfxVolume = 1f;
+    public static bool mute = false;
 
-    private AudioManager sfxManager;
-    private AudioManager musicManager;
+    private static AudioManager sfxManager;
+    private static AudioManager musicManager;
 
-    public void ApplyChanges()
+    public static void ApplyChanges()
     {
         sfxManager = GameObject.FindGameObjectWithTag("SFX").GetComponent<AudioManager>();
         musicManager = GameObject.FindGameObjectWithTag("MUSIC").GetComponent<AudioManager>();
@@ -26,6 +26,20 @@ public class AudioSaver : MonoBehaviour
             MuteAll();
         else
             UnMuteAll();
+
+        //PERMANENT CHANGES
+        SaveManager.Instance.activeSave.globalVolume = globalVolume;
+        SaveManager.Instance.activeSave.musicVolume = musicVolume;
+        SaveManager.Instance.activeSave.sfxVolume = sfxVolume;
+        SaveManager.Instance.activeSave.mute = mute;
+    }
+
+    public static void LoadChanges()
+    {
+        globalVolume = SaveManager.Instance.activeSave.globalVolume;
+        musicVolume = SaveManager.Instance.activeSave.musicVolume;
+        sfxVolume = SaveManager.Instance.activeSave.sfxVolume;
+        mute = SaveManager.Instance.activeSave.mute;
     }
 
     public void PauseAll()
@@ -40,13 +54,13 @@ public class AudioSaver : MonoBehaviour
         musicManager.ResumeAllSounds();
     }
 
-    public void MuteAll()
+    public static void MuteAll()
     {
         sfxManager.MuteAllSounds();
         musicManager.MuteAllSounds();
     }
 
-    public void UnMuteAll()
+    public static void UnMuteAll()
     {
         sfxManager.UnMuteAllSounds();
         musicManager.UnMuteAllSounds();

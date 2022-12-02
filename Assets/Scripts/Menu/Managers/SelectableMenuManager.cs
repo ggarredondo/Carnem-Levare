@@ -24,6 +24,8 @@ public class SelectableMenuManager : MenuManager
         {
             menus[actualActiveMenu].setFirstButton(EventSystem.current.currentSelectedGameObject);
             firstMenu = actualActiveMenu;
+
+            SaveManager.Instance.Save();
         }
     }
 

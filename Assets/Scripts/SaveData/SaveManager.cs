@@ -47,6 +47,8 @@ public class SaveManager : MonoBehaviour
             activeSave = serializer.Deserialize(stream) as SaveData;
             stream.Close();
 
+            activeSave.Load();
+
             Debug.Log("Loaded");
         }
     }
@@ -66,7 +68,23 @@ public class SaveManager : MonoBehaviour
 public class SaveData
 {
     public string saveName;
-    public AudioSaver audioSettings;
-    public VisualSaver visualSettings;
+
+    //Audio Settings
+    public float globalVolume = 1f;
+    public float musicVolume = 1f;
+    public float sfxVolume = 1f;
+    public bool mute = false;
+
+    //Visual Settings
+    public bool fullscreen;
+    public int vsync;
+    public string resolution;
+    public int quality;
+
+    public void Load()
+    {
+        AudioSaver.LoadChanges();
+        VisualSaver.LoadChanges();
+    }
 }
 
