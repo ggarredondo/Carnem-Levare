@@ -3,21 +3,21 @@ using UnityEngine.SceneManagement;
 
 public class SceneManagement : MonoBehaviour
 {
-    private GameObject audioSavior;
-    private GameObject visualSavior;
-    private GameObject controlSavior;
+    private GameObject audioSaver;
+    private GameObject visualSaver;
+    private GameObject controlSaver;
     private GameObject eventSystem;
 
     private void Awake()
     {
-        audioSavior = GameObject.FindGameObjectWithTag("AUDIO");
-        visualSavior = GameObject.FindGameObjectWithTag("VISUAL");
-        controlSavior = GameObject.FindGameObjectWithTag("CONTROLS");
+        audioSaver = GameObject.FindGameObjectWithTag("AUDIO");
+        visualSaver = GameObject.FindGameObjectWithTag("VISUAL");
+        controlSaver = GameObject.FindGameObjectWithTag("CONTROLS");
         eventSystem = GameObject.FindGameObjectWithTag("UI");
 
-        DontDestroyOnLoad(audioSavior);
-        DontDestroyOnLoad(visualSavior);
-        DontDestroyOnLoad(controlSavior);
+        DontDestroyOnLoad(audioSaver);
+        DontDestroyOnLoad(visualSaver);
+        DontDestroyOnLoad(controlSaver);
         DontDestroyOnLoad(eventSystem);
         DontDestroyOnLoad(gameObject);
     }
