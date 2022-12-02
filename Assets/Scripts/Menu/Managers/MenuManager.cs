@@ -7,9 +7,9 @@ using TMPro;
 
 public class MenuManager : MonoBehaviour
 {
+    [Header ("Menu Assets")]
     [SerializeField] protected Menu[] menus;
     [SerializeField] protected int firstMenu;
-    [SerializeField] private GameObject popUpMenu;
 
     protected int actualActiveMenu;
 
@@ -17,17 +17,6 @@ public class MenuManager : MonoBehaviour
     {
         actualActiveMenu = firstMenu;
         SetActiveMenuById(actualActiveMenu, true);
-    }
-
-    public void PopUpMessage(string message)
-    {
-        popUpMenu.GetComponentInChildren<TMP_Text>().text = message;
-        popUpMenu.SetActive(true);
-    }
-
-    public void DisablePopUpMenu()
-    {
-        popUpMenu.SetActive(false);
     }
 
     /// <summary>

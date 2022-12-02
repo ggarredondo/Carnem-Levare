@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.UI;
 
-public class PauseMenuManager : MenuManager
+public class PauseMenuManager : MainMenuManager
 {
     [Range(0f, 1f)] public float slowMotion;
     public PlayerInput playerController;

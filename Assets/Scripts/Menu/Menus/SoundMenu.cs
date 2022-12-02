@@ -84,9 +84,9 @@ public class SoundMenu : MonoBehaviour
     }
 
     public void Mute()
-    { 
+    {
+        muteToggle.isOn = !muteToggle.isOn;
         audioMixer.mute = muteToggle.isOn;
-
         audioMixer.ApplyChanges();
     }
 }

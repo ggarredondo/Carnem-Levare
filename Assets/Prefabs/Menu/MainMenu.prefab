@@ -50,8 +50,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8b88de1ffbc964d4fa07e9f476b8e780, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  equalColor:
+    serializedVersion: 2
+    rgba: 4278220031
   player: {fileID: 0}
-  globalMenuManager: {fileID: 0}
+  globalMenuManager: {fileID: 1136233356876850450}
 --- !u!1 &1955055706418943800
 GameObject:
   m_ObjectHideFlags: 0
@@ -543,6 +546,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f0c1e7eaf7a61bd489232f0235baf06b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  typeButton: 1
+  mouseCanSelect: 1
 --- !u!114 &1955055706505668369
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -671,7 +676,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 909.88684, y: -259.86673}
+  m_AnchoredPosition: {x: 909.88684, y: -260.06372}
   m_SizeDelta: {x: 150, y: 20}
   m_Pivot: {x: 1.5, y: 0.5}
 --- !u!222 &1955055706519732580
@@ -726,7 +731,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1955055708393937219}
+      - m_Target: {fileID: 1136233356876850450}
         m_TargetAssemblyTypeName: MenuManager, Assembly-CSharp
         m_MethodName: GoToChildren
         m_Mode: 1
@@ -750,6 +755,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f0c1e7eaf7a61bd489232f0235baf06b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  typeButton: 1
+  mouseCanSelect: 1
 --- !u!114 &1955055706519732583
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -969,7 +976,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 1010.5802, y: -118.59213}
+  m_AnchoredPosition: {x: 909.88684, y: -139.86673}
   m_SizeDelta: {x: 150, y: 20}
   m_Pivot: {x: 1.5, y: 0.5}
 --- !u!222 &1955055706539337788
@@ -1024,9 +1031,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1955055708393937219}
-        m_TargetAssemblyTypeName: MenuManager, Assembly-CSharp
-        m_MethodName: GoToChildren
+      - m_Target: {fileID: 1955055707561592475}
+        m_TargetAssemblyTypeName: VisualsMenu, Assembly-CSharp
+        m_MethodName: Vsync
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1048,6 +1055,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f0c1e7eaf7a61bd489232f0235baf06b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  typeButton: 1
+  mouseCanSelect: 1
 --- !u!114 &1955055706539337791
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1135,7 +1144,7 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
-  m_hasFontAssetChanged: 1
+  m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
 --- !u!1 &1955055706567742759
@@ -1523,7 +1532,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 909.88684, y: -379.86673}
+  m_AnchoredPosition: {x: 909.88684, y: -380.06372}
   m_SizeDelta: {x: 150, y: 20}
   m_Pivot: {x: 1.5, y: 0.5}
 --- !u!222 &1955055706606478163
@@ -1578,7 +1587,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1955055708393937219}
+      - m_Target: {fileID: 1136233356876850450}
         m_TargetAssemblyTypeName: MenuManager, Assembly-CSharp
         m_MethodName: GoToChildren
         m_Mode: 1
@@ -1602,6 +1611,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f0c1e7eaf7a61bd489232f0235baf06b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  typeButton: 1
+  mouseCanSelect: 1
 --- !u!114 &1955055706606478162
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1776,19 +1787,7 @@ MonoBehaviour:
   m_Group: {fileID: 0}
   onValueChanged:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1955055707561592475}
-        m_TargetAssemblyTypeName: VisualsMenu, Assembly-CSharp
-        m_MethodName: Vsync
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
   m_IsOn: 1
 --- !u!1 &1955055706631775170
 GameObject:
@@ -1828,7 +1827,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 909.88684, y: -499.86673}
+  m_AnchoredPosition: {x: 909.88684, y: -500.06372}
   m_SizeDelta: {x: 150, y: 20}
   m_Pivot: {x: 1.5, y: 0.5}
 --- !u!222 &1955055706631775169
@@ -1883,7 +1882,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1955055708393937219}
+      - m_Target: {fileID: 1136233356876850450}
         m_TargetAssemblyTypeName: MenuManager, Assembly-CSharp
         m_MethodName: GoToChildren
         m_Mode: 1
@@ -1907,6 +1906,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f0c1e7eaf7a61bd489232f0235baf06b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  typeButton: 1
+  mouseCanSelect: 1
 --- !u!114 &1955055706631775168
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2146,7 +2147,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 909.88684, y: -139.86673}
+  m_AnchoredPosition: {x: 909.88684, y: -140.06372}
   m_SizeDelta: {x: 150, y: 20}
   m_Pivot: {x: 1.5, y: 0.5}
 --- !u!222 &1955055706746011777
@@ -2201,9 +2202,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1955055708393937219}
-        m_TargetAssemblyTypeName: MenuManager, Assembly-CSharp
-        m_MethodName: GoToChildren
+      - m_Target: {fileID: 1955055708419865466}
+        m_TargetAssemblyTypeName: SoundMenu, Assembly-CSharp
+        m_MethodName: Mute
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2225,6 +2226,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f0c1e7eaf7a61bd489232f0235baf06b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  typeButton: 1
+  mouseCanSelect: 1
 --- !u!114 &1955055706746011776
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2312,7 +2315,7 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
-  m_hasFontAssetChanged: 1
+  m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
 --- !u!1 &1955055706796554595
@@ -2936,6 +2939,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f0c1e7eaf7a61bd489232f0235baf06b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  typeButton: 1
+  mouseCanSelect: 1
 --- !u!114 &1955055706903400926
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3246,6 +3251,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f0c1e7eaf7a61bd489232f0235baf06b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  typeButton: 1
+  mouseCanSelect: 1
 --- !u!114 &1955055706910578600
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3597,6 +3604,7 @@ GameObject:
   - component: {fileID: 1955055706987902733}
   - component: {fileID: 1955055706987902732}
   - component: {fileID: 1955055706987902735}
+  - component: {fileID: 7721651784957949791}
   m_Layer: 5
   m_Name: Visuals
   m_TagString: Untagged
@@ -3778,6 +3786,20 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &7721651784957949791
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1955055706987902737}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f0c1e7eaf7a61bd489232f0235baf06b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  typeButton: 2
+  mouseCanSelect: 0
 --- !u!1 &1955055706988478364
 GameObject:
   m_ObjectHideFlags: 0
@@ -4265,19 +4287,7 @@ MonoBehaviour:
   m_Group: {fileID: 0}
   onValueChanged:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1955055708419865466}
-        m_TargetAssemblyTypeName: SoundMenu, Assembly-CSharp
-        m_MethodName: Mute
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
   m_IsOn: 0
 --- !u!1 &1955055707124117450
 GameObject:
@@ -5022,6 +5032,7 @@ GameObject:
   - component: {fileID: 1955055707248369616}
   - component: {fileID: 1955055707248369619}
   - component: {fileID: 1955055707248369618}
+  - component: {fileID: 2489894447423180053}
   m_Layer: 5
   m_Name: Accesibility
   m_TagString: Untagged
@@ -5203,6 +5214,20 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &2489894447423180053
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1955055707248369620}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f0c1e7eaf7a61bd489232f0235baf06b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  typeButton: 2
+  mouseCanSelect: 0
 --- !u!1 &1955055707344251592
 GameObject:
   m_ObjectHideFlags: 0
@@ -5582,6 +5607,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f0c1e7eaf7a61bd489232f0235baf06b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  typeButton: 1
+  mouseCanSelect: 1
 --- !u!114 &1955055707382809933
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6061,6 +6088,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f0c1e7eaf7a61bd489232f0235baf06b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  typeButton: 1
+  mouseCanSelect: 1
 --- !u!114 &1955055707478596397
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6467,6 +6496,7 @@ GameObject:
   - component: {fileID: 1955055707574095829}
   - component: {fileID: 1955055707574095828}
   - component: {fileID: 1955055707574095831}
+  - component: {fileID: 140913994702261215}
   m_Layer: 5
   m_Name: Audio
   m_TagString: Untagged
@@ -6648,6 +6678,20 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &140913994702261215
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1955055707574095833}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f0c1e7eaf7a61bd489232f0235baf06b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  typeButton: 2
+  mouseCanSelect: 0
 --- !u!1 &1955055707617368425
 GameObject:
   m_ObjectHideFlags: 0
@@ -6762,7 +6806,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 1010.5802, y: -218.59213}
+  m_AnchoredPosition: {x: 909.88684, y: -259.86673}
   m_SizeDelta: {x: 150, y: 20}
   m_Pivot: {x: 1.5, y: 0.5}
 --- !u!222 &1955055707626076472
@@ -6817,9 +6861,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1955055708393937219}
-        m_TargetAssemblyTypeName: MenuManager, Assembly-CSharp
-        m_MethodName: GoToChildren
+      - m_Target: {fileID: 1955055707561592475}
+        m_TargetAssemblyTypeName: VisualsMenu, Assembly-CSharp
+        m_MethodName: FullScreen
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -6841,6 +6885,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f0c1e7eaf7a61bd489232f0235baf06b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  typeButton: 1
+  mouseCanSelect: 1
 --- !u!114 &1955055707626076475
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6928,7 +6974,7 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
-  m_hasFontAssetChanged: 1
+  m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
 --- !u!1 &1955055707642862387
@@ -7126,7 +7172,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1955055708393937219}
+      - m_Target: {fileID: 1136233356876850450}
         m_TargetAssemblyTypeName: MenuManager, Assembly-CSharp
         m_MethodName: ReturnToParent
         m_Mode: 1
@@ -7150,6 +7196,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f0c1e7eaf7a61bd489232f0235baf06b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  typeButton: 2
+  mouseCanSelect: 1
 --- !u!114 &1955055707732910313
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7966,6 +8014,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f0c1e7eaf7a61bd489232f0235baf06b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  typeButton: 1
+  mouseCanSelect: 1
 --- !u!114 &1955055707918921948
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8173,6 +8223,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f0c1e7eaf7a61bd489232f0235baf06b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  typeButton: 1
+  mouseCanSelect: 1
 --- !u!114 &1955055707924954846
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8578,7 +8630,6 @@ MonoBehaviour:
     parentMenu: {fileID: 1955055706572959651}
     firstSelectedButton: {fileID: 1955055707248369620}
   firstMenu: 0
-  popUpMenu: {fileID: 0}
   selectableButtons:
   - {fileID: 1955055707574095828}
   - {fileID: 1955055708273043241}
@@ -8697,7 +8748,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 1010.5802, y: -318.59213}
+  m_AnchoredPosition: {x: 909.88684, y: -379.86673}
   m_SizeDelta: {x: 150, y: 20}
   m_Pivot: {x: 1.5, y: 0.5}
 --- !u!222 &1955055708013175954
@@ -8752,7 +8803,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1955055708393937219}
+      - m_Target: {fileID: 1136233356876850450}
         m_TargetAssemblyTypeName: MenuManager, Assembly-CSharp
         m_MethodName: GoToChildren
         m_Mode: 1
@@ -8776,6 +8827,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f0c1e7eaf7a61bd489232f0235baf06b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  typeButton: 1
+  mouseCanSelect: 1
 --- !u!114 &1955055708013175957
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8863,7 +8916,7 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
-  m_hasFontAssetChanged: 1
+  m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
 --- !u!1 &1955055708018524464
@@ -9777,7 +9830,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 1010.5802, y: -418.59213}
+  m_AnchoredPosition: {x: 909.88684, y: -499.86673}
   m_SizeDelta: {x: 150, y: 20}
   m_Pivot: {x: 1.5, y: 0.5}
 --- !u!222 &1955055708267768095
@@ -9832,7 +9885,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1955055708393937219}
+      - m_Target: {fileID: 1136233356876850450}
         m_TargetAssemblyTypeName: MenuManager, Assembly-CSharp
         m_MethodName: GoToChildren
         m_Mode: 1
@@ -9856,6 +9909,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f0c1e7eaf7a61bd489232f0235baf06b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  typeButton: 1
+  mouseCanSelect: 1
 --- !u!114 &1955055708267768160
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9943,7 +9998,7 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
-  m_hasFontAssetChanged: 1
+  m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
 --- !u!1 &1955055708273043242
@@ -9958,6 +10013,7 @@ GameObject:
   - component: {fileID: 1955055708273043238}
   - component: {fileID: 1955055708273043241}
   - component: {fileID: 1955055708273043240}
+  - component: {fileID: 2300797093523956599}
   m_Layer: 5
   m_Name: Controls
   m_TagString: Untagged
@@ -10139,6 +10195,20 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &2300797093523956599
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1955055708273043242}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f0c1e7eaf7a61bd489232f0235baf06b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  typeButton: 2
+  mouseCanSelect: 0
 --- !u!1 &1955055708294639721
 GameObject:
   m_ObjectHideFlags: 0
@@ -10207,8 +10277,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: New Text
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 1ea692f388ca4bd4fbce4168f752a796, type: 2}
-  m_sharedMaterial: {fileID: -8750084558539656433, guid: 1ea692f388ca4bd4fbce4168f752a796,
+  m_fontAsset: {fileID: 11400000, guid: 007349dca47f79e4e8c7314c8dcfe46e, type: 2}
+  m_sharedMaterial: {fileID: 8469208026097323215, guid: 007349dca47f79e4e8c7314c8dcfe46e,
     type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
@@ -10272,7 +10342,7 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
-  m_hasFontAssetChanged: 0
+  m_hasFontAssetChanged: 1
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
 --- !u!1 &1955055708305539851
@@ -10476,7 +10546,8 @@ GameObject:
   - component: {fileID: 1955055708393937220}
   - component: {fileID: 1955055708393937223}
   - component: {fileID: 1955055708393937222}
-  - component: {fileID: 1955055708393937219}
+  - component: {fileID: 1136233356876850450}
+  - component: {fileID: 8952931121474253183}
   m_Layer: 5
   m_Name: MainMenu
   m_TagString: Untagged
@@ -10568,7 +10639,7 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
---- !u!114 &1955055708393937219
+--- !u!114 &1136233356876850450
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -10577,7 +10648,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1955055708393937225}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 19c878d3ba83b7d40bf80bcfe5005079, type: 3}
+  m_Script: {fileID: 11500000, guid: 71a7d99d71186b24597e1a28dfd654b6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   menus:
@@ -10589,6 +10660,31 @@ MonoBehaviour:
     firstSelectedButton: {fileID: 1955055706746011778}
   firstMenu: 0
   popUpMenu: {fileID: 1955055706599141509}
+--- !u!114 &8952931121474253183
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1955055708393937225}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f082e66cb4c9d8c45941535a9573453a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  font: {fileID: 11400000, guid: 007349dca47f79e4e8c7314c8dcfe46e, type: 2}
+  selectedButtonColor:
+    serializedVersion: 2
+    rgba: 4288895840
+  highlightedButtonColor:
+    serializedVersion: 2
+    rgba: 4286864224
+  selectedButtonColor2:
+    serializedVersion: 2
+    rgba: 4281286086
+  highlightedButtonColor2:
+    serializedVersion: 2
+    rgba: 4281286050
 --- !u!1 &1955055708399291690
 GameObject:
   m_ObjectHideFlags: 0
@@ -10681,9 +10777,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1955055708393937219}
+      - m_Target: {fileID: 1136233356876850450}
         m_TargetAssemblyTypeName: MenuManager, Assembly-CSharp
-        m_MethodName: ChangeMenuNoInitialize
+        m_MethodName: ChangeMenu
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -10705,6 +10801,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f0c1e7eaf7a61bd489232f0235baf06b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  typeButton: 1
+  mouseCanSelect: 1
 --- !u!114 &1955055708399291688
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11009,19 +11107,7 @@ MonoBehaviour:
   m_Group: {fileID: 0}
   onValueChanged:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1955055707561592475}
-        m_TargetAssemblyTypeName: VisualsMenu, Assembly-CSharp
-        m_MethodName: FullScreen
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
   m_IsOn: 1
 --- !u!1 &4950637126929564212
 GameObject:

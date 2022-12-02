@@ -2737,18 +2737,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1381014433}
   m_Mesh: {fileID: -5745767395898813764, guid: f86a57480dec3ac489161aa40bbd014a, type: 3}
---- !u!114 &1384456605 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1955055708393937219, guid: 268a8de8c2e04b947b4676206ac396d7,
-    type: 3}
-  m_PrefabInstance: {fileID: 1955055707010021598}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 19c878d3ba83b7d40bf80bcfe5005079, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1384520379
 GameObject:
   m_ObjectHideFlags: 0
@@ -3748,7 +3736,7 @@ MonoBehaviour:
     m_ActionName: UI/Point[/Mouse/position,/Pen/position]
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1384456605}
+      - m_Target: {fileID: 1955055707010021599}
         m_TargetAssemblyTypeName: MenuManager, Assembly-CSharp
         m_MethodName: MouseClick
         m_Mode: 0
@@ -3784,7 +3772,7 @@ MonoBehaviour:
     m_ActionName: UI/TrackedDeviceOrientation
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1384456605}
+      - m_Target: {fileID: 1955055707010021599}
         m_TargetAssemblyTypeName: MenuManager, Assembly-CSharp
         m_MethodName: ReturnFromChildren
         m_Mode: 0
@@ -4937,3 +4925,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 268a8de8c2e04b947b4676206ac396d7, type: 3}
+--- !u!114 &1955055707010021599 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1136233356876850450, guid: 268a8de8c2e04b947b4676206ac396d7,
+    type: 3}
+  m_PrefabInstance: {fileID: 1955055707010021598}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 71a7d99d71186b24597e1a28dfd654b6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

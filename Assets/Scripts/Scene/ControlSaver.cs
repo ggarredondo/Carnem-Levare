@@ -7,7 +7,8 @@ using System.IO;
 public class ControlSaver : MonoBehaviour
 {
     [SerializeField] PlayerInput firstPlayer;
-    public static Dictionary<string, string> mapping = new Dictionary<string, string>();
+    public static Dictionary<string, string> mapping = new();
+    public static Dictionary<string, string> uiMapping = new();
 
     private void Awake()
     {
@@ -34,13 +35,22 @@ public class ControlSaver : MonoBehaviour
 
     private void ReadMappingFile()
     {
-        string myFilePath = Application.dataPath + "/Scripts/Scene/mapping.txt";
+        string myFilePath = Application.streamingAssetsPath + "/Mapping/Gamepad.txt";
         string[] fileLines = File.ReadAllLines(myFilePath);
 
         foreach (string line in fileLines)
         {
             string[] actionMap = line.Split(':');
             mapping.Add(actionMap[0].Replace(" ",string.Empty) ,actionMap[1].Replace(" ", string.Empty));
+        }
+
+        myFilePath = Application.streamingAssetsPath + "/Mapping/UI.txt";
+        fileLines = File.ReadAllLines(myFilePath);
+
+        foreach (string line in fileLines)
+        {
+            string[] actionMap = line.Split(':');
+            uiMapping.Add(actionMap[0], actionMap[1]);
         }
     }
 }

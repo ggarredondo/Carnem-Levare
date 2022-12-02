@@ -373,6 +373,18 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 123158986}
   m_Mesh: {fileID: 2471968619768303756, guid: f86a57480dec3ac489161aa40bbd014a, type: 3}
+--- !u!114 &253487975 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1136233356876850450, guid: 268a8de8c2e04b947b4676206ac396d7,
+    type: 3}
+  m_PrefabInstance: {fileID: 1955055707010021598}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 71a7d99d71186b24597e1a28dfd654b6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &297459405
 GameObject:
   m_ObjectHideFlags: 0
@@ -812,6 +824,54 @@ MonoBehaviour:
   vsync: 1
   resolution: 1920x1080
   quality: 2
+--- !u!1 &406762919
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 406762921}
+  - component: {fileID: 406762920}
+  m_Layer: 0
+  m_Name: SaveManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &406762920
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 406762919}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1becc134bddc53349a7190d5b4b15b39, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  activeSave:
+    saveName: Settings
+    audioSettings: {fileID: 0}
+    visualSettings: {fileID: 0}
+--- !u!4 &406762921
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 406762919}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -4.171726, y: -1.5105982, z: 7.7534714}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 11
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &412869921
 GameObject:
   m_ObjectHideFlags: 0
@@ -940,7 +1000,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   globalVolume: 1
-  musicVolume: 0.4
+  musicVolume: 0
   sfxVolume: 1
   mute: 0
 --- !u!1 &458864194
@@ -3345,18 +3405,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1486334629}
   m_Mesh: {fileID: -8844183690752760904, guid: f86a57480dec3ac489161aa40bbd014a, type: 3}
---- !u!114 &1557602757 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1955055708393937219, guid: 268a8de8c2e04b947b4676206ac396d7,
-    type: 3}
-  m_PrefabInstance: {fileID: 1955055707010021598}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 19c878d3ba83b7d40bf80bcfe5005079, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1567119206
 GameObject:
   m_ObjectHideFlags: 0
@@ -4027,7 +4075,7 @@ MonoBehaviour:
     m_ActionName: UI/Point[/Mouse/position,/Pen/position]
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1557602757}
+      - m_Target: {fileID: 253487975}
         m_TargetAssemblyTypeName: MenuManager, Assembly-CSharp
         m_MethodName: MouseClick
         m_Mode: 0
@@ -4063,7 +4111,7 @@ MonoBehaviour:
     m_ActionName: UI/TrackedDeviceOrientation
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1557602757}
+      - m_Target: {fileID: 253487975}
         m_TargetAssemblyTypeName: MenuManager, Assembly-CSharp
         m_MethodName: ReturnFromChildren
         m_Mode: 0
@@ -5068,6 +5116,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1955055708126876873, guid: 268a8de8c2e04b947b4676206ac396d7,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -3.9301758
       objectReference: {fileID: 0}
     - target: {fileID: 1955055708273043243, guid: 268a8de8c2e04b947b4676206ac396d7,
         type: 3}

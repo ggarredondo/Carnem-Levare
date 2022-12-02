@@ -1036,9 +1036,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 6585527209193569098}
-        m_TargetAssemblyTypeName: MenuManager, Assembly-CSharp
-        m_MethodName: GoToChildren
+      - m_Target: {fileID: 1944051378591869785}
+        m_TargetAssemblyTypeName: VisualsMenu, Assembly-CSharp
+        m_MethodName: Vsync
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1815,19 +1815,7 @@ MonoBehaviour:
   m_Group: {fileID: 0}
   onValueChanged:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1944051378591869785}
-        m_TargetAssemblyTypeName: VisualsMenu, Assembly-CSharp
-        m_MethodName: Vsync
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
   m_IsOn: 1
 --- !u!1 &1944051377731585908
 GameObject:
@@ -1996,9 +1984,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 6585527209193569098}
-        m_TargetAssemblyTypeName: MenuManager, Assembly-CSharp
-        m_MethodName: GoToChildren
+      - m_Target: {fileID: 1944051379482629816}
+        m_TargetAssemblyTypeName: SoundMenu, Assembly-CSharp
+        m_MethodName: Mute
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -3627,19 +3615,7 @@ MonoBehaviour:
   m_Group: {fileID: 0}
   onValueChanged:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1944051379482629816}
-        m_TargetAssemblyTypeName: SoundMenu, Assembly-CSharp
-        m_MethodName: Mute
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
   m_IsOn: 0
 --- !u!1 &1944051378152089774
 GameObject:
@@ -6242,9 +6218,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 6585527209193569098}
-        m_TargetAssemblyTypeName: MenuManager, Assembly-CSharp
-        m_MethodName: GoToChildren
+      - m_Target: {fileID: 1944051378591869785}
+        m_TargetAssemblyTypeName: VisualsMenu, Assembly-CSharp
+        m_MethodName: FullScreen
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -7764,7 +7740,6 @@ MonoBehaviour:
     parentMenu: {fileID: 1944051377571168865}
     firstSelectedButton: {fileID: 1944051378254983702}
   firstMenu: 0
-  popUpMenu: {fileID: 0}
   selectableButtons:
   - {fileID: 1944051378579137046}
   - {fileID: 1944051379243469547}
@@ -8332,7 +8307,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.108208336, y: 0.10216862}
   m_AnchorMax: {x: 0.89400005, y: 0.18800001}
-  m_AnchoredPosition: {x: -2.4301147, y: -0.20297241}
+  m_AnchoredPosition: {x: -2.4301147, y: -0.20300293}
   m_SizeDelta: {x: 6.9044, y: 0.40591}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1944051379099941124
@@ -9788,19 +9763,7 @@ MonoBehaviour:
   m_Group: {fileID: 0}
   onValueChanged:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1944051378591869785}
-        m_TargetAssemblyTypeName: VisualsMenu, Assembly-CSharp
-        m_MethodName: FullScreen
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
   m_IsOn: 1
 --- !u!1 &1944051379538273239
 GameObject:
@@ -10937,6 +10900,7 @@ GameObject:
   - component: {fileID: 6585527209193569103}
   - component: {fileID: 6585527209193569102}
   - component: {fileID: 6585527209193569098}
+  - component: {fileID: 4209662606697960346}
   m_Layer: 5
   m_Name: PauseMenu
   m_TagString: Untagged
@@ -11051,6 +11015,25 @@ MonoBehaviour:
   popUpMenu: {fileID: 3888368017546907214}
   slowMotion: 0
   playerController: {fileID: 0}
+--- !u!114 &4209662606697960346
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6585527209193569100}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f082e66cb4c9d8c45941535a9573453a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  font: {fileID: 11400000, guid: 007349dca47f79e4e8c7314c8dcfe46e, type: 2}
+  selectedButtonColor:
+    serializedVersion: 2
+    rgba: 4288895840
+  highlightedButtonColor:
+    serializedVersion: 2
+    rgba: 4286864224
 --- !u!1 &8784146616953135735
 GameObject:
   m_ObjectHideFlags: 0

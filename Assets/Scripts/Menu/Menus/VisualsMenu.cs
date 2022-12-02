@@ -53,15 +53,15 @@ public class VisualsMenu : MonoBehaviour
 
     public void Vsync()
     {
+        vsyncToggle.isOn = !vsyncToggle.isOn;
         visualMixer.vsync = vsyncToggle.isOn ? 1 : 0;
-
         visualMixer.ApplyChanges();
     }
 
     public void FullScreen()
     {
+        fullscreenToggle.isOn = !fullscreenToggle.isOn;
         visualMixer.fullscreen = fullscreenToggle.isOn;
-
         visualMixer.ApplyChanges();
     }
 
