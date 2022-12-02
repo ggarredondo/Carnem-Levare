@@ -7,7 +7,6 @@ public class PauseMenuManager : MainMenuManager
     [Range(0f, 1f)] public float slowMotion;
     public PlayerInput playerController;
 
-    private AudioSaver audioMixer;
     private AudioManager musicManager;
     private AudioManager sfxManager;
     private bool pauseMenuActivated = false;
@@ -19,7 +18,6 @@ public class PauseMenuManager : MainMenuManager
         DisableActiveMenu();
 
         playerController.uiInputModule = GameObject.FindGameObjectWithTag("UI").GetComponent<InputSystemUIInputModule>();
-        audioMixer = GameObject.FindGameObjectWithTag("AUDIO").GetComponent<AudioSaver>();
         musicManager = GameObject.FindGameObjectWithTag("MUSIC").GetComponent<AudioManager>();
         sfxManager = GameObject.FindGameObjectWithTag("SFX").GetComponent<AudioManager>();
 

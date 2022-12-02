@@ -11,7 +11,8 @@ public class ControlSaver : MonoBehaviour
 
     private void Awake()
     {
-        LoadUserRebinds(firstPlayer);
+        if(PlayerPrefs.GetString("rebinds") != null)
+            LoadUserRebinds(firstPlayer);
         ReadMappingFile();
     }
 

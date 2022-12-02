@@ -36,10 +36,12 @@ public class CameraFollow : MonoBehaviour
 
     private void LateUpdate()
     {
-        //Apply the inspector parameter with the real value we need
-        cameraAcelerationTmp = cameraAceleration / CAMERA_SPEED_DIVIDER;
-
-        CameraMovement();
+        if (Time.timeScale == 1)
+        {
+            //Apply the inspector parameter with the real value we need
+            cameraAcelerationTmp = cameraAceleration / CAMERA_SPEED_DIVIDER;
+            CameraMovement();
+        }
     }
 
     /// <summary>
