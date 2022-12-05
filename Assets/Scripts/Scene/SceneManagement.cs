@@ -3,13 +3,22 @@ using UnityEngine.SceneManagement;
 
 public class SceneManagement : MonoBehaviour
 {
+    private GameObject audioSaver;
+    private GameObject visualSaver;
+    private GameObject controlSaver;
+    private GameObject eventSystem;
 
     private void Awake()
     {
-        DontDestroyOnLoad(GameObject.FindGameObjectWithTag("AUDIO"));
-        DontDestroyOnLoad(GameObject.FindGameObjectWithTag("VISUAL"));
-        DontDestroyOnLoad(GameObject.FindGameObjectWithTag("CONTROLS"));
-        DontDestroyOnLoad(GameObject.FindGameObjectWithTag("UI"));
+        audioSaver = GameObject.FindGameObjectWithTag("AUDIO");
+        visualSaver = GameObject.FindGameObjectWithTag("VISUAL");
+        controlSaver = GameObject.FindGameObjectWithTag("CONTROLS");
+        eventSystem = GameObject.FindGameObjectWithTag("UI");
+
+        DontDestroyOnLoad(audioSaver);
+        DontDestroyOnLoad(visualSaver);
+        DontDestroyOnLoad(controlSaver);
+        DontDestroyOnLoad(eventSystem);
         DontDestroyOnLoad(gameObject);
     }
 
@@ -21,7 +30,6 @@ public class SceneManagement : MonoBehaviour
     void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
         AudioSaver.ApplyChanges();
-        VisualSaver.ApplyChanges();
     }
     
     /// <summary>

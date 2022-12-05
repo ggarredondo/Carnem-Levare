@@ -13,7 +13,6 @@ public class ControlSaver : MonoBehaviour
     {
         if(PlayerPrefs.GetString("rebinds") != null)
             LoadUserRebinds(firstPlayer);
-
         ReadMappingFile();
     }
 

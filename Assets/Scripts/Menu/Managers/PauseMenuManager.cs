@@ -20,10 +20,7 @@ public class PauseMenuManager : MainMenuManager
         playerController.uiInputModule = GameObject.FindGameObjectWithTag("UI").GetComponent<InputSystemUIInputModule>();
         musicManager = GameObject.FindGameObjectWithTag("MUSIC").GetComponent<AudioManager>();
         sfxManager = GameObject.FindGameObjectWithTag("SFX").GetComponent<AudioManager>();
-    }
 
-    private void Start()
-    {
         musicManager.Play("Fight");
     }
 
@@ -42,16 +39,6 @@ public class PauseMenuManager : MainMenuManager
             {
                 ExitPauseMode(true);
             }
-    }
-
-    public override void ReturnFromChildren(InputAction.CallbackContext context)
-    {
-        if (context.performed && actualActiveMenu == 0)
-        {
-            ExitPauseMode(true);
-        }
-
-        base.ReturnFromChildren(context);
     }
 
     /// <summary>
