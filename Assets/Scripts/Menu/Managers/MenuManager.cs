@@ -100,8 +100,8 @@ public class MenuManager : MonoBehaviour
     /// <returns>List of elements sort by depth</returns>
     private List<RaycastResult> RaycastMouse()
     {
-        PointerEventData pointerData = new PointerEventData(EventSystem.current) { pointerId = -1, };
-        List<RaycastResult> results = new List<RaycastResult>();
+        PointerEventData pointerData = new(EventSystem.current) { pointerId = -1, };
+        List<RaycastResult> results = new();
 
         pointerData.position = Mouse.current.position.ReadValue();
         EventSystem.current.RaycastAll(pointerData, results);
@@ -122,7 +122,7 @@ public class MenuManager : MonoBehaviour
     /// Return to the parent of the actual object
     /// </summary>
     /// <param name="context"></param>
-    public void ReturnFromChildren(InputAction.CallbackContext context)
+    public virtual void ReturnFromChildren(InputAction.CallbackContext context)
     {
         if (context.performed)
         {
