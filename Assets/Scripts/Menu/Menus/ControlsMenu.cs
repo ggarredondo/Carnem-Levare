@@ -12,6 +12,7 @@ public class ControlsMenu : MonoBehaviour
     [SerializeField] private MainMenuManager globalMenuManager;
 
     private string cancelMessage;
+    public float rebindTimeDelay = 0.25f;
 
     private void Awake()
     {
@@ -31,7 +32,7 @@ public class ControlsMenu : MonoBehaviour
 
             player.actions.FindActionMap(currentActionMap).FindAction(action).PerformInteractiveRebinding()
                 .WithControlsExcluding("Mouse")
-                .OnMatchWaitForAnother(0.25f)
+                .OnMatchWaitForAnother(rebindTimeDelay)
                 .OnCancel(callback => CancelRebind(cancelMessage))
                 .OnComplete(callback => FinishRebind(callback, currentGameObject))
                 .Start();
