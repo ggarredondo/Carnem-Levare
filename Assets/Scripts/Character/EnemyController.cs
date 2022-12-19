@@ -49,8 +49,7 @@ public class EnemyController : MonoBehaviour
         anim.SetBool("is_hurt", hurt);
         anim.SetFloat("hurt_target", target);
         anim.SetFloat("hurt_power", power);
-        if (anim.GetCurrentAnimatorStateInfo(0).IsName("Hurt"))
-            anim.applyRootMotion = false;
+        anim.applyRootMotion = !anim.GetCurrentAnimatorStateInfo(0).IsName("Hurt");
         hurt = false;
     }
     #endregion
