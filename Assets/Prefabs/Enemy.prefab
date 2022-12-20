@@ -131,11 +131,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   TargetPlayer: {fileID: 0}
+  hurtCancelTime: 0.3
   horizontal: 0
   vertical: 0
-  hurt: 0
-  target: 0
-  power: 0
 --- !u!1001 &7481606168323393295
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -12,12 +12,13 @@ public enum Target : uint
 
 public class Hurtbox : MonoBehaviour
 {
-    public Animator animator;
+    public Animator anim;
     public Target target;
     
     private void OnTriggerEnter(Collider other)
     {
-        if (other.tag == "HITBOX")
-            Debug.Log(other.gameObject);
+        anim.SetBool("is_hurt", true);
+        anim.SetFloat("hurt_target", (float) target);
+        anim.SetFloat("hurt_power", 0);
     }
 }

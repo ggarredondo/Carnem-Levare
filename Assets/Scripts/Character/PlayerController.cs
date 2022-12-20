@@ -168,7 +168,5 @@ public class PlayerController : MonoBehaviour
 
     //***PUBLIC METHODS***
 
-    public Animator getAnimator { get { return anim; } }
-
     public bool isWalking { get { return direction.x != 0f && !isAttacking; } }
 }
