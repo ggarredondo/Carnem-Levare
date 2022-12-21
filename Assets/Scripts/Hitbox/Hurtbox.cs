@@ -14,11 +14,12 @@ public class Hurtbox : MonoBehaviour
 {
     public Animator anim;
     public Target target;
+    public Power powerDebug = Power.Light;
     
     private void OnTriggerEnter(Collider other)
     {
-        anim.SetBool("is_hurt", true);
+        anim.SetTrigger("hurt");
         anim.SetFloat("hurt_target", (float) target);
-        anim.SetFloat("hurt_power", 0);
+        anim.SetFloat("hurt_power", (float) powerDebug);
     }
 }

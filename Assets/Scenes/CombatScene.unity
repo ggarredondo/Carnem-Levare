@@ -346,6 +346,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   anim: {fileID: 897349059}
   target: 4
+  power: 0
 --- !u!54 &516743936
 Rigidbody:
   m_ObjectHideFlags: 0
