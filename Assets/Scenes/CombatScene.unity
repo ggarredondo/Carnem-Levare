@@ -344,9 +344,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aa37d1b07b10dce4a80932f87be53208, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  anim: {fileID: 897349059}
+  character: {fileID: 897349060}
   target: 4
-  power: 0
 --- !u!54 &516743936
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -407,12 +406,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 106ee44dc877d184cb81fdc522838962, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!95 &897349059 stripped
-Animator:
-  m_CorrespondingSourceObject: {fileID: 7481606168508649708, guid: 597ff9b00a9e7804681f9e3db89066c3,
+--- !u!114 &897349060 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7481606168508649709, guid: 597ff9b00a9e7804681f9e3db89066c3,
     type: 3}
   m_PrefabInstance: {fileID: 7481606168989916931}
   m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 897349054}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: daefdaab103d1c045b7612f2f096e8cc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &915013589 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8609667796997859083, guid: 597ff9b00a9e7804681f9e3db89066c3,
@@ -2876,6 +2881,41 @@ PrefabInstance:
       propertyPath: rightSpecialSpeed
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 4706402254706946820, guid: 730b6f15cbfa96c4db1930def4556da9,
+        type: 3}
+      propertyPath: hitboxes.Array.size
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 4706402254706946820, guid: 730b6f15cbfa96c4db1930def4556da9,
+        type: 3}
+      propertyPath: hitboxes.Array.data[0]
+      value: 
+      objectReference: {fileID: 1236763289}
+    - target: {fileID: 4706402254706946820, guid: 730b6f15cbfa96c4db1930def4556da9,
+        type: 3}
+      propertyPath: hitboxes.Array.data[1]
+      value: 
+      objectReference: {fileID: 1236763289}
+    - target: {fileID: 4706402254706946820, guid: 730b6f15cbfa96c4db1930def4556da9,
+        type: 3}
+      propertyPath: hitboxes.Array.data[2]
+      value: 
+      objectReference: {fileID: 1236763289}
+    - target: {fileID: 4706402254706946820, guid: 730b6f15cbfa96c4db1930def4556da9,
+        type: 3}
+      propertyPath: hitboxes.Array.data[3]
+      value: 
+      objectReference: {fileID: 1236763289}
+    - target: {fileID: 4706402254706946820, guid: 730b6f15cbfa96c4db1930def4556da9,
+        type: 3}
+      propertyPath: hitboxes.Array.data[4]
+      value: 
+      objectReference: {fileID: 1236763289}
+    - target: {fileID: 4706402254706946820, guid: 730b6f15cbfa96c4db1930def4556da9,
+        type: 3}
+      propertyPath: hitboxes.Array.data[5]
+      value: 
+      objectReference: {fileID: 1236763289}
     - target: {fileID: 4706402254706946823, guid: 730b6f15cbfa96c4db1930def4556da9,
         type: 3}
       propertyPath: m_RootOrder

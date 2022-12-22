@@ -22,13 +22,6 @@ public class Move : MonoBehaviour
     public float animationSpeed = 1f;
 
     [Header("Attack Values")]
-    /// <summary>
-    /// Move's power, classified by Light, Medium and Strong. Used to choose between hurt animations.
-    /// </summary>
-    public Power power;
-
-    /// <summary>
-    /// The damage it deals to the opponent's stamina, if it hits.
-    /// </summary>
-    public float damage;
+    public Power power; // Used to choose between hurt animations, if it hits.
+    public float damage; // Damage dealt to the opponent's stamina, if it hits.
 }

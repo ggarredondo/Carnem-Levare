@@ -3,9 +3,8 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using System.Linq;
 
-public class PlayerController : MonoBehaviour
+public class PlayerController : Character
 {
-    private Animator anim;
     private AnimatorOverrideController animOverride;
     private AnimationClip[] animatorDefaults;
 
@@ -28,12 +27,12 @@ public class PlayerController : MonoBehaviour
     public Move leftSpecialSlot;
     public Move rightSpecialSlot;
     public float attackSpeed = 1f;
-    // Time before the player can attack again (normalized time).
+    // Time before the player can attack again (normalized time) between different moves.
     // 0 means the player can attack again immediately. 1 means the player must wait for the entire animation to play out.
     // 0.5 means the player must wait for half the attack animation to play out before attacking again. Etc.
     // This variable is meant for transitions between different move slots. Move slots can't transition directly to themselves,
     // spamming the same move will always require the entire animation to play out.
-    [Range(0f, 1f)] public float attackCooldown = 0.4f;
+    [Range(0f, 1f)] public float interAttackExitTime = 0.4f;
 
     private void Awake()
     {
@@ -146,8 +145,8 @@ public class PlayerController : MonoBehaviour
         // Values that must be updated frame by frame to allow certain animations to play out accordingly.
         isAttacking = anim.GetCurrentAnimatorStateInfo(0).IsTag("Attacking") && !anim.IsInTransition(0);
         isBlocking = anim.GetCurrentAnimatorStateInfo(0).IsTag("Blocking") && !anim.IsInTransition(0);
-        // The player can't attack if the attack animation has been playing for less than *attackCooldown* seconds and...
-        canAttack = !(isAttacking && (anim.GetCurrentAnimatorStateInfo(0).normalizedTime < attackCooldown)) && !isBlocking;
+        // The player can't attack if the attack animation has been playing for less than *interAttackExitTime* seconds and...
+        canAttack = !(isAttacking && (anim.GetCurrentAnimatorStateInfo(0).normalizedTime < interAttackExitTime)) && !isBlocking;
         anim.SetBool("can_attack", canAttack);
 
         // Animation modifiers

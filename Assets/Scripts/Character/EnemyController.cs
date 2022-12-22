@@ -1,8 +1,7 @@
 using UnityEngine;
 
-public class EnemyController : MonoBehaviour
+public class EnemyController : Character
 {
-    private Animator anim;
     public Transform TargetPlayer;
 
     [Header("Movement Parameters")]
@@ -28,6 +27,6 @@ public class EnemyController : MonoBehaviour
         anim.SetFloat("horizontal", horizontal);
         anim.SetFloat("vertical", vertical);
         transform.LookAt(new Vector3(TargetPlayer.position.x, transform.position.y, TargetPlayer.position.z)); // Rotate towards player
-        anim.applyRootMotion = !anim.GetCurrentAnimatorStateInfo(0).IsName("Hurt");
+        anim.applyRootMotion = !anim.GetCurrentAnimatorStateInfo(0).IsName("Hurt"); // DELETE when animations are correct
     }
 }

@@ -12,14 +12,13 @@ public enum Target : uint
 
 public class Hurtbox : MonoBehaviour
 {
-    public Animator anim;
+    public Character character;
     public Target target;
-    public Power powerDebug = Power.Light;
     
     private void OnTriggerEnter(Collider other)
     {
-        anim.SetTrigger("hurt");
-        anim.SetFloat("hurt_target", (float) target);
-        anim.SetFloat("hurt_power", (float) powerDebug);
+        character.getAnimator.SetTrigger("hurt");
+        character.getAnimator.SetFloat("hurt_target", (float) target);
+        character.getAnimator.SetFloat("hurt_power", 0f);
     }
 }
