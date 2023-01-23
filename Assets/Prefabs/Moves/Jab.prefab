@@ -50,8 +50,8 @@ MonoBehaviour:
     type: 3}
   rightAnimation: {fileID: 7400006, guid: 7934f1476fe2c6e458c230f491769c34, type: 3}
   animationSpeed: 1
-  power: 0
+  power: 2
   damage: 10
-  startTime: 0
-  endTime: 1
+  startTime: 0.2
+  endTime: 0.3
   limb: 1
