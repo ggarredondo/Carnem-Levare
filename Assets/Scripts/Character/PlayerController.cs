@@ -11,8 +11,6 @@ public class PlayerController : Character
     private Vector2 movementValue, direction;
     private bool isAttacking, isBlocking, canAttack;
 
-    public Transform TargetEnemy;
-
     [Header("Movement Parameters")]
     public float movementSpeed = 8f;
     [Range(0f, 1f)] public float attackingModifier = 0f, blockingModifier = 0f; // The player may move slower when attacking or blocking, or not move at all.
@@ -162,7 +160,7 @@ public class PlayerController : Character
         direction = Vector2.MoveTowards(direction, movementValue, current_movementSpeed * Time.deltaTime);
         anim.SetFloat("horizontal", direction.x);
         anim.SetFloat("vertical", direction.y);
-        transform.LookAt(new Vector3(TargetEnemy.position.x, transform.position.y, TargetEnemy.position.z)); // Rotate towards enemy.
+        transform.LookAt(new Vector3(target.position.x, transform.position.y, target.position.z)); // Rotate towards enemy.
     }
 
     //***PUBLIC METHODS***

@@ -51,5 +51,4 @@ MonoBehaviour:
   rightAnimation: {fileID: 7400010, guid: ec11ddf4c9321c24c9509644025391dc, type: 3}
   animationSpeed: 1
   power: 1
-  type: 2
-  damage: 0
+  damage: 15
