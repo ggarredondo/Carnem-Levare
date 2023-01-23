@@ -286,7 +286,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c584565eaef4f6b4ab0e938ece6cd337, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  TargetEnemy: {fileID: 0}
+  target: {fileID: 0}
+  stamina: 0
+  maxStamina: 0
   movementSpeed: 8
   attackingModifier: 0
   blockingModifier: 0
@@ -299,8 +301,20 @@ MonoBehaviour:
     type: 3}
   rightSpecialSlot: {fileID: -4476728132895952727, guid: a353a5b06242cb6489e78a3ce9c641a2,
     type: 3}
+  leftHitboxes:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  rightHitboxes:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   attackSpeed: 1
-  attackCooldown: 0.4
+  interAttackExitTime: 0.4
 --- !u!114 &4706402254706946843
 MonoBehaviour:
   m_ObjectHideFlags: 0

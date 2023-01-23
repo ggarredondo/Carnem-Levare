@@ -52,3 +52,6 @@ MonoBehaviour:
   animationSpeed: 1
   power: 0
   damage: 10
+  startTime: 0
+  endTime: 1
+  limb: 1

@@ -24,6 +24,7 @@ public class PlayerController : Character
     public Move rightNormalSlot;
     public Move leftSpecialSlot;
     public Move rightSpecialSlot;
+    public List<GameObject> leftHitboxes, rightHitboxes; // Five items, in order (same as Limb enum). Elbow, fist, knee, shin, foot.
     public float attackSpeed = 1f;
     // Time before the player can attack again (normalized time) between different moves.
     // 0 means the player can attack again immediately. 1 means the player must wait for the entire animation to play out.

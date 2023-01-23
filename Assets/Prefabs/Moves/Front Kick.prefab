@@ -52,3 +52,5 @@ MonoBehaviour:
   animationSpeed: 1
   power: 1
   damage: 15
+  limb: 4
+  active: 0
