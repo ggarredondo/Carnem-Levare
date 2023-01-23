@@ -1,5 +1,6 @@
 using UnityEngine;
 
+// Used to choose between hurt animations, if it hits.
 public enum Power: uint
 {
     Light = 0,
@@ -7,6 +8,8 @@ public enum Power: uint
     Strong = 2
 }
 
+// Part of limb used for hitting. Used to activate the corresponding hitbox.
+// A hitbox must be added for each of these possible values for both player and enemy, for both left and right.
 public enum Limb : uint
 {
     Elbow = 0,
@@ -31,11 +34,11 @@ public class Move : MonoBehaviour
     public float animationSpeed = 1f;
 
     [Header("Attack Values")]
-    public Power power; // Used to choose between hurt animations, if it hits.
+    public Power power;
     public float damage; // Damage dealt to the opponent's stamina, if it hits.
 
     [Header("Hitbox Values")]
     [Range(0f, 1f)] public float startTime = 0f; // (Normalized) Time when hitbox is activated.
     [Range(0f, 1f)] public float endTime = 0f; // (Normalized) Time when hitbox is deactivated.
-    public Limb limb; // Part of limb used for hitting. Used to activate the corresponding hitbox.
+    public Limb limb;
 }
