@@ -1,13 +1,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using System.Linq;
 
 public class PlayerController : Character
 {
-    private AnimatorOverrideController animOverride;
-    private AnimationClip[] animatorDefaults;
-
     private Vector2 movementValue, direction;
     private bool isAttacking, isBlocking, canAttack;
 
@@ -39,9 +35,6 @@ public class PlayerController : Character
     private void Awake()
     {
         init();
-        anim = GetComponent<Animator>();
-        animatorDefaults = anim.runtimeAnimatorController.animationClips;
-        animOverride = new AnimatorOverrideController(anim.runtimeAnimatorController);
     }
 
     private void Start()
@@ -77,19 +70,6 @@ public class PlayerController : Character
     //***ANIMATION***
 
     #region ------UPDATE ANIMATOR IN REAL TIME CODE------
-
-    /// <summary>
-    /// Updates specific animation from animator in real time.
-    /// </summary>
-    /// <param name="og_clip">Name of the animation clip to be updated</param>
-    /// <param name="new_clip">New animation clip</param>
-    private void UpdateAnimator(string og_clip, AnimationClip new_clip)
-    {
-        List<KeyValuePair<AnimationClip, AnimationClip>> overrides = new List<KeyValuePair<AnimationClip, AnimationClip>>();
-        overrides.Add(new KeyValuePair<AnimationClip, AnimationClip>(animatorDefaults.Where(clip => clip.name == og_clip).SingleOrDefault(), new_clip));
-        animOverride.ApplyOverrides(overrides);
-        anim.runtimeAnimatorController = animOverride;
-    }
 
     /// <summary>
     /// Update left normal slot animations in real time.

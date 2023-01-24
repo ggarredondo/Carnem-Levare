@@ -1,19 +1,40 @@
 using UnityEngine;
+using System.Collections.Generic;
+using System.Linq;
 
 public abstract class Character : MonoBehaviour
 {
     protected Animator anim;
+    protected AnimatorOverrideController animOverride;
+    protected AnimationClip[] animatorDefaults;
 
     public Transform target;
 
     [Header("Stats")]
     [SerializeField] private float stamina;
     [SerializeField] private float maxStamina = 0f;
-    // Fill with common variables once EnemyController and PlayerController are finished
 
     protected void init()
     {
         stamina = maxStamina;
+        anim = GetComponent<Animator>();
+        animatorDefaults = anim.runtimeAnimatorController.animationClips;
+        animOverride = new AnimatorOverrideController(anim.runtimeAnimatorController);
+    }
+
+    //***ANIMATION***
+
+    /// <summary>
+    /// Updates specific animation from animator in real time.
+    /// </summary>
+    /// <param name="og_clip">Name of the animation clip to be updated</param>
+    /// <param name="new_clip">New animation clip</param>
+    protected void UpdateAnimator(string og_clip, AnimationClip new_clip)
+    {
+        List<KeyValuePair<AnimationClip, AnimationClip>> overrides = new List<KeyValuePair<AnimationClip, AnimationClip>>();
+        overrides.Add(new KeyValuePair<AnimationClip, AnimationClip>(animatorDefaults.Where(clip => clip.name == og_clip).SingleOrDefault(), new_clip));
+        animOverride.ApplyOverrides(overrides);
+        anim.runtimeAnimatorController = animOverride;
     }
 
     //***GAMEPLAY***

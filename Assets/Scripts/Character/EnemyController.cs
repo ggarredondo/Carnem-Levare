@@ -10,7 +10,6 @@ public class EnemyController : Character
     private void Awake()
     {
         init();
-        anim = GetComponent<Animator>();
     }
 
     private void Update()
