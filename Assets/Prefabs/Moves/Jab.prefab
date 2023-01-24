@@ -44,13 +44,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9c101ac1060691f4fb04457c1a701efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  crouchLeftAnimation: {fileID: 7400030, guid: 0c9ce63e9f8dd6e43a0807e55303f9cf, type: 3}
+  moveName: Jab
   leftAnimation: {fileID: 7400004, guid: 7934f1476fe2c6e458c230f491769c34, type: 3}
-  crouchRightAnimation: {fileID: 7400032, guid: 0c9ce63e9f8dd6e43a0807e55303f9cf,
-    type: 3}
   rightAnimation: {fileID: 7400006, guid: 7934f1476fe2c6e458c230f491769c34, type: 3}
   animationSpeed: 1
-  power: 2
+  power: 0
   damage: 10
   startTime: 0.2
   endTime: 0.3

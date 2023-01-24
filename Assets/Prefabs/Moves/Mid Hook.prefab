@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 7374017074827612374}
   - component: {fileID: -6294080308579570103}
   m_Layer: 0
-  m_Name: Elbow
+  m_Name: Mid Hook
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -44,11 +44,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9c101ac1060691f4fb04457c1a701efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  crouchLeftAnimation: {fileID: 7400058, guid: 7934f1476fe2c6e458c230f491769c34, type: 3}
-  leftAnimation: {fileID: 7400058, guid: 7934f1476fe2c6e458c230f491769c34, type: 3}
-  crouchRightAnimation: {fileID: 7400056, guid: 7934f1476fe2c6e458c230f491769c34,
-    type: 3}
-  rightAnimation: {fileID: 7400056, guid: 7934f1476fe2c6e458c230f491769c34, type: 3}
+  moveName: Low Hook
+  leftAnimation: {fileID: 7400000, guid: af4fd69ef60a1454cbeb9acce49f52c5, type: 2}
+  rightAnimation: {fileID: 7400072, guid: 7934f1476fe2c6e458c230f491769c34, type: 3}
   animationSpeed: 1
   power: 1
-  damage: 12
+  damage: 15
+  startTime: 0
+  endTime: 0
+  limb: 1

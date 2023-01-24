@@ -44,14 +44,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9c101ac1060691f4fb04457c1a701efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  crouchLeftAnimation: {fileID: 7400016, guid: 7934f1476fe2c6e458c230f491769c34, type: 3}
+  moveName: Hook
   leftAnimation: {fileID: 7400016, guid: 7934f1476fe2c6e458c230f491769c34, type: 3}
-  crouchRightAnimation: {fileID: 7400014, guid: 7934f1476fe2c6e458c230f491769c34,
-    type: 3}
   rightAnimation: {fileID: 7400014, guid: 7934f1476fe2c6e458c230f491769c34, type: 3}
   animationSpeed: 1
-  power: 1
-  damage: 15
+  power: 0
+  damage: 12
   startTime: 0
   endTime: 0
   limb: 1

@@ -27,6 +27,5 @@ public class EnemyController : Character
         anim.SetFloat("horizontal", horizontal);
         anim.SetFloat("vertical", vertical);
         transform.LookAt(new Vector3(target.position.x, transform.position.y, target.position.z)); // Rotate towards player
-        anim.applyRootMotion = !anim.GetCurrentAnimatorStateInfo(0).IsName("Hurt"); // DELETE when animations are correct
     }
 }

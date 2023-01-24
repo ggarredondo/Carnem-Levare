@@ -24,11 +24,11 @@ public enum Limb : uint
 /// </summary>
 public class Move : MonoBehaviour
 {
+    public string moveName;
+
     [Header("Attack Animations")]
     // Animations that the move performs, depending on whether the Move slot is left or right, and if the player is currently crouching.
-    public AnimationClip crouchLeftAnimation;
     public AnimationClip leftAnimation;
-    public AnimationClip crouchRightAnimation;
     public AnimationClip rightAnimation;
 
     public float animationSpeed = 1f;

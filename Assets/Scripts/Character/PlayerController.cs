@@ -69,56 +69,16 @@ public class PlayerController : Character
 
     //***ANIMATION***
 
-    #region ------UPDATE ANIMATOR IN REAL TIME CODE------
-
-    /// <summary>
-    /// Update left normal slot animations in real time.
-    /// </summary>
-    public void UpdateLeftNormalAnimations()
-    {
-        UpdateAnimator("LeftNormalCrouchClip", leftNormalSlot.crouchLeftAnimation);
-        UpdateAnimator("LeftNormalClip", leftNormalSlot.leftAnimation);
-    }
-
-    /// <summary>
-    /// Update right normal slot animations in real time.
-    /// </summary>
-    public void UpdateRightNormalAnimations()
-    {
-        UpdateAnimator("RightNormalCrouchClip", rightNormalSlot.crouchRightAnimation);
-        UpdateAnimator("RightNormalClip", rightNormalSlot.rightAnimation);
-    }
-
-    /// <summary>
-    /// Update left special slot animations in real time.
-    /// </summary>
-    public void UpdateLeftSpecialAnimations()
-    {
-        UpdateAnimator("LeftSpecialCrouchClip", leftSpecialSlot.crouchLeftAnimation);
-        UpdateAnimator("LeftSpecialClip", leftSpecialSlot.leftAnimation);
-    }
-
-    /// <summary>
-    /// Update right special slot animations in real time.
-    /// </summary>
-    public void UpdateRightSpecialAnimations()
-    {
-        UpdateAnimator("RightSpecialCrouchClip", rightSpecialSlot.crouchRightAnimation);
-        UpdateAnimator("RightSpecialClip", rightSpecialSlot.rightAnimation);
-    }
-    
     /// <summary>
     /// Updates all attack animations in real time.
     /// </summary>
     public void UpdateAllAttackAnimations()
     {
-        UpdateLeftNormalAnimations();
-        UpdateRightNormalAnimations();
-        UpdateLeftSpecialAnimations();
-        UpdateRightSpecialAnimations();
+        UpdateAnimator("LeftNormalClip", leftNormalSlot.leftAnimation);
+        UpdateAnimator("RightNormalClip", rightNormalSlot.rightAnimation);
+        UpdateAnimator("LeftSpecialClip", leftSpecialSlot.leftAnimation);
+        UpdateAnimator("RightSpecialClip", rightSpecialSlot.rightAnimation);
     }
-
-    #endregion
 
     /// <summary>
     /// Sets animation parameters for the animator.

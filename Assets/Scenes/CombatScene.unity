@@ -2728,9 +2728,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4706402254706946820, guid: 730b6f15cbfa96c4db1930def4556da9,
         type: 3}
-      propertyPath: leftNormalSlot
+      propertyPath: leftSpecialSlot
       value: 
-      objectReference: {fileID: -6294080308579570103, guid: cc28ac370509dc64592fa14d352d0bf7,
+      objectReference: {fileID: -6294080308579570103, guid: efb9a55e3f71721488f998a63a6181b3,
+        type: 3}
+    - target: {fileID: 4706402254706946820, guid: 730b6f15cbfa96c4db1930def4556da9,
+        type: 3}
+      propertyPath: rightNormalSlot
+      value: 
+      objectReference: {fileID: -4476728132895952727, guid: a353a5b06242cb6489e78a3ce9c641a2,
         type: 3}
     - target: {fileID: 4706402254706946820, guid: 730b6f15cbfa96c4db1930def4556da9,
         type: 3}
@@ -2741,7 +2747,7 @@ PrefabInstance:
         type: 3}
       propertyPath: rightSpecialSlot
       value: 
-      objectReference: {fileID: -6294080308579570103, guid: efb9a55e3f71721488f998a63a6181b3,
+      objectReference: {fileID: -6294080308579570103, guid: a8f961228fb724d4493126f529517e6e,
         type: 3}
     - target: {fileID: 4706402254706946820, guid: 730b6f15cbfa96c4db1930def4556da9,
         type: 3}
