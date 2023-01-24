@@ -9,6 +9,7 @@ public class EnemyController : Character
 
     private void Awake()
     {
+        init();
         anim = GetComponent<Animator>();
     }
 
@@ -16,6 +17,8 @@ public class EnemyController : Character
     {
         SetAnimationParameters();
     }
+
+    //***ANIMATION***
 
     /// <summary>
     /// Sets general animation parameters for the animator.

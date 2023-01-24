@@ -2699,12 +2699,12 @@ PrefabInstance:
     - target: {fileID: 4706402254675848929, guid: 730b6f15cbfa96c4db1930def4556da9,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: -3.122133e-12
+      value: -3.1221401e-12
       objectReference: {fileID: 0}
     - target: {fileID: 4706402254675848929, guid: 730b6f15cbfa96c4db1930def4556da9,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: 1.6650739e-10
+      value: 1.6650781e-10
       objectReference: {fileID: 0}
     - target: {fileID: 4706402254675848930, guid: 730b6f15cbfa96c4db1930def4556da9,
         type: 3}
@@ -2723,9 +2723,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4706402254706946820, guid: 730b6f15cbfa96c4db1930def4556da9,
         type: 3}
+      propertyPath: text
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 4706402254706946820, guid: 730b6f15cbfa96c4db1930def4556da9,
+        type: 3}
       propertyPath: target
       value: 
       objectReference: {fileID: 7481606168989916933}
+    - target: {fileID: 4706402254706946820, guid: 730b6f15cbfa96c4db1930def4556da9,
+        type: 3}
+      propertyPath: maxStamina
+      value: 100
+      objectReference: {fileID: 0}
     - target: {fileID: 4706402254706946820, guid: 730b6f15cbfa96c4db1930def4556da9,
         type: 3}
       propertyPath: TargetEnemy
@@ -3371,12 +3381,12 @@ PrefabInstance:
     - target: {fileID: 4706402255246442001, guid: 730b6f15cbfa96c4db1930def4556da9,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: -3.122133e-12
+      value: -3.1221401e-12
       objectReference: {fileID: 0}
     - target: {fileID: 4706402255246442001, guid: 730b6f15cbfa96c4db1930def4556da9,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: 1.6650739e-10
+      value: 1.6650781e-10
       objectReference: {fileID: 0}
     - target: {fileID: 4706402255682218321, guid: 730b6f15cbfa96c4db1930def4556da9,
         type: 3}

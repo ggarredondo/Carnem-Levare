@@ -24,7 +24,6 @@ public class PlayerController : Character
     public Move rightNormalSlot;
     public Move leftSpecialSlot;
     public Move rightSpecialSlot;
-    public List<GameObject> leftHitboxes, rightHitboxes; // Five items, in order (same as Limb enum). Elbow, fist, knee, shin, foot.
     public float attackSpeed = 1f;
     // Time before the player can attack again (normalized time) between different moves.
     // 0 means the player can attack again immediately. 1 means the player must wait for the entire animation to play out.
@@ -33,8 +32,13 @@ public class PlayerController : Character
     // spamming the same move will always require the entire animation to play out.
     [Range(0f, 1f)] public float interAttackExitTime = 0.4f;
 
+    [Header("Hitbox Lists. (Left/Right) Elbow, Fist, Knee, Shin, Foot")]
+    public List<GameObject> leftHitboxes; // Five items, in order (same as Limb enum).
+    public List<GameObject> rightHitboxes;
+
     private void Awake()
     {
+        init();
         anim = GetComponent<Animator>();
         animatorDefaults = anim.runtimeAnimatorController.animationClips;
         animOverride = new AnimatorOverrideController(anim.runtimeAnimatorController);
@@ -164,7 +168,7 @@ public class PlayerController : Character
         transform.LookAt(new Vector3(target.position.x, transform.position.y, target.position.z)); // Rotate towards enemy.
     }
 
-    //***PUBLIC METHODS***
+    //***GET FUNCTIONS***
 
     public bool isWalking { get { return direction.x != 0f && !isAttacking; } }
 }

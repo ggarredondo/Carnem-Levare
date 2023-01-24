@@ -20,6 +20,6 @@ public class Hurtbox : MonoBehaviour
         character.getAnimator.SetTrigger("hurt");
         character.getAnimator.SetFloat("hurt_target", (float) target);
         character.getAnimator.SetFloat("hurt_power", (float) other.GetComponent<Hitbox>().power);
-        character.stamina -= other.GetComponent<Hitbox>().damage;
+        character.Damage(other.GetComponent<Hitbox>().damage);
     }
 }
