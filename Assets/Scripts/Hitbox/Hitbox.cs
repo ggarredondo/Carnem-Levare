@@ -2,6 +2,6 @@ using UnityEngine;
 
 public class Hitbox : MonoBehaviour
 {
-    [HideInInspector] public Power power = Power.Light;
-    [HideInInspector] public float damage = 0f;
+    [System.NonSerialized] public Power power = Power.Light;
+    [System.NonSerialized] public float damage = 0f;
 }

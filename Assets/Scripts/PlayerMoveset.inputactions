@@ -33,15 +33,6 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Left Normal Held",
-                    "type": "Button",
-                    "id": "ed5edacf-1a76-4547-b19c-914313038d5f",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
                     "name": "Right Normal",
                     "type": "Button",
                     "id": "eae9d122-0c45-49c1-8ae0-abfab8c74b50",
@@ -173,17 +164,6 @@
                     "processors": "",
                     "groups": "",
                     "action": "Block",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "bfd25a21-647c-4409-96fa-12ec1d339fd9",
-                    "path": "<Gamepad>/leftShoulder",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Left Normal Held",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

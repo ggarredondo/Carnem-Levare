@@ -12,8 +12,8 @@ public enum Target : uint
 
 public class Hurtbox : MonoBehaviour
 {
-    public Character character;
-    public Target target;
+    [SerializeField] private Character character;
+    [SerializeField] private Target target;
     
     private void OnTriggerEnter(Collider other)
     {

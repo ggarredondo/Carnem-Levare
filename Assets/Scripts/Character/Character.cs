@@ -8,12 +8,16 @@ public abstract class Character : MonoBehaviour
     protected AnimatorOverrideController animOverride;
     protected AnimationClip[] animatorDefaults;
 
-    public Transform target;
+    [SerializeField] protected Transform target;
 
     [Header("Stats")]
     [SerializeField] private float stamina;
     [SerializeField] private float maxStamina = 0f;
     [Tooltip("Attack animation speed")] [Range(0,2)] public float attackSpeed = 1f;
+
+    [Header("Hitbox Lists - Same items as HitboxType enum")]
+    public List<GameObject> leftHitboxes;
+    public List<GameObject> rightHitboxes;
 
     protected void init()
     {

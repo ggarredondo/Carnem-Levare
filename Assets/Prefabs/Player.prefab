@@ -289,18 +289,7 @@ MonoBehaviour:
   target: {fileID: 0}
   stamina: 0
   maxStamina: 0
-  movementSpeed: 8
-  attackingModifier: 0
-  blockingModifier: 0
-  duckingRange: -1
-  leftNormalSlot: {fileID: -4476728132895952727, guid: cd4612b1a708e5046ae35c3be7591360,
-    type: 3}
-  rightNormalSlot: {fileID: -4476728132895952727, guid: cd4612b1a708e5046ae35c3be7591360,
-    type: 3}
-  leftSpecialSlot: {fileID: -4476728132895952727, guid: a353a5b06242cb6489e78a3ce9c641a2,
-    type: 3}
-  rightSpecialSlot: {fileID: -4476728132895952727, guid: a353a5b06242cb6489e78a3ce9c641a2,
-    type: 3}
+  attackSpeed: 1
   leftHitboxes:
   - {fileID: 0}
   - {fileID: 0}
@@ -313,7 +302,18 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  attackSpeed: 1
+  movementSpeed: 8
+  attackingModifier: 0
+  blockingModifier: 0
+  duckingRange: -1
+  leftNormalSlot: {fileID: -4476728132895952727, guid: cd4612b1a708e5046ae35c3be7591360,
+    type: 3}
+  rightNormalSlot: {fileID: -4476728132895952727, guid: cd4612b1a708e5046ae35c3be7591360,
+    type: 3}
+  leftSpecialSlot: {fileID: -4476728132895952727, guid: f93797f883db7b542ace592e1b90d3b4,
+    type: 3}
+  rightSpecialSlot: {fileID: -4476728132895952727, guid: f93797f883db7b542ace592e1b90d3b4,
+    type: 3}
   interAttackExitTime: 0.4
 --- !u!114 &4706402254706946843
 MonoBehaviour:

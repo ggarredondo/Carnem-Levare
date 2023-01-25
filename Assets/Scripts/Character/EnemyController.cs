@@ -3,9 +3,8 @@ using UnityEngine;
 public class EnemyController : Character
 {
     [Header("Movement Parameters")]
-    [Range(-1f, 1f)] public float horizontal = 0f;
-    [Range(-1f, 0f)] public float vertical = 0f;
-
+    [SerializeField] [Range(-1f, 1f)] private float horizontal = 0f;
+    [SerializeField] [Range(-1f, 0f)] private float vertical = 0f;
 
     private void Awake()
     {

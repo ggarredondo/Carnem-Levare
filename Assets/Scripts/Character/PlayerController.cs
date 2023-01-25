@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -8,11 +7,12 @@ public class PlayerController : Character
     private bool isAttacking, isBlocking, canAttack;
 
     [Header("Movement Parameters")]
-    [Tooltip("How quickly player character follows stick movement")] public float movementSpeed = 8f;
+    [Tooltip("How quickly player character follows stick movement")] 
+    [SerializeField] private float movementSpeed = 8f;
     [Tooltip("Modifies player movement speed when attacking or blocking (the player may move slower, or not move at all)")]
-    [Range(0f, 1f)] public float attackingModifier = 0f, blockingModifier = 0f;
+    [SerializeField] [Range(0f, 1f)] private float attackingModifier = 0f, blockingModifier = 0f;
     private float current_movementSpeed;
-    [Range(-1f, 0f)] public float duckingRange = -1f; // -1: can duck all the way down. 0: can't duck at all.
+    [SerializeField] [Range(-1f, 0f)] private float duckingRange = -1f; // -1: can duck all the way down. 0: can't duck at all.
 
     [Header("Attack Parameters")]
     // The player has four attack slots to define their moveset.
@@ -27,11 +27,7 @@ public class PlayerController : Character
     // This variable is meant for transitions between different move slots. Move slots can't transition directly to themselves,
     // spamming the same move will always require the entire animation to play out.
     [Tooltip("(Normalized) Time before the player can attack again between different moves")] 
-    [Range(0f, 1f)] public float interAttackExitTime = 0.4f;
-
-    [Header("Hitbox Lists. (Left/Right) Elbow, Fist, Knee, Shin, Foot")]
-    public List<GameObject> leftHitboxes; // Five items, in order (same as Limb enum).
-    public List<GameObject> rightHitboxes;
+    [SerializeField] [Range(0f, 1f)] private float interAttackExitTime = 0.4f;
 
     private void Awake()
     {
@@ -94,10 +90,10 @@ public class PlayerController : Character
         anim.SetBool("can_attack", canAttack);
 
         // Animation modifiers
-        anim.SetFloat("left_normal_speed", leftNormalSlot.animationSpeed * leftNormalSlot.chargeSpeed * attackSpeed);
-        anim.SetFloat("right_normal_speed", rightNormalSlot.animationSpeed * rightNormalSlot.chargeSpeed * attackSpeed);
-        anim.SetFloat("left_special_speed", leftSpecialSlot.animationSpeed * leftSpecialSlot.chargeSpeed * attackSpeed);
-        anim.SetFloat("right_special_speed", rightSpecialSlot.animationSpeed * rightSpecialSlot.chargeSpeed * attackSpeed);
+        anim.SetFloat("left_normal_speed", leftNormalSlot.leftAnimationSpeed * leftNormalSlot.chargeSpeed * attackSpeed);
+        anim.SetFloat("right_normal_speed", rightNormalSlot.rightAnimationSpeed * rightNormalSlot.chargeSpeed * attackSpeed);
+        anim.SetFloat("left_special_speed", leftSpecialSlot.leftAnimationSpeed * leftSpecialSlot.chargeSpeed * attackSpeed);
+        anim.SetFloat("right_special_speed", rightSpecialSlot.rightAnimationSpeed * rightSpecialSlot.chargeSpeed * attackSpeed);
 
         // MOVEMENT
         // Softens the movement by establishing the direction as a point that approaches the stick/mouse position.

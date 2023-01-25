@@ -44,16 +44,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9c101ac1060691f4fb04457c1a701efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveName: Hook
-  leftAnimation: {fileID: 7400016, guid: 7934f1476fe2c6e458c230f491769c34, type: 3}
-  rightAnimation: {fileID: 7400014, guid: 7934f1476fe2c6e458c230f491769c34, type: 3}
-  animationSpeed: 1
-  chargeable: 0
-  chargeSpeed: 1
-  chargeDecay: 20
-  pressed: 0
-  power: 0
+  moveName: Jab
+  leftAnimation: {fileID: 7400000, guid: f6683208c965de34b83859005003b6e4, type: 2}
+  leftAnimationSpeed: 1
+  rightAnimation: {fileID: 7400000, guid: 9765ee829dfd0a14d87acbfb1d0c3d5e, type: 2}
+  rightAnimationSpeed: 0.9
+  power: 1
   damage: 12
-  startTime: 0
-  endTime: 0
-  limb: 1
+  chargeable: 1
+  chargeDecay: 4
+  chargeStartTime: 0
+  chargeEndTime: 0.3
+  hitboxType: 1
+  hitboxStartTime: 0
+  hitboxEndTime: 0

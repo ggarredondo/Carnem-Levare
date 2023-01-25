@@ -8,9 +8,9 @@ public enum Power: uint
     Strong = 2
 }
 
-// Part of limb used for hitting. Used to activate the corresponding hitbox.
+// Used to choose the corresponding hitbox from a list of hitboxes (left list and right list).
 // A hitbox must be added for each of these possible values for both player and enemy, for both left and right.
-public enum Limb : uint
+public enum HitboxType : uint
 {
     Elbow = 0,
     Fist = 1,
@@ -29,23 +29,49 @@ public class Move : MonoBehaviour
     [Header("Attack Animations")]
     // Animations that the move performs, depending on whether the Move slot is left or right, and if the player is currently crouching.
     public AnimationClip leftAnimation;
+    [Range(0f, 2f)] public float leftAnimationSpeed = 1f;
     public AnimationClip rightAnimation;
-
-    public float animationSpeed = 1f;
-    [Tooltip("Can it be charged?")] public bool chargeable = true;
-    [HideInInspector] public float chargeSpeed = 1f; // Used when input is held down.
-    [Tooltip("How quickly the animation slows down when holding the attack button (interpolation value)")] 
-    public float chargeDecay = 1f; // Interpolation value used for lerp affecting chargeSpeed.
-    [HideInInspector] public bool pressed = false; // Used to track if the input is held down.
+    [Range(0f, 2f)] public float rightAnimationSpeed = 1f;
 
     [Header("Attack Values")]
     public Power power;
     public float damage; // Damage dealt to the opponent's stamina, if it hits.
 
-    [Header("Hitbox Values")]
-    [Range(0f, 1f)] public float startTime = 0f; // (Normalized) Time when hitbox is activated.
-    [Range(0f, 1f)] public float endTime = 0f; // (Normalized) Time when hitbox is deactivated.
-    public Limb limb;
+    [Header("Charge Values")]
+    [System.NonSerialized] public bool pressed = false; // Used to track if the input is held down.
+    [System.NonSerialized] public float chargeSpeed = 1f; // Used when input is held down.
+    [Tooltip("Can it be charged?")] [SerializeField] private bool chargeable = true;
+    [Tooltip("How quickly the animation slows down when holding the attack button (interpolation value)")]
+    [SerializeField] private float chargeDecay = 1f; // Interpolation value used for lerp affecting chargeSpeed.
+    [Tooltip("Charging attacks is only allowed during the interval [chargeStartTime, chargeEndTime) of the normalized animation time")]
+    [SerializeField] [Range(0f, 1f)] private float chargeStartTime = 0f, chargeEndTime = 0f;
 
-    public bool isCharging { get { return chargeable && pressed; } }
+    [Header("Hitbox Values")]
+    public HitboxType hitboxType;
+    [Tooltip("Hitbox is activated during the interval [hitboxStartTime, hitboxEndTime) of the normalized animation time")] 
+    [SerializeField] [Range(0f, 1f)] private float hitboxStartTime = 0f, hitboxEndTime = 0f;
+
+    /// <summary>
+    /// Hitbox is active during the interval [hitboxStartTime, hitboxEndTime).
+    /// </summary>
+    /// <param name="normalizedTime">Normalized time of the animation</param>
+    /// <returns></returns>
+    public bool isHitboxActive(float normalizedTime)
+    {
+        return normalizedTime >= hitboxStartTime && normalizedTime < hitboxEndTime;
+    }
+
+    /// <summary>
+    /// Slows down attack animation if attack button is held down during the interval [chargeStartTime, chargeEndTime)
+    /// </summary>
+    /// <param name="normalizedTime">Normalized time of the animation</param>
+    /// <param name="attackSpeed">Character's attack speed</param>
+    public void ChargeAttack(float normalizedTime, float attackSpeed)
+    {
+        bool withinInterval = normalizedTime >= chargeStartTime && normalizedTime < chargeEndTime;
+        if (chargeable && pressed && withinInterval)
+            chargeSpeed = Mathf.Lerp(chargeSpeed, 0f, chargeDecay * attackSpeed * Time.deltaTime);
+        else
+            chargeSpeed = 1f;
+    }
 }
