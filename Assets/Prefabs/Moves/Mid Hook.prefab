@@ -48,6 +48,9 @@ MonoBehaviour:
   leftAnimation: {fileID: 7400000, guid: af4fd69ef60a1454cbeb9acce49f52c5, type: 2}
   rightAnimation: {fileID: 7400072, guid: 7934f1476fe2c6e458c230f491769c34, type: 3}
   animationSpeed: 1
+  chargeSpeed: 1
+  chargeDecay: 5
+  pressed: 0
   power: 1
   damage: 15
   startTime: 0

@@ -8,8 +8,9 @@ public class PlayerController : Character
     private bool isAttacking, isBlocking, canAttack;
 
     [Header("Movement Parameters")]
-    public float movementSpeed = 8f;
-    [Range(0f, 1f)] public float attackingModifier = 0f, blockingModifier = 0f; // The player may move slower when attacking or blocking, or not move at all.
+    [Tooltip("How quickly player character follows stick movement")] public float movementSpeed = 8f;
+    [Tooltip("Modifies player movement speed when attacking or blocking (the player may move slower, or not move at all)")]
+    [Range(0f, 1f)] public float attackingModifier = 0f, blockingModifier = 0f;
     private float current_movementSpeed;
     [Range(-1f, 0f)] public float duckingRange = -1f; // -1: can duck all the way down. 0: can't duck at all.
 
@@ -20,12 +21,12 @@ public class PlayerController : Character
     public Move rightNormalSlot;
     public Move leftSpecialSlot;
     public Move rightSpecialSlot;
-    public float attackSpeed = 1f;
-    // Time before the player can attack again (normalized time) between different moves.
+
     // 0 means the player can attack again immediately. 1 means the player must wait for the entire animation to play out.
     // 0.5 means the player must wait for half the attack animation to play out before attacking again. Etc.
     // This variable is meant for transitions between different move slots. Move slots can't transition directly to themselves,
     // spamming the same move will always require the entire animation to play out.
+    [Tooltip("(Normalized) Time before the player can attack again between different moves")] 
     [Range(0f, 1f)] public float interAttackExitTime = 0.4f;
 
     [Header("Hitbox Lists. (Left/Right) Elbow, Fist, Knee, Shin, Foot")]
@@ -61,10 +62,10 @@ public class PlayerController : Character
         movementValue.y = Mathf.Clamp(movementValue.y, duckingRange, 0f); // -1 is crouching, 0 is standing. Doesn't make sense to consider 1 as a value.
     }
 
-    public void LeftNormal(InputAction.CallbackContext context) { anim.SetBool("left_normal", context.performed); }
-    public void RightNormal(InputAction.CallbackContext context) { anim.SetBool("right_normal", context.performed); }
-    public void LeftSpecial(InputAction.CallbackContext context) { anim.SetBool("left_special", context.performed); }
-    public void RightSpecial(InputAction.CallbackContext context) { anim.SetBool("right_special", context.performed); }
+    public void LeftNormal(InputAction.CallbackContext context) { leftNormalSlot.pressed = context.performed; anim.SetBool("left_normal", context.performed); }
+    public void RightNormal(InputAction.CallbackContext context) { rightNormalSlot.pressed = context.performed; anim.SetBool("right_normal", context.performed); }
+    public void LeftSpecial(InputAction.CallbackContext context) { leftSpecialSlot.pressed = context.performed; anim.SetBool("left_special", context.performed); }
+    public void RightSpecial(InputAction.CallbackContext context) { rightSpecialSlot.pressed = context.performed; anim.SetBool("right_special", context.performed); }
     public void Block(InputAction.CallbackContext context) { anim.SetBool("block", context.performed); }
 
     //***ANIMATION***
@@ -93,10 +94,10 @@ public class PlayerController : Character
         anim.SetBool("can_attack", canAttack);
 
         // Animation modifiers
-        anim.SetFloat("left_normal_speed", leftNormalSlot.animationSpeed * attackSpeed);
-        anim.SetFloat("right_normal_speed", rightNormalSlot.animationSpeed * attackSpeed);
-        anim.SetFloat("left_special_speed", leftSpecialSlot.animationSpeed * attackSpeed);
-        anim.SetFloat("right_special_speed", rightSpecialSlot.animationSpeed * attackSpeed);
+        anim.SetFloat("left_normal_speed", leftNormalSlot.animationSpeed * leftNormalSlot.chargeSpeed * attackSpeed);
+        anim.SetFloat("right_normal_speed", rightNormalSlot.animationSpeed * rightNormalSlot.chargeSpeed * attackSpeed);
+        anim.SetFloat("left_special_speed", leftSpecialSlot.animationSpeed * leftSpecialSlot.chargeSpeed * attackSpeed);
+        anim.SetFloat("right_special_speed", rightSpecialSlot.animationSpeed * rightSpecialSlot.chargeSpeed * attackSpeed);
 
         // MOVEMENT
         // Softens the movement by establishing the direction as a point that approaches the stick/mouse position.

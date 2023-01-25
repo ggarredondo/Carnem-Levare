@@ -32,6 +32,11 @@ public class Move : MonoBehaviour
     public AnimationClip rightAnimation;
 
     public float animationSpeed = 1f;
+    [Tooltip("Can it be charged?")] public bool chargeable = true;
+    [HideInInspector] public float chargeSpeed = 1f; // Used when input is held down.
+    [Tooltip("How quickly the animation slows down when holding the attack button (interpolation value)")] 
+    public float chargeDecay = 1f; // Interpolation value used for lerp affecting chargeSpeed.
+    [HideInInspector] public bool pressed = false; // Used to track if the input is held down.
 
     [Header("Attack Values")]
     public Power power;
@@ -41,4 +46,6 @@ public class Move : MonoBehaviour
     [Range(0f, 1f)] public float startTime = 0f; // (Normalized) Time when hitbox is activated.
     [Range(0f, 1f)] public float endTime = 0f; // (Normalized) Time when hitbox is deactivated.
     public Limb limb;
+
+    public bool isCharging { get { return chargeable && pressed; } }
 }

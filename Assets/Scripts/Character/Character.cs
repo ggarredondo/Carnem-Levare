@@ -13,6 +13,7 @@ public abstract class Character : MonoBehaviour
     [Header("Stats")]
     [SerializeField] private float stamina;
     [SerializeField] private float maxStamina = 0f;
+    [Tooltip("Attack animation speed")] [Range(0,2)] public float attackSpeed = 1f;
 
     protected void init()
     {
