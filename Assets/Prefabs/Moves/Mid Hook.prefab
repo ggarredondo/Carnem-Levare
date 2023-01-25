@@ -46,14 +46,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveName: Low Hook
   leftAnimation: {fileID: 7400000, guid: af4fd69ef60a1454cbeb9acce49f52c5, type: 2}
+  leftAnimationSpeed: 1
   rightAnimation: {fileID: 7400072, guid: 7934f1476fe2c6e458c230f491769c34, type: 3}
-  animationSpeed: 1
+  rightAnimationSpeed: 1
   power: 1
   damage: 15
   chargeable: 1
   chargeDecay: 5
   chargeStartTime: 0
-  chargeEndTime: 0.2
+  chargeEndTime: 0.3
+  chargeLimit: 0.001
   hitboxType: 1
   hitboxStartTime: 0
   hitboxEndTime: 0

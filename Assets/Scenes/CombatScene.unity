@@ -2726,33 +2726,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4706402254706946820, guid: 730b6f15cbfa96c4db1930def4556da9,
         type: 3}
-      propertyPath: leftNormalSlot
-      value: 
-      objectReference: {fileID: -4476728132895952727, guid: f93797f883db7b542ace592e1b90d3b4,
-        type: 3}
-    - target: {fileID: 4706402254706946820, guid: 730b6f15cbfa96c4db1930def4556da9,
-        type: 3}
       propertyPath: leftSpecialSlot
       value: 
-      objectReference: {fileID: -6294080308579570103, guid: efb9a55e3f71721488f998a63a6181b3,
-        type: 3}
-    - target: {fileID: 4706402254706946820, guid: 730b6f15cbfa96c4db1930def4556da9,
-        type: 3}
-      propertyPath: rightNormalSlot
-      value: 
-      objectReference: {fileID: -4476728132895952727, guid: f93797f883db7b542ace592e1b90d3b4,
+      objectReference: {fileID: -6294080308579570103, guid: a8f961228fb724d4493126f529517e6e,
         type: 3}
     - target: {fileID: 4706402254706946820, guid: 730b6f15cbfa96c4db1930def4556da9,
         type: 3}
       propertyPath: leftSpecialSpeed
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 4706402254706946820, guid: 730b6f15cbfa96c4db1930def4556da9,
-        type: 3}
-      propertyPath: rightSpecialSlot
-      value: 
-      objectReference: {fileID: -6294080308579570103, guid: a8f961228fb724d4493126f529517e6e,
-        type: 3}
     - target: {fileID: 4706402254706946820, guid: 730b6f15cbfa96c4db1930def4556da9,
         type: 3}
       propertyPath: TargetEnemyAttack

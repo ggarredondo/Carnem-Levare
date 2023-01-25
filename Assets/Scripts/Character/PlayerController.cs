@@ -9,9 +9,11 @@ public class PlayerController : Character
     [Header("Movement Parameters")]
     [Tooltip("How quickly player character follows stick movement")] 
     [SerializeField] private float movementSpeed = 8f;
+    private float current_movementSpeed;
+
     [Tooltip("Modifies player movement speed when attacking or blocking (the player may move slower, or not move at all)")]
     [SerializeField] [Range(0f, 1f)] private float attackingModifier = 0f, blockingModifier = 0f;
-    private float current_movementSpeed;
+
     [SerializeField] [Range(-1f, 0f)] private float duckingRange = -1f; // -1: can duck all the way down. 0: can't duck at all.
 
     [Header("Attack Parameters")]

@@ -39,10 +39,14 @@ public class Move : MonoBehaviour
 
     [Header("Charge Values")]
     [System.NonSerialized] public bool pressed = false; // Used to track if the input is held down.
-    [System.NonSerialized] public float chargeSpeed = 1f; // Used when input is held down.
-    [Tooltip("Can it be charged?")] [SerializeField] private bool chargeable = true;
+    [System.NonSerialized] public float chargeSpeed = 1f; // Attack animation modifier when input is held down.
+
+    [Tooltip("Can it be charged?")] 
+    [SerializeField] private bool chargeable = true;
+
     [Tooltip("How quickly the animation slows down when holding the attack button (interpolation value)")]
     [SerializeField] private float chargeDecay = 1f; // Interpolation value used for lerp affecting chargeSpeed.
+
     [Tooltip("Charging attacks is only allowed during the interval [chargeStartTime, chargeEndTime) of the normalized animation time")]
     [SerializeField] [Range(0f, 1f)] private float chargeStartTime = 0f, chargeEndTime = 0f;
 
@@ -69,6 +73,7 @@ public class Move : MonoBehaviour
     public void ChargeAttack(float normalizedTime, float attackSpeed)
     {
         bool withinInterval = normalizedTime >= chargeStartTime && normalizedTime < chargeEndTime;
+
         if (chargeable && pressed && withinInterval)
             chargeSpeed = Mathf.Lerp(chargeSpeed, 0f, chargeDecay * attackSpeed * Time.deltaTime);
         else
