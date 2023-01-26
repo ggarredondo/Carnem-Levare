@@ -45,14 +45,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveName: Overhand
-  leftAnimation: {fileID: 7400000, guid: ce5c10242fad3aa4f8231a9f5da3b782, type: 2}
+  leftAnimation: {fileID: 7400030, guid: 7934f1476fe2c6e458c230f491769c34, type: 3}
   leftAnimationSpeed: 1
-  rightAnimation: {fileID: 7400000, guid: ee8df0d28d6a02b4b93a2e026e4a7959, type: 2}
+  rightAnimation: {fileID: 7400028, guid: 7934f1476fe2c6e458c230f491769c34, type: 3}
   rightAnimationSpeed: 1
   power: 2
   damage: 20
   chargeable: 1
-  chargeDecay: 10
+  chargeDecay: 5
   chargeStartTime: 0
   chargeEndTime: 0.3
   hitboxType: 1

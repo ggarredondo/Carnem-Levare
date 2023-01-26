@@ -57,7 +57,7 @@ public class PlayerController : Character
     public void Movement(InputAction.CallbackContext context)
     { 
         movementValue = context.ReadValue<Vector2>();
-        movementValue.y = Mathf.Clamp(movementValue.y, duckingRange, 0f); // -1 is crouching, 0 is standing. Doesn't make sense to consider 1 as a value.
+        movementValue.y = Mathf.Clamp(movementValue.y, duckingRange, 1f); // -1 is crouching, 0 is standing, 1 is moving forward.
     }
 
     public void LeftNormal(InputAction.CallbackContext context) { leftNormalSlot.pressed = context.performed; anim.SetBool("left_normal", context.performed); }

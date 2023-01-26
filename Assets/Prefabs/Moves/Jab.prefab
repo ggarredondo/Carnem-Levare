@@ -45,15 +45,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveName: Jab
-  leftAnimation: {fileID: 7400004, guid: 7934f1476fe2c6e458c230f491769c34, type: 3}
-  rightAnimation: {fileID: 7400006, guid: 7934f1476fe2c6e458c230f491769c34, type: 3}
-  animationSpeed: 1
+  leftAnimation: {fileID: 7400032, guid: 7934f1476fe2c6e458c230f491769c34, type: 3}
+  leftAnimationSpeed: 1
+  rightAnimation: {fileID: 7400034, guid: 7934f1476fe2c6e458c230f491769c34, type: 3}
+  rightAnimationSpeed: 1
   power: 0
   damage: 10
   chargeable: 0
-  chargeSpeed: 1
   chargeDecay: 0
-  pressed: 0
   chargeStartTime: 0
   chargeEndTime: 0
   hitboxType: 1
