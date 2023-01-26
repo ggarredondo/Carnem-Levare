@@ -14,6 +14,7 @@ public class EnemyController : Character
     private void Update()
     {
         SetAnimationParameters();
+        updating();
     }
 
     //***ANIMATION***
@@ -25,6 +26,5 @@ public class EnemyController : Character
     {
         anim.SetFloat("horizontal", horizontal);
         anim.SetFloat("vertical", vertical);
-        transform.LookAt(new Vector3(target.position.x, transform.position.y, target.position.z)); // Rotate towards player
     }
 }

@@ -51,6 +51,8 @@ MonoBehaviour:
   rightAnimationSpeed: 1
   power: 0
   damage: 0
+  track: 1
+  cancellable: 0
   chargeable: 0
   chargeDecay: 10
   chargeStartTime: 0

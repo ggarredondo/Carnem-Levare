@@ -4,7 +4,7 @@ using UnityEngine.InputSystem;
 public class PlayerController : Character
 {
     private Vector2 movementValue, direction;
-    private bool isAttacking, isBlocking, canAttack;
+    private bool isAttacking, isBlocking, canAttack, canBlock;
 
     [Header("Movement Parameters")]
     [Tooltip("How quickly player character follows stick movement")] 
@@ -31,6 +31,10 @@ public class PlayerController : Character
     [Tooltip("(Normalized) Time before the player can attack again between different moves")] 
     [SerializeField] [Range(0f, 1f)] private float interAttackExitTime = 0.4f;
 
+    [Tooltip("(Normalized) Range of time where the player can cancel an attack to block")]
+    [SerializeField] [Range(0f, 1f)] private float cancelAttackTime = 0.4f;
+    [System.NonSerialized] public bool cancellable = true;
+
     private void Awake()
     {
         init();
@@ -43,12 +47,14 @@ public class PlayerController : Character
         isAttacking = false;
         isBlocking = false;
         canAttack = true;
+        canBlock = false;
         UpdateAllAttackAnimations();
     }
 
     void Update()
     {
         SetAnimationParameters();
+        updating();
     }
 
     //***INPUT***
@@ -87,9 +93,12 @@ public class PlayerController : Character
         // Values that must be updated frame by frame to allow certain animations to play out accordingly.
         isAttacking = anim.GetCurrentAnimatorStateInfo(0).IsTag("Attacking") && !anim.IsInTransition(0);
         isBlocking = anim.GetCurrentAnimatorStateInfo(0).IsTag("Blocking") && !anim.IsInTransition(0);
-        // The player can't attack if the attack animation has been playing for less than *interAttackExitTime* seconds and...
+        // The player can't attack if the attack animation has been playing for less than *interAttackExitTime* and...
         canAttack = !(isAttacking && (anim.GetCurrentAnimatorStateInfo(0).normalizedTime < interAttackExitTime)) && !isBlocking;
+        // The player can't block if the attack animation has been playing for more than *cancelAttackTime* or if the attack is uncancellable
+        canBlock = !(isAttacking && (anim.GetCurrentAnimatorStateInfo(0).normalizedTime >= cancelAttackTime || !cancellable));
         anim.SetBool("can_attack", canAttack);
+        anim.SetBool("can_block", canBlock);
 
         // Animation modifiers
         anim.SetFloat("left_normal_speed", leftNormalSlot.leftAnimationSpeed * leftNormalSlot.chargeSpeed * attackSpeed);
@@ -104,7 +113,6 @@ public class PlayerController : Character
         direction = Vector2.MoveTowards(direction, movementValue, current_movementSpeed * Time.deltaTime);
         anim.SetFloat("horizontal", direction.x);
         anim.SetFloat("vertical", direction.y);
-        transform.LookAt(new Vector3(target.position.x, transform.position.y, target.position.z)); // Rotate towards enemy.
     }
 
     //***GET FUNCTIONS***

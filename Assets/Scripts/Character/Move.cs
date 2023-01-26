@@ -36,11 +36,17 @@ public class Move : MonoBehaviour
     [Header("Attack Values")]
     public Power power;
     public float damage; // Damage dealt to the opponent's stamina, if it hits.
+    [Tooltip("Does the character track the opponent during the move?")] 
+    [SerializeField] private bool track = false;
+    [System.NonSerialized] public bool isTracking = false; // Nontracking moves may track regardless if they are being charged.
 
-    [Header("Charge Values")]
-    [System.NonSerialized] public bool pressed = false; // Used to track if the input is held down.
+    [Tooltip("Can you cancel the attack by blocking?")]
+    public bool cancellable = true;
+
+    [System.NonSerialized] public bool pressed = false; // Used to check if the input is held down.
     [System.NonSerialized] public float chargeSpeed = 1f; // Attack animation modifier when input is held down.
 
+    [Header("Charge Values")]
     [Tooltip("Can it be charged?")] 
     [SerializeField] private bool chargeable = true;
 
@@ -75,8 +81,14 @@ public class Move : MonoBehaviour
         bool withinInterval = normalizedTime >= chargeStartTime && normalizedTime < chargeEndTime;
 
         if (chargeable && pressed && withinInterval)
+        {
+            isTracking = true;
             chargeSpeed = Mathf.Lerp(chargeSpeed, 0f, chargeDecay * attackSpeed * Time.deltaTime);
+        }
         else
+        {
+            isTracking = track;
             chargeSpeed = 1f;
+        }
     }
 }

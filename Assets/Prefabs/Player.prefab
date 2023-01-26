@@ -315,6 +315,7 @@ MonoBehaviour:
   rightSpecialSlot: {fileID: -6294080308579570103, guid: a8f961228fb724d4493126f529517e6e,
     type: 3}
   interAttackExitTime: 0.4
+  cancelAttackTime: 0.2
 --- !u!114 &4706402254706946843
 MonoBehaviour:
   m_ObjectHideFlags: 0

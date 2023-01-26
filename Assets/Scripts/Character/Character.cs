@@ -9,6 +9,7 @@ public abstract class Character : MonoBehaviour
     protected AnimationClip[] animatorDefaults;
 
     [SerializeField] protected Transform target;
+    [System.NonSerialized] public bool tracking = true;
 
     [Header("Stats")]
     [SerializeField] private float stamina;
@@ -25,6 +26,12 @@ public abstract class Character : MonoBehaviour
         anim = GetComponent<Animator>();
         animatorDefaults = anim.runtimeAnimatorController.animationClips;
         animOverride = new AnimatorOverrideController(anim.runtimeAnimatorController);
+    }
+
+    protected void updating()
+    {
+        if (tracking)
+            transform.LookAt(new Vector3(target.position.x, transform.position.y, target.position.z)); // Rotate towards enemy.
     }
 
     //***ANIMATION***
