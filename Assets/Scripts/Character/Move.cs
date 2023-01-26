@@ -54,7 +54,7 @@ public class Move : MonoBehaviour
     [SerializeField] private float chargeDecay = 1f; // Interpolation value used for lerp affecting chargeSpeed.
 
     [Tooltip("Move will perform automatically after *chargeLimit* frames charging")]
-    [SerializeField] private int chargeLimit = 300;
+    [SerializeField] private int chargeLimit = 600;
     private int lastFrame;
 
     private enum ChargePhase { waiting, performing, canceled }

@@ -55,7 +55,7 @@ MonoBehaviour:
   cancelable: 1
   chargeable: 0
   chargeDecay: 0
-  chargeLimit: 300
+  chargeLimit: 0
   hitboxType: 1
   hitboxStartTime: 0
   hitboxEndTime: 0
