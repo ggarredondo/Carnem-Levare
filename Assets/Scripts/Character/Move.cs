@@ -51,7 +51,8 @@ public class Move : MonoBehaviour
     [SerializeField] private bool chargeable = true;
 
     [Tooltip("How quickly the animation slows down when holding the attack button (interpolation value)")]
-    [SerializeField] private float chargeDecay = 1f; // Interpolation value used for lerp affecting chargeSpeed.
+    public float leftChargeDecay = 1f, rightChargeDecay = 1f; // Interpolation value used for lerp affecting chargeSpeed.
+    [System.NonSerialized] public float chargeDecay;
 
     [Tooltip("Move will perform automatically after *chargeLimit* frames charging")]
     [SerializeField] private int chargeLimit = 600;
@@ -105,5 +106,8 @@ public class Move : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Resets move's chargePhase to waiting state.
+    /// </summary>
     public void ResetChargePhase() { chargePhase = ChargePhase.waiting; }
 }

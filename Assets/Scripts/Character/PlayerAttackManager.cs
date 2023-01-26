@@ -15,10 +15,26 @@ public class PlayerAttackManager : StateMachineBehaviour
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         // Checks which of the four possible attacks the player is perfoming, then saves a reference to the corresponding move and its hitbox.
-        if (stateInfo.IsName("Left Normal")) { currentMove = player.leftNormalSlot; currentHitbox = player.leftHitboxes[(int) currentMove.hitboxType]; }
-        else if (stateInfo.IsName("Right Normal")) { currentMove = player.rightNormalSlot; currentHitbox = player.rightHitboxes[(int) currentMove.hitboxType]; }
-        else if (stateInfo.IsName("Left Special")) { currentMove = player.leftSpecialSlot; currentHitbox = player.leftHitboxes[(int) currentMove.hitboxType]; }
-        else if (stateInfo.IsName("Right Special")) { currentMove = player.rightSpecialSlot; currentHitbox = player.rightHitboxes[(int) currentMove.hitboxType]; }
+        if (stateInfo.IsName("Left Normal")) { 
+            currentMove = player.leftNormalSlot;
+            currentMove.chargeDecay = currentMove.leftChargeDecay;
+            currentHitbox = player.leftHitboxes[(int) currentMove.hitboxType]; 
+        }
+        else if (stateInfo.IsName("Right Normal")) { 
+            currentMove = player.rightNormalSlot;
+            currentMove.chargeDecay = currentMove.rightChargeDecay;
+            currentHitbox = player.rightHitboxes[(int) currentMove.hitboxType]; 
+        }
+        else if (stateInfo.IsName("Left Special")) { 
+            currentMove = player.leftSpecialSlot;
+            currentMove.chargeDecay = currentMove.leftChargeDecay;
+            currentHitbox = player.leftHitboxes[(int) currentMove.hitboxType]; 
+        }
+        else if (stateInfo.IsName("Right Special")) { 
+            currentMove = player.rightSpecialSlot;
+            currentMove.chargeDecay = currentMove.rightChargeDecay;
+            currentHitbox = player.rightHitboxes[(int) currentMove.hitboxType]; 
+        }
 
         // Assigns the move's power and damage to the hitbox component so that once it hits the information is passed onto the hurtbox.
         currentHitbox.GetComponent<Hitbox>().power = currentMove.power;
