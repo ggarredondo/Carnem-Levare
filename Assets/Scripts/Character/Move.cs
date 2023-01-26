@@ -41,7 +41,7 @@ public class Move : MonoBehaviour
     [System.NonSerialized] public bool isTracking = false; // Nontracking moves may track regardless if they are being charged.
 
     [Tooltip("Can you cancel the attack by blocking?")]
-    public bool cancellable = true;
+    public bool cancelable = true;
 
     [System.NonSerialized] public bool pressed = false; // Used to check if the input is held down.
     [System.NonSerialized] public float chargeSpeed = 1f; // Attack animation modifier when input is held down.
@@ -53,8 +53,12 @@ public class Move : MonoBehaviour
     [Tooltip("How quickly the animation slows down when holding the attack button (interpolation value)")]
     [SerializeField] private float chargeDecay = 1f; // Interpolation value used for lerp affecting chargeSpeed.
 
-    [Tooltip("Charging attacks is only allowed during the interval [chargeStartTime, chargeEndTime) of the normalized animation time")]
-    [SerializeField] [Range(0f, 1f)] private float chargeStartTime = 0f, chargeEndTime = 0f;
+    [Tooltip("Move will perform automatically after *chargeLimit* frames charging")]
+    [SerializeField] private int chargeLimit = 300;
+    private int lastFrame;
+
+    private enum ChargePhase { waiting, performing, canceled }
+    private ChargePhase chargePhase;
 
     [Header("Hitbox Values")]
     public HitboxType hitboxType;
@@ -72,23 +76,34 @@ public class Move : MonoBehaviour
     }
 
     /// <summary>
-    /// Slows down attack animation if attack button is held down during the interval [chargeStartTime, chargeEndTime)
+    /// Slows down attack animation if attack button is held down, until it's released or 
+    /// the animation speed reaches a minimum.
     /// </summary>
-    /// <param name="normalizedTime">Normalized time of the animation</param>
     /// <param name="attackSpeed">Character's attack speed</param>
-    public void ChargeAttack(float normalizedTime, float attackSpeed)
+    public void ChargeAttack(float attackSpeed)
     {
-        bool withinInterval = normalizedTime >= chargeStartTime && normalizedTime < chargeEndTime;
+        switch (chargePhase)
+        {
+            case ChargePhase.waiting:
+                if (pressed && chargeable) {
+                    chargePhase = ChargePhase.performing;
+                    lastFrame = Time.frameCount;
+                }
+                break;
 
-        if (chargeable && pressed && withinInterval)
-        {
-            isTracking = true;
-            chargeSpeed = Mathf.Lerp(chargeSpeed, 0f, chargeDecay * attackSpeed * Time.deltaTime);
-        }
-        else
-        {
-            isTracking = track;
-            chargeSpeed = 1f;
+            case ChargePhase.performing:
+                if (pressed) {
+                    isTracking = true;
+                    chargeSpeed = Mathf.Lerp(chargeSpeed, 0f, chargeDecay * attackSpeed * Time.deltaTime);
+                }
+                if (!pressed || Time.frameCount >= lastFrame + chargeLimit) {
+                    isTracking = track;
+                    chargeSpeed = 1f;
+                    chargePhase = ChargePhase.canceled;
+                }
+                break;
         }
     }
+
+    public void ResetChargePhase() { chargePhase = ChargePhase.waiting; }
 }

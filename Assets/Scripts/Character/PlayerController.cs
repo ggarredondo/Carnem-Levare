@@ -33,7 +33,7 @@ public class PlayerController : Character
 
     [Tooltip("(Normalized) Range of time where the player can cancel an attack to block")]
     [SerializeField] [Range(0f, 1f)] private float cancelAttackTime = 0.4f;
-    [System.NonSerialized] public bool cancellable = true;
+    [System.NonSerialized] public bool cancelable = true;
 
     private void Awake()
     {
@@ -96,7 +96,7 @@ public class PlayerController : Character
         // The player can't attack if the attack animation has been playing for less than *interAttackExitTime* and...
         canAttack = !(isAttacking && (anim.GetCurrentAnimatorStateInfo(0).normalizedTime < interAttackExitTime)) && !isBlocking;
         // The player can't block if the attack animation has been playing for more than *cancelAttackTime* or if the attack is uncancellable
-        canBlock = !(isAttacking && (anim.GetCurrentAnimatorStateInfo(0).normalizedTime >= cancelAttackTime || !cancellable));
+        canBlock = !(isAttacking && (anim.GetCurrentAnimatorStateInfo(0).normalizedTime >= cancelAttackTime || !cancelable));
         anim.SetBool("can_attack", canAttack);
         anim.SetBool("can_block", canBlock);
 

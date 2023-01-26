@@ -52,11 +52,10 @@ MonoBehaviour:
   power: 0
   damage: 0
   track: 1
-  cancellable: 0
+  cancelable: 0
   chargeable: 0
   chargeDecay: 10
-  chargeStartTime: 0
-  chargeEndTime: 0
+  chargeLimit: 300
   hitboxType: 1
   hitboxStartTime: 0
   hitboxEndTime: 0

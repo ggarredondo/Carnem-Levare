@@ -29,9 +29,9 @@ public class PlayerAttackManager : StateMachineBehaviour
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         player.tracking = currentMove.isTracking;
-        player.cancellable = currentMove.cancellable;
+        player.cancelable = currentMove.cancelable;
         currentHitbox.SetActive(currentMove.isHitboxActive(stateInfo.normalizedTime));
-        currentMove.ChargeAttack(stateInfo.normalizedTime, player.attackSpeed);
+        currentMove.ChargeAttack(player.attackSpeed);
     }
 
     // OnStateExit is called when a transition ends and the state machine finishes evaluating this state
@@ -39,5 +39,6 @@ public class PlayerAttackManager : StateMachineBehaviour
     {
         player.tracking = true;
         currentHitbox.SetActive(false);
+        currentMove.ResetChargePhase();
     }
 }

@@ -51,10 +51,11 @@ MonoBehaviour:
   rightAnimationSpeed: 1
   power: 0
   damage: 10
+  track: 0
+  cancelable: 1
   chargeable: 0
   chargeDecay: 0
-  chargeStartTime: 0
-  chargeEndTime: 0
+  chargeLimit: 300
   hitboxType: 1
   hitboxStartTime: 0
   hitboxEndTime: 0
