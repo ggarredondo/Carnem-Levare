@@ -23,13 +23,14 @@ public class PlayerAttackManager : StateMachineBehaviour
         // Assigns the move's power and damage to the hitbox component so that once it hits the information is passed onto the hurtbox.
         currentHitbox.GetComponent<Hitbox>().power = currentMove.power;
         currentHitbox.GetComponent<Hitbox>().damage = currentMove.damage;
+
+        player.cancelable = currentMove.cancelable;
     }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         player.tracking = currentMove.isTracking;
-        player.cancelable = currentMove.cancelable;
         currentHitbox.SetActive(currentMove.isHitboxActive(stateInfo.normalizedTime));
         currentMove.ChargeAttack(player.attackSpeed);
     }
