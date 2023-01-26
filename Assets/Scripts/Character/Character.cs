@@ -30,7 +30,7 @@ public abstract class Character : MonoBehaviour
 
     protected void updating()
     {
-        if (tracking)
+        if (tracking && !anim.GetCurrentAnimatorStateInfo(0).IsName("Hurt"))
             transform.LookAt(new Vector3(target.position.x, transform.position.y, target.position.z)); // Rotate towards enemy.
     }
 
