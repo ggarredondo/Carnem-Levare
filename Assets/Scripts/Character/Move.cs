@@ -36,12 +36,16 @@ public class Move : MonoBehaviour
     [Header("Attack Values")]
     public Power power;
     public float damage; // Damage dealt to the opponent's stamina, if it hits.
-    [Tooltip("Does the character track the opponent during the move?")] 
-    [SerializeField] private bool track = false;
-    [System.NonSerialized] public bool isTracking = false; // Nontracking moves may track regardless if they are being charged.
 
     [Tooltip("Can you cancel the attack by blocking?")]
     public bool cancelable = true;
+
+    [Header("Tracking Values")]
+    [Tooltip("Character stops tracking the opponent during the interval [commitStartTime, commitEndTime) of the normalized animation time")]
+    [SerializeField] [Range(0f, 1f)] private float commitStartTime = 0f;
+
+    [Tooltip("Character stops tracking the opponent during the interval [commitStartTime, commitEndTime) of the normalized animation time")]
+    [SerializeField] [Range(0f, 1f)] private float commitEndTime = 0f;
 
     [System.NonSerialized] public bool pressed = false; // Used to check if the input is held down.
     [System.NonSerialized] public float chargeSpeed = 1f; // Attack animation modifier when input is held down.
@@ -71,9 +75,16 @@ public class Move : MonoBehaviour
     /// </summary>
     /// <param name="normalizedTime">Normalized time of the animation</param>
     /// <returns></returns>
-    public bool isHitboxActive(float normalizedTime)
-    {
+    public bool isHitboxActive(float normalizedTime) {
         return normalizedTime >= hitboxStartTime && normalizedTime < hitboxEndTime;
+    }
+
+    /// <summary>
+    /// Character stops tracking the opponent during the interval [commitStartTime, commitEndTime)
+    /// </summary>
+    /// <param name="normalizedTime">Normalized time of the animation</param>
+    public bool isTracking(float normalizedTime) {
+        return !(normalizedTime >= commitStartTime && normalizedTime < commitEndTime);
     }
 
     /// <summary>
@@ -93,12 +104,10 @@ public class Move : MonoBehaviour
                 break;
 
             case ChargePhase.performing:
-                if (pressed && !inTransition) {
-                    isTracking = true;
+                if (pressed && !inTransition)
                     chargeSpeed = Mathf.Lerp(chargeSpeed, 0f, chargeDecay * attackSpeed * Time.deltaTime);
-                }
+
                 if (!pressed || Time.frameCount >= lastFrame + chargeLimit) {
-                    isTracking = track;
                     chargeSpeed = 1f;
                     chargePhase = ChargePhase.canceled;
                 }

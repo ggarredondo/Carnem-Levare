@@ -8,8 +8,13 @@ public abstract class Character : MonoBehaviour
     protected AnimatorOverrideController animOverride;
     protected AnimationClip[] animatorDefaults;
 
+    [Header("Tracking values")]
     [SerializeField] protected Transform target;
     [System.NonSerialized] public bool tracking = true;
+
+    [Tooltip("How quickly character rotates towards their opponent")]
+    [SerializeField] private float trackingRate = 1f;
+    private Quaternion targetLook;
 
     [Header("Stats")]
     [SerializeField] private float stamina;
@@ -30,8 +35,9 @@ public abstract class Character : MonoBehaviour
 
     protected void updating()
     {
+        targetLook = Quaternion.LookRotation(target.position - transform.position);
         if (tracking && !anim.GetCurrentAnimatorStateInfo(0).IsName("Hurt"))
-            transform.LookAt(new Vector3(target.position.x, transform.position.y, target.position.z)); // Rotate towards enemy.
+            transform.rotation = Quaternion.RotateTowards(transform.rotation, targetLook, trackingRate * Time.deltaTime); // Rotate towards opponent.
     }
 
     //***ANIMATION***

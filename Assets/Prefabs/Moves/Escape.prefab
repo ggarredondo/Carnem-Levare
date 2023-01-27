@@ -51,10 +51,12 @@ MonoBehaviour:
   rightAnimationSpeed: 1
   power: 0
   damage: 0
-  track: 1
   cancelable: 0
+  commitStartTime: 0
+  commitEndTime: 0
   chargeable: 0
-  chargeDecay: 10
+  leftChargeDecay: 1
+  rightChargeDecay: 1
   chargeLimit: 600
   hitboxType: 1
   hitboxStartTime: 0

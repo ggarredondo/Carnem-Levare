@@ -46,7 +46,7 @@ public class PlayerAttackManager : StateMachineBehaviour
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        player.tracking = currentMove.isTracking;
+        player.tracking = currentMove.isTracking(stateInfo.normalizedTime);
         currentHitbox.SetActive(currentMove.isHitboxActive(stateInfo.normalizedTime));
         currentMove.ChargeAttack(animator.IsInTransition(layerIndex), player.attackSpeed);
     }
