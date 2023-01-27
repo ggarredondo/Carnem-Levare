@@ -54,7 +54,7 @@ MonoBehaviour:
   track: 0
   cancelable: 1
   chargeable: 1
-  leftChargeDecay: 8
+  leftChargeDecay: 10
   rightChargeDecay: 5
   chargeLimit: 600
   hitboxType: 1
