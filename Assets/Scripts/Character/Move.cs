@@ -81,7 +81,7 @@ public class Move : MonoBehaviour
     /// the animation speed reaches a minimum.
     /// </summary>
     /// <param name="attackSpeed">Character's attack speed</param>
-    public void ChargeAttack(float attackSpeed)
+    public void ChargeAttack(bool inTransition, float attackSpeed)
     {
         switch (chargePhase)
         {
@@ -93,7 +93,7 @@ public class Move : MonoBehaviour
                 break;
 
             case ChargePhase.performing:
-                if (pressed) {
+                if (pressed && !inTransition) {
                     isTracking = true;
                     chargeSpeed = Mathf.Lerp(chargeSpeed, 0f, chargeDecay * attackSpeed * Time.deltaTime);
                 }
