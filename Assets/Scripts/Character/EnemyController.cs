@@ -18,7 +18,7 @@ public class EnemyController : Character
 
     private void FixedUpdate()
     {
-        updating();
+        fixedUpdating();
     }
 
     //***ANIMATION***

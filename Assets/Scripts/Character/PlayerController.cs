@@ -58,7 +58,7 @@ public class PlayerController : Character
 
     private void FixedUpdate()
     {
-        updating();
+        fixedUpdating();
     }
 
     //***INPUT***

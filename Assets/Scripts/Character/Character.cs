@@ -33,7 +33,7 @@ public abstract class Character : MonoBehaviour
         animOverride = new AnimatorOverrideController(anim.runtimeAnimatorController);
     }
 
-    protected void updating()
+    protected void fixedUpdating()
     {
         targetLook = Quaternion.LookRotation(target.position - transform.position);
         if (tracking && !anim.GetCurrentAnimatorStateInfo(0).IsName("Hurt"))
