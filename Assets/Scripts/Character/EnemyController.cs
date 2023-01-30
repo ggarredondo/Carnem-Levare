@@ -14,6 +14,10 @@ public class EnemyController : Character
     private void Update()
     {
         SetAnimationParameters();
+    }
+
+    private void FixedUpdate()
+    {
         updating();
     }
 

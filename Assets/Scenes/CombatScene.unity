@@ -880,17 +880,17 @@ PrefabInstance:
     - target: {fileID: 4706402254675848929, guid: 730b6f15cbfa96c4db1930def4556da9,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0.02219122
+      value: -0.0221912
       objectReference: {fileID: 0}
     - target: {fileID: 4706402254675848929, guid: 730b6f15cbfa96c4db1930def4556da9,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.07630204
+      value: 0.07630201
       objectReference: {fileID: 0}
     - target: {fileID: 4706402254675848929, guid: 730b6f15cbfa96c4db1930def4556da9,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.001698664
+      value: -0.0016986617
       objectReference: {fileID: 0}
     - target: {fileID: 4706402254675848930, guid: 730b6f15cbfa96c4db1930def4556da9,
         type: 3}
@@ -948,6 +948,18 @@ PrefabInstance:
       propertyPath: rightJabSpeed
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 4706402254706946820, guid: 730b6f15cbfa96c4db1930def4556da9,
+        type: 3}
+      propertyPath: leftNormalSlot
+      value: 
+      objectReference: {fileID: -6294080308579570103, guid: 008e7bcd62816d944b01dc5eb115a3b9,
+        type: 3}
+    - target: {fileID: 4706402254706946820, guid: 730b6f15cbfa96c4db1930def4556da9,
+        type: 3}
+      propertyPath: rightNormalSlot
+      value: 
+      objectReference: {fileID: -6294080308579570103, guid: 008e7bcd62816d944b01dc5eb115a3b9,
+        type: 3}
     - target: {fileID: 4706402254706946820, guid: 730b6f15cbfa96c4db1930def4556da9,
         type: 3}
       propertyPath: leftSpecialSpeed
@@ -1606,22 +1618,17 @@ PrefabInstance:
     - target: {fileID: 4706402255246442001, guid: 730b6f15cbfa96c4db1930def4556da9,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0.02219122
+      value: -0.0221912
       objectReference: {fileID: 0}
     - target: {fileID: 4706402255246442001, guid: 730b6f15cbfa96c4db1930def4556da9,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.07630204
+      value: 0.07630201
       objectReference: {fileID: 0}
     - target: {fileID: 4706402255246442001, guid: 730b6f15cbfa96c4db1930def4556da9,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.001698664
-      objectReference: {fileID: 0}
-    - target: {fileID: 4706402255682218321, guid: 730b6f15cbfa96c4db1930def4556da9,
-        type: 3}
-      propertyPath: MAX_DAMPING
-      value: 1
+      value: -0.0016986617
       objectReference: {fileID: 0}
     - target: {fileID: 5105611481086044943, guid: 730b6f15cbfa96c4db1930def4556da9,
         type: 3}

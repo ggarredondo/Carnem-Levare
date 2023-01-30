@@ -541,7 +541,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 1
   m_Constraints: 4
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
 --- !u!136 &3684604065180434156
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -800,7 +800,8 @@ MonoBehaviour:
   playerController: {fileID: 4706402254706946820}
   vcam: {fileID: 4706402255246442000}
   cameraAceleration: 0.1
-  MAX_DAMPING: 1
+  MAX_DAMPING: 2
+  MIN_DAMPING: 1
   cameraRotation: 1
 --- !u!1 &7171772636375460611
 GameObject:

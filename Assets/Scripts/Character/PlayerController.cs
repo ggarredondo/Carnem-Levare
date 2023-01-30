@@ -54,6 +54,10 @@ public class PlayerController : Character
     void Update()
     {
         SetAnimationParameters();
+    }
+
+    private void FixedUpdate()
+    {
         updating();
     }
 

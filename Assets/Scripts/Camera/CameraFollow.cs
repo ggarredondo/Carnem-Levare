@@ -1,3 +1,5 @@
+
+
 using UnityEngine;
 using Cinemachine;
 
@@ -15,6 +17,7 @@ public class CameraFollow : MonoBehaviour
     [Header("Camera Parameters")]
     [Range(0f, 1f)] public float cameraAceleration;
     public float MAX_DAMPING = 20;
+    public float MIN_DAMPING = 0;
     public bool cameraRotation;
 
     private float damping;
@@ -59,14 +62,14 @@ public class CameraFollow : MonoBehaviour
             }
             else
             {
-                damping = damping * reduceDamping;
+                damping *= reduceDamping;
 
                 //Decrement the reduceDamping to make feel aceleration
-                reduceDamping = reduceDamping - cameraAcelerationTmp;
+                reduceDamping -= cameraAcelerationTmp;
 
                 //Make values be under damping parameter range
-                damping = Mathf.Clamp(damping, 0, MAX_DAMPING);
-                reduceDamping = Mathf.Clamp(reduceDamping, 0, MAX_DAMPING);
+                damping = Mathf.Clamp(damping, MIN_DAMPING, MAX_DAMPING);
+                reduceDamping = Mathf.Clamp(reduceDamping, MIN_DAMPING, MAX_DAMPING);
 
                 //Apply to the virtual camera parameter
                 transposer.m_YawDamping = damping;
