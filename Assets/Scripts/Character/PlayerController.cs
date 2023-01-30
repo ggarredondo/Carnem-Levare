@@ -121,7 +121,13 @@ public class PlayerController : Character
 
     //***GET FUNCTIONS***
 
-    public bool isWalking { get { return anim.GetCurrentAnimatorStateInfo(0).IsName("Movement"); } }
+    /// <summary>
+    /// Is the player in animator's state "movement"?
+    /// </summary>
+    public bool getIsMovement { get { return anim.GetCurrentAnimatorStateInfo(0).IsName("Movement"); } }
 
-    public bool isMoving { get { return !(direction.x == 0f && anim.GetCurrentAnimatorStateInfo(0).IsName("Movement")); } }
+    /// <summary>
+    /// Is the player moving? The player may move to the sides, forward or forward when attacking.
+    /// </summary>
+    public bool getIsMoving { get { return !(direction.x == 0f && direction.y <= 0f && anim.GetCurrentAnimatorStateInfo(0).IsName("Movement")); } }
 }

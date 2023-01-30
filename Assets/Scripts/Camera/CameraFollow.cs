@@ -47,13 +47,10 @@ public class CameraFollow : MonoBehaviour
         if (Time.timeScale == 1)
         {
             if (cameraRotation)
-            {
-                transposer.m_YawDamping = OscillateWithVelocity(playerController.isMoving, cameraAceleration, ref reduceDamping, MIN_DAMPING, MAX_DAMPING);
-            }
+                transposer.m_YawDamping = OscillateWithVelocity(playerController.getIsMoving, cameraAceleration, ref reduceDamping, MIN_DAMPING, MAX_DAMPING);
+
             if (cameraNoise)
-            {
-                noiseTransposer.m_FrequencyGain = OscillateWithVelocity(playerController.isWalking, noiseAceleration, ref reduceNoise, MIN_NOISE, MAX_NOISE);
-            }
+                noiseTransposer.m_FrequencyGain = OscillateWithVelocity(playerController.getIsMovement, noiseAceleration, ref reduceNoise, MIN_NOISE, MAX_NOISE);
         }
     }
 
