@@ -121,5 +121,7 @@ public class PlayerController : Character
 
     //***GET FUNCTIONS***
 
-    public bool isWalking { get { return direction.x != 0f && !isAttacking; } }
+    public bool isWalking { get { return anim.GetCurrentAnimatorStateInfo(0).IsName("Movement"); } }
+
+    public bool isMoving { get { return !(direction.x == 0f && anim.GetCurrentAnimatorStateInfo(0).IsName("Movement")); } }
 }
