@@ -822,8 +822,10 @@ MonoBehaviour:
   MIN_DAMPING: 1
   cameraRotation: 1
   noiseAceleration: 2
-  MAX_NOISE: 1
-  MIN_NOISE: 0
+  MAX_FREQUENCY: 1
+  MIN_FREQUENCY: 0
+  MAX_AMPLITUDE: 0.5
+  MIN_AMPLITUDE: 0
   cameraNoise: 1
 --- !u!1 &7171772636375460611
 GameObject:

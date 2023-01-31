@@ -13,7 +13,7 @@ public class CameraFollow : MonoBehaviour
     public PlayerController playerController;
     public CinemachineVirtualCamera vcam;
 
-    [Header("Camera Parameters")]
+    [Header("Follow Parameters")]
     [Range(0f, 5f)] public float cameraAceleration;
     public float MAX_DAMPING = 20;
     public float MIN_DAMPING = 0;
@@ -24,11 +24,13 @@ public class CameraFollow : MonoBehaviour
 
     [Header("Noise Parameters")]
     [Range(0f, 5f)] public float noiseAceleration;
-    public float MAX_NOISE = 3;
-    public float MIN_NOISE = 1;
+    public float MAX_FREQUENCY = 3;
+    public float MIN_FREQUENCY = 1;
+    public float MAX_AMPLITUDE = 3;
+    public float MIN_AMPLITUDE = 1;
     public bool cameraNoise;
 
-    private float reduceNoise;
+    private float reduceAmplitude, reduceFrequency;
     private CinemachineBasicMultiChannelPerlin noiseTransposer;
 
     private void Awake()
@@ -50,7 +52,10 @@ public class CameraFollow : MonoBehaviour
                 transposer.m_YawDamping = OscillateWithVelocity(playerController.getIsMoving, cameraAceleration, ref reduceDamping, MIN_DAMPING, MAX_DAMPING);
 
             if (cameraNoise)
-                noiseTransposer.m_FrequencyGain = OscillateWithVelocity(playerController.getIsMovement, noiseAceleration, ref reduceNoise, MIN_NOISE, MAX_NOISE);
+            {
+                noiseTransposer.m_FrequencyGain = OscillateWithVelocity(playerController.getIsMovement, noiseAceleration, ref reduceFrequency, MIN_FREQUENCY, MAX_FREQUENCY);
+                noiseTransposer.m_AmplitudeGain = OscillateWithVelocity(playerController.getIsMovement, noiseAceleration, ref reduceAmplitude, MIN_AMPLITUDE, MAX_AMPLITUDE);
+            }
         }
     }
 
