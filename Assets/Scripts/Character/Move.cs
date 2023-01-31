@@ -62,7 +62,7 @@ public class Move : MonoBehaviour
     [SerializeField] private int chargeLimit = 600;
     private int lastFrame;
 
-    private enum ChargePhase { waiting, performing, canceled }
+    public enum ChargePhase { waiting, performing, canceled }
     private ChargePhase chargePhase;
 
     [Header("Hitbox Values")]
@@ -119,4 +119,8 @@ public class Move : MonoBehaviour
     /// Resets move's chargePhase to waiting state.
     /// </summary>
     public void ResetChargePhase() { chargePhase = ChargePhase.waiting; }
+
+    public ChargePhase getChargePhase { get { return chargePhase; } }
+
+    public int getLastFrame { get { return lastFrame; } }
 }
