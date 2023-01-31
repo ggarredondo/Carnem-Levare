@@ -48,7 +48,7 @@ public class PlayerAttackManager : StateMachineBehaviour
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         player.tracking = currentMove.isTracking(side, stateInfo.normalizedTime);
-        currentHitbox.SetActive(currentMove.isHitboxActive(side, stateInfo.normalizedTime));
+        currentHitbox.GetComponent<Hitbox>().Activate(currentMove.isHitboxActive(side, stateInfo.normalizedTime));
         currentMove.ChargeAttack(side, animator.IsInTransition(layerIndex), player.attackSpeed);
     }
 
@@ -56,7 +56,7 @@ public class PlayerAttackManager : StateMachineBehaviour
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         player.tracking = true;
-        currentHitbox.SetActive(false);
+        currentHitbox.GetComponent<Hitbox>().hit = false;
         currentMove.ResetChargePhase();
     }
 }

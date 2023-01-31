@@ -46,7 +46,7 @@ public class CameraFollow : MonoBehaviour
 
     private void LateUpdate()
     {
-        if (Time.timeScale == 1)
+        if (Time.timeScale > 0f)
         {
             if (cameraRotation)
                 transposer.m_YawDamping = OscillateWithVelocity(playerController.getIsMoving, cameraAceleration, ref reduceDamping, MIN_DAMPING, MAX_DAMPING);
