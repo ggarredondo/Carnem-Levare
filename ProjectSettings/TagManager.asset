@@ -10,7 +10,6 @@ TagManager:
   - AUDIO
   - UI
   - CONTROLS
-  - HITBOX
   layers:
   - Default
   - TransparentFX

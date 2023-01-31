@@ -52,12 +52,16 @@ MonoBehaviour:
   power: 0
   damage: 10
   cancelable: 1
-  commitStartTime: 0
-  commitEndTime: 0
+  leftCommitStartTime: 0
+  leftCommitEndTime: 0
+  rightCommitStartTime: 0
+  rightCommitEndTime: 0
   chargeable: 0
   leftChargeDecay: 1
   rightChargeDecay: 1
   chargeLimit: 0
-  hitboxType: 1
-  hitboxStartTime: 0
-  hitboxEndTime: 0
+  hitboxType: 0
+  leftHitboxStartTime: 0.2
+  leftHitboxEndTime: 0.3
+  rightHitboxStartTime: 0.3
+  rightHitboxEndTime: 0.4

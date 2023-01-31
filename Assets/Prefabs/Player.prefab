@@ -293,18 +293,8 @@ MonoBehaviour:
   stamina: 0
   maxStamina: 0
   attackSpeed: 1
-  leftHitboxes:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  rightHitboxes:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  leftHitboxes: []
+  rightHitboxes: []
   movementSpeed: 8
   attackingModifier: 0
   blockingModifier: 0
@@ -319,6 +309,7 @@ MonoBehaviour:
     type: 3}
   interAttackExitTime: 0.5
   cancelAttackTime: 0.2
+  updateAnimations: 0
 --- !u!114 &4706402254706946843
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -12,11 +12,14 @@ public enum Power: uint
 // A hitbox must be added for each of these possible values for both player and enemy, for both left and right.
 public enum HitboxType : uint
 {
-    Elbow = 0,
-    Fist = 1,
-    Knee = 2,
-    Shin = 3,
-    Foot = 4
+    Fist = 0
+}
+
+// Used by Attack Managers to choose from which side the attack is coming from
+public enum Side : uint
+{
+    Left = 0,
+    Right = 1
 }
 
 /// <summary>
@@ -42,10 +45,10 @@ public class Move : MonoBehaviour
 
     [Header("Tracking Values")]
     [Tooltip("Character stops tracking the opponent during the interval [commitStartTime, commitEndTime) of the normalized animation time")]
-    [SerializeField] [Range(0f, 1f)] private float commitStartTime = 0f;
+    [SerializeField] [Range(0f, 1f)] private float leftCommitStartTime = 0f;
 
     [Tooltip("Character stops tracking the opponent during the interval [commitStartTime, commitEndTime) of the normalized animation time")]
-    [SerializeField] [Range(0f, 1f)] private float commitEndTime = 0f;
+    [SerializeField] [Range(0f, 1f)] private float leftCommitEndTime = 0f, rightCommitStartTime = 0f, rightCommitEndTime = 0f;
 
     [System.NonSerialized] public bool pressed = false; // Used to check if the input is held down.
     [System.NonSerialized] public float chargeSpeed = 1f; // Attack animation modifier when input is held down.
@@ -56,7 +59,7 @@ public class Move : MonoBehaviour
 
     [Tooltip("How quickly the animation slows down when holding the attack button (interpolation value)")]
     public float leftChargeDecay = 1f, rightChargeDecay = 1f; // Interpolation value used for lerp affecting chargeSpeed.
-    [System.NonSerialized] public float chargeDecay;
+    private float chargeDecay;
 
     [Tooltip("Move will perform automatically after *chargeLimit* frames charging")]
     [SerializeField] private int chargeLimit = 600;
@@ -68,32 +71,45 @@ public class Move : MonoBehaviour
     [Header("Hitbox Values")]
     public HitboxType hitboxType;
     [Tooltip("Hitbox is activated during the interval [hitboxStartTime, hitboxEndTime) of the normalized animation time")] 
-    [SerializeField] [Range(0f, 1f)] private float hitboxStartTime = 0f, hitboxEndTime = 0f;
+    [SerializeField] [Range(0f, 1f)] private float leftHitboxStartTime = 0f, leftHitboxEndTime = 0f;
+
+    [Tooltip("Hitbox is activated during the interval [hitboxStartTime, hitboxEndTime) of the normalized animation time")]
+    [SerializeField] [Range(0f, 1f)] private float rightHitboxStartTime = 0f, rightHitboxEndTime = 0f;
 
     /// <summary>
     /// Hitbox is active during the interval [hitboxStartTime, hitboxEndTime).
     /// </summary>
+    /// <param name="side">Which side is the attack coming from?</param>
     /// <param name="normalizedTime">Normalized time of the animation</param>
     /// <returns></returns>
-    public bool isHitboxActive(float normalizedTime) {
-        return normalizedTime >= hitboxStartTime && normalizedTime < hitboxEndTime;
+    public bool isHitboxActive(Side side, float normalizedTime) {
+        if (side == Side.Left)
+            return normalizedTime >= leftHitboxStartTime && normalizedTime < leftHitboxEndTime;
+        return normalizedTime >= rightHitboxStartTime && normalizedTime < rightHitboxEndTime;
     }
 
     /// <summary>
     /// Character stops tracking the opponent during the interval [commitStartTime, commitEndTime)
     /// </summary>
+    /// <param name="side">Which side is the attack coming from?</param>
     /// <param name="normalizedTime">Normalized time of the animation</param>
-    public bool isTracking(float normalizedTime) {
-        return !(normalizedTime >= commitStartTime && normalizedTime < commitEndTime);
+    public bool isTracking(Side side, float normalizedTime) {
+        if (side == Side.Left)
+            return !(normalizedTime >= leftCommitStartTime && normalizedTime < leftCommitEndTime);
+        return !(normalizedTime >= rightCommitStartTime && normalizedTime < rightCommitEndTime);
     }
 
     /// <summary>
     /// Slows down attack animation if attack button is held down, until it's released or 
     /// the animation speed reaches a minimum.
     /// </summary>
+    /// <param name="side">Which side is the attack coming from?</param>
+    /// <param name="inTransition">Is the animator in transition?</param>
     /// <param name="attackSpeed">Character's attack speed</param>
-    public void ChargeAttack(bool inTransition, float attackSpeed)
+    public void ChargeAttack(Side side, bool inTransition, float attackSpeed)
     {
+        chargeDecay = side == Side.Left ? leftChargeDecay : rightChargeDecay;
+
         switch (chargePhase)
         {
             case ChargePhase.waiting:

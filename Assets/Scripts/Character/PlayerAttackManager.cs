@@ -5,6 +5,7 @@ public class PlayerAttackManager : StateMachineBehaviour
     private PlayerController player;
     private Move currentMove;
     private GameObject currentHitbox;
+    private Side side;
 
     private void Awake()
     {
@@ -17,22 +18,22 @@ public class PlayerAttackManager : StateMachineBehaviour
         // Checks which of the four possible attacks the player is perfoming, then saves a reference to the corresponding move and its hitbox.
         if (stateInfo.IsName("Left Normal")) { 
             currentMove = player.leftNormalSlot;
-            currentMove.chargeDecay = currentMove.leftChargeDecay;
+            side = Side.Left;
             currentHitbox = player.leftHitboxes[(int) currentMove.hitboxType]; 
         }
         else if (stateInfo.IsName("Right Normal")) { 
             currentMove = player.rightNormalSlot;
-            currentMove.chargeDecay = currentMove.rightChargeDecay;
+            side = Side.Right;
             currentHitbox = player.rightHitboxes[(int) currentMove.hitboxType]; 
         }
         else if (stateInfo.IsName("Left Special")) { 
             currentMove = player.leftSpecialSlot;
-            currentMove.chargeDecay = currentMove.leftChargeDecay;
+            side = Side.Left;
             currentHitbox = player.leftHitboxes[(int) currentMove.hitboxType]; 
         }
         else if (stateInfo.IsName("Right Special")) { 
             currentMove = player.rightSpecialSlot;
-            currentMove.chargeDecay = currentMove.rightChargeDecay;
+            side = Side.Right;
             currentHitbox = player.rightHitboxes[(int) currentMove.hitboxType]; 
         }
 
@@ -46,9 +47,9 @@ public class PlayerAttackManager : StateMachineBehaviour
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        player.tracking = currentMove.isTracking(stateInfo.normalizedTime);
-        currentHitbox.SetActive(currentMove.isHitboxActive(stateInfo.normalizedTime));
-        currentMove.ChargeAttack(animator.IsInTransition(layerIndex), player.attackSpeed);
+        player.tracking = currentMove.isTracking(side, stateInfo.normalizedTime);
+        currentHitbox.SetActive(currentMove.isHitboxActive(side, stateInfo.normalizedTime));
+        currentMove.ChargeAttack(side, animator.IsInTransition(layerIndex), player.attackSpeed);
     }
 
     // OnStateExit is called when a transition ends and the state machine finishes evaluating this state

@@ -35,6 +35,9 @@ public class PlayerController : Character
     [SerializeField] [Range(0f, 1f)] private float cancelAttackTime = 0.4f;
     [System.NonSerialized] public bool cancelable = true;
 
+    [Header("Debug")]
+    [SerializeField] private bool updateAnimations = false;
+
     private void Awake()
     {
         init();
@@ -54,6 +57,10 @@ public class PlayerController : Character
     void Update()
     {
         SetAnimationParameters();
+        if (updateAnimations) { // DEBUG
+            UpdateAllAttackAnimations(); // DEBUG
+            updateAnimations = false; // DEBUG
+        }
     }
 
     private void FixedUpdate()
