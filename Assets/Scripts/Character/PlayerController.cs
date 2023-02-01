@@ -37,6 +37,7 @@ public class PlayerController : Character
 
     [Header("Debug")]
     [SerializeField] private bool updateAnimations = false;
+    [SerializeField] private bool modifyTimeScale = false;
     [SerializeField] [Range(0f, 1f)] private float timeScale = 1f;
 
     private void Awake()
@@ -58,7 +59,7 @@ public class PlayerController : Character
     void Update()
     {
         SetAnimationParameters();
-        Time.timeScale = timeScale; // DEBUG
+        if (modifyTimeScale) Time.timeScale = timeScale; // DEBUG
         if (updateAnimations) { // DEBUG
             UpdateAllAttackAnimations(); // DEBUG
             updateAnimations = false; // DEBUG
