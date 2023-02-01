@@ -61,9 +61,9 @@ public class Move : MonoBehaviour
     public float leftChargeDecay = 1f, rightChargeDecay = 1f; // Interpolation value used for lerp affecting chargeSpeed.
     private float chargeDecay;
 
-    [Tooltip("Move will perform automatically after *chargeLimit* frames charging")]
-    [SerializeField] private int chargeLimit = 600;
-    private int lastFrame;
+    [Tooltip("Move will perform automatically after *chargeLimit* deltaTime seconds charging")]
+    [SerializeField] private float chargeLimit = 10f;
+    private float deltaTimer = 0f;
 
     private enum ChargePhase { waiting, performing, canceled }
     private ChargePhase chargePhase;
@@ -115,15 +115,17 @@ public class Move : MonoBehaviour
             case ChargePhase.waiting:
                 if (pressed && chargeable) {
                     chargePhase = ChargePhase.performing;
-                    lastFrame = Time.frameCount;
+                    deltaTimer = 0f;
                 }
                 break;
 
             case ChargePhase.performing:
-                if (pressed && !inTransition)
+                if (pressed && !inTransition) {
                     chargeSpeed = Mathf.Lerp(chargeSpeed, 0f, chargeDecay * attackSpeed * Time.deltaTime);
+                    deltaTimer += Time.deltaTime;
+                }
 
-                if (!pressed || Time.frameCount >= lastFrame + chargeLimit) {
+                if (!pressed || deltaTimer >= chargeLimit) {
                     chargeSpeed = 1f;
                     chargePhase = ChargePhase.canceled;
                 }
