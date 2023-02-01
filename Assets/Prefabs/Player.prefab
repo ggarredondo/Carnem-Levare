@@ -815,6 +815,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d00e05e67ba6c5547a3de5ddbc54315d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  holdingMinFrames: 100
   playerController: {fileID: 4706402254706946820}
   vcam: {fileID: 4706402255246442000}
   cameraAceleration: 2
@@ -827,8 +828,12 @@ MonoBehaviour:
   MAX_AMPLITUDE: 0.1
   MIN_AMPLITUDE: 0
   cameraNoise: 1
-  zoomAceleration: {x: 6, y: 20}
-  positions: []
+  zoomAceleration:
+  - 6
+  - 25
+  fovAceleration: []
+  blockingPositions: []
+  fieldOfView: []
 --- !u!1 &7171772636375460611
 GameObject:
   m_ObjectHideFlags: 0

@@ -123,4 +123,6 @@ public class Move : MonoBehaviour
     public ChargePhase getChargePhase { get { return chargePhase; } }
 
     public int getLastFrame { get { return lastFrame; } }
+
+    public int getChargeLimit { get { return chargeLimit; } }
 }

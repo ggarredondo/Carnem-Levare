@@ -37,8 +37,8 @@ public class CameraFollow : MonoBehaviour
     private CinemachineBasicMultiChannelPerlin noiseTransposer;
 
     [Header("Movement Parameters")]
-    public Vector2 zoomAceleration;
-    public Vector2 fovAceleration;
+    public float[] zoomAceleration;
+    public float[] fovAceleration;
     public Vector3[] blockingPositions;
     public float[] fieldOfView;
     private float reduceFOV, reduceBlock;
@@ -51,7 +51,9 @@ public class CameraFollow : MonoBehaviour
 
     private void Start()
     {
-        reduceDamping = MIN;
+        float newChargeLimit = playerController.rightNormalSlot.getChargeLimit - holdingMinFrames;
+        zoomAceleration[0] = 1 / newChargeLimit * CAMERA_SPEED_DIVIDER;
+        fovAceleration[0] = 1 / newChargeLimit * CAMERA_SPEED_DIVIDER;
     }
 
     private void LateUpdate()
@@ -62,13 +64,12 @@ public class CameraFollow : MonoBehaviour
             {
                 transposer.m_YawDamping = OscillateWithVelocity(playerController.getIsMoving, cameraAceleration, ref reduceDamping, MIN_DAMPING, MAX_DAMPING, Exponential);
 
-                //transposer.m_FollowOffset = QuadraticCameraMovement(playerController.rightNormalSlot.chargePhase == Move.ChargePhase.performing, zoomAceleration, ref reduceCharge, positions[0], positions[1], positions[2]);
-
                 int frameDiference = Time.frameCount - playerController.rightNormalSlot.getLastFrame;
-                transposer.m_FollowOffset = LinealCameraMovement(playerController.rightNormalSlot.getChargePhase == Move.ChargePhase.performing && frameDiference >= holdingMinFrames,
+
+                transposer.m_FollowOffset = LinealCameraMovement(playerController.rightNormalSlot.getChargePhase == Move.ChargePhase.performing && frameDiference >= holdingMinFrames && frameDiference <= playerController.rightNormalSlot.getChargeLimit,
                                                                  zoomAceleration, ref reduceBlock, blockingPositions[0], blockingPositions[1]);
 
-                vcam.m_Lens.FieldOfView = OscillateWithVelocity(playerController.rightNormalSlot.getChargePhase == Move.ChargePhase.performing && frameDiference >= holdingMinFrames,
+                vcam.m_Lens.FieldOfView = OscillateWithVelocity(playerController.rightNormalSlot.getChargePhase == Move.ChargePhase.performing && frameDiference >= holdingMinFrames && frameDiference <= playerController.rightNormalSlot.getChargeLimit,
                                                                 fovAceleration, ref reduceFOV, fieldOfView[0], fieldOfView[1], Mathf.Sin);
             }
 
@@ -106,14 +107,14 @@ public class CameraFollow : MonoBehaviour
         return NormalizeToInterval(value, min, max);   
     }
 
-    private float OscillateWithVelocity(bool condition, Vector2 aceleration, ref float reduce, float min, float max, Func<float, float> function)
+    private float OscillateWithVelocity(bool condition, float[] aceleration, ref float reduce, float min, float max, Func<float, float> function)
     {
         //Apply the reduce to the actual value
         float value = MAX * function(reduce);
 
         //Increment or Decrement the reduce to make feel aceleration
-        if (condition) reduce += aceleration.x / CAMERA_SPEED_DIVIDER;
-        else reduce -= aceleration.y / CAMERA_SPEED_DIVIDER;
+        if (condition) reduce += aceleration[0] / CAMERA_SPEED_DIVIDER;
+        else reduce -= aceleration[1] / CAMERA_SPEED_DIVIDER;
 
         //Make values be under damping parameter range
         reduce = Mathf.Clamp(reduce, MIN, MAX);
@@ -133,14 +134,14 @@ public class CameraFollow : MonoBehaviour
         return Mathf.Pow(_time, 2) * P0 + 2 * _time * time * P1 + Mathf.Pow(time, 2) * P2;
     }
 
-    private Vector3 LinealCameraMovement(bool condition, Vector2 aceleration, ref float reduce, Vector3 P0, Vector3 P1)
+    private Vector3 LinealCameraMovement(bool condition, float[] aceleration, ref float reduce, Vector3 P0, Vector3 P1)
     {
         //Apply the reduce to the actual value
         Vector3 value = LinearBezierCurve(reduce, P0, P1);
 
         //Increment or Decrement the reduce to make feel aceleration
-        if (condition) reduce += aceleration.x / CAMERA_SPEED_DIVIDER;
-        else reduce -= aceleration.y / CAMERA_SPEED_DIVIDER;
+        if (condition) reduce += aceleration[0] / CAMERA_SPEED_DIVIDER;
+        else reduce -= aceleration[1] / CAMERA_SPEED_DIVIDER;
 
         //Make values be under damping parameter range
         reduce = Mathf.Clamp(reduce, MIN, MAX);
@@ -149,14 +150,14 @@ public class CameraFollow : MonoBehaviour
         return value;
     }
 
-    private Vector3 QuadraticCameraMovement(bool condition, Vector2 aceleration, ref float reduce, Vector3 P0, Vector3 P1, Vector3 P2)
+    private Vector3 QuadraticCameraMovement(bool condition, float[] aceleration, ref float reduce, Vector3 P0, Vector3 P1, Vector3 P2)
     {
         //Apply the reduce to the actual value
         Vector3 value = QuadraticBezierCurve(reduce, P0, P1, P2);
 
         //Increment or Decrement the reduce to make feel aceleration
-        if (condition) reduce += aceleration.x / CAMERA_SPEED_DIVIDER;
-        else reduce -= aceleration.y / CAMERA_SPEED_DIVIDER;
+        if (condition) reduce += aceleration[0] / CAMERA_SPEED_DIVIDER;
+        else reduce -= aceleration[1] / CAMERA_SPEED_DIVIDER;
 
         //Make values be under damping parameter range
         reduce = Mathf.Clamp(reduce, MIN, MAX);

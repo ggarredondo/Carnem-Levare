@@ -1020,7 +1020,7 @@ PrefabInstance:
         type: 3}
       propertyPath: leftNormalSlot
       value: 
-      objectReference: {fileID: -6294080308579570103, guid: 5b31fc4a80a3822408c3f6d9d4396459,
+      objectReference: {fileID: -4476728132895952727, guid: cd4612b1a708e5046ae35c3be7591360,
         type: 3}
     - target: {fileID: 4706402254706946820, guid: 730b6f15cbfa96c4db1930def4556da9,
         type: 3}
@@ -1747,11 +1747,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4706402255682218321, guid: 730b6f15cbfa96c4db1930def4556da9,
         type: 3}
-      propertyPath: holdingMinFrames
-      value: 100
-      objectReference: {fileID: 0}
-    - target: {fileID: 4706402255682218321, guid: 730b6f15cbfa96c4db1930def4556da9,
-        type: 3}
       propertyPath: MAX_BLOCKING_ZOOM
       value: -3.2
       objectReference: {fileID: 0}
@@ -1827,6 +1822,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4706402255682218321, guid: 730b6f15cbfa96c4db1930def4556da9,
         type: 3}
+      propertyPath: fovAceleration.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4706402255682218321, guid: 730b6f15cbfa96c4db1930def4556da9,
+        type: 3}
       propertyPath: positions.Array.data[0].x
       value: 0.82
       objectReference: {fileID: 0}
@@ -1882,6 +1882,16 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4706402255682218321, guid: 730b6f15cbfa96c4db1930def4556da9,
         type: 3}
+      propertyPath: fovAceleration.Array.data[0]
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 4706402255682218321, guid: 730b6f15cbfa96c4db1930def4556da9,
+        type: 3}
+      propertyPath: fovAceleration.Array.data[1]
+      value: 25
+      objectReference: {fileID: 0}
+    - target: {fileID: 4706402255682218321, guid: 730b6f15cbfa96c4db1930def4556da9,
+        type: 3}
       propertyPath: blockingPositions.Array.data[0].x
       value: 0.82
       objectReference: {fileID: 0}
@@ -1898,7 +1908,7 @@ PrefabInstance:
     - target: {fileID: 4706402255682218321, guid: 730b6f15cbfa96c4db1930def4556da9,
         type: 3}
       propertyPath: blockingPositions.Array.data[1].x
-      value: 0.82
+      value: 0.52
       objectReference: {fileID: 0}
     - target: {fileID: 4706402255682218321, guid: 730b6f15cbfa96c4db1930def4556da9,
         type: 3}
