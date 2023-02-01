@@ -35,6 +35,7 @@ public class Move : MonoBehaviour
     [Range(0f, 2f)] public float leftAnimationSpeed = 1f;
     public AnimationClip rightAnimation;
     [Range(0f, 2f)] public float rightAnimationSpeed = 1f;
+    private float animationSpeed;
 
     [Header("Attack Values")]
     public Power power;
@@ -109,6 +110,7 @@ public class Move : MonoBehaviour
     public void ChargeAttack(Side side, bool inTransition, float attackSpeed)
     {
         chargeDecay = side == Side.Left ? leftChargeDecay : rightChargeDecay;
+        animationSpeed = side == Side.Left ? leftAnimationSpeed : rightAnimationSpeed;
 
         switch (chargePhase)
         {
@@ -121,7 +123,7 @@ public class Move : MonoBehaviour
 
             case ChargePhase.performing:
                 if (pressed && !inTransition) {
-                    chargeSpeed = Mathf.Lerp(chargeSpeed, 0f, chargeDecay * attackSpeed * Time.deltaTime);
+                    chargeSpeed = Mathf.Lerp(chargeSpeed, 0f, chargeDecay * attackSpeed * animationSpeed * Time.deltaTime);
                     deltaTimer += Time.deltaTime;
                 }
 
