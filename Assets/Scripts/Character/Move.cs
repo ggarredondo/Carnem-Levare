@@ -64,7 +64,7 @@ public class Move : MonoBehaviour
     [System.NonSerialized] public float chargeSpeed = 1f; // Attack animation modifier when input is held down.
 
     [Header("Charge Values")]
-    [Tooltip("Can it be charged?")] 
+    [Tooltip("Can it be charged?")]
     [SerializeField] private bool chargeable = true;
 
     [Tooltip("How quickly the animation slows down when holding the attack button (interpolation value)")]
@@ -74,6 +74,9 @@ public class Move : MonoBehaviour
     [Tooltip("Move will perform automatically after *chargeLimit* deltaTime seconds charging")]
     [SerializeField] private float chargeLimit = 2f;
     private float deltaTimer = 0f;
+
+    [Tooltip("The camera starts dolly zooming from a fraction of the chargeLimit value")]
+    public float chargeLimitDivisor = 6f;
 
     public enum ChargePhase { waiting, performing, canceled }
     private ChargePhase chargePhase;

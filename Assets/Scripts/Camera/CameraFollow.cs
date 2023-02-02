@@ -8,10 +8,8 @@ public class CameraFollow : MonoBehaviour
     //Max value of the damping parameter (Virtual camera)
     const float MAX = 1;
     const float MIN = 0;
-    const float CAMERA_SPEED_DIVIDER = 1000;
 
     private float holdingMinTime;
-    public int chargeLimitDivider;
 
     [Header("Target Objects")]
     public PlayerController playerController;
@@ -45,7 +43,7 @@ public class CameraFollow : MonoBehaviour
 
     private float reduceFOV, reduceBlock;
 
-    [HideInInspector]public Move currentMove;
+    [NonSerialized] public Move currentMove;
 
     private void Awake()
     {
@@ -60,7 +58,7 @@ public class CameraFollow : MonoBehaviour
 
     public void Initialized()
     {
-        holdingMinTime = currentMove.getChargeLimit / chargeLimitDivider;
+        holdingMinTime = currentMove.getChargeLimit / currentMove.chargeLimitDivisor;
         zoomAceleration[0] = 1 / (currentMove.getChargeLimit - holdingMinTime);
     }
 

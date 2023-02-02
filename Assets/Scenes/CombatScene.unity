@@ -898,6 +898,11 @@ PrefabInstance:
       propertyPath: m_LocalRotation.z
       value: -0.0018272698
       objectReference: {fileID: 0}
+    - target: {fileID: 4706402254675848930, guid: 730b6f15cbfa96c4db1930def4556da9,
+        type: 3}
+      propertyPath: near clip plane
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4706402254706946816, guid: 730b6f15cbfa96c4db1930def4556da9,
         type: 3}
       propertyPath: m_Name
