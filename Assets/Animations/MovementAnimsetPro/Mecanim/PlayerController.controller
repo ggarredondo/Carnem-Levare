@@ -24745,9 +24745,9 @@ AnimatorStateMachine:
   m_AnyStateTransitions: []
   m_EntryTransitions: []
   m_StateMachineTransitions:
-  - first: {fileID: 110702515}
-    second: []
   - first: {fileID: 110710186}
+    second: []
+  - first: {fileID: 110702515}
     second: []
   - first: {fileID: 110714326}
     second: []
@@ -24902,7 +24902,7 @@ AnimatorStateMachine:
     m_Position: {x: -24, y: -144, z: 0}
   - serializedVersion: 1
     m_StateMachine: {fileID: 110734748}
-    m_Position: {x: -24, y: 84, z: 0}
+    m_Position: {x: -20, y: 80, z: 0}
   - serializedVersion: 1
     m_StateMachine: {fileID: 110702515}
     m_Position: {x: 480, y: 84, z: 0}
