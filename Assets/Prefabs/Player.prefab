@@ -29,7 +29,7 @@ Transform:
   m_GameObject: {fileID: 1861379024506984188}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0.1, z: 0}
-  m_LocalScale: {x: 0.2, y: 0.2, z: 0.2}
+  m_LocalScale: {x: 0.25, y: 0.25, z: 0.25}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1975984288165124391}
@@ -420,6 +420,7 @@ MonoBehaviour:
   interAttackExitTime: 0.5
   cancelAttackTime: 0.2
   updateAnimations: 0
+  modifyTimeScale: 0
   timeScale: 1
 --- !u!114 &4706402254706946843
 MonoBehaviour:
@@ -726,7 +727,7 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 0.35
+  m_Radius: 0.38
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 1, z: 0}
@@ -1062,7 +1063,7 @@ Transform:
   m_GameObject: {fileID: 7620172225672357468}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0.1, z: 0}
-  m_LocalScale: {x: 0.2, y: 0.2, z: 0.2}
+  m_LocalScale: {x: 0.25, y: 0.25, z: 0.25}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6405758180816368428}

@@ -49,6 +49,7 @@ MonoBehaviour:
   leftAnimationSpeed: 1
   rightAnimation: {fileID: 7400034, guid: 7934f1476fe2c6e458c230f491769c34, type: 3}
   rightAnimationSpeed: 1
+  direction: 1
   power: 0
   damage: 10
   cancelable: 1
