@@ -48,7 +48,7 @@ public class Move : MonoBehaviour
     [Header("Attack Values")]
     public Direction direction;
     public Power power;
-    public float damage; // Damage dealt to the opponent's stamina, if it hits.
+    public float baseDamage; // Used to calculate damage dealt to the opponent's stamina, if it hits.
 
     [Tooltip("Can you cancel the attack by blocking?")]
     public bool cancelable = true;

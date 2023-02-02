@@ -15,11 +15,18 @@ public abstract class Character : MonoBehaviour
     [Tooltip("How quickly character rotates towards their opponent")]
     [SerializeField] private float trackingRate = 1f;
     private Quaternion targetLook;
+    private bool hurting;
 
     [Header("Stats")]
     [SerializeField] private float stamina;
     [SerializeField] private float maxStamina = 0f;
+    [SerializeField] private float attackDamage = 0f;
     [Tooltip("Attack animation speed")] [Range(0,2)] public float attackSpeed = 1f;
+    [SerializeField] [Range(1f, 1.3f)] private float height = 1f;
+    [SerializeField] private float mass = 1f;
+    [SerializeField] private float drag = 0f; // SHOULD BE CALCULATED GIVEN MASS
+    [SerializeField] private float hurtDrag = 20f; // SHOULD BE CALCULATED GIVEN MASS
+    private Rigidbody rb;
 
     [Header("Hitbox Lists - Same items as HitboxType enum")]
     public List<GameObject> leftHitboxes;
@@ -31,13 +38,22 @@ public abstract class Character : MonoBehaviour
         anim = GetComponent<Animator>();
         animatorDefaults = anim.runtimeAnimatorController.animationClips;
         animOverride = new AnimatorOverrideController(anim.runtimeAnimatorController);
+        transform.localScale *= height;
+        rb = GetComponent<Rigidbody>();
+        rb.mass = mass;
+        rb.drag = drag;
     }
 
     protected void fixedUpdating()
     {
+        hurting = anim.GetCurrentAnimatorStateInfo(0).IsName("Hurt");
+
         targetLook = Quaternion.LookRotation(target.position - transform.position);
-        if (tracking && !anim.GetCurrentAnimatorStateInfo(0).IsName("Hurt"))
+        if (tracking && !hurting)
             transform.rotation = Quaternion.RotateTowards(transform.rotation, targetLook, trackingRate * Time.deltaTime); // Rotate towards opponent.
+
+        // If the character is hurting, we assign a specific amount of drag to the rigidbody. Otherwise, we assign the expected drag.
+        rb.drag = hurting ? hurtDrag : drag;
     }
 
     //***ANIMATION***
@@ -66,6 +82,13 @@ public abstract class Character : MonoBehaviour
         stamina -= Mathf.Abs(dmg);
         if (stamina < 0) stamina = 0;
     }
+
+    /// <summary>
+    /// Calculate how much damage a character deals to the opponent's stamina when a Move connects.
+    /// </summary>
+    /// <param name="baseDmg">Move's base damage</param>
+    /// <returns>Calculated final damage</returns>
+    public float CalculateAttackDamage(float baseDmg) { return baseDmg + attackDamage; }
 
     //***GET FUNCTIONS***
 

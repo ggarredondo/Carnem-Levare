@@ -12,6 +12,7 @@ TagManager:
   - CONTROLS
   - HITBOX
   - CAMERA
+  - Enemy
   layers:
   - Default
   - TransparentFX

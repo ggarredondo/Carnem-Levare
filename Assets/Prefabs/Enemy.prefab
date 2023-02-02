@@ -235,7 +235,7 @@ GameObject:
   - component: {fileID: 8958949370764238645}
   m_Layer: 0
   m_Name: Enemy
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -291,9 +291,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   target: {fileID: 0}
   trackingRate: 100
-  stamina: 0
-  maxStamina: 0
+  stamina: 1000
+  maxStamina: 1000
+  attackDamage: 10
   attackSpeed: 1
+  height: 1.1
+  mass: 1
+  drag: 0
+  hurtDrag: 20
   leftHitboxes: []
   rightHitboxes: []
   horizontal: 0

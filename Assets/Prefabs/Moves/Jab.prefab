@@ -51,7 +51,7 @@ MonoBehaviour:
   rightAnimationSpeed: 1
   direction: 1
   power: 0
-  damage: 10
+  baseDamage: 10
   cancelable: 1
   leftCommitStartTime: 0
   leftCommitEndTime: 0
