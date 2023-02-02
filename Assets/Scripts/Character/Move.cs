@@ -59,8 +59,8 @@ public class Move : MonoBehaviour
     [System.NonSerialized] public float chargeDecay;
 
     [Tooltip("Move will perform automatically after *chargeLimit* frames charging")]
-    [SerializeField] private int chargeLimit = 600;
-    private int lastFrame;
+    [SerializeField] private float chargeLimit = 2f;
+    private float deltaTimer;
 
     public enum ChargePhase { waiting, performing, canceled }
     private ChargePhase chargePhase;
@@ -99,15 +99,18 @@ public class Move : MonoBehaviour
             case ChargePhase.waiting:
                 if (pressed && chargeable) {
                     chargePhase = ChargePhase.performing;
-                    lastFrame = Time.frameCount;
+                    deltaTimer = 0f; 
                 }
                 break;
 
             case ChargePhase.performing:
                 if (pressed && !inTransition)
+                {
                     chargeSpeed = Mathf.Lerp(chargeSpeed, 0f, chargeDecay * attackSpeed * Time.deltaTime);
+                    deltaTimer += Time.deltaTime;
+                }
 
-                if (!pressed || Time.frameCount >= lastFrame + chargeLimit) {
+                if (!pressed || deltaTimer >= chargeLimit) {
                     chargeSpeed = 1f;
                     chargePhase = ChargePhase.canceled;
                 }
@@ -122,7 +125,7 @@ public class Move : MonoBehaviour
 
     public ChargePhase getChargePhase { get { return chargePhase; } }
 
-    public int getLastFrame { get { return lastFrame; } }
+    public float getDeltaTimer { get { return deltaTimer; } }
 
-    public int getChargeLimit { get { return chargeLimit; } }
+    public float getChargeLimit { get { return chargeLimit; } }
 }

@@ -5,10 +5,12 @@ public class PlayerAttackManager : StateMachineBehaviour
     private PlayerController player;
     private Move currentMove;
     private GameObject currentHitbox;
+    private CameraFollow cameraFollow;
 
     private void Awake()
     {
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
+        cameraFollow = GameObject.FindGameObjectWithTag("CAMERA").GetComponent<CameraFollow>();
     }
 
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
@@ -41,6 +43,9 @@ public class PlayerAttackManager : StateMachineBehaviour
         currentHitbox.GetComponent<Hitbox>().damage = currentMove.damage;
 
         player.cancelable = currentMove.cancelable;
+
+        cameraFollow.currentMove = currentMove;
+        cameraFollow.Initialized();
     }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
@@ -58,4 +63,6 @@ public class PlayerAttackManager : StateMachineBehaviour
         currentHitbox.SetActive(false);
         currentMove.ResetChargePhase();
     }
+
+    
 }

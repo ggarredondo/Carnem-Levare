@@ -57,7 +57,7 @@ MonoBehaviour:
   chargeable: 0
   leftChargeDecay: 1
   rightChargeDecay: 1
-  chargeLimit: 600
+  chargeLimit: 2
   hitboxType: 1
   hitboxStartTime: 0
   hitboxEndTime: 0
