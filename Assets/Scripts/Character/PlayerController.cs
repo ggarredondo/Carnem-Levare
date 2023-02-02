@@ -68,7 +68,9 @@ public class PlayerController : Character
     //***INPUT***
     // Meant for Unity Input System events
 
-    public void Movement(InputAction.CallbackContext context) { directionTarget = context.ReadValue<Vector2>(); }
+    public void Movement(InputAction.CallbackContext context) { directionTarget = context.ReadValue<Vector2>().normalized; }
+    public void SkipBwd(InputAction.CallbackContext context) { if (context.performed) anim.SetTrigger("skip_bwd"); }
+    public void SkipFwd(InputAction.CallbackContext context) { if (context.performed) anim.SetTrigger("skip_fwd"); }
     public void LeftNormal(InputAction.CallbackContext context) { leftNormalSlot.pressed = context.performed; anim.SetBool("left_normal", context.performed); }
     public void RightNormal(InputAction.CallbackContext context) { rightNormalSlot.pressed = context.performed; anim.SetBool("right_normal", context.performed); }
     public void LeftSpecial(InputAction.CallbackContext context) { leftSpecialSlot.pressed = context.performed; anim.SetBool("left_special", context.performed); }
@@ -111,8 +113,6 @@ public class PlayerController : Character
 
         // MOVEMENT
         // Softens the stick movement by establishing the direction as a point that approaches the stick/mouse position.
-        if (isBlocking)
-            direction.y = Mathf.Clamp(direction.y, -1f, 0f);
         direction = Vector2.MoveTowards(direction, directionTarget, stickSpeed * Time.deltaTime);
         anim.SetFloat("horizontal", direction.x);
         anim.SetFloat("vertical", direction.y);

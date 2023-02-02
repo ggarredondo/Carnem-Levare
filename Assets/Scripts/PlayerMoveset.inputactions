@@ -76,6 +76,24 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "Skip Bwd",
+                    "type": "Button",
+                    "id": "9fbcd690-9542-4086-931a-67baa8ca813a",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Skip Fwd",
+                    "type": "Button",
+                    "id": "ab425d92-13b7-41ad-bac0-a9085a9c6e71",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -164,6 +182,28 @@
                     "processors": "",
                     "groups": "",
                     "action": "Block",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "ef24f668-8c5c-4453-bb08-f6792ae66989",
+                    "path": "<Gamepad>/leftStick/down",
+                    "interactions": "MultiTap",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Skip Bwd",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "0d38f498-c97e-440d-bf1c-6cec69e186ab",
+                    "path": "<Gamepad>/leftStick/up",
+                    "interactions": "MultiTap",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Skip Fwd",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

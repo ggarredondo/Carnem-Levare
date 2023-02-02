@@ -411,7 +411,6 @@ MonoBehaviour:
   leftHitboxes: []
   rightHitboxes: []
   stickSpeed: 8
-  movementSpeed: 1
   leftNormalSlot: {fileID: -4476728132895952727, guid: cd4612b1a708e5046ae35c3be7591360,
     type: 3}
   rightNormalSlot: {fileID: -4476728132895952727, guid: f93797f883db7b542ace592e1b90d3b4,
@@ -687,6 +686,38 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: 12629714-7bd3-4252-a238-67c8108a2f19
     m_ActionName: Main Movement/Start[/XInputControllerWindows/start]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 4706402254706946820}
+        m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
+        m_MethodName: SkipFwd
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 9fbcd690-9542-4086-931a-67baa8ca813a
+    m_ActionName: Main Movement/Skip Bwd[/XInputControllerWindows/leftStick/down]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 4706402254706946820}
+        m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
+        m_MethodName: SkipBwd
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: ab425d92-13b7-41ad-bac0-a9085a9c6e71
+    m_ActionName: Main Movement/Skip Fwd[/XInputControllerWindows/leftStick/up]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Main Movement
