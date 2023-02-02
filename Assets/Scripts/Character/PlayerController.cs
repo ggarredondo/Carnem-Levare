@@ -140,4 +140,6 @@ public class PlayerController : Character
     /// Is the player moving? The player may move to the sides, forward or forward when attacking.
     /// </summary>
     public bool getIsMoving { get { return !(direction.x == 0f && direction.y <= 0f && anim.GetCurrentAnimatorStateInfo(0).IsName("Movement")); } }
+
+    public bool getIsBlocking { get { return isBlocking; } }
 }

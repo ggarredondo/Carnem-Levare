@@ -72,10 +72,10 @@ public class Move : MonoBehaviour
     private float chargeDecay;
 
     [Tooltip("Move will perform automatically after *chargeLimit* deltaTime seconds charging")]
-    [SerializeField] private float chargeLimit = 10f;
+    [SerializeField] private float chargeLimit = 2f;
     private float deltaTimer = 0f;
 
-    private enum ChargePhase { waiting, performing, canceled }
+    public enum ChargePhase { waiting, performing, canceled }
     private ChargePhase chargePhase;
 
     [Header("Hitbox Values")]
@@ -148,4 +148,10 @@ public class Move : MonoBehaviour
     /// Resets move's chargePhase to waiting state.
     /// </summary>
     public void ResetChargePhase() { chargePhase = ChargePhase.waiting; }
+
+    public ChargePhase getChargePhase { get { return chargePhase; } }
+
+    public float getDeltaTimer { get { return deltaTimer; } }
+
+    public float getChargeLimit { get { return chargeLimit; } }
 }
