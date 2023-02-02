@@ -410,10 +410,8 @@ MonoBehaviour:
   hurtDrag: 20
   leftHitboxes: []
   rightHitboxes: []
-  movementSpeed: 8
-  attackingModifier: 0
-  blockingModifier: 0
-  duckingRange: -1
+  stickSpeed: 8
+  movementSpeed: 1
   leftNormalSlot: {fileID: -4476728132895952727, guid: cd4612b1a708e5046ae35c3be7591360,
     type: 3}
   rightNormalSlot: {fileID: -4476728132895952727, guid: f93797f883db7b542ace592e1b90d3b4,
@@ -1013,10 +1011,10 @@ MonoBehaviour:
   zoomAceleration:
     Item1: 6
     Item2: 10
-  offsetVariation: {x: -0.3, y: 0, z: 2}
   fieldOfView:
     Item1: 25
     Item2: 50
+  offsetVariation: {x: -0.3, y: 0, z: 2}
   cameraMovement: 1
 --- !u!1 &7171772636375460611
 GameObject:

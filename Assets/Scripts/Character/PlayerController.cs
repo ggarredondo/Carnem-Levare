@@ -3,18 +3,12 @@ using UnityEngine.InputSystem;
 
 public class PlayerController : Character
 {
-    private Vector2 movementValue, direction;
+    private Vector2 directionTarget, direction;
     private bool isAttacking, isBlocking, canAttack, canBlock;
 
-    [Header("Movement Parameters")]
-    [Tooltip("How quickly player character follows stick movement")] 
-    [SerializeField] private float movementSpeed = 8f;
-    private float current_movementSpeed;
-
-    [Tooltip("Modifies player movement speed when attacking or blocking (the player may move slower, or not move at all)")]
-    [SerializeField] [Range(0f, 1f)] private float attackingModifier = 0f, blockingModifier = 0f;
-
-    [SerializeField] [Range(-1f, 0f)] private float duckingRange = -1f; // -1: can duck all the way down. 0: can't duck at all.
+    [Header("Controller Parameters")]
+    [Tooltip("How quickly player character follows stick movement when blocking")] 
+    [SerializeField] private float stickSpeed = 8f;
 
     [Header("Attack Parameters")]
     // The player has four attack slots to define their moveset.
@@ -47,7 +41,7 @@ public class PlayerController : Character
 
     private void Start()
     {
-        movementValue = Vector2.zero;
+        directionTarget = Vector2.zero;
         direction = Vector2.zero;
         isAttacking = false;
         isBlocking = false;
@@ -74,12 +68,7 @@ public class PlayerController : Character
     //***INPUT***
     // Meant for Unity Input System events
 
-    public void Movement(InputAction.CallbackContext context)
-    { 
-        movementValue = context.ReadValue<Vector2>();
-        movementValue.y = Mathf.Clamp(movementValue.y, duckingRange, 1f); // -1 is crouching, 0 is standing, 1 is moving forward.
-    }
-
+    public void Movement(InputAction.CallbackContext context) { directionTarget = context.ReadValue<Vector2>(); }
     public void LeftNormal(InputAction.CallbackContext context) { leftNormalSlot.pressed = context.performed; anim.SetBool("left_normal", context.performed); }
     public void RightNormal(InputAction.CallbackContext context) { rightNormalSlot.pressed = context.performed; anim.SetBool("right_normal", context.performed); }
     public void LeftSpecial(InputAction.CallbackContext context) { leftSpecialSlot.pressed = context.performed; anim.SetBool("left_special", context.performed); }
@@ -121,10 +110,10 @@ public class PlayerController : Character
         anim.SetFloat("right_special_speed", rightSpecialSlot.rightAnimationSpeed * rightSpecialSlot.chargeSpeed * attackSpeed);
 
         // MOVEMENT
-        // Softens the movement by establishing the direction as a point that approaches the stick/mouse position.
-        current_movementSpeed = movementSpeed - movementSpeed * attackingModifier * System.Convert.ToSingle(isAttacking)
-            - movementSpeed * blockingModifier * System.Convert.ToSingle(isBlocking);
-        direction = Vector2.MoveTowards(direction, movementValue, current_movementSpeed * Time.deltaTime);
+        // Softens the stick movement by establishing the direction as a point that approaches the stick/mouse position.
+        if (isBlocking)
+            direction.y = Mathf.Clamp(direction.y, -1f, 0f);
+        direction = Vector2.MoveTowards(direction, directionTarget, stickSpeed * Time.deltaTime);
         anim.SetFloat("horizontal", direction.x);
         anim.SetFloat("vertical", direction.y);
     }

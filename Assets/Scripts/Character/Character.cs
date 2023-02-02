@@ -15,7 +15,6 @@ public abstract class Character : MonoBehaviour
     [Tooltip("How quickly character rotates towards their opponent")]
     [SerializeField] private float trackingRate = 1f;
     private Quaternion targetLook;
-    private bool hurting;
 
     [Header("Stats")]
     [SerializeField] private float stamina;
@@ -46,14 +45,12 @@ public abstract class Character : MonoBehaviour
 
     protected void fixedUpdating()
     {
-        hurting = anim.GetCurrentAnimatorStateInfo(0).IsName("Hurt");
-
         targetLook = Quaternion.LookRotation(target.position - transform.position);
-        if (tracking && !hurting)
+        if (tracking)
             transform.rotation = Quaternion.RotateTowards(transform.rotation, targetLook, trackingRate * Time.deltaTime); // Rotate towards opponent.
 
         // If the character is hurting, we assign a specific amount of drag to the rigidbody. Otherwise, we assign the expected drag.
-        rb.drag = hurting ? hurtDrag : drag;
+        rb.drag = anim.GetCurrentAnimatorStateInfo(0).IsName("Hurt") ? hurtDrag : drag;
     }
 
     //***ANIMATION***

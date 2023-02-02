@@ -51,7 +51,7 @@ MonoBehaviour:
   rightAnimationSpeed: 0.8
   direction: 0
   power: 0
-  damage: 0
+  baseDamage: 0
   cancelable: 0
   leftCommitStartTime: 0
   leftCommitEndTime: 0
@@ -61,7 +61,7 @@ MonoBehaviour:
   leftChargeDecay: 1
   rightChargeDecay: 1
   chargeLimit: 0
-  chargeLimitDivisor: 4
+  chargeLimitDivisor: 6
   hitboxType: 0
   leftHitboxStartTime: 0
   leftHitboxEndTime: 0

@@ -61,7 +61,7 @@ MonoBehaviour:
   leftChargeDecay: 5
   rightChargeDecay: 5
   chargeLimit: 2
-  chargeLimitDivisor: 4
+  chargeLimitDivisor: 6
   hitboxType: 0
   leftHitboxStartTime: 0.27
   leftHitboxEndTime: 0.4
