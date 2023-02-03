@@ -8,7 +8,11 @@ public class PlayerController : Character
 
     [Header("Movement Parameters")]
     [Tooltip("How quickly player animations follows stick movement")] 
-    [SerializeField] private float stickSpeed = 4f;
+    [SerializeField] private float stickSpeed = 8f;
+
+    [Tooltip("Lower stickSpeed to smooth out transitions to idle (when stick is centered)")]
+    [SerializeField] private float smoothStickSpeed = 2f;
+    private float finalStickSpeed;
 
     [Tooltip("How quickly player transitions to and from blocking animation")]
     [SerializeField] private float blockingSpeed = 4f;
@@ -115,8 +119,9 @@ public class PlayerController : Character
         blockingValue = Mathf.MoveTowards(blockingValue, System.Convert.ToSingle(isBlocking), blockingSpeed * Time.deltaTime);
         anim.SetFloat("block", blockingValue);
 
-        // Softens the stick movement by establishing the direction as a point that approaches the stick/mouse position.
-        direction = Vector2.MoveTowards(direction, directionTarget, stickSpeed * Time.deltaTime);
+        finalStickSpeed = directionTarget.magnitude == 0f && !isBlocking ? smoothStickSpeed : stickSpeed;
+        // Softens the stick movement by establishing the direction as a point that approaches the stick/mouse position at *finalStickSpeed* rate.
+        direction = Vector2.MoveTowards(direction, directionTarget, finalStickSpeed * Time.deltaTime);
         anim.SetFloat("horizontal", direction.x);
         anim.SetFloat("vertical", direction.y);
     }
