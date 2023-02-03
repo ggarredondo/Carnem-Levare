@@ -7,15 +7,15 @@ public class PlayerController : Character
     private bool isAttacking, isBlocking, canAttack;
 
     [Header("Movement Parameters")]
-    [Tooltip("How quickly player animations follows stick movement")] 
-    [SerializeField] private float stickSpeed = 8f;
+    [Tooltip("How quickly player animations follows stick movement")]
+    [SerializeField] private float stickSpeed;
 
     [Tooltip("Lower stickSpeed to smooth out transitions to idle (when stick is centered)")]
-    [SerializeField] private float smoothStickSpeed = 2f;
+    [SerializeField] private float smoothStickSpeed;
     private float finalStickSpeed;
 
     [Tooltip("How quickly player transitions to and from blocking animation")]
-    [SerializeField] private float blockingSpeed = 4f;
+    [SerializeField] private float blockingSpeed;
     private float blockingValue = 0f;
 
     [Tooltip("The player will enter En Garde stance if they are closer than *fightingDistance* units to the enemy")]
@@ -121,7 +121,7 @@ public class PlayerController : Character
 
         finalStickSpeed = directionTarget.magnitude == 0f && !isBlocking ? smoothStickSpeed : stickSpeed;
         // Softens the stick movement by establishing the direction as a point that approaches the stick/mouse position at *finalStickSpeed* rate.
-        direction = Vector2.MoveTowards(direction, directionTarget, finalStickSpeed * Time.deltaTime);
+        direction = Vector2.Lerp(direction, directionTarget, finalStickSpeed * Time.deltaTime);
         anim.SetFloat("horizontal", direction.x);
         anim.SetFloat("vertical", direction.y);
     }
@@ -129,14 +129,14 @@ public class PlayerController : Character
     //***GET FUNCTIONS***
 
     /// <summary>
-    /// Is the player in animator's state "movement"?
+    /// Is the player in any State tagged as "Movement"?
     /// </summary>
-    public bool getIsMovement { get { return anim.GetCurrentAnimatorStateInfo(0).IsName("Movement"); } }
+    public bool getIsMovement { get { return anim.GetCurrentAnimatorStateInfo(0).IsTag("Movement"); } }
 
     /// <summary>
-    /// Is the player moving? The player may move to the sides, forward or forward when attacking.
+    /// Is the player moving? The player may move by pressing the stick or by attacking.
     /// </summary>
-    public bool getIsMoving { get { return !(direction.x == 0f && direction.y <= 0f && anim.GetCurrentAnimatorStateInfo(0).IsName("Movement")); } }
+    public bool getIsMoving { get { return !(direction.magnitude == 0 && anim.GetCurrentAnimatorStateInfo(0).IsTag("Movement")); } }
 
     public bool getIsBlocking { get { return isBlocking; } }
 }

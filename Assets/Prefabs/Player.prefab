@@ -410,7 +410,8 @@ MonoBehaviour:
   hurtDrag: 20
   leftHitboxes: []
   rightHitboxes: []
-  stickSpeed: 8
+  stickSpeed: 15
+  smoothStickSpeed: 3
   blockingSpeed: 8
   fightingDistance: 2
   currentDistance: 0
