@@ -4,7 +4,7 @@ using UnityEngine.InputSystem;
 public class PlayerController : Character
 {
     private Vector2 directionTarget, direction;
-    private bool isAttacking, isBlocking, canAttack, canBlock;
+    private bool isAttacking, isBlocking, canAttack;
 
     [Header("Movement Parameters")]
     [Tooltip("How quickly player animations follows stick movement")] 
@@ -12,7 +12,7 @@ public class PlayerController : Character
 
     [Tooltip("How quickly player transitions to and from blocking animation")]
     [SerializeField] private float blockingSpeed = 4f;
-    private float blockingValue = 0f, blockingTarget;
+    private float blockingValue = 0f;
 
     [Tooltip("The player will enter En Garde stance if they are closer than *fightingDistance* units to the enemy")]
     [SerializeField] private float fightingDistance = 3f;
@@ -50,7 +50,6 @@ public class PlayerController : Character
         isAttacking = false;
         isBlocking = false;
         canAttack = true;
-        canBlock = false;
         UpdateAllAttackAnimations();
     }
 
@@ -101,10 +100,7 @@ public class PlayerController : Character
         isAttacking = anim.GetCurrentAnimatorStateInfo(0).IsTag("Attacking") && !anim.IsInTransition(0);
         // The player can't attack if the attack animation has been playing for less than *interAttackExitTime*
         canAttack = !(isAttacking && anim.GetCurrentAnimatorStateInfo(0).normalizedTime < interAttackExitTime);
-        // The player can't block while attacking
-        canBlock = anim.GetCurrentAnimatorStateInfo(0).IsTag("Attacking");
         anim.SetBool("can_attack", canAttack);
-        anim.SetBool("can_block", canBlock);
 
         // Animation modifiers
         anim.SetFloat("left_normal_speed", leftNormalSlot.leftAnimationSpeed * leftNormalSlot.chargeSpeed * attackSpeed);
@@ -114,9 +110,9 @@ public class PlayerController : Character
 
         // MOVEMENT
         currentDistance = Vector3.Distance(transform.position, target.position);
-        blockingTarget = currentDistance <= fightingDistance ? -1f : (isBlocking ? 1f : 0f);
-        Debug.Log(blockingTarget);
-        blockingValue = Mathf.MoveTowards(blockingValue, blockingTarget, blockingSpeed * Time.deltaTime);
+        anim.SetBool("in_distance", currentDistance <= fightingDistance);
+
+        blockingValue = Mathf.MoveTowards(blockingValue, System.Convert.ToSingle(isBlocking), blockingSpeed * Time.deltaTime);
         anim.SetFloat("block", blockingValue);
 
         // Softens the stick movement by establishing the direction as a point that approaches the stick/mouse position.
