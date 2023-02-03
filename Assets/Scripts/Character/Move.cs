@@ -50,9 +50,6 @@ public class Move : MonoBehaviour
     public Power power;
     public float baseDamage; // Used to calculate damage dealt to the opponent's stamina, if it hits.
 
-    [Tooltip("Can you cancel the attack by blocking?")]
-    public bool cancelable = true;
-
     [Header("Tracking Values")]
     [Tooltip("Character stops tracking the opponent during the interval [commitStartTime, commitEndTime) of the normalized animation time")]
     [SerializeField] [Range(0f, 1f)] private float leftCommitStartTime = 0f;

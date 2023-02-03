@@ -411,6 +411,9 @@ MonoBehaviour:
   leftHitboxes: []
   rightHitboxes: []
   stickSpeed: 8
+  blockingSpeed: 8
+  fightingDistance: 2
+  currentDistance: 0
   leftNormalSlot: {fileID: -4476728132895952727, guid: cd4612b1a708e5046ae35c3be7591360,
     type: 3}
   rightNormalSlot: {fileID: -4476728132895952727, guid: f93797f883db7b542ace592e1b90d3b4,
@@ -420,7 +423,6 @@ MonoBehaviour:
   rightSpecialSlot: {fileID: -6294080308579570103, guid: a8f961228fb724d4493126f529517e6e,
     type: 3}
   interAttackExitTime: 0.5
-  cancelAttackTime: 0.2
   updateAnimations: 0
   modifyTimeScale: 0
   timeScale: 1

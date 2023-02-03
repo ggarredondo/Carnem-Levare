@@ -6,9 +6,17 @@ public class PlayerController : Character
     private Vector2 directionTarget, direction;
     private bool isAttacking, isBlocking, canAttack, canBlock;
 
-    [Header("Controller Parameters")]
-    [Tooltip("How quickly player character follows stick movement when blocking")] 
-    [SerializeField] private float stickSpeed = 8f;
+    [Header("Movement Parameters")]
+    [Tooltip("How quickly player animations follows stick movement")] 
+    [SerializeField] private float stickSpeed = 4f;
+
+    [Tooltip("How quickly player transitions to and from blocking animation")]
+    [SerializeField] private float blockingSpeed = 4f;
+    private float blockingValue = 0f, blockingTarget;
+
+    [Tooltip("The player will enter En Garde stance if they are closer than *fightingDistance* units to the enemy")]
+    [SerializeField] private float fightingDistance = 3f;
+    [SerializeField] private float currentDistance; // SERIALIZED FOR DEBUGGING
 
     [Header("Attack Parameters")]
     // The player has four attack slots to define their moveset.
@@ -24,10 +32,6 @@ public class PlayerController : Character
     // spamming the same move will always require the entire animation to play out.
     [Tooltip("(Normalized) Time before the player can attack again between different moves")] 
     [SerializeField] [Range(0f, 1f)] private float interAttackExitTime = 0.4f;
-
-    [Tooltip("(Normalized) Range of time where the player can cancel an attack to block")]
-    [SerializeField] [Range(0f, 1f)] private float cancelAttackTime = 0.4f;
-    [System.NonSerialized] public bool cancelable = true;
 
     [Header("Debug")]
     [SerializeField] private bool updateAnimations = false;
@@ -73,7 +77,7 @@ public class PlayerController : Character
     public void RightNormal(InputAction.CallbackContext context) { rightNormalSlot.pressed = context.performed; anim.SetBool("right_normal", context.performed); }
     public void LeftSpecial(InputAction.CallbackContext context) { leftSpecialSlot.pressed = context.performed; anim.SetBool("left_special", context.performed); }
     public void RightSpecial(InputAction.CallbackContext context) { rightSpecialSlot.pressed = context.performed; anim.SetBool("right_special", context.performed); }
-    public void Block(InputAction.CallbackContext context) { anim.SetBool("block", context.performed); }
+    public void Block(InputAction.CallbackContext context) { isBlocking = context.performed; }
 
     //***ANIMATION***
 
@@ -95,11 +99,10 @@ public class PlayerController : Character
     {
         // Values that must be updated frame by frame to allow certain animations to play out accordingly.
         isAttacking = anim.GetCurrentAnimatorStateInfo(0).IsTag("Attacking") && !anim.IsInTransition(0);
-        isBlocking = anim.GetCurrentAnimatorStateInfo(0).IsTag("Blocking") && !anim.IsInTransition(0);
-        // The player can't attack if the attack animation has been playing for less than *interAttackExitTime* and...
-        canAttack = !(isAttacking && (anim.GetCurrentAnimatorStateInfo(0).normalizedTime < interAttackExitTime));
-        // The player can't block if the attack animation has been playing for more than *cancelAttackTime* or if the attack is uncancellable
-        canBlock = !(isAttacking && (anim.GetCurrentAnimatorStateInfo(0).normalizedTime >= cancelAttackTime || !cancelable));
+        // The player can't attack if the attack animation has been playing for less than *interAttackExitTime*
+        canAttack = !(isAttacking && anim.GetCurrentAnimatorStateInfo(0).normalizedTime < interAttackExitTime);
+        // The player can't block while attacking
+        canBlock = anim.GetCurrentAnimatorStateInfo(0).IsTag("Attacking");
         anim.SetBool("can_attack", canAttack);
         anim.SetBool("can_block", canBlock);
 
@@ -110,6 +113,12 @@ public class PlayerController : Character
         anim.SetFloat("right_special_speed", rightSpecialSlot.rightAnimationSpeed * rightSpecialSlot.chargeSpeed * attackSpeed);
 
         // MOVEMENT
+        currentDistance = Vector3.Distance(transform.position, target.position);
+        blockingTarget = currentDistance <= fightingDistance ? -1f : (isBlocking ? 1f : 0f);
+        Debug.Log(blockingTarget);
+        blockingValue = Mathf.MoveTowards(blockingValue, blockingTarget, blockingSpeed * Time.deltaTime);
+        anim.SetFloat("block", blockingValue);
+
         // Softens the stick movement by establishing the direction as a point that approaches the stick/mouse position.
         direction = Vector2.MoveTowards(direction, directionTarget, stickSpeed * Time.deltaTime);
         anim.SetFloat("horizontal", direction.x);
