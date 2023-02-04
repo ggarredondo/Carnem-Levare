@@ -24,7 +24,6 @@ public abstract class Character : MonoBehaviour
     [SerializeField] [Range(1f, 1.3f)] private float height = 1f;
     [SerializeField] private float mass = 1f;
     [SerializeField] private float drag = 0f; // SHOULD BE CALCULATED GIVEN MASS
-    [SerializeField] private float hurtDrag = 20f; // SHOULD BE CALCULATED GIVEN MASS
     private Rigidbody rb;
 
     [Header("Hitbox Lists - Same items as HitboxType enum")]
@@ -48,9 +47,6 @@ public abstract class Character : MonoBehaviour
         targetLook = Quaternion.LookRotation(target.position - transform.position);
         if (tracking)
             transform.rotation = Quaternion.RotateTowards(transform.rotation, targetLook, trackingRate * Time.deltaTime); // Rotate towards opponent.
-
-        // If the character is hurting, we assign a specific amount of drag to the rigidbody. Otherwise, we assign the expected drag.
-        rb.drag = anim.GetCurrentAnimatorStateInfo(0).IsName("Hurt") ? hurtDrag : drag;
     }
 
     //***ANIMATION***

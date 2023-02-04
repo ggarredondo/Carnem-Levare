@@ -18,10 +18,6 @@ public class PlayerController : Character
     [SerializeField] private float blockingSpeed;
     private float blockingValue = 0f;
 
-    [Tooltip("The player will enter En Garde stance if they are closer than *fightingDistance* units to the enemy")]
-    [SerializeField] private float fightingDistance = 3f;
-    [SerializeField] private float currentDistance; // SERIALIZED FOR DEBUGGING
-
     [Header("Attack Parameters")]
     // The player has four attack slots to define their moveset.
     // Two attacks from the left (left arm, left leg), two attacks from the right.
@@ -76,6 +72,7 @@ public class PlayerController : Character
     // Meant for Unity Input System events
 
     public void Movement(InputAction.CallbackContext context) { directionTarget = context.ReadValue<Vector2>().normalized; }
+    public void SkipFwd(InputAction.CallbackContext context) { if (context.performed) anim.SetTrigger("skip_fwd"); }
     public void LeftNormal(InputAction.CallbackContext context) { leftNormalSlot.pressed = context.performed; anim.SetBool("left_normal", context.performed); }
     public void RightNormal(InputAction.CallbackContext context) { rightNormalSlot.pressed = context.performed; anim.SetBool("right_normal", context.performed); }
     public void LeftSpecial(InputAction.CallbackContext context) { leftSpecialSlot.pressed = context.performed; anim.SetBool("left_special", context.performed); }
@@ -112,10 +109,6 @@ public class PlayerController : Character
         anim.SetFloat("left_special_speed", leftSpecialSlot.leftAnimationSpeed * leftSpecialSlot.chargeSpeed * attackSpeed);
         anim.SetFloat("right_special_speed", rightSpecialSlot.rightAnimationSpeed * rightSpecialSlot.chargeSpeed * attackSpeed);
 
-        // MOVEMENT
-        currentDistance = Vector3.Distance(transform.position, target.position);
-        anim.SetBool("in_distance", currentDistance <= fightingDistance);
-
         blockingValue = Mathf.MoveTowards(blockingValue, System.Convert.ToSingle(isBlocking), blockingSpeed * Time.deltaTime);
         anim.SetFloat("block", blockingValue);
 
@@ -131,12 +124,12 @@ public class PlayerController : Character
     /// <summary>
     /// Is the player in any State tagged as "Movement"?
     /// </summary>
-    public bool getIsMovement { get { return anim.GetCurrentAnimatorStateInfo(0).IsTag("Movement"); } }
+    public bool getIsMovement { get { return anim.GetCurrentAnimatorStateInfo(0).IsName("Movement"); } }
 
     /// <summary>
     /// Is the player moving? The player may move by pressing the stick or by attacking.
     /// </summary>
-    public bool getIsMoving { get { return !(direction.magnitude == 0 && anim.GetCurrentAnimatorStateInfo(0).IsTag("Movement")); } }
+    public bool getIsMoving { get { return !(direction.magnitude == 0 && anim.GetCurrentAnimatorStateInfo(0).IsName("Movement")); } }
 
     public bool getIsBlocking { get { return isBlocking; } }
 }

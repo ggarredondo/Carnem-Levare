@@ -1153,8 +1153,13 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4706402254706946843, guid: 730b6f15cbfa96c4db1930def4556da9,
         type: 3}
+      propertyPath: m_ActionEvents.Array.size
+      value: 24
+      objectReference: {fileID: 0}
+    - target: {fileID: 4706402254706946843, guid: 730b6f15cbfa96c4db1930def4556da9,
+        type: 3}
       propertyPath: m_ActionEvents.Array.data[23].m_ActionId
-      value: ab425d92-13b7-41ad-bac0-a9085a9c6e71
+      value: d959d0a2-068f-4f9f-b941-ac4413495569
       objectReference: {fileID: 0}
     - target: {fileID: 4706402254706946843, guid: 730b6f15cbfa96c4db1930def4556da9,
         type: 3}
@@ -1164,7 +1169,7 @@ PrefabInstance:
     - target: {fileID: 4706402254706946843, guid: 730b6f15cbfa96c4db1930def4556da9,
         type: 3}
       propertyPath: m_ActionEvents.Array.data[23].m_ActionName
-      value: Main Movement/Skip Fwd[/XInputControllerWindows/leftStick/up]
+      value: Main Movement/Skip Forward[/XInputControllerWindows/leftStick/up]
       objectReference: {fileID: 0}
     - target: {fileID: 4706402254706946843, guid: 730b6f15cbfa96c4db1930def4556da9,
         type: 3}
