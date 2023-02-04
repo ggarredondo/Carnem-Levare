@@ -1028,13 +1028,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerController: {fileID: 4706402254706946820}
-  vcam: {fileID: 4706402255246442000}
-  cameraAceleration: 2
+  cameraAceleration:
+    Item1: 2
+    Item2: 2
   damping:
     Item1: 1
     Item2: 2
   cameraRotation: 1
-  noiseAceleration: 3
+  noiseAceleration:
+    Item1: 3
+    Item2: 3
   frequency:
     Item1: 0
     Item2: 3
@@ -1048,8 +1051,12 @@ MonoBehaviour:
   fieldOfView:
     Item1: 25
     Item2: 50
-  offsetVariation: {x: -0.3, y: 0, z: 2}
+  dollyOffsetVariation: {x: -0.3, y: 0, z: 2}
   cameraMovement: 1
+  onGuardAceleration:
+    Item1: 2
+    Item2: 2
+  onGuardOffsetVariation: {x: -0.82, y: 0, z: 0.5}
 --- !u!1 &7171772636375460611
 GameObject:
   m_ObjectHideFlags: 0
