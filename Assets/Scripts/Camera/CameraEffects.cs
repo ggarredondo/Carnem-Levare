@@ -1,12 +1,14 @@
 using Cinemachine;
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class CameraEffects : MonoBehaviour
 {
     [Header("Target Parameters")]
     public PlayerController playerController;
-    public CinemachineVirtualCamera vcam;
+    private CinemachineVirtualCamera vcam;
+    private CinemachineTransposer transposer;
 
     [Header("Smooth Follow Parameters")]
     public SmoothFollow smoothFollow;
@@ -27,16 +29,28 @@ public class CameraEffects : MonoBehaviour
     [NonSerialized] public Move currentMove;
     private float holdingMinTime;
 
+    private Vector3 initialPosition;
+    private bool isMoving;
+    private bool[] cameraConditions;
+    private int actualCamera;
+    Dictionary<int, CameraMovement> cameraMap = new();
+
+    Stack<CameraMovement> cameraStack = new();
+
     private void Awake()
     {
-        smoothFollow = new(vcam);
-        noise = new(vcam);
-        dollyZoom = new(vcam);
-        onGuardLinealMovement = new(vcam);
+        vcam = GetComponentInChildren<CinemachineVirtualCamera>();
+        transposer = vcam.GetCinemachineComponent<CinemachineTransposer>();
+
+        cameraMap.Add(1, dollyZoom);
+        cameraMap.Add(2, onGuardLinealMovement);
+
+        cameraConditions = new bool[2];
     }
 
     private void Start()
     {
+        initialPosition = transposer.m_FollowOffset;
         currentMove = playerController.rightNormalSlot;
     }
 
@@ -56,11 +70,21 @@ public class CameraEffects : MonoBehaviour
             //Making camera noise oscillate depending on player movement
             if (noiseActivated) noise.ApplyMove(playerController.getIsMovement);
 
-            //Making camera dollyZoom when player hold an attack
-            if (dollyZoomActivated) dollyZoom.ApplyMove(currentMove.getChargePhase == Move.ChargePhase.performing && currentMove.getDeltaTimer >= holdingMinTime && currentMove.getDeltaTimer <= currentMove.getChargeLimit);
+            if (dollyZoomActivated || onGuardActivated)
+            {
+                cameraConditions[0] = currentMove.getChargePhase == Move.ChargePhase.performing && currentMove.getDeltaTimer >= holdingMinTime && currentMove.getDeltaTimer <= currentMove.getChargeLimit;
 
-            //Making lineal movement when player is blocking
-            if (onGuardLinealMovement) onGuardLinealMovement.ApplyMove(playerController.getIsBlocking);
+                cameraConditions[1] = playerController.getIsBlocking;
+
+                if (transposer.m_FollowOffset == dollyZoom.zoomPositions.Item1 && cameraStack.Count != 0) { cameraStack.Pop(); isMoving = false; }
+
+                if (cameraConditions[0] && !isMoving) { dollyZoom.Initialize(); cameraStack.Push(dollyZoom); isMoving = true; actualCamera = 0; }
+
+                if (cameraConditions[1] && !isMoving) { cameraStack.Push(onGuardLinealMovement); actualCamera = 1; }
+
+                if(cameraStack.Count != 0) cameraStack.Peek().ApplyMove(cameraConditions[actualCamera]);
+
+            }
         }
     }
 }

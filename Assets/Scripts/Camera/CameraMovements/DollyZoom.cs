@@ -7,12 +7,21 @@ public class DollyZoom : CameraMovement
     public Vector3 offsetVariation;
 
     private float reduceFOV, reduceZoom;
-    private Tuple<Vector3> zoomPositions;
+    public Tuple<Vector3> zoomPositions;
     private CinemachineTransposer transposer;
 
-    public DollyZoom(CinemachineVirtualCamera vcam) : base(vcam) { transposer = vcam.GetCinemachineComponent<CinemachineTransposer>(); }
+    public override void Awake()
+    {
+        base.Awake();
+        transposer = vcam.GetCinemachineComponent<CinemachineTransposer>();
+    }
 
     private void Start()
+    {
+        Initialize();
+    }
+
+    public void Initialize()
     {
         zoomPositions.Item1 = transposer.m_FollowOffset;
         zoomPositions.Item2 = zoomPositions.Item1 + offsetVariation;

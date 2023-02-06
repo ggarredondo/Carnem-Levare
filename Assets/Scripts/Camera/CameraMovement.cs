@@ -5,10 +5,10 @@ public abstract class CameraMovement : MonoBehaviour
 {
     protected CinemachineVirtualCamera vcam;
 
-    public CameraMovement(CinemachineVirtualCamera vcam)
+    public virtual void Awake()
     {
-        this.vcam = vcam;
-    }
+        vcam = GameObject.FindGameObjectWithTag("CAMERA").GetComponentInChildren<CinemachineVirtualCamera>();
+    } 
 
     public Tuple<float> aceleration;
 

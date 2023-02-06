@@ -8,7 +8,11 @@ public class Noise : CameraMovement
     private float reduceAmplitude, reduceFrequency;
     private CinemachineBasicMultiChannelPerlin noiseTransposer;
 
-    public Noise(CinemachineVirtualCamera vcam) : base(vcam) { noiseTransposer = vcam.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>(); }
+    public override void Awake()
+    {
+        base.Awake();
+        noiseTransposer = vcam.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>();
+    }
 
     public override void ApplyMove(bool condition)
     {

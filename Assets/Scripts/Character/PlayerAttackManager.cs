@@ -6,12 +6,12 @@ public class PlayerAttackManager : StateMachineBehaviour
     private Move currentMove;
     private GameObject currentHitbox;
     private Side side;
-    private CameraFollow cameraFollow;
+    private CameraEffects cameraFollow;
 
     private void Awake()
     {
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
-        cameraFollow = GameObject.FindGameObjectWithTag("CAMERA").GetComponent<CameraFollow>();
+        cameraFollow = GameObject.FindGameObjectWithTag("CAMERA").GetComponent<CameraEffects>();
     }
 
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state

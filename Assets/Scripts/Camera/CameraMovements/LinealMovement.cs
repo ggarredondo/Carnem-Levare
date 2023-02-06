@@ -3,14 +3,17 @@ using UnityEngine;
 
 public class LinealMovement : CameraMovement
 {
-    public Tuple<float> fieldOfView;
     public Vector3 offsetVariation;
 
     private float reduce;
     private Tuple<Vector3> positions;
     private CinemachineTransposer transposer;
 
-    public LinealMovement(CinemachineVirtualCamera vcam) : base(vcam) { transposer = vcam.GetCinemachineComponent<CinemachineTransposer>(); }
+    public override void Awake()
+    {
+        base.Awake();
+        transposer = vcam.GetCinemachineComponent<CinemachineTransposer>();
+    }
 
     private void Start()
     {

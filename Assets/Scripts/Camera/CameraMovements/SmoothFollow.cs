@@ -7,7 +7,11 @@ public class SmoothFollow : CameraMovement
     private float reduce;
     private CinemachineTransposer transposer;
 
-    public SmoothFollow(CinemachineVirtualCamera vcam) : base(vcam) { transposer = vcam.GetCinemachineComponent<CinemachineTransposer>(); }
+    public override void Awake()
+    {
+        base.Awake();
+        transposer = vcam.GetCinemachineComponent<CinemachineTransposer>();
+    }
 
     public override void ApplyMove(bool condition)
     {
