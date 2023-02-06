@@ -295,14 +295,16 @@ MonoBehaviour:
   maxStamina: 1000
   attackDamage: 10
   attackSpeed: 1
+  casualWalkingSpeed: 1
+  guardWalkingSpeed: 1
   height: 1.1
   mass: 1
   drag: 0
-  hurtDrag: 20
   leftHitboxes: []
   rightHitboxes: []
   horizontal: 0
   vertical: 0
+  isBlocking: 1
 --- !u!114 &3674996438534986267
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -106,6 +106,9 @@ public class PlayerController : Character
         anim.SetFloat("right_special_speed", rightSpecialSlot.rightAnimationSpeed * rightSpecialSlot.chargeSpeed * attackSpeed);
 
         anim.SetBool("block", isBlocking);
+        // Ternary operator so that when the player isn't moving, the speed parameter doesn't affect the idle animation
+        anim.SetFloat("casual_walk_speed", directionTarget.magnitude == 0f ? 1f : casualWalkingSpeed);
+        anim.SetFloat("guard_walk_speed", directionTarget.magnitude == 0f ? 1f : guardWalkingSpeed);
 
         finalStickSpeed = directionTarget.magnitude == 0f && !isBlocking ? smoothStickSpeed : stickSpeed;
         // Softens the stick movement by establishing the direction as a point that approaches the stick/mouse position at *finalStickSpeed* rate.

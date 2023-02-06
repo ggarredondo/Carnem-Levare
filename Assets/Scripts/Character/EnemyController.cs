@@ -5,6 +5,7 @@ public class EnemyController : Character
     [Header("Movement Parameters")]
     [SerializeField] [Range(-1f, 1f)] private float horizontal = 0f;
     [SerializeField] [Range(-1f, 1f)] private float vertical = 0f;
+    [SerializeField] private bool isBlocking = false;
 
     private void Awake()
     {
@@ -30,5 +31,6 @@ public class EnemyController : Character
     {
         anim.SetFloat("horizontal", horizontal);
         anim.SetFloat("vertical", vertical);
+        anim.SetBool("block", isBlocking);
     }
 }
