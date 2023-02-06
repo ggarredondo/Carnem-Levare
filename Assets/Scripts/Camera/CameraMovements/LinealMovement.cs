@@ -12,7 +12,7 @@ public class LinealMovement : CameraMovement
     public override void Awake()
     {
         base.Awake();
-        transposer = vcam.GetCinemachineComponent<CinemachineTransposer>();
+        transposer = vcam.GetCinemachineComponent<CinemachineOrbitalTransposer>();
     }
 
     private void Start()

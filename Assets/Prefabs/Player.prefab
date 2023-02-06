@@ -932,7 +932,7 @@ MonoBehaviour:
   m_VerticalDamping: 0
   m_ScreenX: 0.5
   m_ScreenY: 0.5
-  m_DeadZoneWidth: 0.08
+  m_DeadZoneWidth: 0
   m_DeadZoneHeight: 0
   m_SoftZoneWidth: 0.8
   m_SoftZoneHeight: 0.8
@@ -1029,6 +1029,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 96a0b26df394cd74db24fe997d0a97c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  orbitalValue: 0.05
   playerController: {fileID: 4706402254706946820}
   smoothFollow: {fileID: 3740683913482428883}
   smoothFollowActivated: 1
@@ -1075,9 +1076,10 @@ MonoBehaviour:
   aceleration:
     Item1: 2
     Item2: 2
-  damping:
+  variation:
     Item1: 1
     Item2: 2
+  parameter: 0
 --- !u!114 &5856529488855800536
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1114,7 +1116,7 @@ MonoBehaviour:
   aceleration:
     Item1: 2
     Item2: 2
-  offsetVariation: {x: -0.82, y: 0, z: 0.25}
+  offsetVariation: {x: 0, y: 0, z: 0.25}
 --- !u!1 &7171772636375460611
 GameObject:
   m_ObjectHideFlags: 0

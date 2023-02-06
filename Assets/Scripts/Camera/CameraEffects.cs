@@ -5,10 +5,12 @@ using UnityEngine;
 
 public class CameraEffects : MonoBehaviour
 {
+    [Range(0,1)] public float orbitalValue;
+
     [Header("Target Parameters")]
     public PlayerController playerController;
     private CinemachineVirtualCamera vcam;
-    private CinemachineTransposer transposer;
+    private CinemachineOrbitalTransposer transposer;
 
     [Header("Smooth Follow Parameters")]
     public SmoothFollow smoothFollow;
@@ -29,28 +31,22 @@ public class CameraEffects : MonoBehaviour
     [NonSerialized] public Move currentMove;
     private float holdingMinTime;
 
-    private Vector3 initialPosition;
     private bool isMoving;
     private bool[] cameraConditions;
     private int actualCamera;
-    Dictionary<int, CameraMovement> cameraMap = new();
 
-    Stack<CameraMovement> cameraStack = new();
+    private Stack<CameraMovement> cameraStack = new();
 
     private void Awake()
     {
         vcam = GetComponentInChildren<CinemachineVirtualCamera>();
-        transposer = vcam.GetCinemachineComponent<CinemachineTransposer>();
-
-        cameraMap.Add(1, dollyZoom);
-        cameraMap.Add(2, onGuardLinealMovement);
+        transposer = vcam.GetCinemachineComponent<CinemachineOrbitalTransposer>();
 
         cameraConditions = new bool[2];
     }
 
     private void Start()
     {
-        initialPosition = transposer.m_FollowOffset;
         currentMove = playerController.rightNormalSlot;
     }
 
@@ -64,6 +60,11 @@ public class CameraEffects : MonoBehaviour
     {
         if (Time.timeScale > 0f)
         {
+            cameraConditions[0] = currentMove.getChargePhase == Move.ChargePhase.performing && currentMove.getDeltaTimer >= holdingMinTime && currentMove.getDeltaTimer <= currentMove.getChargeLimit;
+            cameraConditions[1] = playerController.getIsBlocking;
+
+            OrbitalMovement();
+
             //Making camera damping oscillate depending on player movement
             if (smoothFollowActivated) smoothFollow.ApplyMove(playerController.getIsMoving);
 
@@ -72,9 +73,6 @@ public class CameraEffects : MonoBehaviour
 
             if (dollyZoomActivated || onGuardActivated)
             {
-                cameraConditions[0] = currentMove.getChargePhase == Move.ChargePhase.performing && currentMove.getDeltaTimer >= holdingMinTime && currentMove.getDeltaTimer <= currentMove.getChargeLimit;
-
-                cameraConditions[1] = playerController.getIsBlocking;
 
                 if (transposer.m_FollowOffset == dollyZoom.zoomPositions.Item1 && cameraStack.Count != 0) { cameraStack.Pop(); isMoving = false; }
 
@@ -85,6 +83,18 @@ public class CameraEffects : MonoBehaviour
                 if(cameraStack.Count != 0) cameraStack.Peek().ApplyMove(cameraConditions[actualCamera]);
 
             }
+        }
+    }
+
+    private void OrbitalMovement()
+    {
+        if (playerController.getDirectionX < -0.1 && !cameraConditions[1]) transposer.m_XAxis.Value -= orbitalValue;
+
+        if (playerController.getDirectionX > 0.1 && !cameraConditions[1]) transposer.m_XAxis.Value += orbitalValue;
+
+        if (cameraConditions[1])
+        {
+            transposer.m_XAxis.Value = Mathf.Lerp(transposer.m_XAxis.Value, 0, orbitalValue);
         }
     }
 }

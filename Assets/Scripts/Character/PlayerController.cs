@@ -128,7 +128,9 @@ public class PlayerController : Character
     /// <summary>
     /// Is the player moving? The player may move by pressing the stick or by attacking.
     /// </summary>
-    public bool getIsMoving { get { return !(direction.magnitude == 0 && anim.GetCurrentAnimatorStateInfo(0).IsTag("Movement")); } }
+    public bool getIsMoving { get { return !(directionTarget.magnitude == 0f && anim.GetCurrentAnimatorStateInfo(0).IsTag("Movement")); } }
+
+    public float getDirectionX { get { return direction.x; } }
 
     public bool getIsBlocking { get { return isBlocking; } }
 }

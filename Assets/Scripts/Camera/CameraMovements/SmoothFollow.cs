@@ -2,19 +2,24 @@ using Cinemachine;
 
 public class SmoothFollow : CameraMovement
 {
-    public Tuple<float> damping;
+    public Tuple<float> variation;
 
     private float reduce;
-    private CinemachineTransposer transposer;
+    private CinemachineOrbitalTransposer transposer;
+    public enum Parameter { DAMPING, ORBITAL }
+    public Parameter parameter;
 
     public override void Awake()
     {
         base.Awake();
-        transposer = vcam.GetCinemachineComponent<CinemachineTransposer>();
+        transposer = vcam.GetCinemachineComponent<CinemachineOrbitalTransposer>();
     }
 
     public override void ApplyMove(bool condition)
     {
-        transposer.m_YawDamping = CameraUtilities.OscillateParameter(condition, aceleration, ref reduce, damping, CameraUtilities.Exponential);
+        if(parameter == Parameter.DAMPING)
+            transposer.m_YawDamping = CameraUtilities.OscillateParameter(condition, aceleration, ref reduce, variation, CameraUtilities.Exponential);
+        else
+            transposer.m_XAxis.Value = CameraUtilities.OscillateParameter(condition, aceleration, ref reduce, variation, CameraUtilities.Exponential);
     }
 }
