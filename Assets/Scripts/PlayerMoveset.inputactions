@@ -85,6 +85,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "Skip Backwards",
+                    "type": "Button",
+                    "id": "c99c723a-ad3e-4232-a9ce-de2a78da5c0f",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -180,10 +189,21 @@
                     "name": "",
                     "id": "21b4ed65-6f06-4c05-ab49-55b905570687",
                     "path": "<Gamepad>/leftStick/up",
-                    "interactions": "MultiTap",
+                    "interactions": "MultiTap(pressPoint=1)",
                     "processors": "",
                     "groups": "",
                     "action": "Skip Forward",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "4157f091-13af-49b6-92c0-92c4574bac09",
+                    "path": "<Gamepad>/leftStick/down",
+                    "interactions": "MultiTap(pressPoint=1)",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Skip Backwards",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
