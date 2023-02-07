@@ -32,5 +32,8 @@ public class EnemyController : Character
         anim.SetFloat("horizontal", horizontal);
         anim.SetFloat("vertical", vertical);
         anim.SetBool("block", isBlocking);
+        // Ternary operator so that when the enemy isn't moving, the speed parameter doesn't affect the idle animation
+        anim.SetFloat("casual_walk_speed", horizontal + vertical == 0f ? 1f : casualWalkingSpeed);
+        anim.SetFloat("guard_walk_speed", horizontal + vertical == 0f ? 1f : guardWalkingSpeed);
     }
 }

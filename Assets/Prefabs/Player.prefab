@@ -403,16 +403,15 @@ MonoBehaviour:
   stamina: 1000
   maxStamina: 1000
   attackDamage: 10
-  attackSpeed: 1
+  attackSpeed: 1.1
   casualWalkingSpeed: 1.2
-  guardWalkingSpeed: 1
+  guardWalkingSpeed: 1.1
+  skipSpeed: 1.2
   height: 1
   mass: 1
   drag: 0
   leftHitboxes: []
   rightHitboxes: []
-  stickSpeed: 15
-  smoothStickSpeed: 5
   leftNormalSlot: {fileID: -4476728132895952727, guid: cd4612b1a708e5046ae35c3be7591360,
     type: 3}
   rightNormalSlot: {fileID: -4476728132895952727, guid: f93797f883db7b542ace592e1b90d3b4,
@@ -422,6 +421,9 @@ MonoBehaviour:
   rightSpecialSlot: {fileID: -6294080308579570103, guid: a8f961228fb724d4493126f529517e6e,
     type: 3}
   interAttackExitTime: 0.5
+  stickSpeed: 15
+  smoothStickSpeed: 5
+  stickTapTolerance: 0.7
   updateAnimations: 0
   modifyTimeScale: 0
   timeScale: 1

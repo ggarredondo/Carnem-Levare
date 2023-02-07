@@ -52,14 +52,12 @@ MonoBehaviour:
   direction: 0
   power: 1
   baseDamage: 12
-  cancelable: 1
   leftCommitStartTime: 0
   leftCommitEndTime: 0
   rightCommitStartTime: 0
   rightCommitEndTime: 0
   chargeable: 1
-  leftChargeDecay: 5
-  rightChargeDecay: 5
+  chargeDecay: 5
   chargeLimit: 2
   chargeLimitDivisor: 6
   hitboxType: 0

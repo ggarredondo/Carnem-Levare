@@ -23,6 +23,7 @@ public abstract class Character : MonoBehaviour
     [Tooltip("Attack animation speed")] [Range(0f, 2f)] public float attackSpeed = 1f;
     [SerializeField] [Range(0f, 2f)] protected float casualWalkingSpeed = 1f;
     [SerializeField] [Range(0f, 2f)] protected float guardWalkingSpeed = 1f;
+    [SerializeField] [Range(0f, 2f)] protected float skipSpeed = 1f;
     [SerializeField] [Range(1f, 1.3f)] private float height = 1f;
     [SerializeField] private float mass = 1f;
     [SerializeField] private float drag = 0f; // SHOULD BE CALCULATED GIVEN MASS

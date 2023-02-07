@@ -43,7 +43,6 @@ public class Move : MonoBehaviour
     [Range(0f, 2f)] public float leftAnimationSpeed = 1f;
     public AnimationClip rightAnimation;
     [Range(0f, 2f)] public float rightAnimationSpeed = 1f;
-    private float animationSpeed;
 
     [Header("Attack Values")]
     public Direction direction;
@@ -64,9 +63,8 @@ public class Move : MonoBehaviour
     [Tooltip("Can it be charged?")]
     [SerializeField] private bool chargeable = true;
 
-    [Tooltip("How quickly the animation slows down when holding the attack button (interpolation value)")]
-    public float leftChargeDecay = 1f, rightChargeDecay = 1f; // Interpolation value used for lerp affecting chargeSpeed.
-    private float chargeDecay;
+    [Tooltip("How quickly the animation slows down when holding the attack button (interpolation value) (right side only)")]
+    [SerializeField] private float chargeDecay; // Interpolation value used for lerp affecting chargeSpeed.
 
     [Tooltip("Move will perform automatically after *chargeLimit* deltaTime seconds charging")]
     [SerializeField] private float chargeLimit = 2f;
@@ -111,16 +109,12 @@ public class Move : MonoBehaviour
 
     /// <summary>
     /// Slows down attack animation if attack button is held down, until it's released or 
-    /// the animation speed reaches a minimum.
+    /// the animation speed reaches a minimum. Only attacks coming from the right.
     /// </summary>
-    /// <param name="side">Which side is the attack coming from?</param>
     /// <param name="inTransition">Is the animator in transition?</param>
     /// <param name="attackSpeed">Character's attack speed</param>
-    public void ChargeAttack(Side side, bool inTransition, float attackSpeed)
+    public void ChargeAttack(bool inTransition, float attackSpeed)
     {
-        chargeDecay = side == Side.Left ? leftChargeDecay : rightChargeDecay;
-        animationSpeed = side == Side.Left ? leftAnimationSpeed : rightAnimationSpeed;
-
         switch (chargePhase)
         {
             case ChargePhase.waiting:
@@ -132,7 +126,7 @@ public class Move : MonoBehaviour
 
             case ChargePhase.performing:
                 if (pressed && !inTransition) {
-                    chargeSpeed = Mathf.Lerp(chargeSpeed, 0f, chargeDecay * attackSpeed * animationSpeed * Time.deltaTime);
+                    chargeSpeed = Mathf.Lerp(chargeSpeed, 0f, chargeDecay * attackSpeed * rightAnimationSpeed * Time.deltaTime);
                     deltaTimer += Time.deltaTime;
                 }
 

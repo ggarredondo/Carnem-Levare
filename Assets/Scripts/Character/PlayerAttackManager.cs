@@ -54,7 +54,7 @@ public class PlayerAttackManager : StateMachineBehaviour
     {
         player.tracking = currentMove.isTracking(side, stateInfo.normalizedTime);
         currentHitbox.GetComponent<Hitbox>().Activate(currentMove.isHitboxActive(side, stateInfo.normalizedTime));
-        currentMove.ChargeAttack(side, animator.IsInTransition(layerIndex), player.attackSpeed);
+        if (side == Side.Right) currentMove.ChargeAttack(animator.IsInTransition(layerIndex), player.attackSpeed);
     }
 
     // OnStateExit is called when a transition ends and the state machine finishes evaluating this state
