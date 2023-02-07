@@ -406,7 +406,7 @@ MonoBehaviour:
   attackSpeed: 1.1
   casualWalkingSpeed: 1.2
   guardWalkingSpeed: 1.1
-  skipSpeed: 1.2
+  skipSpeed: 1.1
   height: 1
   mass: 1
   drag: 0
@@ -1032,6 +1032,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   orbitalValue: 0.05
+  orbitalRecovery: 0
   playerController: {fileID: 4706402254706946820}
   smoothFollow: {fileID: 3740683913482428883}
   smoothFollowActivated: 1

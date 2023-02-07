@@ -129,6 +129,7 @@ public class PlayerController : Character
         // Ternary operator so that when the player isn't moving, the speed parameter doesn't affect the idle animation
         anim.SetFloat("casual_walk_speed", directionTarget.magnitude == 0f ? 1f : casualWalkingSpeed);
         anim.SetFloat("guard_walk_speed", directionTarget.magnitude == 0f ? 1f : guardWalkingSpeed);
+        anim.SetFloat("skip_speed", skipSpeed);
 
         finalStickSpeed = directionTarget.magnitude == 0f && !isBlocking ? smoothStickSpeed : stickSpeed;
         // Softens the stick movement by establishing the direction as a point that approaches the stick/mouse position at *finalStickSpeed* rate.
