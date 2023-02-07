@@ -62,6 +62,7 @@ public class PlayerAttackManager : StateMachineBehaviour
     {
         player.tracking = true;
         currentHitbox.GetComponent<Hitbox>().hit = false;
+        currentHitbox.GetComponent<Hitbox>().Activate(false);
         currentMove.ResetChargePhase();
     }
 

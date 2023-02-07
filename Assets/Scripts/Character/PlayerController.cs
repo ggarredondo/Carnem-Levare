@@ -4,7 +4,7 @@ using UnityEngine.InputSystem;
 public class PlayerController : Character
 {
     private Vector2 directionTarget, direction;
-    private bool isAttacking, isBlocking, isSkipping, canAttack, canSkip;
+    private bool isAttacking, isBlocking, canAttack, canSkip;
 
     [Header("Attack Parameters")]
     // The player has four attack slots to define their moveset.
@@ -112,14 +112,12 @@ public class PlayerController : Character
     {
         // Values that must be updated frame by frame to allow certain animations to play out accordingly.
         isAttacking = anim.GetCurrentAnimatorStateInfo(0).IsTag("Attacking") && !anim.IsInTransition(0);
-        isSkipping = anim.GetCurrentAnimatorStateInfo(0).IsTag("Skipping") && !anim.IsInTransition(0);
-
-        // The player can't attack if the attack animation has been playing for less than *interAttackExitTime* or if they are skipping.
-        canAttack = !((isAttacking && anim.GetCurrentAnimatorStateInfo(0).normalizedTime < interAttackExitTime) || isSkipping);
+        // The player can't attack if the attack animation has been playing for less than *interAttackExitTime*.
+        canAttack = !(isAttacking && anim.GetCurrentAnimatorStateInfo(0).normalizedTime < interAttackExitTime);
         anim.SetBool("can_attack", canAttack);
 
-        // The play can only skip if they are blocking and they aren't attacking or skipping already.
-        canSkip = isBlocking && canTapStick && !isAttacking && !isSkipping;
+        // The player can only skip if they are blocking but not attacking
+        canSkip = isBlocking && canTapStick && !isAttacking;
 
         // Animation modifiers
         anim.SetFloat("left_normal_speed", leftNormalSlot.leftAnimationSpeed * attackSpeed * leftNormalSlot.chargeSpeed);
