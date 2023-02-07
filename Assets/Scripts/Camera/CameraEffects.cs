@@ -94,6 +94,7 @@ public class CameraEffects : MonoBehaviour
 
         if (cameraConditions[1])
         {
+            print("hola");
             transposer.m_XAxis.Value = Mathf.Lerp(transposer.m_XAxis.Value, 0, orbitalValue);
         }
     }
