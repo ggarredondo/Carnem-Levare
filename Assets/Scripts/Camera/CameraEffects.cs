@@ -5,7 +5,9 @@ using UnityEngine;
 
 public class CameraEffects : MonoBehaviour
 {
-    [Range(0,1)] public float orbitalValue;
+    [Range(0,20)] public float orbitalValue;
+    [Range(0,10)] public float orbitalRecovery;
+
 
     [Header("Target Parameters")]
     public PlayerController playerController;
@@ -88,13 +90,13 @@ public class CameraEffects : MonoBehaviour
 
     private void OrbitalMovement()
     {
-        if (playerController.getDirectionX < -0.1 && !cameraConditions[1]) transposer.m_XAxis.Value -= orbitalValue;
+        if (playerController.getDirectionX < -0.1f && !cameraConditions[1]) transposer.m_XAxis.Value -= orbitalValue * Time.deltaTime;
 
-        if (playerController.getDirectionX > 0.1 && !cameraConditions[1]) transposer.m_XAxis.Value += orbitalValue;
+        if (playerController.getDirectionX > 0.1f && !cameraConditions[1]) transposer.m_XAxis.Value += orbitalValue * Time.deltaTime;
 
         if (cameraConditions[1])
         {
-            transposer.m_XAxis.Value = Mathf.Lerp(transposer.m_XAxis.Value, 0, orbitalValue);
+            transposer.m_XAxis.Value = Mathf.Lerp(transposer.m_XAxis.Value, 0, orbitalRecovery * Time.deltaTime);
         }
     }
 }

@@ -30,7 +30,7 @@ public class CameraUtilities
     public static float OscillateParameter(bool condition, Tuple<float> aceleration, ref float reduce, Tuple<float> interval, Func<float, float> function)
     {
         //Apply the reduce to the actual value
-        float value = MAX * function(reduce);
+        float value = function(reduce);
 
         //Increment or Decrement the reduce to make feel aceleration
         if (condition) reduce += aceleration.Item1 * Time.deltaTime;
