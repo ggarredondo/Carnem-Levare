@@ -3,7 +3,7 @@ using UnityEngine.InputSystem;
 
 public class Player : Character
 {
-    private bool isAttacking, canAttack;
+    private bool isAttacking, isSkipping, canAttack;
 
     [Header("Input Parameters")]
 
@@ -29,7 +29,11 @@ public class Player : Character
         // The player can only attack if they're not attacking already.
         canAttack = !isAttacking;
         anim.SetBool("can_attack", canAttack);
-        // The player can only skip if they aren't attacking (and two other conditions that are checked in input for responsiveness)
+
+        // The player can only skip if they are blocking but they aren't attacking nor skipping already.
+        isSkipping = anim.GetCurrentAnimatorStateInfo(0).IsTag("Skipping");
+        // Attacking is checked through the animator so that you can buffer skip after attacking.
+        // Everything else is checked through input so that the tapping doesn't buffer for the next frames.
         anim.SetBool("can_skip", !isAttacking);
 
         directionSpeed = directionTarget.magnitude == 0f && !isBlocking ? smoothStickSpeed : stickSpeed;
@@ -54,8 +58,8 @@ public class Player : Character
         if (directionTarget.magnitude == 0f) canTapStick = true;
     }
 
-    public void SkipFwd(InputAction.CallbackContext context) { anim.SetBool("skip_fwd", context.performed && isBlocking && canTapStick); }
-    public void SkipBwd(InputAction.CallbackContext context) { anim.SetBool("skip_bwd", context.performed && isBlocking && canTapStick); }
+    public void SkipFwd(InputAction.CallbackContext context) { anim.SetBool("skip_fwd", context.performed && isBlocking && canTapStick && !isSkipping); }
+    public void SkipBwd(InputAction.CallbackContext context) { anim.SetBool("skip_bwd", context.performed && isBlocking && canTapStick && !isSkipping); }
     public void LeftNormal(InputAction.CallbackContext context) { anim.SetBool("left_normal", context.performed); }
     public void LeftSpecial(InputAction.CallbackContext context) { anim.SetBool("left_special", context.performed); }
     public void RightNormal(InputAction.CallbackContext context) { rightMoveset[0].pressed = context.performed; anim.SetBool("right_normal", context.performed); }
