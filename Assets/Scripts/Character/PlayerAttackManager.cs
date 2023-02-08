@@ -2,41 +2,38 @@ using UnityEngine;
 
 public class PlayerAttackManager : StateMachineBehaviour
 {
-    private PlayerController player;
+    private Player player;
     private Move currentMove;
+    private bool currentMoveFound;
     private GameObject currentHitbox;
     private Side side;
     private CameraEffects cameraFollow;
 
     private void Awake()
     {
-        player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
+        player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
         cameraFollow = GameObject.FindGameObjectWithTag("CAMERA").GetComponent<CameraEffects>();
     }
 
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        // Checks which of the four possible attacks the player is perfoming, then saves a reference to the corresponding move and its hitbox.
-        if (stateInfo.IsName("Left Normal")) { 
-            currentMove = player.leftNormalSlot;
-            side = Side.Left;
-            currentHitbox = player.leftHitboxes[(int) currentMove.hitboxType]; 
+ 
+        currentMoveFound = false;
+        for (int i = 0; i < player.getLeftMoveset.Count; ++i) {
+            if (stateInfo.IsName("Left"+i)) {
+                currentMove = player.getLeftMoveset[i];
+                side = Side.Left;
+                currentHitbox = player.leftHitboxes[(int)currentMove.hitboxType];
+                currentMoveFound = true;
+            }
         }
-        else if (stateInfo.IsName("Right Normal")) { 
-            currentMove = player.rightNormalSlot;
-            side = Side.Right;
-            currentHitbox = player.rightHitboxes[(int) currentMove.hitboxType]; 
-        }
-        else if (stateInfo.IsName("Left Special")) { 
-            currentMove = player.leftSpecialSlot;
-            side = Side.Left;
-            currentHitbox = player.leftHitboxes[(int) currentMove.hitboxType]; 
-        }
-        else if (stateInfo.IsName("Right Special")) { 
-            currentMove = player.rightSpecialSlot;
-            side = Side.Right;
-            currentHitbox = player.rightHitboxes[(int) currentMove.hitboxType]; 
+        for (int i = 0; i < player.getRightMoveset.Count && !currentMoveFound; ++i) {
+            if (stateInfo.IsName("Right"+i)) {
+                currentMove = player.getRightMoveset[i];
+                side = Side.Right;
+                currentHitbox = player.rightHitboxes[(int)currentMove.hitboxType];
+            }
         }
 
         // Assigns the move's power and damage to the hitbox component so that once it hits the information is passed onto the hurtbox.
@@ -54,7 +51,7 @@ public class PlayerAttackManager : StateMachineBehaviour
     {
         player.tracking = currentMove.isTracking(side, stateInfo.normalizedTime);
         currentHitbox.GetComponent<Hitbox>().Activate(currentMove.isHitboxActive(side, stateInfo.normalizedTime));
-        if (side == Side.Right) currentMove.ChargeAttack(animator.IsInTransition(layerIndex), player.attackSpeed);
+        if (side == Side.Right) currentMove.ChargeAttack(animator.IsInTransition(layerIndex));
     }
 
     // OnStateExit is called when a transition ends and the state machine finishes evaluating this state
@@ -66,5 +63,4 @@ public class PlayerAttackManager : StateMachineBehaviour
         currentMove.ResetChargePhase();
     }
 
-    
 }

@@ -10,7 +10,7 @@ public class CameraEffects : MonoBehaviour
 
 
     [Header("Target Parameters")]
-    public PlayerController playerController;
+    public Player playerController;
     private CinemachineVirtualCamera vcam;
     private CinemachineOrbitalTransposer transposer;
 
@@ -49,7 +49,7 @@ public class CameraEffects : MonoBehaviour
 
     private void Start()
     {
-        currentMove = playerController.rightNormalSlot;
+        currentMove = playerController.getLeftMoveset[0];
     }
 
     public void Initialized()

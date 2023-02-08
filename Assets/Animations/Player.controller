@@ -135,10 +135,10 @@ AnimatorStateMachine:
     m_Position: {x: 310, y: -10, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 421632313408585391}
-    m_Position: {x: 310, y: -150, z: 0}
+    m_Position: {x: 310, y: -80, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -3356859780714560140}
-    m_Position: {x: 310, y: -80, z: 0}
+    m_Position: {x: 310, y: -150, z: 0}
   m_ChildStateMachines: []
   m_AnyStateTransitions: []
   m_EntryTransitions: []
@@ -649,7 +649,7 @@ AnimatorStateTransition:
     m_ConditionEvent: can_attack
     m_EventTreshold: 0
   - m_ConditionMode: 1
-    m_ConditionEvent: left_special
+    m_ConditionEvent: right_normal
     m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: -1776509431900132454}
@@ -1202,6 +1202,9 @@ AnimatorStateTransition:
   m_Name: 
   m_Conditions:
   - m_ConditionMode: 1
+    m_ConditionEvent: can_skip
+    m_EventTreshold: 0
+  - m_ConditionMode: 1
     m_ConditionEvent: skip_fwd
     m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
@@ -1352,7 +1355,7 @@ AnimatorStateTransition:
     m_ConditionEvent: can_attack
     m_EventTreshold: 0
   - m_ConditionMode: 1
-    m_ConditionEvent: right_normal
+    m_ConditionEvent: left_special
     m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 421632313408585391}
@@ -1472,7 +1475,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Left Normal
+  m_Name: Left0
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions:
@@ -1490,7 +1493,7 @@ AnimatorState:
   m_TimeParameterActive: 0
   m_Motion: {fileID: 7400000, guid: 86ab08e4cb4e6ae48957371e28abc53e, type: 2}
   m_Tag: Attacking
-  m_SpeedParameter: left_normal_speed
+  m_SpeedParameter: left0_speed
   m_MirrorParameter: 
   m_CycleOffsetParameter: 
   m_TimeParameter: 
@@ -1756,7 +1759,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Left Special
+  m_Name: Right0
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions:
@@ -1772,9 +1775,9 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: f7df541c44f44b644bc40a610b493186, type: 2}
+  m_Motion: {fileID: 7400000, guid: 942fd45d680be724fa17a409ef364cbe, type: 2}
   m_Tag: Attacking
-  m_SpeedParameter: left_special_speed
+  m_SpeedParameter: right0_speed
   m_MirrorParameter: 
   m_CycleOffsetParameter: 
   m_TimeParameter: 
@@ -2165,7 +2168,7 @@ AnimatorController:
     m_DefaultInt: 0
     m_DefaultBool: 0
     m_Controller: {fileID: 9100000}
-  - m_Name: guard_walk_speed
+  - m_Name: block_walk_speed
     m_Type: 1
     m_DefaultFloat: 0
     m_DefaultInt: 0
@@ -2177,25 +2180,25 @@ AnimatorController:
     m_DefaultInt: 0
     m_DefaultBool: 0
     m_Controller: {fileID: 9100000}
-  - m_Name: left_normal_speed
+  - m_Name: left0_speed
     m_Type: 1
     m_DefaultFloat: 1
     m_DefaultInt: 0
     m_DefaultBool: 0
     m_Controller: {fileID: 9100000}
-  - m_Name: right_normal_speed
+  - m_Name: left1_speed
     m_Type: 1
     m_DefaultFloat: 1
     m_DefaultInt: 0
     m_DefaultBool: 0
     m_Controller: {fileID: 9100000}
-  - m_Name: left_special_speed
+  - m_Name: right0_speed
     m_Type: 1
     m_DefaultFloat: 1
     m_DefaultInt: 0
     m_DefaultBool: 0
     m_Controller: {fileID: 9100000}
-  - m_Name: right_special_speed
+  - m_Name: right1_speed
     m_Type: 1
     m_DefaultFloat: 1
     m_DefaultInt: 0
@@ -2245,6 +2248,12 @@ AnimatorController:
     m_Controller: {fileID: 9100000}
   - m_Name: skip_bwd
     m_Type: 9
+    m_DefaultFloat: 0
+    m_DefaultInt: 0
+    m_DefaultBool: 0
+    m_Controller: {fileID: 9100000}
+  - m_Name: can_skip
+    m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
@@ -2319,7 +2328,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Right Normal
+  m_Name: Left1
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions:
@@ -2335,9 +2344,9 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: 942fd45d680be724fa17a409ef364cbe, type: 2}
+  m_Motion: {fileID: 7400000, guid: f7df541c44f44b644bc40a610b493186, type: 2}
   m_Tag: Attacking
-  m_SpeedParameter: right_normal_speed
+  m_SpeedParameter: left1_speed
   m_MirrorParameter: 
   m_CycleOffsetParameter: 
   m_TimeParameter: 
@@ -2447,7 +2456,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Right Special
+  m_Name: Right1
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions:
@@ -2465,7 +2474,7 @@ AnimatorState:
   m_TimeParameterActive: 0
   m_Motion: {fileID: 7400000, guid: 7c07cd5f4914ba2418339577c66370f1, type: 2}
   m_Tag: Attacking
-  m_SpeedParameter: right_special_speed
+  m_SpeedParameter: right1_speed
   m_MirrorParameter: 
   m_CycleOffsetParameter: 
   m_TimeParameter: 
@@ -2966,7 +2975,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Guard
+  m_Name: Block
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions:
@@ -2982,7 +2991,7 @@ AnimatorState:
   m_TimeParameterActive: 0
   m_Motion: {fileID: 8395684303347265360}
   m_Tag: Movement
-  m_SpeedParameter: guard_walk_speed
+  m_SpeedParameter: block_walk_speed
   m_MirrorParameter: 
   m_CycleOffsetParameter: 
   m_TimeParameter: 
@@ -3551,6 +3560,9 @@ AnimatorStateTransition:
   m_PrefabAsset: {fileID: 0}
   m_Name: 
   m_Conditions:
+  - m_ConditionMode: 1
+    m_ConditionEvent: can_skip
+    m_EventTreshold: 0
   - m_ConditionMode: 1
     m_ConditionEvent: skip_bwd
     m_EventTreshold: 0

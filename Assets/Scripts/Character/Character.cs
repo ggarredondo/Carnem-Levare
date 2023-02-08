@@ -4,10 +4,7 @@ using System.Linq;
 
 public abstract class Character : MonoBehaviour
 {
-    protected Animator anim;
-    protected AnimatorOverrideController animOverride;
-    protected AnimationClip[] animatorDefaults;
-
+    // Character Attributes
     [Header("Tracking values")]
     [SerializeField] protected Transform target;
     [System.NonSerialized] public bool tracking = true;
@@ -22,30 +19,56 @@ public abstract class Character : MonoBehaviour
     [SerializeField] private float attackDamage = 0f;
     [Tooltip("Attack animation speed")] [Range(0f, 2f)] public float attackSpeed = 1f;
     [SerializeField] [Range(0f, 2f)] protected float casualWalkingSpeed = 1f;
-    [SerializeField] [Range(0f, 2f)] protected float guardWalkingSpeed = 1f;
+    [SerializeField] [Range(0f, 2f)] protected float blockWalkingSpeed = 1f;
     [SerializeField] [Range(0f, 2f)] protected float skipSpeed = 1f;
     [SerializeField] [Range(1f, 1.3f)] private float height = 1f;
     [SerializeField] private float mass = 1f;
     [SerializeField] private float drag = 0f; // SHOULD BE CALCULATED GIVEN MASS
+    [SerializeField] protected List<Move> leftMoveset, rightMoveset;
     private Rigidbody rb;
 
     [Header("Hitbox Lists - Same items as HitboxType enum")]
     public List<GameObject> leftHitboxes;
     public List<GameObject> rightHitboxes;
 
-    protected void init()
+    // Character Variables
+    protected Animator anim;
+    protected AnimatorOverrideController animOverride;
+    protected AnimationClip[] animatorDefaults;
+
+    protected Vector2 direction, directionTarget;
+    protected float directionSpeed;
+
+    protected bool isBlocking = false;
+
+    protected virtual void Awake()
     {
+        // Initialize Character Attributes
         stamina = maxStamina;
-        anim = GetComponent<Animator>();
-        animatorDefaults = anim.runtimeAnimatorController.animationClips;
-        animOverride = new AnimatorOverrideController(anim.runtimeAnimatorController);
         transform.localScale *= height;
         rb = GetComponent<Rigidbody>();
         rb.mass = mass;
         rb.drag = drag;
+
+        // Initialize Character Variables
+        anim = GetComponent<Animator>();
+        animatorDefaults = anim.runtimeAnimatorController.animationClips;
+        animOverride = new AnimatorOverrideController(anim.runtimeAnimatorController);
+        direction = Vector2.zero;
+        directionTarget = Vector2.zero;
     }
 
-    protected void fixedUpdating()
+    protected virtual void Start()
+    {
+        UpdateMovesetAnimations();
+    }
+
+    protected virtual void Update()
+    {
+        SetAnimationParameters();
+    }
+
+    protected virtual void FixedUpdate()
     {
         targetLook = Quaternion.LookRotation(target.position - transform.position);
         if (tracking)
@@ -65,6 +88,47 @@ public abstract class Character : MonoBehaviour
         overrides.Add(new KeyValuePair<AnimationClip, AnimationClip>(animatorDefaults.Where(clip => clip.name == og_clip).SingleOrDefault(), new_clip));
         animOverride.ApplyOverrides(overrides);
         anim.runtimeAnimatorController = animOverride;
+    }
+
+    protected void UpdateMovesetAnimations()
+    {
+        // Left Moves
+        for (int i = 0; i < leftMoveset.Count; ++i)
+            UpdateAnimator("LeftClip"+i, leftMoveset[i].leftAnimation);
+
+        // Right Moves
+        for (int i = 0; i < rightMoveset.Count; ++i)
+            UpdateAnimator("RightClip"+i, rightMoveset[i].rightAnimation);
+    }
+
+    protected void UpdateMovesetSpeed()
+    {
+        // Left Moves
+        for (int i = 0; i < leftMoveset.Count; ++i)
+            anim.SetFloat("left"+i+"_speed", leftMoveset[i].getLeftAnimationSpeed * attackSpeed);
+
+        // Right Moves
+        for (int i = 0; i < rightMoveset.Count; ++i)
+            anim.SetFloat("right"+i+"_speed", rightMoveset[i].getRightAnimationSpeed * attackSpeed);
+    }
+
+    /// <summary>
+    /// Sets animation parameters for theS animator.
+    /// </summary>
+    protected virtual void SetAnimationParameters()
+    {
+        UpdateMovesetSpeed();
+        anim.SetBool("block", isBlocking);
+
+        // Ternary operator so that when the character isn't moving, the speed parameter doesn't affect the idle animation
+        anim.SetFloat("casual_walk_speed", directionTarget.magnitude == 0f ? 1f : casualWalkingSpeed);
+        anim.SetFloat("block_walk_speed", directionTarget.magnitude == 0f ? 1f : blockWalkingSpeed);
+        anim.SetFloat("skip_speed", skipSpeed);
+
+        // Softens movement by establishing the direction as a point that approaches the target direction at *directionSpeed* rate.
+        direction = Vector2.Lerp(direction, directionTarget, directionSpeed * Time.deltaTime);
+        anim.SetFloat("horizontal", direction.x);
+        anim.SetFloat("vertical", direction.y);
     }
 
     //***GAMEPLAY***
@@ -89,4 +153,6 @@ public abstract class Character : MonoBehaviour
     //***GET FUNCTIONS***
 
     public Animator getAnimator { get { return anim; } }
+    public List<Move> getLeftMoveset { get { return leftMoveset; } }
+    public List<Move> getRightMoveset { get { return rightMoveset; } }
 }

@@ -297,6 +297,7 @@ MonoBehaviour:
   attackSpeed: 1
   casualWalkingSpeed: 1
   guardWalkingSpeed: 1
+  skipSpeed: 1
   height: 1.1
   mass: 1
   drag: 0
@@ -304,7 +305,8 @@ MonoBehaviour:
   rightHitboxes: []
   horizontal: 0
   vertical: 0
-  isBlocking: 1
+  enemyDirectionSpeed: 1
+  block: 1
 --- !u!114 &3674996438534986267
 MonoBehaviour:
   m_ObjectHideFlags: 0

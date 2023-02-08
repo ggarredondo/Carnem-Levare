@@ -40,9 +40,11 @@ public class Move : MonoBehaviour
     [Header("Attack Animations")]
     // Animations that the move performs, depending on whether the Move slot is left or right, and if the player is currently crouching.
     public AnimationClip leftAnimation;
-    [Range(0f, 2f)] public float leftAnimationSpeed = 1f;
+    [SerializeField] [Range(0f, 2f)] private float leftAnimationSpeed = 1f;
+
     public AnimationClip rightAnimation;
-    [Range(0f, 2f)] public float rightAnimationSpeed = 1f;
+    [SerializeField] [Range(0f, 2f)] private float rightAnimationSpeed = 1f;
+    private float currentRightAnimationSpeed;
 
     [Header("Attack Values")]
     public Direction direction;
@@ -56,12 +58,11 @@ public class Move : MonoBehaviour
     [Tooltip("Character stops tracking the opponent during the interval [commitStartTime, commitEndTime) of the normalized animation time")]
     [SerializeField] [Range(0f, 1f)] private float leftCommitEndTime = 0f, rightCommitStartTime = 0f, rightCommitEndTime = 0f;
 
-    [System.NonSerialized] public bool pressed = false; // Used to check if the input is held down.
-    [System.NonSerialized] public float chargeSpeed = 1f; // Attack animation modifier when input is held down.
-
     [Header("Charge Values")]
     [Tooltip("Can it be charged?")]
     [SerializeField] private bool chargeable = true;
+
+    [System.NonSerialized] public bool pressed = false; // Used to check if input is held down.
 
     [Tooltip("How quickly the animation slows down when holding the attack button (interpolation value) (right side only)")]
     [SerializeField] private float chargeDecay; // Interpolation value used for lerp affecting chargeSpeed.
@@ -112,13 +113,13 @@ public class Move : MonoBehaviour
     /// the animation speed reaches a minimum. Only attacks coming from the right.
     /// </summary>
     /// <param name="inTransition">Is the animator in transition?</param>
-    /// <param name="attackSpeed">Character's attack speed</param>
-    public void ChargeAttack(bool inTransition, float attackSpeed)
+    public void ChargeAttack(bool inTransition)
     {
         switch (chargePhase)
         {
             case ChargePhase.waiting:
                 if (pressed && chargeable) {
+                    currentRightAnimationSpeed = rightAnimationSpeed;
                     chargePhase = ChargePhase.performing;
                     deltaTimer = 0f;
                 }
@@ -126,12 +127,12 @@ public class Move : MonoBehaviour
 
             case ChargePhase.performing:
                 if (pressed && !inTransition) {
-                    chargeSpeed = Mathf.Lerp(chargeSpeed, 0f, chargeDecay * attackSpeed * rightAnimationSpeed * Time.deltaTime);
+                    currentRightAnimationSpeed = Mathf.Lerp(currentRightAnimationSpeed, 0f, chargeDecay * rightAnimationSpeed * Time.deltaTime);
                     deltaTimer += Time.deltaTime;
                 }
 
                 if (!pressed || deltaTimer >= chargeLimit) {
-                    chargeSpeed = 1f;
+                    currentRightAnimationSpeed = rightAnimationSpeed;
                     chargePhase = ChargePhase.canceled;
                 }
                 break;
@@ -143,9 +144,10 @@ public class Move : MonoBehaviour
     /// </summary>
     public void ResetChargePhase() { chargePhase = ChargePhase.waiting; }
 
+    public float getLeftAnimationSpeed { get { return leftAnimationSpeed; } }
+    public float getRightAnimationSpeed { get { return currentRightAnimationSpeed; } }
+
     public ChargePhase getChargePhase { get { return chargePhase; } }
-
     public float getDeltaTimer { get { return deltaTimer; } }
-
     public float getChargeLimit { get { return chargeLimit; } }
 }
