@@ -420,7 +420,7 @@ MonoBehaviour:
   rightHitboxes: []
   stickSpeed: 15
   smoothStickSpeed: 5
-  stickTapTolerance: 0.2
+  stickTapTolerance: 0.6
   modifyTimeScale: 0
   timeScale: 1
 --- !u!114 &4706402254706946843
