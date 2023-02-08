@@ -60,12 +60,23 @@ public abstract class Character : MonoBehaviour
 
     protected virtual void Start()
     {
-        UpdateMovesetAnimations();
+        InitializeMoveset();
+        anim.SetFloat("skip_speed", skipSpeed);
+
     }
 
     protected virtual void Update()
     {
-        SetAnimationParameters();
+        anim.SetBool("block", isBlocking);
+
+        // Ternary operator so that when the character isn't moving, the speed parameter doesn't affect the idle animation
+        anim.SetFloat("casual_walk_speed", directionTarget.magnitude == 0f ? 1f : casualWalkingSpeed);
+        anim.SetFloat("block_walk_speed", directionTarget.magnitude == 0f ? 1f : blockWalkingSpeed);
+
+        // Softens movement by establishing the direction as a point that approaches the target direction at *directionSpeed* rate.
+        direction = Vector2.Lerp(direction, directionTarget, directionSpeed * Time.deltaTime);
+        anim.SetFloat("horizontal", direction.x);
+        anim.SetFloat("vertical", direction.y);
     }
 
     protected virtual void FixedUpdate()
@@ -90,45 +101,24 @@ public abstract class Character : MonoBehaviour
         anim.runtimeAnimatorController = animOverride;
     }
 
-    protected void UpdateMovesetAnimations()
-    {
-        // Left Moves
-        for (int i = 0; i < leftMoveset.Count; ++i)
-            UpdateAnimator("LeftClip"+i, leftMoveset[i].leftAnimation);
-
-        // Right Moves
-        for (int i = 0; i < rightMoveset.Count; ++i)
-            UpdateAnimator("RightClip"+i, rightMoveset[i].rightAnimation);
-    }
-
-    protected void UpdateMovesetSpeed()
-    {
-        // Left Moves
-        for (int i = 0; i < leftMoveset.Count; ++i)
-            anim.SetFloat("left"+i+"_speed", leftMoveset[i].getLeftAnimationSpeed * attackSpeed);
-
-        // Right Moves
-        for (int i = 0; i < rightMoveset.Count; ++i)
-            anim.SetFloat("right"+i+"_speed", rightMoveset[i].getRightAnimationSpeed * attackSpeed);
-    }
-
     /// <summary>
-    /// Sets animation parameters for theS animator.
+    /// Assigns moves' animations and speed to animator.
     /// </summary>
-    protected virtual void SetAnimationParameters()
+    protected void InitializeMoveset()
     {
-        UpdateMovesetSpeed();
-        anim.SetBool("block", isBlocking);
+        // Left Moves
+        for (int i = 0; i < leftMoveset.Count; ++i)
+        {
+            UpdateAnimator("LeftClip" + i, leftMoveset[i].leftAnimation);
+            anim.SetFloat("left" + i + "_speed", leftMoveset[i].getLeftAnimationSpeed * attackSpeed);
+        }
 
-        // Ternary operator so that when the character isn't moving, the speed parameter doesn't affect the idle animation
-        anim.SetFloat("casual_walk_speed", directionTarget.magnitude == 0f ? 1f : casualWalkingSpeed);
-        anim.SetFloat("block_walk_speed", directionTarget.magnitude == 0f ? 1f : blockWalkingSpeed);
-        anim.SetFloat("skip_speed", skipSpeed);
-
-        // Softens movement by establishing the direction as a point that approaches the target direction at *directionSpeed* rate.
-        direction = Vector2.Lerp(direction, directionTarget, directionSpeed * Time.deltaTime);
-        anim.SetFloat("horizontal", direction.x);
-        anim.SetFloat("vertical", direction.y);
+        // Right Moves
+        for (int i = 0; i < rightMoveset.Count; ++i)
+        {
+            UpdateAnimator("RightClip" + i, rightMoveset[i].rightAnimation);
+            anim.SetFloat("right" + i + "_speed", rightMoveset[i].getRightAnimationSpeed * attackSpeed);
+        }
     }
 
     //***GAMEPLAY***

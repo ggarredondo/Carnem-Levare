@@ -41,41 +41,45 @@ public class Move : MonoBehaviour
     // Animations that the move performs, depending on whether the Move slot is left or right, and if the player is currently crouching.
     public AnimationClip leftAnimation;
     [SerializeField] [Range(0f, 2f)] private float leftAnimationSpeed = 1f;
+    public float getLeftAnimationSpeed { get { return leftAnimationSpeed; } }
 
     public AnimationClip rightAnimation;
     [SerializeField] [Range(0f, 2f)] private float rightAnimationSpeed = 1f;
-    private float currentRightAnimationSpeed;
+    public float getRightAnimationSpeed { get { return rightAnimationSpeed; } }
 
     [Header("Attack Values")]
     public Direction direction;
     public Power power;
     public float baseDamage; // Used to calculate damage dealt to the opponent's stamina, if it hits.
 
+    #region TrackingValues
     [Header("Tracking Values")]
     [Tooltip("Character stops tracking the opponent during the interval [commitStartTime, commitEndTime) of the normalized animation time")]
     [SerializeField] [Range(0f, 1f)] private float leftCommitStartTime = 0f;
 
     [Tooltip("Character stops tracking the opponent during the interval [commitStartTime, commitEndTime) of the normalized animation time")]
     [SerializeField] [Range(0f, 1f)] private float leftCommitEndTime = 0f, rightCommitStartTime = 0f, rightCommitEndTime = 0f;
+    #endregion
 
+    #region ChargeValues
     [Header("Charge Values")]
     [Tooltip("Can it be charged?")]
     [SerializeField] private bool chargeable = true;
+    public bool getChargeable { get { return chargeable; } }
 
-    [System.NonSerialized] public bool pressed = false; // Used to check if input is held down.
+    [System.NonSerialized] public bool pressed = false; // Check if this move specifically is held down.
 
     [Tooltip("How quickly the animation slows down when holding the attack button (interpolation value) (right side only)")]
     [SerializeField] private float chargeDecay; // Interpolation value used for lerp affecting chargeSpeed.
+    public float getChargeDecay { get { return chargeDecay; } }
 
     [Tooltip("Move will perform automatically after *chargeLimit* deltaTime seconds charging")]
     [SerializeField] private float chargeLimit = 2f;
-    private float deltaTimer = 0f;
+    public float getChargeLimit { get { return chargeLimit; } }
 
     [Tooltip("The camera starts dolly zooming from a fraction of the chargeLimit value")]
-    public float chargeLimitDivisor = 6f;
-
-    public enum ChargePhase { waiting, performing, canceled }
-    private ChargePhase chargePhase;
+    [SerializeField] private float chargeLimitDivisor = 6f;
+    public float getChargeLimitDivisor { get { return chargeLimitDivisor; } }
 
     [Header("Hitbox Values")]
     public HitboxType hitboxType;
@@ -84,7 +88,9 @@ public class Move : MonoBehaviour
 
     [Tooltip("Hitbox is activated during the interval [hitboxStartTime, hitboxEndTime) of the normalized animation time")]
     [SerializeField] [Range(0f, 1f)] private float rightHitboxStartTime = 0f, rightHitboxEndTime = 0f;
+    #endregion
 
+    #region PublicMethods
     /// <summary>
     /// Hitbox is active during the interval [hitboxStartTime, hitboxEndTime).
     /// </summary>
@@ -107,47 +113,5 @@ public class Move : MonoBehaviour
             return !(normalizedTime >= leftCommitStartTime && normalizedTime < leftCommitEndTime);
         return !(normalizedTime >= rightCommitStartTime && normalizedTime < rightCommitEndTime);
     }
-
-    /// <summary>
-    /// Slows down attack animation if attack button is held down, until it's released or 
-    /// the animation speed reaches a minimum. Only attacks coming from the right.
-    /// </summary>
-    /// <param name="inTransition">Is the animator in transition?</param>
-    public void ChargeAttack(bool inTransition)
-    {
-        switch (chargePhase)
-        {
-            case ChargePhase.waiting:
-                if (pressed && chargeable) {
-                    currentRightAnimationSpeed = rightAnimationSpeed;
-                    chargePhase = ChargePhase.performing;
-                    deltaTimer = 0f;
-                }
-                break;
-
-            case ChargePhase.performing:
-                if (pressed && !inTransition) {
-                    currentRightAnimationSpeed = Mathf.Lerp(currentRightAnimationSpeed, 0f, chargeDecay * rightAnimationSpeed * Time.deltaTime);
-                    deltaTimer += Time.deltaTime;
-                }
-
-                if (!pressed || deltaTimer >= chargeLimit) {
-                    currentRightAnimationSpeed = rightAnimationSpeed;
-                    chargePhase = ChargePhase.canceled;
-                }
-                break;
-        }
-    }
-
-    /// <summary>
-    /// Resets move's chargePhase to waiting state.
-    /// </summary>
-    public void ResetChargePhase() { chargePhase = ChargePhase.waiting; }
-
-    public float getLeftAnimationSpeed { get { return leftAnimationSpeed; } }
-    public float getRightAnimationSpeed { get { return currentRightAnimationSpeed; } }
-
-    public ChargePhase getChargePhase { get { return chargePhase; } }
-    public float getDeltaTimer { get { return deltaTimer; } }
-    public float getChargeLimit { get { return chargeLimit; } }
+    #endregion
 }

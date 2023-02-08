@@ -963,7 +963,7 @@ PrefabInstance:
     - target: {fileID: 4706402254675848929, guid: 730b6f15cbfa96c4db1930def4556da9,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.0000000026452491
+      value: 0.0000000026452496
       objectReference: {fileID: 0}
     - target: {fileID: 4706402254675848929, guid: 730b6f15cbfa96c4db1930def4556da9,
         type: 3}
@@ -1116,12 +1116,6 @@ PrefabInstance:
       propertyPath: leftHitboxes.Array.data[4]
       value: 
       objectReference: {fileID: 0}
-    - target: {fileID: 4706402254706946820, guid: 730b6f15cbfa96c4db1930def4556da9,
-        type: 3}
-      propertyPath: rightMoveset.Array.data[1]
-      value: 
-      objectReference: {fileID: -6294080308579570103, guid: efb9a55e3f71721488f998a63a6181b3,
-        type: 3}
     - target: {fileID: 4706402254706946820, guid: 730b6f15cbfa96c4db1930def4556da9,
         type: 3}
       propertyPath: rightHitboxes.Array.data[0]
@@ -1325,7 +1319,7 @@ PrefabInstance:
     - target: {fileID: 4706402255246442001, guid: 730b6f15cbfa96c4db1930def4556da9,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.0000000026452491
+      value: 0.0000000026452496
       objectReference: {fileID: 0}
     - target: {fileID: 4706402255246442001, guid: 730b6f15cbfa96c4db1930def4556da9,
         type: 3}

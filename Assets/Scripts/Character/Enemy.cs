@@ -17,7 +17,7 @@ public class Enemy : Character
 
     override protected void Update()
     {
-        SetAnimationParameters();
+        base.Update();
 
         DebugInput(); // DEBUG
     }

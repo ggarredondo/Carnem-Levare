@@ -23,12 +23,24 @@ public class Player : Character
 
     override protected void Update()
     {
-        SetAnimationParameters();
+        // Bellow are values that must be updated frame by frame to allow certain animations to play out accordingly.
+        isAttacking = anim.GetCurrentAnimatorStateInfo(0).IsTag("Attacking") && !anim.IsInTransition(0);
+
+        // The player can only attack if they're not attacking already.
+        canAttack = !isAttacking;
+        anim.SetBool("can_attack", canAttack);
+
+        // The player can only skip if they are blocking but not attacking.
+        canSkip = canTapStick && !isAttacking;
+        anim.SetBool("can_skip", canSkip);
+
+        directionSpeed = directionTarget.magnitude == 0f && !isBlocking ? smoothStickSpeed : stickSpeed;
+        base.Update();
 
         if (modifyTimeScale) Time.timeScale = timeScale; // DEBUG
     }
 
-    //***INPUT***
+    #region Input
     // Meant for Unity Input System events
 
     public void Movement(InputAction.CallbackContext context) { 
@@ -44,38 +56,16 @@ public class Player : Character
         if (directionTarget.magnitude == 0f) canTapStick = true;
     }
 
-    public void SkipFwd(InputAction.CallbackContext context) { anim.SetBool("skip_fwd", context.performed); }
-    public void SkipBwd(InputAction.CallbackContext context) { anim.SetBool("skip_bwd", context.performed); }
-    public void LeftNormal(InputAction.CallbackContext context) { leftMoveset[0].pressed = context.performed; anim.SetBool("left_normal", context.performed); }
-    public void LeftSpecial(InputAction.CallbackContext context) { leftMoveset[1].pressed = context.performed; anim.SetBool("left_special", context.performed); }
+    public void SkipFwd(InputAction.CallbackContext context) { anim.SetBool("skip_fwd", context.performed && isBlocking); }
+    public void SkipBwd(InputAction.CallbackContext context) { anim.SetBool("skip_bwd", context.performed && isBlocking); }
+    public void LeftNormal(InputAction.CallbackContext context) { anim.SetBool("left_normal", context.performed); }
+    public void LeftSpecial(InputAction.CallbackContext context) { anim.SetBool("left_special", context.performed); }
     public void RightNormal(InputAction.CallbackContext context) { rightMoveset[0].pressed = context.performed; anim.SetBool("right_normal", context.performed); }
     public void RightSpecial(InputAction.CallbackContext context) { rightMoveset[1].pressed = context.performed; anim.SetBool("right_special", context.performed); }
     public void Block(InputAction.CallbackContext context) { isBlocking = context.performed; }
+    #endregion
 
-    //***ANIMATION***
-
-    /// <summary>
-    /// Sets animation parameters for the animator.
-    /// </summary>
-    override protected void SetAnimationParameters()
-    {
-        // Bellow are values that must be updated frame by frame to allow certain animations to play out accordingly.
-        isAttacking = anim.GetCurrentAnimatorStateInfo(0).IsTag("Attacking") && !anim.IsInTransition(0);
-
-        // The player can only attack if they're not attacking already.
-        canAttack = !isAttacking;
-        anim.SetBool("can_attack", canAttack);
-
-        // The player can only skip if they are blocking but not attacking.
-        canSkip = isBlocking && canTapStick && !isAttacking;
-        anim.SetBool("can_skip", canSkip);
-
-        directionSpeed = directionTarget.magnitude == 0f && !isBlocking ? smoothStickSpeed : stickSpeed;
-        base.SetAnimationParameters();
-    }
-
-    //***GET FUNCTIONS***
-
+    #region PublicMethods
     /// <summary>
     /// Is the player in any State tagged as "Movement"?
     /// </summary>
@@ -89,4 +79,6 @@ public class Player : Character
     public float getDirectionX { get { return direction.x; } }
 
     public bool getIsBlocking { get { return isBlocking; } }
+    #endregion
+
 }

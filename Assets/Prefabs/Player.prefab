@@ -420,7 +420,7 @@ MonoBehaviour:
   rightHitboxes: []
   stickSpeed: 15
   smoothStickSpeed: 5
-  stickTapTolerance: 0.7
+  stickTapTolerance: 0.2
   modifyTimeScale: 0
   timeScale: 1
 --- !u!114 &4706402254706946843
@@ -1027,8 +1027,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 96a0b26df394cd74db24fe997d0a97c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  orbitalValue: 0.05
-  orbitalRecovery: 0
+  orbitalValue: 18
+  orbitalRecovery: 6
   playerController: {fileID: 4706402254706946820}
   smoothFollow: {fileID: 3740683913482428883}
   smoothFollowActivated: 1

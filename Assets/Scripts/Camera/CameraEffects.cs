@@ -30,7 +30,8 @@ public class CameraEffects : MonoBehaviour
     public LinealMovement onGuardLinealMovement;
     public bool onGuardActivated;
 
-    [NonSerialized] public Move currentMove;
+    private ChargePhase chargePhase;
+    private float deltaTimer, chargeLimit, chargeLimitDivisor;
     private float holdingMinTime;
 
     private bool isMoving;
@@ -47,22 +48,25 @@ public class CameraEffects : MonoBehaviour
         cameraConditions = new bool[2];
     }
 
-    private void Start()
+    public void SetChargeValues(ChargePhase _chargePhase, float _deltaTimer, float _chargeLimit, float _chargeLimitDivisor)
     {
-        currentMove = playerController.getLeftMoveset[0];
+        chargePhase = _chargePhase;
+        deltaTimer = _deltaTimer;
+        chargeLimit = _chargeLimit;
+        chargeLimitDivisor = _chargeLimitDivisor;
     }
 
     public void Initialized()
     {
-        holdingMinTime = currentMove.getChargeLimit / currentMove.chargeLimitDivisor;
-        dollyZoom.aceleration.Item1 = 1 / (currentMove.getChargeLimit - holdingMinTime);
+        holdingMinTime = chargeLimit / chargeLimitDivisor;
+        dollyZoom.aceleration.Item1 = 1 / (chargeLimit - holdingMinTime);
     }
 
     private void LateUpdate()
     {
         if (Time.timeScale > 0f)
         {
-            cameraConditions[0] = currentMove.getChargePhase == Move.ChargePhase.performing && currentMove.getDeltaTimer >= holdingMinTime && currentMove.getDeltaTimer <= currentMove.getChargeLimit;
+            cameraConditions[0] = (chargePhase == ChargePhase.performing) && (deltaTimer >= holdingMinTime) && (deltaTimer <= chargeLimit);
             cameraConditions[1] = playerController.getIsBlocking;
 
             OrbitalMovement();

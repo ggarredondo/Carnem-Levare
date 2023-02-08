@@ -1,5 +1,7 @@
 using UnityEngine;
 
+public enum ChargePhase { waiting, performing, canceled }
+
 public class PlayerAttackManager : StateMachineBehaviour
 {
     private Player player;
@@ -7,18 +9,48 @@ public class PlayerAttackManager : StateMachineBehaviour
     private bool currentMoveFound;
     private GameObject currentHitbox;
     private Side side;
-    private CameraEffects cameraFollow;
+    private ChargePhase chargePhase;
+    private float deltaTimer;
+    private CameraEffects cameraEffect;
 
     private void Awake()
     {
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
-        cameraFollow = GameObject.FindGameObjectWithTag("CAMERA").GetComponent<CameraEffects>();
+        cameraEffect = GameObject.FindGameObjectWithTag("CAMERA").GetComponent<CameraEffects>();
+    }
+
+    /// <summary>
+    /// Slows down attack animation if attack button is held down, until it's released or 
+    /// the animation speed reaches a minimum. Only attacks coming from the right, only player.
+    /// </summary>
+    private void ChargeAttack(Animator animator, int layerIndex)
+    {
+        switch (chargePhase)
+        {
+            case ChargePhase.waiting:
+                if (currentMove.pressed && currentMove.getChargeable) {
+                    deltaTimer = 0f;
+                    chargePhase = ChargePhase.performing;
+                }
+                break;
+
+            case ChargePhase.performing:
+                if (currentMove.pressed && !animator.IsInTransition(layerIndex)) {
+                    animator.speed = Mathf.Lerp(animator.speed, 0f, currentMove.getChargeDecay * Time.deltaTime);
+                    deltaTimer += Time.deltaTime;
+                }
+
+                if (!currentMove.pressed || deltaTimer >= currentMove.getChargeLimit) {
+                    animator.speed = 1f;
+                    chargePhase = ChargePhase.canceled;
+                }
+                break;
+        }
     }
 
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
- 
         currentMoveFound = false;
         for (int i = 0; i < player.getLeftMoveset.Count; ++i) {
             if (stateInfo.IsName("Left"+i)) {
@@ -42,8 +74,9 @@ public class PlayerAttackManager : StateMachineBehaviour
         // Assign the move's direction by checking if it's straight, and if it's not we assign left o right.
         currentHitbox.GetComponent<Hitbox>().side = currentMove.direction == Direction.Straight ? 0 : (int) side;
 
-        cameraFollow.currentMove = currentMove;
-        cameraFollow.Initialized();
+        // Assign charge attack timings to camera.
+        cameraEffect.SetChargeValues(chargePhase, deltaTimer, currentMove.getChargeLimit, currentMove.getChargeLimitDivisor);
+        cameraEffect.Initialized();
     }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
@@ -51,7 +84,10 @@ public class PlayerAttackManager : StateMachineBehaviour
     {
         player.tracking = currentMove.isTracking(side, stateInfo.normalizedTime);
         currentHitbox.GetComponent<Hitbox>().Activate(currentMove.isHitboxActive(side, stateInfo.normalizedTime));
-        if (side == Side.Right) currentMove.ChargeAttack(animator.IsInTransition(layerIndex));
+        if (side == Side.Right) ChargeAttack(animator, layerIndex);
+
+        // Camera checks Charge timings every update.
+        cameraEffect.SetChargeValues(chargePhase, deltaTimer, currentMove.getChargeLimit, currentMove.getChargeLimitDivisor);
     }
 
     // OnStateExit is called when a transition ends and the state machine finishes evaluating this state
@@ -60,7 +96,7 @@ public class PlayerAttackManager : StateMachineBehaviour
         player.tracking = true;
         currentHitbox.GetComponent<Hitbox>().hit = false;
         currentHitbox.GetComponent<Hitbox>().Activate(false);
-        currentMove.ResetChargePhase();
+        chargePhase = ChargePhase.waiting;
     }
 
 }
