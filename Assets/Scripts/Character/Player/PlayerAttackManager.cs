@@ -4,7 +4,7 @@ public enum ChargePhase { waiting, performing, canceled }
 
 public class PlayerAttackManager : AttackManager
 {
-    private ChargePhase chargePhase;
+    private ChargePhase chargePhase = ChargePhase.waiting;
     private float deltaTimer;
     private CameraEffects cameraEffect;
 
@@ -33,7 +33,7 @@ public class PlayerAttackManager : AttackManager
         switch (chargePhase)
         {
             case ChargePhase.waiting:
-                if (currentMove.pressed && currentMove.getChargeable)
+                if (currentMove.pressed && currentMove.getChargeable && !animator.IsInTransition(layerIndex))
                 {
                     deltaTimer = 0f;
                     chargePhase = ChargePhase.performing;
@@ -41,16 +41,15 @@ public class PlayerAttackManager : AttackManager
                 break;
 
             case ChargePhase.performing:
-                if (currentMove.pressed && !animator.IsInTransition(layerIndex))
-                {
-                    animator.speed = Mathf.Lerp(animator.speed, 0f, currentMove.getChargeDecay * Time.deltaTime);
-                    deltaTimer += Time.deltaTime;
-                }
-
                 if (!currentMove.pressed || deltaTimer >= currentMove.getChargeLimit)
                 {
                     animator.speed = 1f;
                     chargePhase = ChargePhase.canceled;
+                }
+                else if (currentMove.pressed)
+                {
+                    animator.speed = Mathf.Lerp(animator.speed, 0f, currentMove.getChargeDecay * Time.deltaTime);
+                    deltaTimer += Time.deltaTime;
                 }
                 break;
         }
@@ -61,7 +60,7 @@ public class PlayerAttackManager : AttackManager
     {
         base.OnStateUpdate(animator, stateInfo, layerIndex);
 
-        ChargeAttack(animator, layerIndex);
+        if (side == Side.Right) ChargeAttack(animator, layerIndex);
         cameraEffect.SetChargeValues(chargePhase, deltaTimer); // Camera checks Charge timings every update.
     }
 
