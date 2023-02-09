@@ -2,12 +2,13 @@ using UnityEngine;
 
 public enum ChargePhase { waiting, performing, canceled }
 
-public class PlayerAttackManager : StateMachineBehaviour
+public class AttackManager : StateMachineBehaviour
 {
     private Player player;
     private Move currentMove;
     private bool currentMoveFound;
     private GameObject currentHitbox;
+
     private Side side;
     private ChargePhase chargePhase;
     private float deltaTimer;
@@ -19,52 +20,24 @@ public class PlayerAttackManager : StateMachineBehaviour
         cameraEffect = GameObject.FindGameObjectWithTag("CAMERA").GetComponent<CameraEffects>();
     }
 
-    /// <summary>
-    /// Slows down attack animation if attack button is held down, until it's released or 
-    /// the animation speed reaches a minimum. Only attacks coming from the right, only player.
-    /// </summary>
-    private void ChargeAttack(Animator animator, int layerIndex)
-    {
-        switch (chargePhase)
-        {
-            case ChargePhase.waiting:
-                if (currentMove.pressed && currentMove.getChargeable) {
-                    deltaTimer = 0f;
-                    chargePhase = ChargePhase.performing;
-                }
-                break;
-
-            case ChargePhase.performing:
-                if (currentMove.pressed && !animator.IsInTransition(layerIndex)) {
-                    animator.speed = Mathf.Lerp(animator.speed, 0f, currentMove.getChargeDecay * Time.deltaTime);
-                    deltaTimer += Time.deltaTime;
-                }
-
-                if (!currentMove.pressed || deltaTimer >= currentMove.getChargeLimit) {
-                    animator.speed = 1f;
-                    chargePhase = ChargePhase.canceled;
-                }
-                break;
-        }
-    }
-
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         currentMoveFound = false;
-        for (int i = 0; i < player.getLeftMoveset.Count; ++i) {
-            if (stateInfo.IsName("Left"+i)) {
+        for (int i = 0; i < player.getLeftMoveset.Count && !currentMoveFound; ++i)
+        {
+            if (stateInfo.IsName("Left" + i)) {
                 currentMove = player.getLeftMoveset[i];
                 side = Side.Left;
                 currentHitbox = player.leftHitboxes[(int)currentMove.hitboxType];
-                currentMoveFound = true;
+                currentMoveFound = true; // end loop
             }
-        }
-        for (int i = 0; i < player.getRightMoveset.Count && !currentMoveFound; ++i) {
-            if (stateInfo.IsName("Right"+i)) {
+
+            if (stateInfo.IsName("Right" + i)) {
                 currentMove = player.getRightMoveset[i];
                 side = Side.Right;
                 currentHitbox = player.rightHitboxes[(int)currentMove.hitboxType];
+                currentMoveFound = true; // end loop
             }
         }
 
@@ -79,6 +52,38 @@ public class PlayerAttackManager : StateMachineBehaviour
         cameraEffect.Initialized();
     }
 
+    /// <summary>
+    /// Slows down attack animation if attack button is held down, until it's released or 
+    /// the animation speed reaches a minimum. Only attacks coming from the right, only player.
+    /// </summary>
+    private void ChargeAttack(Animator animator, int layerIndex)
+    {
+        switch (chargePhase)
+        {
+            case ChargePhase.waiting:
+                if (currentMove.pressed && currentMove.getChargeable)
+                {
+                    deltaTimer = 0f;
+                    chargePhase = ChargePhase.performing;
+                }
+                break;
+
+            case ChargePhase.performing:
+                if (currentMove.pressed && !animator.IsInTransition(layerIndex))
+                {
+                    animator.speed = Mathf.Lerp(animator.speed, 0f, currentMove.getChargeDecay * Time.deltaTime);
+                    deltaTimer += Time.deltaTime;
+                }
+
+                if (!currentMove.pressed || deltaTimer >= currentMove.getChargeLimit)
+                {
+                    animator.speed = 1f;
+                    chargePhase = ChargePhase.canceled;
+                }
+                break;
+        }
+    }
+
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
@@ -87,7 +92,7 @@ public class PlayerAttackManager : StateMachineBehaviour
         if (side == Side.Right) ChargeAttack(animator, layerIndex);
 
         // Camera checks Charge timings every update.
-        cameraEffect.SetChargeValues(chargePhase, deltaTimer, currentMove.getChargeLimit, currentMove.getChargeLimitDivisor);
+        cameraEffect.SetChargeValues(chargePhase, deltaTimer);
     }
 
     // OnStateExit is called when a transition ends and the state machine finishes evaluating this state

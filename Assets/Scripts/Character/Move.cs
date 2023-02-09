@@ -1,5 +1,6 @@
 using UnityEngine;
 
+#region Enums
 // Does the attack come from the sides or is it straight?
 // Used to choose between hurt animations, if it hits.
 public enum Direction
@@ -29,6 +30,7 @@ public enum Side : int
     Left = -1,
     Right = 1
 }
+#endregion
 
 /// <summary>
 /// Specification of an attack performed by a player or NPC.

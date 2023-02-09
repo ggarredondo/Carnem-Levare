@@ -17,9 +17,9 @@ public class Player : Character
     [SerializeField] private float stickTapTolerance = 0.1f;
     private bool canTapStick = true;
 
-    [Header("Debug")]
-    [SerializeField] private bool modifyTimeScale = false;
-    [SerializeField] [Range(0f, 1f)] private float timeScale = 1f;
+    [Header("Debug")] // DEBUG
+    [SerializeField] private bool modifyTimeScale = false; // DEBUG
+    [SerializeField] [Range(0f, 1f)] private float timeScale = 1f; // DEBUG
 
     override protected void Update()
     {

@@ -48,6 +48,13 @@ public class CameraEffects : MonoBehaviour
         cameraConditions = new bool[2];
     }
 
+    // Charge Attack provisional functions ////////////////
+    public void SetChargeValues(ChargePhase _chargePhase, float _deltaTimer)
+    {
+        chargePhase = _chargePhase;
+        deltaTimer = _deltaTimer;
+    }
+
     public void SetChargeValues(ChargePhase _chargePhase, float _deltaTimer, float _chargeLimit, float _chargeLimitDivisor)
     {
         chargePhase = _chargePhase;
@@ -55,6 +62,7 @@ public class CameraEffects : MonoBehaviour
         chargeLimit = _chargeLimit;
         chargeLimitDivisor = _chargeLimitDivisor;
     }
+    ////////////////////////////////////////////////////////
 
     public void Initialized()
     {

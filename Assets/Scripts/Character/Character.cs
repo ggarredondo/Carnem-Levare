@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections.Generic;
 using System.Linq;
+using UnityEngine.Assertions;
 
 public abstract class Character : MonoBehaviour
 {
@@ -86,14 +87,13 @@ public abstract class Character : MonoBehaviour
             transform.rotation = Quaternion.RotateTowards(transform.rotation, targetLook, trackingRate * Time.deltaTime); // Rotate towards opponent.
     }
 
-    //***ANIMATION***
-
+    #region Animation
     /// <summary>
     /// Updates specific animation from animator in real time.
     /// </summary>
     /// <param name="og_clip">Name of the animation clip to be updated</param>
     /// <param name="new_clip">New animation clip</param>
-    protected void UpdateAnimator(string og_clip, AnimationClip new_clip)
+    private void UpdateAnimator(string og_clip, AnimationClip new_clip)
     {
         List<KeyValuePair<AnimationClip, AnimationClip>> overrides = new List<KeyValuePair<AnimationClip, AnimationClip>>();
         overrides.Add(new KeyValuePair<AnimationClip, AnimationClip>(animatorDefaults.Where(clip => clip.name == og_clip).SingleOrDefault(), new_clip));
@@ -104,25 +104,24 @@ public abstract class Character : MonoBehaviour
     /// <summary>
     /// Assigns moves' animations and speed to animator.
     /// </summary>
-    protected void InitializeMoveset()
+    private void InitializeMoveset()
     {
-        // Left Moves
+        Assert.AreEqual(leftMoveset.Count, rightMoveset.Count, "Left and Right movesets must have the same number of items");
+
         for (int i = 0; i < leftMoveset.Count; ++i)
         {
+            // Left Moves
             UpdateAnimator("LeftClip" + i, leftMoveset[i].leftAnimation);
             anim.SetFloat("left" + i + "_speed", leftMoveset[i].getLeftAnimationSpeed * attackSpeed);
-        }
 
-        // Right Moves
-        for (int i = 0; i < rightMoveset.Count; ++i)
-        {
+            // Right Moves
             UpdateAnimator("RightClip" + i, rightMoveset[i].rightAnimation);
             anim.SetFloat("right" + i + "_speed", rightMoveset[i].getRightAnimationSpeed * attackSpeed);
         }
     }
+    #endregion
 
-    //***GAMEPLAY***
-
+    #region GameplayFunctions
     /// <summary>
     /// Damage character's stamina.
     /// </summary>
@@ -139,10 +138,11 @@ public abstract class Character : MonoBehaviour
     /// <param name="baseDmg">Move's base damage</param>
     /// <returns>Calculated final damage</returns>
     public float CalculateAttackDamage(float baseDmg) { return baseDmg + attackDamage; }
+    #endregion
 
-    //***GET FUNCTIONS***
-
+    #region PublicMethods
     public Animator getAnimator { get { return anim; } }
     public List<Move> getLeftMoveset { get { return leftMoveset; } }
     public List<Move> getRightMoveset { get { return rightMoveset; } }
+    #endregion
 }
