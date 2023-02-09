@@ -38,6 +38,10 @@ public class PlayerAttackManager : AttackManager
                     deltaTimer = 0f;
                     chargePhase = ChargePhase.performing;
                 }
+                if (!currentMove.pressed)
+                {
+                    chargePhase = ChargePhase.canceled;
+                }
                 break;
 
             case ChargePhase.performing:
