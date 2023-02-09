@@ -17,10 +17,6 @@ public class Player : Character
     [SerializeField] private float stickTapTolerance = 0.1f;
     private bool canTapStick = true;
 
-    [Header("Debug")] // DEBUG
-    [SerializeField] private bool modifyTimeScale = false; // DEBUG
-    [SerializeField] [Range(0f, 1f)] private float timeScale = 1f; // DEBUG
-
     override protected void Update()
     {
         // Bellow are values that must be updated frame by frame to allow certain animations to play out accordingly.
@@ -33,13 +29,11 @@ public class Player : Character
         // The player can only skip if they are blocking but they aren't attacking nor skipping already.
         isSkipping = anim.GetCurrentAnimatorStateInfo(0).IsTag("Skipping");
         // Attacking is checked through the animator so that you can buffer skip after attacking.
-        // Everything else is checked through input so that the tapping doesn't buffer for the next frames.
+        // Everything else is checked through input so that skipping doesn't buffer for the next frames.
         anim.SetBool("can_skip", !isAttacking);
 
         directionSpeed = directionTarget.magnitude == 0f && !isBlocking ? smoothStickSpeed : stickSpeed;
         base.Update();
-
-        if (modifyTimeScale) Time.timeScale = timeScale; // DEBUG
     }
 
     #region Input

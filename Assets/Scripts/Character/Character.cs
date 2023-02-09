@@ -42,6 +42,11 @@ public abstract class Character : MonoBehaviour
 
     protected bool isBlocking = false;
 
+    [Header("Debug")] // DEBUG
+    [SerializeField] private bool updateMoveset = false; // DEBUG
+    [Tooltip("Only works on Player")] [SerializeField] private bool modifyTimeScale = false; // DEBUG
+    [Tooltip("Only works on Player")] [SerializeField] [Range(0f, 1f)] private float timeScale = 1f; // DEBUG
+
     protected virtual void Awake()
     {
         // Initialize Character Attributes
@@ -78,6 +83,9 @@ public abstract class Character : MonoBehaviour
         direction = Vector2.Lerp(direction, directionTarget, directionSpeed * Time.deltaTime);
         anim.SetFloat("horizontal", direction.x);
         anim.SetFloat("vertical", direction.y);
+
+        if (updateMoveset) { InitializeMoveset(); updateMoveset = false; } // DEBUG
+        if (modifyTimeScale && this is Player) Time.timeScale = timeScale; // DEBUG
     }
 
     protected virtual void FixedUpdate()

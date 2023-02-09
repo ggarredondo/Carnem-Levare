@@ -57,7 +57,7 @@ MonoBehaviour:
   rightCommitStartTime: 0
   rightCommitEndTime: 0
   chargeable: 1
-  chargeDecay: 5
+  chargeDecay: 6
   chargeLimit: 2
   chargeLimitDivisor: 6
   hitboxType: 0

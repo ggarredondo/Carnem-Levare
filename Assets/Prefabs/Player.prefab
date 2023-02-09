@@ -1056,7 +1056,7 @@ MonoBehaviour:
   fieldOfView:
     Item1: 25
     Item2: 50
-  offsetVariation: {x: -0.3, y: 0, z: 2}
+  offsetVariation: {x: 0, y: 0, z: 2}
   zoomPositions:
     Item1: {x: 0, y: 0, z: 0}
     Item2: {x: 0, y: 0, z: 0}
