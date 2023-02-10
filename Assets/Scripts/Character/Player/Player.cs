@@ -51,7 +51,6 @@ public class Player : Character
         if (directionTarget.x < -stickTapTolerance || directionTarget.x > stickTapTolerance) canTapStick = false;
         if (directionTarget.magnitude == 0f) canTapStick = true;
     }
-
     public void SkipFwd(InputAction.CallbackContext context) { anim.SetBool("skip_fwd", context.performed && isBlocking && canTapStick && !isSkipping); }
     public void SkipBwd(InputAction.CallbackContext context) { anim.SetBool("skip_bwd", context.performed && isBlocking && canTapStick && !isSkipping); }
     public void LeftNormal(InputAction.CallbackContext context) { anim.SetBool("left_normal", context.performed); }
@@ -63,18 +62,24 @@ public class Player : Character
 
     #region PublicMethods
     /// <summary>
-    /// Is the player in any State tagged as "Movement"?
+    /// Return's player current stick position.
     /// </summary>
-    public bool getIsMovement { get { return anim.GetCurrentAnimatorStateInfo(0).IsTag("Movement"); } }
+    public Vector2 getStickDirection { get { return directionTarget; } }
 
     /// <summary>
-    /// Is the player moving? The player may move by pressing the stick or by attacking.
+    /// Returns player's linearly interpolated stick direction.
     /// </summary>
-    public bool getIsMoving { get { return !(directionTarget.magnitude == 0f && anim.GetCurrentAnimatorStateInfo(0).IsTag("Movement")); } }
+    public Vector2 getStickSmoothDirection { get { return direction; } }
 
-    public float getDirectionX { get { return direction.x; } }
-
-    public bool getIsBlocking { get { return isBlocking; } }
+    /// <summary>
+    /// Checks if player is moving, whether by walking or blocking.
+    /// </summary>
+    public bool isPlayerMoving { get { return directionTarget.magnitude != 0f && anim.GetCurrentAnimatorStateInfo(0).IsTag("Movement"); } }
+    public bool isPlayerIdle { get { return directionTarget.magnitude == 0f && anim.GetCurrentAnimatorStateInfo(0).IsTag("Movement"); } }
+    public bool isPlayerSkippingForward { get { return anim.GetCurrentAnimatorStateInfo(0).IsName("Skip Foward"); } }
+    public bool isPlayerSkippingBackwards { get { return anim.GetCurrentAnimatorStateInfo(0).IsName("Skip Backwards"); } }
+    public bool isPlayerAttacking { get { return anim.GetCurrentAnimatorStateInfo(0).IsTag("Attacking"); } }
+    public bool isPlayerBlocking { get { return isBlocking; } }
     #endregion
 
 }

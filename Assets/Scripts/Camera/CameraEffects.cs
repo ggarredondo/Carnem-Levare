@@ -10,7 +10,7 @@ public class CameraEffects : MonoBehaviour
 
 
     [Header("Target Parameters")]
-    public Player playerController;
+    public Player player;
     private CinemachineVirtualCamera vcam;
     private CinemachineOrbitalTransposer transposer;
 
@@ -75,15 +75,15 @@ public class CameraEffects : MonoBehaviour
         if (Time.timeScale > 0f)
         {
             cameraConditions[0] = (chargePhase == ChargePhase.performing) && (deltaTimer >= holdingMinTime) && (deltaTimer <= chargeLimit);
-            cameraConditions[1] = playerController.getIsBlocking;
+            cameraConditions[1] = player.isPlayerBlocking;
 
             OrbitalMovement();
 
             //Making camera damping oscillate depending on player movement
-            if (smoothFollowActivated) smoothFollow.ApplyMove(playerController.getIsMoving);
+            if (smoothFollowActivated) smoothFollow.ApplyMove(!player.isPlayerIdle);
 
             //Making camera noise oscillate depending on player movement
-            if (noiseActivated) noise.ApplyMove(playerController.getIsMovement);
+            if (noiseActivated) noise.ApplyMove(player.isPlayerIdle || player.isPlayerMoving);
 
             if (dollyZoomActivated || onGuardActivated)
             {
@@ -102,9 +102,9 @@ public class CameraEffects : MonoBehaviour
 
     private void OrbitalMovement()
     {
-        if (playerController.getDirectionX < -0.1f && !cameraConditions[1]) transposer.m_XAxis.Value -= orbitalValue * Time.deltaTime;
+        if (player.getStickSmoothDirection.x < -0.1f && !cameraConditions[1]) transposer.m_XAxis.Value -= orbitalValue * Time.deltaTime;
 
-        if (playerController.getDirectionX > 0.1f && !cameraConditions[1]) transposer.m_XAxis.Value += orbitalValue * Time.deltaTime;
+        if (player.getStickSmoothDirection.x > 0.1f && !cameraConditions[1]) transposer.m_XAxis.Value += orbitalValue * Time.deltaTime;
 
         if (cameraConditions[1])
         {

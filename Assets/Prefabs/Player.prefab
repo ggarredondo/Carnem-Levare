@@ -1030,7 +1030,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   orbitalValue: 18
   orbitalRecovery: 6
-  playerController: {fileID: 4706402254706946820}
+  player: {fileID: 4706402254706946820}
   smoothFollow: {fileID: 3740683913482428883}
   smoothFollowActivated: 1
   noise: {fileID: 5856529488855800536}
