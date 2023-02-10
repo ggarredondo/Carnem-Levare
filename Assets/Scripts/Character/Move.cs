@@ -43,11 +43,11 @@ public class Move : MonoBehaviour
     // Animations that the move performs, depending on whether the Move slot is left or right, and if the player is currently crouching.
     public AnimationClip leftAnimation;
     [SerializeField] [Range(0f, 2f)] private float leftAnimationSpeed = 1f;
-    public float getLeftAnimationSpeed { get { return leftAnimationSpeed; } }
+    public float LeftAnimationSpeed { get { return leftAnimationSpeed; } }
 
     public AnimationClip rightAnimation;
     [SerializeField] [Range(0f, 2f)] private float rightAnimationSpeed = 1f;
-    public float getRightAnimationSpeed { get { return rightAnimationSpeed; } }
+    public float RightAnimationSpeed { get { return rightAnimationSpeed; } }
 
     [Header("Attack Values")]
     public Direction direction;
@@ -67,21 +67,21 @@ public class Move : MonoBehaviour
     [Header("Charge Values")]
     [Tooltip("Can it be charged?")]
     [SerializeField] private bool chargeable = true;
-    public bool getChargeable { get { return chargeable; } }
+    public bool Chargeable { get { return chargeable; } }
 
     [System.NonSerialized] public bool pressed = false; // Check if this move specifically is held down.
 
     [Tooltip("How quickly the animation slows down when holding the attack button (interpolation value) (right side only)")]
     [SerializeField] private float chargeDecay; // Interpolation value used for lerp affecting chargeSpeed.
-    public float getChargeDecay { get { return chargeDecay; } }
+    public float ChargeDecay { get { return chargeDecay; } }
 
     [Tooltip("Move will perform automatically after *chargeLimit* deltaTime seconds charging")]
     [SerializeField] private float chargeLimit = 2f;
-    public float getChargeLimit { get { return chargeLimit; } }
+    public float ChargeLimit { get { return chargeLimit; } }
 
     [Tooltip("The camera starts dolly zooming from a fraction of the chargeLimit value")]
     [SerializeField] private float chargeLimitDivisor = 6f;
-    public float getChargeLimitDivisor { get { return chargeLimitDivisor; } }
+    public float ChargeLimitDivisor { get { return chargeLimitDivisor; } }
 
     [Header("Hitbox Values")]
     public HitboxType hitboxType;

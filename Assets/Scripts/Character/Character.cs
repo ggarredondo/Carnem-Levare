@@ -19,23 +19,23 @@ public abstract class Character : MonoBehaviour
     [SerializeField] private float maxStamina = 0f;
     [SerializeField] private float attackDamage = 0f;
     [Tooltip("Attack animation speed")] [Range(0f, 2f)] public float attackSpeed = 1f;
-    [SerializeField] [Range(0f, 2f)] protected float casualWalkingSpeed = 1f;
-    [SerializeField] [Range(0f, 2f)] protected float blockWalkingSpeed = 1f;
-    [SerializeField] [Range(0f, 2f)] protected float skipSpeed = 1f;
+    [SerializeField] [Range(0f, 2f)] private float casualWalkingSpeed = 1f;
+    [SerializeField] [Range(0f, 2f)] private float blockWalkingSpeed = 1f;
+    [SerializeField] [Range(0f, 2f)] private float skipSpeed = 1f;
     [SerializeField] [Range(1f, 1.3f)] private float height = 1f;
     [SerializeField] private float mass = 1f;
     [SerializeField] private float drag = 0f; // SHOULD BE CALCULATED GIVEN MASS
-    [SerializeField] protected List<Move> leftMoveset, rightMoveset;
+    [SerializeField] private List<Move> leftMoveset, rightMoveset;
     private Rigidbody rb;
 
     [Header("Hitbox Lists - Same items as HitboxType enum")]
-    public List<GameObject> leftHitboxes;
-    public List<GameObject> rightHitboxes;
+    [SerializeField] private List<GameObject> leftHitboxes;
+    [SerializeField] private List<GameObject> rightHitboxes;
 
     // Character Variables
     protected Animator anim;
-    protected AnimatorOverrideController animOverride;
-    protected AnimationClip[] animatorDefaults;
+    private AnimatorOverrideController animOverride;
+    private AnimationClip[] animatorDefaults;
 
     protected Vector2 direction, directionTarget;
     protected float directionSpeed;
@@ -120,11 +120,11 @@ public abstract class Character : MonoBehaviour
         {
             // Left Moves
             UpdateAnimator("LeftClip" + i, leftMoveset[i].leftAnimation);
-            anim.SetFloat("left" + i + "_speed", leftMoveset[i].getLeftAnimationSpeed * attackSpeed);
+            anim.SetFloat("left" + i + "_speed", leftMoveset[i].LeftAnimationSpeed * attackSpeed);
 
             // Right Moves
             UpdateAnimator("RightClip" + i, rightMoveset[i].rightAnimation);
-            anim.SetFloat("right" + i + "_speed", rightMoveset[i].getRightAnimationSpeed * attackSpeed);
+            anim.SetFloat("right" + i + "_speed", rightMoveset[i].RightAnimationSpeed * attackSpeed);
         }
     }
     #endregion
@@ -149,8 +149,18 @@ public abstract class Character : MonoBehaviour
     #endregion
 
     #region PublicMethods
-    public Animator getAnimator { get { return anim; } }
-    public List<Move> getLeftMoveset { get { return leftMoveset; } }
-    public List<Move> getRightMoveset { get { return rightMoveset; } }
+    public Animator Animator { get { return anim; } }
+    public List<Move> LeftMoveset { get { return leftMoveset; } }
+    public List<Move> RightMoveset { get { return rightMoveset; } }
+    public List<GameObject> LeftHitboxes { get { return leftHitboxes; } }
+    public List<GameObject> RightHitboxes { get { return rightHitboxes; } }
+
+    /// <summary>
+    /// To state if a move from right moveset is being pressed. Necessary for
+    /// charging attacks.
+    /// </summary>
+    /// <param name="i">Move index in right moveset list</param>
+    /// <param name="b">Press value</param>
+    public void PressMove(int i, bool b) { rightMoveset[i].pressed = b; }
     #endregion
 }

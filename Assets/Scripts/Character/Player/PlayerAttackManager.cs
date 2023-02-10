@@ -20,7 +20,7 @@ public class PlayerAttackManager : AttackManager
         base.OnStateEnter(animator, stateInfo, layerIndex);
 
         // Assign charge attack timings to camera.
-        cameraEffect.SetChargeValues(chargePhase, deltaTimer, currentMove.getChargeLimit, currentMove.getChargeLimitDivisor);
+        cameraEffect.SetChargeValues(chargePhase, deltaTimer, currentMove.ChargeLimit, currentMove.ChargeLimitDivisor);
         cameraEffect.Initialized();
     }
 
@@ -33,7 +33,7 @@ public class PlayerAttackManager : AttackManager
         switch (chargePhase)
         {
             case ChargePhase.waiting:
-                if (currentMove.pressed && currentMove.getChargeable && !animator.IsInTransition(layerIndex))
+                if (currentMove.pressed && currentMove.Chargeable && !animator.IsInTransition(layerIndex))
                 {
                     deltaTimer = 0f;
                     chargePhase = ChargePhase.performing;
@@ -43,14 +43,14 @@ public class PlayerAttackManager : AttackManager
                 break;
 
             case ChargePhase.performing:
-                if (!currentMove.pressed || deltaTimer >= currentMove.getChargeLimit)
+                if (!currentMove.pressed || deltaTimer >= currentMove.ChargeLimit)
                 {
                     animator.speed = 1f;
                     chargePhase = ChargePhase.canceled;
                 }
                 else if (currentMove.pressed)
                 {
-                    animator.speed = Mathf.Lerp(animator.speed, 0f, currentMove.getChargeDecay * Time.deltaTime);
+                    animator.speed = Mathf.Lerp(animator.speed, 0f, currentMove.ChargeDecay * Time.deltaTime);
                     deltaTimer += Time.deltaTime;
                 }
                 break;

@@ -102,9 +102,9 @@ public class CameraEffects : MonoBehaviour
 
     private void OrbitalMovement()
     {
-        if (player.getStickSmoothDirection.x < -0.1f && !cameraConditions[1]) transposer.m_XAxis.Value -= orbitalValue * Time.deltaTime;
+        if (player.StickSmoothDirection.x < -0.1f && !cameraConditions[1]) transposer.m_XAxis.Value -= orbitalValue * Time.deltaTime;
 
-        if (player.getStickSmoothDirection.x > 0.1f && !cameraConditions[1]) transposer.m_XAxis.Value += orbitalValue * Time.deltaTime;
+        if (player.StickSmoothDirection.x > 0.1f && !cameraConditions[1]) transposer.m_XAxis.Value += orbitalValue * Time.deltaTime;
 
         if (cameraConditions[1])
         {

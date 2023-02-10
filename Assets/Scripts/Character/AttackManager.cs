@@ -12,19 +12,19 @@ public abstract class AttackManager : StateMachineBehaviour
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         currentMoveFound = false;
-        for (int i = 0; i < character.getLeftMoveset.Count && !currentMoveFound; ++i)
+        for (int i = 0; i < character.LeftMoveset.Count && !currentMoveFound; ++i)
         {
             if (stateInfo.IsName("Left" + i)) {
-                currentMove = character.getLeftMoveset[i];
+                currentMove = character.LeftMoveset[i];
                 side = Side.Left;
-                currentHitbox = character.leftHitboxes[(int)currentMove.hitboxType];
+                currentHitbox = character.LeftHitboxes[(int)currentMove.hitboxType];
                 currentMoveFound = true; // end loop
             }
 
             if (stateInfo.IsName("Right" + i)) {
-                currentMove = character.getRightMoveset[i];
+                currentMove = character.RightMoveset[i];
                 side = Side.Right;
-                currentHitbox = character.rightHitboxes[(int)currentMove.hitboxType];
+                currentHitbox = character.RightHitboxes[(int)currentMove.hitboxType];
                 currentMoveFound = true; // end loop
             }
         }
