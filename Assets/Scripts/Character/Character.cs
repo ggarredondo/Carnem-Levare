@@ -16,15 +16,15 @@ public abstract class Character : MonoBehaviour
 
     [Header("Stats")]
     [SerializeField] private float stamina;
-    [SerializeField] private float maxStamina = 0f;
+    [SerializeField] [InitializationField] private float maxStamina = 0f;
     [SerializeField] private float attackDamage = 0f;
-    [Tooltip("Attack animation speed")] [Range(0f, 2f)] public float attackSpeed = 1f;
-    [SerializeField] [Range(0f, 2f)] private float casualWalkingSpeed = 1f;
-    [SerializeField] [Range(0f, 2f)] private float blockWalkingSpeed = 1f;
-    [SerializeField] [Range(0f, 2f)] private float skipSpeed = 1f;
-    [SerializeField] [Range(1f, 1.3f)] private float height = 1f;
-    [SerializeField] private float mass = 1f;
-    [SerializeField] private float drag = 0f; // SHOULD BE CALCULATED GIVEN MASS
+    [Tooltip("Attack animation speed")] [InitializationField] [Range(0f, 2f)] public float attackSpeed = 1f;
+    [SerializeField] [InitializationField] [Range(0f, 2f)] private float casualWalkingSpeed = 1f;
+    [SerializeField] [InitializationField] [Range(0f, 2f)] private float blockWalkingSpeed = 1f;
+    [SerializeField] [InitializationField] [Range(0f, 2f)] private float skipSpeed = 1f;
+    [SerializeField] [InitializationField] [Range(1f, 1.3f)] private float height = 1f;
+    [SerializeField] [InitializationField] private float mass = 1f;
+    [SerializeField] [InitializationField] private float drag = 0f; // SHOULD BE CALCULATED GIVEN MASS
     [SerializeField] private List<Move> leftMoveset, rightMoveset;
     private Rigidbody rb;
 
@@ -133,7 +133,7 @@ public abstract class Character : MonoBehaviour
     /// <summary>
     /// Damage character's stamina.
     /// </summary>
-    /// <param name="dmg">Damage taken.</param>
+    /// <param name="dmg">Damage taken (absolute value).</param>
     public void Damage(float dmg)
     {
         stamina -= Mathf.Abs(dmg);
@@ -149,11 +149,11 @@ public abstract class Character : MonoBehaviour
     #endregion
 
     #region PublicMethods
-    public Animator Animator { get { return anim; } }
-    public List<Move> LeftMoveset { get { return leftMoveset; } }
-    public List<Move> RightMoveset { get { return rightMoveset; } }
-    public List<GameObject> LeftHitboxes { get { return leftHitboxes; } }
-    public List<GameObject> RightHitboxes { get { return rightHitboxes; } }
+    public Animator Animator { get => anim; }
+    public List<Move> LeftMoveset { get => leftMoveset; }
+    public List<Move> RightMoveset { get => rightMoveset; }
+    public List<GameObject> LeftHitboxes { get => leftHitboxes; }
+    public List<GameObject> RightHitboxes { get => rightHitboxes; }
 
     /// <summary>
     /// To state if a move from right moveset is being pressed. Necessary for
