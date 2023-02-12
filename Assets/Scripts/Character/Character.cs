@@ -26,7 +26,6 @@ public abstract class Character : MonoBehaviour
     [SerializeField] [InitializationField] private float mass = 1f;
     [SerializeField] [InitializationField] private float drag = 0f; // SHOULD BE CALCULATED GIVEN MASS
     [SerializeField] private List<Move> leftMoveset, rightMoveset;
-    private Rigidbody rb;
 
     [Header("Hitbox Lists - Same items as HitboxType enum")]
     [SerializeField] private List<GameObject> leftHitboxes;
@@ -36,6 +35,7 @@ public abstract class Character : MonoBehaviour
     protected Animator anim;
     private AnimatorOverrideController animOverride;
     private AnimationClip[] animatorDefaults;
+    private Rigidbody rb;
 
     protected Vector2 direction, directionTarget;
     protected float directionSpeed;
