@@ -9,7 +9,7 @@ using UnityEditor;
 public sealed class InitializationField : PropertyAttribute {}
 
 [CustomPropertyDrawer(typeof(InitializationField))]
-public class InitializationFieldDrawer : PropertyDrawer
+public sealed class InitializationFieldDrawer : PropertyDrawer
 {
     public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
     {

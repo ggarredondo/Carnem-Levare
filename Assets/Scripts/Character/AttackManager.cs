@@ -18,14 +18,14 @@ public abstract class AttackManager : StateMachineBehaviour
                 currentMove = character.LeftMoveset[i];
                 side = Side.Left;
                 currentHitbox = character.LeftHitboxes[(int)currentMove.hitboxType];
-                currentMoveFound = true; // end loop
+                currentMoveFound = true;
             }
 
             if (stateInfo.IsName("Right" + i)) {
                 currentMove = character.RightMoveset[i];
                 side = Side.Right;
                 currentHitbox = character.RightHitboxes[(int)currentMove.hitboxType];
-                currentMoveFound = true; // end loop
+                currentMoveFound = true;
             }
         }
 
