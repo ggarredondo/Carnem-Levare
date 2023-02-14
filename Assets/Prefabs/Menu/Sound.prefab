@@ -131,4 +131,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 636b999a4cc4c8946acc58c7ab5b63e9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sounds: []
+  sounds:
+  - name: Intro
+    clip: {fileID: 8300000, guid: eeeadf4cce2dc8e4096fd7dd10a8bd1b, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 1
+    spatialBlend: 0
+    source: {fileID: 0}

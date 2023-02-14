@@ -128,6 +128,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 0}
   globalMenuManager: {fileID: 6585527209193569098}
+  rebindTimeDelay: 0.25
 --- !u!1 &1944051377457019642
 GameObject:
   m_ObjectHideFlags: 0
@@ -321,6 +322,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f0c1e7eaf7a61bd489232f0235baf06b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  typeButton: 0
+  mouseCanSelect: 0
 --- !u!114 &1944051377490177189
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1060,6 +1063,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f0c1e7eaf7a61bd489232f0235baf06b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  typeButton: 0
+  mouseCanSelect: 0
 --- !u!114 &1944051377604658685
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1432,6 +1437,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f0c1e7eaf7a61bd489232f0235baf06b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  typeButton: 0
+  mouseCanSelect: 0
 --- !u!114 &1944051377663610370
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1639,6 +1646,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f0c1e7eaf7a61bd489232f0235baf06b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  typeButton: 0
+  mouseCanSelect: 0
 --- !u!114 &1944051377671868048
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2008,6 +2017,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f0c1e7eaf7a61bd489232f0235baf06b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  typeButton: 0
+  mouseCanSelect: 0
 --- !u!114 &1944051377817709890
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2715,7 +2726,7 @@ GameObject:
   - component: {fileID: 1944051377917262443}
   - component: {fileID: 1944051377917262442}
   m_Layer: 5
-  m_Name: RightSpecial
+  m_Name: Right Special
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2818,6 +2829,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f0c1e7eaf7a61bd489232f0235baf06b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  typeButton: 0
+  mouseCanSelect: 0
 --- !u!114 &1944051377917262442
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2944,7 +2957,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 882.50006, y: -73.672}
+  m_AnchoredPosition: {x: 882.5, y: -73.672}
   m_SizeDelta: {x: 300, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1944051377957345999
@@ -4871,6 +4884,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f0c1e7eaf7a61bd489232f0235baf06b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  typeButton: 0
+  mouseCanSelect: 0
 --- !u!114 &1944051378388969615
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5544,7 +5559,7 @@ GameObject:
   - component: {fileID: 1944051378540263144}
   - component: {fileID: 1944051378540263151}
   m_Layer: 5
-  m_Name: RightNormal
+  m_Name: Right Normal
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5647,6 +5662,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f0c1e7eaf7a61bd489232f0235baf06b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  typeButton: 0
+  mouseCanSelect: 0
 --- !u!114 &1944051378540263151
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5773,7 +5790,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 282.50006, y: -73.672}
+  m_AnchoredPosition: {x: 282.5, y: -73.672}
   m_SizeDelta: {x: 300, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1944051378579137047
@@ -6242,6 +6259,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f0c1e7eaf7a61bd489232f0235baf06b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  typeButton: 0
+  mouseCanSelect: 0
 --- !u!114 &1944051378665706745
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6369,7 +6388,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 757.8123, y: -38.177746}
+  m_AnchoredPosition: {x: 760, y: -46.309998}
   m_SizeDelta: {x: 293.73, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1944051378705501477
@@ -6448,6 +6467,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f0c1e7eaf7a61bd489232f0235baf06b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  typeButton: 0
+  mouseCanSelect: 0
 --- !u!114 &1944051378705501483
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7013,7 +7034,7 @@ GameObject:
   - component: {fileID: 1944051378920608541}
   - component: {fileID: 1944051378920608540}
   m_Layer: 5
-  m_Name: LeftNormal
+  m_Name: Left Normal
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7116,6 +7137,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f0c1e7eaf7a61bd489232f0235baf06b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  typeButton: 0
+  mouseCanSelect: 0
 --- !u!114 &1944051378920608540
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7220,7 +7243,7 @@ GameObject:
   - component: {fileID: 1944051378922446111}
   - component: {fileID: 1944051378922446110}
   m_Layer: 5
-  m_Name: LeftSpecial
+  m_Name: Left Special
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7323,6 +7346,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f0c1e7eaf7a61bd489232f0235baf06b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  typeButton: 0
+  mouseCanSelect: 0
 --- !u!114 &1944051378922446110
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8073,6 +8098,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f0c1e7eaf7a61bd489232f0235baf06b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  typeButton: 0
+  mouseCanSelect: 0
 --- !u!114 &1944051379083741527
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8307,7 +8334,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.108208336, y: 0.10216862}
   m_AnchorMax: {x: 0.89400005, y: 0.18800001}
-  m_AnchoredPosition: {x: -2.4301147, y: -0.20300293}
+  m_AnchoredPosition: {x: -2.4300537, y: -0.20300293}
   m_SizeDelta: {x: 6.9044, y: 0.40591}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1944051379099941124
@@ -8942,6 +8969,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f0c1e7eaf7a61bd489232f0235baf06b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  typeButton: 0
+  mouseCanSelect: 0
 --- !u!114 &1944051379231966370
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9068,7 +9097,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 582.50006, y: -73.672}
+  m_AnchoredPosition: {x: 582.5, y: -73.672}
   m_SizeDelta: {x: 300, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1944051379243469540
@@ -10271,6 +10300,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f0c1e7eaf7a61bd489232f0235baf06b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  typeButton: 0
+  mouseCanSelect: 0
 --- !u!114 &6585527207938769723
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10477,6 +10508,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f0c1e7eaf7a61bd489232f0235baf06b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  typeButton: 0
+  mouseCanSelect: 0
 --- !u!114 &6585527208038565769
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10683,6 +10716,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f0c1e7eaf7a61bd489232f0235baf06b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  typeButton: 0
+  mouseCanSelect: 0
 --- !u!114 &6585527208494698691
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11034,6 +11069,12 @@ MonoBehaviour:
   highlightedButtonColor:
     serializedVersion: 2
     rgba: 4286864224
+  selectedButtonColor2:
+    serializedVersion: 2
+    rgba: 0
+  highlightedButtonColor2:
+    serializedVersion: 2
+    rgba: 0
 --- !u!1 &8784146616953135735
 GameObject:
   m_ObjectHideFlags: 0

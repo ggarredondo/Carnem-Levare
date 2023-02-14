@@ -10,7 +10,7 @@ EditorBuildSettings:
     guid: cc36de46ab694694e9fd03015604d18a
   - enabled: 1
     path: Assets/Scenes/WithoutNonDestructibles_MainMenuScene.unity
-    guid: 23781cde263b37a4f8f139f2d9345796
+    guid: 4eeb1788d118dab4fad3cbe78c7f7bb7
   - enabled: 1
     path: Assets/Scenes/CombatScene.unity
     guid: f0413dd8caa8ae04da676524480dd586

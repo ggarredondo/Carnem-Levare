@@ -79,7 +79,7 @@ public class ControlsMenu : MonoBehaviour
 
         for (int i = 0; i < buttons.childCount; i++)
         {
-            string buttonText = ControlSaver.uiMapping[buttons.GetChild(i).gameObject.GetComponent<TMP_Text>().text];
+            string buttonText = ControlSaver.uiMapping[buttons.GetChild(i).gameObject.name];
             string buttonAction = player.actions.FindActionMap(currentActionMap).FindAction(buttonText).bindings[0].effectivePath;
             buttons.GetChild(i).transform.GetChild(0).GetComponent<TMP_Text>().text = ControlSaver.mapping[buttonAction];
         }

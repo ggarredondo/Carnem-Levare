@@ -18,6 +18,6 @@ public class Sound
     [Range(0f, 1f)]
     public float spatialBlend;
 
-    [HideInInspector]
+    [System.NonSerialized]
     public AudioSource source;
 }
