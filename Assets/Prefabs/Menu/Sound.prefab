@@ -133,9 +133,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sounds:
   - name: Intro
-    clip: {fileID: 8300000, guid: eeeadf4cce2dc8e4096fd7dd10a8bd1b, type: 3}
+    clip: {fileID: 8300000, guid: 4de8a92d690abf347a9f0b2123daed4d, type: 3}
     volume: 1
     pitch: 1
     loop: 1
     spatialBlend: 0
-    source: {fileID: 0}
+  - name: Fight
+    clip: {fileID: 8300000, guid: bc8deed142934134e977b60b65dcb1f6, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 1
+    spatialBlend: 0

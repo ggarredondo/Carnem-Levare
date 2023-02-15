@@ -564,21 +564,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 9168311950435373000, guid: 654ed3f583879a2439f84e66d0a08ef7,
-        type: 3}
-      propertyPath: sounds.Array.size
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 9168311950435373000, guid: 654ed3f583879a2439f84e66d0a08ef7,
-        type: 3}
-      propertyPath: sounds.Array.data[0].clip
-      value: 
-      objectReference: {fileID: 8300000, guid: 50de7c9a4620bdf4a861de90f3f71f6f, type: 3}
-    - target: {fileID: 9168311950435373000, guid: 654ed3f583879a2439f84e66d0a08ef7,
-        type: 3}
-      propertyPath: sounds.Array.data[0].name
-      value: Test2
-      objectReference: {fileID: 0}
     - target: {fileID: 9168311950741595994, guid: 654ed3f583879a2439f84e66d0a08ef7,
         type: 3}
       propertyPath: m_Name
@@ -638,36 +623,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 9168311950817181050, guid: 654ed3f583879a2439f84e66d0a08ef7,
-        type: 3}
-      propertyPath: sounds.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 9168311950817181050, guid: 654ed3f583879a2439f84e66d0a08ef7,
-        type: 3}
-      propertyPath: sounds.Array.data[0].clip
-      value: 
-      objectReference: {fileID: 8300000, guid: bb1a5a3099fc4694b911f2ab98c1e602, type: 3}
-    - target: {fileID: 9168311950817181050, guid: 654ed3f583879a2439f84e66d0a08ef7,
-        type: 3}
-      propertyPath: sounds.Array.data[0].loop
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 9168311950817181050, guid: 654ed3f583879a2439f84e66d0a08ef7,
-        type: 3}
-      propertyPath: sounds.Array.data[0].name
-      value: Fight
-      objectReference: {fileID: 0}
-    - target: {fileID: 9168311950817181050, guid: 654ed3f583879a2439f84e66d0a08ef7,
-        type: 3}
-      propertyPath: sounds.Array.data[0].pitch
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 9168311950817181050, guid: 654ed3f583879a2439f84e66d0a08ef7,
-        type: 3}
-      propertyPath: sounds.Array.data[0].volume
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 654ed3f583879a2439f84e66d0a08ef7, type: 3}
@@ -958,17 +913,17 @@ PrefabInstance:
     - target: {fileID: 4706402254675848929, guid: 730b6f15cbfa96c4db1930def4556da9,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0.06912031
+      value: -0.0691203
       objectReference: {fileID: 0}
     - target: {fileID: 4706402254675848929, guid: 730b6f15cbfa96c4db1930def4556da9,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.0000000026452491
+      value: -0.000000004787512
       objectReference: {fileID: 0}
     - target: {fileID: 4706402254675848929, guid: 730b6f15cbfa96c4db1930def4556da9,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.000000038178683
+      value: -0.000000037663696
       objectReference: {fileID: 0}
     - target: {fileID: 4706402254675848930, guid: 730b6f15cbfa96c4db1930def4556da9,
         type: 3}
@@ -1325,17 +1280,17 @@ PrefabInstance:
     - target: {fileID: 4706402255246442001, guid: 730b6f15cbfa96c4db1930def4556da9,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0.06912031
+      value: -0.0691203
       objectReference: {fileID: 0}
     - target: {fileID: 4706402255246442001, guid: 730b6f15cbfa96c4db1930def4556da9,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.0000000026452491
+      value: -0.000000004787512
       objectReference: {fileID: 0}
     - target: {fileID: 4706402255246442001, guid: 730b6f15cbfa96c4db1930def4556da9,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.000000038178683
+      value: -0.000000037663696
       objectReference: {fileID: 0}
     - target: {fileID: 6434016986992118542, guid: 730b6f15cbfa96c4db1930def4556da9,
         type: 3}
