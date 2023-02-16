@@ -22,7 +22,7 @@ public class SelectableMenuManager : MenuManager
     {
         if (EventSystem.current != null)
         {
-            menus[actualActiveMenu].setFirstButton(EventSystem.current.currentSelectedGameObject);
+            menus[actualActiveMenu].SetFirstButton(EventSystem.current.currentSelectedGameObject);
             firstMenu = actualActiveMenu;
 
             SaveManager.Instance.Save();
@@ -102,6 +102,5 @@ public class SelectableMenuManager : MenuManager
 
         //Reassign the struct data to the button
         returnButton.navigation = navigation;
-
     }
 }

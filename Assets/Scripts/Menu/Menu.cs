@@ -38,7 +38,7 @@ public class Menu
         return firstSelectedButton;
     }
 
-    public void setFirstButton(GameObject firstButton)
+    public void SetFirstButton(GameObject firstButton)
     {
         firstSelectedButton = firstButton;
     }

@@ -78,7 +78,7 @@ public class MenuManager : MonoBehaviour
     public void ChangeMenu(int id)
     {
         if(EventSystem.current.currentSelectedGameObject != null)
-            menus[actualActiveMenu].setFirstButton(EventSystem.current.currentSelectedGameObject);
+            menus[actualActiveMenu].SetFirstButton(EventSystem.current.currentSelectedGameObject);
 
         SetActiveMenuById(id, true);
     }
@@ -89,7 +89,7 @@ public class MenuManager : MonoBehaviour
     public void ChangeMenuNoInitialize(int id)
     {
         if (EventSystem.current.currentSelectedGameObject != null)
-            menus[actualActiveMenu].setFirstButton(EventSystem.current.currentSelectedGameObject);
+            menus[actualActiveMenu].SetFirstButton(EventSystem.current.currentSelectedGameObject);
 
         SetActiveMenuById(id, false);
     }

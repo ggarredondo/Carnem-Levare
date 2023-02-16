@@ -48,6 +48,11 @@ public class CameraEffects : MonoBehaviour
         cameraConditions = new bool[2];
     }
 
+    private bool InitialPosition()
+    {
+        return transposer.m_FollowOffset == dollyZoom.zoomPositions.Item1 && vcam.m_Lens.FieldOfView == dollyZoom.fieldOfView.Item1;
+    }
+
     // Charge Attack provisional functions ////////////////
     public void SetChargeValues(ChargePhase _chargePhase, float _deltaTimer)
     {
@@ -88,7 +93,7 @@ public class CameraEffects : MonoBehaviour
             if (dollyZoomActivated || onGuardActivated)
             {
 
-                if (transposer.m_FollowOffset == dollyZoom.zoomPositions.Item1 && cameraStack.Count != 0) { cameraStack.Pop(); isMoving = false; }
+                if (InitialPosition() && cameraStack.Count != 0) { cameraStack.Pop(); isMoving = false; }
 
                 if (cameraConditions[0] && !isMoving) { dollyZoom.Initialize(); cameraStack.Push(dollyZoom); isMoving = true; actualCamera = 0; }
 
