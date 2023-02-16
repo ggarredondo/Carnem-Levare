@@ -44,7 +44,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 636b999a4cc4c8946acc58c7ab5b63e9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sounds: []
+  sounds:
+  - name: Test
+    clip: {fileID: 8300000, guid: 32c7ae8961a235e4e90025def39ed6c2, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    spatialBlend: 0
 --- !u!1 &9168311950741595994
 GameObject:
   m_ObjectHideFlags: 0

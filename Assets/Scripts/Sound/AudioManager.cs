@@ -65,7 +65,7 @@ public class AudioManager : MonoBehaviour
 
         if (s == null)
         {
-            Debug.LogWarning("Sound: " + name + " not exist");
+            Debug.LogWarning("Sound: " + name + " doesn't exist");
             return;
         }
 

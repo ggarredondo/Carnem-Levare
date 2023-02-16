@@ -47,7 +47,7 @@ CapsuleCollider:
   m_Radius: 0.15
   m_Height: 0.48
   m_Direction: 0
-  m_Center: {x: 0, y: 0, z: 0.03}
+  m_Center: {x: 0, y: 0.06, z: 0.03}
 --- !u!54 &2625642048112397115
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -247,7 +247,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7481606168508649711}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -296,13 +296,18 @@ MonoBehaviour:
   attackDamage: 10
   attackSpeed: 1
   casualWalkingSpeed: 1
-  guardWalkingSpeed: 1
+  blockWalkingSpeed: 1
   skipSpeed: 1
   height: 1.1
   mass: 1
   drag: 0
+  leftMoveset: []
+  rightMoveset: []
   leftHitboxes: []
   rightHitboxes: []
+  updateMoveset: 0
+  modifyTimeScale: 0
+  timeScale: 1
   horizontal: 0
   vertical: 0
   enemyDirectionSpeed: 1
