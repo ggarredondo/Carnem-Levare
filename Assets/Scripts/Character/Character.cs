@@ -19,8 +19,8 @@ public abstract class Character : MonoBehaviour
     [SerializeField] [InitializationField] private float maxStamina = 0f;
     [SerializeField] private float attackDamage = 0f;
     [Tooltip("Attack animation speed")] [InitializationField] [Range(0f, 2f)] public float attackSpeed = 1f;
-    [SerializeField] [InitializationField] [Range(0f, 2f)] private float casualWalkingSpeed = 1f;
-    [SerializeField] [InitializationField] [Range(0f, 2f)] private float blockWalkingSpeed = 1f;
+    [SerializeField] [Range(0f, 2f)] private float casualWalkingSpeed = 1f;
+    [SerializeField] [Range(0f, 2f)] private float blockWalkingSpeed = 1f;
     [SerializeField] [InitializationField] [Range(0f, 2f)] private float skipSpeed = 1f;
     [SerializeField] [InitializationField] [Range(1f, 1.3f)] private float height = 1f;
     [SerializeField] [InitializationField] private float mass = 1f;
