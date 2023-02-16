@@ -30,7 +30,7 @@ public class Player : Character
         isSkipping = anim.GetCurrentAnimatorStateInfo(0).IsTag("Skipping");
         // Attacking is checked through the animator so that you can buffer skip after attacking.
         // Everything else is checked through input so that skipping doesn't buffer for the next frames.
-        anim.SetBool("can_skip", !isAttacking);
+        anim.SetBool("can_skip", !isAttacking && !isSkipping);
 
         directionSpeed = directionTarget.magnitude == 0f && !isBlocking ? smoothStickSpeed : stickSpeed;
         base.Update();
@@ -51,8 +51,8 @@ public class Player : Character
         if (directionTarget.x < -stickTapTolerance || directionTarget.x > stickTapTolerance) canTapStick = false;
         if (directionTarget.magnitude == 0f) canTapStick = true;
     }
-    public void SkipFwd(InputAction.CallbackContext context) { anim.SetBool("skip_fwd", context.performed && isBlocking && canTapStick && !isSkipping); }
-    public void SkipBwd(InputAction.CallbackContext context) { anim.SetBool("skip_bwd", context.performed && isBlocking && canTapStick && !isSkipping); }
+    public void SkipFwd(InputAction.CallbackContext context) { anim.SetBool("skip_fwd", context.performed && isBlocking && canTapStick); }
+    public void SkipBwd(InputAction.CallbackContext context) { anim.SetBool("skip_bwd", context.performed && isBlocking && canTapStick); }
     public void LeftNormal(InputAction.CallbackContext context) { anim.SetBool("left_normal", context.performed); }
     public void LeftSpecial(InputAction.CallbackContext context) { anim.SetBool("left_special", context.performed); }
     public void RightNormal(InputAction.CallbackContext context) { PressMove(0, context.performed); anim.SetBool("right_normal", context.performed); }
