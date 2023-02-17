@@ -1090,13 +1090,14 @@ MonoBehaviour:
   aceleration:
     Item1: 6
     Item2: 10
-  fieldOfView:
-    Item1: 25
-    Item2: 50
+  fieldOfViewVariation: 25
   offsetVariation: {x: 0, y: -0.5, z: 2}
   zoomPositions:
     Item1: {x: 0, y: 0, z: 0}
     Item2: {x: 0, y: 0, z: 0}
+  fieldOfView:
+    Item1: 25
+    Item2: 50
 --- !u!114 &3740683913482428883
 MonoBehaviour:
   m_ObjectHideFlags: 0
