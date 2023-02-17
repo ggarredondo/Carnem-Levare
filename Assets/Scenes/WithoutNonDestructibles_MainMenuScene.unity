@@ -495,7 +495,7 @@ MonoBehaviour:
     m_ActionName: UI/Start[/XInputControllerWindows/start]
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2030412344}
+      - m_Target: {fileID: 1955055707010021599}
         m_TargetAssemblyTypeName: SelectableMenuManager, Assembly-CSharp
         m_MethodName: MoveToRightMenu
         m_Mode: 0
@@ -511,7 +511,7 @@ MonoBehaviour:
     m_ActionName: UI/ChangeRightMenu[/XInputControllerWindows/rightShoulder]
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2030412344}
+      - m_Target: {fileID: 1955055707010021599}
         m_TargetAssemblyTypeName: SelectableMenuManager, Assembly-CSharp
         m_MethodName: MoveToLeftMenu
         m_Mode: 0
@@ -672,18 +672,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 682.7, y: 0, z: 0}
---- !u!114 &2030412344 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1955055707966085862, guid: 268a8de8c2e04b947b4676206ac396d7,
-    type: 3}
-  m_PrefabInstance: {fileID: 1955055707010021598}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f993cf5ed533a1d4da5f74968095fe9a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &1955055707010021598
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -811,5 +799,22 @@ PrefabInstance:
       propertyPath: m_Name
       value: MainMenu
       objectReference: {fileID: 0}
+    - target: {fileID: 3699270200823943215, guid: 268a8de8c2e04b947b4676206ac396d7,
+        type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 1874459434}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 268a8de8c2e04b947b4676206ac396d7, type: 3}
+--- !u!114 &1955055707010021599 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3699270199949412494, guid: 268a8de8c2e04b947b4676206ac396d7,
+    type: 3}
+  m_PrefabInstance: {fileID: 1955055707010021598}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f993cf5ed533a1d4da5f74968095fe9a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
