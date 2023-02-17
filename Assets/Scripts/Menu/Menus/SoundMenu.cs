@@ -81,9 +81,9 @@ public class SoundMenu : MonoBehaviour
         AudioSaver.ApplyChanges();
     }
 
-    public void Mute()
+    public void Mute(bool changeState)
     {
-        muteToggle.isOn = !muteToggle.isOn;
+        if(changeState) muteToggle.isOn = !muteToggle.isOn;
         AudioSaver.mute = muteToggle.isOn;
         AudioSaver.ApplyChanges();
     }

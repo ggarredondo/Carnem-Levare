@@ -22,9 +22,12 @@ public class SelectableMenuManager : MenuManager
     {
         if (EventSystem.current != null)
         {
-            menus[actualActiveMenu].SetFirstButton(EventSystem.current.currentSelectedGameObject);
-            firstMenu = actualActiveMenu;
+            if (EventSystem.current.currentSelectedGameObject != null)
+            {
+                menus[actualActiveMenu].SetFirstButton(EventSystem.current.currentSelectedGameObject);
+            }
 
+            firstMenu = actualActiveMenu;
             SaveManager.Instance.Save();
         }
     }

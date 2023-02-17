@@ -48,16 +48,16 @@ public class VisualsMenu : MonoBehaviour
         qualityDropdown.value = qualityDropdown.options.FindIndex(option => option.text == quality[VisualSaver.quality]);
     }
 
-    public void Vsync()
+    public void Vsync(bool changeState)
     {
-        vsyncToggle.isOn = !vsyncToggle.isOn;
+        if(changeState) vsyncToggle.isOn = !vsyncToggle.isOn;
         VisualSaver.vsync = vsyncToggle.isOn ? 1 : 0;
         VisualSaver.ApplyChanges();
     }
 
-    public void FullScreen()
+    public void FullScreen(bool changeState)
     {
-        fullscreenToggle.isOn = !fullscreenToggle.isOn;
+        if (changeState) fullscreenToggle.isOn = !fullscreenToggle.isOn;
         VisualSaver.fullscreen = fullscreenToggle.isOn;
         VisualSaver.ApplyChanges();
     }

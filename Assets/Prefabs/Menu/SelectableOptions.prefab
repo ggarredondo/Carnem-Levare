@@ -138,7 +138,19 @@ MonoBehaviour:
   m_Group: {fileID: 0}
   onValueChanged:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 517267782472157170}
+        m_TargetAssemblyTypeName: VisualsMenu, Assembly-CSharp
+        m_MethodName: FullScreen
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   m_IsOn: 1
 --- !u!1 &517267781539778428
 GameObject:
@@ -2725,7 +2737,7 @@ MonoBehaviour:
     firstSelectedButton: {fileID: 517267783364274536}
   - menu: {fileID: 517267783397895882}
     parentMenu: {fileID: 517267783397895882}
-    firstSelectedButton: {fileID: 517267782739254973}
+    firstSelectedButton: {fileID: 517267782384738690}
   firstMenu: 0
   selectableButtons:
   - {fileID: 517267782526766781}
@@ -3391,14 +3403,14 @@ MonoBehaviour:
       - m_Target: {fileID: 517267782472157170}
         m_TargetAssemblyTypeName: VisualsMenu, Assembly-CSharp
         m_MethodName: FullScreen
-        m_Mode: 1
+        m_Mode: 6
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
-          m_BoolArgument: 0
+          m_BoolArgument: 1
         m_CallState: 2
 --- !u!114 &517267782277544031
 MonoBehaviour:
@@ -5558,7 +5570,19 @@ MonoBehaviour:
   m_Group: {fileID: 0}
   onValueChanged:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 517267781485984275}
+        m_TargetAssemblyTypeName: SoundMenu, Assembly-CSharp
+        m_MethodName: Mute
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   m_IsOn: 0
 --- !u!1 &517267782837945349
 GameObject:
@@ -7924,14 +7948,14 @@ MonoBehaviour:
       - m_Target: {fileID: 517267781485984275}
         m_TargetAssemblyTypeName: SoundMenu, Assembly-CSharp
         m_MethodName: Mute
-        m_Mode: 1
+        m_Mode: 6
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
-          m_BoolArgument: 0
+          m_BoolArgument: 1
         m_CallState: 2
 --- !u!114 &517267783310672342
 MonoBehaviour:
@@ -8170,14 +8194,14 @@ MonoBehaviour:
       - m_Target: {fileID: 517267782472157170}
         m_TargetAssemblyTypeName: VisualsMenu, Assembly-CSharp
         m_MethodName: Vsync
-        m_Mode: 1
+        m_Mode: 6
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
-          m_BoolArgument: 0
+          m_BoolArgument: 1
         m_CallState: 2
 --- !u!114 &517267783364274515
 MonoBehaviour:
@@ -9186,7 +9210,19 @@ MonoBehaviour:
   m_Group: {fileID: 0}
   onValueChanged:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 517267782472157170}
+        m_TargetAssemblyTypeName: VisualsMenu, Assembly-CSharp
+        m_MethodName: Vsync
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   m_IsOn: 1
 --- !u!1 &517267783470860895
 GameObject:

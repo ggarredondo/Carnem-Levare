@@ -128,26 +128,31 @@ public class MenuManager : MonoBehaviour
         {
             GameObject current = EventSystem.current.currentSelectedGameObject;
 
-            if (current.GetComponent<Button>() == null)
+            if (current != null)
             {
-                if (current.GetComponent<TMP_Dropdown>() != null)
+                if (current.GetComponent<Button>() == null)
                 {
-                    current.GetComponent<TMP_Dropdown>().Hide();
+                    if (current.GetComponent<TMP_Dropdown>() != null)
+                    {
+                        current.GetComponent<TMP_Dropdown>().Hide();
+                    }
+
+                    GameObject Parent = current.transform.parent.gameObject;
+                    EventSystem.current.SetSelectedGameObject(Parent);
+
+                    if (Parent.GetComponent<Button>() == null)
+                        ReturnFromChildren(context);
                 }
-
-                GameObject Parent = current.transform.parent.gameObject;
-                EventSystem.current.SetSelectedGameObject(Parent);
-
-                if (Parent.GetComponent<Button>() == null)
-                    ReturnFromChildren(context);
-
+                else
+                {
+                    ReturnToParent();
+                }
             }
             else
             {
                 ReturnToParent();
             }
         }
-
     }
 
     /// <summary>
