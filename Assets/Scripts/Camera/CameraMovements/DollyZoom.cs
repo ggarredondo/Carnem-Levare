@@ -12,20 +12,14 @@ public class DollyZoom : CameraMovement
     [HideInInspector] public Tuple<float> nearPlane;
     private CinemachineTransposer transposer;
 
-    public override void Awake()
-    {
-        base.Awake();
-        transposer = vcam.GetCinemachineComponent<CinemachineOrbitalTransposer>();
-    }
-
     private void Start()
     {
         Initialize();
     }
 
-    public void Initialize()
+    public override void Initialize()
     {
-        vcam = GetComponentInChildren<CinemachineVirtualCamera>();
+        vcam = GetComponent<CinemachineVirtualCamera>();
         transposer = vcam.GetCinemachineComponent<CinemachineOrbitalTransposer>();
 
         nearPlane.Item1 = vcam.m_Lens.NearClipPlane;

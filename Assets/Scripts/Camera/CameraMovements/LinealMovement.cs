@@ -9,21 +9,15 @@ public class LinealMovement : CameraMovement
     private Tuple<Vector3> positions;
     private CinemachineTransposer transposer;
 
-    public override void Awake()
-    {
-        base.Awake();
-        transposer = vcam.GetCinemachineComponent<CinemachineOrbitalTransposer>();
-    }
-
     private void Start()
     {
         positions.Item1 = transposer.m_FollowOffset;
         positions.Item2 = positions.Item1 + offsetVariation;
     }
 
-    public void Initialize()
+    public override void Initialize()
     {
-        vcam = GetComponentInChildren<CinemachineVirtualCamera>();
+        vcam = GetComponent<CinemachineVirtualCamera>();
         transposer = vcam.GetCinemachineComponent<CinemachineOrbitalTransposer>();
     }
 

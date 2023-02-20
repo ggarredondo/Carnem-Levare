@@ -9,15 +9,9 @@ public class SmoothFollow : CameraMovement
     public enum Parameter { DAMPING, ORBITAL }
     public Parameter parameter;
 
-    public override void Awake()
+    public override void Initialize()
     {
-        base.Awake();
-        transposer = vcam.GetCinemachineComponent<CinemachineOrbitalTransposer>();
-    }
-
-    public void Initialize()
-    {
-        vcam = GetComponentInChildren<CinemachineVirtualCamera>();
+        vcam = GetComponent<CinemachineVirtualCamera>();
         transposer = vcam.GetCinemachineComponent<CinemachineOrbitalTransposer>();
     }
 

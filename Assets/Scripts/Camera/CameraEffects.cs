@@ -10,13 +10,11 @@ public class CameraEffects : MonoBehaviour
     public Player player;
     public Transform[] alternativeTargets;
     public GameObject[] targetDebug;
-    public int changeVirtualCamera;
-    public static int actualVirtualCamera;
 
     [Header("Target Group Parameters")]
     [Range(-1, 1)] public float playerTarget;
     [Range(-1, 1)] public float enemyTarget;
-    [Range(0, 20)] public float targetingSpeed;
+    [Range(0, 40)] public float targetingSpeed;
     public bool alternativeTarget;
     public bool debug;
 
@@ -58,8 +56,8 @@ public class CameraEffects : MonoBehaviour
 
     private void Awake()
     {
-        targetGroup = GetComponentInChildren<CinemachineTargetGroup>();
-        vcam = GetComponentsInChildren<CinemachineVirtualCamera>()[actualVirtualCamera];
+        targetGroup = GameObject.FindGameObjectWithTag("TARGET_GROUP").GetComponent<CinemachineTargetGroup>();
+        vcam = GetComponent<CinemachineVirtualCamera>();
         transposer = vcam.GetCinemachineComponent<CinemachineOrbitalTransposer>();
 
         click = new InputAction(binding: "<Mouse>/leftButton");
@@ -74,28 +72,6 @@ public class CameraEffects : MonoBehaviour
 
         firstTargets[0] = targetGroup.m_Targets[0].target;
         firstTargets[1] = targetGroup.m_Targets[1].target;
-    }
-
-    private void ChangeVirtualCamera()
-    {
-        actualVirtualCamera = changeVirtualCamera;
-
-        int cont = 0;
-        foreach(CinemachineVirtualCamera camera in GetComponentsInChildren<CinemachineVirtualCamera>()){
-            if (cont == actualVirtualCamera)
-            {
-                camera.enabled = true;
-                vcam = camera;
-                transposer = vcam.GetCinemachineComponent<CinemachineOrbitalTransposer>();
-            }
-            else camera.enabled = false;
-            cont++;
-        }
-
-        smoothFollow.Initialize();
-        dollyZoom.Initialize();
-        noise.Initialize();
-        onGuardLinealMovement.Initialize();
     }
 
     private bool InitialPosition()
@@ -131,8 +107,6 @@ public class CameraEffects : MonoBehaviour
     {
         if (Time.timeScale > 0f)
         {
-            if (actualVirtualCamera != changeVirtualCamera) ChangeVirtualCamera();
-
             cameraConditions[0] = (chargePhase == ChargePhase.performing) && (deltaTimer >= holdingMinTime) && (deltaTimer <= chargeLimit);
             cameraConditions[1] = player.isPlayerBlocking;
 
