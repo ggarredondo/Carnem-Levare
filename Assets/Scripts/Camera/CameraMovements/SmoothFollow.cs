@@ -15,6 +15,12 @@ public class SmoothFollow : CameraMovement
         transposer = vcam.GetCinemachineComponent<CinemachineOrbitalTransposer>();
     }
 
+    public void Initialize()
+    {
+        vcam = GetComponentInChildren<CinemachineVirtualCamera>();
+        transposer = vcam.GetCinemachineComponent<CinemachineOrbitalTransposer>();
+    }
+
     public override void ApplyMove(bool condition)
     {
         if(parameter == Parameter.DAMPING)

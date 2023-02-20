@@ -21,6 +21,12 @@ public class LinealMovement : CameraMovement
         positions.Item2 = positions.Item1 + offsetVariation;
     }
 
+    public void Initialize()
+    {
+        vcam = GetComponentInChildren<CinemachineVirtualCamera>();
+        transposer = vcam.GetCinemachineComponent<CinemachineOrbitalTransposer>();
+    }
+
     public override void ApplyMove(bool condition)
     {
         transposer.m_FollowOffset = CameraUtilities.Movement(condition, aceleration, ref reduce, new Vector3[] { positions.Item1, positions.Item2 }, CameraUtilities.LinearBezierCurve);
