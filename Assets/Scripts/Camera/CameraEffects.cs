@@ -6,38 +6,36 @@ using UnityEngine.InputSystem;
 
 public class CameraEffects : MonoBehaviour
 {
-    [Header("Target Parameters")]
-    public Player player;
-    public Transform[] alternativeTargets;
-    public GameObject[] targetDebug;
+    [Header("Requirements")]
+    [SerializeField] private Player player;
+    [SerializeField] private Transform[] alternativeTargets;
+    [SerializeField] private GameObject[] targetDebug;
 
     [Header("Target Group Parameters")]
-    [Range(-1, 1)] public float playerTarget;
-    [Range(-1, 1)] public float enemyTarget;
-    [Range(0, 40)] public float targetingSpeed;
-    public bool alternativeTarget;
-    public bool debug;
+    [Range(-1, 1)] [SerializeField] private float playerTarget;
+    [Range(-1, 1)] [SerializeField] private float enemyTarget;
+    [Range(0, 40)] [SerializeField] private float targetingSpeed;
+    [SerializeField] private bool alternativeTarget;
+    [SerializeField] private bool debug;
 
     [Header("Orbital Movement")]
-    [Range(0,20)] public float orbitalValue;
-    [Range(0,10)] public float orbitalRecovery;
+    [Range(0,20)] [SerializeField] private float orbitalValue;
+    [Range(0,10)] [SerializeField] private float orbitalRecovery;
 
-    [Header("Smooth Follow Parameters")]
-    public SmoothFollow smoothFollow;
+    [Header("Effects")]
     public bool smoothFollowActivated;
+    [ConditionalField("smoothFollowActivated")] public SmoothFollow smoothFollow;
 
-    [Header("Noise Parameters")]
-    public Noise noise;
     public bool noiseActivated;
+    [ConditionalField("noiseActivated")] public Noise noise;
 
-    [Header("Dolly Zoom Parameters")]
-    public DollyZoom dollyZoom;
     public bool dollyZoomActivated;
+    [ConditionalField("dollyZoomActivated")] public DollyZoom dollyZoom;
 
-    [Header("On Guard Parameters")]
-    public LinealMovement onGuardLinealMovement;
     public bool onGuardActivated;
+    [ConditionalField("onGuardActivated")] public LinealMovement onGuardLinealMovement;
 
+    //PRIVATE
     private ChargePhase chargePhase;
     private float deltaTimer, chargeLimit, chargeLimitDivisor;
     private float holdingMinTime;
@@ -51,14 +49,15 @@ public class CameraEffects : MonoBehaviour
     private Transform[] firstTargets;
 
     private CinemachineVirtualCamera vcam;
-    private CinemachineOrbitalTransposer transposer;
+    private CinemachineOrbitalTransposer orbitalTransposer;
     private CinemachineTargetGroup targetGroup;
 
     private void Awake()
     {
         targetGroup = GameObject.FindGameObjectWithTag("TARGET_GROUP").GetComponent<CinemachineTargetGroup>();
         vcam = GetComponent<CinemachineVirtualCamera>();
-        transposer = vcam.GetCinemachineComponent<CinemachineOrbitalTransposer>();
+
+        orbitalTransposer = vcam.GetCinemachineComponent<CinemachineOrbitalTransposer>();
 
         click = new InputAction(binding: "<Mouse>/leftButton");
         click.Enable();
@@ -76,7 +75,7 @@ public class CameraEffects : MonoBehaviour
 
     private bool InitialPosition()
     {
-        return transposer.m_FollowOffset == dollyZoom.zoomPositions.Item1 &&
+        return orbitalTransposer.m_FollowOffset == dollyZoom.zoomPositions.Item1 &&
                vcam.m_Lens.FieldOfView == dollyZoom.fieldOfView.Item1 &&
                vcam.m_Lens.NearClipPlane == dollyZoom.nearPlane.Item1;
     }
@@ -110,7 +109,7 @@ public class CameraEffects : MonoBehaviour
             cameraConditions[0] = (chargePhase == ChargePhase.performing) && (deltaTimer >= holdingMinTime) && (deltaTimer <= chargeLimit);
             cameraConditions[1] = player.isPlayerBlocking;
 
-            OrbitalMovement();
+            if(orbitalTransposer != null)OrbitalMovement();
 
             TargetUpdate();
 
@@ -137,13 +136,13 @@ public class CameraEffects : MonoBehaviour
 
     private void OrbitalMovement()
     {
-        if (player.StickSmoothDirection.x < -0.1f && !cameraConditions[1]) transposer.m_XAxis.Value -= orbitalValue * Time.deltaTime;
+        if (player.StickSmoothDirection.x < -0.1f && !cameraConditions[1]) orbitalTransposer.m_XAxis.Value -= orbitalValue * Time.deltaTime;
 
-        if (player.StickSmoothDirection.x > 0.1f && !cameraConditions[1]) transposer.m_XAxis.Value += orbitalValue * Time.deltaTime;
+        if (player.StickSmoothDirection.x > 0.1f && !cameraConditions[1]) orbitalTransposer.m_XAxis.Value += orbitalValue * Time.deltaTime;
 
         if (cameraConditions[1])
         {
-            transposer.m_XAxis.Value = Mathf.Lerp(transposer.m_XAxis.Value, 0, orbitalRecovery * Time.deltaTime);
+            orbitalTransposer.m_XAxis.Value = Mathf.Lerp(orbitalTransposer.m_XAxis.Value, 0, orbitalRecovery * Time.deltaTime);
         }
     }
 
