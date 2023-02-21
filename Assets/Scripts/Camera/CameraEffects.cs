@@ -109,9 +109,9 @@ public class CameraEffects : MonoBehaviour
             cameraConditions[0] = (chargePhase == ChargePhase.performing) && (deltaTimer >= holdingMinTime) && (deltaTimer <= chargeLimit);
             cameraConditions[1] = player.isPlayerBlocking;
 
-            if(orbitalTransposer != null)OrbitalMovement();
+            if(orbitalTransposer != null) OrbitalMovement();
 
-            TargetUpdate();
+            if(alternativeTargets.GetLength(0) != 0) TargetUpdate();
 
             //Making camera damping oscillate depending on player movement
             if (smoothFollowActivated) smoothFollow.ApplyMove(!player.isPlayerIdle);

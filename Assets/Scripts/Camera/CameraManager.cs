@@ -39,5 +39,6 @@ public enum VirtualCameras
 {
     STANDARD = 0,
     FIRST_PERSON = 1,
-    DRONE = 2
+    GOPRO = 2,
+    DRONE = 3
 }
