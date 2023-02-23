@@ -50,7 +50,7 @@ public class PlayerAttackManager : AttackManager
                 }
                 else if (currentMove.pressed)
                 {
-                    animator.speed = Mathf.Lerp(animator.speed, currentMove.ChargeMinSpeed, currentMove.ChargeDecay * Time.deltaTime);
+                    animator.speed = Mathf.Lerp(animator.speed, currentMove.ChargeMinSpeed, currentMove.ChargeDecay * character.attackSpeed * Time.deltaTime);
                     deltaTimer += Time.deltaTime;
                 }
                 break;

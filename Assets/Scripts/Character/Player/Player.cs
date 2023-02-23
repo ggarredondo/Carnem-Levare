@@ -53,10 +53,20 @@ public class Player : Character
     }
     public void SkipFwd(InputAction.CallbackContext context) { anim.SetBool("skip_fwd", context.performed && isBlocking && canTapStick); }
     public void SkipBwd(InputAction.CallbackContext context) { anim.SetBool("skip_bwd", context.performed && isBlocking && canTapStick); }
-    public void LeftNormal(InputAction.CallbackContext context) { anim.SetBool("left_normal", context.performed); }
-    public void LeftSpecial(InputAction.CallbackContext context) { anim.SetBool("left_special", context.performed); }
-    public void RightNormal(InputAction.CallbackContext context) { PressMove(0, context.performed); anim.SetBool("right_normal", context.performed); }
-    public void RightSpecial(InputAction.CallbackContext context) { PressMove(1, context.performed); anim.SetBool("right_special", context.performed); }
+    public void LeftNormal(InputAction.CallbackContext context) { if (LeftMoveset.Count > 0) anim.SetBool("left_normal", context.performed); }
+    public void LeftSpecial(InputAction.CallbackContext context) { if (LeftMoveset.Count > 1) anim.SetBool("left_special", context.performed); }
+    public void RightNormal(InputAction.CallbackContext context) {
+        if (RightMoveset.Count > 0) {
+            PressMove(0, context.performed);
+            anim.SetBool("right_normal", context.performed);
+        }
+    }
+    public void RightSpecial(InputAction.CallbackContext context) {
+        if (RightMoveset.Count > 1) {
+            PressMove(1, context.performed);
+            anim.SetBool("right_special", context.performed);
+        }
+    }
     public void Block(InputAction.CallbackContext context) { isBlocking = context.performed; }
     #endregion
 
