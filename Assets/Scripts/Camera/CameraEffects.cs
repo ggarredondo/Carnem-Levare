@@ -136,14 +136,11 @@ public class CameraEffects : MonoBehaviour
 
     private void OrbitalMovement()
     {
-        if (player.StickSmoothDirection.x < -0.1f && !cameraConditions[1]) orbitalTransposer.m_XAxis.Value -= orbitalValue * Time.deltaTime;
+        if (Mathf.Abs(player.StickSmoothDirection.x) > 0.1f && !cameraConditions[1]) orbitalTransposer.m_XAxis.Value += Mathf.Sign(player.StickSmoothDirection.x) * orbitalValue * Time.deltaTime;
 
-        if (player.StickSmoothDirection.x > 0.1f && !cameraConditions[1]) orbitalTransposer.m_XAxis.Value += orbitalValue * Time.deltaTime;
+        if (cameraConditions[1]) orbitalTransposer.m_XAxis.Value = Mathf.Lerp(orbitalTransposer.m_XAxis.Value, 0, orbitalRecovery * Time.deltaTime);
 
-        if (cameraConditions[1])
-        {
-            orbitalTransposer.m_XAxis.Value = Mathf.Lerp(orbitalTransposer.m_XAxis.Value, 0, orbitalRecovery * Time.deltaTime);
-        }
+        orbitalTransposer.m_RecenterToTargetHeading.m_enabled = Mathf.Abs(player.StickSmoothDirection.x) > 0.1f && !cameraConditions[1];
     }
 
     private void AsignTargets(Transform[] targets)

@@ -1577,8 +1577,8 @@ MonoBehaviour:
   targetingSpeed: 4
   alternativeTarget: 0
   debug: 0
-  orbitalValue: 18
-  orbitalRecovery: 6
+  orbitalValue: 10
+  orbitalRecovery: 3
   smoothFollowActivated: 1
   smoothFollow: {fileID: 2369898620119057484}
   noiseActivated: 1
@@ -1819,8 +1819,8 @@ MonoBehaviour:
     m_Bias: 0
   m_RecenterToTargetHeading:
     m_enabled: 0
-    m_WaitTime: 1
-    m_RecenteringTime: 2
+    m_WaitTime: 0
+    m_RecenteringTime: 1.5
     m_LegacyHeadingDefinition: -1
     m_LegacyVelocityFilterStrength: -1
   m_XAxis:
