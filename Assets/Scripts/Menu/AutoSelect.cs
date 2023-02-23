@@ -8,7 +8,7 @@ public class AutoSelect : MonoBehaviour, IPointerEnterHandler
     public int typeButton;
     public bool mouseCanSelect;
 
-    private void Awake()
+    private void Start()
     {
         //Initialize font
         GetComponent<TMP_Text>().font = GlobalMenuVariables.Instance.font;
