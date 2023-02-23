@@ -19,9 +19,6 @@ public abstract class Character : MonoBehaviour
     [SerializeField] [InitializationField] private float maxStamina = 0f;
     [SerializeField] private float attackDamage = 0f;
     [Tooltip("Attack animation speed")] [InitializationField] [Range(0f, 2f)] public float attackSpeed = 1f;
-    [SerializeField] [Range(0f, 2f)] private float casualWalkingSpeed = 1f;
-    [SerializeField] [Range(0f, 2f)] private float blockWalkingSpeed = 1f;
-    [SerializeField] [InitializationField] [Range(0f, 2f)] private float skipSpeed = 1f;
     [SerializeField] [InitializationField] [Range(1f, 1.3f)] private float height = 1f;
     [SerializeField] [InitializationField] private float mass = 1f;
     [SerializeField] [InitializationField] private float drag = 0f; // SHOULD BE CALCULATED GIVEN MASS
@@ -67,17 +64,11 @@ public abstract class Character : MonoBehaviour
     protected virtual void Start()
     {
         InitializeMoveset();
-        anim.SetFloat("skip_speed", skipSpeed);
-
     }
 
     protected virtual void Update()
     {
         anim.SetBool("block", isBlocking);
-
-        // Ternary operator so that when the character isn't moving, the speed parameter doesn't affect the idle animation
-        anim.SetFloat("casual_walk_speed", directionTarget.magnitude == 0f ? 1f : casualWalkingSpeed);
-        anim.SetFloat("block_walk_speed", directionTarget.magnitude == 0f ? 1f : blockWalkingSpeed);
 
         // Softens movement by establishing the direction as a point that approaches the target direction at *directionSpeed* rate.
         direction = Vector2.Lerp(direction, directionTarget, directionSpeed * Time.deltaTime);

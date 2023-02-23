@@ -1,5 +1,5 @@
 {
-    "name": "PlayerMoveset",
+    "name": "Player",
     "maps": [
         {
             "name": "Main Movement",

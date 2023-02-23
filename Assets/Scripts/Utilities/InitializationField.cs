@@ -1,6 +1,8 @@
 using UnityEngine;
 using System;
+#if UNITY_EDITOR
 using UnityEditor;
+#endif
 
 /// <summary>
 /// Field will be Read-Only in play mode.
@@ -8,6 +10,7 @@ using UnityEditor;
 [AttributeUsage(AttributeTargets.Field)]
 public sealed class InitializationField : PropertyAttribute {}
 
+#if UNITY_EDITOR
 [CustomPropertyDrawer(typeof(InitializationField))]
 public sealed class InitializationFieldDrawer : PropertyDrawer
 {
@@ -18,3 +21,4 @@ public sealed class InitializationFieldDrawer : PropertyDrawer
         GUI.enabled = true;
     }
 }
+#endif

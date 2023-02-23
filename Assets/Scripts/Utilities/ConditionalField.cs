@@ -1,6 +1,8 @@
 using UnityEngine;
 using System;
+#if UNITY_EDITOR
 using UnityEditor;
+#endif
 
 [AttributeUsage(AttributeTargets.Field)]
 public sealed class ConditionalField : PropertyAttribute
@@ -15,6 +17,7 @@ public sealed class ConditionalField : PropertyAttribute
     public ConditionalField(string field) => this.field = field;
 }
 
+#if UNITY_EDITOR
 [CustomPropertyDrawer(typeof(ConditionalField))]
 public sealed class ConditionalDrawer : PropertyDrawer
 {
@@ -40,3 +43,4 @@ public sealed class ConditionalDrawer : PropertyDrawer
             propertyHeight = 0f;
     }
 }
+#endif
