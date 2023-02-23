@@ -6,7 +6,7 @@ Texture2D:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: z__GradientRampTex{"mode":1,"colorKeys":[{"color":{"r":1.0,"g":1.0,"b":1.0,"a":1.0},"time":0.17941558361053468},{"color":{"r":0.0,"g":0.0,"b":0.0,"a":1.0},"time":0.29166093468666079},{"color":{"r":0.5849056243896484,"g":0.5221521258354187,"b":0.1848522424697876,"a":1.0},"time":0.3694514334201813},{"color":{"r":0.0,"g":0.0,"b":0.0,"a":1.0},"time":0.4617685079574585},{"color":{"r":0.0,"g":0.0,"b":0.0,"a":1.0},"time":0.6323491334915161},{"color":{"r":0.7075471878051758,"g":0.6898941993713379,"b":0.6107600927352905,"a":1.0},"time":0.886274516582489},{"color":{"r":0.9245283007621765,"g":0.7714129686355591,"b":0.09158062934875488,"a":1.0},"time":0.9088273644447327}],"alphaKeys":[{"alpha":1.0,"time":0.0},{"alpha":1.0,"time":1.0}]}
+  m_Name: z__GradientRampTex{"mode":1,"colorKeys":[{"color":{"r":0.9622641801834106,"g":0.9622641801834106,"b":0.9622641801834106,"a":1.0},"time":0.17941558361053468},{"color":{"r":0.0,"g":0.0,"b":0.0,"a":1.0},"time":0.29166093468666079},{"color":{"r":0.5849056243896484,"g":0.5221521258354187,"b":0.1848522424697876,"a":1.0},"time":0.3694514334201813},{"color":{"r":0.0,"g":0.0,"b":0.0,"a":1.0},"time":0.4617685079574585},{"color":{"r":0.0,"g":0.0,"b":0.0,"a":1.0},"time":0.6323491334915161},{"color":{"r":0.7075471878051758,"g":0.6898941993713379,"b":0.6107600927352905,"a":1.0},"time":0.886274516582489},{"color":{"r":0.9245283007621765,"g":0.7714129686355591,"b":0.09158062934875488,"a":1.0},"time":0.9088273644447327}],"alphaKeys":[{"alpha":1.0,"time":0.0},{"alpha":1.0,"time":1.0}]}
   m_ImageContentsHash:
     serializedVersion: 2
     Hash: 00000000000000000000000000000000
@@ -41,7 +41,7 @@ Texture2D:
   m_ColorSpace: 1
   m_PlatformBlob: 
   image data: 1024
-  _typelessdata: ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff000000ff000000ff000000ff000000ff000000ff000000ff000000ff000000ff000000ff000000ff000000ff000000ff000000ff000000ff000000ff000000ff000000ff000000ff000000ff000000ff000000ff000000ff000000ff000000ff000000ff000000ff000000ff000000ff000000ff95852fff95852fff95852fff95852fff95852fff95852fff95852fff95852fff95852fff95852fff95852fff95852fff95852fff95852fff95852fff95852fff95852fff95852fff95852fff95852fff000000ff000000ff000000ff000000ff000000ff000000ff000000ff000000ff000000ff000000ff000000ff000000ff000000ff000000ff000000ff000000ff000000ff000000ff000000ff000000ff000000ff000000ff000000ff000000ff000000ff000000ff000000ff000000ff000000ff000000ff000000ff000000ff000000ff000000ff000000ff000000ff000000ff000000ff000000ff000000ff000000ff000000ff000000ff000000ff000000ff000000ff000000ff000000ff000000ff000000ff000000ff000000ff000000ff000000ff000000ff000000ff000000ff000000ff000000ff000000ff000000ff000000ff000000ff000000ff000000ff000000ff000000ffb4b09cffb4b09cffb4b09cffb4b09cffb4b09cffb4b09cffb4b09cffb4b09cffb4b09cffb4b09cffb4b09cffb4b09cffb4b09cffb4b09cffb4b09cffb4b09cffb4b09cffb4b09cffb4b09cffb4b09cffb4b09cffb4b09cffb4b09cffb4b09cffb4b09cffb4b09cffb4b09cffb4b09cffb4b09cffb4b09cffb4b09cffb4b09cffb4b09cffb4b09cffb4b09cffb4b09cffb4b09cffb4b09cffb4b09cffb4b09cffb4b09cffb4b09cffb4b09cffb4b09cffb4b09cffb4b09cffb4b09cffb4b09cffb4b09cffb4b09cffb4b09cffb4b09cffb4b09cffb4b09cffb4b09cffb4b09cffb4b09cffb4b09cffb4b09cffb4b09cffb4b09cffb4b09cffb4b09cffb4b09cffb4b09cffecc517ffecc517ffecc517ffecc517ffecc517ffecc517ffecc517ffecc517ffecc517ffecc517ffecc517ffecc517ffecc517ffecc517ffecc517ffecc517ffecc517ffecc517ffecc517ffecc517ffecc517ffecc517ffecc517ffecc517ffecc517ffecc517ffecc517ffecc517ffecc517
+  _typelessdata: fff5f5f5fff5f5f5fff5f5f5fff5f5f5fff5f5f5fff5f5f5fff5f5f5fff5f5f5fff5f5f5fff5f5f5fff5f5f5fff5f5f5fff5f5f5fff5f5f5fff5f5f5fff5f5f5fff5f5f5fff5f5f5fff5f5f5fff5f5f5fff5f5f5fff5f5f5fff5f5f5fff5f5f5fff5f5f5fff5f5f5fff5f5f5fff5f5f5fff5f5f5fff5f5f5fff5f5f5fff5f5f5fff5f5f5fff5f5f5fff5f5f5fff5f5f5fff5f5f5fff5f5f5fff5f5f5fff5f5f5fff5f5f5fff5f5f5fff5f5f5fff5f5f5fff5f5f5fff5f5f5ff000000ff000000ff000000ff000000ff000000ff000000ff000000ff000000ff000000ff000000ff000000ff000000ff000000ff000000ff000000ff000000ff000000ff000000ff000000ff000000ff000000ff000000ff000000ff000000ff000000ff000000ff000000ff000000ff000000ff95852fff95852fff95852fff95852fff95852fff95852fff95852fff95852fff95852fff95852fff95852fff95852fff95852fff95852fff95852fff95852fff95852fff95852fff95852fff95852fff000000ff000000ff000000ff000000ff000000ff000000ff000000ff000000ff000000ff000000ff000000ff000000ff000000ff000000ff000000ff000000ff000000ff000000ff000000ff000000ff000000ff000000ff000000ff000000ff000000ff000000ff000000ff000000ff000000ff000000ff000000ff000000ff000000ff000000ff000000ff000000ff000000ff000000ff000000ff000000ff000000ff000000ff000000ff000000ff000000ff000000ff000000ff000000ff000000ff000000ff000000ff000000ff000000ff000000ff000000ff000000ff000000ff000000ff000000ff000000ff000000ff000000ff000000ff000000ff000000ff000000ff000000ffb4b09cffb4b09cffb4b09cffb4b09cffb4b09cffb4b09cffb4b09cffb4b09cffb4b09cffb4b09cffb4b09cffb4b09cffb4b09cffb4b09cffb4b09cffb4b09cffb4b09cffb4b09cffb4b09cffb4b09cffb4b09cffb4b09cffb4b09cffb4b09cffb4b09cffb4b09cffb4b09cffb4b09cffb4b09cffb4b09cffb4b09cffb4b09cffb4b09cffb4b09cffb4b09cffb4b09cffb4b09cffb4b09cffb4b09cffb4b09cffb4b09cffb4b09cffb4b09cffb4b09cffb4b09cffb4b09cffb4b09cffb4b09cffb4b09cffb4b09cffb4b09cffb4b09cffb4b09cffb4b09cffb4b09cffb4b09cffb4b09cffb4b09cffb4b09cffb4b09cffb4b09cffb4b09cffb4b09cffb4b09cffb4b09cffecc517ffecc517ffecc517ffecc517ffecc517ffecc517ffecc517ffecc517ffecc517ffecc517ffecc517ffecc517ffecc517ffecc517ffecc517ffecc517ffecc517ffecc517ffecc517ffecc517ffecc517ffecc517ffecc517ffecc517ffecc517ffecc517ffecc517ffecc517ffecc517
   m_StreamData:
     serializedVersion: 2
     offset: 0
@@ -54,12 +54,11 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Graveyard_Quibli
+  m_Name: Church_Quibli
   m_Shader: {fileID: 4800000, guid: 2a230514c860643f69b6a4d1871d3825, type: 3}
   m_ValidKeywords:
   - DR_ENABLE_LIGHTMAP_DIR
   - DR_LIGHT_ATTENUATION
-  - DR_OUTLINE_ON
   - DR_RIM_ON
   - DR_SPECULAR_ON
   - _ALPHATEST_ON
@@ -72,7 +71,8 @@ Material:
   m_CustomRenderQueue: 2450
   stringTagMap:
     RenderType: TransparentCutout
-  disabledShaderPasses: []
+  disabledShaderPasses:
+  - SRPDEFAULTUNLIT
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
@@ -209,7 +209,7 @@ Material:
     - _Metallic: 0
     - _OcclusionStrength: 1
     - _OutlineDepthOffset: 0
-    - _OutlineEnabled: 1
+    - _OutlineEnabled: 0
     - _OutlineScale: 1.01
     - _OutlineWidth: 1
     - _OverrideBakedGi: 0
