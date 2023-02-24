@@ -19,9 +19,11 @@ public class ControlsMenu : MonoBehaviour
         LoadRemapping();
     }
 
-    public void Remapping(string action)
+    public void Remapping()
     {
         GameObject currentGameObject = EventSystem.current.currentSelectedGameObject;
+
+        string action = currentGameObject.gameObject.name;
 
         if (player.actions.FindActionMap(currentActionMap).FindAction(action) == null)
             Debug.Log("This action not exists");
@@ -54,8 +56,7 @@ public class ControlsMenu : MonoBehaviour
         {
             string fontPath = ControlSaver.mapping[callback.action.bindings[0].effectivePath];
 
-            string tmp;
-            if ((tmp = CheckIfAsigned(callback.action)) != null)
+            if (CheckIfAsigned(callback.action) != null)
             {
                 print("Iguales");
             }
@@ -79,7 +80,7 @@ public class ControlsMenu : MonoBehaviour
 
         for (int i = 0; i < buttons.childCount; i++)
         {
-            string buttonText = ControlSaver.uiMapping[buttons.GetChild(i).gameObject.name];
+            string buttonText = buttons.GetChild(i).gameObject.name;
             string buttonAction = player.actions.FindActionMap(currentActionMap).FindAction(buttonText).bindings[0].effectivePath;
             buttons.GetChild(i).transform.GetChild(0).GetComponent<TMP_Text>().text = ControlSaver.mapping[buttonAction];
         }

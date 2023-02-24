@@ -14,4 +14,6 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/FightingScene.unity
     guid: 91bc4d5572ccf0549abe3a0a5a381852
-  m_configObjects: {}
+  m_configObjects:
+    com.unity.input.settings: {fileID: 11400000, guid: 1936298257426d14bb0fc56d57eeedf8,
+      type: 2}

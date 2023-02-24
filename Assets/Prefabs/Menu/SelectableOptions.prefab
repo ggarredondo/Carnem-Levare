@@ -2347,7 +2347,7 @@ MonoBehaviour:
       - m_Target: {fileID: 517267783483196206}
         m_TargetAssemblyTypeName: ControlsMenu, Assembly-CSharp
         m_MethodName: Remapping
-        m_Mode: 5
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -2556,7 +2556,7 @@ MonoBehaviour:
       - m_Target: {fileID: 517267783483196206}
         m_TargetAssemblyTypeName: ControlsMenu, Assembly-CSharp
         m_MethodName: Remapping
-        m_Mode: 5
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -3999,7 +3999,7 @@ MonoBehaviour:
       - m_Target: {fileID: 517267783483196206}
         m_TargetAssemblyTypeName: ControlsMenu, Assembly-CSharp
         m_MethodName: Remapping
-        m_Mode: 5
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -4906,7 +4906,7 @@ MonoBehaviour:
       - m_Target: {fileID: 517267783483196206}
         m_TargetAssemblyTypeName: ControlsMenu, Assembly-CSharp
         m_MethodName: Remapping
-        m_Mode: 5
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -7702,7 +7702,7 @@ MonoBehaviour:
       - m_Target: {fileID: 517267783483196206}
         m_TargetAssemblyTypeName: ControlsMenu, Assembly-CSharp
         m_MethodName: Remapping
-        m_Mode: 5
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
