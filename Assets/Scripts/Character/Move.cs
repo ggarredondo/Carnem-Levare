@@ -50,8 +50,8 @@ public class Move : MonoBehaviour
     public float RightAnimationSpeed { get => rightAnimationSpeed; }
 
     [Header("Attack Values")]
-    public Direction direction;
-    public Power power;
+    [Tooltip("States from which side the hurt animation plays out when it hits")] public Direction direction;
+    [Tooltip("States which type of hurt animation will play when it hits")] public Power power;
     public float baseDamage; // Used to calculate damage dealt to the opponent's stamina, if it hits.
 
     #region TrackingValues
