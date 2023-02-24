@@ -542,15 +542,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   target: {fileID: 0}
   trackingRate: 100
-  stamina: 1000
-  maxStamina: 1000
+  stamina: 500
+  maxStamina: 500
   attackDamage: 10
   attackSpeed: 1
   height: 1.1
   mass: 1
   drag: 0
-  leftMoveset: []
-  rightMoveset: []
+  leftMoveset:
+  - {fileID: -4476728132895952727, guid: cd4612b1a708e5046ae35c3be7591360, type: 3}
+  - {fileID: -6294080308579570103, guid: efb9a55e3f71721488f998a63a6181b3, type: 3}
+  - {fileID: -6294080308579570103, guid: a8f961228fb724d4493126f529517e6e, type: 3}
+  rightMoveset:
+  - {fileID: -4476728132895952727, guid: cd4612b1a708e5046ae35c3be7591360, type: 3}
+  - {fileID: -4476728132895952727, guid: f93797f883db7b542ace592e1b90d3b4, type: 3}
+  - {fileID: -6294080308579570103, guid: a8f961228fb724d4493126f529517e6e, type: 3}
   leftHitboxes:
   - {fileID: 6258304511305694117}
   rightHitboxes:
@@ -558,7 +564,7 @@ MonoBehaviour:
   updateMoveset: 0
   modifyTimeScale: 0
   timeScale: 1
-  debugInput: 0
+  debugInput: 1
   enemyDirectionSpeed: 10
 --- !u!114 &7481606168989916935
 MonoBehaviour:
@@ -618,6 +624,102 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: 0ff10795-7b68-47d4-b40b-a977ae1cc7a6
     m_ActionName: Main Movement/Block[/Keyboard/c]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 7481606168508649709}
+        m_TargetAssemblyTypeName: Enemy, Assembly-CSharp
+        m_MethodName: Left0
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: c00d0e02-9001-410b-8d1a-2de79fa4017c
+    m_ActionName: Main Movement/Left0[/Keyboard/numpad1]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 7481606168508649709}
+        m_TargetAssemblyTypeName: Enemy, Assembly-CSharp
+        m_MethodName: Left1
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 5418f625-eb00-4967-ade3-a753dcaaaa3a
+    m_ActionName: Main Movement/Left1[/Keyboard/numpad1]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 7481606168508649709}
+        m_TargetAssemblyTypeName: Enemy, Assembly-CSharp
+        m_MethodName: Left2
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 87392e83-2388-4902-b453-acb8e8a63e2c
+    m_ActionName: Main Movement/Left2[/Keyboard/numpad7]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 7481606168508649709}
+        m_TargetAssemblyTypeName: Enemy, Assembly-CSharp
+        m_MethodName: Right0
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 7d09f5ad-2718-4e42-8029-fdc26fd8a88c
+    m_ActionName: Main Movement/Right0[/Keyboard/numpad3]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 7481606168508649709}
+        m_TargetAssemblyTypeName: Enemy, Assembly-CSharp
+        m_MethodName: Right1
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 566f5264-c346-4326-94ce-236799f92d1b
+    m_ActionName: Main Movement/Right1[/Keyboard/numpad6]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 7481606168508649709}
+        m_TargetAssemblyTypeName: Enemy, Assembly-CSharp
+        m_MethodName: Right2
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 0aa9a96d-05bf-42ab-81da-397d5c52c5a1
+    m_ActionName: Main Movement/Right2[/Keyboard/numpad9]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Main Movement

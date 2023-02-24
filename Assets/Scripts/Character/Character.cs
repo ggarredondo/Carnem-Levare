@@ -19,6 +19,7 @@ public abstract class Character : MonoBehaviour
     [SerializeField] [InitializationField] private float maxStamina = 0f;
     [SerializeField] private float attackDamage = 0f;
     [Tooltip("Attack animation speed")] [InitializationField] [Range(0f, 2f)] public float attackSpeed = 1f;
+    [Tooltip("Percentage of stamina damage taken when blocking")] [SerializeField] [Range(0f, 1f)] private float blockingModifier = 0.5f;
     [SerializeField] [InitializationField] [Range(1f, 1.3f)] private float height = 1f;
     [SerializeField] [InitializationField] private float mass = 1f;
     [SerializeField] [InitializationField] private float drag = 0f; // SHOULD BE CALCULATED GIVEN MASS
@@ -37,7 +38,7 @@ public abstract class Character : MonoBehaviour
     protected Vector2 direction, directionTarget;
     protected float directionSpeed;
 
-    protected bool isBlocking = false;
+    protected bool isAttacking, isHurt, isBlocking = false;
 
     [Header("Debug")] // DEBUG
     [SerializeField] private bool updateMoveset = false; // DEBUG
@@ -68,6 +69,12 @@ public abstract class Character : MonoBehaviour
 
     protected virtual void Update()
     {
+        // Bellow are values that must be updated frame by frame to allow certain animations to play out accordingly.
+        isAttacking = anim.GetCurrentAnimatorStateInfo(0).IsTag("Attacking") && !anim.IsInTransition(0);
+        isHurt = anim.GetCurrentAnimatorStateInfo(0).IsName("Hurt") && !anim.IsInTransition(0);
+
+        // Character can only attack if they're not attacking already or hurt.
+        anim.SetBool("can_attack", !isAttacking && !isHurt);
         anim.SetBool("block", isBlocking);
 
         // Softens movement by establishing the direction as a point that approaches the target direction at *directionSpeed* rate.
@@ -124,10 +131,10 @@ public abstract class Character : MonoBehaviour
     /// <summary>
     /// Damage character's stamina.
     /// </summary>
-    /// <param name="dmg">Damage taken (absolute value).</param>
+    /// <param name="dmg">Damage taken.</param>
     public void Damage(float dmg)
     {
-        stamina -= Mathf.Abs(dmg);
+        stamina -= isBlocking ? Mathf.Round(dmg * blockingModifier) : dmg;
         if (stamina < 0) stamina = 0;
     }
 

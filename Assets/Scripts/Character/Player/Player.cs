@@ -3,7 +3,7 @@ using UnityEngine.InputSystem;
 
 public class Player : Character
 {
-    private bool isAttacking, isHurt, isSkipping;
+    private bool isSkipping;
 
     [Header("Input Parameters")]
 
@@ -19,13 +19,6 @@ public class Player : Character
 
     override protected void Update()
     {
-        // Bellow are values that must be updated frame by frame to allow certain animations to play out accordingly.
-        isAttacking = anim.GetCurrentAnimatorStateInfo(0).IsTag("Attacking") && !anim.IsInTransition(0);
-        isHurt = anim.GetCurrentAnimatorStateInfo(0).IsName("Hurt") && !anim.IsInTransition(0);
-
-        // The player can only attack if they're not attacking already.
-        anim.SetBool("can_attack", !isAttacking && !isHurt);
-
         // The player can only skip if they are blocking but they aren't attacking nor skipping already.
         isSkipping = anim.GetCurrentAnimatorStateInfo(0).IsTag("Skipping");
         // Attacking is checked through the animator so that you can buffer skip after attacking.
