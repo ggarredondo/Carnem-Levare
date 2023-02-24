@@ -546,6 +546,7 @@ MonoBehaviour:
   maxStamina: 500
   attackDamage: 10
   attackSpeed: 1
+  blockingModifier: 0.5
   height: 1.1
   mass: 1
   drag: 0
@@ -573,7 +574,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7481606168508649711}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
   m_Name: 

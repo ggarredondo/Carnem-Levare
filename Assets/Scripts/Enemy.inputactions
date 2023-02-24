@@ -137,7 +137,7 @@
                 {
                     "name": "",
                     "id": "56bd5249-6803-40ce-8147-d78f1355478b",
-                    "path": "<Keyboard>/numpad0",
+                    "path": "<Keyboard>/c",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -148,7 +148,7 @@
                 {
                     "name": "",
                     "id": "882190df-9b69-4143-8a51-08de4da00fc0",
-                    "path": "<Keyboard>/numpad1",
+                    "path": "<Keyboard>/1",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -159,7 +159,7 @@
                 {
                     "name": "",
                     "id": "5b1ffbbe-ca50-4bc2-8a9d-bcdfcf9613bb",
-                    "path": "<Keyboard>/numpad4",
+                    "path": "<Keyboard>/2",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -170,7 +170,7 @@
                 {
                     "name": "",
                     "id": "0f7bc2e6-49fb-488c-b680-b83c18a5a0b3",
-                    "path": "<Keyboard>/numpad7",
+                    "path": "<Keyboard>/3",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -181,7 +181,7 @@
                 {
                     "name": "",
                     "id": "cec01c00-01ab-482e-a5cf-5d4b7834e3b4",
-                    "path": "<Keyboard>/numpad6",
+                    "path": "<Keyboard>/5",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -192,7 +192,7 @@
                 {
                     "name": "",
                     "id": "2df8b3d4-b681-4bfc-be38-05c5c0058fc8",
-                    "path": "<Keyboard>/numpad9",
+                    "path": "<Keyboard>/6",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -203,7 +203,7 @@
                 {
                     "name": "",
                     "id": "409d3504-1cd8-499e-a11b-56930f534ca7",
-                    "path": "<Keyboard>/numpad3",
+                    "path": "<Keyboard>/4",
                     "interactions": "",
                     "processors": "",
                     "groups": "",

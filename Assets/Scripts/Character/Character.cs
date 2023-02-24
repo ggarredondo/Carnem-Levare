@@ -38,7 +38,7 @@ public abstract class Character : MonoBehaviour
     protected Vector2 direction, directionTarget;
     protected float directionSpeed;
 
-    protected bool isAttacking, isHurt, isBlocking = false;
+    protected bool isAttacking, isHurt, isBlocking, block_pressed = false;
 
     [Header("Debug")] // DEBUG
     [SerializeField] private bool updateMoveset = false; // DEBUG
@@ -72,10 +72,12 @@ public abstract class Character : MonoBehaviour
         // Bellow are values that must be updated frame by frame to allow certain animations to play out accordingly.
         isAttacking = anim.GetCurrentAnimatorStateInfo(0).IsTag("Attacking") && !anim.IsInTransition(0);
         isHurt = anim.GetCurrentAnimatorStateInfo(0).IsName("Hurt") && !anim.IsInTransition(0);
+        isBlocking = anim.GetCurrentAnimatorStateInfo(0).IsName("Block") || anim.GetCurrentAnimatorStateInfo(0).IsName("Blocked");
 
         // Character can only attack if they're not attacking already or hurt.
         anim.SetBool("can_attack", !isAttacking && !isHurt);
-        anim.SetBool("block", isBlocking);
+        anim.SetBool("block", block_pressed);
+        anim.SetBool("is_blocking", isBlocking);
 
         // Softens movement by establishing the direction as a point that approaches the target direction at *directionSpeed* rate.
         direction = Vector2.Lerp(direction, directionTarget, directionSpeed * Time.deltaTime);

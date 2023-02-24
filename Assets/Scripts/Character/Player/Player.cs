@@ -25,7 +25,7 @@ public class Player : Character
         // Everything else is checked through input so that skipping doesn't buffer for the next frames.
         anim.SetBool("can_skip", !isAttacking && !isSkipping && !isHurt);
 
-        directionSpeed = directionTarget.magnitude == 0f && !isBlocking ? smoothStickSpeed : stickSpeed;
+        directionSpeed = directionTarget.magnitude == 0f && !block_pressed ? smoothStickSpeed : stickSpeed;
         base.Update();
     }
 
@@ -44,8 +44,8 @@ public class Player : Character
         if (directionTarget.x < -stickTapTolerance || directionTarget.x > stickTapTolerance) canTapStick = false;
         if (directionTarget.magnitude == 0f) canTapStick = true;
     }
-    public void SkipFwd(InputAction.CallbackContext context) { anim.SetBool("skip_fwd", context.performed && isBlocking && canTapStick); }
-    public void SkipBwd(InputAction.CallbackContext context) { anim.SetBool("skip_bwd", context.performed && isBlocking && canTapStick); }
+    public void SkipFwd(InputAction.CallbackContext context) { anim.SetBool("skip_fwd", context.performed && block_pressed && canTapStick); }
+    public void SkipBwd(InputAction.CallbackContext context) { anim.SetBool("skip_bwd", context.performed && block_pressed && canTapStick); }
     public void LeftNormal(InputAction.CallbackContext context) { if (LeftMoveset.Count > 0) anim.SetBool("left_normal", context.performed); }
     public void LeftSpecial(InputAction.CallbackContext context) { if (LeftMoveset.Count > 1) anim.SetBool("left_special", context.performed); }
     public void RightNormal(InputAction.CallbackContext context) {
@@ -60,7 +60,7 @@ public class Player : Character
             anim.SetBool("right_special", context.performed);
         }
     }
-    public void Block(InputAction.CallbackContext context) { isBlocking = context.performed; }
+    public void Block(InputAction.CallbackContext context) { block_pressed = context.performed; }
     #endregion
 
     #region PublicMethods
@@ -82,6 +82,6 @@ public class Player : Character
     public bool isPlayerSkippingForward { get => directionTarget.magnitude == 0f && anim.GetCurrentAnimatorStateInfo(0).IsTag("Movement"); }
     public bool isPlayerSkippingBackwards { get => anim.GetCurrentAnimatorStateInfo(0).IsName("Skip Backwards"); }
     public bool isPlayerAttacking { get => anim.GetCurrentAnimatorStateInfo(0).IsTag("Attacking"); }
-    public bool isPlayerBlocking { get => isBlocking; }
+    public bool isPlayerBlocking { get => block_pressed; }
     #endregion
 }
