@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.EventSystems;
 using TMPro;
+using System;
 
 public class ControlsMenu : MonoBehaviour
 { 
@@ -10,13 +11,28 @@ public class ControlsMenu : MonoBehaviour
 
     [SerializeField] private PlayerInput player;
     [SerializeField] private MainMenuManager globalMenuManager;
+    [SerializeField] private TMP_FontAsset[] fonts;
 
-    private string cancelMessage;
+    private string lastControlScheme;
+    private int controlSchemeIndex;
+    
     public float rebindTimeDelay = 0.25f;
 
     private void Awake()
     {
+        lastControlScheme = player.defaultControlScheme;
+        controlSchemeIndex = 0;
         LoadRemapping();
+    }
+
+    private void Update()
+    {
+        if (player.currentControlScheme != lastControlScheme)
+        {
+            lastControlScheme = player.currentControlScheme;
+            controlSchemeIndex = (controlSchemeIndex + 1) % 2;
+            LoadRemapping();
+        }
     }
 
     public void Remapping()
@@ -32,10 +48,10 @@ public class ControlsMenu : MonoBehaviour
             player.actions.FindActionMap(player.defaultActionMap).Disable();
             globalMenuManager.PopUpMessage("Waiting for input");
 
-            player.actions.FindActionMap(currentActionMap).FindAction(action).PerformInteractiveRebinding()
+            player.actions.FindActionMap(currentActionMap).FindAction(action).PerformInteractiveRebinding(controlSchemeIndex)
                 .WithControlsExcluding("Mouse")
                 .OnMatchWaitForAnother(rebindTimeDelay)
-                .OnCancel(callback => CancelRebind(cancelMessage))
+                .OnCancel(callback => CancelRebind("This action is not supported"))
                 .OnComplete(callback => FinishRebind(callback, currentGameObject))
                 .Start();
         }
@@ -43,6 +59,7 @@ public class ControlsMenu : MonoBehaviour
 
     private void CancelRebind(string cancelMessage)
     {
+        
         StartCoroutine(globalMenuManager.PopUpForTime(cancelMessage));
     }
 
@@ -52,9 +69,9 @@ public class ControlsMenu : MonoBehaviour
 
         GameObject children = currentGameObject.transform.GetChild(0).gameObject;
 
-        if (ControlSaver.mapping.ContainsKey(callback.action.bindings[0].effectivePath))
+        if (ControlSaver.mapping.ContainsKey(callback.action.bindings[controlSchemeIndex].effectivePath))
         {
-            string fontPath = ControlSaver.mapping[callback.action.bindings[0].effectivePath];
+            string fontPath = ControlSaver.mapping[callback.action.bindings[controlSchemeIndex].effectivePath];
 
             if (CheckIfAsigned(callback.action) != null)
             {
@@ -64,11 +81,7 @@ public class ControlsMenu : MonoBehaviour
             children.GetComponent<TMP_Text>().text = fontPath;
             ControlSaver.ApplyChanges(player);
         }
-        else
-        {
-            cancelMessage = "This action is not supported";
-            callback.Cancel();
-        }
+        else callback.Cancel();
 
         callback.Dispose();
         player.actions.FindActionMap(player.defaultActionMap).Enable();
@@ -81,7 +94,8 @@ public class ControlsMenu : MonoBehaviour
         for (int i = 0; i < buttons.childCount; i++)
         {
             string buttonText = buttons.GetChild(i).gameObject.name;
-            string buttonAction = player.actions.FindActionMap(currentActionMap).FindAction(buttonText).bindings[0].effectivePath;
+            string buttonAction = player.actions.FindActionMap(currentActionMap).FindAction(buttonText).bindings[controlSchemeIndex].effectivePath;
+            buttons.GetChild(i).transform.GetChild(0).GetComponent<TMP_Text>().font = fonts[controlSchemeIndex];
             buttons.GetChild(i).transform.GetChild(0).GetComponent<TMP_Text>().text = ControlSaver.mapping[buttonAction];
         }
     }

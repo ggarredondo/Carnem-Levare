@@ -2949,7 +2949,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: 0, w: 0.0013217926}
+  m_margin: {x: 0, y: 0, z: -40, w: 0.0013217926}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -4242,7 +4242,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: 0, w: 0.0013217926}
+  m_margin: {x: 0, y: 0, z: -40, w: 0.0013217926}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -6450,7 +6450,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: 0, w: 0.0013217926}
+  m_margin: {x: 0, y: 0, z: -40, w: 0.0013217926}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -8566,7 +8566,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: 0, w: 0.0013217926}
+  m_margin: {x: 0, y: 0, z: -40, w: 0.0013217926}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -8702,7 +8702,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: 0, w: 0.0013217926}
+  m_margin: {x: 0, y: 0, z: -40, w: 0.0013217926}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -9350,6 +9350,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 0}
   globalMenuManager: {fileID: 0}
+  fonts:
+  - {fileID: 11400000, guid: 2b80a8fa063c79745a3ac60cfeefa351, type: 2}
+  - {fileID: 11400000, guid: 9ee3d445f34cfb24baef4f5f66b12f7d, type: 2}
   rebindTimeDelay: 0.25
 --- !u!1 &517267783486887505
 GameObject:
