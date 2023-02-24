@@ -10,6 +10,12 @@ public class Player : Character
     [Tooltip("How quickly player animations follows stick movement")]
     [SerializeField] private float stickSpeed;
 
+    [Tooltip("How quickly you can duck and sidestep when blocking")]
+    [SerializeField] private float blockingStickSpeed;
+
+    [Tooltip("How quickly you can duck and sidestep when an attack is blocked")]
+    [SerializeField] private float blockedStickSpeed;
+
     [Tooltip("Lower stickSpeed to smooth out transitions to idle (when stick is centered)")]
     [SerializeField] private float smoothStickSpeed;
 
@@ -25,7 +31,17 @@ public class Player : Character
         // Everything else is checked through input so that skipping doesn't buffer for the next frames.
         anim.SetBool("can_skip", !isAttacking && !isSkipping && !isHurt);
 
-        directionSpeed = directionTarget.magnitude == 0f && !block_pressed ? smoothStickSpeed : stickSpeed;
+        if (directionTarget.magnitude == 0f && !block_pressed)
+            directionSpeed = smoothStickSpeed;
+        else if (anim.GetCurrentAnimatorStateInfo(0).IsName("Block"))
+            directionSpeed = blockingStickSpeed;
+        else if (anim.GetCurrentAnimatorStateInfo(0).IsName("Blocked"))
+            directionSpeed = blockedStickSpeed;
+        else if (isHurt)
+            directionSpeed = 0f;
+        else
+            directionSpeed = stickSpeed;
+
         base.Update();
     }
 

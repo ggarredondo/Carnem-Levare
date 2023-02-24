@@ -72,7 +72,7 @@ public abstract class Character : MonoBehaviour
         // Bellow are values that must be updated frame by frame to allow certain animations to play out accordingly.
         isAttacking = anim.GetCurrentAnimatorStateInfo(0).IsTag("Attacking");
         isHurt = anim.GetCurrentAnimatorStateInfo(0).IsName("Hurt");
-        isBlocking = anim.GetCurrentAnimatorStateInfo(0).IsName("Block") || anim.GetCurrentAnimatorStateInfo(0).IsName("Blocked");
+        isBlocking = (anim.GetCurrentAnimatorStateInfo(0).IsName("Block") || anim.GetCurrentAnimatorStateInfo(0).IsName("Blocked")) && block_pressed;
 
         // Character can only attack if they're not attacking already or hurt.
         anim.SetBool("can_attack", !isAttacking && !isHurt);

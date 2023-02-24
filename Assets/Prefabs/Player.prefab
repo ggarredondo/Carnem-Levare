@@ -1215,6 +1215,7 @@ MonoBehaviour:
   maxStamina: 500
   attackDamage: 10
   attackSpeed: 1.1
+  blockingModifier: 0.5
   height: 1
   mass: 1
   drag: 0
@@ -1232,6 +1233,8 @@ MonoBehaviour:
   modifyTimeScale: 0
   timeScale: 1
   stickSpeed: 15
+  blockingStickSpeed: 10
+  blockedStickSpeed: 5
   smoothStickSpeed: 5
   stickTapTolerance: 0.6
 --- !u!114 &4706402254706946843
