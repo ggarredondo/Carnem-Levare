@@ -86,15 +86,13 @@ public abstract class Character : MonoBehaviour
         anim.SetFloat("horizontal", direction.x);
         anim.SetFloat("vertical", direction.y);
 
-        if (updateMoveset) { InitializeMoveset(); updateMoveset = false; } // DEBUG
-        if (modifyTimeScale && this is Player) Time.timeScale = timeScale; // DEBUG
-    }
-
-    protected virtual void FixedUpdate()
-    {
+        // Rotate towards opponent if character is tracking.
         targetLook = Quaternion.LookRotation(target.position - transform.position);
         if (tracking && attackTracking && otherTracking)
-            transform.rotation = Quaternion.RotateTowards(transform.rotation, targetLook, trackingRate * Time.deltaTime); // Rotate towards opponent.
+            transform.rotation = Quaternion.RotateTowards(transform.rotation, targetLook, trackingRate * Time.deltaTime);
+
+        if (updateMoveset) { InitializeMoveset(); updateMoveset = false; } // DEBUG
+        if (modifyTimeScale && this is Player) Time.timeScale = timeScale; // DEBUG
     }
 
     #region Animation
