@@ -10,7 +10,7 @@
                     "type": "Value",
                     "id": "21e7cf7f-b0cf-4b92-8e5e-6f5895e619ea",
                     "expectedControlType": "Vector2",
-                    "processors": "NormalizeVector2",
+                    "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
                 },
@@ -78,21 +78,12 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Skip Forward",
+                    "name": "Dash",
                     "type": "Button",
                     "id": "d959d0a2-068f-4f9f-b941-ac4413495569",
                     "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": "MultiTap",
-                    "initialStateCheck": false
-                },
-                {
-                    "name": "Skip Backwards",
-                    "type": "Button",
-                    "id": "c99c723a-ad3e-4232-a9ce-de2a78da5c0f",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "MultiTap",
+                    "interactions": "",
                     "initialStateCheck": false
                 }
             ],
@@ -254,44 +245,22 @@
                 {
                     "name": "",
                     "id": "21b4ed65-6f06-4c05-ab49-55b905570687",
-                    "path": "<Gamepad>/leftStick/up",
+                    "path": "<Gamepad>/buttonWest",
                     "interactions": "",
                     "processors": "",
                     "groups": "Gamepad",
-                    "action": "Skip Forward",
+                    "action": "Dash",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
                 {
                     "name": "",
                     "id": "6cf4241c-8d9b-420e-80db-326e19805301",
-                    "path": "<Keyboard>/w",
+                    "path": "<Keyboard>/leftShift",
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard&Mouse",
-                    "action": "Skip Forward",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "4157f091-13af-49b6-92c0-92c4574bac09",
-                    "path": "<Gamepad>/leftStick/down",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Gamepad",
-                    "action": "Skip Backwards",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "104ca972-d81e-4f1d-b62b-4fd4bc871646",
-                    "path": "<Keyboard>/s",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Keyboard&Mouse",
-                    "action": "Skip Backwards",
+                    "action": "Dash",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },

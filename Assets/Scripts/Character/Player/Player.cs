@@ -3,7 +3,7 @@ using UnityEngine.InputSystem;
 
 public class Player : Character
 {
-    private bool isSkipping;
+    private bool isDashing;
 
     [Header("Input Parameters")]
 
@@ -19,17 +19,17 @@ public class Player : Character
     [Tooltip("Lower stickSpeed to smooth out transitions to idle (when stick is centered)")]
     [SerializeField] private float smoothStickSpeed;
 
-    [Tooltip("How much off axis movement do you allow when attempting stick tapping actions?")]
-    [SerializeField] private float stickTapTolerance = 0.1f;
-    private bool canTapStick = true;
-
     override protected void Update()
     {
         // The player can only skip if they are blocking but they aren't attacking nor skipping already.
-        isSkipping = anim.GetCurrentAnimatorStateInfo(0).IsTag("Skipping");
-        // Attacking is checked through the animator so that you can buffer skip after attacking.
-        // Everything else is checked through input so that skipping doesn't buffer for the next frames.
-        anim.SetBool("can_skip", !isAttacking && !isSkipping && !isHurt);
+        isDashing = anim.GetCurrentAnimatorStateInfo(0).IsName("Dash");
+        anim.SetBool("can_dash", !isAttacking && !isDashing && !isHurt);
+
+        // Establish a direction towards which to dash that doesn't change while dashing
+        if (!isDashing) {
+            anim.SetFloat("horizontal_dash", Mathf.Round(direction.x));
+            anim.SetFloat("vertical_dash", Mathf.Round(direction.y));
+        }
 
         if (directionTarget.magnitude == 0f && !block_pressed)
             directionSpeed = smoothStickSpeed;
@@ -48,20 +48,8 @@ public class Player : Character
     #region Input
     // Meant for Unity Input System events
 
-    public void Movement(InputAction.CallbackContext context) { 
-        directionTarget = context.ReadValue<Vector2>().normalized;
-
-        // Forward and backwards skips trigger by tapping the left stick twice (up or down respectively).
-        // However, they may also trigger by drawing circles in the stick. We have to make sure there is
-        // no horizontal movement before allowing the player to skip jump, otherwise they may trigger it
-        // by mistake when dodging attacks.
-        // We, however, allow some horizontal movement so that it doesn't have to be too precise.
-        // In the range of [-stickTapTolerance, stickTapTolerance]
-        if (directionTarget.x < -stickTapTolerance || directionTarget.x > stickTapTolerance) canTapStick = false;
-        if (directionTarget.magnitude == 0f) canTapStick = true;
-    }
-    public void SkipFwd(InputAction.CallbackContext context) { anim.SetBool("skip_fwd", context.performed && block_pressed && canTapStick); }
-    public void SkipBwd(InputAction.CallbackContext context) { anim.SetBool("skip_bwd", context.performed && block_pressed && canTapStick); }
+    public void Movement(InputAction.CallbackContext context) { directionTarget = context.ReadValue<Vector2>().normalized; }
+    public void Dash(InputAction.CallbackContext context) { anim.SetBool("dash", context.performed && block_pressed); }
     public void LeftNormal(InputAction.CallbackContext context) { if (LeftMoveset.Count > 0) anim.SetBool("left_normal", context.performed); }
     public void LeftSpecial(InputAction.CallbackContext context) { if (LeftMoveset.Count > 1) anim.SetBool("left_special", context.performed); }
     public void RightNormal(InputAction.CallbackContext context) {

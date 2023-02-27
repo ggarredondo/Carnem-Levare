@@ -136,7 +136,8 @@ public class CameraEffects : MonoBehaviour
 
     private void OrbitalMovement()
     {
-        if (Mathf.Abs(player.StickSmoothDirection.x) > 0.1f && !cameraConditions[1]) orbitalTransposer.m_XAxis.Value += Mathf.Sign(player.StickSmoothDirection.x) * orbitalValue * Time.deltaTime;
+        if (Mathf.Abs(player.StickSmoothDirection.x) > 0.1f && player.isPlayerMoving && !cameraConditions[1]) 
+            orbitalTransposer.m_XAxis.Value += Mathf.Sign(player.StickSmoothDirection.x) * orbitalValue * Time.deltaTime;
 
         if (cameraConditions[1]) orbitalTransposer.m_XAxis.Value = Mathf.Lerp(orbitalTransposer.m_XAxis.Value, 0, orbitalRecovery * Time.deltaTime);
 
