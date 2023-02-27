@@ -533,12 +533,8 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: d959d0a2-068f-4f9f-b941-ac4413495569
     m_ActionName: Main Movement/Skip Forward[/XInputControllerWindows/leftStick/up]
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: c99c723a-ad3e-4232-a9ce-de2a78da5c0f
-    m_ActionName: Main Movement/Skip Backwards[/XInputControllerWindows/leftStick/down]
   m_NeverAutoSwitchControlSchemes: 0
-  m_DefaultControlScheme: 
+  m_DefaultControlScheme: Gamepad
   m_DefaultActionMap: UI
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 1418685037}

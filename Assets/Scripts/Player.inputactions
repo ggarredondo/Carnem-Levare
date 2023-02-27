@@ -893,6 +893,17 @@
                 },
                 {
                     "name": "",
+                    "id": "90ce0b92-eb0e-4138-abef-4cd59c750cb5",
+                    "path": "<Keyboard>/b",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard&Mouse",
+                    "action": "Back",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "024162d1-df55-498d-bbd0-5c462d40727c",
                     "path": "<Gamepad>/buttonSouth",
                     "interactions": "",
@@ -915,6 +926,17 @@
                 },
                 {
                     "name": "",
+                    "id": "effeb3a9-2fa0-4b1f-8a06-a23af93c3abc",
+                    "path": "<Keyboard>/escape",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard&Mouse",
+                    "action": "Start",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "6cfbb805-86a5-42fb-afec-842424fbf3a1",
                     "path": "<Gamepad>/rightShoulder",
                     "interactions": "",
@@ -926,11 +948,33 @@
                 },
                 {
                     "name": "",
+                    "id": "b238da4a-eb19-42db-8113-1d5e7eeaa3f4",
+                    "path": "<Keyboard>/e",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard&Mouse",
+                    "action": "ChangeRightMenu",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "1ed89730-5cec-4577-acbb-c07874b4da24",
                     "path": "<Gamepad>/leftShoulder",
                     "interactions": "",
                     "processors": "",
                     "groups": "Gamepad",
+                    "action": "ChangeLeftMenu",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "0f83db76-f81e-4d9d-a9b6-b24cc392f040",
+                    "path": "<Keyboard>/q",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard&Mouse",
                     "action": "ChangeLeftMenu",
                     "isComposite": false,
                     "isPartOfComposite": false
