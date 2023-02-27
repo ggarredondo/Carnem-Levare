@@ -91,7 +91,7 @@ public abstract class Character : MonoBehaviour
     protected virtual void FixedUpdate()
     {
         targetLook = Quaternion.LookRotation(target.position - transform.position);
-        if (tracking)
+        if (tracking && !anim.GetCurrentAnimatorStateInfo(0).IsName("Dash"))
             transform.rotation = Quaternion.RotateTowards(transform.rotation, targetLook, trackingRate * Time.deltaTime); // Rotate towards opponent.
     }
 
