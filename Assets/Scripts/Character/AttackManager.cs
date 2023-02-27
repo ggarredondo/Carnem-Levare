@@ -39,14 +39,14 @@ public abstract class AttackManager : StateMachineBehaviour
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        character.tracking = currentMove.isTracking(side, stateInfo.normalizedTime);
+        character.attackTracking = currentMove.isTracking(side, stateInfo.normalizedTime);
         currentHitbox.GetComponent<Hitbox>().Activate(currentMove.isHitboxActive(side, stateInfo.normalizedTime));
     }
 
     // OnStateExit is called when a transition ends and the state machine finishes evaluating this state
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        character.tracking = true;
+        character.attackTracking = true;
         currentHitbox.GetComponent<Hitbox>().hit = false;
         currentHitbox.GetComponent<Hitbox>().Activate(false);
     }

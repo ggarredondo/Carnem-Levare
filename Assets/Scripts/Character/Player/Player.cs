@@ -24,6 +24,7 @@ public class Player : Character
         // The player can only skip if they are blocking but they aren't attacking nor skipping already.
         isDashing = anim.GetCurrentAnimatorStateInfo(0).IsName("Dash");
         anim.SetBool("can_dash", !isAttacking && !isDashing && !isHurt);
+        otherTracking = !isDashing || anim.IsInTransition(0);
 
         // Establish a direction towards which to dash that doesn't change while dashing
         if (!isDashing) {

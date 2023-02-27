@@ -8,7 +8,9 @@ public abstract class Character : MonoBehaviour
     // Character Attributes
     [Header("Tracking values")]
     [SerializeField] protected Transform target;
-    [System.NonSerialized] public bool tracking = true;
+    [SerializeField] private bool tracking = true;
+    [System.NonSerialized] public bool attackTracking = true; // To deactivate tracking during the commitment phase of an attack.
+    protected bool otherTracking = true; // To deactivate tracking during any other action if necessary.
 
     [Tooltip("How quickly character rotates towards their opponent")]
     [SerializeField] private float trackingRate = 1f;
@@ -91,7 +93,7 @@ public abstract class Character : MonoBehaviour
     protected virtual void FixedUpdate()
     {
         targetLook = Quaternion.LookRotation(target.position - transform.position);
-        if (tracking && !anim.GetCurrentAnimatorStateInfo(0).IsName("Dash"))
+        if (tracking && attackTracking && otherTracking)
             transform.rotation = Quaternion.RotateTowards(transform.rotation, targetLook, trackingRate * Time.deltaTime); // Rotate towards opponent.
     }
 
