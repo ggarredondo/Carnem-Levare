@@ -28,8 +28,8 @@ public class Player : Character
 
         // Establish a direction towards which to dash that doesn't change while dashing
         if (!isDashing) {
-            anim.SetFloat("horizontal_dash", Mathf.Round(direction.x));
-            anim.SetFloat("vertical_dash", Mathf.Round(direction.y));
+            anim.SetFloat("horizontal_dash", directionTarget.x);
+            anim.SetFloat("vertical_dash", directionTarget.y);
         }
 
         if (directionTarget.magnitude == 0f && !block_pressed)
