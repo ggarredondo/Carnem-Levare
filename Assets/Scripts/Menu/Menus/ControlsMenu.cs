@@ -3,6 +3,7 @@ using UnityEngine.InputSystem;
 using UnityEngine.EventSystems;
 using TMPro;
 using System;
+using static UnityEngine.InputSystem.InputActionRebindingExtensions;
 
 public class ControlsMenu : MonoBehaviour
 { 
@@ -13,9 +14,9 @@ public class ControlsMenu : MonoBehaviour
     [SerializeField] private MainMenuManager globalMenuManager;
     [SerializeField] private TMP_FontAsset[] fonts;
 
-    private string lastControlScheme;
+    private string lastControlScheme, cancelMessage;
     private int controlSchemeIndex;
-    
+    private InputAction action, originalAction;
     public float rebindTimeDelay = 0.25f;
 
     private void Awake()
@@ -39,52 +40,61 @@ public class ControlsMenu : MonoBehaviour
     {
         GameObject currentGameObject = EventSystem.current.currentSelectedGameObject;
 
-        string action = currentGameObject.gameObject.name;
+        action = player.actions.FindActionMap(currentActionMap).FindAction(currentGameObject.gameObject.name);
 
-        if (player.actions.FindActionMap(currentActionMap).FindAction(action) == null)
+        if (action == null)
             Debug.Log("This action not exists");
         else
         {
-            player.actions.FindActionMap(player.defaultActionMap).Disable();
             globalMenuManager.PopUpMessage("Waiting for input");
 
-            player.actions.FindActionMap(currentActionMap).FindAction(action).PerformInteractiveRebinding(controlSchemeIndex)
+            originalAction = action.Clone();
+
+            action.PerformInteractiveRebinding(controlSchemeIndex)
                 .WithControlsExcluding("Mouse")
                 .OnMatchWaitForAnother(rebindTimeDelay)
-                .OnCancel(callback => CancelRebind("This action is not supported"))
+                .OnCancel(callback => CancelRebind(callback, cancelMessage))
                 .OnComplete(callback => FinishRebind(callback, currentGameObject))
                 .Start();
         }
     }
 
-    private void CancelRebind(string cancelMessage)
+    private void CancelRebind(RebindingOperation callback, string cancelMessage)
     {
-        
-        StartCoroutine(globalMenuManager.PopUpForTime(cancelMessage));
+        //StartCoroutine(globalMenuManager.PopUpForTime(cancelMessage));
+        callback.action.ApplyBindingOverride(controlSchemeIndex, originalAction.bindings[controlSchemeIndex]);
     }
 
-    private void FinishRebind(InputActionRebindingExtensions.RebindingOperation callback, GameObject currentGameObject)
+    private void FinishRebind(RebindingOperation callback, GameObject currentGameObject)
     {
         globalMenuManager.DisablePopUpMenu();
 
         GameObject children = currentGameObject.transform.GetChild(0).gameObject;
 
+        Debug.Log(callback.action.bindings[controlSchemeIndex].effectivePath);
+
         if (ControlSaver.mapping.ContainsKey(callback.action.bindings[controlSchemeIndex].effectivePath))
         {
-            string fontPath = ControlSaver.mapping[callback.action.bindings[controlSchemeIndex].effectivePath];
-
             if (CheckIfAsigned(callback.action) != null)
             {
-                print("Iguales");
+                cancelMessage = "Is equal to another assignment";
+                callback.Cancel();
             }
-
-            children.GetComponent<TMP_Text>().text = fontPath;
-            ControlSaver.ApplyChanges(player);
+            else
+            {
+                string fontPath = ControlSaver.mapping[callback.action.bindings[controlSchemeIndex].effectivePath];
+                children.GetComponent<TMP_Text>().text = fontPath;
+            }
         }
-        else callback.Cancel();
+        else
+        {
+            cancelMessage = "This action is not supported";
+            callback.Cancel();
+        }
 
+        ControlSaver.ApplyChanges(player);
         callback.Dispose();
-        player.actions.FindActionMap(player.defaultActionMap).Enable();
+        LoadRemapping();
     }
 
     private void LoadRemapping()
@@ -103,7 +113,7 @@ public class ControlsMenu : MonoBehaviour
     private string CheckIfAsigned(InputAction action)
     {
         string result = null;
-        InputBinding actualBinding = action.bindings[0];
+        InputBinding actualBinding = action.bindings[controlSchemeIndex];
 
         foreach (InputBinding binding in action.actionMap.bindings) {
 
