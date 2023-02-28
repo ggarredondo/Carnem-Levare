@@ -32,6 +32,10 @@ public class Player : Character
             anim.SetFloat("vertical_dash", directionTarget.y);
         }
 
+        // When deflecting an attack, progressive damage is cancelled.
+        if (anim.GetCurrentAnimatorStateInfo(0).IsName("Deflect"))
+            targetStamina = stamina;
+
         // Change movement animation blending speed depending on the situation.
         if (directionTarget.magnitude == 0f && !block_pressed)
             directionSpeed = smoothStickSpeed;

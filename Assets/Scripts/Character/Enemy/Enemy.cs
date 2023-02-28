@@ -3,8 +3,9 @@ using UnityEngine.InputSystem;
 
 public class Enemy : Character
 {
-    [Header("Movement Parameters")]
+    [Header("Enemy-specific Parameters")]
     [SerializeField] private float enemyDirectionSpeed = 1f;
+    [SerializeField] private bool block;
 
     public void Movement(InputAction.CallbackContext context) { directionTarget = -context.ReadValue<Vector2>().normalized; }
     public void Block(InputAction.CallbackContext context) { block_pressed = !block_pressed; }
@@ -17,16 +18,10 @@ public class Enemy : Character
     public void Right1(InputAction.CallbackContext context) { if (RightMoveset.Count > 1) anim.SetBool("right1", context.performed); }
     public void Right2(InputAction.CallbackContext context) { if (RightMoveset.Count > 2) anim.SetBool("right2", context.performed); }
 
-
-    protected override void Start()
-    {
-        block_pressed = true;
-        base.Start();
-    }
-
     protected override void Update()
     {
         directionSpeed = enemyDirectionSpeed;
+        block_pressed = block;
         base.Update();
     }
 }

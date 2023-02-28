@@ -54,6 +54,16 @@ public class Move : MonoBehaviour
     [Tooltip("States which type of hurt animation will play when it hits")] public Power power;
     public float baseDamage; // Used to calculate damage dealt to the opponent's stamina, if it hits.
 
+    #region HitboxValues
+    [Header("Hitbox Values")]
+    public HitboxType hitboxType;
+    [Tooltip("Hitbox is activated during the interval [hitboxStartTime, hitboxEndTime) of the normalized animation time")]
+    [SerializeField] [Range(0f, 1f)] private float leftHitboxStartTime = 0f, leftHitboxEndTime = 0f;
+
+    [Tooltip("Hitbox is activated during the interval [hitboxStartTime, hitboxEndTime) of the normalized animation time")]
+    [SerializeField] [Range(0f, 1f)] private float rightHitboxStartTime = 0f, rightHitboxEndTime = 0f;
+    #endregion
+
     #region TrackingValues
     [Header("Tracking Values")]
     [Tooltip("Character stops tracking the opponent during the interval [commitStartTime, commitEndTime) of the normalized animation time")]
@@ -61,6 +71,16 @@ public class Move : MonoBehaviour
 
     [Tooltip("Character stops tracking the opponent during the interval [commitStartTime, commitEndTime) of the normalized animation time")]
     [SerializeField] [Range(0f, 1f)] private float leftCommitEndTime = 0f, rightCommitStartTime = 0f, rightCommitEndTime = 0f;
+    #endregion
+
+    #region MovementValues
+    [Header("(Extra) Movement Values")]
+
+    [Tooltip("The attack may move the character further than established by root motion")]
+    [SerializeField] private float leftMovement = 0f;
+
+    [Tooltip("The attack may move the character further than established by root motion")]
+    [SerializeField] private float rightMovement = 0f;
     #endregion
 
     #region ChargeValues
@@ -86,14 +106,6 @@ public class Move : MonoBehaviour
     [Tooltip("The camera starts dolly zooming from a fraction of the chargeLimit value")]
     [SerializeField] [ConditionalField("chargeable")] private float chargeLimitDivisor = 6f;
     public float ChargeLimitDivisor { get => chargeLimitDivisor; }
-
-    [Header("Hitbox Values")]
-    public HitboxType hitboxType;
-    [Tooltip("Hitbox is activated during the interval [hitboxStartTime, hitboxEndTime) of the normalized animation time")] 
-    [SerializeField] [Range(0f, 1f)] private float leftHitboxStartTime = 0f, leftHitboxEndTime = 0f;
-
-    [Tooltip("Hitbox is activated during the interval [hitboxStartTime, hitboxEndTime) of the normalized animation time")]
-    [SerializeField] [Range(0f, 1f)] private float rightHitboxStartTime = 0f, rightHitboxEndTime = 0f;
     #endregion
 
     #region PublicMethods
@@ -102,7 +114,7 @@ public class Move : MonoBehaviour
     /// </summary>
     /// <param name="side">Which side is the attack coming from?</param>
     /// <param name="normalizedTime">Normalized time of the animation</param>
-    /// <returns></returns>
+    /// <returns>True if hitbox is active, false otherwise</returns>
     public bool isHitboxActive(Side side, float normalizedTime) {
         if (side == Side.Left)
             return normalizedTime >= leftHitboxStartTime && normalizedTime < leftHitboxEndTime;
@@ -118,6 +130,17 @@ public class Move : MonoBehaviour
         if (side == Side.Left)
             return !(normalizedTime >= leftCommitStartTime && normalizedTime < leftCommitEndTime);
         return !(normalizedTime >= rightCommitStartTime && normalizedTime < rightCommitEndTime);
+    }
+
+    /// <summary>
+    /// Returns the amount of extra movement the move may have depending on the side it was used from.
+    /// </summary>
+    /// <param name="side">Which side is the attack coming from?</param>
+    /// <returns>Amount of extra movement</returns>
+    public float getMovement(Side side) {
+        if (side == Side.Left)
+            return leftMovement;
+        return rightMovement;
     }
     #endregion
 }

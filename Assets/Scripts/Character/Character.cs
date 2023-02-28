@@ -17,8 +17,12 @@ public abstract class Character : MonoBehaviour
     private Quaternion targetLook;
 
     [Header("Stats")]
-    [SerializeField] private float stamina;
+
+    protected float stamina;
+    [SerializeField] protected float targetStamina;
     [SerializeField] [InitializationField] private float maxStamina = 0f;
+    [Tooltip("How fast stamina updates")] [SerializeField] private float staminaSpeed;
+
     [SerializeField] private float attackDamage = 0f;
     [Tooltip("Attack animation speed")] [InitializationField] [Range(0f, 2f)] public float attackSpeed = 1f;
     [Tooltip("Percentage of stamina damage taken when blocking")] [SerializeField] [Range(0f, 1f)] private float blockingModifier = 0.5f;
@@ -51,6 +55,7 @@ public abstract class Character : MonoBehaviour
     {
         // Initialize Character Attributes
         stamina = maxStamina;
+        targetStamina = maxStamina;
         transform.localScale *= height;
         rb = GetComponent<Rigidbody>();
         rb.mass = mass;
@@ -87,10 +92,17 @@ public abstract class Character : MonoBehaviour
         anim.SetFloat("vertical", direction.y);
 
         // Rotate towards opponent if character is tracking.
-        targetLook = Quaternion.LookRotation(target.position - transform.position);
-        if (tracking && attackTracking && otherTracking)
-            transform.rotation = Quaternion.RotateTowards(transform.rotation, targetLook, trackingRate * Time.deltaTime);
+        if (target != null) {
+            targetLook = Quaternion.LookRotation(target.position - transform.position);
+            if (tracking && attackTracking && otherTracking)
+                transform.rotation = Quaternion.RotateTowards(transform.rotation, targetLook, trackingRate * Time.deltaTime);
+        }
 
+        // Damage is taken progressively over a small window of time to allow for damage cancelling.
+        stamina = (int) Mathf.Lerp(stamina, targetStamina, staminaSpeed * Time.deltaTime); // NOT WORKING PROPERLY
+        stamina = Mathf.Clamp(stamina, 0f, maxStamina);
+
+        // DEBUG
         if (updateMoveset) { InitializeMoveset(); updateMoveset = false; } // DEBUG
         if (modifyTimeScale && this is Player) Time.timeScale = timeScale; // DEBUG
     }
@@ -134,10 +146,9 @@ public abstract class Character : MonoBehaviour
     /// Damage character's stamina.
     /// </summary>
     /// <param name="dmg">Damage taken.</param>
-    public void Damage(float dmg)
-    {
-        stamina -= isBlocking ? Mathf.Round(dmg * blockingModifier) : dmg;
-        if (stamina < 0) stamina = 0;
+    public void Damage(float dmg) {
+        dmg = isBlocking ? Mathf.Round(dmg * blockingModifier) : dmg;
+        targetStamina = stamina - dmg;
     }
 
     /// <summary>
@@ -150,10 +161,15 @@ public abstract class Character : MonoBehaviour
 
     #region PublicMethods
     public Animator Animator { get => anim; }
+
     public List<Move> LeftMoveset { get => leftMoveset; }
     public List<Move> RightMoveset { get => rightMoveset; }
+
     public List<GameObject> LeftHitboxes { get => leftHitboxes; }
     public List<GameObject> RightHitboxes { get => rightHitboxes; }
+
+    public float Stamina { get => stamina; }
+    public float MaxStamina { get => maxStamina; }
 
     /// <summary>
     /// To state if a move from right moveset is being pressed. Necessary for

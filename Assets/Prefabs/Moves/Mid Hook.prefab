@@ -52,17 +52,19 @@ MonoBehaviour:
   direction: 0
   power: 1
   baseDamage: 15
-  leftCommitStartTime: 0
-  leftCommitEndTime: 0
-  rightCommitStartTime: 0
-  rightCommitEndTime: 0
-  chargeable: 1
-  chargeDecay: 5.5
-  chargeMinSpeed: 0.01
-  chargeLimit: 2
-  chargeLimitDivisor: 6
   hitboxType: 0
   leftHitboxStartTime: 0.2
   leftHitboxEndTime: 0.4
   rightHitboxStartTime: 0.25
   rightHitboxEndTime: 0.4
+  leftCommitStartTime: 0
+  leftCommitEndTime: 0
+  rightCommitStartTime: 0
+  rightCommitEndTime: 0
+  leftMovement: 1
+  rightMovement: 1
+  chargeable: 1
+  chargeDecay: 5.5
+  chargeMinSpeed: 0.01
+  chargeLimit: 2
+  chargeLimitDivisor: 6

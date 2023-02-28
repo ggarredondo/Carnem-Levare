@@ -439,8 +439,9 @@ MonoBehaviour:
   target: {fileID: 0}
   tracking: 1
   trackingRate: 100
-  stamina: 500
-  maxStamina: 500
+  targetStamina: 300
+  maxStamina: 300
+  staminaSpeed: 5
   attackDamage: 10
   attackSpeed: 1
   blockingModifier: 0.5
@@ -463,6 +464,7 @@ MonoBehaviour:
   modifyTimeScale: 0
   timeScale: 1
   enemyDirectionSpeed: 10
+  block: 0
 --- !u!114 &7481606168989916935
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -660,7 +662,7 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 0.5
+  m_Radius: 0.45
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 1, z: 0}
