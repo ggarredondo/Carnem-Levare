@@ -86,7 +86,7 @@ public class PauseMenuManager : MainMenuManager
     public void ReturnMainMenu()
     {
         ExitPauseMode(false);
-        SceneManagement.LoadPreviousScene();
+        StartCoroutine(SceneManagement.LoadPreviousScene());
     }
 
     /// <summary>

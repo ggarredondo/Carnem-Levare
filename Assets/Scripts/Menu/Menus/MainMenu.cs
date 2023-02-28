@@ -27,6 +27,6 @@ public class MainMenu : MonoBehaviour
     /// </summary>
     public void PlayGame()
     {
-        SceneManagement.LoadSceneByIndex(2);
+        StartCoroutine(SceneManagement.LoadSceneByIndex(2));
     }
 }
