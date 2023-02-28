@@ -26,12 +26,13 @@ public class Player : Character
         anim.SetBool("can_dash", !isAttacking && !isDashing && !isHurt);
         otherTracking = !isDashing || anim.IsInTransition(0);
 
-        // Establish a direction towards which to dash that doesn't change while dashing
+        // Establish a direction towards which to dash that doesn't change while dashing.
         if (!isDashing) {
             anim.SetFloat("horizontal_dash", directionTarget.x);
             anim.SetFloat("vertical_dash", directionTarget.y);
         }
 
+        // Change movement animation blending speed depending on the situation.
         if (directionTarget.magnitude == 0f && !block_pressed)
             directionSpeed = smoothStickSpeed;
         else if (anim.GetCurrentAnimatorStateInfo(0).IsName("Block"))
