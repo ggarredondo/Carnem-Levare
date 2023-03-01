@@ -85,13 +85,13 @@ public class Move : MonoBehaviour
 
     #region ChargeValues
     [Header("Charge Values")]
-    [Tooltip("Can it be charged?")]
+    [Tooltip("Can it be charged? (right side only)")]
     [SerializeField] private bool chargeable = true;
     public bool Chargeable { get => chargeable; }
 
     [System.NonSerialized] public bool pressed = false; // Check if this move specifically is held down.
 
-    [Tooltip("How quickly the animation slows down when holding the attack button (interpolation value) (right side only)")]
+    [Tooltip("How quickly the animation slows down when holding the attack button (interpolation value)")]
     [SerializeField] [ConditionalField("chargeable")] private float chargeDecay; // Interpolation value used for lerp affecting chargeSpeed.
     public float ChargeDecay { get => chargeDecay; }
 

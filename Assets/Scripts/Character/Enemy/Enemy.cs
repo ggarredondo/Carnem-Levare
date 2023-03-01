@@ -18,6 +18,12 @@ public class Enemy : Character
     public void Right1(InputAction.CallbackContext context) { if (RightMoveset.Count > 1) anim.SetBool("right1", context.performed); }
     public void Right2(InputAction.CallbackContext context) { if (RightMoveset.Count > 2) anim.SetBool("right2", context.performed); }
 
+    protected override void Start()
+    {
+        target = GameObject.FindWithTag("Player").transform;
+        base.Start();
+    }
+
     protected override void Update()
     {
         directionSpeed = enemyDirectionSpeed;

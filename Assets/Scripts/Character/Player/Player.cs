@@ -19,6 +19,12 @@ public class Player : Character
     [Tooltip("Lower stickSpeed to smooth out transitions to idle (when stick is centered)")]
     [SerializeField] private float smoothStickSpeed;
 
+    protected override void Start()
+    {
+        target = GameObject.FindWithTag("Enemy").transform;
+        base.Start();
+    }
+
     override protected void Update()
     {
         // The player can only skip if they are blocking but they aren't attacking nor skipping already.
