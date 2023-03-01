@@ -94,6 +94,7 @@ public class SceneManagement : MonoBehaviour
 
         loadingScreen = animator.transform.GetChild(0).gameObject;
         loadingScreen.SetActive(true);
+
         Instance.StartCoroutine(LoadSceneAsync(sceneIndex));
     }
 }
