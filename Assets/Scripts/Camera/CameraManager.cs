@@ -9,15 +9,12 @@ public class CameraManager : MonoBehaviour
     private CameraTargets playerTargets, enemyTargets;
     private CinemachineTargetGroup targetGroup;
 
-    private void Awake()
+    private void Start()
     {
         playerTargets = GameObject.FindGameObjectWithTag("Player").GetComponent<CameraTargets>();
         enemyTargets = GameObject.FindGameObjectWithTag("Enemy").GetComponent<CameraTargets>();
         targetGroup = GameObject.FindGameObjectWithTag("TARGET_GROUP").GetComponent<CinemachineTargetGroup>();
-    }
 
-    private void Start()
-    {
         InitializeTargets();
     }
 
@@ -32,7 +29,7 @@ public class CameraManager : MonoBehaviour
             camera.m_Follow = playerTargets.GetTarget(cont, false);
 
             if (cont != 2 && cont != 1)
-                camera.GetComponent<CameraEffects>().InitilizeTargets(playerTargets.GetTarget(cont, true), enemyTargets.GetTarget(cont, true));
+                camera.GetComponent<CameraEffects>().InitializeTargets(playerTargets.GetTarget(cont, true), enemyTargets.GetTarget(cont, true));
 
             if (cont == 2)
                 camera.m_LookAt = playerTargets.GetTarget(cont, true);

@@ -55,32 +55,26 @@ public class CameraEffects : MonoBehaviour
     private void Awake()
     {
         alternativeTargets = new Transform[2];
+        firstTargets = new Transform[2];
 
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
-
         targetGroup = GameObject.FindGameObjectWithTag("TARGET_GROUP").GetComponent<CinemachineTargetGroup>();
         vcam = GetComponent<CinemachineVirtualCamera>();
-
         orbitalTransposer = vcam.GetCinemachineComponent<CinemachineOrbitalTransposer>();
 
         click = new InputAction(binding: "<Mouse>/leftButton");
         click.Enable();
 
-        firstTargets = new Transform[2];
-    }
-
-    private void Start()
-    {
         cameraConditions = new bool[2];
-
-        firstTargets[0] = targetGroup.m_Targets[0].target;
-        firstTargets[1] = targetGroup.m_Targets[1].target;
     }
 
-    public void InitilizeTargets(Transform playerAlternative, Transform enemyAlternative)
+    public void InitializeTargets(Transform playerAlternative, Transform enemyAlternative)
     {
         alternativeTargets[0] = playerAlternative;
         alternativeTargets[1] = enemyAlternative;
+
+        firstTargets[0] = targetGroup.m_Targets[0].target;
+        firstTargets[1] = targetGroup.m_Targets[1].target;
     }
 
     private bool InitialPosition()
@@ -162,9 +156,7 @@ public class CameraEffects : MonoBehaviour
 
     private void TargetUpdate()
     {
-        if (!player.isPlayerBlocking || player.isPlayerAttacking) alternativeTarget = true; else alternativeTarget = false;
-
-        if (alternativeTarget) AsignTargets(alternativeTargets); else AsignTargets(firstTargets);
+        if (!player.isPlayerBlocking || player.isPlayerAttacking) AsignTargets(alternativeTargets); else AsignTargets(firstTargets);
 
         alternativeTargets[0].Translate(Vector3.up * playerTarget * Time.deltaTime);
         alternativeTargets[1].Translate(Vector3.up * enemyTarget * Time.deltaTime);
