@@ -2,7 +2,6 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.EventSystems;
 using TMPro;
-using System;
 using static UnityEngine.InputSystem.InputActionRebindingExtensions;
 
 public class ControlsMenu : MonoBehaviour
@@ -10,7 +9,7 @@ public class ControlsMenu : MonoBehaviour
 
     private static readonly string currentActionMap = "Main Movement";
 
-    [SerializeField] private PlayerInput player;
+    [SerializeField] private PlayerInput playerInput;
     [SerializeField] private MainMenuManager globalMenuManager;
     [SerializeField] private TMP_FontAsset[] fonts;
 
@@ -21,16 +20,17 @@ public class ControlsMenu : MonoBehaviour
 
     private void Awake()
     {
-        lastControlScheme = player.defaultControlScheme;
+        playerInput = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerInput>();
+        lastControlScheme = playerInput.defaultControlScheme;
         controlSchemeIndex = 0;
         LoadRemapping();
     }
 
     private void Update()
     {
-        if (player.currentControlScheme != lastControlScheme)
+        if (playerInput.currentControlScheme != lastControlScheme)
         {
-            lastControlScheme = player.currentControlScheme;
+            lastControlScheme = playerInput.currentControlScheme;
             controlSchemeIndex = (controlSchemeIndex + 1) % 2;
             LoadRemapping();
         }
@@ -40,7 +40,7 @@ public class ControlsMenu : MonoBehaviour
     {
         GameObject currentGameObject = EventSystem.current.currentSelectedGameObject;
 
-        action = player.actions.FindActionMap(currentActionMap).FindAction(currentGameObject.gameObject.name);
+        action = playerInput.actions.FindActionMap(currentActionMap).FindAction(currentGameObject.gameObject.name);
 
         if (action == null)
             Debug.Log("This action not exists");
@@ -71,8 +71,6 @@ public class ControlsMenu : MonoBehaviour
 
         GameObject children = currentGameObject.transform.GetChild(0).gameObject;
 
-        Debug.Log(callback.action.bindings[controlSchemeIndex].effectivePath);
-
         if (ControlSaver.mapping.ContainsKey(callback.action.bindings[controlSchemeIndex].effectivePath))
         {
             if (CheckIfAsigned(callback.action) != null)
@@ -92,7 +90,7 @@ public class ControlsMenu : MonoBehaviour
             callback.Cancel();
         }
 
-        ControlSaver.ApplyChanges(player);
+        ControlSaver.ApplyChanges(playerInput);
         callback.Dispose();
         LoadRemapping();
     }
@@ -104,7 +102,7 @@ public class ControlsMenu : MonoBehaviour
         for (int i = 0; i < buttons.childCount; i++)
         {
             string buttonText = buttons.GetChild(i).gameObject.name;
-            string buttonAction = player.actions.FindActionMap(currentActionMap).FindAction(buttonText).bindings[controlSchemeIndex].effectivePath;
+            string buttonAction = playerInput.actions.FindActionMap(currentActionMap).FindAction(buttonText).bindings[controlSchemeIndex].effectivePath;
             buttons.GetChild(i).transform.GetChild(0).GetComponent<TMP_Text>().font = fonts[controlSchemeIndex];
             buttons.GetChild(i).transform.GetChild(0).GetComponent<TMP_Text>().text = ControlSaver.mapping[buttonAction];
         }

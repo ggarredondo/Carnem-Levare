@@ -351,7 +351,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 53.91809, y: -30.555365}
+  m_AnchoredPosition: {x: 53.91809, y: -30.55542}
   m_SizeDelta: {x: 146, y: 14.13}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6585527207938769717
@@ -559,7 +559,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 53.91809, y: -57.185364}
+  m_AnchoredPosition: {x: 53.91809, y: -57.185303}
   m_SizeDelta: {x: 146, y: 14.13}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6585527208038565771
@@ -1180,7 +1180,6 @@ MonoBehaviour:
   firstMenu: 0
   popUpMenu: {fileID: 192767816468351848}
   slowMotion: 0
-  playerController: {fileID: 0}
 --- !u!114 &4209662606697960346
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1463,6 +1462,16 @@ PrefabInstance:
       propertyPath: globalMenuManager
       value: 
       objectReference: {fileID: 6585527209193569098}
+    - target: {fileID: 4053041730831790053, guid: b23f23136e78c1148966f9384c67b6dc,
+        type: 3}
+      propertyPath: m_Color.a
+      value: 0.78431374
+      objectReference: {fileID: 0}
+    - target: {fileID: 8267277766164624983, guid: b23f23136e78c1148966f9384c67b6dc,
+        type: 3}
+      propertyPath: m_Color.a
+      value: 0.78431374
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b23f23136e78c1148966f9384c67b6dc, type: 3}
 --- !u!1 &3449900721883270252 stripped

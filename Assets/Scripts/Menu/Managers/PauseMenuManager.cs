@@ -5,7 +5,7 @@ using UnityEngine.InputSystem.UI;
 public class PauseMenuManager : MainMenuManager
 {
     [Range(0f, 1f)] public float slowMotion;
-    public PlayerInput playerController;
+    private PlayerInput playerInput;
 
     private AudioManager musicManager;
     private AudioManager sfxManager;
@@ -17,7 +17,8 @@ public class PauseMenuManager : MainMenuManager
 
         DisableActiveMenu();
 
-        playerController.uiInputModule = GameObject.FindGameObjectWithTag("UI").GetComponent<InputSystemUIInputModule>();
+        playerInput = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerInput>();
+        playerInput.uiInputModule = GameObject.FindGameObjectWithTag("UI").GetComponent<InputSystemUIInputModule>();
         musicManager = GameObject.FindGameObjectWithTag("MUSIC").GetComponent<AudioManager>();
         sfxManager = GameObject.FindGameObjectWithTag("SFX").GetComponent<AudioManager>();
     }
@@ -62,7 +63,7 @@ public class PauseMenuManager : MainMenuManager
         Time.timeScale = slowMotion;
         ChangeMenu(firstMenu);
         pauseMenuActivated = true;
-        playerController.SwitchCurrentActionMap("UI");
+        playerInput.SwitchCurrentActionMap("UI");
         sfxManager.PauseAllSounds();
     }
 
@@ -74,7 +75,7 @@ public class PauseMenuManager : MainMenuManager
         Time.timeScale = 1;
         DisableActiveMenu();
         pauseMenuActivated = false;
-        playerController.SwitchCurrentActionMap("Main Movement");
+        playerInput.SwitchCurrentActionMap("Main Movement");
 
         if (resumeSounds)
             sfxManager.ResumeAllSounds();

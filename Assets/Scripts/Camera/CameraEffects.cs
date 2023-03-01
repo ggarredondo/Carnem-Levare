@@ -7,8 +7,8 @@ using UnityEngine.InputSystem;
 public class CameraEffects : MonoBehaviour
 {
     [Header("Requirements")]
-    [SerializeField] private Player player;
-    [SerializeField] private Transform[] alternativeTargets;
+    private Player player;
+    private Transform[] alternativeTargets;
     [SerializeField] private GameObject[] targetDebug;
 
     [Header("Target Group Parameters")]
@@ -54,6 +54,10 @@ public class CameraEffects : MonoBehaviour
 
     private void Awake()
     {
+        alternativeTargets = new Transform[2];
+
+        player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
+
         targetGroup = GameObject.FindGameObjectWithTag("TARGET_GROUP").GetComponent<CinemachineTargetGroup>();
         vcam = GetComponent<CinemachineVirtualCamera>();
 
@@ -71,6 +75,12 @@ public class CameraEffects : MonoBehaviour
 
         firstTargets[0] = targetGroup.m_Targets[0].target;
         firstTargets[1] = targetGroup.m_Targets[1].target;
+    }
+
+    public void InitilizeTargets(Transform playerAlternative, Transform enemyAlternative)
+    {
+        alternativeTargets[0] = playerAlternative;
+        alternativeTargets[1] = enemyAlternative;
     }
 
     private bool InitialPosition()
@@ -111,7 +121,7 @@ public class CameraEffects : MonoBehaviour
 
             if(orbitalTransposer != null) OrbitalMovement();
 
-            if(alternativeTargets.GetLength(0) != 0) TargetUpdate();
+            if(alternativeTargets[0] != null && alternativeTargets[1] != null) TargetUpdate();
 
             //Making camera damping oscillate depending on player movement
             if (smoothFollowActivated) smoothFollow.ApplyMove(!player.isPlayerIdle);
