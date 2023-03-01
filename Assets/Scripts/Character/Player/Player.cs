@@ -62,6 +62,7 @@ public class Player : Character
 
     public void Movement(InputAction.CallbackContext context) { directionTarget = context.ReadValue<Vector2>().normalized; }
     public void Dash(InputAction.CallbackContext context) { anim.SetBool("dash", context.performed && block_pressed); }
+    public void Sprint(InputAction.CallbackContext context) { anim.SetBool("sprint", context.performed); }
     public void LeftNormal(InputAction.CallbackContext context) { if (LeftMoveset.Count > 0) anim.SetBool("left_normal", context.performed); }
     public void LeftSpecial(InputAction.CallbackContext context) { if (LeftMoveset.Count > 1) anim.SetBool("left_special", context.performed); }
     public void RightNormal(InputAction.CallbackContext context) {

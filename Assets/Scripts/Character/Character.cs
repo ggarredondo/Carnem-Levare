@@ -103,11 +103,16 @@ public abstract class Character : MonoBehaviour
     protected virtual void FixedUpdate()
     {
         // Rotate towards opponent if character is tracking.
-        if (target != null)
+        if (target != null && tracking && attackTracking && otherTracking)
         {
             targetLook = Quaternion.LookRotation(target.position - transform.position);
-            if (tracking && attackTracking && otherTracking)
-                transform.rotation = Quaternion.Lerp(transform.rotation, targetLook, trackingRate * Time.deltaTime);
+            transform.rotation = Quaternion.Lerp(transform.rotation, targetLook, trackingRate * Time.fixedDeltaTime);
+        }
+        else {
+            //dir.x = direction.x;
+            //dir.z = direction.y;
+            //targetLook = Quaternion.LookRotation(dir);
+            //transform.rotation = Quaternion.Lerp(transform.rotation, targetLook, trackingRate * Time.fixedDeltaTime);
         }
     }
 

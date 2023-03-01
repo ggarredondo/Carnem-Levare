@@ -254,7 +254,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2612641834989396881}
   m_Layer: 0
-  m_Name: Camera Target
+  m_Name: AlternativeTarget
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -347,12 +347,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c584565eaef4f6b4ab0e938ece6cd337, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  target: {fileID: 0}
   tracking: 1
   trackingRate: 5
   targetStamina: 300
   maxStamina: 300
-  staminaSpeed: 5
+  staminaSpeed: 10
   attackDamage: 10
   attackSpeed: 1.1
   blockingModifier: 0.5
@@ -654,6 +653,22 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: d959d0a2-068f-4f9f-b941-ac4413495569
     m_ActionName: Main Movement/Skip Forward[/XInputControllerWindows/leftStick/up]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 4706402254706946820}
+        m_TargetAssemblyTypeName: Player, Assembly-CSharp
+        m_MethodName: Sprint
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: f397ad3e-d704-4a74-8e2d-ce927f0ca5c1
+    m_ActionName: Main Movement/Sprint[/XInputControllerWindows/buttonWest,/Keyboard/leftShift]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: Gamepad
   m_DefaultActionMap: Main Movement

@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2438128927966419538}
   m_Layer: 0
-  m_Name: Camera Target
+  m_Name: AlternativeTarget
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -437,12 +437,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: daefdaab103d1c045b7612f2f096e8cc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  target: {fileID: 0}
   tracking: 1
   trackingRate: 5
   targetStamina: 300
   maxStamina: 300
-  staminaSpeed: 5
+  staminaSpeed: 10
   attackDamage: 10
   attackSpeed: 1
   blockingModifier: 0.5
