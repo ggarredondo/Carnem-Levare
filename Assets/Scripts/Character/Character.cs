@@ -91,16 +91,16 @@ public abstract class Character : MonoBehaviour
         anim.SetFloat("horizontal", direction.x);
         anim.SetFloat("vertical", direction.y);
 
+        // Damage is taken progressively over a small window of time to allow for damage cancelling.
+        stamina = Mathf.MoveTowards(stamina, targetStamina, staminaSpeed * Time.deltaTime);
+        stamina = Mathf.Clamp(stamina, 0f, maxStamina);
+
         // Rotate towards opponent if character is tracking.
         if (target != null) {
             targetLook = Quaternion.LookRotation(target.position - transform.position);
             if (tracking && attackTracking && otherTracking)
-                transform.rotation = Quaternion.RotateTowards(transform.rotation, targetLook, trackingRate * Time.deltaTime);
+                transform.rotation = Quaternion.Lerp(transform.rotation, targetLook, trackingRate * Time.deltaTime);
         }
-
-        // Damage is taken progressively over a small window of time to allow for damage cancelling.
-        stamina = (int) Mathf.Lerp(stamina, targetStamina, staminaSpeed * Time.deltaTime); // NOT WORKING PROPERLY
-        stamina = Mathf.Clamp(stamina, 0f, maxStamina);
 
         // DEBUG
         if (updateMoveset) { InitializeMoveset(); updateMoveset = false; } // DEBUG

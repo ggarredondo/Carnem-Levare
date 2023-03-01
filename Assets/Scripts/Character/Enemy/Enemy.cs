@@ -8,7 +8,7 @@ public class Enemy : Character
     [SerializeField] private bool block;
 
     public void Movement(InputAction.CallbackContext context) { directionTarget = -context.ReadValue<Vector2>().normalized; }
-    public void Block(InputAction.CallbackContext context) { block_pressed = !block_pressed; }
+    public void Block(InputAction.CallbackContext context) { block = context.performed ? !block : block; }
 
     public void Left0(InputAction.CallbackContext context) { if (LeftMoveset.Count > 0) anim.SetBool("left0", context.performed); }
     public void Left1(InputAction.CallbackContext context) { if (LeftMoveset.Count > 1) anim.SetBool("left1", context.performed); }

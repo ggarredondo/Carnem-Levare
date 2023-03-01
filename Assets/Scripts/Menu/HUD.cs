@@ -28,8 +28,8 @@ public class HUD : MonoBehaviour
     private void Update()
     {
         UpdateBar(player.Stamina, player.MaxStamina, playerStaminaBar, Axis.x);
-        playerNumber.text = player.Stamina + "/" + player.MaxStamina;
+        playerNumber.text = (int) player.Stamina + "/" + player.MaxStamina;
         UpdateBar(enemy.Stamina, enemy.MaxStamina, enemyStaminaBar, Axis.x);
-        enemyNumber.text = enemy.Stamina + "/" + enemy.MaxStamina;
+        enemyNumber.text = (int) enemy.Stamina + "/" + enemy.MaxStamina;
     }
 }

@@ -348,7 +348,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   target: {fileID: 0}
   tracking: 1
-  trackingRate: 100
+  trackingRate: 5
   targetStamina: 300
   maxStamina: 300
   staminaSpeed: 5
