@@ -7,6 +7,7 @@ public class SceneManagement : MonoBehaviour
 {
     public static SceneManagement Instance;
     private static Animator animator;
+    private static GameObject loadingScreen;
 
     private void Awake()
     {
@@ -34,17 +35,6 @@ public class SceneManagement : MonoBehaviour
         VisualSaver.ApplyChanges();
     }
 
-    private bool AnimatorIsPlaying()
-    {
-        return animator.GetCurrentAnimatorStateInfo(0).length >
-               animator.GetCurrentAnimatorStateInfo(0).normalizedTime;
-    }
-
-    private bool AnimatorIsPlaying(string stateName)
-    {
-        return AnimatorIsPlaying() && animator.GetCurrentAnimatorStateInfo(0).IsName(stateName);
-    }
-
     private IEnumerator EndLoading()
     {
         animator.SetBool("endLoading", true);
@@ -54,11 +44,7 @@ public class SceneManagement : MonoBehaviour
     private static IEnumerator LoadSceneAsync(int sceneId)
     {
         AsyncOperation operation = SceneManager.LoadSceneAsync(sceneId);
-
-        GameObject loadingScreen = animator.transform.GetChild(0).gameObject;
         TMP_Text percentage = loadingScreen.GetComponentInChildren<TMP_Text>();
-
-        loadingScreen.SetActive(true);
 
         while (!operation.isDone)
         {
@@ -105,6 +91,9 @@ public class SceneManagement : MonoBehaviour
     {
         animator.SetBool("isLoading", true);
         yield return new WaitForSecondsRealtime(animator.GetCurrentAnimatorStateInfo(0).length);
+
+        loadingScreen = animator.transform.GetChild(0).gameObject;
+        loadingScreen.SetActive(true);
         Instance.StartCoroutine(LoadSceneAsync(sceneIndex));
     }
 }
