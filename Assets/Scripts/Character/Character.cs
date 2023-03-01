@@ -95,16 +95,20 @@ public abstract class Character : MonoBehaviour
         stamina = Mathf.MoveTowards(stamina, targetStamina, staminaSpeed * Time.deltaTime);
         stamina = Mathf.Clamp(stamina, 0f, maxStamina);
 
+        // DEBUG
+        if (updateMoveset) { InitializeMoveset(); updateMoveset = false; } // DEBUG
+        if (modifyTimeScale && this is Player) Time.timeScale = timeScale; // DEBUG
+    }
+
+    protected virtual void FixedUpdate()
+    {
         // Rotate towards opponent if character is tracking.
-        if (target != null) {
+        if (target != null)
+        {
             targetLook = Quaternion.LookRotation(target.position - transform.position);
             if (tracking && attackTracking && otherTracking)
                 transform.rotation = Quaternion.Lerp(transform.rotation, targetLook, trackingRate * Time.deltaTime);
         }
-
-        // DEBUG
-        if (updateMoveset) { InitializeMoveset(); updateMoveset = false; } // DEBUG
-        if (modifyTimeScale && this is Player) Time.timeScale = timeScale; // DEBUG
     }
 
     #region Animation
