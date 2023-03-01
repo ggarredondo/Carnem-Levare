@@ -18,8 +18,7 @@ public abstract class Character : MonoBehaviour
 
     [Header("Stats")]
 
-    protected float stamina;
-    [SerializeField] protected float targetStamina;
+    [SerializeField] private float stamina;
     [SerializeField] [InitializationField] private float maxStamina = 0f;
     [Tooltip("How fast stamina updates")] [SerializeField] private float staminaSpeed;
 
@@ -55,7 +54,6 @@ public abstract class Character : MonoBehaviour
     {
         // Initialize Character Attributes
         stamina = maxStamina;
-        targetStamina = maxStamina;
         transform.localScale *= height;
         rb = GetComponent<Rigidbody>();
         rb.mass = mass;
@@ -90,10 +88,6 @@ public abstract class Character : MonoBehaviour
         direction = Vector2.Lerp(direction, directionTarget, directionSpeed * Time.deltaTime);
         anim.SetFloat("horizontal", direction.x);
         anim.SetFloat("vertical", direction.y);
-
-        // Damage is taken progressively over a small window of time to allow for damage cancelling.
-        stamina = Mathf.MoveTowards(stamina, targetStamina, staminaSpeed * Time.deltaTime);
-        stamina = Mathf.Clamp(stamina, 0f, maxStamina);
 
         // DEBUG
         if (updateMoveset) { InitializeMoveset(); updateMoveset = false; } // DEBUG
@@ -156,8 +150,8 @@ public abstract class Character : MonoBehaviour
     /// </summary>
     /// <param name="dmg">Damage taken.</param>
     public void Damage(float dmg) {
-        dmg = isBlocking ? Mathf.Round(dmg * blockingModifier) : dmg;
-        targetStamina = stamina - dmg;
+        stamina -= isBlocking ? Mathf.Round(dmg * blockingModifier) : dmg;
+        if (stamina < 0) stamina = 0;
     }
 
     /// <summary>

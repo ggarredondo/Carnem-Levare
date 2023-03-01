@@ -763,3 +763,4 @@ MonoBehaviour:
   enemyStaminaBar: {fileID: 6536273633816182835}
   playerNumber: {fileID: 314037188}
   enemyNumber: {fileID: 1188537058}
+  updateSpeed: 5
