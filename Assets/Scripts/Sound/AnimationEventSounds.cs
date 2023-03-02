@@ -5,7 +5,7 @@ public class AnimationEventSounds : MonoBehaviour
 
     private AudioManager sfxManager;
 
-    private void Awake()
+    private void Start()
     {
         sfxManager = GameObject.FindGameObjectWithTag("SFX").GetComponent<AudioManager>();
     }

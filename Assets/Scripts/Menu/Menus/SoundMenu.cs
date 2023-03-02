@@ -16,8 +16,6 @@ public class SoundMenu : MonoBehaviour
 
     private void Awake()
     {
-        sfxManager = GameObject.FindGameObjectWithTag("SFX").GetComponent<AudioManager>();
-
         //Initilize Sliders
         globalSlider.value = AudioSaver.globalVolume * globalSlider.maxValue / AudioSaver.GLOBAL_MAX;
         musicSlider.value = AudioSaver.musicVolume * musicSlider.maxValue;
@@ -25,6 +23,11 @@ public class SoundMenu : MonoBehaviour
 
         //Initialize Mute Toggle
         muteToggle.isOn = AudioSaver.mute;
+    }
+
+    private void Start()
+    {
+        sfxManager = GameObject.FindGameObjectWithTag("SFX").GetComponent<AudioManager>();
     }
 
     /// <summary>

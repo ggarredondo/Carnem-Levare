@@ -12,17 +12,20 @@ public class SceneManagement : MonoBehaviour
     private void Awake()
     {
         Instance = this;
-
-        DontDestroyOnLoad(GameObject.FindGameObjectWithTag("AUDIO"));
-        DontDestroyOnLoad(GameObject.FindGameObjectWithTag("VISUAL"));
-        DontDestroyOnLoad(GameObject.FindGameObjectWithTag("CONTROLS"));
-        DontDestroyOnLoad(GameObject.FindGameObjectWithTag("UI"));
-        DontDestroyOnLoad(gameObject);
     }
 
     void OnEnable()
     {
         SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+
+    private void Start()
+    {
+        DontDestroyOnLoad(GameObject.FindGameObjectWithTag("AUDIO"));
+        DontDestroyOnLoad(GameObject.FindGameObjectWithTag("VISUAL"));
+        DontDestroyOnLoad(GameObject.FindGameObjectWithTag("CONTROLS"));
+        DontDestroyOnLoad(GameObject.FindGameObjectWithTag("UI"));
+        DontDestroyOnLoad(gameObject);
     }
 
     void OnSceneLoaded(Scene scene, LoadSceneMode mode)

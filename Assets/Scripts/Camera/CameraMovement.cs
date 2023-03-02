@@ -7,7 +7,7 @@ public abstract class CameraMovement : MonoBehaviour
 
     public Tuple<float> aceleration;
 
-    private void Awake()
+    private void Start()
     {
         Initialize();
     }

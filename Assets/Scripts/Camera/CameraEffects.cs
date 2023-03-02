@@ -57,8 +57,6 @@ public class CameraEffects : MonoBehaviour
         alternativeTargets = new Transform[2];
         firstTargets = new Transform[2];
 
-        player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
-        targetGroup = GameObject.FindGameObjectWithTag("TARGET_GROUP").GetComponent<CinemachineTargetGroup>();
         vcam = GetComponent<CinemachineVirtualCamera>();
         orbitalTransposer = vcam.GetCinemachineComponent<CinemachineOrbitalTransposer>();
 
@@ -68,10 +66,17 @@ public class CameraEffects : MonoBehaviour
         cameraConditions = new bool[2];
     }
 
+    private void Start()
+    {
+        player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
+    }
+
     public void InitializeTargets(Transform playerAlternative, Transform enemyAlternative)
     {
         alternativeTargets[0] = playerAlternative;
         alternativeTargets[1] = enemyAlternative;
+
+        targetGroup = GameObject.FindGameObjectWithTag("TARGET_GROUP").GetComponent<CinemachineTargetGroup>();
 
         firstTargets[0] = targetGroup.m_Targets[0].target;
         firstTargets[1] = targetGroup.m_Targets[1].target;

@@ -16,15 +16,15 @@ public class PauseMenuManager : MainMenuManager
         base.Awake();
 
         DisableActiveMenu();
-
-        playerInput = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerInput>();
-        playerInput.uiInputModule = GameObject.FindGameObjectWithTag("UI").GetComponent<InputSystemUIInputModule>();
-        musicManager = GameObject.FindGameObjectWithTag("MUSIC").GetComponent<AudioManager>();
-        sfxManager = GameObject.FindGameObjectWithTag("SFX").GetComponent<AudioManager>();
     }
 
     private void Start()
     {
+        playerInput = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerInput>();
+        playerInput.uiInputModule = GameObject.FindGameObjectWithTag("UI").GetComponent<InputSystemUIInputModule>();
+        musicManager = GameObject.FindGameObjectWithTag("MUSIC").GetComponent<AudioManager>();
+        sfxManager = GameObject.FindGameObjectWithTag("SFX").GetComponent<AudioManager>();
+
         musicManager.Play("Fight");
     }
 

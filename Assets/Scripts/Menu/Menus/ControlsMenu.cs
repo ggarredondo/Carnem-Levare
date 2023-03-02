@@ -18,7 +18,7 @@ public class ControlsMenu : MonoBehaviour
     private InputAction action, originalAction;
     public float rebindTimeDelay = 0.25f;
 
-    private void Awake()
+    private void Start()
     {
         playerInput = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerInput>();
         lastControlScheme = playerInput.defaultControlScheme;
