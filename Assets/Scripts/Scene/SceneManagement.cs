@@ -2,16 +2,26 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using TMPro;
+using UnityEngine.InputSystem;
 
 public class SceneManagement : MonoBehaviour
 {
     public static SceneManagement Instance;
-    private static Animator animator;
-    private static GameObject loadingScreen;
+    public AnimationClip endAnimation;
+    private Animator animator;
+    private bool transitionEnd;
+    private PlayerInput playerInput;
+    private AsyncOperation asyncOperation;
+    private TMP_Text percentage;
+
+    private string lastControlScheme;
+    private int controlSchemeIndex;
+    private string continueAction;
 
     private void Awake()
     {
         Instance = this;
+        Application.backgroundLoadingPriority = ThreadPriority.Low;
     }
 
     void OnEnable()
@@ -28,10 +38,18 @@ public class SceneManagement : MonoBehaviour
         DontDestroyOnLoad(gameObject);
     }
 
+    public bool TransitionEnd { get { return transitionEnd; } }
+    public int ControlSchemeIndex { get { return controlSchemeIndex; } }
+
     void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
         animator = GameObject.FindGameObjectWithTag("TRANSITION").GetComponent<Animator>();
+        playerInput = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerInput>();
 
+        lastControlScheme = playerInput.defaultControlScheme;
+        controlSchemeIndex = 0;
+
+        transitionEnd = false;
         StartCoroutine(EndLoading());
 
         AudioSaver.ApplyChanges();
@@ -41,37 +59,54 @@ public class SceneManagement : MonoBehaviour
     private IEnumerator EndLoading()
     {
         animator.SetBool("endLoading", true);
-        yield return new WaitForSecondsRealtime(animator.GetCurrentAnimatorStateInfo(0).length);
+        yield return new WaitForSecondsRealtime(endAnimation.length);
+        transitionEnd = true;
     }
 
-    private static IEnumerator LoadSceneAsync(int sceneId)
+    private void Update()
     {
-        AsyncOperation operation = SceneManager.LoadSceneAsync(sceneId);
-        TMP_Text percentage = loadingScreen.GetComponentInChildren<TMP_Text>();
-
-        while (!operation.isDone)
+        if (playerInput.currentControlScheme != lastControlScheme)
         {
-            percentage.text = (int) (operation.progress * 100) + " %";
+            lastControlScheme = playerInput.currentControlScheme;
+            controlSchemeIndex = (controlSchemeIndex + 1) % 2;
+            continueAction = playerInput.actions.FindAction("Continue").bindings[controlSchemeIndex].path.Split("/")[1];
+        }
+    }
+
+    private IEnumerator LoadSceneAsync(int sceneId)
+    {
+        asyncOperation = SceneManager.LoadSceneAsync(sceneId);
+        asyncOperation.allowSceneActivation = false;
+
+        GameObject loadingScreen = animator.transform.GetChild(0).gameObject;
+        percentage = loadingScreen.GetComponentInChildren<TMP_Text>();
+
+        loadingScreen.SetActive(true);
+
+        playerInput.SwitchCurrentActionMap("LoadingScreen");
+
+        while (!asyncOperation.isDone)
+        {
+            percentage.text = (int) (Mathf.Clamp01(asyncOperation.progress / 0.9f) * 100) + " %";
+
+            if (asyncOperation.progress >= 0.9f)
+            {
+                percentage.text = "Press " + continueAction + " to continue";
+
+                if (playerInput.actions.FindAction("Continue").IsPressed())
+                    asyncOperation.allowSceneActivation = true;
+            }
 
             yield return null;
         }
     }
 
     /// <summary>
-    /// Load the next scene in the list of build scenes
-    /// </summary>
-    public static IEnumerator LoadNextScene() 
-    {
-        animator.SetBool("isLoading", true);
-        yield return new WaitForSecondsRealtime(animator.GetCurrentAnimatorStateInfo(0).length);
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
-    }
-
-    /// <summary>
     /// Load the previous scene in the list of build scenes
     /// </summary>
-    public static IEnumerator LoadPreviousScene()
+    public IEnumerator LoadPreviousScene()
     {
+        yield return new WaitUntil(() => TransitionEnd);
         animator.SetBool("isLoading", true);
         yield return new WaitForSecondsRealtime(animator.GetCurrentAnimatorStateInfo(0).length);
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 1);
@@ -81,23 +116,11 @@ public class SceneManagement : MonoBehaviour
     /// Load a scene by the scene name
     /// </summary>
     /// <param name="sceneName"> The scene name </param>
-    public static void LoadSceneByName(string sceneName)
+    public IEnumerator LoadSceneByIndex(int sceneIndex)
     {
-        SceneManager.LoadScene(sceneName);
-    }
-
-    /// <summary>
-    /// Load a scene by the scene name
-    /// </summary>
-    /// <param name="sceneName"> The scene name </param>
-    public static IEnumerator LoadSceneByIndex(int sceneIndex)
-    {
+        yield return new WaitUntil(() => TransitionEnd);
         animator.SetBool("isLoading", true);
         yield return new WaitForSecondsRealtime(animator.GetCurrentAnimatorStateInfo(0).length);
-
-        loadingScreen = animator.transform.GetChild(0).gameObject;
-        loadingScreen.SetActive(true);
-
-        Instance.StartCoroutine(LoadSceneAsync(sceneIndex));
+        StartCoroutine(LoadSceneAsync(sceneIndex));
     }
 }

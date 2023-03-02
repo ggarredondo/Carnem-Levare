@@ -165,6 +165,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8f987bc0ed7df6c42af3cd36e96a823f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  endAnimation: {fileID: 7400000, guid: b8d9f7a9e2f9470418c11a2d25fe0663, type: 2}
 --- !u!4 &330824238
 Transform:
   m_ObjectHideFlags: 0

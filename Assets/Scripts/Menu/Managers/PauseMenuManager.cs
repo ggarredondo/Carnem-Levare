@@ -60,11 +60,14 @@ public class PauseMenuManager : MainMenuManager
     /// </summary>
     private void EnterPauseMode()
     {
-        Time.timeScale = slowMotion;
-        ChangeMenu(firstMenu);
-        pauseMenuActivated = true;
-        playerInput.SwitchCurrentActionMap("UI");
-        sfxManager.PauseAllSounds();
+        if (SceneManagement.Instance.TransitionEnd)
+        {
+            Time.timeScale = slowMotion;
+            ChangeMenu(firstMenu);
+            pauseMenuActivated = true;
+            playerInput.SwitchCurrentActionMap("UI");
+            sfxManager.PauseAllSounds();
+        }
     }
 
     /// <summary>
@@ -87,7 +90,7 @@ public class PauseMenuManager : MainMenuManager
     public void ReturnMainMenu()
     {
         ExitPauseMode(false);
-        StartCoroutine(SceneManagement.LoadPreviousScene());
+        StartCoroutine(SceneManagement.Instance.LoadPreviousScene());
     }
 
     /// <summary>

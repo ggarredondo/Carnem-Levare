@@ -332,7 +332,7 @@
                     "name": "",
                     "id": "7003c705-e8c4-4a5f-8b66-0b5d7ce35e9b",
                     "path": "<Gamepad>/buttonWest",
-                    "interactions": "",
+                    "interactions": "Hold",
                     "processors": "",
                     "groups": "Gamepad",
                     "action": "Sprint",
@@ -1007,6 +1007,45 @@
                     "processors": "",
                     "groups": "Keyboard&Mouse",
                     "action": "ChangeLeftMenu",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        },
+        {
+            "name": "LoadingScreen",
+            "id": "163b01bc-1759-4c76-8491-2b936d83b771",
+            "actions": [
+                {
+                    "name": "Continue",
+                    "type": "Button",
+                    "id": "81ef5d60-0200-42ff-9d13-af67beaa6c37",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "0c24e94e-da61-4531-8a37-8bc11cf93c27",
+                    "path": "<Gamepad>/start",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Gamepad",
+                    "action": "Continue",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "8c3e6fb2-f5e8-463d-b01f-f7806dcb0097",
+                    "path": "<Keyboard>/space",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard&Mouse",
+                    "action": "Continue",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

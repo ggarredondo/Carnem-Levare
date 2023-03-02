@@ -23,6 +23,6 @@ public class MainMenu : MonoBehaviour
     /// </summary>
     public void PlayGame()
     {
-        StartCoroutine(SceneManagement.LoadSceneByIndex(2));
+        StartCoroutine(SceneManagement.Instance.LoadSceneByIndex(2));
     }
 }
