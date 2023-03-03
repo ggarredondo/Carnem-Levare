@@ -2,7 +2,6 @@ using Cinemachine;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 public class CameraEffects : MonoBehaviour
 {
@@ -12,10 +11,7 @@ public class CameraEffects : MonoBehaviour
     [SerializeField] private GameObject[] targetDebug;
 
     [Header("Target Group Parameters")]
-    [Range(-1, 1)] [SerializeField] private float playerTarget;
-    [Range(-1, 1)] [SerializeField] private float enemyTarget;
     [Range(0, 40)] [SerializeField] private float targetingSpeed;
-    [SerializeField] private bool alternativeTarget;
     [SerializeField] private bool debug;
 
     [Header("Orbital Movement")]
@@ -45,7 +41,6 @@ public class CameraEffects : MonoBehaviour
     private int actualCamera;
 
     private Stack<CameraMovement> cameraStack = new();
-    private InputAction click;
     private Transform[] firstTargets;
 
     private CinemachineVirtualCamera vcam;
@@ -60,9 +55,6 @@ public class CameraEffects : MonoBehaviour
         vcam = GetComponent<CinemachineVirtualCamera>();
         orbitalTransposer = vcam.GetCinemachineComponent<CinemachineOrbitalTransposer>();
 
-        click = new InputAction(binding: "<Mouse>/leftButton");
-        click.Enable();
-
         cameraConditions = new bool[2];
     }
 
@@ -71,15 +63,21 @@ public class CameraEffects : MonoBehaviour
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
     }
 
+    public void InitializeTargetGroup(Transform playerTarget, Transform enemyTarget)
+    {
+        targetGroup = GameObject.FindGameObjectWithTag("TARGET_GROUP").GetComponent<CinemachineTargetGroup>();
+
+        firstTargets[0] = playerTarget;
+        firstTargets[1] = enemyTarget;
+
+        targetGroup.m_Targets[0].target = firstTargets[0];
+        targetGroup.m_Targets[1].target = firstTargets[1];
+    }
+
     public void InitializeTargets(Transform playerAlternative, Transform enemyAlternative)
     {
         alternativeTargets[0] = playerAlternative;
         alternativeTargets[1] = enemyAlternative;
-
-        targetGroup = GameObject.FindGameObjectWithTag("TARGET_GROUP").GetComponent<CinemachineTargetGroup>();
-
-        firstTargets[0] = targetGroup.m_Targets[0].target;
-        firstTargets[1] = targetGroup.m_Targets[1].target;
     }
 
     private bool InitialPosition()
@@ -162,11 +160,6 @@ public class CameraEffects : MonoBehaviour
     private void TargetUpdate()
     {
         if (!player.isPlayerBlocking || player.isPlayerAttacking) AsignTargets(alternativeTargets); else AsignTargets(firstTargets);
-
-        alternativeTargets[0].Translate(Vector3.up * playerTarget * Time.deltaTime);
-        alternativeTargets[1].Translate(Vector3.up * enemyTarget * Time.deltaTime);
-
-        if (!click.IsPressed()) { playerTarget = 0; enemyTarget = 0; }
 
         //Debug Targets with Spheres
         targetDebug[0].transform.position = targetGroup.m_Targets[0].target.position;

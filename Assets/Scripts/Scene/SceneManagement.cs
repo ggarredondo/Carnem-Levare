@@ -8,15 +8,12 @@ public class SceneManagement : MonoBehaviour
 {
     public static SceneManagement Instance;
     public AnimationClip endAnimation;
+
     private Animator animator;
     private bool transitionEnd;
     private PlayerInput playerInput;
     private AsyncOperation asyncOperation;
-    private TMP_Text percentage;
-
-    private string lastControlScheme;
-    private int controlSchemeIndex;
-    private string continueAction;
+    private LoadingScreen loadingScreen;
 
     private void Awake()
     {
@@ -39,15 +36,16 @@ public class SceneManagement : MonoBehaviour
     }
 
     public bool TransitionEnd { get { return transitionEnd; } }
-    public int ControlSchemeIndex { get { return controlSchemeIndex; } }
 
     void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
         animator = GameObject.FindGameObjectWithTag("TRANSITION").GetComponent<Animator>();
         playerInput = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerInput>();
+        loadingScreen = animator.GetComponent<LoadingScreen>();
 
-        lastControlScheme = playerInput.defaultControlScheme;
-        controlSchemeIndex = 0;
+        playerInput.controlsChangedEvent.AddListener(ControlSaver.OnControlSchemeChanged);
+        ControlSaver.StaticEvent += OnLoadingTextChanged;
+        ControlSaver.OnControlSchemeChanged(playerInput);
 
         transitionEnd = false;
         StartCoroutine(EndLoading());
@@ -56,6 +54,8 @@ public class SceneManagement : MonoBehaviour
         VisualSaver.ApplyChanges();
     }
 
+    public void OnLoadingTextChanged(){ loadingScreen.ChangeText(); }
+
     private IEnumerator EndLoading()
     {
         animator.SetBool("endLoading", true);
@@ -63,40 +63,18 @@ public class SceneManagement : MonoBehaviour
         transitionEnd = true;
     }
 
-    private void Update()
-    {
-        if (playerInput.currentControlScheme != lastControlScheme)
-        {
-            lastControlScheme = playerInput.currentControlScheme;
-            controlSchemeIndex = (controlSchemeIndex + 1) % 2;
-            continueAction = playerInput.actions.FindAction("Continue").bindings[controlSchemeIndex].path.Split("/")[1];
-        }
-    }
-
     private IEnumerator LoadSceneAsync(int sceneId)
     {
         asyncOperation = SceneManager.LoadSceneAsync(sceneId);
         asyncOperation.allowSceneActivation = false;
 
-        GameObject loadingScreen = animator.transform.GetChild(0).gameObject;
-        percentage = loadingScreen.GetComponentInChildren<TMP_Text>();
-
-        loadingScreen.SetActive(true);
-
-        playerInput.SwitchCurrentActionMap("LoadingScreen");
+        loadingScreen.Activate();
 
         while (!asyncOperation.isDone)
         {
-            percentage.text = (int) (Mathf.Clamp01(asyncOperation.progress / 0.9f) * 100) + " %";
-
-            if (asyncOperation.progress >= 0.9f)
-            {
-                percentage.text = "Press " + continueAction + " to continue";
-
-                if (playerInput.actions.FindAction("Continue").IsPressed())
-                    asyncOperation.allowSceneActivation = true;
-            }
-
+            if (loadingScreen.UpdateProgess(asyncOperation.progress))
+                asyncOperation.allowSceneActivation = true;
+            
             yield return null;
         }
     }

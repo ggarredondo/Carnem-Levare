@@ -5,15 +5,38 @@ using System.IO;
 
 public class ControlSaver : MonoBehaviour
 {
-    [SerializeField] PlayerInput firstPlayer;
+    private PlayerInput playerInput;
     public static Dictionary<string, string> mapping = new();
+
+    public static int controlSchemeIndex;
+
+    public delegate void StaticEventHandler();
+    public static event StaticEventHandler StaticEvent;
 
     private void Awake()
     {
-        if(PlayerPrefs.GetString("rebinds") != null)
-            LoadUserRebinds(firstPlayer);
-
         ReadMappingFile();
+    }
+
+    private void Start()
+    {
+        playerInput = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerInput>();
+
+        if (PlayerPrefs.GetString("rebinds") != null)
+            LoadUserRebinds(playerInput);
+
+        OnControlSchemeChanged(playerInput);
+    }
+
+    public static void OnControlSchemeChanged(PlayerInput playerInput)
+    {
+        switch (playerInput.currentControlScheme)
+        {
+            case "Keyboard&Mouse": controlSchemeIndex = 1; break;
+            case "Gamepad": controlSchemeIndex = 0; break;
+        }
+
+        StaticEvent.Invoke();
     }
 
     public static void ApplyChanges(PlayerInput player)

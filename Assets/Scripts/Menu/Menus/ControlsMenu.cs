@@ -14,15 +14,13 @@ public class ControlsMenu : MonoBehaviour
     [SerializeField] private TMP_FontAsset[] fonts;
 
     private string lastControlScheme, cancelMessage;
-    private int controlSchemeIndex;
     private InputAction action, originalAction;
     public float rebindTimeDelay = 0.25f;
 
     private void Start()
     {
         playerInput = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerInput>();
-        lastControlScheme = playerInput.defaultControlScheme;
-        controlSchemeIndex = 0;
+        
         LoadRemapping();
     }
 
@@ -31,7 +29,6 @@ public class ControlsMenu : MonoBehaviour
         if (playerInput.currentControlScheme != lastControlScheme)
         {
             lastControlScheme = playerInput.currentControlScheme;
-            controlSchemeIndex = (controlSchemeIndex + 1) % 2;
             LoadRemapping();
         }
     }
@@ -50,7 +47,7 @@ public class ControlsMenu : MonoBehaviour
 
             originalAction = action.Clone();
 
-            action.PerformInteractiveRebinding(controlSchemeIndex)
+            action.PerformInteractiveRebinding(ControlSaver.controlSchemeIndex)
                 .WithControlsExcluding("Mouse")
                 .OnMatchWaitForAnother(rebindTimeDelay)
                 .OnCancel(callback => CancelRebind(callback, cancelMessage))
@@ -62,7 +59,7 @@ public class ControlsMenu : MonoBehaviour
     private void CancelRebind(RebindingOperation callback, string cancelMessage)
     {
         //StartCoroutine(globalMenuManager.PopUpForTime(cancelMessage));
-        callback.action.ApplyBindingOverride(controlSchemeIndex, originalAction.bindings[controlSchemeIndex]);
+        callback.action.ApplyBindingOverride(ControlSaver.controlSchemeIndex, originalAction.bindings[ControlSaver.controlSchemeIndex]);
     }
 
     private void FinishRebind(RebindingOperation callback, GameObject currentGameObject)
@@ -71,7 +68,7 @@ public class ControlsMenu : MonoBehaviour
 
         GameObject children = currentGameObject.transform.GetChild(0).gameObject;
 
-        if (ControlSaver.mapping.ContainsKey(callback.action.bindings[controlSchemeIndex].effectivePath))
+        if (ControlSaver.mapping.ContainsKey(callback.action.bindings[ControlSaver.controlSchemeIndex].effectivePath))
         {
             if (CheckIfAsigned(callback.action) != null)
             {
@@ -80,7 +77,7 @@ public class ControlsMenu : MonoBehaviour
             }
             else
             {
-                string fontPath = ControlSaver.mapping[callback.action.bindings[controlSchemeIndex].effectivePath];
+                string fontPath = ControlSaver.mapping[callback.action.bindings[ControlSaver.controlSchemeIndex].effectivePath];
                 children.GetComponent<TMP_Text>().text = fontPath;
             }
         }
@@ -102,8 +99,8 @@ public class ControlsMenu : MonoBehaviour
         for (int i = 0; i < buttons.childCount; i++)
         {
             string buttonText = buttons.GetChild(i).gameObject.name;
-            string buttonAction = playerInput.actions.FindActionMap(currentActionMap).FindAction(buttonText).bindings[controlSchemeIndex].effectivePath;
-            buttons.GetChild(i).transform.GetChild(0).GetComponent<TMP_Text>().font = fonts[controlSchemeIndex];
+            string buttonAction = playerInput.actions.FindActionMap(currentActionMap).FindAction(buttonText).bindings[ControlSaver.controlSchemeIndex].effectivePath;
+            buttons.GetChild(i).transform.GetChild(0).GetComponent<TMP_Text>().font = fonts[ControlSaver.controlSchemeIndex];
             buttons.GetChild(i).transform.GetChild(0).GetComponent<TMP_Text>().text = ControlSaver.mapping[buttonAction];
         }
     }
@@ -111,7 +108,7 @@ public class ControlsMenu : MonoBehaviour
     private string CheckIfAsigned(InputAction action)
     {
         string result = null;
-        InputBinding actualBinding = action.bindings[controlSchemeIndex];
+        InputBinding actualBinding = action.bindings[ControlSaver.controlSchemeIndex];
 
         foreach (InputBinding binding in action.actionMap.bindings) {
 

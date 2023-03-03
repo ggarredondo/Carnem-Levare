@@ -3,6 +3,7 @@ using UnityEngine;
 public class MainMenu : MonoBehaviour
 {
     private AudioManager musicManager;
+    private bool isLoading;
 
     private void Start()
     {
@@ -23,6 +24,10 @@ public class MainMenu : MonoBehaviour
     /// </summary>
     public void PlayGame()
     {
-        StartCoroutine(SceneManagement.Instance.LoadSceneByIndex(2));
+        if (!isLoading)
+        {
+            isLoading = true;
+            StartCoroutine(SceneManagement.Instance.LoadSceneByIndex(2));
+        }
     }
 }
