@@ -15,6 +15,7 @@ TagManager:
   - TARGET_GROUP
   - CAMERA
   - TRANSITION
+  - INPUT
   layers:
   - Default
   - TransparentFX

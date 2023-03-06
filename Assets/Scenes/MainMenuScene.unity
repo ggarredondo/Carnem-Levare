@@ -683,7 +683,7 @@ GameObject:
   - component: {fileID: 1874459434}
   m_Layer: 0
   m_Name: InputManagerUI
-  m_TagString: Player
+  m_TagString: INPUT
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -860,8 +860,16 @@ MonoBehaviour:
     m_ActionName: Main Movement/Skip Forward[/XInputControllerWindows/leftStick/up]
   - m_PersistentCalls:
       m_Calls: []
-    m_ActionId: c99c723a-ad3e-4232-a9ce-de2a78da5c0f
-    m_ActionName: Main Movement/Skip Backwards[/XInputControllerWindows/leftStick/down]
+    m_ActionId: f397ad3e-d704-4a74-8e2d-ce927f0ca5c1
+    m_ActionName: Main Movement/Sprint[/XInputControllerWindows/buttonWest,/Keyboard/leftShift]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 81ef5d60-0200-42ff-9d13-af67beaa6c37
+    m_ActionName: LoadingScreen/Continue[/XInputControllerWindows/start,/Keyboard/space]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 8f006f83-0367-4932-80f0-42ce968fad13
+    m_ActionName: LoadingScreen/Stop[/XInputControllerWindows/buttonSouth,/Keyboard/a]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: Gamepad
   m_DefaultActionMap: UI

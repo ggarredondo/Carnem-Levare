@@ -20,7 +20,7 @@ public class ControlSaver : MonoBehaviour
 
     private void Start()
     {
-        playerInput = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerInput>();
+        playerInput = GameObject.FindGameObjectWithTag("INPUT").GetComponent<PlayerInput>();
 
         if (PlayerPrefs.GetString("rebinds") != null)
             LoadUserRebinds(playerInput);

@@ -24,7 +24,7 @@ public class LoadingScreen : MonoBehaviour
 
     private void OnEnable()
     {
-        playerInput = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerInput>();
+        playerInput = GameObject.FindGameObjectWithTag("INPUT").GetComponent<PlayerInput>();
         ControlSaver.StaticEvent += ChangeText; 
     }
 

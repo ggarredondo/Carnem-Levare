@@ -20,7 +20,7 @@ public class PauseMenuManager : MainMenuManager
 
     private void Start()
     {
-        playerInput = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerInput>();
+        playerInput = GameObject.FindGameObjectWithTag("INPUT").GetComponent<PlayerInput>();
         playerInput.uiInputModule = GameObject.FindGameObjectWithTag("UI").GetComponent<InputSystemUIInputModule>();
         musicManager = GameObject.FindGameObjectWithTag("MUSIC").GetComponent<AudioManager>();
         sfxManager = GameObject.FindGameObjectWithTag("SFX").GetComponent<AudioManager>();

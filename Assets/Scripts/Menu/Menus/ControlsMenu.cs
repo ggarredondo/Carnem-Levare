@@ -19,7 +19,7 @@ public class ControlsMenu : MonoBehaviour
 
     private void Start()
     {
-        playerInput = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerInput>();
+        playerInput = GameObject.FindGameObjectWithTag("INPUT").GetComponent<PlayerInput>();
         
         LoadRemapping();
     }

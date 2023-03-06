@@ -40,7 +40,7 @@ public class SceneManagement : MonoBehaviour
     void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
         animator = GameObject.FindGameObjectWithTag("TRANSITION").GetComponent<Animator>();
-        playerInput = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerInput>();
+        playerInput = GameObject.FindGameObjectWithTag("INPUT").GetComponent<PlayerInput>();
         loadingScreen = animator.GetComponent<LoadingScreen>();
 
         playerInput.controlsChangedEvent.AddListener(ControlSaver.OnControlSchemeChanged);
