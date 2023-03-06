@@ -97,7 +97,7 @@ public abstract class Character : MonoBehaviour
     {
         tracking = debugTracking && attackTracking && otherTracking;
         // Rotate towards opponent if character is tracking.
-        if (target != null && tracking && directionTarget.magnitude > 0f)
+        if (target != null && tracking && !(directionTarget.magnitude == 0f && anim.GetCurrentAnimatorStateInfo(0).IsTag("Movement")))
         {
             targetLook = Quaternion.LookRotation(target.position - transform.position);
             transform.rotation = Quaternion.Lerp(transform.rotation, targetLook, trackingRate * Time.fixedDeltaTime);
