@@ -346,8 +346,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c584565eaef4f6b4ab0e938ece6cd337, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tracking: 1
-  trackingRate: 5
+  debugTracking: 1
+  trackingRate: 20
   stamina: 0
   maxStamina: 200
   attackDamage: 10

@@ -49,18 +49,16 @@ MonoBehaviour:
   leftAnimationSpeed: 1
   rightAnimation: {fileID: 7400072, guid: 7934f1476fe2c6e458c230f491769c34, type: 3}
   rightAnimationSpeed: 1
+  hitboxType: 0
   direction: 0
   power: 1
   baseDamage: 15
-  hitboxType: 0
-  leftHitboxStartTime: 0.2
-  leftHitboxEndTime: 0.4
-  rightHitboxStartTime: 0.25
-  rightHitboxEndTime: 0.4
-  leftCommitStartTime: 0
-  leftCommitEndTime: 0
-  rightCommitStartTime: 0
-  rightCommitEndTime: 0
+  leftStartUp: 0.2
+  leftActive: 0.4
+  leftRecovery: 0
+  rightStartUp: 0.25
+  rightActive: 0.4
+  rightRecovery: 0
   leftMovement: 1
   rightMovement: 1
   chargeable: 1

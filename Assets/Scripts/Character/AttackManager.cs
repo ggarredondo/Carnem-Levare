@@ -4,7 +4,7 @@ public abstract class AttackManager : StateMachineBehaviour
 {
     protected Character character;
     protected Move currentMove;
-    private bool currentMoveFound;
+    private bool currentMoveFound, active;
     protected GameObject currentHitbox;
     protected Side side;
 
@@ -39,10 +39,11 @@ public abstract class AttackManager : StateMachineBehaviour
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        if (currentHitbox.activeInHierarchy) // CHANGE ONCE FRAME DATA IS IMPLEMENTED
-            character.transform.position += character.transform.forward * currentMove.getMovement(side) * Time.deltaTime;
-        character.attackTracking = currentMove.isTracking(side, stateInfo.normalizedTime);
-        currentHitbox.GetComponent<Hitbox>().Activate(currentMove.isHitboxActive(side, stateInfo.normalizedTime));
+        active = currentMove.isActive(side, stateInfo.normalizedTime);
+
+        if (active) character.transform.position += character.transform.forward * currentMove.getMovement(side) * Time.deltaTime; // Extra movement
+        character.attackTracking = !active; // Won't track opponent when move is active
+        currentHitbox.GetComponent<Hitbox>().Activate(active); // Hitbox is activated when move is active
     }
 
     // OnStateExit is called when a transition ends and the state machine finishes evaluating this state
