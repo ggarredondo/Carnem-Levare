@@ -44,7 +44,6 @@ public class SceneManagement : MonoBehaviour
         loadingScreen = animator.GetComponent<LoadingScreen>();
 
         playerInput.controlsChangedEvent.AddListener(ControlSaver.OnControlSchemeChanged);
-        ControlSaver.StaticEvent += OnLoadingTextChanged;
         ControlSaver.OnControlSchemeChanged(playerInput);
 
         transitionEnd = false;
@@ -53,8 +52,6 @@ public class SceneManagement : MonoBehaviour
         AudioSaver.ApplyChanges();
         VisualSaver.ApplyChanges();
     }
-
-    public void OnLoadingTextChanged(){ loadingScreen.ChangeText(); }
 
     private IEnumerator EndLoading()
     {

@@ -1,4 +1,5 @@
 using TMPro;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
@@ -6,10 +7,15 @@ using UnityEngine.UI;
 public class LoadingScreen : MonoBehaviour
 {
     [SerializeField] private GameObject loadingScreen;
+
+    [Header("Loading bar")]
     [SerializeField] private TMP_Text percentage;
     [SerializeField] private Image progressBar;
     [SerializeField] private float progressBarSpeed;
     [SerializeField] private Animator loadingTextAnim;
+
+    [Header("Mask")]
+    [SerializeField] private Animator maskAnim;
 
     private PlayerInput playerInput;
 
@@ -19,7 +25,10 @@ public class LoadingScreen : MonoBehaviour
     private void OnEnable()
     {
         playerInput = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerInput>();
+        ControlSaver.StaticEvent += ChangeText; 
     }
+
+    private void OnDisable(){ ControlSaver.StaticEvent -= ChangeText;}
 
     public void Activate()
     {
@@ -31,6 +40,11 @@ public class LoadingScreen : MonoBehaviour
     {
         float xScale = Mathf.Lerp(progressBar.transform.localScale.x, actualProgress, progressBarSpeed * Time.deltaTime);
         progressBar.transform.localScale = new Vector3(xScale, progressBar.transform.localScale.y, progressBar.transform.localScale.z);
+
+        if (playerInput.actions.FindAction("Stop").IsPressed())
+        {
+            maskAnim.SetBool("Stop", true);
+        }
     }
 
     public bool UpdateProgess(float progress)

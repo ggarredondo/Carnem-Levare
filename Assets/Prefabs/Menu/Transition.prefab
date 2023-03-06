@@ -407,6 +407,7 @@ MonoBehaviour:
   progressBar: {fileID: 8914202947532677853}
   progressBarSpeed: 2
   loadingTextAnim: {fileID: 6837560479234622647}
+  maskAnim: {fileID: 2120474088376845518}
 --- !u!222 &978868567033538810
 CanvasRenderer:
   m_ObjectHideFlags: 0
