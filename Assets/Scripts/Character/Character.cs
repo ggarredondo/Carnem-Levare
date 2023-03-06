@@ -7,10 +7,10 @@ public abstract class Character : MonoBehaviour
 {
     // Character Attributes
     [Header("Tracking values")]
-    protected Transform target;
     [SerializeField] private bool tracking = true;
     [System.NonSerialized] public bool attackTracking = true; // To deactivate tracking during the commitment phase of an attack.
     protected bool otherTracking = true; // To deactivate tracking during any other action if necessary.
+    protected Transform target;
 
     [Tooltip("How quickly character rotates towards their opponent")]
     [SerializeField] private float trackingRate = 1f;
