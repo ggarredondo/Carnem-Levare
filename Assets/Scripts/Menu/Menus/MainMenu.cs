@@ -27,7 +27,7 @@ public class MainMenu : MonoBehaviour
         if (!isLoading)
         {
             isLoading = true;
-            StartCoroutine(SceneManagement.Instance.LoadSceneByIndex(2));
+            StartCoroutine(SceneManagement.Instance.LoadSceneByIndexAsync(3));
         }
     }
 }

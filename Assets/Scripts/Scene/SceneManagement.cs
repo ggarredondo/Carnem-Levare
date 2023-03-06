@@ -15,6 +15,8 @@ public class SceneManagement : MonoBehaviour
     private AsyncOperation asyncOperation;
     private LoadingScreen loadingScreen;
 
+    private int sceneToLoad;
+
     private void Awake()
     {
         Instance = this;
@@ -41,7 +43,12 @@ public class SceneManagement : MonoBehaviour
     {
         animator = GameObject.FindGameObjectWithTag("TRANSITION").GetComponent<Animator>();
         playerInput = GameObject.FindGameObjectWithTag("INPUT").GetComponent<PlayerInput>();
-        loadingScreen = animator.GetComponent<LoadingScreen>();
+
+        if (SceneManager.GetActiveScene().buildIndex == 1)
+        {
+            loadingScreen = GameObject.FindGameObjectWithTag("LOADING").GetComponent<LoadingScreen>();
+            StartCoroutine(LoadFromLoadingScreen());
+        }
 
         playerInput.controlsChangedEvent.AddListener(ControlSaver.OnControlSchemeChanged);
         ControlSaver.OnControlSchemeChanged(playerInput);
@@ -87,15 +94,22 @@ public class SceneManagement : MonoBehaviour
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 1);
     }
 
+    public IEnumerator LoadFromLoadingScreen()
+    {
+        yield return new WaitUntil(() => TransitionEnd);
+        StartCoroutine(LoadSceneAsync(sceneToLoad));
+    }
+
     /// <summary>
     /// Load a scene by the scene name
     /// </summary>
     /// <param name="sceneName"> The scene name </param>
-    public IEnumerator LoadSceneByIndex(int sceneIndex)
+    public IEnumerator LoadSceneByIndexAsync(int sceneIndex)
     {
         yield return new WaitUntil(() => TransitionEnd);
         animator.SetBool("isLoading", true);
         yield return new WaitForSecondsRealtime(animator.GetCurrentAnimatorStateInfo(0).length);
-        StartCoroutine(LoadSceneAsync(sceneIndex));
+        sceneToLoad = sceneIndex;
+        SceneManager.LoadScene(1);
     }
 }

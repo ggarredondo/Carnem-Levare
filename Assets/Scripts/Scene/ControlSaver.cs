@@ -36,7 +36,8 @@ public class ControlSaver : MonoBehaviour
             case "Gamepad": controlSchemeIndex = 0; break;
         }
 
-        StaticEvent.Invoke();
+        if(StaticEvent != null)
+            StaticEvent.Invoke();
     }
 
     public static void ApplyChanges(PlayerInput player)

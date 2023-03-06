@@ -1,3 +1,4 @@
+using System.Collections;
 using TMPro;
 using UnityEditor;
 using UnityEngine;
@@ -6,8 +7,6 @@ using UnityEngine.UI;
 
 public class LoadingScreen : MonoBehaviour
 {
-    [SerializeField] private GameObject loadingScreen;
-
     [Header("Loading bar")]
     [SerializeField] private TMP_Text percentage;
     [SerializeField] private Image progressBar;
@@ -17,10 +16,15 @@ public class LoadingScreen : MonoBehaviour
     [Header("Mask")]
     [SerializeField] private Animator maskAnim;
 
+    [Header("Transition")]
+    [SerializeField] private Animator transAnim;
+
     private PlayerInput playerInput;
 
     private string continueAction;
     private float actualProgress;
+
+    private bool pressStart;
 
     private void OnEnable()
     {
@@ -32,7 +36,6 @@ public class LoadingScreen : MonoBehaviour
 
     public void Activate()
     {
-        loadingScreen.SetActive(true);
         playerInput.SwitchCurrentActionMap("LoadingScreen");
     }
 
@@ -52,18 +55,23 @@ public class LoadingScreen : MonoBehaviour
         actualProgress = Mathf.Clamp01(progress / 0.9f);
         percentage.text = (int)(Mathf.Clamp01(progress / 0.9f) * 100) + " %";
 
-        bool result = false;
-
         if (progress >= 0.9f)
         {
             percentage.text = "Press " + continueAction + " to continue";
             loadingTextAnim.enabled = true;
 
-            if (playerInput.actions.FindAction("Continue").IsPressed())
-                result = true;
+            if (playerInput.actions.FindAction("Continue").IsPressed() && !pressStart)
+                StartCoroutine(EndLoading());
         }
 
-        return result;
+        return pressStart;
+    }
+
+    public IEnumerator EndLoading()
+    {
+        transAnim.SetBool("isLoading", true);
+        yield return new WaitForSecondsRealtime(transAnim.GetCurrentAnimatorStateInfo(0).length);
+        pressStart = true;
     }
 
     public void ChangeText()
