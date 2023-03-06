@@ -7,7 +7,7 @@ public enum Axis { x = 0, y = 1, z = 2 }
 public class HUD : MonoBehaviour
 {
     private Character player, enemy;
-    [SerializeField] private Image playerStaminaBar, enemyStaminaBar;
+    [SerializeField] private Image playerInstant, playerAnimated, enemyInstant, enemyAnimated;
     [SerializeField] private TMP_Text playerNumber, enemyNumber;
     [Tooltip("Speed at which stamina bars update")] [SerializeField] private float updateSpeed = 5f;
     private float currentP, currentE;
@@ -23,19 +23,22 @@ public class HUD : MonoBehaviour
     /// Update image scale in one axis corresponding to a percentage given by
     /// a current and max value.
     /// </summary>
-    private void UpdateBar(float value, float maxValue, Image bar, Axis axis, TMP_Text text) {
+    private void UpdateBar(float value, float maxValue, Image bar, Axis axis) {
         Vector3 newScale = new Vector3(1f, 1f, 1f);
         newScale[(int) axis] = value / maxValue;
         bar.transform.localScale = newScale;
-        text.text = Mathf.Round(value) + "/" + maxValue;
+    }
+
+    private void UpdateCharacterBar(Character charac, ref float current, Image instant, Image animated, TMP_Text number) {
+        current = Mathf.Lerp(current, charac.Stamina, updateSpeed * Time.deltaTime);
+        UpdateBar(current, charac.MaxStamina, animated, Axis.x);
+        UpdateBar(charac.Stamina, charac.MaxStamina, instant, Axis.x);
+        number.text = charac.Stamina + "/" + charac.MaxStamina;
     }
 
     private void Update()
     {
-        currentP = Mathf.Lerp(currentP, player.Stamina, updateSpeed * Time.deltaTime);
-        UpdateBar(currentP, player.MaxStamina, playerStaminaBar, Axis.x, playerNumber);
-
-        currentE = Mathf.Lerp(currentE, enemy.Stamina, updateSpeed * Time.deltaTime);
-        UpdateBar(currentE, enemy.MaxStamina, enemyStaminaBar, Axis.x, enemyNumber);
+        UpdateCharacterBar(player, ref currentP, playerInstant, playerAnimated, playerNumber);
+        UpdateCharacterBar(enemy, ref currentE, enemyInstant, enemyAnimated, enemyNumber);
     }
 }
