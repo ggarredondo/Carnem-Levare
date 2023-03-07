@@ -74,26 +74,4 @@ public class Player : Character
     }
     public void Block(InputAction.CallbackContext context) { block_pressed = context.performed; }
     #endregion
-
-    #region PublicMethods
-    /// <summary>
-    /// Return's player current stick position.
-    /// </summary>
-    public Vector2 StickDirection { get => directionTarget; }
-
-    /// <summary>
-    /// Returns player's linearly interpolated stick direction.
-    /// </summary>
-    public Vector2 StickSmoothDirection { get => direction; }
-
-    /// <summary>
-    /// Checks if player is moving, whether by walking or blocking.
-    /// </summary>
-    public bool isPlayerMoving { get => directionTarget.magnitude != 0f && anim.GetCurrentAnimatorStateInfo(0).IsTag("Movement"); }
-    public bool isPlayerIdle { get => directionTarget.magnitude == 0f && anim.GetCurrentAnimatorStateInfo(0).IsTag("Movement"); }
-    public bool isPlayerSkippingForward { get => directionTarget.magnitude == 0f && anim.GetCurrentAnimatorStateInfo(0).IsTag("Movement"); }
-    public bool isPlayerSkippingBackwards { get => anim.GetCurrentAnimatorStateInfo(0).IsName("Skip Backwards"); }
-    public bool isPlayerAttacking { get => anim.GetCurrentAnimatorStateInfo(0).IsTag("Attacking"); }
-    public bool isPlayerBlocking { get => block_pressed; }
-    #endregion
 }

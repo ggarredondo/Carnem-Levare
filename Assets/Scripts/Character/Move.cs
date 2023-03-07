@@ -1,14 +1,6 @@
 using UnityEngine;
 
 #region Enums
-// Does the attack come from the sides or is it straight?
-// Used to choose between hurt animations, if it hits.
-public enum Direction
-{
-    Curved,
-    Straight
-}
-
 // Used to choose between hurt animations, if it hits.
 public enum Power: uint
 {
@@ -51,7 +43,6 @@ public class Move : MonoBehaviour
 
     [Header("Attack Values")]
     public HitboxType hitboxType;
-    [Tooltip("States from which side the hurt animation plays out when it hits")] public Direction direction;
     [Tooltip("States which type of hurt animation will play when it hits")] public Power power;
     public float baseDamage; // Used to calculate damage dealt to the opponent's stamina, if it hits.
 

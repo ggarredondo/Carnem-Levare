@@ -1024,12 +1024,6 @@ AnimatorController:
     m_DefaultInt: 0
     m_DefaultBool: 0
     m_Controller: {fileID: 0}
-  - m_Name: hurt_side
-    m_Type: 1
-    m_DefaultFloat: 0
-    m_DefaultInt: 0
-    m_DefaultBool: 0
-    m_Controller: {fileID: 0}
   - m_Name: hurt_target
     m_Type: 1
     m_DefaultFloat: 0
@@ -2014,13 +2008,13 @@ BlendTree:
     m_CycleOffset: 0
     m_DirectBlendParameter: horizontal
     m_Mirror: 0
-  m_BlendParameter: hurt_side
+  m_BlendParameter: hurt_target
   m_BlendParameterY: hurt_target
   m_MinThreshold: 0
   m_MaxThreshold: 5
   m_UseAutomaticThresholds: 0
   m_NormalizedBlendValues: 0
-  m_BlendType: 3
+  m_BlendType: 0
 --- !u!206 &8919165703255043636
 BlendTree:
   m_ObjectHideFlags: 1

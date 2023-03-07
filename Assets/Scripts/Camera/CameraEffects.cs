@@ -109,17 +109,17 @@ public class CameraEffects : MonoBehaviour
         if (Time.timeScale > 0f)
         {
             cameraConditions[0] = (chargePhase == ChargePhase.performing) && (deltaTimer >= holdingMinTime) && (deltaTimer <= chargeLimit);
-            cameraConditions[1] = player.isPlayerBlocking;
+            cameraConditions[1] = player.IsBlocking;
 
             if(orbitalTransposer != null) OrbitalMovement();
 
             if(alternativeTargets[0] != null && alternativeTargets[1] != null) TargetUpdate();
 
             //Making camera damping oscillate depending on player movement
-            if (smoothFollowActivated) smoothFollow.ApplyMove(!player.isPlayerIdle);
+            if (smoothFollowActivated) smoothFollow.ApplyMove(!player.IsIdle);
 
             //Making camera noise oscillate depending on player movement
-            if (noiseActivated) noise.ApplyMove(player.isPlayerIdle || player.isPlayerMoving);
+            if (noiseActivated) noise.ApplyMove(player.IsIdle || player.IsMoving);
 
             if (dollyZoomActivated || onGuardActivated)
             {
@@ -138,12 +138,12 @@ public class CameraEffects : MonoBehaviour
 
     private void OrbitalMovement()
     {
-        if (Mathf.Abs(player.StickSmoothDirection.x) > 0.1f && player.isPlayerMoving && !cameraConditions[1]) 
-            orbitalTransposer.m_XAxis.Value += Mathf.Sign(player.StickSmoothDirection.x) * orbitalValue * Time.deltaTime;
+        if (Mathf.Abs(player.Direction.x) > 0.1f && player.IsMoving && !cameraConditions[1]) 
+            orbitalTransposer.m_XAxis.Value += Mathf.Sign(player.Direction.x) * orbitalValue * Time.deltaTime;
 
         if (cameraConditions[1]) orbitalTransposer.m_XAxis.Value = Mathf.Lerp(orbitalTransposer.m_XAxis.Value, 0, orbitalRecovery * Time.deltaTime);
 
-        orbitalTransposer.m_RecenterToTargetHeading.m_enabled = Mathf.Abs(player.StickSmoothDirection.x) > 0.1f && player.isPlayerMoving && !cameraConditions[1];
+        orbitalTransposer.m_RecenterToTargetHeading.m_enabled = Mathf.Abs(player.Direction.x) > 0.1f && player.IsMoving && !cameraConditions[1];
     }
 
     private void AsignTargets(Transform[] targets)
@@ -154,7 +154,7 @@ public class CameraEffects : MonoBehaviour
 
     private void TargetUpdate()
     {
-        if (!player.isPlayerBlocking || player.isPlayerAttacking) AsignTargets(alternativeTargets);
+        if (!player.IsBlocking || player.IsAttacking) AsignTargets(alternativeTargets);
 
         //Debug Targets with Spheres
         targetDebug[0].transform.position = targetGroup.m_Targets[0].target.position;

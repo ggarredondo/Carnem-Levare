@@ -33,7 +33,6 @@ public abstract class AttackManager : StateMachineBehaviour
         currentHitbox.GetComponent<Hitbox>().power = currentMove.power;
         currentHitbox.GetComponent<Hitbox>().damage = character.CalculateAttackDamage(currentMove.baseDamage);
         // Assign the move's direction by checking if it's straight, and if it's not we assign left o right.
-        currentHitbox.GetComponent<Hitbox>().side = currentMove.direction == Direction.Straight ? 0 : (int) side;
     }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks

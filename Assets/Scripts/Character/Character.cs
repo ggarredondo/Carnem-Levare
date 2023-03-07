@@ -97,7 +97,7 @@ public abstract class Character : MonoBehaviour
     {
         tracking = debugTracking && attackTracking && otherTracking;
         // Rotate towards opponent if character is tracking.
-        if (target != null && tracking && !(directionTarget.magnitude == 0f && anim.GetCurrentAnimatorStateInfo(0).IsTag("Movement")))
+        if (target != null && tracking && !isHurt && !IsIdle)
         {
             targetLook = Quaternion.LookRotation(target.position - transform.position);
             transform.rotation = Quaternion.Lerp(transform.rotation, targetLook, trackingRate * Time.fixedDeltaTime);
@@ -173,6 +173,24 @@ public abstract class Character : MonoBehaviour
 
     public float Stamina { get => stamina; }
     public float MaxStamina { get => maxStamina; }
+
+    /// <summary>
+    /// Returns character's current intended direction.
+    /// </summary>
+    public Vector2 DirectionTarget { get => directionTarget; }
+
+    /// <summary>
+    /// Returns character's current lerp-smoothed direction.
+    /// </summary>
+    public Vector2 Direction { get => direction; }
+
+    /// <summary>
+    /// Is character moving while blocking or casual walking?
+    /// </summary>
+    public bool IsMoving { get => directionTarget.magnitude != 0f && anim.GetCurrentAnimatorStateInfo(0).IsTag("Movement"); }
+    public bool IsIdle { get => directionTarget.magnitude == 0f && anim.GetCurrentAnimatorStateInfo(0).IsTag("Movement"); }
+    public bool IsAttacking { get => isAttacking; }
+    public bool IsBlocking { get => isBlocking; }
 
     /// <summary>
     /// To state if a move from right moveset is being pressed. Necessary for
