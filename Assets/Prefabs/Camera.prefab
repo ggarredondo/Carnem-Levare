@@ -391,7 +391,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2835685395483145561}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: -1.33, y: 0, z: 0}
 --- !u!20 &2835685394306887700
 Camera:
@@ -670,7 +670,7 @@ Transform:
   m_Children:
   - {fileID: 2835685394845596708}
   m_Father: {fileID: 2835685395483145561}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: -0.04, y: 0.04, z: 0}
 --- !u!114 &2835685394733476226
 MonoBehaviour:
@@ -722,10 +722,7 @@ MonoBehaviour:
   targetDebug:
   - {fileID: 2835685395472132083}
   - {fileID: 2835685394071100821}
-  playerTarget: 0
-  enemyTarget: 0
   targetingSpeed: 4
-  alternativeTarget: 0
   debug: 0
   orbitalValue: 18
   orbitalRecovery: 6
@@ -922,7 +919,7 @@ Transform:
   - {fileID: 2835685395472132078}
   - {fileID: 2835685394071100816}
   m_Father: {fileID: 2835685395483145561}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2835685395184203564
 MonoBehaviour:
@@ -981,7 +978,7 @@ Transform:
   m_Children:
   - {fileID: 2835685394079182387}
   m_Father: {fileID: 2835685395483145561}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: -0.04, y: 0.04, z: 0}
 --- !u!114 &2835685395348398053
 MonoBehaviour:
@@ -1033,10 +1030,7 @@ MonoBehaviour:
   targetDebug:
   - {fileID: 2835685395472132083}
   - {fileID: 2835685394071100821}
-  playerTarget: 0
-  enemyTarget: 0
   targetingSpeed: 4
-  alternativeTarget: 0
   debug: 0
   orbitalValue: 18
   orbitalRecovery: 6
@@ -1200,6 +1194,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 2437912868694387621}
   - {fileID: 2835685395184203567}
   - {fileID: 2835685396104087958}
   - {fileID: 2835685395923890379}
@@ -1222,6 +1217,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   changeVirtualCamera: 0
+  actualTransform: {fileID: 2437912868694387621}
 --- !u!1 &2835685395923890378
 GameObject:
   m_ObjectHideFlags: 0
@@ -1256,7 +1252,7 @@ Transform:
   m_Children:
   - {fileID: 2835685394315603463}
   m_Father: {fileID: 2835685395483145561}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: -0.04, y: 0.04, z: 0}
 --- !u!114 &2835685395923890375
 MonoBehaviour:
@@ -1308,10 +1304,7 @@ MonoBehaviour:
   targetDebug:
   - {fileID: 2835685395472132083}
   - {fileID: 2835685394071100821}
-  playerTarget: 0
-  enemyTarget: 0
   targetingSpeed: 4
-  alternativeTarget: 0
   debug: 0
   orbitalValue: 18
   orbitalRecovery: 6
@@ -1399,7 +1392,7 @@ Transform:
   m_Children:
   - {fileID: 2835685394191603326}
   m_Father: {fileID: 2835685395483145561}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: -0.04, y: 0.04, z: 0}
 --- !u!114 &2835685396104087952
 MonoBehaviour:
@@ -1451,10 +1444,7 @@ MonoBehaviour:
   targetDebug:
   - {fileID: 2835685395472132083}
   - {fileID: 2835685394071100821}
-  playerTarget: 0
-  enemyTarget: 0
   targetingSpeed: 4
-  alternativeTarget: 0
   debug: 0
   orbitalValue: 10
   orbitalRecovery: 3
@@ -1548,3 +1538,34 @@ MonoBehaviour:
     Item1: 2
     Item2: 2
   offsetVariation: {x: 0, y: 0, z: 0.25}
+--- !u!1 &4335206462500320825
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2437912868694387621}
+  m_Layer: 0
+  m_Name: FollowPlayer
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2437912868694387621
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4335206462500320825}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2835685395483145561}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

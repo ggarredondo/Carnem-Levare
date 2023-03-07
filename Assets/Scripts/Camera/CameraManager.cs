@@ -7,13 +7,27 @@ public class CameraManager : MonoBehaviour
     public static VirtualCameras actualVirtualCamera;
 
     private CameraTargets playerTargets, enemyTargets;
+    [SerializeField] private Transform actualTransform;
+    private Vector3 initialPosition;
 
     private void Start()
     {
         playerTargets = GameObject.FindGameObjectWithTag("Player").GetComponent<CameraTargets>();
         enemyTargets = GameObject.FindGameObjectWithTag("Enemy").GetComponent<CameraTargets>();
-
+        //initialPosition = playerTargets.GetTarget((int)actualVirtualCamera, false).position - enemyTargets.GetTarget((int)actualVirtualCamera, false).position;
         InitializeTargets();
+    }
+
+    private void LateUpdate()
+    {
+        if (actualVirtualCamera != changeVirtualCamera) ChangeVirtualCamera();
+
+        actualTransform.position = playerTargets.GetTarget((int)actualVirtualCamera, false).position;
+        actualTransform.LookAt(enemyTargets.GetTarget((int)actualVirtualCamera, false).position);
+        /*
+        Quaternion tmp = Quaternion.FromToRotation(initialPosition, actualTransform.position - enemyTargets.GetTarget((int)actualVirtualCamera, false).position);
+        actualTransform.rotation = Quaternion.Euler(0, tmp.eulerAngles.y, 0);
+        */
     }
 
     private void InitializeTargets()
@@ -21,7 +35,8 @@ public class CameraManager : MonoBehaviour
         int cont = 0;
         foreach (CinemachineVirtualCamera camera in GetComponentsInChildren<CinemachineVirtualCamera>())
         {
-            camera.m_Follow = playerTargets.GetTarget(cont, false);
+
+            camera.m_Follow = actualTransform;
             camera.GetComponent<CameraEffects>().InitializeTargetGroup(playerTargets.GetTarget(0, false), enemyTargets.GetTarget(0, false));
 
             if (cont != 2 && cont != 1)
@@ -54,11 +69,6 @@ public class CameraManager : MonoBehaviour
 
             cont++;
         }
-    }
-
-    private void LateUpdate()
-    {
-        if (actualVirtualCamera != changeVirtualCamera) ChangeVirtualCamera();
     }
 
 }

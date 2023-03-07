@@ -41,7 +41,6 @@ public class CameraEffects : MonoBehaviour
     private int actualCamera;
 
     private Stack<CameraMovement> cameraStack = new();
-    private Transform[] firstTargets;
 
     private CinemachineVirtualCamera vcam;
     private CinemachineOrbitalTransposer orbitalTransposer;
@@ -50,7 +49,6 @@ public class CameraEffects : MonoBehaviour
     private void Awake()
     {
         alternativeTargets = new Transform[2];
-        firstTargets = new Transform[2];
 
         vcam = GetComponent<CinemachineVirtualCamera>();
         orbitalTransposer = vcam.GetCinemachineComponent<CinemachineOrbitalTransposer>();
@@ -67,11 +65,8 @@ public class CameraEffects : MonoBehaviour
     {
         targetGroup = GameObject.FindGameObjectWithTag("TARGET_GROUP").GetComponent<CinemachineTargetGroup>();
 
-        firstTargets[0] = playerTarget;
-        firstTargets[1] = enemyTarget;
-
-        targetGroup.m_Targets[0].target = firstTargets[0];
-        targetGroup.m_Targets[1].target = firstTargets[1];
+        targetGroup.m_Targets[0].target = playerTarget;
+        targetGroup.m_Targets[1].target = enemyTarget;
     }
 
     public void InitializeTargets(Transform playerAlternative, Transform enemyAlternative)
@@ -159,7 +154,7 @@ public class CameraEffects : MonoBehaviour
 
     private void TargetUpdate()
     {
-        if (!player.isPlayerBlocking || player.isPlayerAttacking) AsignTargets(alternativeTargets); else AsignTargets(firstTargets);
+        if (!player.isPlayerBlocking || player.isPlayerAttacking) AsignTargets(alternativeTargets);
 
         //Debug Targets with Spheres
         targetDebug[0].transform.position = targetGroup.m_Targets[0].target.position;
