@@ -25,6 +25,7 @@ public class PauseMenuManager : MainMenuManager
         musicManager = GameObject.FindGameObjectWithTag("MUSIC").GetComponent<AudioManager>();
         sfxManager = GameObject.FindGameObjectWithTag("SFX").GetComponent<AudioManager>();
 
+        musicManager.StopAllSounds();
         musicManager.Play("Fight");
     }
 

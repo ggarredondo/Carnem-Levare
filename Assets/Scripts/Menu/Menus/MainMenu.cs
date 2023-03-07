@@ -8,6 +8,7 @@ public class MainMenu : MonoBehaviour
     private void Start()
     {
         musicManager = GameObject.FindGameObjectWithTag("MUSIC").GetComponent<AudioManager>();
+        musicManager.StopAllSounds();
         musicManager.Play("Intro");
     }
 

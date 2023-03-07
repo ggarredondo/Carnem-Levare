@@ -24,8 +24,6 @@ public class LoadingScreen : MonoBehaviour
     private string continueAction;
     private float actualProgress;
 
-    private bool pressStart;
-
     private void OnEnable()
     {
         playerInput = GameObject.FindGameObjectWithTag("INPUT").GetComponent<PlayerInput>();
@@ -55,23 +53,18 @@ public class LoadingScreen : MonoBehaviour
         actualProgress = Mathf.Clamp01(progress / 0.9f);
         percentage.text = (int)(Mathf.Clamp01(progress / 0.9f) * 100) + " %";
 
+        bool result = false;
+
         if (progress >= 0.9f)
         {
             percentage.text = "Press " + continueAction + " to continue";
             loadingTextAnim.enabled = true;
 
-            if (playerInput.actions.FindAction("Continue").IsPressed() && !pressStart)
-                StartCoroutine(EndLoading());
+            if (playerInput.actions.FindAction("Continue").IsPressed())
+                result = true;
         }
 
-        return pressStart;
-    }
-
-    public IEnumerator EndLoading()
-    {
-        transAnim.SetBool("isLoading", true);
-        yield return new WaitForSecondsRealtime(transAnim.GetCurrentAnimatorStateInfo(0).length);
-        pressStart = true;
+        return result;
     }
 
     public void ChangeText()

@@ -30,10 +30,9 @@ public class SceneManagement : MonoBehaviour
 
     private void Start()
     {
-        DontDestroyOnLoad(GameObject.FindGameObjectWithTag("AUDIO"));
-        DontDestroyOnLoad(GameObject.FindGameObjectWithTag("VISUAL"));
-        DontDestroyOnLoad(GameObject.FindGameObjectWithTag("CONTROLS"));
+        DontDestroyOnLoad(GameObject.FindGameObjectWithTag("SAVE"));
         DontDestroyOnLoad(GameObject.FindGameObjectWithTag("UI"));
+        DontDestroyOnLoad(GameObject.FindGameObjectWithTag("MUSIC").transform.parent.gameObject);
         DontDestroyOnLoad(gameObject);
     }
 
@@ -77,10 +76,20 @@ public class SceneManagement : MonoBehaviour
         while (!asyncOperation.isDone)
         {
             if (loadingScreen.UpdateProgess(asyncOperation.progress))
-                asyncOperation.allowSceneActivation = true;
-            
+            {
+                StartCoroutine(EndAsyncOperation());
+                break;
+            }
+
             yield return null;
         }
+    }
+
+    public IEnumerator EndAsyncOperation()
+    {
+        animator.SetBool("isLoading", true);
+        yield return new WaitForSecondsRealtime(animator.GetCurrentAnimatorStateInfo(0).length);
+        asyncOperation.allowSceneActivation = true;
     }
 
     /// <summary>
