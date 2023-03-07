@@ -74,7 +74,7 @@ public abstract class Character : MonoBehaviour
     protected virtual void Update()
     {
         // Bellow are values that must be updated frame by frame to allow certain animations to play out accordingly.
-        isAttacking = anim.GetCurrentAnimatorStateInfo(0).IsTag("Attacking");
+        isAttacking = anim.GetCurrentAnimatorStateInfo(0).IsTag("Attacking") && !anim.IsInTransition(0);
         isHurt = anim.GetCurrentAnimatorStateInfo(0).IsName("Hurt");
         isBlocking = (anim.GetCurrentAnimatorStateInfo(0).IsName("Block") || anim.GetCurrentAnimatorStateInfo(0).IsName("Blocked")) && block_pressed;
 

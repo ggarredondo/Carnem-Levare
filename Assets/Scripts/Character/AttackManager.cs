@@ -44,6 +44,7 @@ public abstract class AttackManager : StateMachineBehaviour
         if (active) character.transform.position += character.transform.forward * currentMove.getMovement(side) * Time.deltaTime; // Extra movement
         character.attackTracking = !active; // Won't track opponent when move is active
         currentHitbox.GetComponent<Hitbox>().Activate(active); // Hitbox is activated when move is active
+        if (currentMove.canCancel(side, stateInfo.normalizedTime)) animator.SetTrigger("cancel"); // Can cancel animation after recovery
     }
 
     // OnStateExit is called when a transition ends and the state machine finishes evaluating this state
@@ -52,5 +53,6 @@ public abstract class AttackManager : StateMachineBehaviour
         character.attackTracking = true;
         currentHitbox.GetComponent<Hitbox>().hit = false;
         currentHitbox.GetComponent<Hitbox>().Activate(false);
+        animator.ResetTrigger("cancel");
     }
 }
