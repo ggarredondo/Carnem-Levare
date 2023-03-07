@@ -5,9 +5,12 @@ public enum Target : uint
     LeftHead = 0,
     MidHead = 1,
     RightHead = 2,
-    LeftBody = 3,
-    MidBody = 4,
-    RightBody = 5
+    BackHead = 3,
+
+    LeftBody = 4,
+    MidBody = 5,
+    RightBody = 6,
+    BackBody = 7,
 }
 
 public class Hurtbox : MonoBehaviour
