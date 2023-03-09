@@ -30,10 +30,13 @@ public class SceneManagement : MonoBehaviour
 
     private void Start()
     {
-        DontDestroyOnLoad(GameObject.FindGameObjectWithTag("SAVE"));
-        DontDestroyOnLoad(GameObject.FindGameObjectWithTag("UI"));
-        DontDestroyOnLoad(GameObject.FindGameObjectWithTag("MUSIC").transform.parent.gameObject);
-        DontDestroyOnLoad(gameObject);
+        if (SceneManager.GetActiveScene().buildIndex == 0)
+        {
+            DontDestroyOnLoad(GameObject.FindGameObjectWithTag("SAVE"));
+            DontDestroyOnLoad(GameObject.FindGameObjectWithTag("UI"));
+            DontDestroyOnLoad(GameObject.FindGameObjectWithTag("MUSIC").transform.parent.gameObject);
+            DontDestroyOnLoad(gameObject);
+        }
     }
 
     public bool TransitionEnd { get { return transitionEnd; } }
