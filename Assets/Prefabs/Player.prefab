@@ -42,7 +42,7 @@ GameObject:
   - component: {fileID: 8785268891604238130}
   - component: {fileID: 730847539452262329}
   - component: {fileID: 2528519819064968607}
-  m_Layer: 7
+  m_Layer: 9
   m_Name: Left Fist Hitbox
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -405,7 +405,7 @@ GameObject:
   - component: {fileID: 6481368992884126611}
   - component: {fileID: 3814267820771970520}
   - component: {fileID: 972517564017927109}
-  m_Layer: 7
+  m_Layer: 9
   m_Name: Right Fist Hitbox
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -464,7 +464,7 @@ GameObject:
   - component: {fileID: 2236189113358744085}
   - component: {fileID: 4941813015266750535}
   - component: {fileID: 6363734173970544490}
-  m_Layer: 6
+  m_Layer: 8
   m_Name: Hurtbox
   m_TagString: Untagged
   m_Icon: {fileID: 0}

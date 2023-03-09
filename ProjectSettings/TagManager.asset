@@ -22,10 +22,10 @@ TagManager:
   - 
   - Water
   - UI
-  - Hurtbox
-  - Hitbox
-  - 
-  - 
+  - EnemyHurtbox
+  - EnemyHitbox
+  - PlayerHurtbox
+  - PlayerHitbox
   - 
   - 
   - 
