@@ -27,7 +27,7 @@ public class Enemy : Character
     protected override void Update()
     {
         directionSpeed = enemyDirectionSpeed;
-        block_pressed = block;
+        anim.SetBool("block", block);
         base.Update();
     }
 }

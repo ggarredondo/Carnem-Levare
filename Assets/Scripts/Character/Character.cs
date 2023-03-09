@@ -43,8 +43,7 @@ public abstract class Character : MonoBehaviour
     protected Vector2 direction, directionTarget;
     protected float directionSpeed;
 
-    protected bool isAttacking, isHurt, isBlocking, block_pressed = false;
-    private bool isDashing;
+    protected bool isAttacking, isHurt, isBlocking, isDashing;
 
     [Header("Debug")] // DEBUG
     [SerializeField] private bool updateMoveset = false; // DEBUG
@@ -78,14 +77,13 @@ public abstract class Character : MonoBehaviour
         // Bellow are values that must be updated frame by frame to allow certain animations to play out accordingly.
         isAttacking = anim.GetCurrentAnimatorStateInfo(0).IsTag("Attacking") && !anim.IsInTransition(0);
         isHurt = anim.GetCurrentAnimatorStateInfo(0).IsName("Hurt");
-        isBlocking = (anim.GetCurrentAnimatorStateInfo(0).IsName("Block") || anim.GetCurrentAnimatorStateInfo(0).IsTag("Blocking")) && block_pressed;
+        isBlocking = anim.GetCurrentAnimatorStateInfo(0).IsName("Block") || anim.GetCurrentAnimatorStateInfo(0).IsTag("Blocking");
 
         // Character can only attack if they're not attacking already or hurt.
         anim.SetBool("can_attack", !isAttacking && !isHurt);
-        anim.SetBool("block", block_pressed);
         anim.SetBool("is_blocking", isBlocking);
 
-        // Character can only dash if they aren't attack nor hurt nor dashing already
+        // Character can only dash if they aren't attacking nor hurt nor dashing already
         isDashing = anim.GetCurrentAnimatorStateInfo(0).IsName("Dash");
         anim.SetBool("can_dash", !isAttacking && !isDashing && !isHurt);
         otherTracking = !isDashing || anim.IsInTransition(0);

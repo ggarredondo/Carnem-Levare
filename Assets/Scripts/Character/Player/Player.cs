@@ -26,7 +26,7 @@ public class Player : Character
     override protected void Update()
     {
         // Change movement animation blending speed depending on the situation.
-        if (directionTarget.magnitude == 0f && !block_pressed)
+        if (directionTarget.magnitude == 0f && !anim.GetCurrentAnimatorStateInfo(0).IsName("Block"))
             directionSpeed = smoothStickSpeed;
         else if (anim.GetCurrentAnimatorStateInfo(0).IsName("Block"))
             directionSpeed = blockingStickSpeed;
@@ -44,7 +44,7 @@ public class Player : Character
     // Meant for Unity Input System events
 
     public void Movement(InputAction.CallbackContext context) { directionTarget = context.ReadValue<Vector2>().normalized; }
-    public void Dash(InputAction.CallbackContext context) { anim.SetBool("dash", context.performed && block_pressed); }
+    public void Dash(InputAction.CallbackContext context) { anim.SetBool("dash", context.performed); }
     public void LeftNormal(InputAction.CallbackContext context) { if (LeftMoveset.Count > 0) anim.SetBool("left_normal", context.performed); }
     public void LeftSpecial(InputAction.CallbackContext context) { if (LeftMoveset.Count > 1) anim.SetBool("left_special", context.performed); }
     public void RightNormal(InputAction.CallbackContext context) {
@@ -59,6 +59,6 @@ public class Player : Character
             anim.SetBool("right_special", context.performed);
         }
     }
-    public void Block(InputAction.CallbackContext context) { block_pressed = context.performed; }
+    public void Block(InputAction.CallbackContext context) { anim.SetBool("block", context.performed); }
     #endregion
 }
