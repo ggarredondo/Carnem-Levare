@@ -74,6 +74,8 @@ public abstract class Character : MonoBehaviour
 
     protected virtual void Update()
     {
+        anim.SetBool("ko", stamina <= 0);
+
         // Bellow are values that must be updated frame by frame to allow certain animations to play out accordingly.
         isAttacking = anim.GetCurrentAnimatorStateInfo(0).IsTag("Attacking") && !anim.IsInTransition(0);
         isHurt = anim.GetCurrentAnimatorStateInfo(0).IsName("Hurt");
@@ -157,7 +159,7 @@ public abstract class Character : MonoBehaviour
     /// <param name="unblockable">Can the attack be blocked?</param>
     public void Damage(float dmg, bool unblockable) {
         stamina -= isBlocking && !unblockable ? Mathf.Round(dmg * blockingModifier) : dmg;
-        if (stamina < 0) stamina = 0;
+        if (stamina < 0f) stamina = 0f;
     }
 
     /// <summary>
