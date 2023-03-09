@@ -44,6 +44,7 @@ public class Move : MonoBehaviour
     [Header("Attack Values")]
     public HitboxType hitboxType;
     [Tooltip("States which type of hurt animation will play when it hits")] public Power power;
+    public bool unblockable;
     public float baseDamage; // Used to calculate damage dealt to the opponent's stamina, if it hits.
 
     #region TimeData

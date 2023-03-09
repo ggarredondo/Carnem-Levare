@@ -32,7 +32,7 @@ public abstract class AttackManager : StateMachineBehaviour
         // Assigns the move's power and damage to the hitbox component so that once it hits the information is passed onto the hurtbox.
         currentHitbox.GetComponent<Hitbox>().power = currentMove.power;
         currentHitbox.GetComponent<Hitbox>().damage = character.CalculateAttackDamage(currentMove.baseDamage);
-        // Assign the move's direction by checking if it's straight, and if it's not we assign left o right.
+        currentHitbox.GetComponent<Hitbox>().unblockable = currentMove.unblockable;
     }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks

@@ -76,7 +76,7 @@ public abstract class Character : MonoBehaviour
         // Bellow are values that must be updated frame by frame to allow certain animations to play out accordingly.
         isAttacking = anim.GetCurrentAnimatorStateInfo(0).IsTag("Attacking") && !anim.IsInTransition(0);
         isHurt = anim.GetCurrentAnimatorStateInfo(0).IsName("Hurt");
-        isBlocking = (anim.GetCurrentAnimatorStateInfo(0).IsName("Block") || anim.GetCurrentAnimatorStateInfo(0).IsName("Blocked")) && block_pressed;
+        isBlocking = (anim.GetCurrentAnimatorStateInfo(0).IsName("Block") || anim.GetCurrentAnimatorStateInfo(0).IsTag("Blocking")) && block_pressed;
 
         // Character can only attack if they're not attacking already or hurt.
         anim.SetBool("can_attack", !isAttacking && !isHurt);
@@ -149,8 +149,9 @@ public abstract class Character : MonoBehaviour
     /// Damage character's stamina.
     /// </summary>
     /// <param name="dmg">Damage taken.</param>
-    public void Damage(float dmg) {
-        stamina -= isBlocking ? Mathf.Round(dmg * blockingModifier) : dmg;
+    /// <param name="unblockable">Can the attack be blocked?</param>
+    public void Damage(float dmg, bool unblockable) {
+        stamina -= isBlocking && !unblockable ? Mathf.Round(dmg * blockingModifier) : dmg;
         if (stamina < 0) stamina = 0;
     }
 
