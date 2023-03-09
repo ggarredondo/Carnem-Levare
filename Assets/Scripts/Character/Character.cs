@@ -113,12 +113,6 @@ public abstract class Character : MonoBehaviour
             targetLook = Quaternion.LookRotation(target.position - transform.position);
             transform.rotation = Quaternion.Lerp(transform.rotation, targetLook, trackingRate * Time.fixedDeltaTime);
         }
-        else {
-            //dir.x = direction.x;
-            //dir.z = direction.y;
-            //targetLook = Quaternion.LookRotation(dir);
-            //transform.rotation = Quaternion.Lerp(transform.rotation, targetLook, trackingRate * Time.fixedDeltaTime);
-        }
     }
 
     #region Animation
@@ -196,9 +190,6 @@ public abstract class Character : MonoBehaviour
     /// </summary>
     public Vector2 Direction { get => direction; }
 
-    /// <summary>
-    /// Is character moving while blocking or casual walking?
-    /// </summary>
     public bool IsMoving { get => directionTarget.magnitude != 0f && anim.GetCurrentAnimatorStateInfo(0).IsTag("Movement"); }
     public bool IsIdle { get => directionTarget.magnitude == 0f && anim.GetCurrentAnimatorStateInfo(0).IsTag("Movement"); }
     public bool IsAttacking { get => isAttacking; }

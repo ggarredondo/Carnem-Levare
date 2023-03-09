@@ -55,10 +55,10 @@ MonoBehaviour:
   baseDamage: 20
   leftStartUp: 0.2
   leftActive: 0.45
-  leftRecovery: 0.6
+  leftRecovery: 0.5
   rightStartUp: 0.2
   rightActive: 0.35
-  rightRecovery: 0.6
+  rightRecovery: 0.5
   leftMovement: 2
   rightMovement: 2
   chargeable: 1
