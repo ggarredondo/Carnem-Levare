@@ -51,6 +51,42 @@ MonoBehaviour:
     pitch: 1
     loop: 0
     spatialBlend: 0
+  - name: PressButton
+    clip: {fileID: 8300000, guid: a0fe1d8bfa8b653449017f5f33a5cd98, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    spatialBlend: 0
+  - name: SelectButton
+    clip: {fileID: 8300000, guid: 99ac5bbf8d21cf34d8acd7e821a38607, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    spatialBlend: 0
+  - name: PlayGame
+    clip: {fileID: 8300000, guid: 639807957b7383e4b9a45848414b8235, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    spatialBlend: 0
+  - name: PauseGame
+    clip: {fileID: 8300000, guid: 0ef254caff8402a4099261d19f130162, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    spatialBlend: 0
+  - name: BackMenu
+    clip: {fileID: 8300000, guid: 18c35a311aae4944fb6fb99db04b771b, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    spatialBlend: 0
+  - name: ApplyRebind
+    clip: {fileID: 8300000, guid: ae100d7aaf7cbcb48a7edb2fc1993050, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    spatialBlend: 0
 --- !u!1 &9168311950741595994
 GameObject:
   m_ObjectHideFlags: 0
@@ -61,6 +97,7 @@ GameObject:
   m_Component:
   - component: {fileID: 9168311950741595995}
   - component: {fileID: 9168311950741595996}
+  - component: {fileID: 2656627806292724080}
   m_Layer: 0
   m_Name: Sound
   m_TagString: Untagged
@@ -93,6 +130,18 @@ AudioListener:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9168311950741595994}
   m_Enabled: 1
+--- !u!114 &2656627806292724080
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9168311950741595994}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c3ba9560dd9280e498c63405895ad234, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &9168311950817181048
 GameObject:
   m_ObjectHideFlags: 0
@@ -140,13 +189,13 @@ MonoBehaviour:
   sounds:
   - name: Intro
     clip: {fileID: 8300000, guid: 4de8a92d690abf347a9f0b2123daed4d, type: 3}
-    volume: 1
+    volume: 0.5
     pitch: 1
     loop: 1
     spatialBlend: 0
   - name: Fight
     clip: {fileID: 8300000, guid: bc8deed142934134e977b60b65dcb1f6, type: 3}
-    volume: 1
+    volume: 0.5
     pitch: 1
     loop: 1
     spatialBlend: 0

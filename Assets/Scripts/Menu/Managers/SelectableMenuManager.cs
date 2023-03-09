@@ -68,6 +68,7 @@ public class SelectableMenuManager : MenuManager
     /// <param name="newActualMenu">The index of the new menu</param>
     public void SelectWithMouse(int newActualMenu)
     {
+        SoundEvents.Instance.PressButton.Invoke();
         CleanOldButtons(actualActiveMenu);
         SetUpButtons(newActualMenu);
         SetActiveMenuById(newActualMenu, true);
@@ -91,7 +92,7 @@ public class SelectableMenuManager : MenuManager
     {
         //Highlight the actual selected button
         selectableButtons[actualMenu].OnSelect(null);
-        
+
         //Get the Navigation data of return button
         Navigation navigation = returnButton.navigation;
         Transform buttons = menus[actualMenu].GetButtonsGameObject().transform;

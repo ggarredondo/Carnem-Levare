@@ -50,13 +50,15 @@ public class VisualsMenu : MonoBehaviour
 
     public void Vsync(bool changeState)
     {
-        if(changeState) vsyncToggle.isOn = !vsyncToggle.isOn;
+        SoundEvents.Instance.PressButton.Invoke();
+        if (changeState) vsyncToggle.isOn = !vsyncToggle.isOn;
         VisualSaver.vsync = vsyncToggle.isOn ? 1 : 0;
         VisualSaver.ApplyChanges();
     }
 
     public void FullScreen(bool changeState)
     {
+        SoundEvents.Instance.PressButton.Invoke();
         if (changeState) fullscreenToggle.isOn = !fullscreenToggle.isOn;
         VisualSaver.fullscreen = fullscreenToggle.isOn;
         VisualSaver.ApplyChanges();

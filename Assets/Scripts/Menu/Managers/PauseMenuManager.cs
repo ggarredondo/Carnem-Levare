@@ -35,7 +35,7 @@ public class PauseMenuManager : MainMenuManager
     /// <param name="context"></param>
     public void EnterPauseMenu(InputAction.CallbackContext context)
     {
-        if(context.performed)
+        if (context.performed)
             if (!pauseMenuActivated)
             {
                 EnterPauseMode();
@@ -44,6 +44,7 @@ public class PauseMenuManager : MainMenuManager
             {
                 ExitPauseMode(true);
             }
+        
     }
 
     public override void ReturnFromChildren(InputAction.CallbackContext context)
@@ -68,6 +69,7 @@ public class PauseMenuManager : MainMenuManager
             pauseMenuActivated = true;
             playerInput.SwitchCurrentActionMap("UI");
             sfxManager.PauseAllSounds();
+            SoundEvents.Instance.PauseGame.Invoke();
         }
     }
 
@@ -80,7 +82,7 @@ public class PauseMenuManager : MainMenuManager
         DisableActiveMenu();
         pauseMenuActivated = false;
         playerInput.SwitchCurrentActionMap("Main Movement");
-
+        SoundEvents.Instance.PauseGame.Invoke();
         if (resumeSounds)
             sfxManager.ResumeAllSounds();
     }
@@ -91,6 +93,8 @@ public class PauseMenuManager : MainMenuManager
     public void ReturnMainMenu()
     {
         ExitPauseMode(false);
+        sfxManager.StopAllSounds();
+        SoundEvents.Instance.BackMenu.Invoke();
         StartCoroutine(SceneManagement.Instance.LoadPreviousScene());
     }
 

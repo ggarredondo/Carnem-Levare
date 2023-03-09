@@ -31,7 +31,10 @@ public class MenuManager : MonoBehaviour
         actualActiveMenu = id;
 
         if (activeFirstButton)
+        {
             EventSystem.current.SetSelectedGameObject(menus[actualActiveMenu].GetFirstButton());
+            SoundEvents.Instance.StopSound("SelectButton");
+        }
 
         menus[actualActiveMenu].SetActive(true);
     }
@@ -65,6 +68,8 @@ public class MenuManager : MonoBehaviour
     /// </summary>
     public void ReturnToParent()
     {
+        SoundEvents.Instance.PressButton.Invoke();
+
         if (menus[actualActiveMenu].GetParentName() != menus[actualActiveMenu].GetName())
         {
             int parentId = GetIdByName(menus[actualActiveMenu].GetParentName());
@@ -77,7 +82,9 @@ public class MenuManager : MonoBehaviour
     /// </summary>
     public void ChangeMenu(int id)
     {
-        if(EventSystem.current.currentSelectedGameObject != null)
+        SoundEvents.Instance.PressButton.Invoke();
+
+        if (EventSystem.current.currentSelectedGameObject != null)
             menus[actualActiveMenu].SetFirstButton(EventSystem.current.currentSelectedGameObject);
 
         SetActiveMenuById(id, true);
@@ -88,6 +95,8 @@ public class MenuManager : MonoBehaviour
     /// </summary>
     public void ChangeMenuNoInitialize(int id)
     {
+        SoundEvents.Instance.PressButton.Invoke();
+
         if (EventSystem.current.currentSelectedGameObject != null)
             menus[actualActiveMenu].SetFirstButton(EventSystem.current.currentSelectedGameObject);
 
@@ -114,6 +123,8 @@ public class MenuManager : MonoBehaviour
     /// </summary>
     public void GoToChildren()
     {
+        SoundEvents.Instance.PressButton.Invoke();
+
         GameObject children = EventSystem.current.currentSelectedGameObject.transform.GetChild(0).gameObject;
         EventSystem.current.SetSelectedGameObject(children);
     }

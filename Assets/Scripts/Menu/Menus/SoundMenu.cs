@@ -86,7 +86,8 @@ public class SoundMenu : MonoBehaviour
 
     public void Mute(bool changeState)
     {
-        if(changeState) muteToggle.isOn = !muteToggle.isOn;
+        SoundEvents.Instance.PressButton.Invoke();
+        if (changeState) muteToggle.isOn = !muteToggle.isOn;
         AudioSaver.mute = muteToggle.isOn;
         AudioSaver.ApplyChanges();
     }

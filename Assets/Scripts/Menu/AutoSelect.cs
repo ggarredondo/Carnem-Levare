@@ -3,7 +3,7 @@ using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using TMPro;
 
-public class AutoSelect : MonoBehaviour, IPointerEnterHandler
+public class AutoSelect : MonoBehaviour, IPointerEnterHandler, ISelectHandler
 {
     public int typeButton;
     public bool mouseCanSelect;
@@ -31,9 +31,14 @@ public class AutoSelect : MonoBehaviour, IPointerEnterHandler
         GetComponent<Button>().colors = colors;
     }
 
+    public void OnSelect(BaseEventData eventData)
+    {
+        SoundEvents.Instance.SelectButton.Invoke();
+    }
+
     public void OnPointerEnter(PointerEventData eventData)
     {
-        if(mouseCanSelect)
+        if (mouseCanSelect)
             GetComponent<Selectable>().Select();
     }
 }
