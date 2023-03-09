@@ -3,8 +3,6 @@ using UnityEngine.InputSystem;
 
 public class Player : Character
 {
-    private bool isDashing;
-
     [Header("Input Parameters")]
 
     [Tooltip("How quickly player animations follows stick movement")]
@@ -27,17 +25,6 @@ public class Player : Character
 
     override protected void Update()
     {
-        // The player can only skip if they are blocking but they aren't attacking nor skipping already.
-        isDashing = anim.GetCurrentAnimatorStateInfo(0).IsName("Dash");
-        anim.SetBool("can_dash", !isAttacking && !isDashing && !isHurt);
-        otherTracking = !isDashing || anim.IsInTransition(0);
-
-        // Establish a direction towards which to dash that doesn't change while dashing.
-        if (!isDashing) {
-            anim.SetFloat("horizontal_dash", directionTarget.x);
-            anim.SetFloat("vertical_dash", directionTarget.y);
-        }
-
         // Change movement animation blending speed depending on the situation.
         if (directionTarget.magnitude == 0f && !block_pressed)
             directionSpeed = smoothStickSpeed;

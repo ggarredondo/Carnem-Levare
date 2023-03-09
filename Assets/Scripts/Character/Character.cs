@@ -9,7 +9,8 @@ public abstract class Character : MonoBehaviour
     [Header("Tracking values")]
     [SerializeField] private bool debugTracking = true;
     [System.NonSerialized] public bool attackTracking = true; // To deactivate tracking during the commitment phase of an attack.
-    protected bool otherTracking = true, tracking; // To deactivate tracking during any other action if necessary.
+    protected bool otherTracking = true; // Other tracking restrictions.
+    private bool tracking;
     protected Transform target;
 
     [Tooltip("How quickly character rotates towards their opponent")]
@@ -43,6 +44,7 @@ public abstract class Character : MonoBehaviour
     protected float directionSpeed;
 
     protected bool isAttacking, isHurt, isBlocking, block_pressed = false;
+    private bool isDashing;
 
     [Header("Debug")] // DEBUG
     [SerializeField] private bool updateMoveset = false; // DEBUG
@@ -82,6 +84,17 @@ public abstract class Character : MonoBehaviour
         anim.SetBool("can_attack", !isAttacking && !isHurt);
         anim.SetBool("block", block_pressed);
         anim.SetBool("is_blocking", isBlocking);
+
+        // Character can only dash if they aren't attack nor hurt nor dashing already
+        isDashing = anim.GetCurrentAnimatorStateInfo(0).IsName("Dash");
+        anim.SetBool("can_dash", !isAttacking && !isDashing && !isHurt);
+        otherTracking = !isDashing || anim.IsInTransition(0);
+
+        // Establish a direction towards which to dash that doesn't change while dashing.
+        if (!isDashing) {
+            anim.SetFloat("horizontal_dash", directionTarget.x);
+            anim.SetFloat("vertical_dash", directionTarget.y);
+        }
 
         // Softens movement by establishing the direction as a point that approaches the target direction at *directionSpeed* rate.
         direction = Vector2.Lerp(direction, directionTarget, directionSpeed * Time.deltaTime);
