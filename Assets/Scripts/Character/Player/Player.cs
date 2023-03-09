@@ -44,7 +44,9 @@ public class Player : Character
     // Meant for Unity Input System events
 
     public void Movement(InputAction.CallbackContext context) { directionTarget = context.ReadValue<Vector2>().normalized; }
-    public void Dash(InputAction.CallbackContext context) { anim.SetBool("dash", context.performed); }
+    public void Dash(InputAction.CallbackContext context) { anim.SetBool("dash", context.started); }
+    public void Block(InputAction.CallbackContext context) { anim.SetBool("block", context.performed); }
+    
     public void LeftNormal(InputAction.CallbackContext context) { if (LeftMoveset.Count > 0) anim.SetBool("left_normal", context.performed); }
     public void LeftSpecial(InputAction.CallbackContext context) { if (LeftMoveset.Count > 1) anim.SetBool("left_special", context.performed); }
     public void RightNormal(InputAction.CallbackContext context) {
@@ -59,6 +61,6 @@ public class Player : Character
             anim.SetBool("right_special", context.performed);
         }
     }
-    public void Block(InputAction.CallbackContext context) { anim.SetBool("block", context.performed); }
+    
     #endregion
 }
