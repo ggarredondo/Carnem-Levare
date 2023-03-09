@@ -45,8 +45,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sounds:
-  - name: Test
-    clip: {fileID: 8300000, guid: 32c7ae8961a235e4e90025def39ed6c2, type: 3}
+  - name: Slider
+    clip: {fileID: 8300000, guid: 85a922d84d6434047a80a73c2fd9b288, type: 3}
     volume: 1
     pitch: 1
     loop: 0
@@ -83,6 +83,18 @@ MonoBehaviour:
     spatialBlend: 0
   - name: ApplyRebind
     clip: {fileID: 8300000, guid: ae100d7aaf7cbcb48a7edb2fc1993050, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    spatialBlend: 0
+  - name: ExitLoading
+    clip: {fileID: 8300000, guid: 94bbd3b025f8e214ca67db8a65318a1f, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    spatialBlend: 0
+  - name: MaskAlert
+    clip: {fileID: 8300000, guid: 977faa92ad1efc74fb101e3c36767b03, type: 3}
     volume: 1
     pitch: 1
     loop: 0

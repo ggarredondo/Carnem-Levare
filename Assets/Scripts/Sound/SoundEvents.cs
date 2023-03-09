@@ -13,7 +13,11 @@ public class SoundEvents : MonoBehaviour
     public SoundEventHandler PauseGame;
     public SoundEventHandler BackMenu;
     public SoundEventHandler ApplyRebind;
+    public SoundEventHandler ExitLoading;
+    public SoundEventHandler MaskAlert;
+
     private AudioManager sfxManager;
+    private AudioManager musicManager;
 
     private void Awake()
     {
@@ -26,52 +30,24 @@ public class SoundEvents : MonoBehaviour
         {
             Instance = this;
         }
-
-        PressButton += OnPressButton;
-        SelectButton += OnSelectButton;
-        PlayGame += OnPlayGame;
-        PauseGame += OnPauseGame;
-        BackMenu += OnBackMenu;
-        ApplyRebind += OnApplyRebind;
     }
 
-    public void StopSound(string sound)
-    {
-        sfxManager?.Stop(sound);
-    }
+    public void StopSound(string sound) { sfxManager?.Stop(sound); }
+
+    public void PlayMusic(string sound) { musicManager.StopAllSounds(); musicManager?.Play(sound); }
 
     private void Start()
     {
         sfxManager = GameObject.FindGameObjectWithTag("SFX").GetComponent<AudioManager>();
-    }
+        musicManager = GameObject.FindGameObjectWithTag("MUSIC").GetComponent<AudioManager>();
 
-    private void OnPressButton()
-    {
-        sfxManager.Play("PressButton");
-    }
-
-    private void OnSelectButton()
-    {
-        sfxManager.Play("SelectButton");
-    }
-
-    private void OnPlayGame()
-    {
-        sfxManager.Play("PlayGame");
-    }
-
-    private void OnPauseGame()
-    {
-        sfxManager.Play("PauseGame");
-    }
-
-    private void OnBackMenu()
-    {
-        sfxManager.Play("BackMenu");
-    }
-
-    private void OnApplyRebind()
-    {
-        sfxManager.Play("ApplyRebind");
+        PressButton += () => { sfxManager.Play("PressButton"); };
+        SelectButton += () => { sfxManager.Play("SelectButton"); };
+        PlayGame += () => { sfxManager.Play("PlayGame"); };
+        PauseGame += () => { sfxManager.Play("PauseGame"); sfxManager.Play("PauseGame"); };
+        BackMenu += () => { sfxManager.Play("BackMenu"); };
+        ApplyRebind += () => { sfxManager.Play("ApplyRebind"); };
+        ExitLoading += () => { sfxManager.Play("ExitLoading"); };
+        MaskAlert += () => { sfxManager.Play("MaskAlert"); };
     }
 }

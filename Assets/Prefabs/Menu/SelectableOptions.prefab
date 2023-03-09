@@ -6183,7 +6183,7 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: Test
+          m_StringArgument: Slider
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!1 &517267782926422271
@@ -9349,7 +9349,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8b88de1ffbc964d4fa07e9f476b8e780, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 0}
+  playerInput: {fileID: 0}
   globalMenuManager: {fileID: 0}
   fonts:
   - {fileID: 11400000, guid: 2b80a8fa063c79745a3ac60cfeefa351, type: 2}

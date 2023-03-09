@@ -2,14 +2,11 @@ using UnityEngine;
 
 public class MainMenu : MonoBehaviour
 {
-    private AudioManager musicManager;
     private bool isLoading;
 
     private void Start()
     {
-        musicManager = GameObject.FindGameObjectWithTag("MUSIC").GetComponent<AudioManager>();
-        musicManager.StopAllSounds();
-        musicManager.Play("Intro");
+        SoundEvents.Instance.PlayMusic("Intro");
     }
 
     /// <summary>

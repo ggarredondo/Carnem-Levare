@@ -23,6 +23,7 @@ public class LoadingScreen : MonoBehaviour
 
     private string continueAction;
     private float actualProgress;
+    private bool isStopped;
 
     private void OnEnable()
     {
@@ -42,8 +43,11 @@ public class LoadingScreen : MonoBehaviour
         float xScale = Mathf.Lerp(progressBar.transform.localScale.x, actualProgress, progressBarSpeed * Time.deltaTime);
         progressBar.transform.localScale = new Vector3(xScale, progressBar.transform.localScale.y, progressBar.transform.localScale.z);
 
-        if (playerInput.actions.FindAction("Stop").IsPressed())
+        if (playerInput.actions.FindAction("Stop").IsPressed() && !isStopped)
         {
+            isStopped = true;
+            SoundEvents.Instance.MaskAlert.Invoke();
+            maskAnim.speed = 6;
             maskAnim.SetBool("Stop", true);
         }
     }
@@ -61,7 +65,10 @@ public class LoadingScreen : MonoBehaviour
             loadingTextAnim.enabled = true;
 
             if (playerInput.actions.FindAction("Continue").IsPressed())
+            {
+                SoundEvents.Instance.ExitLoading.Invoke();
                 result = true;
+            }
         }
 
         return result;
