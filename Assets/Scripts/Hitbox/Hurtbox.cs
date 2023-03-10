@@ -22,7 +22,7 @@ public class Hurtbox : MonoBehaviour
     
     private void OnTriggerEnter(Collider other)
     {
-        if (!other.GetComponent<Hitbox>().hit) {
+        if (!other.GetComponent<Hitbox>().hit && !character.HurtExceptions) {
             other.GetComponent<Hitbox>().hit = true;
             character.Animator.SetTrigger("hurt");
             character.Animator.SetFloat("hurt_target", (float)target);

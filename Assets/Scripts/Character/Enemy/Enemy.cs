@@ -7,17 +7,19 @@ public class Enemy : Character
     [SerializeField] private float enemyDirectionSpeed = 1f;
     [SerializeField] private bool block;
 
-    public void Movement(InputAction.CallbackContext context) { directionTarget = -context.ReadValue<Vector2>().normalized; }
-    public void Dash(InputAction.CallbackContext context) { anim.SetBool("dash", context.performed); }
+    #region DebugInput
+    public void Movement(InputAction.CallbackContext context) { base.Movement(-context.ReadValue<Vector2>().normalized); }
+    public void Dash(InputAction.CallbackContext context) { base.Dash(context.performed); }
     public void Block(InputAction.CallbackContext context) { block = context.performed ? !block : block; }
 
-    public void Left0(InputAction.CallbackContext context) { if (LeftMoveset.Count > 0) anim.SetBool("left0", context.performed); }
-    public void Left1(InputAction.CallbackContext context) { if (LeftMoveset.Count > 1) anim.SetBool("left1", context.performed); }
-    public void Left2(InputAction.CallbackContext context) { if (LeftMoveset.Count > 2) anim.SetBool("left2", context.performed); }
+    public void Left0(InputAction.CallbackContext context) { base.LeftN(context.performed, 0); }
+    public void Left1(InputAction.CallbackContext context) { base.LeftN(context.performed, 1); }
+    public void Left2(InputAction.CallbackContext context) { base.LeftN(context.performed, 2); }
 
-    public void Right0(InputAction.CallbackContext context) { if (RightMoveset.Count > 0) anim.SetBool("right0", context.performed); }
-    public void Right1(InputAction.CallbackContext context) { if (RightMoveset.Count > 1) anim.SetBool("right1", context.performed); }
-    public void Right2(InputAction.CallbackContext context) { if (RightMoveset.Count > 2) anim.SetBool("right2", context.performed); }
+    public void Right0(InputAction.CallbackContext context) { base.RightN(context.performed, 0); }
+    public void Right1(InputAction.CallbackContext context) { base.RightN(context.performed, 1); }
+    public void Right2(InputAction.CallbackContext context) { base.RightN(context.performed, 2); }
+    #endregion
 
     protected override void Start()
     {
@@ -28,7 +30,7 @@ public class Enemy : Character
     protected override void Update()
     {
         directionSpeed = enemyDirectionSpeed;
-        anim.SetBool("block", block);
+        base.Block(block); // DebugInput
         base.Update();
     }
 }

@@ -43,24 +43,28 @@ public class Player : Character
     #region Input
     // Meant for Unity Input System events
 
-    public void Movement(InputAction.CallbackContext context) { directionTarget = context.ReadValue<Vector2>().normalized; }
-    public void Dash(InputAction.CallbackContext context) { anim.SetBool("dash", context.performed); }
-    public void Block(InputAction.CallbackContext context) { anim.SetBool("block", context.performed); }
+    public void Movement(InputAction.CallbackContext context) { base.Movement(context.ReadValue<Vector2>().normalized); }
+    public void Dash(InputAction.CallbackContext context) { base.Dash(context.performed); }
+    public void Block(InputAction.CallbackContext context) { base.Block(context.performed); }
     
-    public void LeftNormal(InputAction.CallbackContext context) { if (LeftMoveset.Count > 0) anim.SetBool("left_normal", context.performed); }
-    public void LeftSpecial(InputAction.CallbackContext context) { if (LeftMoveset.Count > 1) anim.SetBool("left_special", context.performed); }
+    public void LeftNormal(InputAction.CallbackContext context) { base.LeftN(context.performed, 0); }
+    public void LeftSpecial(InputAction.CallbackContext context) { base.LeftN(context.performed, 1); }
+
+    /// <summary>
+    /// To state if a move from right moveset is being pressed. Necessary for
+    /// charging attacks.
+    /// </summary>
+    /// <param name="i">Move index in right moveset list</param>
+    /// <param name="b">Press value</param>
+    public void PressMove(int i, bool b) { RightMoveset[i].pressed = b; }
     public void RightNormal(InputAction.CallbackContext context) {
-        if (RightMoveset.Count > 0) {
-            PressMove(0, context.performed);
-            anim.SetBool("right_normal", context.performed);
-        }
+        PressMove(0, context.performed);
+        base.RightN(context.performed, 0);
     }
     public void RightSpecial(InputAction.CallbackContext context) {
-        if (RightMoveset.Count > 1) {
-            PressMove(1, context.performed);
-            anim.SetBool("right_special", context.performed);
-        }
+        PressMove(1, context.performed);
+        base.RightN(context.performed, 1);
     }
-    
+
     #endregion
 }

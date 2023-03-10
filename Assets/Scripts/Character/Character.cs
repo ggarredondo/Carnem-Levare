@@ -10,7 +10,7 @@ public abstract class Character : MonoBehaviour
     [SerializeField] private bool debugTracking = true;
     [System.NonSerialized] public bool attackTracking = true; // To deactivate tracking during the commitment phase of an attack.
     protected bool otherTracking = true; // Other tracking restrictions.
-    private bool tracking;
+    private bool trackingConditions;
     protected Transform target;
 
     [Tooltip("How quickly character rotates towards their opponent")]
@@ -39,13 +39,14 @@ public abstract class Character : MonoBehaviour
     private AnimatorOverrideController animOverride;
     private AnimationClip[] animatorDefaults;
     private Rigidbody rb;
-
     protected Vector2 direction, directionTarget;
     protected float directionSpeed;
-
-    protected bool isAttacking, isHurt, isBlocking, isDashing;
+    protected bool isAttacking, isHurt, isKO, isBlocking, isDashing;
+    private bool hurtExceptions;
 
     [Header("Debug")] // DEBUG
+    [SerializeField] private bool noDamage = false; // DEBUG
+    [SerializeField] private bool noDeath = false; // DEBUG
     [SerializeField] private bool updateMoveset = false; // DEBUG
     [Tooltip("Only works on Player")] [SerializeField] private bool modifyTimeScale = false; // DEBUG
     [Tooltip("Only works on Player")] [SerializeField] [Range(0f, 1f)] private float timeScale = 1f; // DEBUG
@@ -74,7 +75,11 @@ public abstract class Character : MonoBehaviour
 
     protected virtual void Update()
     {
-        anim.SetBool("ko", stamina <= 0);
+        // Character is KO when stamina is equal or below 0.
+        isKO = stamina <= 0;
+        anim.SetBool("ko", isKO);
+        // Character won't be hurt if any of these conditions are met.
+        hurtExceptions = isKO || noDamage;
 
         // Bellow are values that must be updated frame by frame to allow certain animations to play out accordingly.
         isAttacking = anim.GetCurrentAnimatorStateInfo(0).IsTag("Attacking") && !anim.IsInTransition(0);
@@ -82,19 +87,13 @@ public abstract class Character : MonoBehaviour
         isBlocking = anim.GetCurrentAnimatorStateInfo(0).IsName("Block") || anim.GetCurrentAnimatorStateInfo(0).IsTag("Blocking");
 
         // Character can only attack if they're not attacking already or hurt.
-        anim.SetBool("can_attack", !isAttacking && !isHurt);
+        anim.SetBool("can_attack", !isAttacking && !isHurt && !isKO);
         anim.SetBool("is_blocking", isBlocking);
 
         // Character can only dash if they aren't attacking nor hurt nor dashing already
         isDashing = anim.GetCurrentAnimatorStateInfo(0).IsName("Dash");
-        anim.SetBool("can_dash", !isAttacking && !isDashing && !isHurt);
+        anim.SetBool("can_dash", !isAttacking && !isDashing && !isHurt && !isKO);
         otherTracking = !isDashing || anim.IsInTransition(0);
-
-        // Establish a direction towards which to dash that doesn't change while dashing.
-        if (!isDashing) {
-            anim.SetFloat("horizontal_dash", directionTarget.x);
-            anim.SetFloat("vertical_dash", directionTarget.y);
-        }
 
         // Softens movement by establishing the direction as a point that approaches the target direction at *directionSpeed* rate.
         direction = Vector2.Lerp(direction, directionTarget, directionSpeed * Time.deltaTime);
@@ -108,9 +107,9 @@ public abstract class Character : MonoBehaviour
 
     protected virtual void FixedUpdate()
     {
-        tracking = debugTracking && attackTracking && otherTracking;
+        trackingConditions = debugTracking && attackTracking && otherTracking && !isHurt && !IsIdle && !isKO;
         // Rotate towards opponent if character is tracking.
-        if (target != null && tracking && !isHurt && !IsIdle)
+        if (target != null && trackingConditions)
         {
             targetLook = Quaternion.LookRotation(target.position - transform.position);
             transform.rotation = Quaternion.Lerp(transform.rotation, targetLook, trackingRate * Time.fixedDeltaTime);
@@ -151,7 +150,26 @@ public abstract class Character : MonoBehaviour
     }
     #endregion
 
+    #region Actions
+    protected void Movement(Vector2 dir) {
+        directionTarget = dir;
+
+        // Establish a direction towards which to dash that doesn't change while dashing.
+        if (!isDashing)
+        {
+            anim.SetFloat("horizontal_dash", directionTarget.x);
+            anim.SetFloat("vertical_dash", directionTarget.y);
+        }
+    }
+    protected void Dash(bool performed) { anim.SetBool("dash", performed); }
+    protected void Block(bool performed) { anim.SetBool("block", performed); }
+
+    protected void LeftN(bool performed, int n) { if (leftMoveset.Count > n) anim.SetBool("left" + n, performed); }
+    protected void RightN(bool performed, int n) { if (rightMoveset.Count > n) anim.SetBool("right" + n, performed); }
+    #endregion
+
     #region GameplayFunctions
+
     /// <summary>
     /// Damage character's stamina.
     /// </summary>
@@ -159,7 +177,7 @@ public abstract class Character : MonoBehaviour
     /// <param name="unblockable">Can the attack be blocked?</param>
     public void Damage(float dmg, bool unblockable) {
         stamina -= isBlocking && !unblockable ? Mathf.Round(dmg * blockingModifier) : dmg;
-        if (stamina < 0f) stamina = 0f;
+        if (stamina <= 0f) stamina = noDeath ? 1f : 0f;
     }
 
     /// <summary>
@@ -196,13 +214,7 @@ public abstract class Character : MonoBehaviour
     public bool IsIdle { get => directionTarget.magnitude == 0f && anim.GetCurrentAnimatorStateInfo(0).IsTag("Movement"); }
     public bool IsAttacking { get => isAttacking; }
     public bool IsBlocking { get => isBlocking; }
-
-    /// <summary>
-    /// To state if a move from right moveset is being pressed. Necessary for
-    /// charging attacks.
-    /// </summary>
-    /// <param name="i">Move index in right moveset list</param>
-    /// <param name="b">Press value</param>
-    public void PressMove(int i, bool b) { rightMoveset[i].pressed = b; }
+    public bool IsKO { get => isKO; }
+    public bool HurtExceptions { get => hurtExceptions; }
     #endregion
 }
