@@ -2,20 +2,30 @@ using UnityEngine;
 
 public class VisualSaver : MonoBehaviour
 {
+    public static VisualSaver Instance { get; private set; }
+
     [Header("Visual Mixer")]
-    public static bool fullscreen;
-    public static int vsync;
-    public static string resolution;
-    public static int quality;
+    public bool fullscreen;
+    public int vsync;
+    public string resolution;
+    public int quality;
 
-    public static void ApplyChanges()
+    private void Awake()
     {
-        QualitySettings.vSyncCount = vsync;
+        // If there is an instance, and it's not me, delete myself.
+        if (Instance != null && Instance != this)
+        {
+            Destroy(this);
+        }
+        else
+        {
+            Instance = this;
+        }
+    }
 
-        string[] resolutionArray = resolution.Split('x');
-        Screen.SetResolution(int.Parse(resolutionArray[0]), int.Parse(resolutionArray[1]), fullscreen);
-
-        QualitySettings.SetQualityLevel(quality, false);
+    public void ApplyChanges()
+    {
+        ApplyUI();
 
         //PERMANENT CHANGES
         SaveManager.Instance.activeSave.vsync = vsync;
@@ -24,11 +34,23 @@ public class VisualSaver : MonoBehaviour
         SaveManager.Instance.activeSave.quality = quality;
     }
 
-    public static void LoadChanges()
+    public void ApplyUI()
+    {
+        QualitySettings.vSyncCount = vsync;
+
+        string[] resolutionArray = resolution.Split('x');
+        Screen.SetResolution(int.Parse(resolutionArray[0]), int.Parse(resolutionArray[1]), fullscreen);
+
+        QualitySettings.SetQualityLevel(quality, false);
+    }
+
+    public void LoadChanges()
     {
         vsync = SaveManager.Instance.activeSave.vsync;
         fullscreen = SaveManager.Instance.activeSave.fullscreen;
         resolution = SaveManager.Instance.activeSave.resolution;
         quality = SaveManager.Instance.activeSave.quality;
+
+        ApplyUI();
     }
 }

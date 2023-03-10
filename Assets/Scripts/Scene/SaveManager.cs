@@ -20,7 +20,10 @@ public class SaveManager : MonoBehaviour
         {
             Instance = this;
         }
+    }
 
+    private void Start()
+    {
         Load();
     }
 
@@ -70,10 +73,10 @@ public class SaveData
     public string saveName;
 
     //Audio Settings
-    public float globalVolume = 1f;
-    public float musicVolume = 1f;
-    public float sfxVolume = 1f;
-    public bool mute = false;
+    public float globalVolume;
+    public float musicVolume;
+    public float sfxVolume;
+    public bool mute;
 
     //Visual Settings
     public bool fullscreen;
@@ -83,8 +86,8 @@ public class SaveData
 
     public void Load()
     {
-        AudioSaver.LoadChanges();
-        VisualSaver.LoadChanges();
+        VisualSaver.Instance.LoadChanges();
+        AudioSaver.Instance.LoadChanges();
     }
 }
 

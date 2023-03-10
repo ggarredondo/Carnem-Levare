@@ -1,31 +1,38 @@
+using System;
 using UnityEngine;
+using UnityEngine.Audio;
 
 public class AudioSaver : MonoBehaviour
 {
-    public const float GLOBAL_MAX = 5f;
+    public static AudioSaver Instance { get; private set; }
+
+    [SerializeField] private AudioMixer audioMixer;
 
     [Header("Audio Mixer")]
-    [Range(0f, GLOBAL_MAX)] public static float globalVolume = 1f;
-    [Range(0f, 1f)] public static float musicVolume = 1f;
-    [Range(0f, 1f)] public static float sfxVolume = 1f;
-    public static bool mute = false;
+    public float globalVolume = 1f;
+    public float musicVolume = 1f;
+    public float sfxVolume = 1f;
+    public bool mute = false;
 
-    private static AudioManager sfxManager;
-    private static AudioManager musicManager;
+    private AudioManager sfxManager;
+    private AudioManager musicManager;
 
-    public static void ApplyChanges()
+    private void Awake()
     {
-        sfxManager = GameObject.FindGameObjectWithTag("SFX").GetComponent<AudioManager>();
-        musicManager = GameObject.FindGameObjectWithTag("MUSIC").GetComponent<AudioManager>();
-
-        AudioListener.volume = globalVolume;
-        sfxManager.ChangeVolume(sfxVolume);
-        musicManager.ChangeVolume(musicVolume);
-
-        if (mute)
-            MuteAll();
+        // If there is an instance, and it's not me, delete myself.
+        if (Instance != null && Instance != this)
+        {
+            Destroy(this);
+        }
         else
-            UnMuteAll();
+        {
+            Instance = this;
+        }
+    }
+
+    public void ApplyChanges()
+    {
+        ApplyUI();
 
         //PERMANENT CHANGES
         SaveManager.Instance.activeSave.globalVolume = globalVolume;
@@ -34,12 +41,29 @@ public class AudioSaver : MonoBehaviour
         SaveManager.Instance.activeSave.mute = mute;
     }
 
-    public static void LoadChanges()
+    public void ApplyUI()
+    {
+        sfxManager = GameObject.FindGameObjectWithTag("SFX").GetComponent<AudioManager>();
+        musicManager = GameObject.FindGameObjectWithTag("MUSIC").GetComponent<AudioManager>();
+
+        audioMixer.SetFloat("MasterVolume", Mathf.Log10(globalVolume) * 20);
+        audioMixer.SetFloat("MusicVolume", Mathf.Log10(musicVolume) * 20);
+        audioMixer.SetFloat("SfxVolume", Mathf.Log10(sfxVolume) * 20);
+
+        if (mute)
+            MuteAll();
+        else
+            UnMuteAll();
+    }
+
+    public void LoadChanges()
     {
         globalVolume = SaveManager.Instance.activeSave.globalVolume;
         musicVolume = SaveManager.Instance.activeSave.musicVolume;
         sfxVolume = SaveManager.Instance.activeSave.sfxVolume;
         mute = SaveManager.Instance.activeSave.mute;
+
+        ApplyUI();
     }
 
     public void PauseAll()
@@ -54,13 +78,13 @@ public class AudioSaver : MonoBehaviour
         musicManager.ResumeAllSounds();
     }
 
-    public static void MuteAll()
+    public void MuteAll()
     {
         sfxManager.MuteAllSounds();
         musicManager.MuteAllSounds();
     }
 
-    public static void UnMuteAll()
+    public void UnMuteAll()
     {
         sfxManager.UnMuteAllSounds();
         musicManager.UnMuteAllSounds();

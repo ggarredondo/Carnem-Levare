@@ -4,8 +4,6 @@ using UnityEngine.UI;
 
 public class SoundMenu : MonoBehaviour
 {
-    private AudioManager sfxManager;
-
     [Header("Sliders")]
     [SerializeField] private Slider globalSlider;
     [SerializeField] private Slider musicSlider;
@@ -17,78 +15,68 @@ public class SoundMenu : MonoBehaviour
     private void Awake()
     {
         //Initilize Sliders
-        globalSlider.value = AudioSaver.globalVolume * globalSlider.maxValue / AudioSaver.GLOBAL_MAX;
-        musicSlider.value = AudioSaver.musicVolume * musicSlider.maxValue;
-        sfxSlider.value = AudioSaver.sfxVolume * sfxSlider.maxValue;
+        globalSlider.value = AudioSaver.Instance.globalVolume;
+        musicSlider.value = AudioSaver.Instance.musicVolume;
+        sfxSlider.value = AudioSaver.Instance.sfxVolume;
 
         //Initialize Mute Toggle
-        muteToggle.isOn = AudioSaver.mute;
-    }
-
-    private void Start()
-    {
-        sfxManager = GameObject.FindGameObjectWithTag("SFX").GetComponent<AudioManager>();
+        muteToggle.isOn = AudioSaver.Instance.mute;
     }
 
     /// <summary>
     /// Slider to change the global volume
     /// </summary>
-    public void ChangeGlobalVolume(string sound)
+    public void ChangeGlobalVolume()
     {
         Slider tmp = EventSystem.current.currentSelectedGameObject.GetComponent<Slider>();
 
         if (tmp != null)
         {
-            AudioSaver.globalVolume = tmp.value * AudioSaver.GLOBAL_MAX / tmp.maxValue;
+            AudioSaver.Instance.globalVolume = tmp.value;
 
-            if (sound != "NO")
-                sfxManager.Play(sound);
+            if (AudioSaver.Instance.musicVolume == 0)
+                SoundEvents.Instance.Slider.Invoke();
         }
 
-        AudioSaver.ApplyChanges();
+        AudioSaver.Instance.ApplyChanges();
     }
 
     /// <summary>
     /// Slider to change the Sfx volume
     /// </summary>
-    public void ChangeSfxVolume(string sound)
+    public void ChangeSfxVolume()
     {
         Slider tmp = EventSystem.current.currentSelectedGameObject.GetComponent<Slider>();
 
         if (tmp != null)
         {
-            AudioSaver.sfxVolume = tmp.value / tmp.maxValue;
-
-            if (sound != "NO")
-                sfxManager.Play(sound);
+            AudioSaver.Instance.sfxVolume = tmp.value;
+            SoundEvents.Instance.Slider.Invoke();
         }
 
-        AudioSaver.ApplyChanges();
+        AudioSaver.Instance.ApplyChanges();
     }
 
     /// <summary>
     /// Slider to change the Music volume
     /// </summary>
-    public void ChangeMusicVolume(string sound)
+    public void ChangeMusicVolume()
     {
         Slider tmp = EventSystem.current.currentSelectedGameObject.GetComponent<Slider>();
 
         if (tmp != null)
         {
-            AudioSaver.musicVolume = tmp.value / tmp.maxValue;
-
-            if (sound != "NO")
-                sfxManager.Play(sound);
+            AudioSaver.Instance.musicVolume = tmp.value;
         }
 
-        AudioSaver.ApplyChanges();
+        AudioSaver.Instance.ApplyChanges();
     }
 
     public void Mute(bool changeState)
     {
         SoundEvents.Instance.PressButton.Invoke();
         if (changeState) muteToggle.isOn = !muteToggle.isOn;
-        AudioSaver.mute = muteToggle.isOn;
-        AudioSaver.ApplyChanges();
+        AudioSaver.Instance.mute = muteToggle.isOn;
+        AudioSaver.Instance.ApplyChanges();
     }
 }

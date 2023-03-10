@@ -33,7 +33,7 @@ public class MenuManager : MonoBehaviour
         if (activeFirstButton)
         {
             EventSystem.current.SetSelectedGameObject(menus[actualActiveMenu].GetFirstButton());
-            SoundEvents.Instance.StopSound("SelectButton");
+            SoundEvents.Instance?.StopSound("SelectButton");
         }
 
         menus[actualActiveMenu].SetActive(true);

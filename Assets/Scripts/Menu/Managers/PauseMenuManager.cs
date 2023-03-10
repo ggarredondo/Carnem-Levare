@@ -7,7 +7,6 @@ public class PauseMenuManager : MainMenuManager
     [Range(0f, 1f)] public float slowMotion;
     private PlayerInput playerInput;
 
-    private AudioManager sfxManager;
     private bool pauseMenuActivated = false;
 
     protected override void Awake()
@@ -21,7 +20,6 @@ public class PauseMenuManager : MainMenuManager
     {
         playerInput = GameObject.FindGameObjectWithTag("INPUT").GetComponent<PlayerInput>();
         playerInput.uiInputModule = GameObject.FindGameObjectWithTag("UI").GetComponent<InputSystemUIInputModule>();
-        sfxManager = GameObject.FindGameObjectWithTag("SFX").GetComponent<AudioManager>();
 
         SoundEvents.Instance.PlayMusic("Fight");
     }
@@ -33,23 +31,13 @@ public class PauseMenuManager : MainMenuManager
     public void EnterPauseMenu(InputAction.CallbackContext context)
     {
         if (context.performed)
-            if (!pauseMenuActivated)
-            {
-                EnterPauseMode();
-            }
-            else
-            {
-                ExitPauseMode(true);
-            }
-        
+            if (!pauseMenuActivated) EnterPauseMode();
+            else ExitPauseMode(true);
     }
 
     public override void ReturnFromChildren(InputAction.CallbackContext context)
     {
-        if (context.performed && actualActiveMenu == 0)
-        {
-            ExitPauseMode(true);
-        }
+        if (context.performed && actualActiveMenu == 0) ExitPauseMode(true);
 
         base.ReturnFromChildren(context);
     }
@@ -65,8 +53,7 @@ public class PauseMenuManager : MainMenuManager
             ChangeMenu(firstMenu);
             pauseMenuActivated = true;
             playerInput.SwitchCurrentActionMap("UI");
-            sfxManager.PauseAllSounds();
-            SoundEvents.Instance.PauseGame.Invoke();
+            SoundEvents.Instance.PauseGame.Invoke(true);
         }
     }
 
@@ -79,9 +66,7 @@ public class PauseMenuManager : MainMenuManager
         DisableActiveMenu();
         pauseMenuActivated = false;
         playerInput.SwitchCurrentActionMap("Main Movement");
-        SoundEvents.Instance.PauseGame.Invoke();
-        if (resumeSounds)
-            sfxManager.ResumeAllSounds();
+        SoundEvents.Instance.PauseGame.Invoke(false && resumeSounds);
     }
 
     /// <summary>
@@ -90,7 +75,6 @@ public class PauseMenuManager : MainMenuManager
     public void ReturnMainMenu()
     {
         ExitPauseMode(false);
-        sfxManager.StopAllSounds();
         SoundEvents.Instance.BackMenu.Invoke();
         StartCoroutine(SceneManagement.Instance.LoadPreviousScene());
     }

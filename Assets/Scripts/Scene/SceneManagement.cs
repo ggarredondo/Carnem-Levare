@@ -57,9 +57,6 @@ public class SceneManagement : MonoBehaviour
 
         transitionEnd = false;
         StartCoroutine(EndLoading());
-
-        AudioSaver.ApplyChanges();
-        VisualSaver.ApplyChanges();
     }
 
     private IEnumerator EndLoading()

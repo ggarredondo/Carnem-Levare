@@ -225,6 +225,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a700ed0722cfa674b95f24486216b1bb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  fullscreen: 0
+  vsync: 0
+  resolution: 
+  quality: 0
 --- !u!1 &406762919
 GameObject:
   m_ObjectHideFlags: 0
@@ -323,6 +327,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e154c1e9c97884f44ac3a899bf652adf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  audioMixer: {fileID: 24100000, guid: 6634d3955dedfbd41a411112534c1a55, type: 2}
+  globalVolume: 1
+  musicVolume: 1
+  sfxVolume: 1
+  mute: 0
 --- !u!1 &723508535
 GameObject:
   m_ObjectHideFlags: 0

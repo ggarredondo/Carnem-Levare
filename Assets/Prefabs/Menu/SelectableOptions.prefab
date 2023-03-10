@@ -3601,9 +3601,9 @@ MonoBehaviour:
   m_FillRect: {fileID: 517267781782190689}
   m_HandleRect: {fileID: 517267782837945348}
   m_Direction: 0
-  m_MinValue: 0
-  m_MaxValue: 25
-  m_WholeNumbers: 1
+  m_MinValue: 0.0001
+  m_MaxValue: 1
+  m_WholeNumbers: 0
   m_Value: 1
   m_OnValueChanged:
     m_PersistentCalls:
@@ -3611,7 +3611,7 @@ MonoBehaviour:
       - m_Target: {fileID: 517267781485984275}
         m_TargetAssemblyTypeName: SoundMenu, Assembly-CSharp
         m_MethodName: ChangeGlobalVolume
-        m_Mode: 5
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -6167,17 +6167,17 @@ MonoBehaviour:
   m_FillRect: {fileID: 517267781684552799}
   m_HandleRect: {fileID: 517267782005092314}
   m_Direction: 0
-  m_MinValue: 0
-  m_MaxValue: 25
-  m_WholeNumbers: 1
-  m_Value: 5
+  m_MinValue: 0.0001
+  m_MaxValue: 1
+  m_WholeNumbers: 0
+  m_Value: 1
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 517267781485984275}
         m_TargetAssemblyTypeName: SoundMenu, Assembly-CSharp
         m_MethodName: ChangeSfxVolume
-        m_Mode: 5
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -7588,17 +7588,17 @@ MonoBehaviour:
   m_FillRect: {fileID: 517267783486887504}
   m_HandleRect: {fileID: 517267781822357704}
   m_Direction: 0
-  m_MinValue: 0
-  m_MaxValue: 25
-  m_WholeNumbers: 1
-  m_Value: 5
+  m_MinValue: 0.0001
+  m_MaxValue: 1
+  m_WholeNumbers: 0
+  m_Value: 1
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 517267781485984275}
         m_TargetAssemblyTypeName: SoundMenu, Assembly-CSharp
         m_MethodName: ChangeMusicVolume
-        m_Mode: 5
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -10154,7 +10154,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Dodge
+  m_text: Dodge / Run (Hold)
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 007349dca47f79e4e8c7314c8dcfe46e, type: 2}
   m_sharedMaterial: {fileID: 8469208026097323215, guid: 007349dca47f79e4e8c7314c8dcfe46e,

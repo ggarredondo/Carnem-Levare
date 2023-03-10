@@ -1,12 +1,14 @@
 using UnityEngine;
 using System;
 using System.Collections.Generic;
+using UnityEngine.Audio;
 
 public class AudioManager : MonoBehaviour
 {
+    public AudioMixerGroup audioMixerGroup;
     public Sound[] sounds;
 
-    private List<Sound> currentSounds = new List<Sound>();
+    private List<Sound> currentSounds = new();
 
     void Awake()
     {
@@ -18,6 +20,7 @@ public class AudioManager : MonoBehaviour
             s.source.pitch = s.pitch;
             s.source.loop = s.loop;
             s.source.spatialBlend = s.spatialBlend;
+            s.source.outputAudioMixerGroup = audioMixerGroup;
         }
     }
 

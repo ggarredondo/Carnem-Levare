@@ -17,8 +17,8 @@ public class VisualsMenu : MonoBehaviour
     private void Awake()
     {
         //Initilize Toggles
-        fullscreenToggle.isOn = VisualSaver.fullscreen;
-        vsyncToggle.isOn = VisualSaver.vsync == 1;
+        fullscreenToggle.isOn = VisualSaver.Instance.fullscreen;
+        vsyncToggle.isOn = VisualSaver.Instance.vsync == 1;
 
         //Initialize resolution Dropdown
         List<string> options = new List<string>();
@@ -34,7 +34,7 @@ public class VisualsMenu : MonoBehaviour
 
         resolutionDropdown.ClearOptions();
         resolutionDropdown.AddOptions(options);
-        resolutionDropdown.value = resolutionDropdown.options.FindIndex(option => option.text == VisualSaver.resolution);
+        resolutionDropdown.value = resolutionDropdown.options.FindIndex(option => option.text == VisualSaver.Instance.resolution);
 
         //Initialize quality Dropdown
         List<string> quality = new List<string>();
@@ -45,34 +45,34 @@ public class VisualsMenu : MonoBehaviour
 
         qualityDropdown.ClearOptions();
         qualityDropdown.AddOptions(quality);
-        qualityDropdown.value = qualityDropdown.options.FindIndex(option => option.text == quality[VisualSaver.quality]);
+        qualityDropdown.value = qualityDropdown.options.FindIndex(option => option.text == quality[VisualSaver.Instance.quality]);
     }
 
     public void Vsync(bool changeState)
     {
         SoundEvents.Instance.PressButton.Invoke();
         if (changeState) vsyncToggle.isOn = !vsyncToggle.isOn;
-        VisualSaver.vsync = vsyncToggle.isOn ? 1 : 0;
-        VisualSaver.ApplyChanges();
+        VisualSaver.Instance.vsync = vsyncToggle.isOn ? 1 : 0;
+        VisualSaver.Instance.ApplyChanges();
     }
 
     public void FullScreen(bool changeState)
     {
         SoundEvents.Instance.PressButton.Invoke();
         if (changeState) fullscreenToggle.isOn = !fullscreenToggle.isOn;
-        VisualSaver.fullscreen = fullscreenToggle.isOn;
-        VisualSaver.ApplyChanges();
+        VisualSaver.Instance.fullscreen = fullscreenToggle.isOn;
+        VisualSaver.Instance.ApplyChanges();
     }
 
     public void ChangeResolution()
     {
-        VisualSaver.resolution = resolutionDropdown.options[resolutionDropdown.value].text;
-        VisualSaver.ApplyChanges();
+        VisualSaver.Instance.resolution = resolutionDropdown.options[resolutionDropdown.value].text;
+        VisualSaver.Instance.ApplyChanges();
     }
 
     public void ChangeQuality()
     {
-        VisualSaver.quality = qualityDropdown.value;
-        VisualSaver.ApplyChanges();
+        VisualSaver.Instance.quality = qualityDropdown.value;
+        VisualSaver.Instance.ApplyChanges();
     }
 }
