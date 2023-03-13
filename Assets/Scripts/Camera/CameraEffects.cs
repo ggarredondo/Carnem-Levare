@@ -7,6 +7,7 @@ public class CameraEffects : MonoBehaviour
 {
     [Header("Requirements")]
     private Player player;
+    private Enemy enemy;
     private Transform[] alternativeTargets;
     [SerializeField] private GameObject[] targetDebug;
 
@@ -59,6 +60,7 @@ public class CameraEffects : MonoBehaviour
     private void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
+        enemy = GameObject.FindGameObjectWithTag("Enemy").GetComponent<Enemy>();
     }
 
     public void InitializeTargetGroup(Transform playerTarget, Transform enemyTarget)
@@ -146,15 +148,15 @@ public class CameraEffects : MonoBehaviour
         orbitalTransposer.m_RecenterToTargetHeading.m_enabled = Mathf.Abs(player.Direction.x) > 0.1f && player.IsMoving && !cameraConditions[1];
     }
 
-    private void AsignTargets(Transform[] targets)
+    private void AsignAlternativeTarget(int index)
     {
-        targetGroup.m_Targets[0].target.position = Vector3.Lerp(targetGroup.m_Targets[0].target.position, targets[0].position, targetingSpeed * Time.deltaTime);
-        targetGroup.m_Targets[1].target.position = Vector3.Lerp(targetGroup.m_Targets[1].target.position, targets[1].position, targetingSpeed * Time.deltaTime);
+        targetGroup.m_Targets[index].target.position = Vector3.Lerp(targetGroup.m_Targets[index].target.position, alternativeTargets[index].position, targetingSpeed * Time.deltaTime);
     }
 
     private void TargetUpdate()
     {
-        if (!player.IsBlocking || player.IsAttacking) AsignTargets(alternativeTargets);
+        if (!player.IsBlocking || player.IsAttacking) AsignAlternativeTarget(0);
+        if(!enemy.IsMoving) AsignAlternativeTarget(1);
 
         //Debug Targets with Spheres
         targetDebug[0].transform.position = targetGroup.m_Targets[0].target.position;
