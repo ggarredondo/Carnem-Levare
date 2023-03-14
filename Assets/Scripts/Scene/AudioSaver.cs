@@ -14,7 +14,7 @@ public class AudioSaver : MonoBehaviour
     public float sfxVolume = 1f;
     public bool mute = false;
 
-    private AudioManager sfxManager;
+    private AudioManager uiSfxManager, gameSfxManager;
     private AudioManager musicManager;
 
     private void Awake()
@@ -43,7 +43,8 @@ public class AudioSaver : MonoBehaviour
 
     public void ApplyUI()
     {
-        sfxManager = GameObject.FindGameObjectWithTag("SFX").GetComponent<AudioManager>();
+        uiSfxManager = GameObject.FindGameObjectWithTag("SFX").transform.GetChild(0).GetComponent<AudioManager>();
+        gameSfxManager = GameObject.FindGameObjectWithTag("SFX").GetComponent<AudioManager>();
         musicManager = GameObject.FindGameObjectWithTag("MUSIC").GetComponent<AudioManager>();
 
         audioMixer.SetFloat("MasterVolume", Mathf.Log10(globalVolume) * 20);
@@ -68,25 +69,29 @@ public class AudioSaver : MonoBehaviour
 
     public void PauseAll()
     {
-        sfxManager.PauseAllSounds();
+        uiSfxManager.PauseAllSounds();
+        gameSfxManager.PauseAllSounds();
         musicManager.PauseAllSounds();
     }
 
     public void ResumeAll()
     {
-        sfxManager.ResumeAllSounds();
+        uiSfxManager.ResumeAllSounds();
+        gameSfxManager.ResumeAllSounds();
         musicManager.ResumeAllSounds();
     }
 
     public void MuteAll()
     {
-        sfxManager.MuteAllSounds();
+        uiSfxManager.MuteAllSounds();
+        gameSfxManager.MuteAllSounds();
         musicManager.MuteAllSounds();
     }
 
     public void UnMuteAll()
     {
-        sfxManager.UnMuteAllSounds();
+        uiSfxManager.UnMuteAllSounds();
+        gameSfxManager.UnMuteAllSounds();
         musicManager.UnMuteAllSounds();
     }
 

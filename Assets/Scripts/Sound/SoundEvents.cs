@@ -21,7 +21,7 @@ public class SoundEvents : MonoBehaviour
 
     public PauseMenuHandler PauseGame;
 
-    private AudioManager sfxManager;
+    private AudioManager uiSfxManager, gameSfxManager;
     private AudioManager musicManager;
 
     private void Awake()
@@ -37,33 +37,34 @@ public class SoundEvents : MonoBehaviour
         }
     }
 
-    public void StopSound(string sound) { sfxManager?.Stop(sound); }
+    public void StopSound(string sound) { uiSfxManager?.Stop(sound); }
 
     public void PlayMusic(string sound) { musicManager.StopAllSounds(); musicManager?.Play(sound); }
 
-    public void PlaySfx(string sound) { sfxManager?.Play(sound); }
+    public void PlaySfx(string sound) { gameSfxManager?.Play(sound); }
 
     private void OnEnable()
     {
-        sfxManager = GameObject.FindGameObjectWithTag("SFX").GetComponent<AudioManager>();
+        uiSfxManager = GameObject.FindGameObjectWithTag("SFX").transform.GetChild(0).GetComponent<AudioManager>();
+        gameSfxManager = GameObject.FindGameObjectWithTag("SFX").GetComponent<AudioManager>();
         musicManager = GameObject.FindGameObjectWithTag("MUSIC").GetComponent<AudioManager>();
 
-        PressButton += () => { sfxManager.Play("PressButton"); };
-        SelectButton += () => { sfxManager.Play("SelectButton"); };
-        PlayGame += () => { sfxManager.Play("PlayGame"); };
-        BackMenu += () => { sfxManager.StopAllSounds(); sfxManager.Play("BackMenu"); };
-        ApplyRebind += () => { sfxManager.Play("ApplyRebind"); };
-        ExitLoading += () => { sfxManager.Play("ExitLoading"); };
-        MaskAlert += () => { sfxManager.Play("MaskAlert"); };
-        Slider += () => { sfxManager.Play("Slider"); };
+        PressButton += () => { uiSfxManager.Play("PressButton"); };
+        SelectButton += () => { uiSfxManager.Play("SelectButton"); };
+        PlayGame += () => { uiSfxManager.Play("PlayGame"); };
+        BackMenu += () => { uiSfxManager.StopAllSounds(); uiSfxManager.Play("BackMenu"); };
+        ApplyRebind += () => { uiSfxManager.Play("ApplyRebind"); };
+        ExitLoading += () => { uiSfxManager.Play("ExitLoading"); };
+        MaskAlert += () => { uiSfxManager.Play("MaskAlert"); };
+        Slider += () => { uiSfxManager.Play("Slider"); };
 
         PauseGame += (bool enter) =>
         {
-            if (enter) sfxManager.PauseAllSounds();
+            if (enter) uiSfxManager.PauseAllSounds();
 
-            sfxManager.Stop("PauseGame"); sfxManager.Play("PauseGame");
+            uiSfxManager.Stop("PauseGame"); uiSfxManager.Play("PauseGame");
 
-            if (!enter) sfxManager.ResumeAllSounds();
+            if (!enter) uiSfxManager.ResumeAllSounds();
         };
     }
 }
