@@ -6,6 +6,7 @@ public class Hitbox : MonoBehaviour
     [System.NonSerialized] public float damage = 0f;
     [System.NonSerialized] public bool hit = false;
     [System.NonSerialized] public bool unblockable = false;
+    [System.NonSerialized] public string hitSound;
 
     public void Activate(bool activated) {
         transform.gameObject.SetActive(activated && !hit);

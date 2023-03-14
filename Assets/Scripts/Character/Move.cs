@@ -29,23 +29,25 @@ public enum Side : int
 /// </summary>
 public class Move : MonoBehaviour
 {
-    public string moveName;
+    [SerializeField] private string moveName;
 
     [Header("Attack Animations")]
     // Animations that the move performs, depending on whether the Move slot is left or right, and if the player is currently crouching.
     public AnimationClip leftAnimation;
     [SerializeField] [Range(0f, 2f)] private float leftAnimationSpeed = 1f;
-    public float LeftAnimationSpeed { get => leftAnimationSpeed; }
 
     public AnimationClip rightAnimation;
     [SerializeField] [Range(0f, 2f)] private float rightAnimationSpeed = 1f;
-    public float RightAnimationSpeed { get => rightAnimationSpeed; }
+
+    [Header("Attack Sound")]
+    [SerializeField] private string whiffSound;
+    [SerializeField] private string hitSound;
 
     [Header("Attack Values")]
-    public HitboxType hitboxType;
-    [Tooltip("States which type of hurt animation will play when it hits")] public Power power;
-    public bool unblockable;
-    public float baseDamage; // Used to calculate damage dealt to the opponent's stamina, if it hits.
+    [SerializeField] private HitboxType hitboxType;
+    [Tooltip("States which type of hurt animation will play when it hits")] [SerializeField] private Power power;
+    [SerializeField] private bool unblockable;
+    [SerializeField] private float baseDamage; // Used to calculate damage dealt to the opponent's stamina, if it hits.
 
     #region TimeData
     [Header("Left Time Data (Normalized Animation Time)")]
@@ -83,28 +85,46 @@ public class Move : MonoBehaviour
     [Header("Charge Values")]
     [Tooltip("Can it be charged? (right side only)")]
     [SerializeField] private bool chargeable = true;
-    public bool Chargeable { get => chargeable; }
 
     [System.NonSerialized] public bool pressed = false; // Check if this move specifically is held down.
 
     [Tooltip("How quickly the animation slows down when holding the attack button (interpolation value)")]
     [SerializeField] [ConditionalField("chargeable")] private float chargeDecay; // Interpolation value used for lerp affecting chargeSpeed.
-    public float ChargeDecay { get => chargeDecay; }
 
     [Tooltip("Minimum speed allowed when slowing down the attack animation")]
     [SerializeField] [ConditionalField("chargeable")] private float chargeMinSpeed = 0.01f;
-    public float ChargeMinSpeed { get => chargeMinSpeed; }
 
     [Tooltip("Move will perform automatically after *chargeLimit* deltaTime seconds charging")]
     [SerializeField] [ConditionalField("chargeable")] private float chargeLimit = 2f;
-    public float ChargeLimit { get => chargeLimit; }
 
     [Tooltip("The camera starts dolly zooming from a fraction of the chargeLimit value")]
     [SerializeField] [ConditionalField("chargeable")] private float chargeLimitDivisor = 6f;
-    public float ChargeLimitDivisor { get => chargeLimitDivisor; }
     #endregion
 
     #region PublicMethods
+    public string MoveName { get => moveName; }
+
+    // Animation
+    public float LeftAnimationSpeed { get => leftAnimationSpeed; }
+    public float RightAnimationSpeed { get => rightAnimationSpeed; }
+
+    // Sound
+    public string WhiffSound { get => whiffSound; }
+    public string HitSound { get => hitSound; }
+
+    // Attack Values
+    public HitboxType HitboxType { get => hitboxType; }
+    public Power Power { get => power; }
+    public bool Unblockable { get => unblockable; }
+    public float BaseDamage { get => baseDamage; }
+
+    // Charge Values
+    public bool Chargeable { get => chargeable; }
+    public float ChargeDecay { get => chargeDecay; }
+    public float ChargeMinSpeed { get => chargeMinSpeed; }
+    public float ChargeLimit { get => chargeLimit; }
+    public float ChargeLimitDivisor { get => chargeLimitDivisor; }
+
     /// <summary>
     /// Move is active during the interval (startup, active].
     /// </summary>

@@ -23,6 +23,7 @@ public class Hurtbox : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         if (!other.GetComponent<Hitbox>().hit && !character.HurtExceptions) {
+            // Animation
             other.GetComponent<Hitbox>().hit = true;
             character.Animator.SetTrigger("hurt");
             character.Animator.SetFloat("hurt_target", (float)target);
@@ -31,6 +32,9 @@ public class Hurtbox : MonoBehaviour
             unblock = target == Target.BackHead || target == Target.BackBody || other.GetComponent<Hitbox>().unblockable;
             character.Animator.SetBool("unblockable", unblock);
             character.Damage(other.GetComponent<Hitbox>().damage, unblock);
+
+            // Sound
+            // SoundEvents.instance.PlaySfx(other.GetComponent<Hitbox>().hitSound);
         }
     }
 }

@@ -17,22 +17,25 @@ public abstract class AttackManager : StateMachineBehaviour
             if (stateInfo.IsName("Left" + i)) {
                 currentMove = character.LeftMoveset[i];
                 side = Side.Left;
-                currentHitbox = character.LeftHitboxes[(int)currentMove.hitboxType];
+                currentHitbox = character.LeftHitboxes[(int)currentMove.HitboxType];
                 currentMoveFound = true;
             }
 
             if (stateInfo.IsName("Right" + i)) {
                 currentMove = character.RightMoveset[i];
                 side = Side.Right;
-                currentHitbox = character.RightHitboxes[(int)currentMove.hitboxType];
+                currentHitbox = character.RightHitboxes[(int)currentMove.HitboxType];
                 currentMoveFound = true;
             }
         }
 
-        // Assigns the move's power and damage to the hitbox component so that once it hits the information is passed onto the hurtbox.
-        currentHitbox.GetComponent<Hitbox>().power = currentMove.power;
-        currentHitbox.GetComponent<Hitbox>().damage = character.CalculateAttackDamage(currentMove.baseDamage);
-        currentHitbox.GetComponent<Hitbox>().unblockable = currentMove.unblockable;
+        // Assigns the move valeus to the hitbox component so that once it hits the information is passed onto the hurtbox.
+        currentHitbox.GetComponent<Hitbox>().power = currentMove.Power;
+        currentHitbox.GetComponent<Hitbox>().damage = character.CalculateAttackDamage(currentMove.BaseDamage);
+        currentHitbox.GetComponent<Hitbox>().unblockable = currentMove.Unblockable;
+        currentHitbox.GetComponent<Hitbox>().hitSound = currentMove.HitSound;
+
+        // SoundEvents.instance.PlaySfx(currentMove.WhiffSound);
     }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
