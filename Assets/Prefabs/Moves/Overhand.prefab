@@ -51,9 +51,10 @@ MonoBehaviour:
   rightAnimationSpeed: 1
   whiffSound: Whiff_Overhand
   hitSound: Hit_Overhand
+  blockedSound: 
   hitboxType: 0
   power: 2
-  unblockable: 1
+  unblockable: 0
   baseDamage: 20
   leftStartUp: 0.2
   leftActive: 0.45
@@ -63,8 +64,3 @@ MonoBehaviour:
   rightRecovery: 0.5
   leftMovement: 2
   rightMovement: 2
-  chargeable: 1
-  chargeDecay: 6
-  chargeMinSpeed: 0.01
-  chargeLimit: 2
-  chargeLimitDivisor: 6

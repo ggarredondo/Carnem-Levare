@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.Audio;
 
 #region Enums
 // Used to choose between hurt animations, if it hits.
@@ -43,6 +42,7 @@ public class Move : MonoBehaviour
     [Header("Attack Sound")]
     [SerializeField] private string whiffSound;
     [SerializeField] private string hitSound;
+    [SerializeField] private string blockedSound;
 
     [Header("Attack Values")]
     [SerializeField] private HitboxType hitboxType;
@@ -82,26 +82,6 @@ public class Move : MonoBehaviour
     [SerializeField] private float rightMovement = 0f;
     #endregion
 
-    #region ChargeValues
-    [Header("Charge Values")]
-    [Tooltip("Can it be charged? (right side only)")]
-    [SerializeField] private bool chargeable = true;
-
-    [System.NonSerialized] public bool pressed = false; // Check if this move specifically is held down.
-
-    [Tooltip("How quickly the animation slows down when holding the attack button (interpolation value)")]
-    [SerializeField] [ConditionalField("chargeable")] private float chargeDecay; // Interpolation value used for lerp affecting chargeSpeed.
-
-    [Tooltip("Minimum speed allowed when slowing down the attack animation")]
-    [SerializeField] [ConditionalField("chargeable")] private float chargeMinSpeed = 0.01f;
-
-    [Tooltip("Move will perform automatically after *chargeLimit* deltaTime seconds charging")]
-    [SerializeField] [ConditionalField("chargeable")] private float chargeLimit = 2f;
-
-    [Tooltip("The camera starts dolly zooming from a fraction of the chargeLimit value")]
-    [SerializeField] [ConditionalField("chargeable")] private float chargeLimitDivisor = 6f;
-    #endregion
-
     #region PublicMethods
     public string MoveName { get => moveName; }
 
@@ -112,19 +92,13 @@ public class Move : MonoBehaviour
     // Sound
     public string WhiffSound { get => whiffSound; }
     public string HitSound { get => hitSound; }
+    public string BlockedSound { get => blockedSound; }
 
     // Attack Values
     public HitboxType HitboxType { get => hitboxType; }
     public Power Power { get => power; }
     public bool Unblockable { get => unblockable; }
     public float BaseDamage { get => baseDamage; }
-
-    // Charge Values
-    public bool Chargeable { get => chargeable; }
-    public float ChargeDecay { get => chargeDecay; }
-    public float ChargeMinSpeed { get => chargeMinSpeed; }
-    public float ChargeLimit { get => chargeLimit; }
-    public float ChargeLimitDivisor { get => chargeLimitDivisor; }
 
     /// <summary>
     /// Move is active during the interval (startup, active].

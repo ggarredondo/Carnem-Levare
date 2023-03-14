@@ -1,12 +1,22 @@
 using UnityEngine;
 
-public abstract class AttackManager : StateMachineBehaviour
+public class AttackManager : StateMachineBehaviour
 {
-    protected Character character;
-    protected Move currentMove;
+    private enum Attacker { Player, Enemy }
+    [SerializeField] private Attacker attacker;
+
+    private Character character;
+    private Move currentMove;
     private bool currentMoveFound, active;
-    protected GameObject currentHitbox;
-    protected Side side;
+    private GameObject currentHitbox;
+    private Side side;
+
+    private void Awake()
+    {
+        character = attacker == Attacker.Player ? 
+            GameObject.FindGameObjectWithTag("Player").GetComponent<Character>() 
+            : GameObject.FindGameObjectWithTag("Enemy").GetComponent<Character>();
+    }
 
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)

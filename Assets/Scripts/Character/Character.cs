@@ -9,7 +9,6 @@ public abstract class Character : MonoBehaviour
     [Header("Tracking values")]
     [SerializeField] private bool debugTracking = true;
     [System.NonSerialized] public bool attackTracking = true; // To deactivate tracking during the commitment phase of an attack.
-    protected bool otherTracking = true; // Other tracking restrictions.
     private bool trackingConditions;
     protected Transform target;
 
@@ -41,7 +40,7 @@ public abstract class Character : MonoBehaviour
     private Rigidbody rb;
     protected Vector2 direction, directionTarget;
     protected float directionSpeed;
-    protected bool isAttacking, isHurt, isKO, isBlocking, isDashing;
+    protected bool isAttacking, isHurt, isKO, isBlocking;
     private bool hurtExceptions;
 
     [Header("Debug")] // DEBUG
@@ -90,11 +89,6 @@ public abstract class Character : MonoBehaviour
         anim.SetBool("can_attack", !isAttacking && !isHurt && !isKO);
         anim.SetBool("is_blocking", isBlocking);
 
-        // Character can only dash if they aren't attacking nor hurt nor dashing already
-        isDashing = anim.GetCurrentAnimatorStateInfo(0).IsName("Dash");
-        anim.SetBool("can_dash", !isAttacking && !isDashing && !isHurt && !isKO);
-        otherTracking = !isDashing || anim.IsInTransition(0);
-
         // Softens movement by establishing the direction as a point that approaches the target direction at *directionSpeed* rate.
         direction = Vector2.Lerp(direction, directionTarget, directionSpeed * Time.deltaTime);
         anim.SetFloat("horizontal", direction.x);
@@ -107,7 +101,7 @@ public abstract class Character : MonoBehaviour
 
     protected virtual void FixedUpdate()
     {
-        trackingConditions = debugTracking && attackTracking && otherTracking && !isHurt && !IsIdle && !isKO;
+        trackingConditions = debugTracking && attackTracking && !isHurt && !IsIdle && !isKO;
         // Rotate towards opponent if character is tracking.
         if (target != null && trackingConditions)
         {
@@ -151,17 +145,7 @@ public abstract class Character : MonoBehaviour
     #endregion
 
     #region Actions
-    protected void Movement(Vector2 dir) {
-        directionTarget = dir;
-
-        // Establish a direction towards which to dash that doesn't change while dashing.
-        if (!isDashing)
-        {
-            anim.SetFloat("horizontal_dash", directionTarget.x);
-            anim.SetFloat("vertical_dash", directionTarget.y);
-        }
-    }
-    protected void Dash(bool performed) { anim.SetBool("dash", performed); }
+    protected void Movement(Vector2 dir) { directionTarget = dir; }
     protected void Block(bool performed) { anim.SetBool("block", performed); }
 
     protected void LeftN(bool performed, int n) { if (leftMoveset.Count > n) anim.SetBool("left" + n, performed); }

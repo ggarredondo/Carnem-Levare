@@ -44,27 +44,11 @@ public class Player : Character
     // Meant for Unity Input System events
 
     public void Movement(InputAction.CallbackContext context) { base.Movement(context.ReadValue<Vector2>().normalized); }
-    public void Dash(InputAction.CallbackContext context) { base.Dash(context.performed); }
     public void Block(InputAction.CallbackContext context) { base.Block(context.performed); }
     
     public void LeftNormal(InputAction.CallbackContext context) { base.LeftN(context.performed, 0); }
     public void LeftSpecial(InputAction.CallbackContext context) { base.LeftN(context.performed, 1); }
-
-    /// <summary>
-    /// To state if a move from right moveset is being pressed. Necessary for
-    /// charging attacks.
-    /// </summary>
-    /// <param name="i">Move index in right moveset list</param>
-    /// <param name="b">Press value</param>
-    public void PressMove(int i, bool b) { RightMoveset[i].pressed = b; }
-    public void RightNormal(InputAction.CallbackContext context) {
-        PressMove(0, context.performed);
-        base.RightN(context.performed, 0);
-    }
-    public void RightSpecial(InputAction.CallbackContext context) {
-        PressMove(1, context.performed);
-        base.RightN(context.performed, 1);
-    }
-
+    public void RightNormal(InputAction.CallbackContext context) { base.RightN(context.performed, 0); }
+    public void RightSpecial(InputAction.CallbackContext context) { base.RightN(context.performed, 1); }
     #endregion
 }

@@ -33,10 +33,6 @@ public class CameraEffects : MonoBehaviour
     [ConditionalField("onGuardActivated")] public LinealMovement onGuardLinealMovement;
 
     //PRIVATE
-    private ChargePhase chargePhase;
-    private float deltaTimer, chargeLimit, chargeLimitDivisor;
-    private float holdingMinTime;
-
     private bool isMoving;
     private bool[] cameraConditions;
     private int actualCamera;
@@ -84,33 +80,10 @@ public class CameraEffects : MonoBehaviour
                vcam.m_Lens.NearClipPlane == dollyZoom.nearPlane.Item1;
     }
 
-    // Charge Attack provisional functions ////////////////
-    public void SetChargeValues(ChargePhase _chargePhase, float _deltaTimer)
-    {
-        chargePhase = _chargePhase;
-        deltaTimer = _deltaTimer;
-    }
-
-    public void SetChargeValues(ChargePhase _chargePhase, float _deltaTimer, float _chargeLimit, float _chargeLimitDivisor)
-    {
-        chargePhase = _chargePhase;
-        deltaTimer = _deltaTimer;
-        chargeLimit = _chargeLimit;
-        chargeLimitDivisor = _chargeLimitDivisor;
-    }
-    ////////////////////////////////////////////////////////
-
-    public void Initialized()
-    {
-        holdingMinTime = chargeLimit / chargeLimitDivisor;
-        dollyZoom.aceleration.Item1 = 1 / (chargeLimit - holdingMinTime);
-    }
-
     private void LateUpdate()
     {
         if (Time.timeScale > 0f)
         {
-            cameraConditions[0] = (chargePhase == ChargePhase.performing) && (deltaTimer >= holdingMinTime) && (deltaTimer <= chargeLimit);
             cameraConditions[1] = player.IsBlocking;
 
             if(orbitalTransposer != null) OrbitalMovement();
