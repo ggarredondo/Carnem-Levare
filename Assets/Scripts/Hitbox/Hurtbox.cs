@@ -34,7 +34,7 @@ public class Hurtbox : MonoBehaviour
             character.Damage(other.GetComponent<Hitbox>().damage, unblock);
 
             // Sound
-            // SoundEvents.instance.PlaySfx(other.GetComponent<Hitbox>().hitSound);
+            SoundEvents.Instance.PlaySfx(other.GetComponent<Hitbox>().hitSound);
         }
     }
 }

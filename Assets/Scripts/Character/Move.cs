@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Audio;
 
 #region Enums
 // Used to choose between hurt animations, if it hits.
@@ -131,10 +132,22 @@ public class Move : MonoBehaviour
     /// <param name="side">Which side is the attack coming from?</param>
     /// <param name="normalizedTime">Normalized time of the animation</param>
     /// <returns>True if time is in interval, false otherwise</returns>
-    public bool isActive(Side side, float normalizedTime) {
+    public bool IsActive(Side side, float normalizedTime) {
         if (side == Side.Left)
             return normalizedTime > leftStartUp && normalizedTime <= leftActive;
         return normalizedTime > rightStartUp && normalizedTime <= rightActive;
+    }
+
+    /// <summary>
+    /// Move is recovering during the interval (active, recovery].
+    /// </summary>
+    /// <param name="side">Which side is the attack coming from?</param>
+    /// <param name="normalizedTime">Normalized time of the animation</param>
+    /// <returns>True if time is in interval, false otherwise</returns>
+    public bool IsRecovering(Side side, float normalizedTime) {
+        if (side == Side.Left)
+            return normalizedTime > leftActive && normalizedTime <= leftRecovery;
+        return normalizedTime > rightActive && normalizedTime <= rightRecovery;
     }
 
     /// <summary>
@@ -144,7 +157,7 @@ public class Move : MonoBehaviour
     /// <param name="side">Which side is the attack coming from?</param>
     /// <param name="normalizedTime">Normalized time of the animation</param>
     /// <returns>True if time is greater than *recovery*, false otherwise</returns>
-    public bool canCancel(Side side, float normalizedTime) {
+    public bool HasRecovered(Side side, float normalizedTime) {
         if (side == Side.Left) 
             return normalizedTime > leftRecovery;
         return normalizedTime > rightRecovery;
@@ -155,7 +168,7 @@ public class Move : MonoBehaviour
     /// </summary>
     /// <param name="side">Which side is the attack coming from?</param>
     /// <returns>Amount of extra movement</returns>
-    public float getMovement(Side side) {
+    public float GetMovement(Side side) {
         if (side == Side.Left)
             return leftMovement;
         return rightMovement;

@@ -1,9 +1,12 @@
 using UnityEngine;
+using UnityEngine.Audio;
 
 public class SoundEvents : MonoBehaviour
 {
+
     public static SoundEvents Instance { get; private set; }
 
+    public AudioMixerGroup audioMixerGroup;
     public delegate void SoundEventHandler();
     public delegate void PauseMenuHandler(bool enter);
 
@@ -37,6 +40,8 @@ public class SoundEvents : MonoBehaviour
     public void StopSound(string sound) { sfxManager?.Stop(sound); }
 
     public void PlayMusic(string sound) { musicManager.StopAllSounds(); musicManager?.Play(sound); }
+
+    public void PlaySfx(string sound) { sfxManager?.Play(sound); }
 
     private void OnEnable()
     {

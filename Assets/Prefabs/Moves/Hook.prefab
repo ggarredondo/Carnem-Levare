@@ -49,6 +49,8 @@ MonoBehaviour:
   leftAnimationSpeed: 1
   rightAnimation: {fileID: 7400040, guid: 7934f1476fe2c6e458c230f491769c34, type: 3}
   rightAnimationSpeed: 0.9
+  whiffSound: Whiff
+  hitSound: Hit
   hitboxType: 0
   power: 1
   unblockable: 0

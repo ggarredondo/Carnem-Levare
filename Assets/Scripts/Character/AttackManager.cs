@@ -35,18 +35,21 @@ public abstract class AttackManager : StateMachineBehaviour
         currentHitbox.GetComponent<Hitbox>().unblockable = currentMove.Unblockable;
         currentHitbox.GetComponent<Hitbox>().hitSound = currentMove.HitSound;
 
-        // SoundEvents.instance.PlaySfx(currentMove.WhiffSound);
+        SoundEvents.Instance.PlaySfx(currentMove.WhiffSound);
     }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        active = currentMove.isActive(side, stateInfo.normalizedTime);
+        active = currentMove.IsActive(side, stateInfo.normalizedTime);
 
-        if (active) character.transform.position += character.transform.forward * currentMove.getMovement(side) * Time.deltaTime; // Extra movement
+        // ACTIVE
+        if (active) character.transform.position += character.transform.forward * currentMove.GetMovement(side) * Time.deltaTime; // Extra movement
         character.attackTracking = !active; // Won't track opponent when move is active
-        currentHitbox.GetComponent<Hitbox>().Activate(active); // Hitbox is activated when move is active
-        if (currentMove.canCancel(side, stateInfo.normalizedTime)) animator.SetTrigger("cancel"); // Can cancel animation after recovery
+        currentHitbox.GetComponent<Hitbox>().Activate(active); // Hitbox is activated
+
+        // RECOVERY
+        if (currentMove.HasRecovered(side, stateInfo.normalizedTime)) animator.SetTrigger("cancel"); // Can cancel animation after recovery
     }
 
     // OnStateExit is called when a transition ends and the state machine finishes evaluating this state
