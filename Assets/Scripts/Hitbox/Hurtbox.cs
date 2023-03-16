@@ -18,22 +18,20 @@ public class Hurtbox : MonoBehaviour
 {
     [SerializeField] private Character character;
     [SerializeField] private Target target;
-    private bool unblock;
+    private Hitbox hitbox;
     
     private void OnTriggerEnter(Collider other)
     {
-        if (!other.GetComponent<Hitbox>().hit && !character.HurtExceptions) {
-            // Animation
-            other.GetComponent<Hitbox>().hit = true;
-            character.Animator.SetTrigger("hurt");
-            character.Animator.SetFloat("hurt_target", (float)target);
-            character.Animator.SetFloat("hurt_power", (float)other.GetComponent<Hitbox>().power);
+        hitbox = other.GetComponent<Hitbox>();
+        if (!hitbox.hit && !character.HurtExceptions) {
+            // Establish that hitbox has already hit so that it's disabled and it doesn't hit twice.
+            hitbox.hit = true;
 
-            unblock = target == Target.BackHead || target == Target.BackBody || other.GetComponent<Hitbox>().unblockable;
-            character.Animator.SetBool("unblockable", unblock);
-            character.Damage(other.GetComponent<Hitbox>().damage, unblock);
+            character.Damage((float) target, (float) hitbox.power, hitbox.damage,
+                // Can't block attack if it's unblockable or if it hits the back.
+                hitbox.unblockable || target == Target.BackHead || target == Target.BackBody);
 
-            // Sound
+            // Play hit sound now that we know for sure it hit.
             SoundEvents.Instance.PlaySfx(other.GetComponent<Hitbox>().hitSound);
         }
     }

@@ -83,7 +83,7 @@ public abstract class Character : MonoBehaviour
         // Bellow are values that must be updated frame by frame to allow certain animations to play out accordingly.
         isAttacking = anim.GetCurrentAnimatorStateInfo(0).IsTag("Attacking") && !anim.IsInTransition(0);
         isHurt = anim.GetCurrentAnimatorStateInfo(0).IsName("Hurt");
-        isBlocking = anim.GetCurrentAnimatorStateInfo(0).IsName("Block") || anim.GetCurrentAnimatorStateInfo(0).IsTag("Blocking");
+        isBlocking = anim.GetCurrentAnimatorStateInfo(0).IsName("Block") || anim.GetCurrentAnimatorStateInfo(0).IsName("Blocked");
 
         // Character can only attack if they're not attacking already or hurt.
         anim.SetBool("can_attack", !isAttacking && !isHurt && !isKO);
@@ -155,13 +155,22 @@ public abstract class Character : MonoBehaviour
     #region GameplayFunctions
 
     /// <summary>
-    /// Damage character's stamina.
+    /// Damage character, reducing their stamina and playing a hurt animation.
     /// </summary>
+    /// <param name="target">Where were they damaged?</param>
+    /// <param name="power">Attack's power.</param>
     /// <param name="dmg">Damage taken.</param>
     /// <param name="unblockable">Can the attack be blocked?</param>
-    public void Damage(float dmg, bool unblockable) {
-        stamina -= isBlocking && !unblockable ? Mathf.Round(dmg * blockingModifier) : dmg;
-        if (stamina <= 0f) stamina = noDeath ? 1f : 0f;
+    public void Damage(float target, float power, float dmg, bool unblockable)
+    {
+        // Animation
+        anim.SetTrigger("hurt");
+        anim.SetFloat("hurt_target", target);
+        anim.SetFloat("hurt_power", power);
+
+        // Stamina
+        stamina -= isBlocking && !unblockable ? Mathf.Round(dmg * blockingModifier) : dmg; // Take less damage if blocking.
+        if (stamina <= 0f) stamina = noDeath ? 1f : 0f; // Stamina can't go lower than 0. Can't go lower than 1 if noDeath is activated.
     }
 
     /// <summary>

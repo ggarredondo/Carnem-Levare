@@ -13,8 +13,8 @@ public class AttackManager : StateMachineBehaviour
 
     private void Awake()
     {
-        character = attacker == Attacker.Player ? 
-            GameObject.FindGameObjectWithTag("Player").GetComponent<Character>() 
+        character = attacker == Attacker.Player 
+            ? GameObject.FindGameObjectWithTag("Player").GetComponent<Character>() 
             : GameObject.FindGameObjectWithTag("Enemy").GetComponent<Character>();
     }
 
@@ -39,12 +39,13 @@ public class AttackManager : StateMachineBehaviour
             }
         }
 
-        // Assigns the move valeus to the hitbox component so that once it hits the information is passed onto the hurtbox.
+        // Assigns the move values to the hitbox component so that once it hits the information is passed onto the hurtbox.
         currentHitbox.GetComponent<Hitbox>().power = currentMove.Power;
         currentHitbox.GetComponent<Hitbox>().damage = character.CalculateAttackDamage(currentMove.BaseDamage);
         currentHitbox.GetComponent<Hitbox>().unblockable = currentMove.Unblockable;
         currentHitbox.GetComponent<Hitbox>().hitSound = currentMove.HitSound;
 
+        // Play whiff sound, since character hasn't hit already.
         SoundEvents.Instance.PlaySfx(currentMove.WhiffSound);
     }
 
