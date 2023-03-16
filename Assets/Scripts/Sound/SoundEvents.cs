@@ -7,6 +7,7 @@ public class SoundEvents : MonoBehaviour
     public static SoundEvents Instance { get; private set; }
 
     public AudioMixerGroup audioMixerGroup;
+
     public delegate void SoundEventHandler();
     public delegate void PauseMenuHandler(bool enter);
 

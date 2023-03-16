@@ -95,6 +95,12 @@ MonoBehaviour:
     pitch: 1
     loop: 0
     spatialBlend: 0
+  - name: MaskAlert
+    clip: {fileID: 8300000, guid: 977faa92ad1efc74fb101e3c36767b03, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    spatialBlend: 0
 --- !u!1 &9168311950435373014
 GameObject:
   m_ObjectHideFlags: 0
