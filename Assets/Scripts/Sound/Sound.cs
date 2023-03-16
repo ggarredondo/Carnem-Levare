@@ -19,5 +19,5 @@ public class Sound
     public float spatialBlend;
 
     [System.NonSerialized]
-    public AudioSource source;
+    public AudioSource[] source;
 }

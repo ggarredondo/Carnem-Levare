@@ -46,6 +46,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   audioMixerGroup: {fileID: 1346823579002931596, guid: 6634d3955dedfbd41a411112534c1a55,
     type: 2}
+  speakers:
+  - {fileID: 7008236477886495668}
   sounds:
   - name: Slider
     clip: {fileID: 8300000, guid: 85a922d84d6434047a80a73c2fd9b288, type: 3}
@@ -148,10 +150,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   audioMixerGroup: {fileID: 1346823579002931596, guid: 6634d3955dedfbd41a411112534c1a55,
     type: 2}
+  speakers:
+  - {fileID: 0}
+  - {fileID: 0}
   sounds:
   - name: Whiff_Jab
     clip: {fileID: 8300000, guid: 20a4f733a6b1437478533aa501a59811, type: 3}
-    volume: 0.1
+    volume: 0.3
     pitch: 1.5
     loop: 0
     spatialBlend: 1
@@ -163,7 +168,7 @@ MonoBehaviour:
     spatialBlend: 1
   - name: Whiff_Hook
     clip: {fileID: 8300000, guid: 021ee8d446f206742b8452686a763cae, type: 3}
-    volume: 0.1
+    volume: 0.3
     pitch: 1.5
     loop: 0
     spatialBlend: 1
@@ -175,7 +180,7 @@ MonoBehaviour:
     spatialBlend: 1
   - name: Whiff_Mid_Hook
     clip: {fileID: 8300000, guid: 2e99169e60a310f498f25840912e52cc, type: 3}
-    volume: 0.1
+    volume: 0.3
     pitch: 1.5
     loop: 0
     spatialBlend: 1
@@ -187,13 +192,25 @@ MonoBehaviour:
     spatialBlend: 1
   - name: Whiff_Overhand
     clip: {fileID: 8300000, guid: 826fc3985eaa9d944b985509a6cc5ece, type: 3}
-    volume: 0.1
+    volume: 0.3
     pitch: 1.5
     loop: 0
     spatialBlend: 1
   - name: Hit_Overhand
     clip: {fileID: 8300000, guid: 1f8c1646c87a6844da3e8da6b82949d9, type: 3}
     volume: 0.5
+    pitch: 1
+    loop: 0
+    spatialBlend: 1
+  - name: Right_Foot
+    clip: {fileID: 8300000, guid: 5a706d28a95071a4eb84b0a586f996d9, type: 3}
+    volume: 0.3
+    pitch: 1
+    loop: 0
+    spatialBlend: 1
+  - name: Left_Foot
+    clip: {fileID: 8300000, guid: b8f91d2f9676bd143be3be6fef9be342, type: 3}
+    volume: 0.3
     pitch: 1
     loop: 0
     spatialBlend: 1
@@ -206,7 +223,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 9168311950741595995}
-  - component: {fileID: 9168311950741595996}
   - component: {fileID: 2656627806292724080}
   m_Layer: 0
   m_Name: Sound
@@ -232,14 +248,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!81 &9168311950741595996
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9168311950741595994}
-  m_Enabled: 1
 --- !u!114 &2656627806292724080
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -300,6 +308,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   audioMixerGroup: {fileID: -3278381760577669313, guid: 6634d3955dedfbd41a411112534c1a55,
     type: 2}
+  speakers:
+  - {fileID: 9168311950817181048}
   sounds:
   - name: Intro
     clip: {fileID: 8300000, guid: 4de8a92d690abf347a9f0b2123daed4d, type: 3}

@@ -10,6 +10,7 @@ public class SoundEvents : MonoBehaviour
 
     public delegate void SoundEventHandler();
     public delegate void PauseMenuHandler(bool enter);
+    public delegate void WalkingHandler(int foot);
 
     public SoundEventHandler PressButton;
     public SoundEventHandler SelectButton;
@@ -21,6 +22,7 @@ public class SoundEvents : MonoBehaviour
     public SoundEventHandler Slider;
 
     public PauseMenuHandler PauseGame;
+    public WalkingHandler Walking;
 
     private AudioManager uiSfxManager, gameSfxManager;
     private AudioManager musicManager;
@@ -66,6 +68,12 @@ public class SoundEvents : MonoBehaviour
             uiSfxManager.Stop("PauseGame"); uiSfxManager.Play("PauseGame");
 
             if (!enter) uiSfxManager.ResumeAllSounds();
+        };
+
+        Walking += (int foot) =>
+        {
+            if (foot == 0) gameSfxManager.Play("Left_Foot");
+            else gameSfxManager.Play("Right_Foot");
         };
     }
 }

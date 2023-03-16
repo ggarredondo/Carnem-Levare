@@ -6,6 +6,7 @@ using UnityEngine.Audio;
 public class AudioManager : MonoBehaviour
 {
     public AudioMixerGroup audioMixerGroup;
+    public GameObject[] speakers;
     public Sound[] sounds;
 
     private List<Sound> currentSounds = new();
@@ -14,13 +15,18 @@ public class AudioManager : MonoBehaviour
     {
         foreach (Sound s in sounds)
         {
-            s.source = gameObject.AddComponent<AudioSource>();
-            s.source.clip = s.clip;
-            s.source.volume = s.volume;
-            s.source.pitch = s.pitch;
-            s.source.loop = s.loop;
-            s.source.spatialBlend = s.spatialBlend;
-            s.source.outputAudioMixerGroup = audioMixerGroup;
+            s.source = new AudioSource[speakers.GetLength(0)];
+
+            for (int i = 0; i < speakers.GetLength(0); i++)
+            {
+                s.source[i] = speakers[i].AddComponent<AudioSource>();
+                s.source[i].clip = s.clip;
+                s.source[i].volume = s.volume;
+                s.source[i].pitch = s.pitch;
+                s.source[i].loop = s.loop;
+                s.source[i].spatialBlend = s.spatialBlend;
+                s.source[i].outputAudioMixerGroup = audioMixerGroup;
+            }
         }
     }
 
@@ -38,7 +44,7 @@ public class AudioManager : MonoBehaviour
             Debug.LogWarning("Sound: " + name + " not exist");
         }
 
-        s.source.pitch = pitch;
+        s.source[0].pitch = pitch;
     }
 
     /// <summary>
@@ -72,7 +78,7 @@ public class AudioManager : MonoBehaviour
             return;
         }
 
-        s.source.Play();
+        s.source[0].Play();
     }
 
     /// <summary>
@@ -89,7 +95,7 @@ public class AudioManager : MonoBehaviour
             return;
         }
 
-        s.source.Stop();
+        s.source[0].Stop();
     }
 
     /// <summary>
@@ -106,7 +112,7 @@ public class AudioManager : MonoBehaviour
             return;
         }
 
-        s.source.Pause();
+        s.source[0].Pause();
     }
 
     /// <summary>
@@ -116,9 +122,9 @@ public class AudioManager : MonoBehaviour
     {
         foreach (Sound sound in sounds)
         {
-            if (sound.source.isPlaying)
+            if (sound.source[0].isPlaying)
             {
-                sound.source.Pause();
+                sound.source[0].Pause();
                 currentSounds.Add(sound);
             }
         }
@@ -131,7 +137,7 @@ public class AudioManager : MonoBehaviour
     {
         foreach (Sound sound in currentSounds)
         {
-            sound.source.UnPause();
+            sound.source[0].UnPause();
         }
     }
 
@@ -142,7 +148,7 @@ public class AudioManager : MonoBehaviour
     {
         foreach (Sound sound in sounds)
         {
-            sound.source.mute = true;
+            sound.source[0].mute = true;
         }
     }
 
@@ -153,7 +159,7 @@ public class AudioManager : MonoBehaviour
     {
         foreach (Sound sound in sounds)
         {
-            sound.source.mute = false;
+            sound.source[0].mute = false;
         }
     }
 
@@ -164,7 +170,7 @@ public class AudioManager : MonoBehaviour
     {
         foreach (Sound sound in sounds)
         {
-            sound.source.Stop();
+            sound.source[0].Stop();
         }
     }
 
@@ -194,7 +200,7 @@ public class AudioManager : MonoBehaviour
     {
         foreach (Sound s in sounds)
         {
-            s.source.volume = s.volume * volume;
+            s.source[0].volume = s.volume * volume;
         }
     }
 
@@ -214,6 +220,6 @@ public class AudioManager : MonoBehaviour
             return false;
         }
 
-        return s.source.isPlaying;
+        return s.source[0].isPlaying;
     }
 }
