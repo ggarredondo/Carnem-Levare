@@ -27,11 +27,7 @@ public abstract class Character : MonoBehaviour
     [SerializeField] [InitializationField] [Range(1f, 1.3f)] private float height = 1f;
     [SerializeField] [InitializationField] private float mass = 1f;
     [SerializeField] [InitializationField] private float drag = 0f; // SHOULD BE CALCULATED GIVEN MASS
-    [SerializeField] private List<Move> leftMoveset, rightMoveset;
-
-    [Header("Hitbox Lists - Same items as HitboxType enum")]
-    [SerializeField] private List<GameObject> leftHitboxes;
-    [SerializeField] private List<GameObject> rightHitboxes;
+    [SerializeField] private List<MoveWrapper> leftMoveset, rightMoveset;
 
     // Character Variables
     protected Animator anim;
@@ -134,12 +130,12 @@ public abstract class Character : MonoBehaviour
         for (int i = 0; i < leftMoveset.Count; ++i)
         {
             // Left Moves
-            UpdateAnimator("LeftClip" + i, leftMoveset[i].leftAnimation);
-            anim.SetFloat("left" + i + "_speed", leftMoveset[i].LeftAnimationSpeed * attackSpeed);
+            UpdateAnimator("LeftClip" + i, leftMoveset[i].move.LeftAnimation);
+            anim.SetFloat("left" + i + "_speed", leftMoveset[i].move.LeftAnimationSpeed * attackSpeed);
 
             // Right Moves
-            UpdateAnimator("RightClip" + i, rightMoveset[i].rightAnimation);
-            anim.SetFloat("right" + i + "_speed", rightMoveset[i].RightAnimationSpeed * attackSpeed);
+            UpdateAnimator("RightClip" + i, rightMoveset[i].move.RightAnimation);
+            anim.SetFloat("right" + i + "_speed", rightMoveset[i].move.RightAnimationSpeed * attackSpeed);
         }
     }
     #endregion
@@ -184,11 +180,8 @@ public abstract class Character : MonoBehaviour
     #region PublicMethods
     public Animator Animator { get => anim; }
 
-    public List<Move> LeftMoveset { get => leftMoveset; }
-    public List<Move> RightMoveset { get => rightMoveset; }
-
-    public List<GameObject> LeftHitboxes { get => leftHitboxes; }
-    public List<GameObject> RightHitboxes { get => rightHitboxes; }
+    public List<MoveWrapper> LeftMoveset { get => leftMoveset; }
+    public List<MoveWrapper> RightMoveset { get => rightMoveset; }
 
     public float Stamina { get => stamina; }
     public float MaxStamina { get => maxStamina; }

@@ -324,15 +324,15 @@ MonoBehaviour:
   mass: 1
   drag: 0
   leftMoveset:
-  - {fileID: -4476728132895952727, guid: cd4612b1a708e5046ae35c3be7591360, type: 3}
-  - {fileID: -6294080308579570103, guid: efb9a55e3f71721488f998a63a6181b3, type: 3}
+  - move: {fileID: -4476728132895952727, guid: cd4612b1a708e5046ae35c3be7591360, type: 3}
+    hitbox: {fileID: 2528519819064968607}
+  - move: {fileID: -6294080308579570103, guid: efb9a55e3f71721488f998a63a6181b3, type: 3}
+    hitbox: {fileID: 2528519819064968607}
   rightMoveset:
-  - {fileID: -6294080308579570103, guid: efb9a55e3f71721488f998a63a6181b3, type: 3}
-  - {fileID: -6294080308579570103, guid: a8f961228fb724d4493126f529517e6e, type: 3}
-  leftHitboxes:
-  - {fileID: 1861379024506984188}
-  rightHitboxes:
-  - {fileID: 7620172225672357468}
+  - move: {fileID: -6294080308579570103, guid: efb9a55e3f71721488f998a63a6181b3, type: 3}
+    hitbox: {fileID: 972517564017927109}
+  - move: {fileID: -6294080308579570103, guid: a8f961228fb724d4493126f529517e6e, type: 3}
+    hitbox: {fileID: 972517564017927109}
   noDamage: 0
   noDeath: 0
   updateMoveset: 0

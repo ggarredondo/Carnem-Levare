@@ -4,46 +4,42 @@ public enum Entity { Player, Enemy }
 public class AttackManager : StateMachineBehaviour
 {
     [SerializeField] private Entity entity;
+    [SerializeField] private Side side;
+    [SerializeField] private int index;
 
     private Character character;
+    private MoveWrapper currentWrapper;
     private Move currentMove;
-    private bool currentMoveFound, active;
-    private GameObject currentHitbox;
-    private Side side;
+    private Hitbox currentHitbox;
+    private bool active;
+
+    private void AssignMove() {
+        if (index < character.LeftMoveset.Count) {
+            currentWrapper = side == Side.Left
+                ? character.LeftMoveset[index]
+                : character.RightMoveset[index];
+
+            currentMove = currentWrapper.move;
+            currentHitbox = currentWrapper.hitbox;
+        }
+    }
 
     private void Awake()
     {
         character = entity == Entity.Player 
             ? GameObject.FindGameObjectWithTag("Player").GetComponent<Character>() 
             : GameObject.FindGameObjectWithTag("Enemy").GetComponent<Character>();
+        AssignMove();
     }
 
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        currentMoveFound = false;
-        for (int i = 0; i < character.LeftMoveset.Count && !currentMoveFound; ++i)
-        {
-            if (stateInfo.IsName("Left" + i)) {
-                currentMove = character.LeftMoveset[i];
-                side = Side.Left;
-                currentHitbox = character.LeftHitboxes[(int)currentMove.HitboxType];
-                currentMoveFound = true;
-            }
-
-            if (stateInfo.IsName("Right" + i)) {
-                currentMove = character.RightMoveset[i];
-                side = Side.Right;
-                currentHitbox = character.RightHitboxes[(int)currentMove.HitboxType];
-                currentMoveFound = true;
-            }
-        }
-
         // Assigns the move values to the hitbox component so that once it hits the information is passed onto the hurtbox.
-        currentHitbox.GetComponent<Hitbox>().power = currentMove.Power;
-        currentHitbox.GetComponent<Hitbox>().damage = character.CalculateAttackDamage(currentMove.BaseDamage);
-        currentHitbox.GetComponent<Hitbox>().unblockable = currentMove.Unblockable;
-        currentHitbox.GetComponent<Hitbox>().hitSound = currentMove.HitSound;
+        currentHitbox.power = currentMove.Power;
+        currentHitbox.damage = character.CalculateAttackDamage(currentMove.BaseDamage);
+        currentHitbox.unblockable = currentMove.Unblockable;
+        currentHitbox.hitSound = currentMove.HitSound;
 
         // Play whiff sound, since character hasn't hit already.
         SoundEvents.Instance.PlaySfx(currentMove.WhiffSound, entity);
@@ -57,7 +53,7 @@ public class AttackManager : StateMachineBehaviour
         // ACTIVE
         if (active) character.transform.position += character.transform.forward * currentMove.GetMovement(side) * Time.deltaTime; // Extra movement
         character.attackTracking = !active; // Won't track opponent when move is active
-        currentHitbox.GetComponent<Hitbox>().Activate(active); // Hitbox is activated
+        currentHitbox.Activate(active); // Hitbox is activated
 
         // RECOVERY
         if (currentMove.HasRecovered(side, stateInfo.normalizedTime)) animator.SetTrigger("cancel"); // Can cancel animation after recovery
@@ -67,8 +63,8 @@ public class AttackManager : StateMachineBehaviour
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         character.attackTracking = true;
-        currentHitbox.GetComponent<Hitbox>().hit = false;
-        currentHitbox.GetComponent<Hitbox>().Activate(false);
+        currentHitbox.hit = false;
+        currentHitbox.Activate(false);
         animator.ResetTrigger("cancel");
     }
 }

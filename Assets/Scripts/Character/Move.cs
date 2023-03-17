@@ -9,14 +9,7 @@ public enum Power: uint
     Strong = 2
 }
 
-// Used to choose the corresponding hitbox from a list of hitboxes (left list and right list).
-// A hitbox must be added for each of these possible values for both player and enemy, for both left and right.
-public enum HitboxType : uint
-{
-    Fist = 0
-}
-
-// Used by Attack Managers to choose from which side the attack is coming from
+// Used by Attack Manager to know from which side the attack is coming from
 public enum Side : int
 {
     Left = -1,
@@ -33,10 +26,10 @@ public class Move : MonoBehaviour
 
     [Header("Attack Animations")]
     // Animations that the move performs, depending on whether the Move slot is left or right, and if the player is currently crouching.
-    public AnimationClip leftAnimation;
+    [SerializeField] private AnimationClip leftAnimation;
     [SerializeField] [Range(0f, 2f)] private float leftAnimationSpeed = 1f;
 
-    public AnimationClip rightAnimation;
+    [SerializeField] private AnimationClip rightAnimation;
     [SerializeField] [Range(0f, 2f)] private float rightAnimationSpeed = 1f;
 
     [Header("Attack Sound")]
@@ -45,7 +38,6 @@ public class Move : MonoBehaviour
     [SerializeField] private string blockedSound;
 
     [Header("Attack Values")]
-    [SerializeField] private HitboxType hitboxType;
     [Tooltip("States which type of hurt animation will play when it hits")] [SerializeField] private Power power;
     [SerializeField] private bool unblockable;
     [SerializeField] private float baseDamage; // Used to calculate damage dealt to the opponent's stamina, if it hits.
@@ -86,7 +78,9 @@ public class Move : MonoBehaviour
     public string MoveName { get => moveName; }
 
     // Animation
+    public AnimationClip LeftAnimation { get => leftAnimation; }
     public float LeftAnimationSpeed { get => leftAnimationSpeed; }
+    public AnimationClip RightAnimation { get => rightAnimation; }
     public float RightAnimationSpeed { get => rightAnimationSpeed; }
 
     // Sound
@@ -95,7 +89,6 @@ public class Move : MonoBehaviour
     public string BlockedSound { get => blockedSound; }
 
     // Attack Values
-    public HitboxType HitboxType { get => hitboxType; }
     public Power Power { get => power; }
     public bool Unblockable { get => unblockable; }
     public float BaseDamage { get => baseDamage; }

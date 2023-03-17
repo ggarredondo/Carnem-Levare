@@ -1341,6 +1341,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attacker: 0
+  side: 1
+  index: 0
 --- !u!206 &-5294554074493614212
 BlendTree:
   m_ObjectHideFlags: 1
@@ -2178,6 +2180,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attacker: 0
+  side: 0
+  index: 0
 --- !u!206 &-2608484211136484720
 BlendTree:
   m_ObjectHideFlags: 1
@@ -3377,6 +3381,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attacker: 0
+  side: -1
+  index: 1
 --- !u!1102 &421632313408585391
 AnimatorState:
   serializedVersion: 6
@@ -4616,6 +4622,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attacker: 0
+  side: 1
+  index: 1
 --- !u!1101 &4003552621405044718
 AnimatorStateTransition:
   m_ObjectHideFlags: 1
@@ -5507,6 +5515,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attacker: 0
+  side: 0
+  index: 0
 --- !u!206 &6031687066524796045
 BlendTree:
   m_ObjectHideFlags: 1
@@ -6445,3 +6455,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attacker: 0
+  side: -1
+  index: 0
