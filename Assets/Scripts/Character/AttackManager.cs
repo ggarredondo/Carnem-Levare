@@ -1,9 +1,9 @@
 using UnityEngine;
+public enum Entity { Player, Enemy }
 
 public class AttackManager : StateMachineBehaviour
 {
-    private enum Attacker { Player, Enemy }
-    [SerializeField] private Attacker attacker;
+    [SerializeField] private Entity entity;
 
     private Character character;
     private Move currentMove;
@@ -13,7 +13,7 @@ public class AttackManager : StateMachineBehaviour
 
     private void Awake()
     {
-        character = attacker == Attacker.Player 
+        character = entity == Entity.Player 
             ? GameObject.FindGameObjectWithTag("Player").GetComponent<Character>() 
             : GameObject.FindGameObjectWithTag("Enemy").GetComponent<Character>();
     }

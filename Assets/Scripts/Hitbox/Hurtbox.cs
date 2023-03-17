@@ -16,10 +16,15 @@ public enum Target : uint
 
 public class Hurtbox : MonoBehaviour
 {
+    private Entity entity;
     [SerializeField] private Character character;
     [SerializeField] private Target target;
     private Hitbox hitbox;
-    
+
+    private void Awake() {
+        entity = character is Player ? Entity.Player : Entity.Enemy;
+    }
+
     private void OnTriggerEnter(Collider other)
     {
         hitbox = other.GetComponent<Hitbox>();
