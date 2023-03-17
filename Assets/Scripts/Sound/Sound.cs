@@ -15,9 +15,6 @@ public class Sound
 
     public bool loop;
 
-    [Range(0f, 1f)]
-    public float spatialBlend;
-
     [System.NonSerialized]
     public AudioSource[] source;
 }

@@ -14,9 +14,6 @@ public class AudioSaver : MonoBehaviour
     public float sfxVolume = 1f;
     public bool mute = false;
 
-    private AudioManager uiSfxManager, gameSfxManager;
-    private AudioManager musicManager;
-
     private void Awake()
     {
         // If there is an instance, and it's not me, delete myself.
@@ -43,10 +40,6 @@ public class AudioSaver : MonoBehaviour
 
     public void ApplyUI()
     {
-        uiSfxManager = GameObject.FindGameObjectWithTag("SFX").transform.GetChild(0).GetComponent<AudioManager>();
-        gameSfxManager = GameObject.FindGameObjectWithTag("SFX").GetComponent<AudioManager>();
-        musicManager = GameObject.FindGameObjectWithTag("MUSIC").GetComponent<AudioManager>();
-
         audioMixer.SetFloat("MasterVolume", Mathf.Log10(globalVolume) * 20);
         audioMixer.SetFloat("MusicVolume", Mathf.Log10(musicVolume) * 20);
         audioMixer.SetFloat("SfxVolume", Mathf.Log10(sfxVolume) * 20);
@@ -67,32 +60,14 @@ public class AudioSaver : MonoBehaviour
         ApplyUI();
     }
 
-    public void PauseAll()
-    {
-        uiSfxManager.PauseAllSounds();
-        gameSfxManager.PauseAllSounds();
-        musicManager.PauseAllSounds();
-    }
-
-    public void ResumeAll()
-    {
-        uiSfxManager.ResumeAllSounds();
-        gameSfxManager.ResumeAllSounds();
-        musicManager.ResumeAllSounds();
-    }
-
     public void MuteAll()
     {
-        uiSfxManager.MuteAllSounds();
-        gameSfxManager.MuteAllSounds();
-        musicManager.MuteAllSounds();
+        audioMixer.SetFloat("MasterVolume", -80);
     }
 
     public void UnMuteAll()
     {
-        uiSfxManager.UnMuteAllSounds();
-        gameSfxManager.UnMuteAllSounds();
-        musicManager.UnMuteAllSounds();
+        audioMixer.SetFloat("MasterVolume", Mathf.Log10(globalVolume) * 20);
     }
 
 }

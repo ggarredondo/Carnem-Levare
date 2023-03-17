@@ -40,6 +40,8 @@ public class AudioManager : MonoBehaviour
         Initialize();
     }
 
+    public bool NotActive { set { notActive = value; } }
+
     public void Initialize()
     {
         if (speakers?.GetLength(0) > 0)
@@ -80,7 +82,7 @@ public class AudioManager : MonoBehaviour
     /// </summary>
     /// <param name="name">Sound name</param>
     /// <param name="pitch">Pitch we want to change to</param>
-    public void ChangePitch(string name, float pitch)
+    public void ChangePitch(string name, float pitch, int actualSource = 0)
     {
         if (!notActive)
         {
@@ -91,7 +93,7 @@ public class AudioManager : MonoBehaviour
                 Debug.LogWarning("Sound: " + name + " not exist");
             }
 
-            s.source[0].pitch = pitch;
+            s.source[actualSource].pitch = pitch;
         }
     }
 
@@ -136,7 +138,7 @@ public class AudioManager : MonoBehaviour
     /// Stop a sound
     /// </summary>
     /// <param name="name">Sound name</param>
-    public void Stop(string name)
+    public void Stop(string name, int actualSource = 0)
     {
         if (!notActive)
         {
@@ -148,7 +150,7 @@ public class AudioManager : MonoBehaviour
                 return;
             }
 
-            s.source[0].Stop();
+            s.source[actualSource].Stop();
         }
     }
 
@@ -156,7 +158,7 @@ public class AudioManager : MonoBehaviour
     /// Pause a sound
     /// </summary>
     /// <param name="name">Sound name</param>
-    public void Pause(string name)
+    public void Pause(string name, int actualSource = 0)
     {
         if (!notActive)
         {
@@ -168,7 +170,7 @@ public class AudioManager : MonoBehaviour
                 return;
             }
 
-            s.source[0].Pause();
+            s.source[actualSource].Pause();
         }
     }
 
@@ -181,10 +183,13 @@ public class AudioManager : MonoBehaviour
         {
             foreach (Sound sound in sounds)
             {
-                if (sound.source[0].isPlaying)
+                for (int i = 0; i < speakers.GetLength(0); i++)
                 {
-                    sound.source[0].Pause();
-                    currentSounds.Add(sound);
+                    if (sound.source[i].isPlaying)
+                    {
+                        sound.source[i].Pause();
+                        currentSounds.Add(sound);
+                    }
                 }
             }
         }
@@ -199,7 +204,8 @@ public class AudioManager : MonoBehaviour
         {
             foreach (Sound sound in currentSounds)
             {
-                sound.source[0].UnPause();
+                for (int i = 0; i < speakers.GetLength(0); i++)
+                    sound.source[i].UnPause();
             }
         }
     }
@@ -213,7 +219,8 @@ public class AudioManager : MonoBehaviour
         {
             foreach (Sound sound in sounds)
             {
-                sound.source[0].mute = true;
+                for (int i = 0; i < speakers.GetLength(0); i++)
+                    sound.source[i].mute = true;
             }
         }
     }
@@ -227,7 +234,8 @@ public class AudioManager : MonoBehaviour
         {
             foreach (Sound sound in sounds)
             {
-                sound.source[0].mute = false;
+                for (int i = 0; i < speakers.GetLength(0); i++)
+                    sound.source[i].mute = false;
             }
         }
     }
@@ -241,7 +249,8 @@ public class AudioManager : MonoBehaviour
         {
             foreach (Sound sound in sounds)
             {
-                sound.source[0].Stop();
+                for (int i = 0; i < speakers.GetLength(0); i++)
+                    sound.source[i].Stop();
             }
         }
     }
@@ -274,7 +283,8 @@ public class AudioManager : MonoBehaviour
         {
             foreach (Sound s in sounds)
             {
-                s.source[0].volume = s.volume * volume;
+                for (int i = 0; i < speakers.GetLength(0); i++)
+                    s.source[i].volume = s.volume * volume;
             }
         }
     }
@@ -285,7 +295,7 @@ public class AudioManager : MonoBehaviour
     /// </summary>
     /// <param name="name">Sound name</param>
     /// <returns></returns>
-    public bool IsPlaying(string name)
+    public bool IsPlaying(string name, int actualSource = 0)
     {
         if (!notActive)
         {
@@ -297,7 +307,7 @@ public class AudioManager : MonoBehaviour
                 return false;
             }
 
-            return s.source[0].isPlaying;
+            return s.source[actualSource].isPlaying;
         }
         else return false;
     }

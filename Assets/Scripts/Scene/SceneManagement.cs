@@ -45,6 +45,7 @@ public class SceneManagement : MonoBehaviour
     {
         animator = GameObject.FindGameObjectWithTag("TRANSITION").GetComponent<Animator>();
         playerInput = GameObject.FindGameObjectWithTag("INPUT").GetComponent<PlayerInput>();
+        AudioManager gameSfxManager = GameObject.FindGameObjectWithTag("SFX").GetComponent<AudioManager>();
 
         if (SceneManager.GetActiveScene().buildIndex == 1)
         {
@@ -54,10 +55,10 @@ public class SceneManagement : MonoBehaviour
 
         if (SceneManager.GetActiveScene().buildIndex == 3)
         {
-            AudioManager gameSfxManager = GameObject.FindGameObjectWithTag("SFX").GetComponent<AudioManager>();
             gameSfxManager.speakers = GameObject.FindGameObjectsWithTag("AUDIO_SOURCES");
             gameSfxManager.Initialize();
         }
+        else gameSfxManager.NotActive = true;
 
         playerInput.controlsChangedEvent.AddListener(ControlSaver.OnControlSchemeChanged);
         ControlSaver.OnControlSchemeChanged(playerInput);

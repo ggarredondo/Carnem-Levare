@@ -34,7 +34,7 @@ public class SoundMenu : MonoBehaviour
         {
             AudioSaver.Instance.globalVolume = tmp.value;
 
-            if (AudioSaver.Instance.musicVolume == 0)
+            if (AudioSaver.Instance.musicVolume < 0.1)
                 SoundEvents.Instance.Slider.Invoke();
         }
 
