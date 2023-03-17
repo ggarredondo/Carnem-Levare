@@ -45,10 +45,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveName: Overhand
-  leftHitbox: {fileID: 2136804595336161011, guid: ba86f0ef6c92ccd478d60fd61ec18e60,
-    type: 3}
-  rightHitbox: {fileID: 3203653492192437718, guid: f486f27fe879b314aa1baa1c06281ac7,
-    type: 3}
   leftAnimation: {fileID: 7400030, guid: 7934f1476fe2c6e458c230f491769c34, type: 3}
   leftAnimationSpeed: 1
   rightAnimation: {fileID: 7400028, guid: 7934f1476fe2c6e458c230f491769c34, type: 3}
@@ -65,5 +61,5 @@ MonoBehaviour:
   rightStartUp: 0.2
   rightActive: 0.35
   rightRecovery: 0.5
-  leftMovement: 2
-  rightMovement: 2
+  leftMovement: 1
+  rightMovement: 1

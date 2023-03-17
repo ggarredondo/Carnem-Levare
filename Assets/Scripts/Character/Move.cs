@@ -94,6 +94,19 @@ public class Move : MonoBehaviour
     public float BaseDamage { get => baseDamage; }
 
     /// <summary>
+    /// Move is starting during the interval [0, startup].
+    /// </summary>
+    /// <param name="side">Which side is the attack coming from?</param>
+    /// <param name="normalizedTime">Normalized time of the animation</param>
+    /// <returns>True if time is in interval, false otherwise</returns>
+    public bool IsStarting(Side side, float normalizedTime)
+    {
+        if (side == Side.Left)
+            return normalizedTime <= leftStartUp;
+        return normalizedTime <= rightStartUp;
+    }
+
+    /// <summary>
     /// Move is active during the interval (startup, active].
     /// </summary>
     /// <param name="side">Which side is the attack coming from?</param>

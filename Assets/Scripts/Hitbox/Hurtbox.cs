@@ -28,16 +28,16 @@ public class Hurtbox : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         hitbox = other.GetComponent<Hitbox>();
-        if (!hitbox.hit && !character.HurtExceptions) {
+        if (!hitbox.hitFlag && !character.HurtExceptions) {
             // Establish that hitbox has already hit so that it's disabled and it doesn't hit twice.
-            hitbox.hit = true;
+            hitbox.hitFlag = true;
 
-            character.Damage((float) target, (float) hitbox.power, hitbox.damage,
+            character.Damage((float) target, (float) hitbox.Power, hitbox.Damage,
                 // Can't block attack if it's unblockable or if it hits the back.
-                hitbox.unblockable || target == Target.BackHead || target == Target.BackBody);
+                hitbox.Unblockable || target == Target.BackHead || target == Target.BackBody);
 
             // Play hit sound now that we know for sure it hit.
-            SoundEvents.Instance.PlaySfx(other.GetComponent<Hitbox>().hitSound, entity);
+            SoundEvents.Instance.PlaySfx(other.GetComponent<Hitbox>().HitSound, entity);
         }
     }
 }
