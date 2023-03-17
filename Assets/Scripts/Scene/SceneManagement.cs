@@ -52,6 +52,13 @@ public class SceneManagement : MonoBehaviour
             StartCoroutine(LoadFromLoadingScreen());
         }
 
+        if (SceneManager.GetActiveScene().buildIndex == 3)
+        {
+            AudioManager gameSfxManager = GameObject.FindGameObjectWithTag("SFX").GetComponent<AudioManager>();
+            gameSfxManager.speakers = GameObject.FindGameObjectsWithTag("AUDIO_SOURCES");
+            gameSfxManager.Initialize();
+        }
+
         playerInput.controlsChangedEvent.AddListener(ControlSaver.OnControlSchemeChanged);
         ControlSaver.OnControlSchemeChanged(playerInput);
 

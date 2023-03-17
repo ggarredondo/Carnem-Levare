@@ -10,7 +10,7 @@ public class SoundEvents : MonoBehaviour
 
     public delegate void SoundEventHandler();
     public delegate void PauseMenuHandler(bool enter);
-    public delegate void WalkingHandler(int foot);
+    public delegate void WalkingHandler(int foot, Entity actualSource);
 
     public SoundEventHandler PressButton;
     public SoundEventHandler SelectButton;
@@ -46,6 +46,8 @@ public class SoundEvents : MonoBehaviour
 
     public void PlaySfx(string sound) { gameSfxManager?.Play(sound); }
 
+    public void PlaySfx(string sound, Entity actualSource) { gameSfxManager?.Play(sound, (int) actualSource); }
+
     private void OnEnable()
     {
         uiSfxManager = GameObject.FindGameObjectWithTag("SFX").transform.GetChild(0).GetComponent<AudioManager>();
@@ -70,10 +72,10 @@ public class SoundEvents : MonoBehaviour
             if (!enter) uiSfxManager.ResumeAllSounds();
         };
 
-        Walking += (int foot) =>
+        Walking += (int foot, Entity actualSource) =>
         {
-            if (foot == 0) gameSfxManager.Play("Left_Foot");
-            else gameSfxManager.Play("Right_Foot");
+            if (foot == 0) gameSfxManager.Play("Left_Foot", (int) actualSource);
+            else gameSfxManager.Play("Right_Foot", (int)actualSource);
         };
     }
 }

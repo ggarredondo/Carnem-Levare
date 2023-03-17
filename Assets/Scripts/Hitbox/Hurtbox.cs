@@ -37,7 +37,7 @@ public class Hurtbox : MonoBehaviour
                 hitbox.unblockable || target == Target.BackHead || target == Target.BackBody);
 
             // Play hit sound now that we know for sure it hit.
-            SoundEvents.Instance.PlaySfx(other.GetComponent<Hitbox>().hitSound);
+            SoundEvents.Instance.PlaySfx(other.GetComponent<Hitbox>().hitSound, entity);
         }
     }
 }

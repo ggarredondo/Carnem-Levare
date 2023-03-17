@@ -5,29 +5,74 @@ using UnityEngine.Audio;
 
 public class AudioManager : MonoBehaviour
 {
-    public AudioMixerGroup audioMixerGroup;
-    public GameObject[] speakers;
-    public Sound[] sounds;
+    [Header("AudioMixer")]
+    [SerializeField] private AudioMixerGroup audioMixerGroup;
+
+    [Header("3D Sound")]
+    [SerializeField] private bool threeD;
+    [NonSerialized] public GameObject[] speakers;
+
+    // Define the 3D sound settings
+    [ConditionalField("threeD")] [Range(0,5)]    [SerializeField] private float dopplerLevel = 1f;
+    [ConditionalField("threeD")] [Range(0, 360)] [SerializeField] private float spread = 0f;
+    [ConditionalField("threeD")] [SerializeField] private AudioRolloffMode volumeRolloff = AudioRolloffMode.Logarithmic;
+    [ConditionalField("threeD")] [SerializeField] private float minDistance = 1f;
+    [ConditionalField("threeD")] [SerializeField] private float maxDistance = 500f;
+    [ConditionalField("threeD")] [SerializeField] private AnimationCurve customRollofCurve;
+
+    [Header("Manager Sounds")]
+    [SerializeField] private Sound[] sounds;
 
     private List<Sound> currentSounds = new();
+    private bool notActive;
+    private int spatialBlend;
 
     void Awake()
     {
-        foreach (Sound s in sounds)
-        {
-            s.source = new AudioSource[speakers.GetLength(0)];
+        spatialBlend = threeD ? 1 : 0;
 
-            for (int i = 0; i < speakers.GetLength(0); i++)
+        if (!threeD)
+        {
+            speakers = new GameObject[1];
+            speakers[0] = gameObject;
+        }
+
+        Initialize();
+    }
+
+    public void Initialize()
+    {
+        if (speakers?.GetLength(0) > 0)
+        {
+            notActive = false;
+            foreach (Sound s in sounds)
             {
-                s.source[i] = speakers[i].AddComponent<AudioSource>();
-                s.source[i].clip = s.clip;
-                s.source[i].volume = s.volume;
-                s.source[i].pitch = s.pitch;
-                s.source[i].loop = s.loop;
-                s.source[i].spatialBlend = s.spatialBlend;
-                s.source[i].outputAudioMixerGroup = audioMixerGroup;
+                s.source = new AudioSource[speakers.GetLength(0)];
+
+                for (int i = 0; i < speakers.GetLength(0); i++)
+                {
+                    s.source[i] = speakers[i].AddComponent<AudioSource>();
+                    s.source[i].clip = s.clip;
+                    s.source[i].volume = s.volume;
+                    s.source[i].pitch = s.pitch;
+                    s.source[i].loop = s.loop;
+                    s.source[i].spatialBlend = spatialBlend;
+
+                    if (threeD)
+                    {
+                        s.source[i].dopplerLevel = dopplerLevel;
+                        s.source[i].spread = spread;
+                        s.source[i].rolloffMode = volumeRolloff;
+                        s.source[i].minDistance = minDistance;
+                        s.source[i].maxDistance = maxDistance;
+                        s.source[i].SetCustomCurve(AudioSourceCurveType.CustomRolloff, customRollofCurve);
+                    }
+
+                    s.source[i].outputAudioMixerGroup = audioMixerGroup;
+                }
             }
         }
+        else notActive = true;
     }
 
     /// <summary>
@@ -37,14 +82,17 @@ public class AudioManager : MonoBehaviour
     /// <param name="pitch">Pitch we want to change to</param>
     public void ChangePitch(string name, float pitch)
     {
-        Sound s = Array.Find(sounds, sound => sound.name == name);
-
-        if (s == null)
+        if (!notActive)
         {
-            Debug.LogWarning("Sound: " + name + " not exist");
-        }
+            Sound s = Array.Find(sounds, sound => sound.name == name);
 
-        s.source[0].pitch = pitch;
+            if (s == null)
+            {
+                Debug.LogWarning("Sound: " + name + " not exist");
+            }
+
+            s.source[0].pitch = pitch;
+        }
     }
 
     /// <summary>
@@ -68,17 +116,20 @@ public class AudioManager : MonoBehaviour
     /// Play a sound
     /// </summary>
     /// <param name="name">Sound name</param>
-    public void Play(string name)
+    public void Play(string name, int actualSource = 0)
     {
-        Sound s = Array.Find(sounds, sound => sound.name == name);
-
-        if (s == null)
+        if (!notActive)
         {
-            Debug.LogWarning("Sound: " + name + " doesn't exist");
-            return;
-        }
+            Sound s = Array.Find(sounds, sound => sound.name == name);
 
-        s.source[0].Play();
+            if (s == null)
+            {
+                Debug.LogWarning("Sound: " + name + " doesn't exist");
+                return;
+            }
+
+            s.source[actualSource].Play();
+        }
     }
 
     /// <summary>
@@ -87,15 +138,18 @@ public class AudioManager : MonoBehaviour
     /// <param name="name">Sound name</param>
     public void Stop(string name)
     {
-        Sound s = Array.Find(sounds, sound => sound.name == name);
-
-        if (s == null)
+        if (!notActive)
         {
-            Debug.LogWarning("Sound: " + name + " not exist");
-            return;
-        }
+            Sound s = Array.Find(sounds, sound => sound.name == name);
 
-        s.source[0].Stop();
+            if (s == null)
+            {
+                Debug.LogWarning("Sound: " + name + " not exist");
+                return;
+            }
+
+            s.source[0].Stop();
+        }
     }
 
     /// <summary>
@@ -104,15 +158,18 @@ public class AudioManager : MonoBehaviour
     /// <param name="name">Sound name</param>
     public void Pause(string name)
     {
-        Sound s = Array.Find(sounds, sound => sound.name == name);
-
-        if (s == null)
+        if (!notActive)
         {
-            Debug.LogWarning("Sound: " + name + " not exist");
-            return;
-        }
+            Sound s = Array.Find(sounds, sound => sound.name == name);
 
-        s.source[0].Pause();
+            if (s == null)
+            {
+                Debug.LogWarning("Sound: " + name + " not exist");
+                return;
+            }
+
+            s.source[0].Pause();
+        }
     }
 
     /// <summary>
@@ -120,12 +177,15 @@ public class AudioManager : MonoBehaviour
     /// </summary>
     public void PauseAllSounds()
     {
-        foreach (Sound sound in sounds)
+        if (!notActive)
         {
-            if (sound.source[0].isPlaying)
+            foreach (Sound sound in sounds)
             {
-                sound.source[0].Pause();
-                currentSounds.Add(sound);
+                if (sound.source[0].isPlaying)
+                {
+                    sound.source[0].Pause();
+                    currentSounds.Add(sound);
+                }
             }
         }
     }
@@ -135,9 +195,12 @@ public class AudioManager : MonoBehaviour
     /// </summary>
     public void ResumeAllSounds()
     {
-        foreach (Sound sound in currentSounds)
+        if (!notActive)
         {
-            sound.source[0].UnPause();
+            foreach (Sound sound in currentSounds)
+            {
+                sound.source[0].UnPause();
+            }
         }
     }
 
@@ -146,9 +209,12 @@ public class AudioManager : MonoBehaviour
     /// </summary>
     public void MuteAllSounds()
     {
-        foreach (Sound sound in sounds)
+        if (!notActive)
         {
-            sound.source[0].mute = true;
+            foreach (Sound sound in sounds)
+            {
+                sound.source[0].mute = true;
+            }
         }
     }
 
@@ -157,9 +223,12 @@ public class AudioManager : MonoBehaviour
     /// </summary>
     public void UnMuteAllSounds()
     {
-        foreach (Sound sound in sounds)
+        if (!notActive)
         {
-            sound.source[0].mute = false;
+            foreach (Sound sound in sounds)
+            {
+                sound.source[0].mute = false;
+            }
         }
     }
 
@@ -168,9 +237,12 @@ public class AudioManager : MonoBehaviour
     /// </summary>
     public void StopAllSounds()
     {
-        foreach (Sound sound in sounds)
+        if (!notActive)
         {
-            sound.source[0].Stop();
+            foreach (Sound sound in sounds)
+            {
+                sound.source[0].Stop();
+            }
         }
     }
 
@@ -198,9 +270,12 @@ public class AudioManager : MonoBehaviour
     /// <param name="volume">The percentage of volume that we want to apply</param>
     public void ChangeVolume(float volume)
     {
-        foreach (Sound s in sounds)
+        if (!notActive)
         {
-            s.source[0].volume = s.volume * volume;
+            foreach (Sound s in sounds)
+            {
+                s.source[0].volume = s.volume * volume;
+            }
         }
     }
 
@@ -212,14 +287,18 @@ public class AudioManager : MonoBehaviour
     /// <returns></returns>
     public bool IsPlaying(string name)
     {
-        Sound s = Array.Find(sounds, sound => sound.name == name);
-
-        if (s == null)
+        if (!notActive)
         {
-            Debug.LogWarning("Sound: " + name + " not exist");
-            return false;
-        }
+            Sound s = Array.Find(sounds, sound => sound.name == name);
 
-        return s.source[0].isPlaying;
+            if (s == null)
+            {
+                Debug.LogWarning("Sound: " + name + " not exist");
+                return false;
+            }
+
+            return s.source[0].isPlaying;
+        }
+        else return false;
     }
 }

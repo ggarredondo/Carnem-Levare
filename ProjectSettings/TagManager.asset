@@ -15,6 +15,7 @@ TagManager:
   - INPUT
   - LOADING
   - SAVE
+  - AUDIO_SOURCES
   layers:
   - Default
   - TransparentFX

@@ -46,7 +46,7 @@ public class AttackManager : StateMachineBehaviour
         currentHitbox.GetComponent<Hitbox>().hitSound = currentMove.HitSound;
 
         // Play whiff sound, since character hasn't hit already.
-        SoundEvents.Instance.PlaySfx(currentMove.WhiffSound);
+        SoundEvents.Instance.PlaySfx(currentMove.WhiffSound, entity);
     }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
