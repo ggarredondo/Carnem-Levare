@@ -51,7 +51,7 @@ MonoBehaviour:
   rightAnimationSpeed: 1
   whiffSound: Whiff_Overhand
   hitSound: Hit_Overhand
-  blockedSound: 
+  blockedSound: Blocked_Default
   power: 2
   unblockable: 0
   baseDamage: 20

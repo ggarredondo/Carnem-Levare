@@ -251,6 +251,12 @@ MonoBehaviour:
     pitch: 1
     loop: 0
     spatialBlend: 1
+  - name: Blocked_Default
+    clip: {fileID: 8300000, guid: 19ddc316ff85f6d4db324352983e1165, type: 3}
+    volume: 0.5
+    pitch: 1
+    loop: 0
+    spatialBlend: 1
 --- !u!1 &9168311950741595994
 GameObject:
   m_ObjectHideFlags: 0

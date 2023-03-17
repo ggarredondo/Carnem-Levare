@@ -16,14 +16,9 @@ public enum Target : uint
 
 public class Hurtbox : MonoBehaviour
 {
-    private Entity entity;
     [SerializeField] private Character character;
     [SerializeField] private Target target;
     private Hitbox hitbox;
-
-    private void Awake() {
-        entity = character is Player ? Entity.Player : Entity.Enemy;
-    }
 
     private void OnTriggerEnter(Collider other)
     {
@@ -34,10 +29,8 @@ public class Hurtbox : MonoBehaviour
 
             character.Damage((float) target, (float) hitbox.Power, hitbox.Damage,
                 // Can't block attack if it's unblockable or if it hits the back.
-                hitbox.Unblockable || target == Target.BackHead || target == Target.BackBody);
-
-            // Play hit sound now that we know for sure it hit.
-            SoundEvents.Instance.PlaySfx(other.GetComponent<Hitbox>().HitSound, entity);
+                hitbox.Unblockable || target == Target.BackHead || target == Target.BackBody,
+                hitbox.HitSound, hitbox.BlockedSound);
         }
     }
 }

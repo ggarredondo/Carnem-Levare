@@ -51,7 +51,7 @@ MonoBehaviour:
   rightAnimationSpeed: 1
   whiffSound: Whiff_Jab
   hitSound: Hit_Jab
-  blockedSound: 
+  blockedSound: Blocked_Default
   power: 0
   unblockable: 0
   baseDamage: 10

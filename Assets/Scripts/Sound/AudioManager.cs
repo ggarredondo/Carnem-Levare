@@ -102,7 +102,7 @@ public class AudioManager : MonoBehaviour
     /// </summary>
     /// <param name="name">Sound name</param>
     /// <returns></returns>
-    public float Lenght(string name)
+    public float Length(string name)
     {
         Sound s = Array.Find(sounds, sound => sound.name == name);
 

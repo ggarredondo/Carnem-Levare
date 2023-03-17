@@ -30,6 +30,7 @@ public abstract class Character : MonoBehaviour
     [SerializeField] private List<MoveWrapper> leftMoveset, rightMoveset;
 
     // Character Variables
+    private Entity entity;
     protected Animator anim;
     private AnimatorOverrideController animOverride;
     private AnimationClip[] animatorDefaults;
@@ -56,6 +57,7 @@ public abstract class Character : MonoBehaviour
         rb.drag = drag;
 
         // Initialize Character Variables
+        entity = this is Player ? Entity.Player : Entity.Enemy;
         anim = GetComponent<Animator>();
         animatorDefaults = anim.runtimeAnimatorController.animationClips;
         animOverride = new AnimatorOverrideController(anim.runtimeAnimatorController);
@@ -157,12 +159,17 @@ public abstract class Character : MonoBehaviour
     /// <param name="power">Attack's power.</param>
     /// <param name="dmg">Damage taken.</param>
     /// <param name="unblockable">Can the attack be blocked?</param>
-    public void Damage(float target, float power, float dmg, bool unblockable)
+    /// <param name="hitSound">Sound if the attack hits character directly.</param>
+    /// <param name="blockedSound">Sound if the attack hits character while blocking.</param>
+    public void Damage(float target, float power, float dmg, bool unblockable, string hitSound, string blockedSound)
     {
         // Animation
         anim.SetTrigger("hurt");
         anim.SetFloat("hurt_target", target);
         anim.SetFloat("hurt_power", power);
+
+        // Sound
+        SoundEvents.Instance.PlaySfx(isBlocking ? blockedSound : hitSound, entity);
 
         // Stamina
         stamina -= isBlocking && !unblockable ? Mathf.Round(dmg * blockingModifier) : dmg; // Take less damage if blocking.

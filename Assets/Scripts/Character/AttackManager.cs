@@ -11,21 +11,18 @@ public class AttackManager : StateMachineBehaviour
     private MoveWrapper wrapper;
     private bool active;
 
-    private void AssignMove() 
-    {
-        if (index < character.LeftMoveset.Count) {
-            wrapper = side == Side.Left
-                ? character.LeftMoveset[index]
-                : character.RightMoveset[index];
-        }
-    }
-
     private void Awake()
     {
         character = entity == Entity.Player 
             ? GameObject.FindGameObjectWithTag("Player").GetComponent<Character>() 
             : GameObject.FindGameObjectWithTag("Enemy").GetComponent<Character>();
-        AssignMove();
+
+        // Assign move if there's actually a move to assign
+        if (index < character.LeftMoveset.Count) {
+            wrapper = side == Side.Left
+                ? character.LeftMoveset[index]
+                : character.RightMoveset[index];
+        };
     }
 
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
@@ -36,7 +33,8 @@ public class AttackManager : StateMachineBehaviour
         wrapper.hitbox.Set(wrapper.move.Power, 
             character.CalculateAttackDamage(wrapper.move.BaseDamage), 
             wrapper.move.Unblockable, 
-            wrapper.move.HitSound);
+            wrapper.move.HitSound,
+            wrapper.move.BlockedSound);
 
         // Play whiff sound, since character hasn't hit already.
         SoundEvents.Instance.PlaySfx(wrapper.move.WhiffSound, entity);
