@@ -991,6 +991,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 71a7d99d71186b24597e1a28dfd654b6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  inputReader: {fileID: 11400000, guid: cb514f7bc969f1e4da23444266f585b7, type: 2}
   menus:
   - menu: {fileID: 1955055707429003211}
     parentMenu: {fileID: 1955055707429003211}

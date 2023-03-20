@@ -1,6 +1,5 @@
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.InputSystem;
 using UnityEngine.EventSystems;
 
 public class SelectableMenuManager : MenuManager
@@ -8,8 +7,13 @@ public class SelectableMenuManager : MenuManager
     [SerializeField] private Button[] selectableButtons;
     [SerializeField] private Button returnButton;
 
-    private void OnEnable()
+    protected override void OnEnable()
     {
+        base.OnEnable();
+
+        inputReader.ChangeRightMenuEvent += MoveToRightMenu;
+        inputReader.ChangeLeftMenuEvent += MoveToLeftMenu;
+
         actualActiveMenu = firstMenu;
         SetUpButtons(actualActiveMenu);
         SetActiveMenuById(actualActiveMenu, true);
@@ -18,8 +22,13 @@ public class SelectableMenuManager : MenuManager
     /// <summary>
     /// Save the last selected button
     /// </summary>
-    private void OnDisable()
+    protected override void OnDisable()
     {
+        base.OnDisable();
+
+        inputReader.ChangeRightMenuEvent -= MoveToRightMenu;
+        inputReader.ChangeLeftMenuEvent -= MoveToLeftMenu;
+
         if (EventSystem.current != null)
         {
             if (EventSystem.current.currentSelectedGameObject != null)
@@ -35,10 +44,9 @@ public class SelectableMenuManager : MenuManager
     /// <summary>
     /// Move to the Menu on the right when pressing right shoulder
     /// </summary>
-    /// <param name="context"></param>
-    public void MoveToRightMenu(InputAction.CallbackContext context)
+    public void MoveToRightMenu()
     {
-        if (context.performed && gameObject.activeSelf)
+        if (gameObject.activeSelf)
         {
             CleanOldButtons(actualActiveMenu);
             int newActualMenu = Mod(actualActiveMenu + 1, selectableButtons.Length);
@@ -50,10 +58,9 @@ public class SelectableMenuManager : MenuManager
     /// <summary>
     /// Move to the Menu on the left when pressing left shoulder
     /// </summary>
-    /// <param name="context"></param>
-    public void MoveToLeftMenu(InputAction.CallbackContext context)
+    public void MoveToLeftMenu()
     {
-        if (context.performed && gameObject.activeSelf)
+        if (gameObject.activeSelf)
         {
             CleanOldButtons(actualActiveMenu);
             int newActualMenu = Mod(actualActiveMenu - 1, selectableButtons.Length);

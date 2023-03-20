@@ -1170,6 +1170,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd5a68a0aecbeb545b9627209ddbd499, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  inputReader: {fileID: 11400000, guid: cb514f7bc969f1e4da23444266f585b7, type: 2}
   menus:
   - menu: {fileID: 6585527209032124905}
     parentMenu: {fileID: 6585527209032124905}

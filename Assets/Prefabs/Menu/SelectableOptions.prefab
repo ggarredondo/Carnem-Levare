@@ -2739,6 +2739,7 @@ MonoBehaviour:
     parentMenu: {fileID: 517267783397895882}
     firstSelectedButton: {fileID: 517267782384738690}
   firstMenu: 0
+  inputReader: {fileID: 11400000, guid: cb514f7bc969f1e4da23444266f585b7, type: 2}
   selectableButtons:
   - {fileID: 517267782526766781}
   - {fileID: 517267781850768960}

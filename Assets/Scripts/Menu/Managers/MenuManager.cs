@@ -8,10 +8,23 @@ using TMPro;
 public class MenuManager : MonoBehaviour
 {
     [Header ("Menu Assets")]
+    [SerializeField] protected InputReader inputReader = default;
     [SerializeField] protected Menu[] menus;
     [SerializeField] protected int firstMenu;
 
     protected int actualActiveMenu;
+
+    protected virtual void OnEnable()
+    {
+        inputReader.MouseClickEvent += MouseClick;
+        inputReader.MenuBackEvent += ReturnFromChildren;
+    }
+
+    protected virtual void OnDisable()
+    {
+        inputReader.MouseClickEvent -= MouseClick;
+        inputReader.MenuBackEvent -= ReturnFromChildren;
+    }
 
     protected virtual void Awake()
     {
@@ -133,44 +146,41 @@ public class MenuManager : MonoBehaviour
     /// Return to the parent of the actual object
     /// </summary>
     /// <param name="context"></param>
-    public virtual void ReturnFromChildren(InputAction.CallbackContext context)
+    public virtual void ReturnFromChildren()
     {
-        if (context.performed)
+        GameObject current = EventSystem.current.currentSelectedGameObject;
+
+        if (current != null)
         {
-            GameObject current = EventSystem.current.currentSelectedGameObject;
-
-            if (current != null)
+            if (current.GetComponent<Button>() == null)
             {
-                if (current.GetComponent<Button>() == null)
+                if (current.GetComponent<TMP_Dropdown>() != null)
                 {
-                    if (current.GetComponent<TMP_Dropdown>() != null)
-                    {
-                        current.GetComponent<TMP_Dropdown>().Hide();
-                    }
-
-                    GameObject Parent = current.transform.parent.gameObject;
-                    EventSystem.current.SetSelectedGameObject(Parent);
-
-                    if (Parent.GetComponent<Button>() == null)
-                        ReturnFromChildren(context);
+                    current.GetComponent<TMP_Dropdown>().Hide();
                 }
-                else
-                {
-                    ReturnToParent();
-                }
+
+                GameObject Parent = current.transform.parent.gameObject;
+                EventSystem.current.SetSelectedGameObject(Parent);
+
+                if (Parent.GetComponent<Button>() == null)
+                    ReturnFromChildren();
             }
             else
             {
                 ReturnToParent();
             }
         }
+        else
+        {
+            ReturnToParent();
+        } 
     }
 
     /// <summary>
     /// Obtain the elements behind the mouse and if there is a slider it will set as the selected one
     /// </summary>
     /// <param name="context"></param>
-    public void MouseClick(InputAction.CallbackContext context)
+    public void MouseClick()
     {
         if (RaycastMouse().Count != 0)
             if (RaycastMouse()[0].gameObject.name == "Handle")

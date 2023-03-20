@@ -1,13 +1,11 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using TMPro;
 using UnityEngine.InputSystem;
 
 public class SceneManagement : MonoBehaviour
 {
     public static SceneManagement Instance;
-    public AnimationClip endAnimation;
 
     private Animator animator;
     private bool transitionEnd;
@@ -70,7 +68,7 @@ public class SceneManagement : MonoBehaviour
     private IEnumerator EndLoading()
     {
         animator.SetBool("endLoading", true);
-        yield return new WaitForSecondsRealtime(endAnimation.length);
+        yield return new WaitForSecondsRealtime(animator.GetCurrentAnimatorStateInfo(0).length);
         transitionEnd = true;
     }
 

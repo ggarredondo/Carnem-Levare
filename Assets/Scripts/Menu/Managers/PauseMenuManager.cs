@@ -9,6 +9,20 @@ public class PauseMenuManager : MainMenuManager
 
     private bool pauseMenuActivated = false;
 
+    protected override void OnEnable()
+    {
+        base.OnEnable();
+
+        inputReader.StartPauseMenuEvent += EnterPauseMenu;
+    }
+
+    protected override void OnDisable()
+    {
+        base.OnDisable();
+
+        inputReader.StartPauseMenuEvent -= EnterPauseMenu;
+    }
+
     protected override void Awake()
     {
         base.Awake();
@@ -28,18 +42,17 @@ public class PauseMenuManager : MainMenuManager
     /// enable or disable the pause menu
     /// </summary>
     /// <param name="context"></param>
-    public void EnterPauseMenu(InputAction.CallbackContext context)
+    public void EnterPauseMenu()
     {
-        if (context.performed)
-            if (!pauseMenuActivated) EnterPauseMode();
-            else ExitPauseMode(true);
+        if (!pauseMenuActivated) EnterPauseMode();
+        else ExitPauseMode(true);
     }
 
-    public override void ReturnFromChildren(InputAction.CallbackContext context)
+    public override void ReturnFromChildren()
     {
-        if (context.performed && actualActiveMenu == 0) ExitPauseMode(true);
+        if (actualActiveMenu == 0) ExitPauseMode(true);
 
-        base.ReturnFromChildren(context);
+        base.ReturnFromChildren();
     }
 
     /// <summary>
