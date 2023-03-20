@@ -14,6 +14,9 @@ public class InputReader : ScriptableObject
 
     // Main Movement
     public event UnityAction<Vector2> MovementEvent;
+    public event UnityAction<bool> BlockEvent;
+    public event UnityAction<bool> Left0Event, Left1Event;
+    public event UnityAction<bool> Right0Event, Right1Event;
 
     #region UI
     public void OnMouseClick(InputAction.CallbackContext context)
@@ -47,6 +50,28 @@ public class InputReader : ScriptableObject
     public void OnMovement(InputAction.CallbackContext context)
     {
         MovementEvent.Invoke(context.ReadValue<Vector2>());
+    }
+    public void OnBlock(InputAction.CallbackContext context)
+    {
+        BlockEvent.Invoke(context.performed);
+    }
+
+    public void OnLeft0(InputAction.CallbackContext context)
+    {
+        Left0Event.Invoke(context.performed);
+    }
+    public void OnLeft1(InputAction.CallbackContext context)
+    {
+        Left1Event.Invoke(context.performed);
+    }
+
+    public void OnRight0(InputAction.CallbackContext context)
+    {
+        Right0Event.Invoke(context.performed);
+    }
+    public void OnRight1(InputAction.CallbackContext context)
+    {
+        Right1Event.Invoke(context.performed);
     }
 
     #endregion

@@ -373,7 +373,6 @@ GameObject:
   - component: {fileID: 7481606168508649710}
   - component: {fileID: 7481606168508649708}
   - component: {fileID: 7481606168508649709}
-  - component: {fileID: 7481606168989916935}
   - component: {fileID: 5975427957589119885}
   - component: {fileID: 8958949370764238645}
   - component: {fileID: 630855138708282714}
@@ -434,6 +433,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: daefdaab103d1c045b7612f2f096e8cc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  inputReader: {fileID: 11400000, guid: cb514f7bc969f1e4da23444266f585b7, type: 2}
   debugTracking: 1
   trackingRate: 20
   stamina: 0
@@ -449,181 +449,17 @@ MonoBehaviour:
     hitbox: {fileID: 692432875193982508}
   - move: {fileID: 11400000, guid: fa350c7d7c867b24da1f6763a4020f2f, type: 2}
     hitbox: {fileID: 692432875193982508}
-  - move: {fileID: 11400000, guid: d6bf674840b5bc944ba69f634ef34c5d, type: 2}
-    hitbox: {fileID: 692432875193982508}
   rightMoveset:
-  - move: {fileID: 11400000, guid: 9ec677a7eb446e244816d077b11c8747, type: 2}
-    hitbox: {fileID: 3986532354630737285}
   - move: {fileID: 11400000, guid: 0de5e9c08e7776e43a041833bdf495cb, type: 2}
     hitbox: {fileID: 3986532354630737285}
   - move: {fileID: 11400000, guid: d6bf674840b5bc944ba69f634ef34c5d, type: 2}
     hitbox: {fileID: 3986532354630737285}
   noDamage: 0
-  noDeath: 0
+  noDeath: 1
   updateMoveset: 0
   modifyTimeScale: 0
   timeScale: 1
   enemyDirectionSpeed: 10
-  block: 0
---- !u!114 &7481606168989916935
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7481606168508649711}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Actions: {fileID: -944628639613478452, guid: 4c5932b877e14b74aa13f4a70b61213f,
-    type: 3}
-  m_NotificationBehavior: 2
-  m_UIInputModule: {fileID: 0}
-  m_DeviceLostEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  m_DeviceRegainedEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  m_ControlsChangedEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  m_ActionEvents:
-  - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 7481606168508649709}
-        m_TargetAssemblyTypeName: Enemy, Assembly-CSharp
-        m_MethodName: Movement
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-    m_ActionId: ee75891c-1f20-4be3-85fe-1d8cc16dcacf
-    m_ActionName: Main Movement/Movement[/Keyboard/w,/Keyboard/s,/Keyboard/a,/Keyboard/d]
-  - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 7481606168508649709}
-        m_TargetAssemblyTypeName: Enemy, Assembly-CSharp
-        m_MethodName: Block
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-    m_ActionId: 0ff10795-7b68-47d4-b40b-a977ae1cc7a6
-    m_ActionName: Main Movement/Block[/Keyboard/c]
-  - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 7481606168508649709}
-        m_TargetAssemblyTypeName: Enemy, Assembly-CSharp
-        m_MethodName: Left0
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-    m_ActionId: c00d0e02-9001-410b-8d1a-2de79fa4017c
-    m_ActionName: Main Movement/Left0[/Keyboard/numpad1]
-  - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 7481606168508649709}
-        m_TargetAssemblyTypeName: Enemy, Assembly-CSharp
-        m_MethodName: Left1
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-    m_ActionId: 5418f625-eb00-4967-ade3-a753dcaaaa3a
-    m_ActionName: Main Movement/Left1[/Keyboard/numpad1]
-  - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 7481606168508649709}
-        m_TargetAssemblyTypeName: Enemy, Assembly-CSharp
-        m_MethodName: Left2
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-    m_ActionId: 87392e83-2388-4902-b453-acb8e8a63e2c
-    m_ActionName: Main Movement/Left2[/Keyboard/numpad7]
-  - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 7481606168508649709}
-        m_TargetAssemblyTypeName: Enemy, Assembly-CSharp
-        m_MethodName: Right0
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-    m_ActionId: 7d09f5ad-2718-4e42-8029-fdc26fd8a88c
-    m_ActionName: Main Movement/Right0[/Keyboard/numpad3]
-  - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 7481606168508649709}
-        m_TargetAssemblyTypeName: Enemy, Assembly-CSharp
-        m_MethodName: Right1
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-    m_ActionId: 566f5264-c346-4326-94ce-236799f92d1b
-    m_ActionName: Main Movement/Right1[/Keyboard/numpad6]
-  - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 7481606168508649709}
-        m_TargetAssemblyTypeName: Enemy, Assembly-CSharp
-        m_MethodName: Right2
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-    m_ActionId: 0aa9a96d-05bf-42ab-81da-397d5c52c5a1
-    m_ActionName: Main Movement/Right2[/Keyboard/numpad9]
-  m_NeverAutoSwitchControlSchemes: 0
-  m_DefaultControlScheme: 
-  m_DefaultActionMap: Main Movement
-  m_SplitScreenIndex: -1
-  m_Camera: {fileID: 0}
 --- !u!54 &5975427957589119885
 Rigidbody:
   m_ObjectHideFlags: 0

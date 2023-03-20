@@ -24,7 +24,7 @@
                     "initialStateCheck": true
                 },
                 {
-                    "name": "Left Normal",
+                    "name": "Left0",
                     "type": "Button",
                     "id": "60f7e98c-e28e-44f5-8238-041783e0c44c",
                     "expectedControlType": "Button",
@@ -33,16 +33,7 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Right Normal",
-                    "type": "Button",
-                    "id": "eae9d122-0c45-49c1-8ae0-abfab8c74b50",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
-                    "name": "Left Special",
+                    "name": "Left1",
                     "type": "Button",
                     "id": "eb6c9e9b-9855-49aa-b21b-39ffbc961e31",
                     "expectedControlType": "Button",
@@ -51,7 +42,16 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Right Special",
+                    "name": "Right0",
+                    "type": "Button",
+                    "id": "eae9d122-0c45-49c1-8ae0-abfab8c74b50",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Right1",
                     "type": "Button",
                     "id": "6f6c8496-ad55-4a5b-b196-c474aff84dcb",
                     "expectedControlType": "Button",
@@ -108,7 +108,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "Gamepad",
-                    "action": "Right Normal",
+                    "action": "Right0",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -119,29 +119,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard&Mouse",
-                    "action": "Right Normal",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "147dfe10-d56f-4f57-9a0a-3c01ffcf6b6f",
-                    "path": "<Gamepad>/rightTrigger",
-                    "interactions": "",
-                    "processors": "AxisDeadzone",
-                    "groups": "Gamepad",
-                    "action": "Right Special",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "00d4a3eb-c564-45ca-8b6e-a241aa7688b7",
-                    "path": "<Keyboard>/l",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Keyboard&Mouse",
-                    "action": "Right Special",
+                    "action": "Right0",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -152,7 +130,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "Gamepad",
-                    "action": "Left Normal",
+                    "action": "Left0",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -163,29 +141,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard&Mouse",
-                    "action": "Left Normal",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "68725ed5-c3a7-4ea4-a01f-3e1f38b5a817",
-                    "path": "<Gamepad>/leftTrigger",
-                    "interactions": "",
-                    "processors": "AxisDeadzone",
-                    "groups": "Gamepad",
-                    "action": "Left Special",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "ad522fab-6360-44bb-9f72-28a8061827d6",
-                    "path": "<Keyboard>/h",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Keyboard&Mouse",
-                    "action": "Left Special",
+                    "action": "Left0",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -287,6 +243,50 @@
                     "action": "Movement",
                     "isComposite": false,
                     "isPartOfComposite": true
+                },
+                {
+                    "name": "",
+                    "id": "147dfe10-d56f-4f57-9a0a-3c01ffcf6b6f",
+                    "path": "<Gamepad>/rightTrigger",
+                    "interactions": "",
+                    "processors": "AxisDeadzone",
+                    "groups": "Gamepad",
+                    "action": "Right1",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "00d4a3eb-c564-45ca-8b6e-a241aa7688b7",
+                    "path": "<Keyboard>/l",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard&Mouse",
+                    "action": "Right1",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "68725ed5-c3a7-4ea4-a01f-3e1f38b5a817",
+                    "path": "<Gamepad>/leftTrigger",
+                    "interactions": "",
+                    "processors": "AxisDeadzone",
+                    "groups": "Gamepad",
+                    "action": "Left1",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "ad522fab-6360-44bb-9f72-28a8061827d6",
+                    "path": "<Keyboard>/h",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard&Mouse",
+                    "action": "Left1",
+                    "isComposite": false,
+                    "isPartOfComposite": false
                 }
             ]
         },

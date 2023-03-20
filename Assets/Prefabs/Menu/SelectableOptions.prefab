@@ -2265,7 +2265,7 @@ GameObject:
   - component: {fileID: 517267782064783286}
   - component: {fileID: 517267782064783287}
   m_Layer: 5
-  m_Name: Left Normal
+  m_Name: Left0
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2474,7 +2474,7 @@ GameObject:
   - component: {fileID: 517267782066614708}
   - component: {fileID: 517267782066614709}
   m_Layer: 5
-  m_Name: Left Special
+  m_Name: Left1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2725,6 +2725,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f993cf5ed533a1d4da5f74968095fe9a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  inputReader: {fileID: 11400000, guid: cb514f7bc969f1e4da23444266f585b7, type: 2}
   menus:
   - menu: {fileID: 517267781485984277}
     parentMenu: {fileID: 517267781485984277}
@@ -2739,7 +2740,6 @@ MonoBehaviour:
     parentMenu: {fileID: 517267783397895882}
     firstSelectedButton: {fileID: 517267782384738690}
   firstMenu: 0
-  inputReader: {fileID: 11400000, guid: cb514f7bc969f1e4da23444266f585b7, type: 2}
   selectableButtons:
   - {fileID: 517267782526766781}
   - {fileID: 517267781850768960}
@@ -3918,7 +3918,7 @@ GameObject:
   - component: {fileID: 517267782422911555}
   - component: {fileID: 517267782422911556}
   m_Layer: 5
-  m_Name: Right Normal
+  m_Name: Right0
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7621,7 +7621,7 @@ GameObject:
   - component: {fileID: 517267783207065280}
   - component: {fileID: 517267783207065281}
   m_Layer: 5
-  m_Name: Right Special
+  m_Name: Right1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

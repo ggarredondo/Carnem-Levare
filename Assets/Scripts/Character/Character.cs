@@ -5,6 +5,8 @@ using UnityEngine.Assertions;
 
 public abstract class Character : MonoBehaviour
 {
+    [SerializeField] protected InputReader inputReader;
+
     // Character Attributes
     [Header("Tracking values")]
     [SerializeField] private bool debugTracking = true;
@@ -22,9 +24,9 @@ public abstract class Character : MonoBehaviour
     [SerializeField] [InitializationField] private float maxStamina = 0f;
 
     [SerializeField] private float attackDamage = 0f;
-    [Tooltip("Attack animation speed")] [InitializationField] [Range(0f, 2f)] public float attackSpeed = 1f;
+    [Tooltip("Attack animation speed")] [InitializationField] [Range(1f, 1.2f)] public float attackSpeed = 1f;
     [Tooltip("Percentage of stamina damage taken when blocking")] [SerializeField] [Range(0f, 1f)] private float blockingModifier = 0.5f;
-    [SerializeField] [InitializationField] [Range(1f, 1.3f)] private float height = 1f;
+    [SerializeField] [InitializationField] [Range(1f, 1.2f)] private float height = 1f;
     [SerializeField] [InitializationField] private float mass = 1f;
     [SerializeField] [InitializationField] private float drag = 0f; // SHOULD BE CALCULATED GIVEN MASS
     [SerializeField] private List<MoveWrapper> leftMoveset, rightMoveset;
@@ -69,7 +71,6 @@ public abstract class Character : MonoBehaviour
     {
         InitializeMoveset();
     }
-
     protected virtual void Update()
     {
         // Character is KO when stamina is equal or below 0.
@@ -96,7 +97,6 @@ public abstract class Character : MonoBehaviour
         if (updateMoveset) { InitializeMoveset(); updateMoveset = false; } // DEBUG
         if (modifyTimeScale && this is Player) Time.timeScale = timeScale; // DEBUG
     }
-
     protected virtual void FixedUpdate()
     {
         trackingConditions = debugTracking && attackTracking && !isHurt && !IsIdle && !isKO;
@@ -109,6 +109,7 @@ public abstract class Character : MonoBehaviour
     }
 
     #region Animation
+
     /// <summary>
     /// Updates specific animation from animator in real time.
     /// </summary>
@@ -140,14 +141,17 @@ public abstract class Character : MonoBehaviour
             anim.SetFloat("right" + i + "_speed", rightMoveset[i].move.RightAnimationSpeed * attackSpeed);
         }
     }
+
     #endregion
 
     #region Actions
+
     protected void Movement(Vector2 dir) { directionTarget = dir; }
     protected void Block(bool performed) { anim.SetBool("block", performed); }
 
     protected void LeftN(bool performed, int n) { if (leftMoveset.Count > n) anim.SetBool("left" + n, performed); }
     protected void RightN(bool performed, int n) { if (rightMoveset.Count > n) anim.SetBool("right" + n, performed); }
+
     #endregion
 
     #region GameplayFunctions
@@ -182,9 +186,11 @@ public abstract class Character : MonoBehaviour
     /// <param name="baseDmg">Move's base damage</param>
     /// <returns>Calculated final damage</returns>
     public float CalculateAttackDamage(float baseDmg) { return baseDmg + attackDamage; }
+
     #endregion
 
     #region PublicMethods
+
     public Animator Animator { get => anim; }
 
     public List<MoveWrapper> LeftMoveset { get => leftMoveset; }
@@ -209,5 +215,6 @@ public abstract class Character : MonoBehaviour
     public bool IsBlocking { get => isBlocking; }
     public bool IsKO { get => isKO; }
     public bool HurtExceptions { get => hurtExceptions; }
+
     #endregion
 }

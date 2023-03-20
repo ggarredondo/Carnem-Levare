@@ -1308,18 +1308,18 @@ AnimatorStateMachine:
     m_StateMachine: {fileID: -9078301276858239714}
     m_Position: {x: 50, y: 380, z: 0}
   m_AnyStateTransitions:
+  - {fileID: -4703801876434653094}
+  - {fileID: 2941127460269263322}
+  - {fileID: 131318248362496176}
+  - {fileID: -9154354318402014305}
   - {fileID: -4014850441957676598}
   - {fileID: -4010974546763440742}
   - {fileID: -7073367237746119711}
   - {fileID: -6058610683163787315}
-  - {fileID: 2941127460269263322}
-  - {fileID: 131318248362496176}
-  - {fileID: -9154354318402014305}
   - {fileID: 1917047012029683445}
   - {fileID: -8215878547659517237}
   - {fileID: 2529482390413668808}
   - {fileID: 3118481081375886651}
-  - {fileID: -4703801876434653094}
   m_EntryTransitions: []
   m_StateMachineTransitions: {}
   m_StateMachineBehaviours: []
@@ -1340,7 +1340,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e36b4490d86efe6458b6c56bd3ac5bc1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attacker: 0
+  entity: 0
   side: 1
   index: 0
 --- !u!206 &-5294554074493614212
@@ -2179,7 +2179,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e36b4490d86efe6458b6c56bd3ac5bc1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attacker: 0
+  entity: 0
   side: 0
   index: 0
 --- !u!206 &-2608484211136484720
@@ -3380,7 +3380,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e36b4490d86efe6458b6c56bd3ac5bc1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attacker: 0
+  entity: 0
   side: -1
   index: 1
 --- !u!1102 &421632313408585391
@@ -4621,7 +4621,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e36b4490d86efe6458b6c56bd3ac5bc1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attacker: 0
+  entity: 0
   side: 1
   index: 1
 --- !u!1101 &4003552621405044718
@@ -5514,7 +5514,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e36b4490d86efe6458b6c56bd3ac5bc1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attacker: 0
+  entity: 0
   side: 0
   index: 0
 --- !u!206 &6031687066524796045
@@ -6454,6 +6454,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e36b4490d86efe6458b6c56bd3ac5bc1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attacker: 0
+  entity: 0
   side: -1
   index: 0
