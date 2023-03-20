@@ -1,0 +1,33 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9c101ac1060691f4fb04457c1a701efc, type: 3}
+  m_Name: Overhand
+  m_EditorClassIdentifier: 
+  moveName: Overhand
+  leftAnimation: {fileID: 7400030, guid: 7934f1476fe2c6e458c230f491769c34, type: 3}
+  leftAnimationSpeed: 1
+  rightAnimation: {fileID: 7400028, guid: 7934f1476fe2c6e458c230f491769c34, type: 3}
+  rightAnimationSpeed: 1
+  whiffSound: Whiff_Overhand
+  hitSound: Hit_Overhand
+  blockedSound: Blocked_Default
+  power: 2
+  unblockable: 0
+  baseDamage: 20
+  leftStartUp: 0.2
+  leftActive: 0.45
+  leftRecovery: 0.5
+  rightStartUp: 0.2
+  rightActive: 0.35
+  rightRecovery: 0.5
+  leftMovement: 1
+  rightMovement: 1

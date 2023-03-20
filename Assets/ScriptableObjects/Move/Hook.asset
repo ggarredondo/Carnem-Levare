@@ -1,0 +1,33 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9c101ac1060691f4fb04457c1a701efc, type: 3}
+  m_Name: Hook
+  m_EditorClassIdentifier: 
+  moveName: Hook
+  leftAnimation: {fileID: 7400038, guid: 7934f1476fe2c6e458c230f491769c34, type: 3}
+  leftAnimationSpeed: 1
+  rightAnimation: {fileID: 7400040, guid: 7934f1476fe2c6e458c230f491769c34, type: 3}
+  rightAnimationSpeed: 0.9
+  whiffSound: Whiff_Hook
+  hitSound: Hit_Hook
+  blockedSound: Blocked_Default
+  power: 1
+  unblockable: 0
+  baseDamage: 12
+  leftStartUp: 0.27
+  leftActive: 0.4
+  leftRecovery: 0.5
+  rightStartUp: 0.3
+  rightActive: 0.47
+  rightRecovery: 0.5
+  leftMovement: 0
+  rightMovement: 0

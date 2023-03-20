@@ -445,18 +445,18 @@ MonoBehaviour:
   mass: 1
   drag: 0
   leftMoveset:
-  - move: {fileID: -4476728132895952727, guid: cd4612b1a708e5046ae35c3be7591360, type: 3}
+  - move: {fileID: 11400000, guid: 9ec677a7eb446e244816d077b11c8747, type: 2}
     hitbox: {fileID: 692432875193982508}
-  - move: {fileID: -4476728132895952727, guid: f93797f883db7b542ace592e1b90d3b4, type: 3}
+  - move: {fileID: 11400000, guid: fa350c7d7c867b24da1f6763a4020f2f, type: 2}
     hitbox: {fileID: 692432875193982508}
-  - move: {fileID: -6294080308579570103, guid: efb9a55e3f71721488f998a63a6181b3, type: 3}
+  - move: {fileID: 11400000, guid: d6bf674840b5bc944ba69f634ef34c5d, type: 2}
     hitbox: {fileID: 692432875193982508}
   rightMoveset:
-  - move: {fileID: -4476728132895952727, guid: cd4612b1a708e5046ae35c3be7591360, type: 3}
+  - move: {fileID: 11400000, guid: 9ec677a7eb446e244816d077b11c8747, type: 2}
     hitbox: {fileID: 3986532354630737285}
-  - move: {fileID: -4476728132895952727, guid: f93797f883db7b542ace592e1b90d3b4, type: 3}
+  - move: {fileID: 11400000, guid: 0de5e9c08e7776e43a041833bdf495cb, type: 2}
     hitbox: {fileID: 3986532354630737285}
-  - move: {fileID: -6294080308579570103, guid: a8f961228fb724d4493126f529517e6e, type: 3}
+  - move: {fileID: 11400000, guid: d6bf674840b5bc944ba69f634ef34c5d, type: 2}
     hitbox: {fileID: 3986532354630737285}
   noDamage: 0
   noDeath: 0

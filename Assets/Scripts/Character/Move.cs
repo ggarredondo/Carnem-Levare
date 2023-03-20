@@ -17,10 +17,8 @@ public enum Side : int
 }
 #endregion
 
-/// <summary>
-/// Specification of an attack performed by a player or NPC.
-/// </summary>
-public class Move : MonoBehaviour
+[CreateAssetMenu(menuName = "Scriptable Objects/Move")]
+public class Move : ScriptableObject
 {
     [SerializeField] private string moveName;
 
