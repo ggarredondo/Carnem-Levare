@@ -3360,10 +3360,10 @@ AnimatorStateMachine:
     m_StateMachine: {fileID: -4551719657035663077}
     m_Position: {x: -30, y: 170, z: 0}
   m_AnyStateTransitions:
+  - {fileID: -5490767237025358106}
   - {fileID: -6120586022704298848}
   - {fileID: -1744558624474432286}
   - {fileID: 8583629279090782767}
-  - {fileID: -5490767237025358106}
   - {fileID: -4134848003568788820}
   - {fileID: 5215451331397047043}
   - {fileID: -4772089676705368064}

@@ -1308,10 +1308,10 @@ AnimatorStateMachine:
     m_StateMachine: {fileID: -9078301276858239714}
     m_Position: {x: 50, y: 380, z: 0}
   m_AnyStateTransitions:
+  - {fileID: -9154354318402014305}
   - {fileID: -4703801876434653094}
   - {fileID: 2941127460269263322}
   - {fileID: 131318248362496176}
-  - {fileID: -9154354318402014305}
   - {fileID: -4014850441957676598}
   - {fileID: -4010974546763440742}
   - {fileID: -7073367237746119711}

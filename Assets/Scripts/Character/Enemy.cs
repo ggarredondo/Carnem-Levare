@@ -4,7 +4,7 @@ public class Enemy : Character
 {
     [Header("Enemy-specific Parameters")]
     [SerializeField] private float enemyDirectionSpeed = 1f;
-    [SerializeField] private bool block = false;
+    [SerializeField] private bool block = false, jab = false;
 
     protected override void Start()
     {
@@ -14,7 +14,12 @@ public class Enemy : Character
     protected override void Update()
     {
         directionSpeed = enemyDirectionSpeed;
-        Block(block);
+        Behaviour();
         base.Update();
+    }
+
+    private void Behaviour() {
+        Block(block);
+        LeftN(jab, 0);
     }
 }

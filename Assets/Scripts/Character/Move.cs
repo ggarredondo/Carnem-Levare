@@ -41,6 +41,7 @@ public class Move : ScriptableObject
     [SerializeField] private float baseDamage; // Used to calculate damage dealt to the opponent's stamina, if it hits.
 
     #region TimeData
+
     [Header("Left Time Data (Normalized Animation Time)")]
     [Tooltip("[0, startup]: no hitbox. (startup, active]: hitbox is active.")]
     [SerializeField] [Range(0f, 1f)] private float leftStartUp = 0f;
@@ -51,6 +52,12 @@ public class Move : ScriptableObject
     [Tooltip("(active, recovery]: no hitbox. (recovery, 1]: can cancel animation.")]
     [SerializeField] [Range(0f, 1f)] private float leftRecovery = 0f;
 
+    [Tooltip("How many deltaseconds the opponent takes to leave block animation.")]
+    [SerializeField] private float leftAdvantageOnBlock = 0f;
+
+    [Tooltip("How many deltaseconds the opponent takes to leave hurt animation.")]
+    [SerializeField] private float leftAdvantageOnHit = 0f;
+
     [Header("Right Time Data")]
     [Tooltip("[0, startup]: no hitbox. (startup, active]: hitbox is active.")]
     [SerializeField] [Range(0f, 1f)] private float rightStartUp = 0f;
@@ -60,9 +67,17 @@ public class Move : ScriptableObject
 
     [Tooltip("(active, recovery]: no hitbox. (recovery, 1]: can cancel animation.")]
     [SerializeField] [Range(0f, 1f)] private float rightRecovery = 0f;
+
+    [Tooltip("How many deltaseconds the opponent takes to leave block animation.")]
+    [SerializeField] private float rightAdvantageOnBlock = 0f;
+
+    [Tooltip("How many deltaseconds the opponent takes to leave hurt animation.")]
+    [SerializeField] private float rightAdvantageOnHit = 0f;
+
     #endregion
 
     #region MovementValues
+
     [Header("(Extra) Movement Values")]
 
     [Tooltip("The attack may move the character further than established by root motion")]
@@ -70,6 +85,7 @@ public class Move : ScriptableObject
 
     [Tooltip("The attack may move the character further than established by root motion")]
     [SerializeField] private float rightMovement = 0f;
+
     #endregion
 
     #region PublicMethods
@@ -142,6 +158,30 @@ public class Move : ScriptableObject
     }
 
     /// <summary>
+    /// Returns deltaseconds it takes for the receiving opponent to
+    /// leave the blocked animation.
+    /// </summary>
+    /// <param name="side">Which side is the attack coming from?</param>
+    /// <returns>Advantage on block in deltaseconds</returns>
+    public float GetAdvantageOnBlock(Side side) {
+        if (side == Side.Left)
+            return leftAdvantageOnBlock;
+        return rightAdvantageOnBlock;
+    }
+
+    /// <summary>
+    /// Returns deltaseconds it takes for the receiving opponent to
+    /// leave the hurt animation.
+    /// </summary>
+    /// <param name="side">Which side is the attack coming from?</param>
+    /// <returns>Advantage on hit in deltaseconds</returns>
+    public float GetAdvantageOnHit(Side side) {
+        if (side == Side.Left)
+            return leftAdvantageOnHit;
+        return rightAdvantageOnHit;
+    }
+
+    /// <summary>
     /// Returns the amount of extra movement the move may have depending on the side it was used from.
     /// </summary>
     /// <param name="side">Which side is the attack coming from?</param>
@@ -151,5 +191,6 @@ public class Move : ScriptableObject
             return leftMovement;
         return rightMovement;
     }
+
     #endregion
 }
