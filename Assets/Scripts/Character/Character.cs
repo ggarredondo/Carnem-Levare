@@ -182,7 +182,6 @@ public abstract class Character : MonoBehaviour
         SoundEvents.Instance.PlaySfx(isBlocking ? blockedSound : hitSound, entity);
 
         // Stamina
-        Debug.Log(- (isBlocking && !unblockable ? Mathf.Round(dmg * blockingModifier) : dmg)); // DEBUG
         stamina -= isBlocking && !unblockable ? Mathf.Round(dmg * blockingModifier) : dmg; // Take less damage if blocking.
         if (stamina <= 0f) stamina = noDeath ? 1f : 0f; // Stamina can't go lower than 0. Can't go lower than 1 if noDeath is activated.
     }
