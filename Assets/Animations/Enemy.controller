@@ -3400,10 +3400,10 @@ AnimatorStateMachine:
   - {fileID: -6120586022704298848}
   - {fileID: -1744558624474432286}
   - {fileID: 8583629279090782767}
-  - {fileID: -6545512469332665476}
-  - {fileID: -7957485233111013811}
   - {fileID: -1547049144075826462}
   - {fileID: -3818393843851146567}
+  - {fileID: -6545512469332665476}
+  - {fileID: -7957485233111013811}
   m_EntryTransitions: []
   m_StateMachineTransitions: {}
   m_StateMachineBehaviours: []

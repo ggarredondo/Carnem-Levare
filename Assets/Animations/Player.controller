@@ -1331,10 +1331,10 @@ AnimatorStateMachine:
   - {fileID: -4703801876434653094}
   - {fileID: 2941127460269263322}
   - {fileID: 131318248362496176}
-  - {fileID: 1917047012029683445}
-  - {fileID: -8215878547659517237}
   - {fileID: 2529482390413668808}
   - {fileID: 3118481081375886651}
+  - {fileID: 1917047012029683445}
+  - {fileID: -8215878547659517237}
   m_EntryTransitions: []
   m_StateMachineTransitions: {}
   m_StateMachineBehaviours: []

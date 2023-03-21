@@ -84,7 +84,7 @@ public abstract class Character : MonoBehaviour
         isAttacking = anim.GetCurrentAnimatorStateInfo(0).IsTag("Attacking") && !anim.IsInTransition(0);
         isBlocked = anim.GetCurrentAnimatorStateInfo(0).IsName("Blocked");
         isHurt = anim.GetCurrentAnimatorStateInfo(0).IsName("Hurt");
-        isBlocking = anim.GetCurrentAnimatorStateInfo(0).IsName("Block") || isBlocked;
+        isBlocking = (anim.GetCurrentAnimatorStateInfo(0).IsName("Block") || isBlocked) && anim.GetBool("block");
 
         // Character can only attack if they're not attacking already or hurt.
         anim.SetBool("can_attack", !isAttacking && !isHurt && !isBlocked && !isKO);
@@ -176,6 +176,7 @@ public abstract class Character : MonoBehaviour
         anim.SetTrigger("hurt");
         anim.SetFloat("hurt_target", target);
         anim.SetFloat("hurt_power", power);
+        anim.SetBool("unblockable", unblockable);
         disadvantage = isBlocking ? disadvantageOnBlock : disadvantageOnHit;
 
         // Sound

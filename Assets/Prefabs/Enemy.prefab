@@ -460,6 +460,8 @@ MonoBehaviour:
   modifyTimeScale: 0
   timeScale: 1
   enemyDirectionSpeed: 10
+  jab: 0
+  block: 1
   blockMaxTime: 2
 --- !u!54 &5975427957589119885
 Rigidbody:
