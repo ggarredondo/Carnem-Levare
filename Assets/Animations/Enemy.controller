@@ -877,6 +877,34 @@ AnimatorStateTransition:
   m_InterruptionSource: 0
   m_OrderedInterruption: 1
   m_CanTransitionToSelf: 1
+--- !u!114 &-5391289910687847054
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: de7602dab846cf04da4947aa11959df3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hit: 0
+  entity: 1
+--- !u!114 &-5388121221320742737
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: de7602dab846cf04da4947aa11959df3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hit: 1
+  entity: 1
 --- !u!206 &-5198243469057126525
 BlendTree:
   m_ObjectHideFlags: 1
@@ -2316,7 +2344,8 @@ AnimatorState:
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions: []
-  m_StateMachineBehaviours: []
+  m_StateMachineBehaviours:
+  - {fileID: -5388121221320742737}
   m_Position: {x: 50, y: 50, z: 0}
   m_IKOnFeet: 0
   m_WriteDefaultValues: 1
@@ -2625,7 +2654,8 @@ AnimatorState:
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions: []
-  m_StateMachineBehaviours: []
+  m_StateMachineBehaviours:
+  - {fileID: -5391289910687847054}
   m_Position: {x: 50, y: 50, z: 0}
   m_IKOnFeet: 0
   m_WriteDefaultValues: 1
@@ -3360,20 +3390,20 @@ AnimatorStateMachine:
     m_StateMachine: {fileID: -4551719657035663077}
     m_Position: {x: -30, y: 170, z: 0}
   m_AnyStateTransitions:
-  - {fileID: -5490767237025358106}
-  - {fileID: -6120586022704298848}
-  - {fileID: -1744558624474432286}
-  - {fileID: 8583629279090782767}
   - {fileID: -4134848003568788820}
   - {fileID: 5215451331397047043}
   - {fileID: -4772089676705368064}
   - {fileID: 5269893272596769702}
   - {fileID: 5327093637523529161}
   - {fileID: -1429509584169111230}
-  - {fileID: -1547049144075826462}
-  - {fileID: -3818393843851146567}
+  - {fileID: -5490767237025358106}
+  - {fileID: -6120586022704298848}
+  - {fileID: -1744558624474432286}
+  - {fileID: 8583629279090782767}
   - {fileID: -6545512469332665476}
   - {fileID: -7957485233111013811}
+  - {fileID: -1547049144075826462}
+  - {fileID: -3818393843851146567}
   m_EntryTransitions: []
   m_StateMachineTransitions: {}
   m_StateMachineBehaviours: []

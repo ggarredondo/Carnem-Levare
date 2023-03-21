@@ -30,7 +30,8 @@ public class Hurtbox : MonoBehaviour
             character.Damage((float) target, (float) hitbox.Power, hitbox.Damage,
                 // Can't block attack if it's unblockable or if it hits the back.
                 hitbox.Unblockable || target == Target.BackHead || target == Target.BackBody,
-                hitbox.HitSound, hitbox.BlockedSound);
+                hitbox.HitSound, hitbox.BlockedSound,
+                hitbox.AdvantageOnBlock, hitbox.AdvantageOnHit);
         }
     }
 }

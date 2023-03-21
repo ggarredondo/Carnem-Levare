@@ -34,7 +34,9 @@ public class AttackManager : StateMachineBehaviour
             character.CalculateAttackDamage(wrapper.move.BaseDamage), 
             wrapper.move.Unblockable, 
             wrapper.move.HitSound,
-            wrapper.move.BlockedSound);
+            wrapper.move.BlockedSound,
+            wrapper.move.GetAdvantageOnBlock(side),
+            wrapper.move.GetAdvantageOnHit(side));
 
         // Play whiff sound, since character hasn't hit already.
         SoundEvents.Instance.PlaySfx(wrapper.move.WhiffSound, entity);

@@ -25,9 +25,13 @@ MonoBehaviour:
   baseDamage: 20
   leftStartUp: 0.2
   leftActive: 0.45
-  leftRecovery: 0.5
+  leftRecovery: 0.6
+  leftAdvantageOnBlock: 1
+  leftAdvantageOnHit: 1
   rightStartUp: 0.2
   rightActive: 0.35
-  rightRecovery: 0.5
+  rightRecovery: 0.6
+  rightAdvantageOnBlock: 1
+  rightAdvantageOnHit: 1
   leftMovement: 1
   rightMovement: 1

@@ -41,6 +41,7 @@ public abstract class Character : MonoBehaviour
     protected float directionSpeed;
     protected bool isAttacking, isHurt, isKO, isBlocked, isBlocking;
     private bool hurtExceptions;
+    private float disadvantage;
 
     [Header("Debug")] // DEBUG
     [SerializeField] private bool noDamage = false; // DEBUG
@@ -166,17 +167,22 @@ public abstract class Character : MonoBehaviour
     /// <param name="unblockable">Can the attack be blocked?</param>
     /// <param name="hitSound">Sound if the attack hits character directly.</param>
     /// <param name="blockedSound">Sound if the attack hits character while blocking.</param>
-    public void Damage(float target, float power, float dmg, bool unblockable, string hitSound, string blockedSound)
+    /// <param name="disadvantageOnBlock">How many deltaseconds does the character take in blocked animation.</param>
+    /// <param name="disadvantageOnHit">How many deltaseconds does the character take in hit animation.</param>
+    public void Damage(float target, float power, float dmg, bool unblockable, string hitSound, string blockedSound, 
+        float disadvantageOnBlock, float disadvantageOnHit)
     {
         // Animation
         anim.SetTrigger("hurt");
         anim.SetFloat("hurt_target", target);
         anim.SetFloat("hurt_power", power);
+        disadvantage = isBlocking ? disadvantageOnBlock : disadvantageOnHit;
 
         // Sound
         SoundEvents.Instance.PlaySfx(isBlocking ? blockedSound : hitSound, entity);
 
         // Stamina
+        Debug.Log(- (isBlocking && !unblockable ? Mathf.Round(dmg * blockingModifier) : dmg)); // DEBUG
         stamina -= isBlocking && !unblockable ? Mathf.Round(dmg * blockingModifier) : dmg; // Take less damage if blocking.
         if (stamina <= 0f) stamina = noDeath ? 1f : 0f; // Stamina can't go lower than 0. Can't go lower than 1 if noDeath is activated.
     }
@@ -216,6 +222,7 @@ public abstract class Character : MonoBehaviour
     public bool IsBlocking { get => isBlocking; }
     public bool IsKO { get => isKO; }
     public bool HurtExceptions { get => hurtExceptions; }
+    public float Disadvantage { get => disadvantage; }
 
     #endregion
 }

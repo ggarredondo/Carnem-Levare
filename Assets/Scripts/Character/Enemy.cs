@@ -4,7 +4,8 @@ public class Enemy : Character
 {
     [Header("Enemy-specific Parameters")]
     [SerializeField] private float enemyDirectionSpeed = 1f;
-    [SerializeField] private bool block = false, jab = false;
+    [SerializeField] private float blockMaxTime = 5f;
+    private float deltaTimer;
 
     protected override void Start()
     {
@@ -19,7 +20,9 @@ public class Enemy : Character
     }
 
     private void Behaviour() {
-        Block(block);
-        LeftN(jab, 0);
+        if (isHurt)
+            deltaTimer = 0f;
+        Block(deltaTimer <= blockMaxTime);
+        deltaTimer += Time.deltaTime;
     }
 }

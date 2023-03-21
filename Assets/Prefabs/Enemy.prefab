@@ -460,6 +460,7 @@ MonoBehaviour:
   modifyTimeScale: 0
   timeScale: 1
   enemyDirectionSpeed: 10
+  blockMaxTime: 2
 --- !u!54 &5975427957589119885
 Rigidbody:
   m_ObjectHideFlags: 0
