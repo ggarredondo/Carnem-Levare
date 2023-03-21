@@ -66,3 +66,10 @@ public struct Tuple<T>
     public T Item1;
     public T Item2;
 }
+
+[Serializable]
+public struct Tuple<T, K>
+{
+    public T Item1;
+    public K Item2;
+}

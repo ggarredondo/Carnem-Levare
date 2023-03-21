@@ -41,7 +41,7 @@ public class InputReader : ScriptableObject
 
     public void OnStartPauseMenu(InputAction.CallbackContext context)
     {
-        if (context.performed) StartPauseMenuEvent.Invoke();
+        if (context.performed) StartPauseMenuEvent?.Invoke();
     }
     #endregion
 
@@ -49,7 +49,7 @@ public class InputReader : ScriptableObject
 
     public void OnMovement(InputAction.CallbackContext context)
     {
-        MovementEvent.Invoke(context.ReadValue<Vector2>());
+        MovementEvent?.Invoke(context.ReadValue<Vector2>());
     }
     public void OnBlock(InputAction.CallbackContext context)
     {

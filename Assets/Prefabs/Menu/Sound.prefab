@@ -1,118 +1,5 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &7008236477886495668
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 3603002622229774034}
-  - component: {fileID: 623362944893570352}
-  m_Layer: 0
-  m_Name: UI
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &3603002622229774034
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7008236477886495668}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 9168311950435373015}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &623362944893570352
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7008236477886495668}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 636b999a4cc4c8946acc58c7ab5b63e9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  audioMixerGroup: {fileID: 1346823579002931596, guid: 6634d3955dedfbd41a411112534c1a55,
-    type: 2}
-  threeD: 0
-  dopplerLevel: 1
-  spread: 0
-  volumeRolloff: 0
-  minDistance: 1
-  maxDistance: 500
-  customRollofCurve:
-    serializedVersion: 2
-    m_Curve: []
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  sounds:
-  - name: Slider
-    clip: {fileID: 8300000, guid: 85a922d84d6434047a80a73c2fd9b288, type: 3}
-    volume: 1
-    pitch: 1
-    loop: 0
-    spatialBlend: 0
-  - name: PressButton
-    clip: {fileID: 8300000, guid: a0fe1d8bfa8b653449017f5f33a5cd98, type: 3}
-    volume: 1
-    pitch: 1
-    loop: 0
-    spatialBlend: 0
-  - name: SelectButton
-    clip: {fileID: 8300000, guid: 99ac5bbf8d21cf34d8acd7e821a38607, type: 3}
-    volume: 1
-    pitch: 1
-    loop: 0
-    spatialBlend: 0
-  - name: PlayGame
-    clip: {fileID: 8300000, guid: 639807957b7383e4b9a45848414b8235, type: 3}
-    volume: 1
-    pitch: 1
-    loop: 0
-    spatialBlend: 0
-  - name: PauseGame
-    clip: {fileID: 8300000, guid: 0ef254caff8402a4099261d19f130162, type: 3}
-    volume: 1
-    pitch: 1
-    loop: 0
-    spatialBlend: 0
-  - name: BackMenu
-    clip: {fileID: 8300000, guid: 18c35a311aae4944fb6fb99db04b771b, type: 3}
-    volume: 1
-    pitch: 1
-    loop: 0
-    spatialBlend: 0
-  - name: ApplyRebind
-    clip: {fileID: 8300000, guid: ae100d7aaf7cbcb48a7edb2fc1993050, type: 3}
-    volume: 1
-    pitch: 1
-    loop: 0
-    spatialBlend: 0
-  - name: ExitLoading
-    clip: {fileID: 8300000, guid: 94bbd3b025f8e214ca67db8a65318a1f, type: 3}
-    volume: 1
-    pitch: 1
-    loop: 0
-    spatialBlend: 0
-  - name: MaskAlert
-    clip: {fileID: 8300000, guid: 977faa92ad1efc74fb101e3c36767b03, type: 3}
-    volume: 1
-    pitch: 1
-    loop: 0
-    spatialBlend: 0
 --- !u!1 &9168311950435373014
 GameObject:
   m_ObjectHideFlags: 0
@@ -122,9 +9,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 9168311950435373015}
-  - component: {fileID: 9168311950435373000}
   m_Layer: 0
-  m_Name: Sfx Manager
+  m_Name: Sfx Sources
   m_TagString: SFX
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -141,122 +27,10 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 3603002622229774034}
+  m_Children: []
   m_Father: {fileID: 9168311950741595995}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &9168311950435373000
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9168311950435373014}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 636b999a4cc4c8946acc58c7ab5b63e9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  audioMixerGroup: {fileID: 1346823579002931596, guid: 6634d3955dedfbd41a411112534c1a55,
-    type: 2}
-  threeD: 1
-  dopplerLevel: 1
-  spread: 0
-  volumeRolloff: 2
-  minDistance: 0
-  maxDistance: 10
-  customRollofCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0.0026527867
-      value: 1.0027959
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    - serializedVersion: 3
-      time: 15
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  sounds:
-  - name: Whiff_Jab
-    clip: {fileID: 8300000, guid: 20a4f733a6b1437478533aa501a59811, type: 3}
-    volume: 0.3
-    pitch: 1.5
-    loop: 0
-    spatialBlend: 1
-  - name: Hit_Jab
-    clip: {fileID: 8300000, guid: f9d9c5191b939794b80d48221a72c64b, type: 3}
-    volume: 0.5
-    pitch: 1
-    loop: 0
-    spatialBlend: 1
-  - name: Whiff_Hook
-    clip: {fileID: 8300000, guid: 021ee8d446f206742b8452686a763cae, type: 3}
-    volume: 0.3
-    pitch: 1.5
-    loop: 0
-    spatialBlend: 1
-  - name: Hit_Hook
-    clip: {fileID: 8300000, guid: 75983ce02f0bc1a4f9083ca1760360e3, type: 3}
-    volume: 0.5
-    pitch: 1
-    loop: 0
-    spatialBlend: 1
-  - name: Whiff_Mid_Hook
-    clip: {fileID: 8300000, guid: 2e99169e60a310f498f25840912e52cc, type: 3}
-    volume: 0.3
-    pitch: 1.5
-    loop: 0
-    spatialBlend: 1
-  - name: Hit_Mid_Hook
-    clip: {fileID: 8300000, guid: 75983ce02f0bc1a4f9083ca1760360e3, type: 3}
-    volume: 0.5
-    pitch: 1
-    loop: 0
-    spatialBlend: 1
-  - name: Whiff_Overhand
-    clip: {fileID: 8300000, guid: 826fc3985eaa9d944b985509a6cc5ece, type: 3}
-    volume: 0.3
-    pitch: 1.5
-    loop: 0
-    spatialBlend: 1
-  - name: Hit_Overhand
-    clip: {fileID: 8300000, guid: 1f8c1646c87a6844da3e8da6b82949d9, type: 3}
-    volume: 0.5
-    pitch: 1
-    loop: 0
-    spatialBlend: 1
-  - name: Right_Foot
-    clip: {fileID: 8300000, guid: 5a706d28a95071a4eb84b0a586f996d9, type: 3}
-    volume: 0.1
-    pitch: 1
-    loop: 0
-    spatialBlend: 1
-  - name: Left_Foot
-    clip: {fileID: 8300000, guid: b8f91d2f9676bd143be3be6fef9be342, type: 3}
-    volume: 0.1
-    pitch: 1
-    loop: 0
-    spatialBlend: 1
-  - name: Blocked_Default
-    clip: {fileID: 8300000, guid: 19ddc316ff85f6d4db324352983e1165, type: 3}
-    volume: 0.5
-    pitch: 1
-    loop: 0
-    spatialBlend: 1
 --- !u!1 &9168311950741595994
 GameObject:
   m_ObjectHideFlags: 0
@@ -303,8 +77,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c3ba9560dd9280e498c63405895ad234, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  audioMixerGroup: {fileID: 1346823579002931596, guid: 6634d3955dedfbd41a411112534c1a55,
-    type: 2}
+  uiSfxSounds: {fileID: 11400000, guid: 5579dd4c23fd5554397d995ec5221c28, type: 2}
+  gameSfxSounds: {fileID: 11400000, guid: 7bb960d4926ae204ca58b6e854dceac3, type: 2}
+  musicSounds: {fileID: 11400000, guid: c92730399fa649c4f84f69f30d845b4b, type: 2}
 --- !u!1 &9168311950817181048
 GameObject:
   m_ObjectHideFlags: 0
@@ -314,9 +89,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 9168311950817181049}
-  - component: {fileID: 9168311950817181050}
   m_Layer: 0
-  m_Name: Music Manager
+  m_Name: Music Sources
   m_TagString: MUSIC
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -337,42 +111,3 @@ Transform:
   m_Father: {fileID: 9168311950741595995}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &9168311950817181050
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9168311950817181048}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 636b999a4cc4c8946acc58c7ab5b63e9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  audioMixerGroup: {fileID: -3278381760577669313, guid: 6634d3955dedfbd41a411112534c1a55,
-    type: 2}
-  threeD: 0
-  dopplerLevel: 1
-  spread: 0
-  volumeRolloff: 0
-  minDistance: 1
-  maxDistance: 500
-  customRollofCurve:
-    serializedVersion: 2
-    m_Curve: []
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  sounds:
-  - name: Intro
-    clip: {fileID: 8300000, guid: 4de8a92d690abf347a9f0b2123daed4d, type: 3}
-    volume: 0.1
-    pitch: 1
-    loop: 1
-    spatialBlend: 0
-  - name: Fight
-    clip: {fileID: 8300000, guid: bc8deed142934134e977b60b65dcb1f6, type: 3}
-    volume: 0.1
-    pitch: 1
-    loop: 1
-    spatialBlend: 0

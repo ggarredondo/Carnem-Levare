@@ -153,6 +153,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8f987bc0ed7df6c42af3cd36e96a823f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  allSounds:
+  - Item1: {fileID: 11400000, guid: 7bb960d4926ae204ca58b6e854dceac3, type: 2}
+    Item2: 3
+  - Item1: {fileID: 11400000, guid: c92730399fa649c4f84f69f30d845b4b, type: 2}
+    Item2: 0
+  - Item1: {fileID: 11400000, guid: 5579dd4c23fd5554397d995ec5221c28, type: 2}
+    Item2: 0
 --- !u!4 &330824238
 Transform:
   m_ObjectHideFlags: 0

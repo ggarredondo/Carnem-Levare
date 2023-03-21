@@ -13,6 +13,7 @@ public class SceneManagement : MonoBehaviour
     private AsyncOperation asyncOperation;
     private LoadingScreen loadingScreen;
     private int sceneToLoad;
+    [SerializeField] private Tuple<Sounds, SceneNumber>[] allSounds;
 
     private void Awake()
     {
@@ -42,7 +43,6 @@ public class SceneManagement : MonoBehaviour
     {
         animator = GameObject.FindGameObjectWithTag("TRANSITION").GetComponent<Animator>();
         playerInput = GameObject.FindGameObjectWithTag("INPUT").GetComponent<PlayerInput>();
-        AudioManager gameSfxManager = GameObject.FindGameObjectWithTag("SFX").GetComponent<AudioManager>();
 
         if (SceneManager.GetActiveScene().buildIndex == 1)
         {
@@ -50,18 +50,26 @@ public class SceneManagement : MonoBehaviour
             StartCoroutine(LoadFromLoadingScreen());
         }
 
-        if (SceneManager.GetActiveScene().buildIndex == 3)
-        {
-            gameSfxManager.speakers = GameObject.FindGameObjectsWithTag("AUDIO_SOURCES");
-            gameSfxManager.Initialize();
-        }
-        else gameSfxManager.NotActive = true;
+        InitializeSoundSources();
 
         playerInput.controlsChangedEvent.AddListener(ControlSaver.OnControlSchemeChanged);
         ControlSaver.OnControlSchemeChanged(playerInput);
 
         transitionEnd = false;
         StartCoroutine(EndLoading());
+    }
+
+    private void InitializeSoundSources()
+    {
+        for(int i = 0; i < allSounds.GetLength(0); i++)
+        {
+            if (SceneManager.GetActiveScene().buildIndex == (int) allSounds[i].Item2)
+            {
+                GameObject[] speakers = GameObject.FindGameObjectsWithTag(allSounds[i].Item1.SpeakersTag);
+                allSounds[i].Item1.speakers = speakers;
+                allSounds[i].Item1.Initialize();
+            }
+        }
     }
 
     private IEnumerator EndLoading()
@@ -126,4 +134,11 @@ public class SceneManagement : MonoBehaviour
         sceneToLoad = sceneIndex;
         SceneManager.LoadScene(1);
     }
+}
+
+public enum SceneNumber
+{
+    MAIN_MENU = 0,
+    LOADING_MENU = 1,
+    GAME = 3
 }

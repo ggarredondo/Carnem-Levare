@@ -4,10 +4,11 @@ using UnityEngine.Audio;
 
 public class SoundEvents : MonoBehaviour
 {
-
     public static SoundEvents Instance { get; private set; }
 
-    public AudioMixerGroup audioMixerGroup;
+    public Sounds uiSfxSounds;
+    public Sounds gameSfxSounds;
+    public Sounds musicSounds;
 
     public delegate void SoundEventHandler();
     public delegate void PauseMenuHandler(bool enter);
@@ -25,8 +26,6 @@ public class SoundEvents : MonoBehaviour
     public PauseMenuHandler PauseGame;
     public WalkingHandler Walking;
 
-    private AudioManager uiSfxManager, gameSfxManager;
-    private AudioManager musicManager;
     private bool isPlayingSlider;
 
     private void Awake()
@@ -42,50 +41,46 @@ public class SoundEvents : MonoBehaviour
         }
     }
 
-    public void StopSound(string sound) { uiSfxManager?.Stop(sound); }
+    public void StopSound(string sound) { uiSfxSounds?.Stop(sound); }
 
-    public void PlayMusic(string sound) { musicManager.StopAllSounds(); musicManager?.Play(sound); }
+    public void PlayMusic(string sound) { musicSounds.StopAllSounds(); musicSounds?.Play(sound); }
 
-    public void PlaySfx(string sound) { gameSfxManager?.Play(sound); }
+    public void PlaySfx(string sound) { gameSfxSounds?.Play(sound); }
 
-    public void PlaySfx(string sound, Entity actualSource) { gameSfxManager?.Play(sound, (int) actualSource); }
+    public void PlaySfx(string sound, Entity actualSource) { gameSfxSounds?.Play(sound, (int) actualSource); }
 
     private void OnEnable()
     {
-        uiSfxManager = GameObject.FindGameObjectWithTag("SFX").transform.GetChild(0).GetComponent<AudioManager>();
-        gameSfxManager = GameObject.FindGameObjectWithTag("SFX").GetComponent<AudioManager>();
-        musicManager = GameObject.FindGameObjectWithTag("MUSIC").GetComponent<AudioManager>();
-
-        PressButton += () => { uiSfxManager.Play("PressButton"); };
-        SelectButton += () => { uiSfxManager.Play("SelectButton"); };
-        PlayGame += () => { uiSfxManager.Play("PlayGame"); };
-        BackMenu += () => { uiSfxManager.StopAllSounds(); uiSfxManager.Play("BackMenu"); };
-        ApplyRebind += () => { uiSfxManager.Play("ApplyRebind"); };
-        ExitLoading += () => { uiSfxManager.Play("ExitLoading"); };
-        MaskAlert += () => { uiSfxManager.Play("MaskAlert"); };
+        PressButton += () => { uiSfxSounds.Play("PressButton"); };
+        SelectButton += () => { uiSfxSounds.Play("SelectButton"); };
+        PlayGame += () => { uiSfxSounds.Play("PlayGame"); };
+        BackMenu += () => { uiSfxSounds.StopAllSounds(); uiSfxSounds.Play("BackMenu"); };
+        ApplyRebind += () => { uiSfxSounds.Play("ApplyRebind"); };
+        ExitLoading += () => { uiSfxSounds.Play("ExitLoading"); };
+        MaskAlert += () => { uiSfxSounds.Play("MaskAlert"); };
         Slider += () => { if (!isPlayingSlider) StartCoroutine(PlaySlider()); };
 
         PauseGame += (bool enter) =>
         {
-            if (enter) uiSfxManager.PauseAllSounds();
+            if (enter) gameSfxSounds.PauseAllSounds();
 
-            uiSfxManager.Stop("PauseGame"); uiSfxManager.Play("PauseGame");
+            uiSfxSounds.Stop("PauseGame"); uiSfxSounds.Play("PauseGame");
 
-            if (!enter) uiSfxManager.ResumeAllSounds();
+            //if (!enter) gameSfxSounds.ResumeAllSounds();
         };
 
         Walking += (int foot, Entity actualSource) =>
         {
-            if (foot == 0) gameSfxManager.Play("Left_Foot", (int) actualSource);
-            else gameSfxManager.Play("Right_Foot", (int)actualSource);
+            if (foot == 0) gameSfxSounds.Play("Left_Foot", (int) actualSource);
+            else gameSfxSounds.Play("Right_Foot", (int)actualSource);
         };
     }
 
     public IEnumerator PlaySlider()
     {
-        uiSfxManager.Play("Slider");
+        uiSfxSounds.Play("Slider");
         isPlayingSlider = true;
-        yield return new WaitForSecondsRealtime(uiSfxManager.Length("Slider") / 6);
+        yield return new WaitForSecondsRealtime(uiSfxSounds.Length("Slider") / 6);
         isPlayingSlider = false;
     }
 }

@@ -1,0 +1,104 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7564036886c38a042a3217cff9b6784e, type: 3}
+  m_Name: GameSfxSounds
+  m_EditorClassIdentifier: 
+  audioMixerGroup: {fileID: 1346823579002931596, guid: 6634d3955dedfbd41a411112534c1a55,
+    type: 2}
+  initializeScene: 3
+  speakersTag: AUDIO_SOURCES
+  threeD: 1
+  dopplerLevel: 1
+  spread: 0
+  volumeRolloff: 2
+  minDistance: 0
+  maxDistance: 10
+  customRollofCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0.0026527867
+      value: 1.0027959
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 15
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  sounds:
+  - name: Whiff_Jab
+    clip: {fileID: 8300000, guid: 20a4f733a6b1437478533aa501a59811, type: 3}
+    volume: 0.3
+    pitch: 1.5
+    loop: 0
+  - name: Hit_Jab
+    clip: {fileID: 8300000, guid: f9d9c5191b939794b80d48221a72c64b, type: 3}
+    volume: 0.5
+    pitch: 1
+    loop: 0
+  - name: Whiff_Hook
+    clip: {fileID: 8300000, guid: 021ee8d446f206742b8452686a763cae, type: 3}
+    volume: 0.3
+    pitch: 1.5
+    loop: 0
+  - name: Hit_Hook
+    clip: {fileID: 8300000, guid: 75983ce02f0bc1a4f9083ca1760360e3, type: 3}
+    volume: 0.5
+    pitch: 1
+    loop: 0
+  - name: Whiff_Mid_Hook
+    clip: {fileID: 8300000, guid: 2e99169e60a310f498f25840912e52cc, type: 3}
+    volume: 0.3
+    pitch: 1.5
+    loop: 0
+  - name: Hit_Mid_Hook
+    clip: {fileID: 8300000, guid: 75983ce02f0bc1a4f9083ca1760360e3, type: 3}
+    volume: 0.5
+    pitch: 1
+    loop: 0
+  - name: Whiff_Overhand
+    clip: {fileID: 8300000, guid: 826fc3985eaa9d944b985509a6cc5ece, type: 3}
+    volume: 0.3
+    pitch: 1.5
+    loop: 0
+  - name: Hit_Overhand
+    clip: {fileID: 8300000, guid: 1f8c1646c87a6844da3e8da6b82949d9, type: 3}
+    volume: 0.5
+    pitch: 1
+    loop: 0
+  - name: Right_Foot
+    clip: {fileID: 8300000, guid: 5a706d28a95071a4eb84b0a586f996d9, type: 3}
+    volume: 0.1
+    pitch: 1
+    loop: 0
+  - name: Left_Foot
+    clip: {fileID: 8300000, guid: b8f91d2f9676bd143be3be6fef9be342, type: 3}
+    volume: 0.1
+    pitch: 1
+    loop: 0
+  - name: Blocked_Default
+    clip: {fileID: 8300000, guid: 19ddc316ff85f6d4db324352983e1165, type: 3}
+    volume: 0.5
+    pitch: 1
+    loop: 0
