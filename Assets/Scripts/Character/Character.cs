@@ -2,6 +2,7 @@ using UnityEngine;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine.Assertions;
+using System;
 
 public abstract class Character : MonoBehaviour
 {
@@ -24,12 +25,12 @@ public abstract class Character : MonoBehaviour
     [SerializeField] [InitializationField] private float maxStamina = 0f;
 
     [SerializeField] private float attackDamage = 0f;
-    [Tooltip("Attack animation speed")] [InitializationField] [Range(1f, 1.2f)] public float attackSpeed = 1f;
     [Tooltip("Percentage of stamina damage taken when blocking")] [SerializeField] [Range(0f, 1f)] private float blockingModifier = 0.5f;
     [SerializeField] [InitializationField] [Range(1f, 1.2f)] private float height = 1f;
     [SerializeField] [InitializationField] private float mass = 1f;
     [SerializeField] [InitializationField] private float drag = 0f; // SHOULD BE CALCULATED GIVEN MASS
-    [SerializeField] private List<MoveWrapper> leftMoveset, rightMoveset;
+    [SerializeField] private List<Move> leftMoveset, rightMoveset;
+    [SerializeField] private List<Hitbox> hitboxes;
 
     // Character Variables
     private Entity entity;
@@ -135,12 +136,12 @@ public abstract class Character : MonoBehaviour
         for (int i = 0; i < leftMoveset.Count; ++i)
         {
             // Left Moves
-            UpdateAnimator("LeftClip" + i, leftMoveset[i].move.LeftAnimation);
-            anim.SetFloat("left" + i + "_speed", leftMoveset[i].move.LeftAnimationSpeed * attackSpeed);
+            UpdateAnimator("LeftClip" + i, leftMoveset[i].Animation);
+            anim.SetFloat("left" + i + "_speed", leftMoveset[i].AnimationSpeed);
 
             // Right Moves
-            UpdateAnimator("RightClip" + i, rightMoveset[i].move.RightAnimation);
-            anim.SetFloat("right" + i + "_speed", rightMoveset[i].move.RightAnimationSpeed * attackSpeed);
+            UpdateAnimator("RightClip" + i, rightMoveset[i].Animation);
+            anim.SetFloat("right" + i + "_speed", rightMoveset[i].AnimationSpeed);
         }
     }
 
@@ -200,8 +201,9 @@ public abstract class Character : MonoBehaviour
 
     public Animator Animator { get => anim; }
 
-    public List<MoveWrapper> LeftMoveset { get => leftMoveset; }
-    public List<MoveWrapper> RightMoveset { get => rightMoveset; }
+    public List<Move> LeftMoveset { get => leftMoveset; }
+    public List<Move> RightMoveset { get => rightMoveset; }
+    public List<Hitbox> Hitboxes { get => hitboxes; }
 
     public float Stamina { get => stamina; }
     public float MaxStamina { get => maxStamina; }

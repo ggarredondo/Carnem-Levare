@@ -1,6 +1,5 @@
 using UnityEngine;
 
-#region Enums
 // Used to choose between hurt animations, if it hits.
 public enum Power: uint
 {
@@ -9,26 +8,15 @@ public enum Power: uint
     Strong = 2
 }
 
-// Used by Attack Manager to know from which side the attack is coming from
-public enum Side : int
-{
-    Left = -1,
-    Right = 1
-}
-#endregion
-
 [CreateAssetMenu(menuName = "Scriptable Objects/Move")]
 public class Move : ScriptableObject
 {
     [SerializeField] private string moveName;
 
     [Header("Attack Animations")]
-    // Animations that the move performs, depending on whether the Move slot is left or right, and if the player is currently crouching.
-    [SerializeField] private AnimationClip leftAnimation;
-    [SerializeField] [Range(0f, 2f)] private float leftAnimationSpeed = 1f;
-
-    [SerializeField] private AnimationClip rightAnimation;
-    [SerializeField] [Range(0f, 2f)] private float rightAnimationSpeed = 1f;
+    [SerializeField] private AnimationClip animation;
+    [SerializeField] [Range(0f, 2f)] private float animationSpeed = 1f;
+    [SerializeField] private string hitboxName;
 
     [Header("Attack Sound")]
     [SerializeField] private string whiffSound;
@@ -40,51 +28,26 @@ public class Move : ScriptableObject
     [SerializeField] private bool unblockable;
     [SerializeField] private float baseDamage; // Used to calculate damage dealt to the opponent's stamina, if it hits.
 
+    [Tooltip("The attack may move the character further than established by root motion")]
+    [SerializeField] private float extraMovement = 0f;
+
     #region TimeData
 
-    [Header("Left Time Data (Normalized Animation Time)")]
+    [Header("Time Data (Normalized Animation Time)")]
     [Tooltip("[0, startup]: no hitbox. (startup, active]: hitbox is active.")]
-    [SerializeField] [Range(0f, 1f)] private float leftStartUp = 0f;
+    [SerializeField] [Range(0f, 1f)] private float startUp = 0f;
 
     [Tooltip("(startup, active]: hitbox is active. (active, recovery]: no hitbox.")]
-    [SerializeField] [Range(0f, 1f)] private float leftActive = 0f;
+    [SerializeField] [Range(0f, 1f)] private float active = 0f;
 
     [Tooltip("(active, recovery]: no hitbox. (recovery, 1]: can cancel animation.")]
-    [SerializeField] [Range(0f, 1f)] private float leftRecovery = 0f;
+    [SerializeField] [Range(0f, 1f)] private float recovery = 0f;
 
     [Tooltip("How many deltaseconds the opponent takes to leave block animation.")]
-    [SerializeField] private float leftAdvantageOnBlock = 0f;
+    [SerializeField] private float advantageOnBlock = 0f;
 
     [Tooltip("How many deltaseconds the opponent takes to leave hurt animation.")]
-    [SerializeField] private float leftAdvantageOnHit = 0f;
-
-    [Header("Right Time Data")]
-    [Tooltip("[0, startup]: no hitbox. (startup, active]: hitbox is active.")]
-    [SerializeField] [Range(0f, 1f)] private float rightStartUp = 0f;
-
-    [Tooltip("(startup, active]: hitbox is active. (active, recovery]: no hitbox.")]
-    [SerializeField] [Range(0f, 1f)] private float rightActive = 0f;
-
-    [Tooltip("(active, recovery]: no hitbox. (recovery, 1]: can cancel animation.")]
-    [SerializeField] [Range(0f, 1f)] private float rightRecovery = 0f;
-
-    [Tooltip("How many deltaseconds the opponent takes to leave block animation.")]
-    [SerializeField] private float rightAdvantageOnBlock = 0f;
-
-    [Tooltip("How many deltaseconds the opponent takes to leave hurt animation.")]
-    [SerializeField] private float rightAdvantageOnHit = 0f;
-
-    #endregion
-
-    #region MovementValues
-
-    [Header("(Extra) Movement Values")]
-
-    [Tooltip("The attack may move the character further than established by root motion")]
-    [SerializeField] private float leftMovement = 0f;
-
-    [Tooltip("The attack may move the character further than established by root motion")]
-    [SerializeField] private float rightMovement = 0f;
+    [SerializeField] private float advantageOnHit = 0f;
 
     #endregion
 
@@ -92,10 +55,9 @@ public class Move : ScriptableObject
     public string MoveName { get => moveName; }
 
     // Animation
-    public AnimationClip LeftAnimation { get => leftAnimation; }
-    public float LeftAnimationSpeed { get => leftAnimationSpeed; }
-    public AnimationClip RightAnimation { get => rightAnimation; }
-    public float RightAnimationSpeed { get => rightAnimationSpeed; }
+    public AnimationClip Animation { get => animation; }
+    public float AnimationSpeed { get => animationSpeed; }
+    public string HitboxName { get => hitboxName; }
 
     // Sound
     public string WhiffSound { get => whiffSound; }
@@ -110,87 +72,42 @@ public class Move : ScriptableObject
     /// <summary>
     /// Move is starting during the interval [0, startup].
     /// </summary>
-    /// <param name="side">Which side is the attack coming from?</param>
     /// <param name="normalizedTime">Normalized time of the animation</param>
     /// <returns>True if time is in interval, false otherwise</returns>
-    public bool IsStarting(Side side, float normalizedTime)
-    {
-        if (side == Side.Left)
-            return normalizedTime <= leftStartUp;
-        return normalizedTime <= rightStartUp;
-    }
+    public bool IsStarting(float normalizedTime) { return normalizedTime < startUp; }
 
     /// <summary>
     /// Move is active during the interval (startup, active].
     /// </summary>
-    /// <param name="side">Which side is the attack coming from?</param>
     /// <param name="normalizedTime">Normalized time of the animation</param>
     /// <returns>True if time is in interval, false otherwise</returns>
-    public bool IsActive(Side side, float normalizedTime) {
-        if (side == Side.Left)
-            return normalizedTime > leftStartUp && normalizedTime <= leftActive;
-        return normalizedTime > rightStartUp && normalizedTime <= rightActive;
+    public bool IsActive(float normalizedTime) {
+        return normalizedTime > startUp && normalizedTime <= active;
     }
 
     /// <summary>
     /// Move is recovering during the interval (active, recovery].
     /// </summary>
-    /// <param name="side">Which side is the attack coming from?</param>
     /// <param name="normalizedTime">Normalized time of the animation</param>
     /// <returns>True if time is in interval, false otherwise</returns>
-    public bool IsRecovering(Side side, float normalizedTime) {
-        if (side == Side.Left)
-            return normalizedTime > leftActive && normalizedTime <= leftRecovery;
-        return normalizedTime > rightActive && normalizedTime <= rightRecovery;
+    public bool IsRecovering(float normalizedTime) {
+        return normalizedTime > active && normalizedTime <= recovery;
     }
 
     /// <summary>
     /// Move can be cancelled when the animation normalized time is
     /// over *recovery* value.
     /// </summary>
-    /// <param name="side">Which side is the attack coming from?</param>
     /// <param name="normalizedTime">Normalized time of the animation</param>
     /// <returns>True if time is greater than *recovery*, false otherwise</returns>
-    public bool HasRecovered(Side side, float normalizedTime) {
-        if (side == Side.Left) 
-            return normalizedTime > leftRecovery;
-        return normalizedTime > rightRecovery;
+    public bool HasRecovered(float normalizedTime) {
+        return normalizedTime > recovery;
     }
 
-    /// <summary>
-    /// Returns deltaseconds it takes for the receiving opponent to
-    /// leave the blocked animation.
-    /// </summary>
-    /// <param name="side">Which side is the attack coming from?</param>
-    /// <returns>Advantage on block in deltaseconds</returns>
-    public float GetAdvantageOnBlock(Side side) {
-        if (side == Side.Left)
-            return leftAdvantageOnBlock;
-        return rightAdvantageOnBlock;
-    }
+    public float AdvantageOnBlock { get => advantageOnBlock; }
+    public float AdvantageOnHit { get => advantageOnHit; }
 
-    /// <summary>
-    /// Returns deltaseconds it takes for the receiving opponent to
-    /// leave the hurt animation.
-    /// </summary>
-    /// <param name="side">Which side is the attack coming from?</param>
-    /// <returns>Advantage on hit in deltaseconds</returns>
-    public float GetAdvantageOnHit(Side side) {
-        if (side == Side.Left)
-            return leftAdvantageOnHit;
-        return rightAdvantageOnHit;
-    }
-
-    /// <summary>
-    /// Returns the amount of extra movement the move may have depending on the side it was used from.
-    /// </summary>
-    /// <param name="side">Which side is the attack coming from?</param>
-    /// <returns>Amount of extra movement</returns>
-    public float GetMovement(Side side) {
-        if (side == Side.Left)
-            return leftMovement;
-        return rightMovement;
-    }
+    public float ExtraMovement { get => extraMovement; }
 
     #endregion
 }

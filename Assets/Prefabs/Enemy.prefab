@@ -43,7 +43,7 @@ GameObject:
   - component: {fileID: 125701324109848622}
   - component: {fileID: 3986532354630737285}
   m_Layer: 7
-  m_Name: Right Fist Hitbox
+  m_Name: RightFistHitbox
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -285,7 +285,7 @@ GameObject:
   - component: {fileID: 1145502306408624781}
   - component: {fileID: 692432875193982508}
   m_Layer: 7
-  m_Name: Left Fist Hitbox
+  m_Name: LeftFistHitbox
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -439,21 +439,15 @@ MonoBehaviour:
   stamina: 0
   maxStamina: 200
   attackDamage: 10
-  attackSpeed: 1
   blockingModifier: 0.1
   height: 1.1
   mass: 1
   drag: 0
-  leftMoveset:
-  - move: {fileID: 11400000, guid: 9ec677a7eb446e244816d077b11c8747, type: 2}
-    hitbox: {fileID: 692432875193982508}
-  - move: {fileID: 11400000, guid: fa350c7d7c867b24da1f6763a4020f2f, type: 2}
-    hitbox: {fileID: 692432875193982508}
-  rightMoveset:
-  - move: {fileID: 11400000, guid: 0de5e9c08e7776e43a041833bdf495cb, type: 2}
-    hitbox: {fileID: 3986532354630737285}
-  - move: {fileID: 11400000, guid: d6bf674840b5bc944ba69f634ef34c5d, type: 2}
-    hitbox: {fileID: 3986532354630737285}
+  leftMoveset: []
+  rightMoveset: []
+  hitboxes:
+  - {fileID: 692432875193982508}
+  - {fileID: 3986532354630737285}
   noDamage: 0
   noDeath: 1
   updateMoveset: 0
