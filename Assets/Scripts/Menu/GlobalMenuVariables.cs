@@ -7,6 +7,7 @@ public class GlobalMenuVariables : MonoBehaviour
 
     [Header("Font Asset")]
     public TMP_FontAsset font;
+    public TMP_FontAsset[] inputFonts;
 
     [Header ("Button type 1")]
     public Color32 selectedButtonColor;

@@ -44,7 +44,7 @@ public class SelectableMenuManager : MenuManager
     /// <summary>
     /// Move to the Menu on the right when pressing right shoulder
     /// </summary>
-    public void MoveToRightMenu()
+    private void MoveToRightMenu()
     {
         if (gameObject.activeSelf)
         {
@@ -58,7 +58,7 @@ public class SelectableMenuManager : MenuManager
     /// <summary>
     /// Move to the Menu on the left when pressing left shoulder
     /// </summary>
-    public void MoveToLeftMenu()
+    private void MoveToLeftMenu()
     {
         if (gameObject.activeSelf)
         {

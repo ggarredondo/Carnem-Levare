@@ -145,8 +145,7 @@ public class MenuManager : MonoBehaviour
     /// <summary>
     /// Return to the parent of the actual object
     /// </summary>
-    /// <param name="context"></param>
-    public virtual void ReturnFromChildren()
+    protected virtual void ReturnFromChildren()
     {
         GameObject current = EventSystem.current.currentSelectedGameObject;
 
@@ -179,8 +178,7 @@ public class MenuManager : MonoBehaviour
     /// <summary>
     /// Obtain the elements behind the mouse and if there is a slider it will set as the selected one
     /// </summary>
-    /// <param name="context"></param>
-    public void MouseClick()
+    private void MouseClick()
     {
         if (RaycastMouse().Count != 0)
             if (RaycastMouse()[0].gameObject.name == "Handle")

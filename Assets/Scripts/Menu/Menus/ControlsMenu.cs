@@ -8,10 +8,9 @@ public class ControlsMenu : MonoBehaviour
 { 
 
     private static readonly string currentActionMap = "Main Movement";
+    private PlayerInput playerInput;
 
-    [SerializeField] private PlayerInput playerInput;
     [SerializeField] private MainMenuManager globalMenuManager;
-    [SerializeField] private TMP_FontAsset[] fonts;
 
     private string lastControlScheme, cancelMessage;
     private InputAction action, originalAction;
@@ -104,7 +103,7 @@ public class ControlsMenu : MonoBehaviour
         {
             string buttonText = buttons.GetChild(i).gameObject.name;
             string buttonAction = playerInput.actions.FindActionMap(currentActionMap).FindAction(buttonText).bindings[ControlSaver.controlSchemeIndex].effectivePath;
-            buttons.GetChild(i).transform.GetChild(0).GetComponent<TMP_Text>().font = fonts[ControlSaver.controlSchemeIndex];
+            buttons.GetChild(i).transform.GetChild(0).GetComponent<TMP_Text>().font = GlobalMenuVariables.Instance.inputFonts[ControlSaver.controlSchemeIndex];
             buttons.GetChild(i).transform.GetChild(0).GetComponent<TMP_Text>().text = ControlSaver.mapping[buttonAction];
         }
     }

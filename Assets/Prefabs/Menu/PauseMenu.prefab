@@ -1194,6 +1194,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   font: {fileID: 11400000, guid: 704c349f8c07eea43aacb0cea9093d88, type: 2}
+  inputFonts:
+  - {fileID: 11400000, guid: 2b80a8fa063c79745a3ac60cfeefa351, type: 2}
+  - {fileID: 11400000, guid: 9ee3d445f34cfb24baef4f5f66b12f7d, type: 2}
   selectedButtonColor:
     serializedVersion: 2
     rgba: 4288895840

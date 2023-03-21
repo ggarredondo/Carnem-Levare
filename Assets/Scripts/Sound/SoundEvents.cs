@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.Audio;
 
@@ -26,6 +27,7 @@ public class SoundEvents : MonoBehaviour
 
     private AudioManager uiSfxManager, gameSfxManager;
     private AudioManager musicManager;
+    private bool isPlayingSlider;
 
     private void Awake()
     {
@@ -61,7 +63,7 @@ public class SoundEvents : MonoBehaviour
         ApplyRebind += () => { uiSfxManager.Play("ApplyRebind"); };
         ExitLoading += () => { uiSfxManager.Play("ExitLoading"); };
         MaskAlert += () => { uiSfxManager.Play("MaskAlert"); };
-        Slider += () => { uiSfxManager.Play("Slider"); };
+        Slider += () => { if (!isPlayingSlider) StartCoroutine(PlaySlider()); };
 
         PauseGame += (bool enter) =>
         {
@@ -77,5 +79,13 @@ public class SoundEvents : MonoBehaviour
             if (foot == 0) gameSfxManager.Play("Left_Foot", (int) actualSource);
             else gameSfxManager.Play("Right_Foot", (int)actualSource);
         };
+    }
+
+    public IEnumerator PlaySlider()
+    {
+        uiSfxManager.Play("Slider");
+        isPlayingSlider = true;
+        yield return new WaitForSecondsRealtime(uiSfxManager.Length("Slider") / 6);
+        isPlayingSlider = false;
     }
 }

@@ -41,14 +41,13 @@ public class PauseMenuManager : MainMenuManager
     /// <summary>
     /// enable or disable the pause menu
     /// </summary>
-    /// <param name="context"></param>
-    public void EnterPauseMenu()
+    private void EnterPauseMenu()
     {
         if (!pauseMenuActivated) EnterPauseMode();
         else ExitPauseMode(true);
     }
 
-    public override void ReturnFromChildren()
+    protected override void ReturnFromChildren()
     {
         if (actualActiveMenu == 0) ExitPauseMode(true);
 

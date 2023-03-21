@@ -31,12 +31,12 @@ public class InputReader : ScriptableObject
 
     public void OnChangeRightMenu(InputAction.CallbackContext context)
     {
-        if (context.performed) ChangeRightMenuEvent.Invoke();
+        if (context.performed) ChangeRightMenuEvent?.Invoke();
     }
 
     public void OnChangeLeftMenu(InputAction.CallbackContext context)
     {
-        if (context.performed) ChangeLeftMenuEvent.Invoke();
+        if (context.performed) ChangeLeftMenuEvent?.Invoke();
     }
 
     public void OnStartPauseMenu(InputAction.CallbackContext context)

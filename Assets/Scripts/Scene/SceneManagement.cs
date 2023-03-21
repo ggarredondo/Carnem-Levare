@@ -12,7 +12,6 @@ public class SceneManagement : MonoBehaviour
     private PlayerInput playerInput;
     private AsyncOperation asyncOperation;
     private LoadingScreen loadingScreen;
-
     private int sceneToLoad;
 
     private void Awake()

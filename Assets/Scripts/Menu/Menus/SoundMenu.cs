@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 public class SoundMenu : MonoBehaviour
@@ -28,11 +27,9 @@ public class SoundMenu : MonoBehaviour
     /// </summary>
     public void ChangeGlobalVolume()
     {
-        Slider tmp = EventSystem.current.currentSelectedGameObject.GetComponent<Slider>();
-
-        if (tmp != null)
+        if (globalSlider != null)
         {
-            AudioSaver.Instance.globalVolume = tmp.value;
+            AudioSaver.Instance.globalVolume = globalSlider.value;
 
             if (AudioSaver.Instance.musicVolume < 0.1)
                 SoundEvents.Instance.Slider.Invoke();
@@ -46,11 +43,9 @@ public class SoundMenu : MonoBehaviour
     /// </summary>
     public void ChangeSfxVolume()
     {
-        Slider tmp = EventSystem.current.currentSelectedGameObject.GetComponent<Slider>();
-
-        if (tmp != null)
+        if (sfxSlider != null)
         {
-            AudioSaver.Instance.sfxVolume = tmp.value;
+            AudioSaver.Instance.sfxVolume = sfxSlider.value;
             SoundEvents.Instance.Slider.Invoke();
         }
 
@@ -62,11 +57,9 @@ public class SoundMenu : MonoBehaviour
     /// </summary>
     public void ChangeMusicVolume()
     {
-        Slider tmp = EventSystem.current.currentSelectedGameObject.GetComponent<Slider>();
-
-        if (tmp != null)
+        if (musicSlider != null)
         {
-            AudioSaver.Instance.musicVolume = tmp.value;
+            AudioSaver.Instance.musicVolume = musicSlider.value;
         }
 
         AudioSaver.Instance.ApplyChanges();
