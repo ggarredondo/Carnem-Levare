@@ -28,7 +28,7 @@ public class SceneManagement : MonoBehaviour
 
     private void Start()
     {
-        if (SceneManager.GetActiveScene().buildIndex == 0)
+        if (SceneManager.GetActiveScene().buildIndex == (int) SceneNumber.MAIN_MENU)
         {
             DontDestroyOnLoad(GameObject.FindGameObjectWithTag("SAVE"));
             DontDestroyOnLoad(GameObject.FindGameObjectWithTag("UI"));
@@ -44,7 +44,7 @@ public class SceneManagement : MonoBehaviour
         animator = GameObject.FindGameObjectWithTag("TRANSITION").GetComponent<Animator>();
         playerInput = GameObject.FindGameObjectWithTag("INPUT").GetComponent<PlayerInput>();
 
-        if (SceneManager.GetActiveScene().buildIndex == 1)
+        if (SceneManager.GetActiveScene().buildIndex == (int) SceneNumber.LOADING_MENU)
         {
             loadingScreen = GameObject.FindGameObjectWithTag("LOADING").GetComponent<LoadingScreen>();
             StartCoroutine(LoadFromLoadingScreen());
@@ -65,8 +65,12 @@ public class SceneManagement : MonoBehaviour
         {
             if (SceneManager.GetActiveScene().buildIndex == (int) allSounds[i].Item2)
             {
-                GameObject[] speakers = GameObject.FindGameObjectsWithTag(allSounds[i].Item1.SpeakersTag);
-                allSounds[i].Item1.speakers = speakers;
+                for (int j = 0; j < allSounds[i].Item1.SoundGroups.GetLength(0); j++)
+                {
+                    GameObject[] speakers = GameObject.FindGameObjectsWithTag(allSounds[i].Item1.SoundGroups[j].speakersTag);
+                    allSounds[i].Item1.SoundGroups[j].speakers = speakers;
+                }
+
                 allSounds[i].Item1.Initialize();
             }
         }

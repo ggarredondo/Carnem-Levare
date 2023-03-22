@@ -46,7 +46,7 @@ public class LoadingScreen : MonoBehaviour
         if (playerInput.actions.FindAction("Stop").IsPressed() && !isStopped)
         {
             isStopped = true;
-            SoundEvents.Instance.MaskAlert.Invoke();
+            SoundEvents.Instance.uiSfxSounds.Play("MaskAlert");
             maskAnim.speed = 6;
             maskAnim.SetBool("Stop", true);
         }
@@ -66,7 +66,7 @@ public class LoadingScreen : MonoBehaviour
 
             if (playerInput.actions.FindAction("Continue").IsPressed())
             {
-                SoundEvents.Instance.ExitLoading.Invoke();
+                SoundEvents.Instance.uiSfxSounds.Play("ExitLoading");
                 result = true;
             }
         }

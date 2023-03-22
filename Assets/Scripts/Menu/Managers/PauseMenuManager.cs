@@ -65,7 +65,7 @@ public class PauseMenuManager : MainMenuManager
             ChangeMenu(firstMenu);
             pauseMenuActivated = true;
             playerInput.SwitchCurrentActionMap("UI");
-            SoundEvents.Instance.PauseGame.Invoke(true);
+            SoundEvents.Instance.PauseGame(true);
         }
     }
 
@@ -78,7 +78,7 @@ public class PauseMenuManager : MainMenuManager
         DisableActiveMenu();
         pauseMenuActivated = false;
         playerInput.SwitchCurrentActionMap("Main Movement");
-        SoundEvents.Instance.PauseGame.Invoke(false && resumeSounds);
+        SoundEvents.Instance.PauseGame(false && resumeSounds);
     }
 
     /// <summary>
@@ -87,7 +87,7 @@ public class PauseMenuManager : MainMenuManager
     public void ReturnMainMenu()
     {
         ExitPauseMode(false);
-        SoundEvents.Instance.BackMenu.Invoke();
+        SoundEvents.Instance.BackMenu();
         StartCoroutine(SceneManagement.Instance.LoadPreviousScene());
     }
 

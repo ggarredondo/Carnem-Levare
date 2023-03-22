@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Audio;
@@ -8,10 +9,6 @@ public class Sounds : ScriptableObject
 {
     [Header("AudioMixer")]
     [SerializeField] private AudioMixerGroup audioMixerGroup;
-
-    [Header("Scene")]
-    [SerializeField] private string speakersTag;
-    [NonSerialized] public GameObject[] speakers;
 
     [Header("3D Sound")]
     [SerializeField] private bool threeD;
@@ -25,32 +22,30 @@ public class Sounds : ScriptableObject
     [ConditionalField("threeD")] [SerializeField] private AnimationCurve customRollofCurve;
 
     [Header("Manager Sounds")]
-    [SerializeField] private Sound[] sounds;
+    [SerializeField] private SoundGroup[] soundGroups;
 
     private List<AudioSource> currentSounds = new();
-    private bool notActive;
     private int spatialBlend;
+    private Hashtable SoundsTable;
 
-    void Awake()
-    {
-        spatialBlend = threeD ? 1 : 0;
-    }
+    #region Initialization
 
-    public bool NotActive { set { notActive = value; } }
-    public string SpeakersTag { get { return speakersTag; } }
+    public SoundGroup[] SoundGroups { get { return soundGroups; } }
 
     public void Initialize()
     {
-        if (speakers?.GetLength(0) > 0)
-        {
-            notActive = false;
-            foreach (Sound s in sounds)
-            {
-                s.source = new AudioSource[speakers.GetLength(0)];
+        spatialBlend = threeD ? 1 : 0;
+        SoundsTable = new Hashtable();
 
-                for (int i = 0; i < speakers.GetLength(0); i++)
+        foreach (SoundGroup group in soundGroups)
+        {
+            foreach (Sound s in group.sounds)
+            {
+                s.source = new AudioSource[group.speakers.GetLength(0)];
+
+                for (int i = 0; i < group.speakers.GetLength(0); i++)
                 {
-                    s.source[i] = speakers[i].AddComponent<AudioSource>();
+                    s.source[i] = group.speakers[i].AddComponent<AudioSource>();
                     s.source[i].clip = s.clip;
                     s.source[i].volume = s.volume;
                     s.source[i].pitch = s.pitch;
@@ -69,10 +64,15 @@ public class Sounds : ScriptableObject
 
                     s.source[i].outputAudioMixerGroup = audioMixerGroup;
                 }
+
+                SoundsTable.Add(s.name, s);
             }
         }
-        else notActive = true;
     }
+
+    #endregion
+
+    #region Individual_Utilities
 
     /// <summary>
     /// Change the pitch of any sound
@@ -81,17 +81,7 @@ public class Sounds : ScriptableObject
     /// <param name="pitch">Pitch we want to change to</param>
     public void ChangePitch(string name, float pitch, int actualSource = 0)
     {
-        if (!notActive)
-        {
-            Sound s = Array.Find(sounds, sound => sound.name == name);
-
-            if (s == null)
-            {
-                Debug.LogWarning("Sound: " + name + " not exist");
-            }
-
-            s.source[actualSource].pitch = pitch;
-        }
+        FindSound(name).source[actualSource].pitch = pitch;
     }
 
     /// <summary>
@@ -101,14 +91,7 @@ public class Sounds : ScriptableObject
     /// <returns></returns>
     public float Length(string name)
     {
-        Sound s = Array.Find(sounds, sound => sound.name == name);
-
-        if (s == null)
-        {
-            Debug.LogWarning("Sound: " + name + " not exist");
-        }
-
-        return s.clip.length;
+        return FindSound(name).clip.length;
     }
 
     /// <summary>
@@ -117,18 +100,27 @@ public class Sounds : ScriptableObject
     /// <param name="name">Sound name</param>
     public void Play(string name, int actualSource = 0)
     {
-        if (!notActive)
-        {
-            Sound s = Array.Find(sounds, sound => sound.name == name);
+        FindSound(name)?.source[actualSource].Play();
+    }
 
-            if (s == null)
-            {
-                Debug.LogWarning("Sound: " + name + " doesn't exist");
-                return;
-            }
+    /// <summary>
+    /// Play a sound at point in 3D
+    /// </summary>
+    /// <param name="name">Sound name</param>
+    /// <param name="point">Point in space</param>
+    public void PlayAtPoint(string name, Vector3 point)
+    {
+        AudioSource.PlayClipAtPoint(FindSound(name).clip, point);
+    }
 
-            s.source[actualSource].Play();
-        }
+    /// <summary>
+    /// Know if a sound is playing
+    /// </summary>
+    /// <param name="name">Sound name</param>
+    /// <returns></returns>
+    public bool IsPlaying(string name, int actualSource = 0)
+    {
+        return FindSound(name).source[actualSource].isPlaying;
     }
 
     /// <summary>
@@ -137,18 +129,7 @@ public class Sounds : ScriptableObject
     /// <param name="name">Sound name</param>
     public void Stop(string name, int actualSource = 0)
     {
-        if (!notActive)
-        {
-            Sound s = Array.Find(sounds, sound => sound.name == name);
-
-            if (s == null)
-            {
-                Debug.LogWarning("Sound: " + name + " not exist");
-                return;
-            }
-
-            s.source[actualSource].Stop();
-        }
+        FindSound(name)?.source[actualSource].Stop();
     }
 
     /// <summary>
@@ -157,36 +138,26 @@ public class Sounds : ScriptableObject
     /// <param name="name">Sound name</param>
     public void Pause(string name, int actualSource = 0)
     {
-        if (!notActive)
-        {
-            Sound s = Array.Find(sounds, sound => sound.name == name);
-
-            if (s == null)
-            {
-                Debug.LogWarning("Sound: " + name + " not exist");
-                return;
-            }
-
-            s.source[actualSource].Pause();
-        }
+        FindSound(name)?.source[actualSource].Pause();
     }
+
+    #endregion
+
+    #region All_Sounds_Utilities
 
     /// <summary>
     /// Pause all the sounds included in audioManager
     /// </summary>
     public void PauseAllSounds()
     {
-        if (!notActive)
+        foreach (DictionaryEntry entry in SoundsTable)
         {
-            foreach (Sound sound in sounds)
+            Sound s = (Sound)entry.Value;
+            for (int i = 0; i < s.source.GetLength(0); i++)
             {
-                for (int i = 0; i < speakers.GetLength(0); i++)
+                if (s.source[i].isPlaying)
                 {
-                    if (sound.source[i].isPlaying)
-                    {
-                        sound.source[i].Pause();
-                        currentSounds.Add(sound.source[i]);
-                    }
+                    s.source[i].Pause();
                 }
             }
         }
@@ -197,11 +168,12 @@ public class Sounds : ScriptableObject
     /// </summary>
     public void ResumeAllSounds()
     {
-        if (!notActive)
+        foreach (DictionaryEntry entry in SoundsTable)
         {
-            foreach (AudioSource sound in currentSounds)
+            Sound s = (Sound)entry.Value;
+            for (int i = 0; i < s.source.GetLength(0); i++)
             {
-                sound.UnPause();
+                s.source[i].UnPause();
             }
         }
     }
@@ -211,13 +183,11 @@ public class Sounds : ScriptableObject
     /// </summary>
     public void MuteAllSounds()
     {
-        if (!notActive)
+        foreach (DictionaryEntry entry in SoundsTable)
         {
-            foreach (Sound sound in sounds)
-            {
-                for (int i = 0; i < speakers.GetLength(0); i++)
-                    sound.source[i].mute = true;
-            }
+            Sound s = (Sound)entry.Value;
+            for (int i = 0; i < s.source.GetLength(0); i++)
+                s.source[i].mute = true;
         }
     }
 
@@ -226,13 +196,11 @@ public class Sounds : ScriptableObject
     /// </summary>
     public void UnMuteAllSounds()
     {
-        if (!notActive)
+        foreach (DictionaryEntry entry in SoundsTable)
         {
-            foreach (Sound sound in sounds)
-            {
-                for (int i = 0; i < speakers.GetLength(0); i++)
-                    sound.source[i].mute = false;
-            }
+            Sound s = (Sound)entry.Value;
+            for (int i = 0; i < s.source.GetLength(0); i++)
+                s.source[i].mute = false;
         }
     }
 
@@ -241,32 +209,12 @@ public class Sounds : ScriptableObject
     /// </summary>
     public void StopAllSounds()
     {
-        if (!notActive)
+        foreach (DictionaryEntry entry in SoundsTable)
         {
-            foreach (Sound sound in sounds)
-            {
-                for (int i = 0; i < speakers.GetLength(0); i++)
-                    sound.source[i].Stop();
-            }
+            Sound s = (Sound)entry.Value;
+            for (int i = 0; i < s.source.GetLength(0); i++)
+                s.source[i].Stop();
         }
-    }
-
-    /// <summary>
-    /// Play a sound at point in 3D
-    /// </summary>
-    /// <param name="name">Sound name</param>
-    /// <param name="point">Point in space</param>
-    public void PlayAtPoint(string name, Vector3 point)
-    {
-        Sound s = Array.Find(sounds, sound => sound.name == name);
-
-        if (s == null)
-        {
-            Debug.LogWarning("Sound: " + name + " not exist");
-            return;
-        }
-
-        AudioSource.PlayClipAtPoint(s.clip, point);
     }
 
     /// <summary>
@@ -275,36 +223,38 @@ public class Sounds : ScriptableObject
     /// <param name="volume">The percentage of volume that we want to apply</param>
     public void ChangeVolume(float volume)
     {
-        if (!notActive)
+        foreach (DictionaryEntry entry in SoundsTable)
         {
-            foreach (Sound s in sounds)
-            {
-                for (int i = 0; i < speakers.GetLength(0); i++)
-                    s.source[i].volume = s.volume * volume;
-            }
+            Sound s = (Sound)entry.Value;
+            for (int i = 0; i < s.source.GetLength(0); i++)
+                s.source[i].volume = s.volume * volume;
         }
     }
 
+    #endregion
 
-    /// <summary>
-    /// Know if a sound is playing
-    /// </summary>
-    /// <param name="name">Sound name</param>
-    /// <returns></returns>
-    public bool IsPlaying(string name, int actualSource = 0)
+    #region Private
+
+    private Sound FindSound(string name)
     {
-        if (!notActive)
+        if (!SoundsTable.ContainsKey(name))
         {
-            Sound s = Array.Find(sounds, sound => sound.name == name);
-
-            if (s == null)
-            {
-                Debug.LogWarning("Sound: " + name + " not exist");
-                return false;
-            }
-
-            return s.source[actualSource].isPlaying;
+            Debug.LogWarning("Sound: " + name + " not exist");
+            return null;
         }
-        else return false;
+        else
+        {
+            return (Sound) SoundsTable[name];
+        }
     }
+
+    #endregion
+}
+
+[Serializable]
+public struct SoundGroup
+{
+    public string speakersTag;
+    public Sound[] sounds;
+    [NonSerialized] public GameObject[] speakers;
 }

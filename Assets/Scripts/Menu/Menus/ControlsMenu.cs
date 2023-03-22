@@ -34,7 +34,7 @@ public class ControlsMenu : MonoBehaviour
 
     public void Remapping()
     {
-        SoundEvents.Instance.PressButton.Invoke();
+        SoundEvents.Instance.uiSfxSounds.Play("PressButton");
 
         GameObject currentGameObject = EventSystem.current.currentSelectedGameObject;
 
@@ -65,7 +65,7 @@ public class ControlsMenu : MonoBehaviour
 
     private void FinishRebind(RebindingOperation callback, GameObject currentGameObject)
     {
-        SoundEvents.Instance.ApplyRebind.Invoke();
+        SoundEvents.Instance.uiSfxSounds.Play("ApplyRebind");
 
         globalMenuManager.DisablePopUpMenu();
 

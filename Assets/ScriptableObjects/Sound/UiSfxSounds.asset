@@ -14,8 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   audioMixerGroup: {fileID: 1346823579002931596, guid: 6634d3955dedfbd41a411112534c1a55,
     type: 2}
-  initializeScene: 0
-  speakersTag: SFX
   threeD: 0
   dopplerLevel: 1
   spread: 0
@@ -28,49 +26,51 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  sounds:
-  - name: Slider
-    clip: {fileID: 8300000, guid: 85a922d84d6434047a80a73c2fd9b288, type: 3}
-    volume: 1
-    pitch: 1
-    loop: 0
-  - name: PressButton
-    clip: {fileID: 8300000, guid: a0fe1d8bfa8b653449017f5f33a5cd98, type: 3}
-    volume: 1
-    pitch: 1
-    loop: 0
-  - name: SelectButton
-    clip: {fileID: 8300000, guid: 99ac5bbf8d21cf34d8acd7e821a38607, type: 3}
-    volume: 1
-    pitch: 1
-    loop: 0
-  - name: PlayGame
-    clip: {fileID: 8300000, guid: 639807957b7383e4b9a45848414b8235, type: 3}
-    volume: 1
-    pitch: 1
-    loop: 0
-  - name: PauseGame
-    clip: {fileID: 8300000, guid: 0ef254caff8402a4099261d19f130162, type: 3}
-    volume: 1
-    pitch: 1
-    loop: 0
-  - name: BackMenu
-    clip: {fileID: 8300000, guid: 18c35a311aae4944fb6fb99db04b771b, type: 3}
-    volume: 1
-    pitch: 1
-    loop: 0
-  - name: ApplyRebind
-    clip: {fileID: 8300000, guid: ae100d7aaf7cbcb48a7edb2fc1993050, type: 3}
-    volume: 1
-    pitch: 1
-    loop: 0
-  - name: ExitLoading
-    clip: {fileID: 8300000, guid: 94bbd3b025f8e214ca67db8a65318a1f, type: 3}
-    volume: 1
-    pitch: 1
-    loop: 0
-  - name: MaskAlert
-    clip: {fileID: 8300000, guid: 977faa92ad1efc74fb101e3c36767b03, type: 3}
-    volume: 1
-    pitch: 1
-    loop: 0
+  soundGroups:
+  - speakersTag: SFX
+    sounds:
+    - name: Slider
+      clip: {fileID: 8300000, guid: 85a922d84d6434047a80a73c2fd9b288, type: 3}
+      volume: 1
+      pitch: 1
+      loop: 0
+    - name: PressButton
+      clip: {fileID: 8300000, guid: a0fe1d8bfa8b653449017f5f33a5cd98, type: 3}
+      volume: 1
+      pitch: 1
+      loop: 0
+    - name: SelectButton
+      clip: {fileID: 8300000, guid: 99ac5bbf8d21cf34d8acd7e821a38607, type: 3}
+      volume: 1
+      pitch: 1
+      loop: 0
+    - name: PlayGame
+      clip: {fileID: 8300000, guid: 639807957b7383e4b9a45848414b8235, type: 3}
+      volume: 1
+      pitch: 1
+      loop: 0
+    - name: PauseGame
+      clip: {fileID: 8300000, guid: 0ef254caff8402a4099261d19f130162, type: 3}
+      volume: 1
+      pitch: 1
+      loop: 0
+    - name: BackMenu
+      clip: {fileID: 8300000, guid: 18c35a311aae4944fb6fb99db04b771b, type: 3}
+      volume: 1
+      pitch: 1
+      loop: 0
+    - name: ApplyRebind
+      clip: {fileID: 8300000, guid: ae100d7aaf7cbcb48a7edb2fc1993050, type: 3}
+      volume: 1
+      pitch: 1
+      loop: 0
+    - name: ExitLoading
+      clip: {fileID: 8300000, guid: 94bbd3b025f8e214ca67db8a65318a1f, type: 3}
+      volume: 1
+      pitch: 1
+      loop: 0
+    - name: MaskAlert
+      clip: {fileID: 8300000, guid: 977faa92ad1efc74fb101e3c36767b03, type: 3}
+      volume: 1
+      pitch: 1
+      loop: 0

@@ -32,7 +32,7 @@ public class SoundMenu : MonoBehaviour
             AudioSaver.Instance.globalVolume = globalSlider.value;
 
             if (AudioSaver.Instance.musicVolume < 0.1)
-                SoundEvents.Instance.Slider.Invoke();
+                SoundEvents.Instance.Slider();
         }
 
         AudioSaver.Instance.ApplyChanges();
@@ -46,7 +46,7 @@ public class SoundMenu : MonoBehaviour
         if (sfxSlider != null)
         {
             AudioSaver.Instance.sfxVolume = sfxSlider.value;
-            SoundEvents.Instance.Slider.Invoke();
+            SoundEvents.Instance.Slider();
         }
 
         AudioSaver.Instance.ApplyChanges();
@@ -67,7 +67,7 @@ public class SoundMenu : MonoBehaviour
 
     public void Mute(bool changeState)
     {
-        SoundEvents.Instance.PressButton.Invoke();
+        SoundEvents.Instance.uiSfxSounds.Play("PressButton");
         if (changeState) muteToggle.isOn = !muteToggle.isOn;
         AudioSaver.Instance.mute = muteToggle.isOn;
         AudioSaver.Instance.ApplyChanges();

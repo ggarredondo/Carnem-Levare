@@ -24,7 +24,7 @@ public class MainMenu : MonoBehaviour
     {
         if (!isLoading)
         {
-            SoundEvents.Instance.PlayGame.Invoke();
+            SoundEvents.Instance.uiSfxSounds.Play("PlayGame");
             isLoading = true;
             StartCoroutine(SceneManagement.Instance.LoadSceneByIndexAsync(3));
         }
