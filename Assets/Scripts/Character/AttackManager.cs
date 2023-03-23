@@ -1,5 +1,5 @@
 using UnityEngine;
-public enum Entity { Player, Enemy }
+
 public enum Side { Left, Right }
 
 public class AttackManager : StateMachineBehaviour

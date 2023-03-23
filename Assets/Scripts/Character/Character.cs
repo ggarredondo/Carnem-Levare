@@ -2,7 +2,8 @@ using UnityEngine;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine.Assertions;
-using System;
+
+public enum Entity { Player, Enemy }
 
 public abstract class Character : MonoBehaviour
 {
@@ -44,12 +45,9 @@ public abstract class Character : MonoBehaviour
     private bool hurtExceptions;
     private float disadvantage;
 
-    [Header("Debug")] // DEBUG
-    [SerializeField] private bool noDamage = false; // DEBUG
-    [SerializeField] private bool noDeath = false; // DEBUG
-    [SerializeField] private bool updateMoveset = false; // DEBUG
-    [Tooltip("Only works on Player")] [SerializeField] private bool modifyTimeScale = false; // DEBUG
-    [Tooltip("Only works on Player")] [SerializeField] [Range(0f, 1f)] private float timeScale = 1f; // DEBUG
+    [Header("Debug")]
+    [SerializeField] private bool noDamage = false;
+    [SerializeField] private bool noDeath = false;
 
     protected virtual void Awake()
     {
@@ -68,7 +66,6 @@ public abstract class Character : MonoBehaviour
         direction = Vector2.zero;
         directionTarget = Vector2.zero;
     }
-
     protected virtual void Start()
     {
         InitializeMoveset();
@@ -95,10 +92,6 @@ public abstract class Character : MonoBehaviour
         direction = Vector2.Lerp(direction, directionTarget, directionSpeed * Time.deltaTime);
         anim.SetFloat("horizontal", direction.x);
         anim.SetFloat("vertical", direction.y);
-
-        // DEBUG
-        if (updateMoveset) { InitializeMoveset(); updateMoveset = false; } // DEBUG
-        if (modifyTimeScale && this is Player) Time.timeScale = timeScale; // DEBUG
     }
     protected virtual void FixedUpdate()
     {
