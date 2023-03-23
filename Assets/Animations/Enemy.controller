@@ -844,7 +844,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   entity: 1
-  side: -1
+  side: 0
   index: 1
 --- !u!1101 &-5490767237025358106
 AnimatorStateTransition:
@@ -1842,7 +1842,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   entity: 1
-  side: -1
+  side: 0
   index: 2
 --- !u!206 &-2144631649222437278
 BlendTree:
@@ -4335,7 +4335,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   entity: 1
-  side: -1
+  side: 0
   index: 0
 --- !u!206 &8316876861150292198
 BlendTree:

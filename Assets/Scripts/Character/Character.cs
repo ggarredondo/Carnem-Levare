@@ -124,15 +124,12 @@ public abstract class Character : MonoBehaviour
     /// </summary>
     private void InitializeMoveset()
     {
-        Assert.AreEqual(leftMoveset.Count, rightMoveset.Count, "Left and Right movesets must have the same number of items");
-
-        for (int i = 0; i < leftMoveset.Count; ++i)
-        {
-            // Left Moves
+        for (int i = 0; i < leftMoveset.Count; ++i) {
             UpdateAnimator("LeftClip" + i, leftMoveset[i].Animation);
             anim.SetFloat("left" + i + "_speed", leftMoveset[i].AnimationSpeed);
+        }
 
-            // Right Moves
+        for (int i = 0; i < rightMoveset.Count; ++i) {
             UpdateAnimator("RightClip" + i, rightMoveset[i].Animation);
             anim.SetFloat("right" + i + "_speed", rightMoveset[i].AnimationSpeed);
         }

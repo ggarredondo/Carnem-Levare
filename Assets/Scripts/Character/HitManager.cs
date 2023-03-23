@@ -8,7 +8,8 @@ public class HitManager : StateMachineBehaviour
     private Character character;
 
     private float disadvantage;
-    private float deltaTimer;
+    private float timer;
+    private const float secToMsec = 1000f;
 
     private void Awake()
     {
@@ -20,15 +21,15 @@ public class HitManager : StateMachineBehaviour
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        deltaTimer = 0f;
+        timer = 0f;
         disadvantage = character.Disadvantage;
     }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        deltaTimer += Time.deltaTime;
-        if (deltaTimer > disadvantage)
+        timer += Time.deltaTime * secToMsec;
+        if (timer > disadvantage)
             animator.SetTrigger("cancel");
     }
 

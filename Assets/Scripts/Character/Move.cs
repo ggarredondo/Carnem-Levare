@@ -33,20 +33,20 @@ public class Move : ScriptableObject
 
     #region TimeData
 
-    [Header("Time Data (Normalized Animation Time)")]
-    [Tooltip("[0, startup]: no hitbox. (startup, active]: hitbox is active.")]
-    [SerializeField] [Range(0f, 1f)] private float startUp = 0f;
+    [Header("Time Data (ms)")]
+    [Tooltip("Move is starting for *startUp* ms. No hitbox.")]
+    [SerializeField] private float startUp = 0f;
 
-    [Tooltip("(startup, active]: hitbox is active. (active, recovery]: no hitbox.")]
-    [SerializeField] [Range(0f, 1f)] private float active = 0f;
+    [Tooltip("Hitbox is active for *active* ms.")]
+    [SerializeField] private float active = 0f;
 
-    [Tooltip("(active, recovery]: no hitbox. (recovery, 1]: can cancel animation.")]
-    [SerializeField] [Range(0f, 1f)] private float recovery = 0f;
+    [Tooltip("Move is recovering for *recovery* ms.")]
+    [SerializeField] private float recovery = 0f;
 
-    [Tooltip("How many deltaseconds the opponent takes to leave block animation.")]
+    [Tooltip("How many milliseconds the opponent takes to leave block animation.")]
     [SerializeField] private float advantageOnBlock = 0f;
 
-    [Tooltip("How many deltaseconds the opponent takes to leave hurt animation.")]
+    [Tooltip("How many milliseconds the opponent takes to leave hurt animation.")]
     [SerializeField] private float advantageOnHit = 0f;
 
     #endregion
@@ -69,39 +69,17 @@ public class Move : ScriptableObject
     public bool Unblockable { get => unblockable; }
     public float BaseDamage { get => baseDamage; }
 
-    /// <summary>
-    /// Move is starting during the interval [0, startup].
-    /// </summary>
-    /// <param name="normalizedTime">Normalized time of the animation</param>
-    /// <returns>True if time is in interval, false otherwise</returns>
-    public bool IsStarting(float normalizedTime) { return normalizedTime < startUp; }
-
-    /// <summary>
-    /// Move is active during the interval (startup, active].
-    /// </summary>
-    /// <param name="normalizedTime">Normalized time of the animation</param>
-    /// <returns>True if time is in interval, false otherwise</returns>
-    public bool IsActive(float normalizedTime) {
-        return normalizedTime > startUp && normalizedTime <= active;
+    public bool IsStarting(float ms) { 
+        return ms <= startUp; 
     }
-
-    /// <summary>
-    /// Move is recovering during the interval (active, recovery].
-    /// </summary>
-    /// <param name="normalizedTime">Normalized time of the animation</param>
-    /// <returns>True if time is in interval, false otherwise</returns>
-    public bool IsRecovering(float normalizedTime) {
-        return normalizedTime > active && normalizedTime <= recovery;
+    public bool IsActive(float ms) {
+        return ms > startUp && ms <= startUp+active;
     }
-
-    /// <summary>
-    /// Move can be cancelled when the animation normalized time is
-    /// over *recovery* value.
-    /// </summary>
-    /// <param name="normalizedTime">Normalized time of the animation</param>
-    /// <returns>True if time is greater than *recovery*, false otherwise</returns>
-    public bool HasRecovered(float normalizedTime) {
-        return normalizedTime > recovery;
+    public bool IsRecovering(float ms) {
+        return ms > active && ms <= startUp+active+recovery;
+    }
+    public bool HasRecovered(float ms) {
+        return ms > startUp+active+recovery;
     }
 
     public float AdvantageOnBlock { get => advantageOnBlock; }

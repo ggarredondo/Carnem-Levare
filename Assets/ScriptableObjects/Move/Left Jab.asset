@@ -23,8 +23,8 @@ MonoBehaviour:
   unblockable: 0
   baseDamage: 10
   extraMovement: 0
-  startUp: 0
-  active: 1
-  recovery: 1
-  advantageOnBlock: 1
-  advantageOnHit: 1
+  startUp: 200
+  active: 50
+  recovery: 600
+  advantageOnBlock: 0
+  advantageOnHit: 400

@@ -8,7 +8,7 @@ public class Enemy : Character
 
     [SerializeField] private bool block;
     [SerializeField] private float blockMaxTime = 5f;
-    private float deltaTimer;
+    private float timer;
 
     protected override void Start()
     {
@@ -23,10 +23,9 @@ public class Enemy : Character
     }
 
     private void Behaviour() {
-        if (isHurt)
-            deltaTimer = 0f;
-        Block(deltaTimer <= blockMaxTime && block);
-        deltaTimer += Time.deltaTime;
+        if (isHurt || isBlocked) timer = 0f;
+        Block(timer <= blockMaxTime && block);
+        timer += Time.deltaTime;
         LeftN(jab, 0);
     }
 }

@@ -11,6 +11,10 @@ public class AttackManager : StateMachineBehaviour
     private Character character;
     private Move move;
     private Hitbox hitbox;
+
+    private float timer;
+    private const float secToMsec = 1000f;
+
     private bool active;
 
     private void Awake()
@@ -20,13 +24,22 @@ public class AttackManager : StateMachineBehaviour
             : GameObject.FindGameObjectWithTag("Enemy").GetComponent<Character>();
 
         // Assign move if there's actually a move to assign
-        if (index < character.LeftMoveset.Count) {
-            move = side == Side.Left
-                ? character.LeftMoveset[index]
-                : character.RightMoveset[index];
+        switch (side)
+        {
+            case Side.Left:
+                if (index < character.LeftMoveset.Count) {
+                    move = character.LeftMoveset[index];
+                    hitbox = character.Hitboxes.Find(x => x.name == move.HitboxName);
+                }
+                break;
 
-            hitbox = character.Hitboxes.Find(x => x.name == move.HitboxName);
-        };
+            case Side.Right:
+                if (index < character.RightMoveset.Count) {
+                    move = character.RightMoveset[index];
+                    hitbox = character.Hitboxes.Find(x => x.name == move.HitboxName);
+                }
+                break;
+        }
     }
 
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
@@ -34,13 +47,14 @@ public class AttackManager : StateMachineBehaviour
     {
         // Assigns the move values to the hitbox component so that once it hits the information is passed onto the hurtbox.
         // It has to be assigned every time the character attacks because hitboxes are reused between moves.
-        hitbox.Set(move.Power, 
+        hitbox.Set(move.Power,
             character.CalculateAttackDamage(move.BaseDamage), 
             move.Unblockable, 
             move.HitSound,
             move.BlockedSound,
             move.AdvantageOnBlock,
             move.AdvantageOnHit);
+        timer = 0f;
 
         // Play whiff sound, since character hasn't hit already.
         AudioManager.Instance.gameSfxSounds.Play(move.WhiffSound, (int) entity);
@@ -49,7 +63,8 @@ public class AttackManager : StateMachineBehaviour
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        active = move.IsActive(stateInfo.normalizedTime);
+        timer += Time.deltaTime * secToMsec;
+        active = move.IsActive(timer);
 
         // ACTIVE
         if (active) character.transform.position += character.transform.forward * move.ExtraMovement * Time.deltaTime; // Extra movement
@@ -57,7 +72,7 @@ public class AttackManager : StateMachineBehaviour
         hitbox.Activate(active); // Hitbox is activated
 
         // RECOVERY
-        if (move.HasRecovered(stateInfo.normalizedTime)) animator.SetTrigger("cancel"); // Can cancel animation after recovery
+        if (move.HasRecovered(timer)) animator.SetTrigger("cancel"); // Can cancel animation after recovery
     }
 
     // OnStateExit is called when a transition ends and the state machine finishes evaluating this state
