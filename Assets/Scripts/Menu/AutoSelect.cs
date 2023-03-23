@@ -33,7 +33,7 @@ public class AutoSelect : MonoBehaviour, IPointerEnterHandler, ISelectHandler
 
     public void OnSelect(BaseEventData eventData)
     {
-        SoundEvents.Instance.uiSfxSounds.Play("SelectButton");
+        AudioManager.Instance.uiSfxSounds.Play("SelectButton");
     }
 
     public void OnPointerEnter(PointerEventData eventData)

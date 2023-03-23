@@ -43,7 +43,7 @@ public class AttackManager : StateMachineBehaviour
             move.AdvantageOnHit);
 
         // Play whiff sound, since character hasn't hit already.
-        SoundEvents.Instance.gameSfxSounds.Play(move.WhiffSound, (int) entity);
+        AudioManager.Instance.gameSfxSounds.Play(move.WhiffSound, (int) entity);
     }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks

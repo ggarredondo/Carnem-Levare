@@ -1,10 +1,9 @@
 using System.Collections;
 using UnityEngine;
-using UnityEngine.Audio;
 
-public class SoundEvents : MonoBehaviour
+public class AudioManager : MonoBehaviour
 {
-    public static SoundEvents Instance { get; private set; }
+    public static AudioManager Instance { get; private set; }
 
     public Sounds uiSfxSounds;
     public Sounds gameSfxSounds;

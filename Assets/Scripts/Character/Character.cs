@@ -181,7 +181,7 @@ public abstract class Character : MonoBehaviour
         disadvantage = isBlocking ? disadvantageOnBlock : disadvantageOnHit;
 
         // Sound
-        SoundEvents.Instance.gameSfxSounds.Play(isBlocking ? blockedSound : hitSound, (int) entity);
+        AudioManager.Instance.gameSfxSounds.Play(isBlocking ? blockedSound : hitSound, (int) entity);
 
         // Stamina
         stamina -= isBlocking && !unblockable ? Mathf.Round(dmg * blockingModifier) : dmg; // Take less damage if blocking.

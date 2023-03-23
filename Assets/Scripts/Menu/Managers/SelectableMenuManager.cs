@@ -75,7 +75,7 @@ public class SelectableMenuManager : MenuManager
     /// <param name="newActualMenu">The index of the new menu</param>
     public void SelectWithMouse(int newActualMenu)
     {
-        SoundEvents.Instance.uiSfxSounds.Play("PressButton");
+        AudioManager.Instance.uiSfxSounds.Play("PressButton");
         CleanOldButtons(actualActiveMenu);
         SetUpButtons(newActualMenu);
         SetActiveMenuById(newActualMenu, true);

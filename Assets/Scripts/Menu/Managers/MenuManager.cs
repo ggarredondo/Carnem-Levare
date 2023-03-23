@@ -46,7 +46,7 @@ public class MenuManager : MonoBehaviour
         if (activeFirstButton)
         {
             EventSystem.current.SetSelectedGameObject(menus[actualActiveMenu].GetFirstButton());
-            SoundEvents.Instance?.uiSfxSounds.Stop("SelectButton");
+            AudioManager.Instance?.uiSfxSounds.Stop("SelectButton");
         }
 
         menus[actualActiveMenu].SetActive(true);
@@ -81,7 +81,7 @@ public class MenuManager : MonoBehaviour
     /// </summary>
     public void ReturnToParent()
     {
-        SoundEvents.Instance.uiSfxSounds.Play("PressButton");
+        AudioManager.Instance.uiSfxSounds.Play("PressButton");
 
         if (menus[actualActiveMenu].GetParentName() != menus[actualActiveMenu].GetName())
         {
@@ -95,7 +95,7 @@ public class MenuManager : MonoBehaviour
     /// </summary>
     public void ChangeMenu(int id)
     {
-        SoundEvents.Instance.uiSfxSounds.Play("PressButton");
+        AudioManager.Instance.uiSfxSounds.Play("PressButton");
 
         if (EventSystem.current.currentSelectedGameObject != null)
             menus[actualActiveMenu].SetFirstButton(EventSystem.current.currentSelectedGameObject);
@@ -108,7 +108,7 @@ public class MenuManager : MonoBehaviour
     /// </summary>
     public void ChangeMenuNoInitialize(int id)
     {
-        SoundEvents.Instance.uiSfxSounds.Play("PressButton");
+        AudioManager.Instance.uiSfxSounds.Play("PressButton");
 
         if (EventSystem.current.currentSelectedGameObject != null)
             menus[actualActiveMenu].SetFirstButton(EventSystem.current.currentSelectedGameObject);
@@ -136,7 +136,7 @@ public class MenuManager : MonoBehaviour
     /// </summary>
     public void GoToChildren()
     {
-        SoundEvents.Instance.uiSfxSounds.Play("PressButton");
+        AudioManager.Instance.uiSfxSounds.Play("PressButton");
 
         GameObject children = EventSystem.current.currentSelectedGameObject.transform.GetChild(0).gameObject;
         EventSystem.current.SetSelectedGameObject(children);

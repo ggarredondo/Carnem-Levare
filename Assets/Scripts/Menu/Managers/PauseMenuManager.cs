@@ -35,7 +35,7 @@ public class PauseMenuManager : MainMenuManager
         playerInput = GameObject.FindGameObjectWithTag("INPUT").GetComponent<PlayerInput>();
         playerInput.uiInputModule = GameObject.FindGameObjectWithTag("UI").GetComponent<InputSystemUIInputModule>();
 
-        SoundEvents.Instance.PlayMusic("Fight");
+        AudioManager.Instance.PlayMusic("Fight");
     }
 
     /// <summary>
@@ -65,7 +65,7 @@ public class PauseMenuManager : MainMenuManager
             ChangeMenu(firstMenu);
             pauseMenuActivated = true;
             playerInput.SwitchCurrentActionMap("UI");
-            SoundEvents.Instance.PauseGame(true);
+            AudioManager.Instance.PauseGame(true);
         }
     }
 
@@ -78,7 +78,7 @@ public class PauseMenuManager : MainMenuManager
         DisableActiveMenu();
         pauseMenuActivated = false;
         playerInput.SwitchCurrentActionMap("Main Movement");
-        SoundEvents.Instance.PauseGame(false && resumeSounds);
+        AudioManager.Instance.PauseGame(false && resumeSounds);
     }
 
     /// <summary>
@@ -87,7 +87,7 @@ public class PauseMenuManager : MainMenuManager
     public void ReturnMainMenu()
     {
         ExitPauseMode(false);
-        SoundEvents.Instance.BackMenu();
+        AudioManager.Instance.BackMenu();
         StartCoroutine(SceneManagement.Instance.LoadPreviousScene());
     }
 

@@ -6,7 +6,7 @@ public class MainMenu : MonoBehaviour
 
     private void Start()
     {
-        SoundEvents.Instance.PlayMusic("Intro");
+        AudioManager.Instance.PlayMusic("Intro");
     }
 
     /// <summary>
@@ -24,7 +24,7 @@ public class MainMenu : MonoBehaviour
     {
         if (!isLoading)
         {
-            SoundEvents.Instance.uiSfxSounds.Play("PlayGame");
+            AudioManager.Instance.uiSfxSounds.Play("PlayGame");
             isLoading = true;
             StartCoroutine(SceneManagement.Instance.LoadSceneByIndexAsync(3));
         }
