@@ -5,7 +5,7 @@ using UnityEngine.UI;
 using UnityEngine;
 using TMPro;
 
-public class MenuManager : MonoBehaviour
+public abstract class MenuManager : MonoBehaviour
 {
     [Header ("Menu Assets")]
     [SerializeField] protected InputReader inputReader = default;

@@ -1,44 +1,26 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.EventSystems;
-using TMPro;
 using static UnityEngine.InputSystem.InputActionRebindingExtensions;
 
 public class ControlsMenu : MonoBehaviour
 { 
-
-    private static readonly string currentActionMap = "Main Movement";
-    private PlayerInput playerInput;
-
     [SerializeField] private MainMenuManager globalMenuManager;
 
-    private string lastControlScheme, cancelMessage;
     private InputAction action, originalAction;
     public float rebindTimeDelay = 0.25f;
 
     private void Start()
-    {
-        playerInput = GameObject.FindGameObjectWithTag("INPUT").GetComponent<PlayerInput>();
-        
+    {        
         LoadRemapping();
     }
 
-    private void Update()
-    {
-        if (playerInput.currentControlScheme != lastControlScheme)
-        {
-            lastControlScheme = playerInput.currentControlScheme;
-            LoadRemapping();
-        }
-    }
-
+    #region Public
     public void Remapping()
     {
         AudioManager.Instance.uiSfxSounds.Play("PressButton");
 
-        GameObject currentGameObject = EventSystem.current.currentSelectedGameObject;
-
-        action = playerInput.actions.FindActionMap(currentActionMap).FindAction(currentGameObject.gameObject.name);
+        action = SceneManagement.Instance.PlayerInput.actions.FindActionMap("Main Movement").FindAction(EventSystem.current.currentSelectedGameObject.name);
 
         if (action == null)
             Debug.Log("This action not exists");
@@ -51,61 +33,43 @@ public class ControlsMenu : MonoBehaviour
             action.PerformInteractiveRebinding(ControlSaver.controlSchemeIndex)
                 .WithControlsExcluding("Mouse")
                 .OnMatchWaitForAnother(rebindTimeDelay)
-                .OnCancel(callback => CancelRebind(callback, cancelMessage))
-                .OnComplete(callback => FinishRebind(callback, currentGameObject))
+                .OnCancel(callback => CancelRebind(callback))
+                .OnComplete(callback => FinishRebind(callback))
                 .Start();
         }
     }
+    #endregion
 
-    private void CancelRebind(RebindingOperation callback, string cancelMessage)
+    #region Private
+
+    private void CancelRebind(RebindingOperation callback)
     {
-        //StartCoroutine(globalMenuManager.PopUpForTime(cancelMessage));
         callback.action.ApplyBindingOverride(ControlSaver.controlSchemeIndex, originalAction.bindings[ControlSaver.controlSchemeIndex]);
     }
 
-    private void FinishRebind(RebindingOperation callback, GameObject currentGameObject)
+    private void FinishRebind(RebindingOperation callback)
     {
         AudioManager.Instance.uiSfxSounds.Play("ApplyRebind");
 
         globalMenuManager.DisablePopUpMenu();
 
-        GameObject children = currentGameObject.transform.GetChild(0).gameObject;
-
         if (ControlSaver.mapping.ContainsKey(callback.action.bindings[ControlSaver.controlSchemeIndex].effectivePath))
         {
             if (CheckIfAsigned(callback.action) != null)
             {
-                cancelMessage = "Is equal to another assignment";
                 callback.Cancel();
             }
-            else
-            {
-                string fontPath = ControlSaver.mapping[callback.action.bindings[ControlSaver.controlSchemeIndex].effectivePath];
-                children.GetComponent<TMP_Text>().text = fontPath;
-            }
         }
-        else
-        {
-            cancelMessage = "This action is not supported";
-            callback.Cancel();
-        }
+        else callback.Cancel();
 
-        ControlSaver.ApplyChanges(playerInput);
+        ControlSaver.ApplyChanges(SceneManagement.Instance.PlayerInput);
         callback.Dispose();
         LoadRemapping();
     }
 
     private void LoadRemapping()
     {
-        RectTransform buttons = transform.GetChild(0).GetComponent<RectTransform>();
-
-        for (int i = 0; i < buttons.childCount; i++)
-        {
-            string buttonText = buttons.GetChild(i).gameObject.name;
-            string buttonAction = playerInput.actions.FindActionMap(currentActionMap).FindAction(buttonText).bindings[ControlSaver.controlSchemeIndex].effectivePath;
-            buttons.GetChild(i).transform.GetChild(0).GetComponent<TMP_Text>().font = GlobalMenuVariables.Instance.inputFonts[ControlSaver.controlSchemeIndex];
-            buttons.GetChild(i).transform.GetChild(0).GetComponent<TMP_Text>().text = ControlSaver.mapping[buttonAction];
-        }
+        ControlSaver.StaticEvent.Invoke();
     }
 
     private string CheckIfAsigned(InputAction action)
@@ -129,4 +93,6 @@ public class ControlsMenu : MonoBehaviour
 
         return result;
     }
+
+    #endregion
 }

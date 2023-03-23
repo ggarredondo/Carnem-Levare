@@ -1178,6 +1178,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   typeButton: 1
   mouseCanSelect: 1
+  inputButton: 0
 --- !u!114 &517267781837170697
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1476,6 +1477,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   typeButton: 2
   mouseCanSelect: 0
+  inputButton: 0
 --- !u!1 &517267781892662782
 GameObject:
   m_ObjectHideFlags: 0
@@ -1595,6 +1597,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   typeButton: 1
   mouseCanSelect: 1
+  inputButton: 0
 --- !u!114 &517267781892662780
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2370,6 +2373,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   typeButton: 1
   mouseCanSelect: 1
+  inputButton: 1
 --- !u!114 &517267782064783287
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2579,6 +2583,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   typeButton: 1
   mouseCanSelect: 1
+  inputButton: 1
 --- !u!114 &517267782066614709
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3427,6 +3432,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   typeButton: 1
   mouseCanSelect: 1
+  inputButton: 0
 --- !u!114 &517267782277544018
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3738,6 +3744,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   typeButton: 2
   mouseCanSelect: 1
+  inputButton: 0
 --- !u!114 &517267782384738688
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4023,6 +4030,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   typeButton: 1
   mouseCanSelect: 1
+  inputButton: 1
 --- !u!114 &517267782422911556
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4549,6 +4557,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   typeButton: 2
   mouseCanSelect: 0
+  inputButton: 0
 --- !u!1 &517267782557264801
 GameObject:
   m_ObjectHideFlags: 0
@@ -4930,6 +4939,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   typeButton: 1
   mouseCanSelect: 1
+  inputButton: 1
 --- !u!114 &517267782604801060
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5487,6 +5497,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   typeButton: 2
   mouseCanSelect: 0
+  inputButton: 0
 --- !u!1 &517267782811273177
 GameObject:
   m_ObjectHideFlags: 0
@@ -6854,6 +6865,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   typeButton: 2
   mouseCanSelect: 0
+  inputButton: 0
 --- !u!1 &517267782981852587
 GameObject:
   m_ObjectHideFlags: 0
@@ -7726,6 +7738,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   typeButton: 1
   mouseCanSelect: 1
+  inputButton: 1
 --- !u!114 &517267783207065281
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7972,6 +7985,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   typeButton: 1
   mouseCanSelect: 1
+  inputButton: 0
 --- !u!114 &517267783310672361
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8218,6 +8232,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   typeButton: 1
   mouseCanSelect: 1
+  inputButton: 0
 --- !u!114 &517267783364274518
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8828,6 +8843,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   typeButton: 1
   mouseCanSelect: 1
+  inputButton: 0
 --- !u!114 &517267783422960297
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9037,6 +9053,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   typeButton: 1
   mouseCanSelect: 1
+  inputButton: 0
 --- !u!114 &517267783431479867
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9349,11 +9366,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8b88de1ffbc964d4fa07e9f476b8e780, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerInput: {fileID: 0}
   globalMenuManager: {fileID: 0}
-  fonts:
-  - {fileID: 11400000, guid: 2b80a8fa063c79745a3ac60cfeefa351, type: 2}
-  - {fileID: 11400000, guid: 9ee3d445f34cfb24baef4f5f66b12f7d, type: 2}
   rebindTimeDelay: 0.25
 --- !u!1 &517267783486887505
 GameObject:
@@ -9849,6 +9862,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   typeButton: 1
   mouseCanSelect: 1
+  inputButton: 0
 --- !u!114 &517267783587414030
 MonoBehaviour:
   m_ObjectHideFlags: 0

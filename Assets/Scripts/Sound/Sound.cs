@@ -18,3 +18,11 @@ public class Sound
     [System.NonSerialized]
     public AudioSource[] source;
 }
+
+[System.Serializable]
+public struct SoundGroup
+{
+    public string speakersTag;
+    public Sound[] sounds;
+    [System.NonSerialized] public GameObject[] speakers;
+}

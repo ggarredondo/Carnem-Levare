@@ -8,13 +8,11 @@ public class CameraManager : MonoBehaviour
 
     private CameraTargets playerTargets, enemyTargets;
     [SerializeField] private Transform actualTransform;
-    private Vector3 initialPosition;
 
     private void Start()
     {
         playerTargets = GameObject.FindGameObjectWithTag("Player").GetComponent<CameraTargets>();
         enemyTargets = GameObject.FindGameObjectWithTag("Enemy").GetComponent<CameraTargets>();
-        //initialPosition = playerTargets.GetTarget((int)actualVirtualCamera, false).position - enemyTargets.GetTarget((int)actualVirtualCamera, false).position;
         InitializeTargets();
     }
 
@@ -24,10 +22,6 @@ public class CameraManager : MonoBehaviour
 
         actualTransform.position = playerTargets.GetTarget((int)actualVirtualCamera, false).position;
         actualTransform.LookAt(enemyTargets.GetTarget((int)actualVirtualCamera, false).position);
-        /*
-        Quaternion tmp = Quaternion.FromToRotation(initialPosition, actualTransform.position - enemyTargets.GetTarget((int)actualVirtualCamera, false).position);
-        actualTransform.rotation = Quaternion.Euler(0, tmp.eulerAngles.y, 0);
-        */
     }
 
     private void InitializeTargets()

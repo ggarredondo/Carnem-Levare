@@ -39,6 +39,8 @@ public class SceneManagement : MonoBehaviour
 
     public bool TransitionEnd { get { return transitionEnd; } }
 
+    public PlayerInput PlayerInput { get { return playerInput; } }
+
     void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
         animator = GameObject.FindGameObjectWithTag("TRANSITION").GetComponent<Animator>();

@@ -5,13 +5,12 @@ using System.IO;
 
 public class ControlSaver : MonoBehaviour
 {
-    private PlayerInput playerInput;
     public static Dictionary<string, string> mapping = new();
 
     public static int controlSchemeIndex;
 
     public delegate void StaticEventHandler();
-    public static event StaticEventHandler StaticEvent;
+    public static StaticEventHandler StaticEvent;
 
     private void Awake()
     {
@@ -20,12 +19,10 @@ public class ControlSaver : MonoBehaviour
 
     private void Start()
     {
-        playerInput = GameObject.FindGameObjectWithTag("INPUT").GetComponent<PlayerInput>();
-
         if (PlayerPrefs.GetString("rebinds") != null)
-            LoadUserRebinds(playerInput);
+            LoadUserRebinds(SceneManagement.Instance.PlayerInput);
 
-        OnControlSchemeChanged(playerInput);
+        OnControlSchemeChanged(SceneManagement.Instance.PlayerInput);
     }
 
     public static void OnControlSchemeChanged(PlayerInput playerInput)
@@ -36,13 +33,17 @@ public class ControlSaver : MonoBehaviour
             case "Gamepad": controlSchemeIndex = 0; break;
         }
 
-        if(StaticEvent != null)
-            StaticEvent.Invoke();
+        StaticEvent?.Invoke();
     }
 
     public static void ApplyChanges(PlayerInput player)
     {
         SaveUserRebinds(player);
+    }
+
+    public static string ObtainMapping(string buttonName)
+    {
+        return mapping[SceneManagement.Instance.PlayerInput.actions.FindActionMap("Main Movement").FindAction(buttonName).bindings[controlSchemeIndex].effectivePath];
     }
 
     private static void SaveUserRebinds(PlayerInput player)

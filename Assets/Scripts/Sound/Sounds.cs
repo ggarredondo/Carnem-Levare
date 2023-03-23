@@ -24,7 +24,6 @@ public class Sounds : ScriptableObject
     [Header("Manager Sounds")]
     [SerializeField] private SoundGroup[] soundGroups;
 
-    private List<AudioSource> currentSounds = new();
     private int spatialBlend;
     private Hashtable SoundsTable;
 
@@ -249,12 +248,4 @@ public class Sounds : ScriptableObject
     }
 
     #endregion
-}
-
-[Serializable]
-public struct SoundGroup
-{
-    public string speakersTag;
-    public Sound[] sounds;
-    [NonSerialized] public GameObject[] speakers;
 }
