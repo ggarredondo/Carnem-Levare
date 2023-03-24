@@ -1,7 +1,6 @@
 using UnityEngine;
 using System.Collections.Generic;
 using System.Linq;
-using UnityEngine.Assertions;
 
 public enum Entity { Player, Enemy }
 

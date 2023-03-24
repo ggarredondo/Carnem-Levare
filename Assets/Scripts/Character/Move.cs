@@ -82,6 +82,10 @@ public class Move : ScriptableObject
         return ms > startUp+active+recovery;
     }
 
+    public float StartUp { get => startUp; }
+    public float Active { get => active; }
+    public float Recovery { get => recovery; }
+
     public float AdvantageOnBlock { get => advantageOnBlock; }
     public float AdvantageOnHit { get => advantageOnHit; }
 
