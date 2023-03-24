@@ -11,8 +11,6 @@ public abstract class Character : MonoBehaviour
     // Character Attributes
     [Header("Tracking values")]
     [SerializeField] private bool debugTracking = true;
-    [System.NonSerialized] public bool attackTracking = true; // To deactivate tracking during the commitment phase of an attack.
-    private bool trackingConditions;
     protected Transform target;
 
     [Tooltip("How quickly character rotates towards their opponent")]
@@ -29,7 +27,7 @@ public abstract class Character : MonoBehaviour
     [SerializeField] [InitializationField] [Range(1f, 1.2f)] private float height = 1f;
     [SerializeField] [InitializationField] private float mass = 1f;
     [SerializeField] [InitializationField] private float drag = 0f; // SHOULD BE CALCULATED GIVEN MASS
-    [SerializeField] private List<Move> leftMoveset, rightMoveset;
+    [SerializeField] private List<Move> moveset;
     [SerializeField] private List<Hitbox> hitboxes;
 
     // Character Variables
@@ -84,7 +82,6 @@ public abstract class Character : MonoBehaviour
         isBlocking = (anim.GetCurrentAnimatorStateInfo(0).IsName("Block") || isBlocked) && anim.GetBool("block");
 
         // Character can only attack if they're not attacking already or hurt.
-        anim.SetBool("can_attack", !isAttacking && !isHurt && !isBlocked && !isKO);
         anim.SetBool("is_blocking", isBlocking);
 
         // Softens movement by establishing the direction as a point that approaches the target direction at *directionSpeed* rate.
@@ -94,9 +91,8 @@ public abstract class Character : MonoBehaviour
     }
     protected virtual void FixedUpdate()
     {
-        trackingConditions = debugTracking && attackTracking && !isHurt && !IsIdle && !isKO;
         // Rotate towards opponent if character is tracking.
-        if (target != null && trackingConditions)
+        if (target != null && debugTracking && !isHurt && !IsIdle && !isKO)
         {
             targetLook = Quaternion.LookRotation(target.position - transform.position);
             transform.rotation = Quaternion.Lerp(transform.rotation, targetLook, trackingRate * Time.fixedDeltaTime);
@@ -123,14 +119,9 @@ public abstract class Character : MonoBehaviour
     /// </summary>
     private void InitializeMoveset()
     {
-        for (int i = 0; i < leftMoveset.Count; ++i) {
-            UpdateAnimator("LeftClip" + i, leftMoveset[i].Animation);
-            anim.SetFloat("left" + i + "_speed", leftMoveset[i].AnimationSpeed);
-        }
-
-        for (int i = 0; i < rightMoveset.Count; ++i) {
-            UpdateAnimator("RightClip" + i, rightMoveset[i].Animation);
-            anim.SetFloat("right" + i + "_speed", rightMoveset[i].AnimationSpeed);
+        for (int i = 0; i < moveset.Count; ++i) {
+            UpdateAnimator("AttackClip" + i, moveset[i].Animation);
+            anim.SetFloat("attack" + i + "_speed", moveset[i].AnimationSpeed);
         }
     }
 
@@ -140,9 +131,7 @@ public abstract class Character : MonoBehaviour
 
     protected void Movement(Vector2 dir) { directionTarget = dir; }
     protected void Block(bool performed) { anim.SetBool("block", performed); }
-
-    protected void LeftN(bool performed, int n) { if (leftMoveset.Count > n) anim.SetBool("left" + n, performed); }
-    protected void RightN(bool performed, int n) { if (rightMoveset.Count > n) anim.SetBool("right" + n, performed); }
+    protected void AttackN(bool performed, int n) { if (moveset.Count > n) anim.SetBool("attack" + n, performed); }
 
     #endregion
 
@@ -190,8 +179,7 @@ public abstract class Character : MonoBehaviour
 
     public Animator Animator { get => anim; }
 
-    public List<Move> LeftMoveset { get => leftMoveset; }
-    public List<Move> RightMoveset { get => rightMoveset; }
+    public List<Move> Moveset { get => moveset; }
     public List<Hitbox> Hitboxes { get => hitboxes; }
 
     public float Stamina { get => stamina; }

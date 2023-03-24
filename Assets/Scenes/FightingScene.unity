@@ -14382,7 +14382,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 11400000, guid: cb514f7bc969f1e4da23444266f585b7, type: 2}
         m_TargetAssemblyTypeName: InputReader, Assembly-CSharp
-        m_MethodName: OnLeft0
+        m_MethodName: OnAttack0
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -14398,7 +14398,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 11400000, guid: cb514f7bc969f1e4da23444266f585b7, type: 2}
         m_TargetAssemblyTypeName: InputReader, Assembly-CSharp
-        m_MethodName: OnRight0
+        m_MethodName: OnAttack1
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -14414,7 +14414,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 11400000, guid: cb514f7bc969f1e4da23444266f585b7, type: 2}
         m_TargetAssemblyTypeName: InputReader, Assembly-CSharp
-        m_MethodName: OnLeft1
+        m_MethodName: OnAttack2
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -14430,7 +14430,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 11400000, guid: cb514f7bc969f1e4da23444266f585b7, type: 2}
         m_TargetAssemblyTypeName: InputReader, Assembly-CSharp
-        m_MethodName: OnRight1
+        m_MethodName: OnAttack3
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

@@ -21,11 +21,10 @@ public class Player : Character
         inputReader.MovementEvent += Movement;
         inputReader.BlockEvent += Block;
 
-        inputReader.Left0Event += Left0;
-        inputReader.Left1Event += Left1;
-
-        inputReader.Right0Event += Right0;
-        inputReader.Right1Event += Right1;
+        inputReader.Attack0Event += Attack0;
+        inputReader.Attack1Event += Attack1;
+        inputReader.Attack2Event += Attack2;
+        inputReader.Attack3Event += Attack3;
     }
 
     protected override void Start()
@@ -53,20 +52,19 @@ public class Player : Character
         inputReader.MovementEvent -= Movement;
         inputReader.BlockEvent -= Block;
 
-        inputReader.Left0Event -= Left0;
-        inputReader.Left1Event -= Left1;
-
-        inputReader.Right0Event -= Right0;
-        inputReader.Right1Event -= Right1;
+        inputReader.Attack0Event -= Attack0;
+        inputReader.Attack1Event -= Attack1;
+        inputReader.Attack2Event -= Attack2;
+        inputReader.Attack3Event -= Attack3;
     }
 
     #region Actions
 
-    private void Left0(bool performed) { LeftN(performed, 0); }
-    private void Left1(bool performed) { LeftN(performed, 1); }
+    private void Attack0(bool performed) { AttackN(performed, 0); }
+    private void Attack1(bool performed) { AttackN(performed, 1); }
 
-    private void Right0(bool performed) { RightN(performed, 0); }
-    private void Right1(bool performed) { RightN(performed, 1); }
+    private void Attack2(bool performed) { AttackN(performed, 2); }
+    private void Attack3(bool performed) { AttackN(performed, 3); }
 
     #endregion
 }

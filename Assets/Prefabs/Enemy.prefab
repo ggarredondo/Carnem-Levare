@@ -443,9 +443,8 @@ MonoBehaviour:
   height: 1.1
   mass: 1
   drag: 0
-  leftMoveset:
+  moveset:
   - {fileID: 11400000, guid: 9ec677a7eb446e244816d077b11c8747, type: 2}
-  rightMoveset: []
   hitboxes:
   - {fileID: 692432875193982508}
   - {fileID: 3986532354630737285}

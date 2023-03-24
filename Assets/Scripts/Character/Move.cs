@@ -69,19 +69,6 @@ public class Move : ScriptableObject
     public bool Unblockable { get => unblockable; }
     public float BaseDamage { get => baseDamage; }
 
-    public bool IsStarting(float ms) { 
-        return ms <= startUp; 
-    }
-    public bool IsActive(float ms) {
-        return ms > startUp && ms <= startUp+active;
-    }
-    public bool IsRecovering(float ms) {
-        return ms > active && ms <= startUp+active+recovery;
-    }
-    public bool HasRecovered(float ms) {
-        return ms > startUp+active+recovery;
-    }
-
     public float StartUp { get => startUp; }
     public float Active { get => active; }
     public float Recovery { get => recovery; }

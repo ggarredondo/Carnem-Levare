@@ -26,6 +26,6 @@ public class Enemy : Character
         if (isHurt || isBlocked) timer = 0f;
         Block(timer <= blockMaxTime && block);
         timer += Time.deltaTime;
-        LeftN(jab, 0);
+        AttackN(jab, 0);
     }
 }
