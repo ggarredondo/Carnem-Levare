@@ -1,22 +1,28 @@
 using Cinemachine;
 using UnityEngine;
 
+[CreateAssetMenu(menuName = "Scriptable Objects/CameraEffects/DollyZoom")]
 public class DollyZoom : CameraMovement
 {
     public float fieldOfViewVariation;
     public Vector3 offsetVariation;
 
-    private float reduceFOV, reduceZoom, reduceNear;
-    [HideInInspector] public Tuple<Vector3> zoomPositions;
-    [HideInInspector] public Tuple<float> fieldOfView;
-    [HideInInspector] public Tuple<float> nearPlane;
+    [System.NonSerialized] public Tuple<Vector3> zoomPositions;
+    [System.NonSerialized] public Tuple<float> fieldOfView;
+    [System.NonSerialized] public Tuple<float> nearPlane;
     private CinemachineTransposer transposer;
+    private float reduceFOV, reduceZoom, reduceNear;
 
-    public override void Initialize()
+    public override void Initialize(CinemachineVirtualCamera vcam)
     {
-        vcam = GetComponent<CinemachineVirtualCamera>();
+        this.vcam = vcam;
         transposer = vcam.GetCinemachineComponent<CinemachineOrbitalTransposer>();
 
+        UpdateParameters();
+    }
+
+    public override void UpdateParameters()
+    {
         nearPlane.Item1 = vcam.m_Lens.NearClipPlane;
         nearPlane.Item2 = 1;
 
@@ -25,6 +31,13 @@ public class DollyZoom : CameraMovement
 
         fieldOfView.Item1 = vcam.m_Lens.FieldOfView;
         fieldOfView.Item2 = fieldOfView.Item1 + fieldOfViewVariation;
+    }
+
+    public override bool InitialPosition()
+    {
+        return transposer.m_FollowOffset == zoomPositions.Item1 &&
+               vcam.m_Lens.FieldOfView == fieldOfView.Item1 &&
+               vcam.m_Lens.NearClipPlane == nearPlane.Item1;
     }
 
     public override void ApplyMove(bool condition)

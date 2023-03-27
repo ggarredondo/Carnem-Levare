@@ -20,23 +20,12 @@ public class CameraEffects : MonoBehaviour
     [Range(0,10)] [SerializeField] private float orbitalRecovery;
 
     [Header("Effects")]
-    public bool smoothFollowActivated;
-    [ConditionalField("smoothFollowActivated")] public SmoothFollow smoothFollow;
-
-    public bool noiseActivated;
-    [ConditionalField("noiseActivated")] public Noise noise;
-
-    public bool dollyZoomActivated;
-    [ConditionalField("dollyZoomActivated")] public DollyZoom dollyZoom;
-
-    public bool onGuardActivated;
-    [ConditionalField("onGuardActivated")] public LinealMovement onGuardLinealMovement;
+    public CameraMovement[] cameraEffects;
 
     //PRIVATE
-    private bool isMoving;
+    private bool cameraIsMoving;
     private bool[] cameraConditions;
     private int actualCamera;
-
     private Stack<CameraMovement> cameraStack = new();
 
     private CinemachineVirtualCamera vcam;
@@ -50,14 +39,21 @@ public class CameraEffects : MonoBehaviour
         vcam = GetComponent<CinemachineVirtualCamera>();
         orbitalTransposer = vcam.GetCinemachineComponent<CinemachineOrbitalTransposer>();
 
-        cameraConditions = new bool[2];
+        cameraConditions = new bool[Enum.GetNames(typeof(TypeCameraMovement)).Length];
     }
 
     private void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
         enemy = GameObject.FindGameObjectWithTag("Enemy").GetComponent<Enemy>();
+
+        foreach(CameraMovement movement in cameraEffects)
+        {
+            movement.Initialize(vcam);
+        }
     }
+
+    #region Public
 
     public void InitializeTargetGroup(Transform playerTarget, Transform enemyTarget)
     {
@@ -73,41 +69,63 @@ public class CameraEffects : MonoBehaviour
         alternativeTargets[1] = enemyAlternative;
     }
 
-    private bool InitialPosition()
+    #endregion
+
+    #region Private
+
+    private void UpdateCameraConditions()
     {
-        return orbitalTransposer.m_FollowOffset == dollyZoom.zoomPositions.Item1 &&
-               vcam.m_Lens.FieldOfView == dollyZoom.fieldOfView.Item1 &&
-               vcam.m_Lens.NearClipPlane == dollyZoom.nearPlane.Item1;
+        foreach (CameraMovement movement in cameraEffects)
+        {
+            switch (movement.ID)
+            {
+                case TypeCameraMovement.SMOOTH_FOLLOW:
+                    cameraConditions[(int)TypeCameraMovement.SMOOTH_FOLLOW] = !player.IsIdle;
+                    break;
+
+                case TypeCameraMovement.LINEAL_MOVE:
+                    cameraConditions[(int)TypeCameraMovement.LINEAL_MOVE] = player.IsBlocking;
+                    break;
+
+                case TypeCameraMovement.NOISE:
+                    cameraConditions[(int)TypeCameraMovement.NOISE] = player.IsIdle || player.IsMoving;
+                    break;
+
+                case TypeCameraMovement.DOLLY_ZOOM:
+                    cameraConditions[(int)TypeCameraMovement.DOLLY_ZOOM] = player.IsAttacking;
+                    break;
+            }
+        }
     }
 
     private void LateUpdate()
     {
         if (Time.timeScale > 0f)
         {
-            cameraConditions[1] = player.IsBlocking;
+            UpdateCameraConditions();
 
             if(orbitalTransposer != null) OrbitalMovement();
 
             if(alternativeTargets[0] != null && alternativeTargets[1] != null) TargetUpdate();
 
-            //Making camera damping oscillate depending on player movement
-            if (smoothFollowActivated) smoothFollow.ApplyMove(!player.IsIdle);
-
-            //Making camera noise oscillate depending on player movement
-            if (noiseActivated) noise.ApplyMove(player.IsIdle || player.IsMoving);
-
-            if (dollyZoomActivated || onGuardActivated)
+            foreach (CameraMovement movement in cameraEffects)
             {
+                if(!movement.Stackable) movement.ApplyMove(cameraConditions[(int)movement.ID]);
+                else
+                {
+                    if (movement.InitialPosition() && cameraStack.Count != 0) { cameraStack.Pop(); cameraIsMoving = false; }
 
-                if (InitialPosition() && cameraStack.Count != 0) { cameraStack.Pop(); isMoving = false; }
-
-                if (cameraConditions[0] && !isMoving) { dollyZoom.Initialize(); cameraStack.Push(dollyZoom); isMoving = true; actualCamera = 0; }
-
-                if (cameraConditions[1] && !isMoving) { cameraStack.Push(onGuardLinealMovement); actualCamera = 1; }
-
-                if(cameraStack.Count != 0) cameraStack.Peek().ApplyMove(cameraConditions[actualCamera]);
-
+                    if (cameraConditions[(int)movement.ID] && !cameraIsMoving)
+                    {
+                        movement.UpdateParameters();
+                        cameraStack.Push(movement);
+                        cameraIsMoving = !movement.Cancelable;
+                        actualCamera = (int)movement.ID;
+                    }
+                }
             }
+
+            if(cameraStack.Count != 0) cameraStack.Peek().ApplyMove(cameraConditions[actualCamera]);
         }
     }
 
@@ -116,7 +134,7 @@ public class CameraEffects : MonoBehaviour
         if (Mathf.Abs(player.Direction.x) > 0.1f && player.IsMoving && !cameraConditions[1]) 
             orbitalTransposer.m_XAxis.Value += Mathf.Sign(player.Direction.x) * orbitalValue * Time.deltaTime;
 
-        if (cameraConditions[1]) orbitalTransposer.m_XAxis.Value = Mathf.Lerp(orbitalTransposer.m_XAxis.Value, 0, orbitalRecovery * Time.deltaTime);
+        if (player.IsBlocking) orbitalTransposer.m_XAxis.Value = Mathf.Lerp(orbitalTransposer.m_XAxis.Value, 0, orbitalRecovery * Time.deltaTime);
 
         orbitalTransposer.m_RecenterToTargetHeading.m_enabled = Mathf.Abs(player.Direction.x) > 0.1f && player.IsMoving && !cameraConditions[1];
     }
@@ -138,4 +156,6 @@ public class CameraEffects : MonoBehaviour
         targetDebug[0].SetActive(debug);
         targetDebug[1].SetActive(debug);
     }
+
+    #endregion
 }

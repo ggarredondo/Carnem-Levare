@@ -648,7 +648,6 @@ GameObject:
   - component: {fileID: 2835685394733476231}
   - component: {fileID: 2835685394733476226}
   - component: {fileID: 2835685394733476229}
-  - component: {fileID: 2835685394733476228}
   m_Layer: 0
   m_Name: Drone
   m_TagString: Untagged
@@ -726,35 +725,7 @@ MonoBehaviour:
   debug: 0
   orbitalValue: 18
   orbitalRecovery: 6
-  smoothFollowActivated: 0
-  smoothFollow: {fileID: 0}
-  noiseActivated: 1
-  noise: {fileID: 2835685394733476228}
-  dollyZoomActivated: 0
-  dollyZoom: {fileID: 0}
-  onGuardActivated: 0
-  onGuardLinealMovement: {fileID: 0}
---- !u!114 &2835685394733476228
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2835685394733476230}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b48949f1a28583e4b8ca075f942b4aa5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  aceleration:
-    Item1: 3
-    Item2: 3
-  frequency:
-    Item1: 0
-    Item2: 3
-  amplitude:
-    Item1: 0
-    Item2: 0.1
+  cameraEffects: []
 --- !u!1 &2835685394845596711
 GameObject:
   m_ObjectHideFlags: 0
@@ -954,8 +925,6 @@ GameObject:
   - component: {fileID: 2835685395348398057}
   - component: {fileID: 2835685395348398053}
   - component: {fileID: 2835685395348398052}
-  - component: {fileID: 2835685395348398055}
-  - component: {fileID: 2835685395348398054}
   m_Layer: 0
   m_Name: GoPro
   m_TagString: Untagged
@@ -1034,54 +1003,7 @@ MonoBehaviour:
   debug: 0
   orbitalValue: 18
   orbitalRecovery: 6
-  smoothFollowActivated: 1
-  smoothFollow: {fileID: 2835685395348398055}
-  noiseActivated: 1
-  noise: {fileID: 2835685395348398054}
-  dollyZoomActivated: 0
-  dollyZoom: {fileID: 0}
-  onGuardActivated: 0
-  onGuardLinealMovement: {fileID: 0}
---- !u!114 &2835685395348398055
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2835685395348398056}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dae92714987ac8743a60e9400c5e2d98, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  aceleration:
-    Item1: 2
-    Item2: 2
-  variation:
-    Item1: 1
-    Item2: 2
-  parameter: 0
---- !u!114 &2835685395348398054
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2835685395348398056}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b48949f1a28583e4b8ca075f942b4aa5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  aceleration:
-    Item1: 3
-    Item2: 3
-  frequency:
-    Item1: 0
-    Item2: 3
-  amplitude:
-    Item1: 0
-    Item2: 0.1
+  cameraEffects: []
 --- !u!1 &2835685395472132083
 GameObject:
   m_ObjectHideFlags: 0
@@ -1229,8 +1151,6 @@ GameObject:
   - component: {fileID: 2835685395923890379}
   - component: {fileID: 2835685395923890375}
   - component: {fileID: 2835685395923890374}
-  - component: {fileID: 2835685395923890377}
-  - component: {fileID: 2835685395923890376}
   m_Layer: 0
   m_Name: FirstPerson
   m_TagString: Untagged
@@ -1308,54 +1228,7 @@ MonoBehaviour:
   debug: 0
   orbitalValue: 18
   orbitalRecovery: 6
-  smoothFollowActivated: 1
-  smoothFollow: {fileID: 2835685395923890377}
-  noiseActivated: 1
-  noise: {fileID: 2835685395923890376}
-  dollyZoomActivated: 0
-  dollyZoom: {fileID: 0}
-  onGuardActivated: 0
-  onGuardLinealMovement: {fileID: 0}
---- !u!114 &2835685395923890377
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2835685395923890378}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dae92714987ac8743a60e9400c5e2d98, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  aceleration:
-    Item1: 2
-    Item2: 2
-  variation:
-    Item1: 1
-    Item2: 2
-  parameter: 0
---- !u!114 &2835685395923890376
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2835685395923890378}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b48949f1a28583e4b8ca075f942b4aa5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  aceleration:
-    Item1: 3
-    Item2: 3
-  frequency:
-    Item1: 0
-    Item2: 3
-  amplitude:
-    Item1: 0
-    Item2: 0.1
+  cameraEffects: []
 --- !u!1 &2835685396104087961
 GameObject:
   m_ObjectHideFlags: 0
@@ -1367,10 +1240,6 @@ GameObject:
   - component: {fileID: 2835685396104087958}
   - component: {fileID: 2835685396104087952}
   - component: {fileID: 2835685396104087955}
-  - component: {fileID: 2835685396104087954}
-  - component: {fileID: 2835685396104087957}
-  - component: {fileID: 2835685396104087956}
-  - component: {fileID: 2835685396104087959}
   m_Layer: 0
   m_Name: Virtual Camera
   m_TagString: CAMERA
@@ -1448,96 +1317,11 @@ MonoBehaviour:
   debug: 0
   orbitalValue: 10
   orbitalRecovery: 3
-  smoothFollowActivated: 1
-  smoothFollow: {fileID: 2835685396104087957}
-  noiseActivated: 1
-  noise: {fileID: 2835685396104087956}
-  dollyZoomActivated: 1
-  dollyZoom: {fileID: 2835685396104087954}
-  onGuardActivated: 1
-  onGuardLinealMovement: {fileID: 2835685396104087959}
---- !u!114 &2835685396104087954
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2835685396104087961}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 93914abb648e0b04ca4b708120a5a24f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  aceleration:
-    Item1: 6
-    Item2: 10
-  fieldOfViewVariation: 25
-  offsetVariation: {x: 0, y: -0.5, z: 2}
-  zoomPositions:
-    Item1: {x: 0, y: 0, z: 0}
-    Item2: {x: 0, y: 0, z: 0}
-  fieldOfView:
-    Item1: 25
-    Item2: 50
-  nearPlane:
-    Item1: 0
-    Item2: 0
---- !u!114 &2835685396104087957
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2835685396104087961}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dae92714987ac8743a60e9400c5e2d98, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  aceleration:
-    Item1: 2
-    Item2: 2
-  variation:
-    Item1: 1
-    Item2: 2
-  parameter: 0
---- !u!114 &2835685396104087956
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2835685396104087961}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b48949f1a28583e4b8ca075f942b4aa5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  aceleration:
-    Item1: 3
-    Item2: 3
-  frequency:
-    Item1: 0
-    Item2: 3
-  amplitude:
-    Item1: 0
-    Item2: 0.1
---- !u!114 &2835685396104087959
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2835685396104087961}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1a5a034724bbc0e40b46cac15babf2f7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  aceleration:
-    Item1: 2
-    Item2: 2
-  offsetVariation: {x: 0, y: 0, z: 0.25}
+  cameraEffects:
+  - {fileID: 11400000, guid: c0ef79e48f3d5cc46adb9c5c31918ec2, type: 2}
+  - {fileID: 11400000, guid: e9c3a4d31ca76584cab921ddbf6f857e, type: 2}
+  - {fileID: 11400000, guid: 59aaaa083c81fd14c83fa5c71a74098b, type: 2}
+  - {fileID: 11400000, guid: 2fac0b2e5d52e3241b00c165a480b6be, type: 2}
 --- !u!1 &4335206462500320825
 GameObject:
   m_ObjectHideFlags: 0

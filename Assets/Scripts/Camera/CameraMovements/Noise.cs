@@ -1,5 +1,7 @@
 using Cinemachine;
+using UnityEngine;
 
+[CreateAssetMenu(menuName = "Scriptable Objects/CameraEffects/Noise")]
 public class Noise : CameraMovement
 {
     public Tuple<float> frequency;
@@ -8,9 +10,9 @@ public class Noise : CameraMovement
     private float reduceAmplitude, reduceFrequency;
     private CinemachineBasicMultiChannelPerlin noiseTransposer;
 
-    public override void Initialize()
+    public override void Initialize(CinemachineVirtualCamera vcam)
     {
-        vcam = GetComponent<CinemachineVirtualCamera>();
+        this.vcam = vcam;
         noiseTransposer = vcam.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>();
     }
 

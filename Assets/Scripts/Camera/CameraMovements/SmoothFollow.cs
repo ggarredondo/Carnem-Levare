@@ -1,5 +1,7 @@
 using Cinemachine;
+using UnityEngine;
 
+[CreateAssetMenu(menuName = "Scriptable Objects/CameraEffects/SmoothFollow")]
 public class SmoothFollow : CameraMovement
 {
     public Tuple<float> variation;
@@ -9,9 +11,9 @@ public class SmoothFollow : CameraMovement
     public enum Parameter { DAMPING, ORBITAL }
     public Parameter parameter;
 
-    public override void Initialize()
+    public override void Initialize(CinemachineVirtualCamera vcam)
     {
-        vcam = GetComponent<CinemachineVirtualCamera>();
+        this.vcam = vcam;
         transposer = vcam.GetCinemachineComponent<CinemachineOrbitalTransposer>();
     }
 
