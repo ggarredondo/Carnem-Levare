@@ -40,7 +40,6 @@ public abstract class Character : MonoBehaviour
     protected float directionSpeed;
 
     protected bool isAttacking, isHurt, isKO, isBlocked, isBlocking;
-    private float disadvantage;
     private int moveIndex = 0;
     private bool hurtExceptions;
 
@@ -84,7 +83,7 @@ public abstract class Character : MonoBehaviour
         isBlocking = (anim.GetCurrentAnimatorStateInfo(0).IsName("Block") || isBlocked);
         anim.SetBool("is_blocking", isBlocking);
         // Character may not attack when they are blocking an attack, when they are hurt or when they are already attacking.
-        anim.SetBool("can_attack", !isAttacking && !isBlocked && !isHurt);
+        anim.SetBool("can_attack", !isAttacking && !isBlocked && !isHurt && !isKO);
 
         // Softens movement by establishing the direction as a point that approaches the target direction at *directionSpeed* rate.
         direction = Vector2.Lerp(direction, directionTarget, directionSpeed * Time.deltaTime);
@@ -174,7 +173,7 @@ public abstract class Character : MonoBehaviour
         anim.SetFloat("hurt_target", target);
         anim.SetFloat("hurt_power", power);
         anim.SetBool("unblockable", unblockable);
-        disadvantage = isBlocking ? disadvantageOnBlock : disadvantageOnHit;
+        //disadvantage = isBlocking ? disadvantageOnBlock : disadvantageOnHit;
 
         // Sound
         AudioManager.Instance.gameSfxSounds.Play(isBlocking ? blockedSound : hitSound, (int) entity);
