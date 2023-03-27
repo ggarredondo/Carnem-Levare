@@ -1,8 +1,5 @@
-using System.Collections;
 using TMPro;
-using UnityEditor;
 using UnityEngine;
-using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
 public class LoadingScreen : MonoBehaviour
@@ -19,31 +16,20 @@ public class LoadingScreen : MonoBehaviour
     [Header("Transition")]
     [SerializeField] private Animator transAnim;
 
-    private PlayerInput playerInput;
-
     private string continueAction;
     private float actualProgress;
     private bool isStopped;
 
-    private void OnEnable()
-    {
-        playerInput = GameObject.FindGameObjectWithTag("INPUT").GetComponent<PlayerInput>();
-        ControlSaver.StaticEvent += ChangeText; 
-    }
+    private void OnEnable(){ ControlSaver.StaticEvent += ChangeText; }
 
     private void OnDisable(){ ControlSaver.StaticEvent -= ChangeText;}
-
-    public void Activate()
-    {
-        playerInput.SwitchCurrentActionMap("LoadingScreen");
-    }
 
     private void Update()
     {
         float xScale = Mathf.Lerp(progressBar.transform.localScale.x, actualProgress, progressBarSpeed * Time.deltaTime);
         progressBar.transform.localScale = new Vector3(xScale, progressBar.transform.localScale.y, progressBar.transform.localScale.z);
 
-        if (playerInput.actions.FindAction("Stop").IsPressed() && !isStopped)
+        if (SceneManagement.Instance.PlayerInput.actions.FindAction("Stop").IsPressed() && !isStopped)
         {
             isStopped = true;
             AudioManager.Instance.uiSfxSounds.Play("MaskAlert");
@@ -52,6 +38,21 @@ public class LoadingScreen : MonoBehaviour
         }
     }
 
+    #region Public
+
+    /// <summary>
+    /// Change to the loading screen Action map
+    /// </summary>
+    public void Activate()
+    {
+        SceneManagement.Instance.PlayerInput.SwitchCurrentActionMap("LoadingScreen");
+    }
+
+    /// <summary>
+    /// Update the UI to the current loading progress
+    /// </summary>
+    /// <param name="progress">The Async operation progress</param>
+    /// <returns></returns>
     public bool UpdateProgess(float progress)
     {
         actualProgress = Mathf.Clamp01(progress / 0.9f);
@@ -64,7 +65,7 @@ public class LoadingScreen : MonoBehaviour
             percentage.text = "Press " + continueAction + " to continue";
             loadingTextAnim.enabled = true;
 
-            if (playerInput.actions.FindAction("Continue").IsPressed())
+            if (SceneManagement.Instance.PlayerInput.actions.FindAction("Continue").IsPressed())
             {
                 AudioManager.Instance.uiSfxSounds.Play("ExitLoading");
                 result = true;
@@ -74,9 +75,14 @@ public class LoadingScreen : MonoBehaviour
         return result;
     }
 
+    /// <summary>
+    /// Function executes when OnControlsChanged triggers
+    /// </summary>
     public void ChangeText()
     {
-        continueAction = playerInput.actions.FindActionMap("LoadingScreen").FindAction("Continue").bindings[ControlSaver.controlSchemeIndex].path.Split("/")[1];
+        continueAction = SceneManagement.Instance.PlayerInput.actions.FindActionMap("LoadingScreen").FindAction("Continue").bindings[ControlSaver.controlSchemeIndex].path.Split("/")[1];
     }
+
+    #endregion
 
 }

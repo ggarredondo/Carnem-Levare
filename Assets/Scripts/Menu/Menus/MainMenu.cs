@@ -9,6 +9,8 @@ public class MainMenu : MonoBehaviour
         AudioManager.Instance.PlayMusic("Intro");
     }
 
+    #region Public
+
     /// <summary>
     /// Quit the game, exit to the desk
     /// </summary>
@@ -29,4 +31,6 @@ public class MainMenu : MonoBehaviour
             StartCoroutine(SceneManagement.Instance.LoadSceneByIndexAsync(3));
         }
     }
+
+    #endregion
 }

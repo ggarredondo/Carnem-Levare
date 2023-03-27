@@ -32,6 +32,63 @@ public abstract class MenuManager : MonoBehaviour
         SetActiveMenuById(actualActiveMenu, true);
     }
 
+    #region Public
+
+    /// <summary>
+    /// Return to the parent menu of the actual active menu
+    /// </summary>
+    public void ReturnToParent()
+    {
+        AudioManager.Instance.uiSfxSounds.Play("PressButton");
+
+        if (menus[actualActiveMenu].GetParentName() != menus[actualActiveMenu].GetName())
+        {
+            int parentId = GetIdByName(menus[actualActiveMenu].GetParentName());
+            SetActiveMenuById(parentId, true);
+        }
+    }
+
+    /// <summary>
+    /// Change the actual menu
+    /// </summary>
+    public void ChangeMenu(int id)
+    {
+        AudioManager.Instance.uiSfxSounds.Play("PressButton");
+
+        if (EventSystem.current.currentSelectedGameObject != null)
+            menus[actualActiveMenu].SetFirstButton(EventSystem.current.currentSelectedGameObject);
+
+        SetActiveMenuById(id, true);
+    }
+
+    /// <summary>
+    /// Change the actual menuManager
+    /// </summary>
+    public void ChangeMenuNoInitialize(int id)
+    {
+        AudioManager.Instance.uiSfxSounds.Play("PressButton");
+
+        if (EventSystem.current.currentSelectedGameObject != null)
+            menus[actualActiveMenu].SetFirstButton(EventSystem.current.currentSelectedGameObject);
+
+        SetActiveMenuById(id, false);
+    }
+
+    /// <summary>
+    /// Go to a children of the actual object
+    /// </summary>
+    public void GoToChildren()
+    {
+        AudioManager.Instance.uiSfxSounds.Play("PressButton");
+
+        GameObject children = EventSystem.current.currentSelectedGameObject.transform.GetChild(0).gameObject;
+        EventSystem.current.SetSelectedGameObject(children);
+    }
+
+    #endregion
+
+    #region Private&Protected
+
     /// <summary>
     /// Set the active menu by the id of the 'menus' Array
     /// </summary>
@@ -77,46 +134,6 @@ public abstract class MenuManager : MonoBehaviour
     }
 
     /// <summary>
-    /// Return to the parent menu of the actual active menu
-    /// </summary>
-    public void ReturnToParent()
-    {
-        AudioManager.Instance.uiSfxSounds.Play("PressButton");
-
-        if (menus[actualActiveMenu].GetParentName() != menus[actualActiveMenu].GetName())
-        {
-            int parentId = GetIdByName(menus[actualActiveMenu].GetParentName());
-            SetActiveMenuById(parentId, true);
-        }
-    } 
-
-    /// <summary>
-    /// Change the actual menu
-    /// </summary>
-    public void ChangeMenu(int id)
-    {
-        AudioManager.Instance.uiSfxSounds.Play("PressButton");
-
-        if (EventSystem.current.currentSelectedGameObject != null)
-            menus[actualActiveMenu].SetFirstButton(EventSystem.current.currentSelectedGameObject);
-
-        SetActiveMenuById(id, true);
-    }
-
-    /// <summary>
-    /// Change the actual menuManager
-    /// </summary>
-    public void ChangeMenuNoInitialize(int id)
-    {
-        AudioManager.Instance.uiSfxSounds.Play("PressButton");
-
-        if (EventSystem.current.currentSelectedGameObject != null)
-            menus[actualActiveMenu].SetFirstButton(EventSystem.current.currentSelectedGameObject);
-
-        SetActiveMenuById(id, false);
-    }
-
-    /// <summary>
     /// Raycast the UI elements behind the mouse position
     /// </summary>
     /// <returns>List of elements sort by depth</returns>
@@ -129,17 +146,6 @@ public abstract class MenuManager : MonoBehaviour
         EventSystem.current.RaycastAll(pointerData, results);
 
         return results;
-    }
-
-    /// <summary>
-    /// Go to a children of the actual object
-    /// </summary>
-    public void GoToChildren()
-    {
-        AudioManager.Instance.uiSfxSounds.Play("PressButton");
-
-        GameObject children = EventSystem.current.currentSelectedGameObject.transform.GetChild(0).gameObject;
-        EventSystem.current.SetSelectedGameObject(children);
     }
 
     /// <summary>
@@ -195,4 +201,6 @@ public abstract class MenuManager : MonoBehaviour
     {
         return (a % b + b) % b;
     }
+
+    #endregion
 }

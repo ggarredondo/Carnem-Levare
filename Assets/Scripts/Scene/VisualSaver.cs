@@ -23,6 +23,11 @@ public class VisualSaver : MonoBehaviour
         }
     }
 
+    #region Public
+
+    /// <summary>
+    /// Save and apply the changes made in the visual menu
+    /// </summary>
     public void ApplyChanges()
     {
         ApplyUI();
@@ -34,6 +39,9 @@ public class VisualSaver : MonoBehaviour
         SaveManager.Instance.activeSave.quality = quality;
     }
 
+    /// <summary>
+    /// Apply the changes to the unity visual options
+    /// </summary>
     public void ApplyUI()
     {
         QualitySettings.vSyncCount = vsync;
@@ -44,6 +52,9 @@ public class VisualSaver : MonoBehaviour
         QualitySettings.SetQualityLevel(quality, false);
     }
 
+    /// <summary>
+    /// Load changes from the SaveManager to obtain the initial values
+    /// </summary>
     public void LoadChanges()
     {
         vsync = SaveManager.Instance.activeSave.vsync;
@@ -53,4 +64,6 @@ public class VisualSaver : MonoBehaviour
 
         ApplyUI();
     }
+
+    #endregion
 }

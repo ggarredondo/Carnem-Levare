@@ -41,6 +41,24 @@ public class SelectableMenuManager : MenuManager
         }
     }
 
+    #region Public
+
+    /// <summary>
+    /// Selecting the menu with the mouse cursor
+    /// </summary>
+    /// <param name="newActualMenu">The index of the new menu</param>
+    public void SelectWithMouse(int newActualMenu)
+    {
+        AudioManager.Instance.uiSfxSounds.Play("PressButton");
+        CleanOldButtons(actualActiveMenu);
+        SetUpButtons(newActualMenu);
+        SetActiveMenuById(newActualMenu, true);
+    }
+
+    #endregion
+
+    #region Private
+
     /// <summary>
     /// Move to the Menu on the right when pressing right shoulder
     /// </summary>
@@ -67,18 +85,6 @@ public class SelectableMenuManager : MenuManager
             SetUpButtons(newActualMenu);
             ChangeMenu(newActualMenu);
         }
-    }
-
-    /// <summary>
-    /// Selecting the menu with the mouse cursor
-    /// </summary>
-    /// <param name="newActualMenu">The index of the new menu</param>
-    public void SelectWithMouse(int newActualMenu)
-    {
-        AudioManager.Instance.uiSfxSounds.Play("PressButton");
-        CleanOldButtons(actualActiveMenu);
-        SetUpButtons(newActualMenu);
-        SetActiveMenuById(newActualMenu, true);
     }
 
     /// <summary>
@@ -114,4 +120,6 @@ public class SelectableMenuManager : MenuManager
         //Reassign the struct data to the button
         returnButton.navigation = navigation;
     }
+
+    #endregion
 }

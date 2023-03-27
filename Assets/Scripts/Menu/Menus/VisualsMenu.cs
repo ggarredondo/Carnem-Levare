@@ -21,32 +21,36 @@ public class VisualsMenu : MonoBehaviour
         vsyncToggle.isOn = VisualSaver.Instance.vsync == 1;
 
         //Initialize resolution Dropdown
-        List<string> options = new List<string>();
-
-        options.Add(Display.main.systemWidth + "x" + Display.main.systemHeight);
-        options.Add("1600x900");
-        options.Add("1536x864");
-        options.Add("1440x900");
-        options.Add("1366x768");
-        options.Add("1280x720");
-        options.Add("1280x1024");
-        options.Add("768x1024");
+        List<string> options = new()
+        {
+            Display.main.systemWidth + "x" + Display.main.systemHeight,
+            "1600x900",
+            "1536x864",
+            "1440x900",
+            "1366x768",
+            "1280x720",
+            "1280x1024",
+            "768x1024"
+        };
 
         resolutionDropdown.ClearOptions();
         resolutionDropdown.AddOptions(options);
         resolutionDropdown.value = resolutionDropdown.options.FindIndex(option => option.text == VisualSaver.Instance.resolution);
 
         //Initialize quality Dropdown
-        List<string> quality = new List<string>();
-
-        quality.Add("Low");
-        quality.Add("Medium");
-        quality.Add("High");
+        List<string> quality = new()
+        {
+            "Low",
+            "Medium",
+            "High"
+        };
 
         qualityDropdown.ClearOptions();
         qualityDropdown.AddOptions(quality);
         qualityDropdown.value = qualityDropdown.options.FindIndex(option => option.text == quality[VisualSaver.Instance.quality]);
     }
+
+    #region Public
 
     public void Vsync(bool changeState)
     {
@@ -75,4 +79,6 @@ public class VisualsMenu : MonoBehaviour
         VisualSaver.Instance.quality = qualityDropdown.value;
         VisualSaver.Instance.ApplyChanges();
     }
+
+    #endregion
 }

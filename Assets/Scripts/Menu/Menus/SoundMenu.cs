@@ -22,6 +22,8 @@ public class SoundMenu : MonoBehaviour
         muteToggle.isOn = AudioSaver.Instance.mute;
     }
 
+    #region Public
+
     /// <summary>
     /// Slider to change the global volume
     /// </summary>
@@ -65,6 +67,10 @@ public class SoundMenu : MonoBehaviour
         AudioSaver.Instance.ApplyChanges();
     }
 
+    /// <summary>
+    /// Mue or unMute the sounds
+    /// </summary>
+    /// <param name="changeState"></param>
     public void Mute(bool changeState)
     {
         AudioManager.Instance.uiSfxSounds.Play("PressButton");
@@ -72,4 +78,6 @@ public class SoundMenu : MonoBehaviour
         AudioSaver.Instance.mute = muteToggle.isOn;
         AudioSaver.Instance.ApplyChanges();
     }
+
+    #endregion
 }

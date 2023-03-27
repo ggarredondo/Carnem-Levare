@@ -34,28 +34,45 @@ public class AutoSelect : MonoBehaviour, IPointerEnterHandler, ISelectHandler
 
     private void OnEnable()
     {
-        if(inputButton) ControlSaver.StaticEvent += ChangeInputFont;
+        if (inputButton) ControlSaver.StaticEvent += ChangeInputFont;
     }
 
     private void OnDisable()
     {
-        if(inputButton) ControlSaver.StaticEvent -= ChangeInputFont;
+        if (inputButton) ControlSaver.StaticEvent -= ChangeInputFont;
     }
 
+    #region Public
+
+    /// <summary>
+    /// Event that triggers when an ui object is selected
+    /// </summary>
+    public void OnSelect(BaseEventData eventData)
+    {
+        AudioManager.Instance.uiSfxSounds.Play("SelectButton");
+    }
+
+    /// <summary>
+    /// Event that triggers when the mouse pointer is on an ui object
+    /// </summary>
+    public void OnPointerEnter(PointerEventData eventData)
+    {
+        if (mouseCanSelect)
+            GetComponent<Selectable>().Select();
+    }
+
+    #endregion
+
+    #region Private
+
+    /// <summary>
+    /// Use this functions when the onControlsChange triggers
+    /// </summary>
     private void ChangeInputFont()
     {
         transform.GetChild(0).GetComponent<TMP_Text>().font = GlobalMenuVariables.Instance.inputFonts[ControlSaver.controlSchemeIndex];
         transform.GetChild(0).GetComponent<TMP_Text>().text = ControlSaver.ObtainMapping(gameObject.name);
     }
 
-    public void OnSelect(BaseEventData eventData)
-    {
-        AudioManager.Instance.uiSfxSounds.Play("SelectButton");
-    }
-
-    public void OnPointerEnter(PointerEventData eventData)
-    {
-        if (mouseCanSelect)
-            GetComponent<Selectable>().Select();
-    }
+    #endregion
 }

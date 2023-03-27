@@ -38,6 +38,30 @@ public class PauseMenuManager : MainMenuManager
         AudioManager.Instance.PlayMusic("Fight");
     }
 
+    #region Public
+
+    /// <summary>
+    /// Quit the game, exit to the desk
+    /// </summary>
+    public void ReturnMainMenu()
+    {
+        ExitPauseMode(false);
+        AudioManager.Instance.BackMenu();
+        StartCoroutine(SceneManagement.Instance.LoadPreviousScene());
+    }
+
+    /// <summary>
+    /// Resume the game
+    /// </summary>
+    public void ResumeGame()
+    {
+        ExitPauseMode(true);
+    }
+
+    #endregion
+
+    #region Private
+
     /// <summary>
     /// enable or disable the pause menu
     /// </summary>
@@ -81,21 +105,5 @@ public class PauseMenuManager : MainMenuManager
         AudioManager.Instance.PauseGame(false && resumeSounds);
     }
 
-    /// <summary>
-    /// Quit the game, exit to the desk
-    /// </summary>
-    public void ReturnMainMenu()
-    {
-        ExitPauseMode(false);
-        AudioManager.Instance.BackMenu();
-        StartCoroutine(SceneManagement.Instance.LoadPreviousScene());
-    }
-
-    /// <summary>
-    /// Resume the game
-    /// </summary>
-    public void ResumeGame()
-    {
-        ExitPauseMode(true);
-    }
+    #endregion
 }

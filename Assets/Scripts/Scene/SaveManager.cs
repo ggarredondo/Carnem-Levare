@@ -27,6 +27,11 @@ public class SaveManager : MonoBehaviour
         Load();
     }
 
+    #region Public
+
+    /// <summary>
+    /// Save the actual configuration in a serialize file
+    /// </summary>
     public void Save()
     {
         string dataPath = Application.persistentDataPath;
@@ -39,6 +44,9 @@ public class SaveManager : MonoBehaviour
         Debug.Log("Saved");
     }
 
+    /// <summary>
+    /// Load the actual configuration from a serialized file
+    /// </summary>
     public void Load()
     {
         string dataPath = Application.persistentDataPath;
@@ -56,6 +64,9 @@ public class SaveManager : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Delete the serialized file
+    /// </summary>
     public void DeleteSaveData()
     {
         string dataPath = Application.persistentDataPath;
@@ -65,6 +76,8 @@ public class SaveManager : MonoBehaviour
             File.Delete(dataPath + "/" + activeSave.saveName + ".save");
         }
     }
+
+    #endregion
 }
 
 [System.Serializable]
