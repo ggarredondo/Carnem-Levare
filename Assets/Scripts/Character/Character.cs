@@ -38,6 +38,7 @@ public abstract class Character : MonoBehaviour
     private Rigidbody rb;
     protected Vector2 direction, directionTarget;
     protected float directionSpeed;
+
     protected bool isAttacking, isHurt, isKO, isBlocked, isBlocking;
     private bool hurtExceptions;
     private float disadvantage;
@@ -75,14 +76,13 @@ public abstract class Character : MonoBehaviour
         // Character won't be hurt if any of these conditions are met.
         hurtExceptions = isKO || noDamage;
 
-        // Bellow are values that must be updated frame by frame to allow certain animations to play out accordingly.
+        // Check current state so that certain behaviours may play accordingly.
         isAttacking = anim.GetCurrentAnimatorStateInfo(0).IsTag("Attacking") && !anim.IsInTransition(0);
         isBlocked = anim.GetCurrentAnimatorStateInfo(0).IsName("Blocked");
         isHurt = anim.GetCurrentAnimatorStateInfo(0).IsName("Hurt");
         isBlocking = (anim.GetCurrentAnimatorStateInfo(0).IsName("Block") || isBlocked) && anim.GetBool("block");
-
-        // Character can only attack if they're not attacking already or hurt.
-        anim.SetBool("is_blocking", isBlocking);
+        // Character may not attack when they are blocking an attack, when they are hurt or when they are already attacking.
+        anim.SetBool("can_attack", !isAttacking && !isBlocked && !isHurt);
 
         // Softens movement by establishing the direction as a point that approaches the target direction at *directionSpeed* rate.
         direction = Vector2.Lerp(direction, directionTarget, directionSpeed * Time.deltaTime);

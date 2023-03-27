@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class Player : Character
 {
-    [Header("Input Parameters")]
+    [Header("Player-specific Parameters")]
 
     [Tooltip("How quickly player animations follows stick movement")]
     [SerializeField] private float stickSpeed;

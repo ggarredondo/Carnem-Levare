@@ -68,15 +68,15 @@ public class Move : ScriptableObject
     public Power Power { get => power; }
     public bool Unblockable { get => unblockable; }
     public float BaseDamage { get => baseDamage; }
+    public float ExtraMovement { get => extraMovement; }
 
+    // Time Data
     public float StartUp { get => startUp; }
     public float Active { get => active; }
     public float Recovery { get => recovery; }
 
     public float AdvantageOnBlock { get => advantageOnBlock; }
     public float AdvantageOnHit { get => advantageOnHit; }
-
-    public float ExtraMovement { get => extraMovement; }
 
     #endregion
 }
