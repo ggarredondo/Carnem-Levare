@@ -8,6 +8,12 @@ public enum Power: uint
     Strong = 2
 }
 
+public enum HitboxType : int
+{
+    LeftFist = 0,
+    RightFist = 1
+}
+
 [CreateAssetMenu(menuName = "Scriptable Objects/Move")]
 public class Move : ScriptableObject
 {
@@ -16,7 +22,7 @@ public class Move : ScriptableObject
     [Header("Attack Animations")]
     [SerializeField] private AnimationClip animation;
     [SerializeField] [Range(0f, 2f)] private float animationSpeed = 1f;
-    [SerializeField] private string hitboxName;
+    [SerializeField] private HitboxType hitbox;
 
     [Header("Attack Sound")]
     [SerializeField] private string whiffSound;
@@ -51,13 +57,35 @@ public class Move : ScriptableObject
 
     #endregion
 
+    private void OnEnable()
+    {
+        AnimationEvent startAttackEvent = new AnimationEvent();
+        startAttackEvent.functionName = "StartAttack";
+        startAttackEvent.time = 0f;
+
+        AnimationEvent hitboxActivationEvent = new AnimationEvent();
+        hitboxActivationEvent.functionName = "ActivateHitbox";
+        hitboxActivationEvent.time = startUp / (animation.length * 1000f);
+
+        AnimationEvent hitboxDeactivationEvent = new AnimationEvent();
+        hitboxDeactivationEvent.functionName = "DeactivateHitbox";
+        hitboxDeactivationEvent.time = (startUp+active) / (animation.length * 1000f);
+
+        AnimationEvent cancelAnimationEvent = new AnimationEvent();
+        cancelAnimationEvent.functionName = "CancelAnimation";
+        cancelAnimationEvent.time = (startUp+active+recovery) / (animation.length * 1000f);
+
+        AnimationEvent[] events = { startAttackEvent, hitboxActivationEvent, hitboxDeactivationEvent, cancelAnimationEvent };
+        UnityEditor.AnimationUtility.SetAnimationEvents(animation, events);
+    }
+
     #region PublicMethods
     public string MoveName { get => moveName; }
 
     // Animation
     public AnimationClip Animation { get => animation; }
     public float AnimationSpeed { get => animationSpeed; }
-    public string HitboxName { get => hitboxName; }
+    public HitboxType HitboxType { get => hitbox; }
 
     // Sound
     public string WhiffSound { get => whiffSound; }

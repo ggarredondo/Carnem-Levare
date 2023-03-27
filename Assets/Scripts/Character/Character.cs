@@ -40,8 +40,9 @@ public abstract class Character : MonoBehaviour
     protected float directionSpeed;
 
     protected bool isAttacking, isHurt, isKO, isBlocked, isBlocking;
-    private bool hurtExceptions;
     private float disadvantage;
+    private int moveIndex = 0;
+    private bool hurtExceptions;
 
     [Header("Debug")]
     [SerializeField] private bool noDamage = false;
@@ -80,7 +81,8 @@ public abstract class Character : MonoBehaviour
         isAttacking = anim.GetCurrentAnimatorStateInfo(0).IsTag("Attacking") && !anim.IsInTransition(0);
         isBlocked = anim.GetCurrentAnimatorStateInfo(0).IsName("Blocked");
         isHurt = anim.GetCurrentAnimatorStateInfo(0).IsName("Hurt");
-        isBlocking = (anim.GetCurrentAnimatorStateInfo(0).IsName("Block") || isBlocked) && anim.GetBool("block");
+        isBlocking = (anim.GetCurrentAnimatorStateInfo(0).IsName("Block") || isBlocked);
+        anim.SetBool("is_blocking", isBlocking);
         // Character may not attack when they are blocking an attack, when they are hurt or when they are already attacking.
         anim.SetBool("can_attack", !isAttacking && !isBlocked && !isHurt);
 
@@ -136,6 +138,22 @@ public abstract class Character : MonoBehaviour
     #endregion
 
     #region GameplayFunctions
+
+    public void StartAttack()
+    {
+        AudioManager.Instance.gameSfxSounds.Play(moveset[moveIndex].WhiffSound, (int)entity); // Play sound.
+        // Assign move data to hitbox. Must be done this way because hitboxes are reusable.
+        hitboxes[(int)moveset[moveIndex].HitboxType].Set(moveset[moveIndex].Power, 
+            CalculateAttackDamage(moveset[moveIndex].BaseDamage),
+            moveset[moveIndex].Unblockable,
+            moveset[moveIndex].HitSound,
+            moveset[moveIndex].BlockedSound,
+            moveset[moveIndex].AdvantageOnBlock,
+            moveset[moveIndex].AdvantageOnHit);
+    }
+    public void ActivateHitbox() { hitboxes[(int)moveset[moveIndex].HitboxType].Activate(true); }
+    public void DeactivateHitbox() { hitboxes[(int)moveset[moveIndex].HitboxType].Activate(false); }
+    public void CancelAnimation() { anim.SetTrigger("cancel"); }
 
     /// <summary>
     /// Damage character, reducing their stamina and playing a hurt animation.

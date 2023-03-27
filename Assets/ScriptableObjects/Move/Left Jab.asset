@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Left Jab
   m_EditorClassIdentifier: 
   moveName: Left Jab
-  animation: {fileID: 7400032, guid: 7934f1476fe2c6e458c230f491769c34, type: 3}
+  animation: {fileID: 7400000, guid: e652c0869035b6b418eef0c72bbb19c0, type: 2}
   animationSpeed: 1
   hitboxName: LeftFistHitbox
   whiffSound: Whiff_Jab
@@ -25,6 +25,6 @@ MonoBehaviour:
   extraMovement: 0
   startUp: 200
   active: 50
-  recovery: 600
+  recovery: 300
   advantageOnBlock: 0
-  advantageOnHit: 400
+  advantageOnHit: 0
