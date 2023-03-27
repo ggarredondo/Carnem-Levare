@@ -218,7 +218,6 @@ public abstract class Character : MonoBehaviour
     public bool IsBlocking { get => isBlocking; }
     public bool IsKO { get => isKO; }
     public bool HurtExceptions { get => hurtExceptions; }
-    public float Disadvantage { get => disadvantage; }
 
     #endregion
 }
