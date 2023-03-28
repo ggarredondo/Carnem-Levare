@@ -13,15 +13,24 @@ public class DollyZoom : CameraMovement
     private CinemachineTransposer transposer;
     private float reduceFOV, reduceZoom, reduceNear;
 
+    //SaveInitialPosition
+    private Vector3 initialZoomPosition;
+    private float initialFieldOfView;
+    private float initialNearPlane;
+
     public override void Initialize(CinemachineVirtualCamera vcam)
     {
         this.vcam = vcam;
         transposer = vcam.GetCinemachineComponent<CinemachineOrbitalTransposer>();
 
         UpdateParameters();
+
+        initialZoomPosition = zoomPositions.Item1;
+        initialFieldOfView = fieldOfView.Item1;
+        initialNearPlane = nearPlane.Item1;
     }
 
-    public override void UpdateParameters()
+    protected override void UpdateParameters()
     {
         nearPlane.Item1 = vcam.m_Lens.NearClipPlane;
         nearPlane.Item2 = 1;
@@ -33,11 +42,18 @@ public class DollyZoom : CameraMovement
         fieldOfView.Item2 = fieldOfView.Item1 + fieldOfViewVariation;
     }
 
-    public override bool InitialPosition()
+    public override void UpdateInitialPosition()
     {
-        return transposer.m_FollowOffset == zoomPositions.Item1 &&
-               vcam.m_Lens.FieldOfView == fieldOfView.Item1 &&
-               vcam.m_Lens.NearClipPlane == nearPlane.Item1;
+        zoomPositions.Item1 = transposer.m_FollowOffset;
+        fieldOfView.Item1 = vcam.m_Lens.FieldOfView;
+        nearPlane.Item1 = vcam.m_Lens.NearClipPlane;
+    }
+
+    public override void ReturnInitialPosition()
+    {
+        zoomPositions.Item1 = initialZoomPosition;
+        fieldOfView.Item1 = initialFieldOfView;
+        nearPlane.Item1 = initialNearPlane;
     }
 
     public override void ApplyMove(bool condition)

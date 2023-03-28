@@ -11,25 +11,23 @@ public abstract class CameraMovement : ScriptableObject
 
     [SerializeField] protected bool stackable;
 
-    [ConditionalField("stackable")] [SerializeField] protected bool cancelable;
-
     [Header("Parameters")]
 
     public Tuple<float> aceleration;
 
     public abstract void Initialize(CinemachineVirtualCamera vcam);
 
-    public virtual void UpdateParameters(){ }
+    protected virtual void UpdateParameters(){ }
 
-    public virtual bool InitialPosition() { return false; }
+    public virtual void ReturnInitialPosition() { }
+
+    public virtual void UpdateInitialPosition() { }
 
     public abstract void ApplyMove(bool condition);
 
     public TypeCameraMovement ID { get { return id; } }
 
     public bool Stackable { get { return stackable; } }
-
-    public bool Cancelable { get { return cancelable; } }
 }
 
 public enum TypeCameraMovement

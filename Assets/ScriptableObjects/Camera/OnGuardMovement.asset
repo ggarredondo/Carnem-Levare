@@ -14,8 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 1
   stackable: 1
-  cancelable: 1
   aceleration:
     Item1: 2
     Item2: 2
-  offsetVariation: {x: 0, y: 10, z: 3}
+  offsetVariation: {x: 0, y: 0, z: 0.25}

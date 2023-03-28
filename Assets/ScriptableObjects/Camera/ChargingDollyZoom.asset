@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 0
   stackable: 1
+  canCancel: 1
   aceleration:
     Item1: 6
     Item2: 10

@@ -6,9 +6,6 @@ using UnityEngine;
 public class CameraEffects : MonoBehaviour
 {
     [Header("Requirements")]
-    private Player player;
-    private Enemy enemy;
-    private Transform[] alternativeTargets;
     [SerializeField] private GameObject[] targetDebug;
 
     [Header("Target Group Parameters")]
@@ -20,13 +17,15 @@ public class CameraEffects : MonoBehaviour
     [Range(0,10)] [SerializeField] private float orbitalRecovery;
 
     [Header("Effects")]
-    public CameraMovement[] cameraEffects;
+    [SerializeField] private CameraMovement[] cameraEffects;
 
     //PRIVATE
-    private bool cameraIsMoving;
+    private Player player;
+    private Enemy enemy;
+    private Transform[] alternativeTargets;
+
     private bool[] cameraConditions;
-    private int actualCamera;
-    private Stack<CameraMovement> cameraStack = new();
+    private Queue<CameraMovement> cameraStack = new();
 
     private CinemachineVirtualCamera vcam;
     private CinemachineOrbitalTransposer orbitalTransposer;
@@ -73,6 +72,9 @@ public class CameraEffects : MonoBehaviour
 
     #region Private
 
+    /// <summary>
+    /// Update the conditions that enable/disable the camera effects
+    /// </summary>
     private void UpdateCameraConditions()
     {
         foreach (CameraMovement movement in cameraEffects)
@@ -102,33 +104,40 @@ public class CameraEffects : MonoBehaviour
     {
         if (Time.timeScale > 0f)
         {
-            UpdateCameraConditions();
-
             if(orbitalTransposer != null) OrbitalMovement();
 
+            //Change the camera targets to create more hitting impact
             if(alternativeTargets[0] != null && alternativeTargets[1] != null) TargetUpdate();
 
+            UpdateCameraConditions();
+
+            //Apply the camera movement to each effect depending of his condition
             foreach (CameraMovement movement in cameraEffects)
             {
                 if(!movement.Stackable) movement.ApplyMove(cameraConditions[(int)movement.ID]);
                 else
                 {
-                    if (movement.InitialPosition() && cameraStack.Count != 0) { cameraStack.Pop(); cameraIsMoving = false; }
+                    cameraStack.TryPeek(out CameraMovement peek);
+                    
+                    if(!cameraConditions[(int)movement.ID]) movement.ReturnInitialPosition();
 
-                    if (cameraConditions[(int)movement.ID] && !cameraIsMoving)
+                    if (cameraConditions[(int)movement.ID] && peek != movement)
                     {
-                        movement.UpdateParameters();
-                        cameraStack.Push(movement);
-                        cameraIsMoving = !movement.Cancelable;
-                        actualCamera = (int)movement.ID;
+                        movement.UpdateInitialPosition();
+                        cameraStack.Enqueue(movement);
                     }
                 }
             }
 
-            if(cameraStack.Count != 0) cameraStack.Peek().ApplyMove(cameraConditions[actualCamera]);
+            if(cameraStack.Count > cameraConditions.GetLength(0)) cameraStack.Dequeue();
+
+            if(cameraStack.Count != 0) cameraStack.Peek().ApplyMove(cameraConditions[(int) cameraStack.Peek().ID]);
         }
     }
 
+    /// <summary>
+    /// Camera orbital movement between the player and the enemy
+    /// </summary>
     private void OrbitalMovement()
     {
         if (Mathf.Abs(player.Direction.x) > 0.1f && player.IsMoving && !cameraConditions[1]) 
@@ -139,11 +148,18 @@ public class CameraEffects : MonoBehaviour
         orbitalTransposer.m_RecenterToTargetHeading.m_enabled = Mathf.Abs(player.Direction.x) > 0.1f && player.IsMoving && !cameraConditions[1];
     }
 
+    /// <summary>
+    /// Change the target group position to the alternative target position
+    /// </summary>
+    /// <param name="index">0 (player target), 1 (enemy target)</param>
     private void AsignAlternativeTarget(int index)
     {
         targetGroup.m_Targets[index].target.position = Vector3.Lerp(targetGroup.m_Targets[index].target.position, alternativeTargets[index].position, targetingSpeed * Time.deltaTime);
     }
 
+    /// <summary>
+    /// Change the target of enemy and player depending on a condition
+    /// </summary>
     private void TargetUpdate()
     {
         if (!player.IsBlocking || player.IsAttacking) AsignAlternativeTarget(0);
