@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections.Generic;
 using System.Linq;
+using System.Collections;
 
 public enum Entity { Player, Enemy }
 
@@ -40,6 +41,7 @@ public abstract class Character : MonoBehaviour
     protected float directionSpeed;
 
     protected bool isAttacking, isHurt, isKO, isBlocked, isBlocking;
+    private float disadvantage;
     private int moveIndex = 0;
     private bool hurtExceptions;
 
@@ -153,6 +155,10 @@ public abstract class Character : MonoBehaviour
     public void ActivateHitbox() { hitboxes[(int)moveset[moveIndex].HitboxType].Activate(true); }
     public void DeactivateHitbox() { hitboxes[(int)moveset[moveIndex].HitboxType].Activate(false); }
     public void CancelAnimation() { anim.SetTrigger("cancel"); }
+    private IEnumerator WaitAndCancelAnimation(float time) { 
+        yield return new WaitForSeconds(time);
+        anim.SetTrigger("cancel");
+    }
 
     /// <summary>
     /// Damage character, reducing their stamina and playing a hurt animation.
@@ -173,7 +179,7 @@ public abstract class Character : MonoBehaviour
         anim.SetFloat("hurt_target", target);
         anim.SetFloat("hurt_power", power);
         anim.SetBool("unblockable", unblockable);
-        //disadvantage = isBlocking ? disadvantageOnBlock : disadvantageOnHit;
+        disadvantage = isBlocking ? disadvantageOnBlock : disadvantageOnHit;
 
         // Sound
         AudioManager.Instance.gameSfxSounds.Play(isBlocking ? blockedSound : hitSound, (int) entity);
@@ -181,6 +187,9 @@ public abstract class Character : MonoBehaviour
         // Stamina
         stamina -= isBlocking && !unblockable ? Mathf.Round(dmg * blockingModifier) : dmg; // Take less damage if blocking.
         if (stamina <= 0f) stamina = noDeath ? 1f : 0f; // Stamina can't go lower than 0. Can't go lower than 1 if noDeath is activated.
+
+        StopAllCoroutines();
+        StartCoroutine(WaitAndCancelAnimation(disadvantage / 1000f));
     }
 
     /// <summary>

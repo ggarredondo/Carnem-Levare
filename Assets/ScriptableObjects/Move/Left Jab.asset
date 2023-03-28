@@ -15,7 +15,7 @@ MonoBehaviour:
   moveName: Left Jab
   animation: {fileID: 7400000, guid: e652c0869035b6b418eef0c72bbb19c0, type: 2}
   animationSpeed: 1
-  hitboxName: LeftFistHitbox
+  hitbox: 0
   whiffSound: Whiff_Jab
   hitSound: Hit_Jab
   blockedSound: Blocked_Default
