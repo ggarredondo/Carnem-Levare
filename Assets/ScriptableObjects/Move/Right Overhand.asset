@@ -25,5 +25,5 @@ MonoBehaviour:
   startUp: 350
   active: 100
   recovery: 550
-  advantageOnBlock: 0
+  advantageOnBlock: 700
   advantageOnHit: 1000
