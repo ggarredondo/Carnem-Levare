@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections.Generic;
 using System.Linq;
+using System.Collections;
 
 public enum Entity { Player, Enemy }
 
@@ -11,8 +12,6 @@ public abstract class Character : MonoBehaviour
     // Character Attributes
     [Header("Tracking values")]
     [SerializeField] private bool debugTracking = true;
-    [System.NonSerialized] public bool attackTracking = true; // To deactivate tracking during the commitment phase of an attack.
-    private bool trackingConditions;
     protected Transform target;
 
     [Tooltip("How quickly character rotates towards their opponent")]
@@ -29,7 +28,7 @@ public abstract class Character : MonoBehaviour
     [SerializeField] [InitializationField] [Range(1f, 1.2f)] private float height = 1f;
     [SerializeField] [InitializationField] private float mass = 1f;
     [SerializeField] [InitializationField] private float drag = 0f; // SHOULD BE CALCULATED GIVEN MASS
-    [SerializeField] private List<Move> leftMoveset, rightMoveset;
+    [SerializeField] private List<Move> moveset;
     [SerializeField] private List<Hitbox> hitboxes;
 
     // Character Variables
@@ -40,13 +39,17 @@ public abstract class Character : MonoBehaviour
     private Rigidbody rb;
     protected Vector2 direction, directionTarget;
     protected float directionSpeed;
+
     protected bool isAttacking, isHurt, isKO, isBlocked, isBlocking;
-    private bool hurtExceptions;
     private float disadvantage;
+    private Coroutine hurtCoroutine;
+    private int moveIndex = 0;
+    private bool hurtExceptions;
 
     [Header("Debug")]
     [SerializeField] private bool noDamage = false;
     [SerializeField] private bool noDeath = false;
+    [SerializeField] private bool updateMoveset = false;
 
     protected virtual void Awake()
     {
@@ -77,26 +80,27 @@ public abstract class Character : MonoBehaviour
         // Character won't be hurt if any of these conditions are met.
         hurtExceptions = isKO || noDamage;
 
-        // Bellow are values that must be updated frame by frame to allow certain animations to play out accordingly.
+        // Check current state so that certain behaviours may play accordingly.
         isAttacking = anim.GetCurrentAnimatorStateInfo(0).IsTag("Attacking") && !anim.IsInTransition(0);
         isBlocked = anim.GetCurrentAnimatorStateInfo(0).IsName("Blocked");
         isHurt = anim.GetCurrentAnimatorStateInfo(0).IsName("Hurt");
-        isBlocking = (anim.GetCurrentAnimatorStateInfo(0).IsName("Block") || isBlocked) && anim.GetBool("block");
-
-        // Character can only attack if they're not attacking already or hurt.
-        anim.SetBool("can_attack", !isAttacking && !isHurt && !isBlocked && !isKO);
+        isBlocking = (anim.GetCurrentAnimatorStateInfo(0).IsName("Block") || isBlocked);
         anim.SetBool("is_blocking", isBlocking);
+        // Character may not attack when they are blocking an attack, when they are hurt or when they are already attacking.
+        anim.SetBool("can_attack", !isAttacking && !isBlocked && !isHurt && !isKO);
 
         // Softens movement by establishing the direction as a point that approaches the target direction at *directionSpeed* rate.
         direction = Vector2.Lerp(direction, directionTarget, directionSpeed * Time.deltaTime);
         anim.SetFloat("horizontal", direction.x);
         anim.SetFloat("vertical", direction.y);
+
+        // --------------- DEBUG --------------------
+        if (updateMoveset) { InitializeMoveset(); updateMoveset = false; }
     }
     protected virtual void FixedUpdate()
     {
-        trackingConditions = debugTracking && attackTracking && !isHurt && !IsIdle && !isKO;
         // Rotate towards opponent if character is tracking.
-        if (target != null && trackingConditions)
+        if (target != null && debugTracking && !isHurt && !IsIdle && !isKO)
         {
             targetLook = Quaternion.LookRotation(target.position - transform.position);
             transform.rotation = Quaternion.Lerp(transform.rotation, targetLook, trackingRate * Time.fixedDeltaTime);
@@ -123,14 +127,10 @@ public abstract class Character : MonoBehaviour
     /// </summary>
     private void InitializeMoveset()
     {
-        for (int i = 0; i < leftMoveset.Count; ++i) {
-            UpdateAnimator("LeftClip" + i, leftMoveset[i].Animation);
-            anim.SetFloat("left" + i + "_speed", leftMoveset[i].AnimationSpeed);
-        }
-
-        for (int i = 0; i < rightMoveset.Count; ++i) {
-            UpdateAnimator("RightClip" + i, rightMoveset[i].Animation);
-            anim.SetFloat("right" + i + "_speed", rightMoveset[i].AnimationSpeed);
+        for (int i = 0; i < moveset.Count; ++i) {
+            UpdateAnimator("AttackClip" + i, moveset[i].Animation);
+            anim.SetFloat("attack" + i + "_speed", moveset[i].AnimationSpeed);
+            moveset[i].AssignEvents();
         }
     }
 
@@ -140,13 +140,36 @@ public abstract class Character : MonoBehaviour
 
     protected void Movement(Vector2 dir) { directionTarget = dir; }
     protected void Block(bool performed) { anim.SetBool("block", performed); }
-
-    protected void LeftN(bool performed, int n) { if (leftMoveset.Count > n) anim.SetBool("left" + n, performed); }
-    protected void RightN(bool performed, int n) { if (rightMoveset.Count > n) anim.SetBool("right" + n, performed); }
+    protected void AttackN(bool performed, int n) {
+        if (moveset.Count > n) {
+            moveIndex = n;
+            anim.SetBool("attack" + n, performed);
+        }
+    }
 
     #endregion
 
     #region GameplayFunctions
+
+    public void StartAttack()
+    {
+        AudioManager.Instance.gameSfxSounds.Play(moveset[moveIndex].WhiffSound, (int)entity); // Play sound.
+        // Assign move data to hitbox. Must be done this way because hitboxes are reusable.
+        hitboxes[(int)moveset[moveIndex].HitboxType].Set(moveset[moveIndex].Power, 
+            CalculateAttackDamage(moveset[moveIndex].BaseDamage),
+            moveset[moveIndex].Unblockable,
+            moveset[moveIndex].HitSound,
+            moveset[moveIndex].BlockedSound,
+            moveset[moveIndex].AdvantageOnBlock,
+            moveset[moveIndex].AdvantageOnHit);
+    }
+    public void ActivateHitbox() { hitboxes[(int)moveset[moveIndex].HitboxType].Activate(true); }
+    public void DeactivateHitbox() { hitboxes[(int)moveset[moveIndex].HitboxType].Activate(false); }
+    public void CancelAnimation() { anim.SetTrigger("cancel"); }
+    private IEnumerator WaitAndCancelAnimation(float time) { 
+        yield return new WaitForSeconds(time);
+        anim.SetTrigger("cancel");
+    }
 
     /// <summary>
     /// Damage character, reducing their stamina and playing a hurt animation.
@@ -167,14 +190,17 @@ public abstract class Character : MonoBehaviour
         anim.SetFloat("hurt_target", target);
         anim.SetFloat("hurt_power", power);
         anim.SetBool("unblockable", unblockable);
-        disadvantage = isBlocking ? disadvantageOnBlock : disadvantageOnHit;
+        disadvantage = isBlocking && !unblockable ? disadvantageOnBlock : disadvantageOnHit;
 
         // Sound
-        AudioManager.Instance.gameSfxSounds.Play(isBlocking ? blockedSound : hitSound, (int) entity);
+        AudioManager.Instance.gameSfxSounds.Play(isBlocking && !unblockable ? blockedSound : hitSound, (int) entity);
 
         // Stamina
         stamina -= isBlocking && !unblockable ? Mathf.Round(dmg * blockingModifier) : dmg; // Take less damage if blocking.
         if (stamina <= 0f) stamina = noDeath ? 1f : 0f; // Stamina can't go lower than 0. Can't go lower than 1 if noDeath is activated.
+
+        if (hurtCoroutine != null) StopCoroutine(hurtCoroutine);
+        hurtCoroutine = StartCoroutine(WaitAndCancelAnimation(disadvantage / 1000f));
     }
 
     /// <summary>
@@ -190,8 +216,7 @@ public abstract class Character : MonoBehaviour
 
     public Animator Animator { get => anim; }
 
-    public List<Move> LeftMoveset { get => leftMoveset; }
-    public List<Move> RightMoveset { get => rightMoveset; }
+    public List<Move> Moveset { get => moveset; }
     public List<Hitbox> Hitboxes { get => hitboxes; }
 
     public float Stamina { get => stamina; }
@@ -213,7 +238,6 @@ public abstract class Character : MonoBehaviour
     public bool IsBlocking { get => isBlocking; }
     public bool IsKO { get => isKO; }
     public bool HurtExceptions { get => hurtExceptions; }
-    public float Disadvantage { get => disadvantage; }
 
     #endregion
 }

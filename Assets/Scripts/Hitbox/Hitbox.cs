@@ -7,7 +7,6 @@ public class Hitbox : MonoBehaviour
     private bool unblockable;
     private string hitSound, blockedSound;
     private float advantageOnBlock, advantageOnHit;
-    [System.NonSerialized] public bool hitFlag;
 
     public void Set(Power power, float damage, bool unblockable, string hitSound, string blockedSound,
         float advantageOnBlock, float advantageOnHit) 
@@ -22,7 +21,7 @@ public class Hitbox : MonoBehaviour
     }
 
     public void Activate(bool activated) {
-        transform.gameObject.SetActive(activated && !hitFlag);
+        transform.gameObject.SetActive(activated);
     }
 
     // Gets

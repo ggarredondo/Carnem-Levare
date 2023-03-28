@@ -23,9 +23,9 @@ public class Hurtbox : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         hitbox = other.GetComponent<Hitbox>();
-        if (!hitbox.hitFlag && !character.HurtExceptions) {
+        if (!character.HurtExceptions) {
             // Establish that hitbox has already hit so that it's disabled and it doesn't hit twice.
-            hitbox.hitFlag = true;
+            hitbox.Activate(false);
 
             character.Damage((float) target, (float) hitbox.Power, hitbox.Damage,
                 // Can't block attack if it's unblockable or if it hits the back.

@@ -24,7 +24,7 @@
                     "initialStateCheck": true
                 },
                 {
-                    "name": "Left0",
+                    "name": "Attack0",
                     "type": "Button",
                     "id": "60f7e98c-e28e-44f5-8238-041783e0c44c",
                     "expectedControlType": "Button",
@@ -33,7 +33,7 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Left1",
+                    "name": "Attack1",
                     "type": "Button",
                     "id": "eb6c9e9b-9855-49aa-b21b-39ffbc961e31",
                     "expectedControlType": "Button",
@@ -42,7 +42,7 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Right0",
+                    "name": "Attack2",
                     "type": "Button",
                     "id": "eae9d122-0c45-49c1-8ae0-abfab8c74b50",
                     "expectedControlType": "Button",
@@ -51,7 +51,7 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Right1",
+                    "name": "Attack3",
                     "type": "Button",
                     "id": "6f6c8496-ad55-4a5b-b196-c474aff84dcb",
                     "expectedControlType": "Button",
@@ -108,7 +108,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "Gamepad",
-                    "action": "Right0",
+                    "action": "Attack2",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -119,7 +119,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard&Mouse",
-                    "action": "Right0",
+                    "action": "Attack2",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -130,7 +130,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "Gamepad",
-                    "action": "Left0",
+                    "action": "Attack0",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -141,7 +141,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard&Mouse",
-                    "action": "Left0",
+                    "action": "Attack0",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -251,7 +251,7 @@
                     "interactions": "",
                     "processors": "AxisDeadzone",
                     "groups": "Gamepad",
-                    "action": "Right1",
+                    "action": "Attack3",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -262,7 +262,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard&Mouse",
-                    "action": "Right1",
+                    "action": "Attack3",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -273,7 +273,7 @@
                     "interactions": "",
                     "processors": "AxisDeadzone",
                     "groups": "Gamepad",
-                    "action": "Left1",
+                    "action": "Attack1",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -284,7 +284,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard&Mouse",
-                    "action": "Left1",
+                    "action": "Attack1",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

@@ -323,14 +323,16 @@ MonoBehaviour:
   height: 1
   mass: 1
   drag: 0
-  leftMoveset:
+  moveset:
   - {fileID: 11400000, guid: 9ec677a7eb446e244816d077b11c8747, type: 2}
-  rightMoveset: []
+  - {fileID: 11400000, guid: 4a3d8bfacd94d494eb3e67c65bb0ba26, type: 2}
   hitboxes:
   - {fileID: 2528519819064968607}
   - {fileID: 972517564017927109}
   noDamage: 0
   noDeath: 1
+  enableAttackTimer: 0
+  maxTime: 1000
   stickSpeed: 15
   blockingStickSpeed: 10
   blockedStickSpeed: 5

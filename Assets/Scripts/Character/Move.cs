@@ -8,6 +8,12 @@ public enum Power: uint
     Strong = 2
 }
 
+public enum HitboxType : int
+{
+    LeftFist = 0,
+    RightFist = 1
+}
+
 [CreateAssetMenu(menuName = "Scriptable Objects/Move")]
 public class Move : ScriptableObject
 {
@@ -16,7 +22,7 @@ public class Move : ScriptableObject
     [Header("Attack Animations")]
     [SerializeField] private AnimationClip animation;
     [SerializeField] [Range(0f, 2f)] private float animationSpeed = 1f;
-    [SerializeField] private string hitboxName;
+    [SerializeField] private HitboxType hitbox;
 
     [Header("Attack Sound")]
     [SerializeField] private string whiffSound;
@@ -27,9 +33,6 @@ public class Move : ScriptableObject
     [Tooltip("States which type of hurt animation will play when it hits")] [SerializeField] private Power power;
     [SerializeField] private bool unblockable;
     [SerializeField] private float baseDamage; // Used to calculate damage dealt to the opponent's stamina, if it hits.
-
-    [Tooltip("The attack may move the character further than established by root motion")]
-    [SerializeField] private float extraMovement = 0f;
 
     #region TimeData
 
@@ -51,13 +54,15 @@ public class Move : ScriptableObject
 
     #endregion
 
+    private void OnEnable() { AssignEvents(); }
+
     #region PublicMethods
     public string MoveName { get => moveName; }
 
     // Animation
     public AnimationClip Animation { get => animation; }
     public float AnimationSpeed { get => animationSpeed; }
-    public string HitboxName { get => hitboxName; }
+    public HitboxType HitboxType { get => hitbox; }
 
     // Sound
     public string WhiffSound { get => whiffSound; }
@@ -69,19 +74,7 @@ public class Move : ScriptableObject
     public bool Unblockable { get => unblockable; }
     public float BaseDamage { get => baseDamage; }
 
-    public bool IsStarting(float ms) { 
-        return ms <= startUp; 
-    }
-    public bool IsActive(float ms) {
-        return ms > startUp && ms <= startUp+active;
-    }
-    public bool IsRecovering(float ms) {
-        return ms > active && ms <= startUp+active+recovery;
-    }
-    public bool HasRecovered(float ms) {
-        return ms > startUp+active+recovery;
-    }
-
+    // Time Data
     public float StartUp { get => startUp; }
     public float Active { get => active; }
     public float Recovery { get => recovery; }
@@ -89,7 +82,31 @@ public class Move : ScriptableObject
     public float AdvantageOnBlock { get => advantageOnBlock; }
     public float AdvantageOnHit { get => advantageOnHit; }
 
-    public float ExtraMovement { get => extraMovement; }
+    /// <summary>
+    /// Assigns scripted events to the animation clip
+    /// for start up, active and recovery.
+    /// </summary>
+    public void AssignEvents()
+    {
+        AnimationEvent startAttackEvent = new AnimationEvent();
+        startAttackEvent.functionName = "StartAttack";
+        startAttackEvent.time = 0f;
+
+        AnimationEvent hitboxActivationEvent = new AnimationEvent();
+        hitboxActivationEvent.functionName = "ActivateHitbox";
+        hitboxActivationEvent.time = startUp / 1000f;
+
+        AnimationEvent hitboxDeactivationEvent = new AnimationEvent();
+        hitboxDeactivationEvent.functionName = "DeactivateHitbox";
+        hitboxDeactivationEvent.time = (startUp + active) / 1000f;
+
+        AnimationEvent cancelAnimationEvent = new AnimationEvent();
+        cancelAnimationEvent.functionName = "CancelAnimation";
+        cancelAnimationEvent.time = (startUp + active + recovery) / 1000f;
+
+        AnimationEvent[] events = { startAttackEvent, hitboxActivationEvent, hitboxDeactivationEvent, cancelAnimationEvent };
+        UnityEditor.AnimationUtility.SetAnimationEvents(animation, events);
+    }
 
     #endregion
 }
