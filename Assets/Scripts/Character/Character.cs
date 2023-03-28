@@ -42,12 +42,14 @@ public abstract class Character : MonoBehaviour
 
     protected bool isAttacking, isHurt, isKO, isBlocked, isBlocking;
     private float disadvantage;
+    private Coroutine hurtCoroutine;
     private int moveIndex = 0;
     private bool hurtExceptions;
 
     [Header("Debug")]
     [SerializeField] private bool noDamage = false;
     [SerializeField] private bool noDeath = false;
+    [SerializeField] private bool updateMoveset = false;
 
     protected virtual void Awake()
     {
@@ -91,6 +93,9 @@ public abstract class Character : MonoBehaviour
         direction = Vector2.Lerp(direction, directionTarget, directionSpeed * Time.deltaTime);
         anim.SetFloat("horizontal", direction.x);
         anim.SetFloat("vertical", direction.y);
+
+        // --------------- DEBUG --------------------
+        if (updateMoveset) { InitializeMoveset(); updateMoveset = false; }
     }
     protected virtual void FixedUpdate()
     {
@@ -125,6 +130,7 @@ public abstract class Character : MonoBehaviour
         for (int i = 0; i < moveset.Count; ++i) {
             UpdateAnimator("AttackClip" + i, moveset[i].Animation);
             anim.SetFloat("attack" + i + "_speed", moveset[i].AnimationSpeed);
+            moveset[i].AssignEvents();
         }
     }
 
@@ -134,7 +140,12 @@ public abstract class Character : MonoBehaviour
 
     protected void Movement(Vector2 dir) { directionTarget = dir; }
     protected void Block(bool performed) { anim.SetBool("block", performed); }
-    protected void AttackN(bool performed, int n) { if (moveset.Count > n) anim.SetBool("attack" + n, performed); }
+    protected void AttackN(bool performed, int n) {
+        if (moveset.Count > n) {
+            moveIndex = n;
+            anim.SetBool("attack" + n, performed);
+        }
+    }
 
     #endregion
 
@@ -179,17 +190,17 @@ public abstract class Character : MonoBehaviour
         anim.SetFloat("hurt_target", target);
         anim.SetFloat("hurt_power", power);
         anim.SetBool("unblockable", unblockable);
-        disadvantage = isBlocking ? disadvantageOnBlock : disadvantageOnHit;
+        disadvantage = isBlocking && !unblockable ? disadvantageOnBlock : disadvantageOnHit;
 
         // Sound
-        AudioManager.Instance.gameSfxSounds.Play(isBlocking ? blockedSound : hitSound, (int) entity);
+        AudioManager.Instance.gameSfxSounds.Play(isBlocking && !unblockable ? blockedSound : hitSound, (int) entity);
 
         // Stamina
         stamina -= isBlocking && !unblockable ? Mathf.Round(dmg * blockingModifier) : dmg; // Take less damage if blocking.
         if (stamina <= 0f) stamina = noDeath ? 1f : 0f; // Stamina can't go lower than 0. Can't go lower than 1 if noDeath is activated.
 
-        StopAllCoroutines();
-        StartCoroutine(WaitAndCancelAnimation(disadvantage / 1000f));
+        if (hurtCoroutine != null) StopCoroutine(hurtCoroutine);
+        hurtCoroutine = StartCoroutine(WaitAndCancelAnimation(disadvantage / 1000f));
     }
 
     /// <summary>

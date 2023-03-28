@@ -10,20 +10,20 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9c101ac1060691f4fb04457c1a701efc, type: 3}
-  m_Name: Left Jab
+  m_Name: Right Overhand
   m_EditorClassIdentifier: 
   moveName: Left Jab
-  animation: {fileID: 7400000, guid: e652c0869035b6b418eef0c72bbb19c0, type: 2}
+  animation: {fileID: 7400000, guid: 6232cd1526a6c3d40a5382e8b5611702, type: 2}
   animationSpeed: 1
-  hitbox: 0
-  whiffSound: Whiff_Jab
-  hitSound: Hit_Jab
+  hitbox: 1
+  whiffSound: Whiff_Overhand
+  hitSound: Hit_Overhand
   blockedSound: Blocked_Default
-  power: 0
-  unblockable: 0
-  baseDamage: 10
-  startUp: 200
-  active: 50
-  recovery: 400
+  power: 2
+  unblockable: 1
+  baseDamage: 20
+  startUp: 350
+  active: 100
+  recovery: 550
   advantageOnBlock: 0
-  advantageOnHit: 0
+  advantageOnHit: 1000

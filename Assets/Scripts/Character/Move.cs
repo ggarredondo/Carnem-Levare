@@ -34,9 +34,6 @@ public class Move : ScriptableObject
     [SerializeField] private bool unblockable;
     [SerializeField] private float baseDamage; // Used to calculate damage dealt to the opponent's stamina, if it hits.
 
-    [Tooltip("The attack may move the character further than established by root motion")]
-    [SerializeField] private float extraMovement = 0f;
-
     #region TimeData
 
     [Header("Time Data (ms)")]
@@ -57,27 +54,7 @@ public class Move : ScriptableObject
 
     #endregion
 
-    private void OnEnable()
-    {
-        AnimationEvent startAttackEvent = new AnimationEvent();
-        startAttackEvent.functionName = "StartAttack";
-        startAttackEvent.time = 0f;
-
-        AnimationEvent hitboxActivationEvent = new AnimationEvent();
-        hitboxActivationEvent.functionName = "ActivateHitbox";
-        hitboxActivationEvent.time = startUp / (animation.length * 1000f);
-
-        AnimationEvent hitboxDeactivationEvent = new AnimationEvent();
-        hitboxDeactivationEvent.functionName = "DeactivateHitbox";
-        hitboxDeactivationEvent.time = (startUp+active) / (animation.length * 1000f);
-
-        AnimationEvent cancelAnimationEvent = new AnimationEvent();
-        cancelAnimationEvent.functionName = "CancelAnimation";
-        cancelAnimationEvent.time = (startUp+active+recovery) / (animation.length * 1000f);
-
-        AnimationEvent[] events = { startAttackEvent, hitboxActivationEvent, hitboxDeactivationEvent, cancelAnimationEvent };
-        UnityEditor.AnimationUtility.SetAnimationEvents(animation, events);
-    }
+    private void OnEnable() { AssignEvents(); }
 
     #region PublicMethods
     public string MoveName { get => moveName; }
@@ -96,7 +73,6 @@ public class Move : ScriptableObject
     public Power Power { get => power; }
     public bool Unblockable { get => unblockable; }
     public float BaseDamage { get => baseDamage; }
-    public float ExtraMovement { get => extraMovement; }
 
     // Time Data
     public float StartUp { get => startUp; }
@@ -105,6 +81,32 @@ public class Move : ScriptableObject
 
     public float AdvantageOnBlock { get => advantageOnBlock; }
     public float AdvantageOnHit { get => advantageOnHit; }
+
+    /// <summary>
+    /// Assigns scripted events to the animation clip
+    /// for start up, active and recovery.
+    /// </summary>
+    public void AssignEvents()
+    {
+        AnimationEvent startAttackEvent = new AnimationEvent();
+        startAttackEvent.functionName = "StartAttack";
+        startAttackEvent.time = 0f;
+
+        AnimationEvent hitboxActivationEvent = new AnimationEvent();
+        hitboxActivationEvent.functionName = "ActivateHitbox";
+        hitboxActivationEvent.time = startUp / 1000f;
+
+        AnimationEvent hitboxDeactivationEvent = new AnimationEvent();
+        hitboxDeactivationEvent.functionName = "DeactivateHitbox";
+        hitboxDeactivationEvent.time = (startUp + active) / 1000f;
+
+        AnimationEvent cancelAnimationEvent = new AnimationEvent();
+        cancelAnimationEvent.functionName = "CancelAnimation";
+        cancelAnimationEvent.time = (startUp + active + recovery) / 1000f;
+
+        AnimationEvent[] events = { startAttackEvent, hitboxActivationEvent, hitboxDeactivationEvent, cancelAnimationEvent };
+        UnityEditor.AnimationUtility.SetAnimationEvents(animation, events);
+    }
 
     #endregion
 }
