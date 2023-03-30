@@ -182,7 +182,7 @@ public abstract class Character : MonoBehaviour
     /// <param name="blockedSound">Sound if the attack hits character while blocking.</param>
     /// <param name="disadvantageOnBlock">How many deltaseconds does the character take in blocked animation.</param>
     /// <param name="disadvantageOnHit">How many deltaseconds does the character take in hit animation.</param>
-    public void Damage(float target, float power, float dmg, bool unblockable, string hitSound, string blockedSound, 
+    public virtual void Damage(float target, float power, float dmg, bool unblockable, string hitSound, string blockedSound, 
         float disadvantageOnBlock, float disadvantageOnHit)
     {
         // Animation

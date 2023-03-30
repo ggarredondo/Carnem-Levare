@@ -26,17 +26,17 @@ public class ControllerRumble : MonoBehaviour
         gamepad = Gamepad.current;
     }
 
-    public void Vibrate(float duration, float leftAmplitude, float rightAmplitude)
+    public void Rumble(float duration, float leftAmplitude, float rightAmplitude)
     {
         if (gamepad != null && SceneManagement.Instance.PlayerInput.currentControlScheme == "Gamepad" && !isRumbling)
         {
             gamepad.SetMotorSpeeds(leftAmplitude, rightAmplitude);
             isRumbling = true;
-            StartCoroutine(StopVibration(duration));
+            StartCoroutine(StopRumble(duration));
         }
     }
 
-    private IEnumerator StopVibration(float duration)
+    private IEnumerator StopRumble(float duration)
     {
         yield return new WaitForSeconds(duration);
         gamepad.SetMotorSpeeds(0f, 0f);
