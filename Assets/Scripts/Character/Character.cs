@@ -7,8 +7,6 @@ public enum Entity { Player, Enemy }
 
 public abstract class Character : MonoBehaviour
 {
-    [SerializeField] protected InputReader inputReader;
-
     // Character Attributes
     [Header("Tracking values")]
     [SerializeField] private bool debugTracking = true;

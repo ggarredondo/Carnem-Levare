@@ -4,6 +4,8 @@ public class Player : Character
 {
     [Header("Player-specific Parameters")]
 
+    [SerializeField] protected InputReader inputReader;
+
     [Tooltip("How quickly player animations follows stick movement")]
     [SerializeField] private float stickSpeed;
 
