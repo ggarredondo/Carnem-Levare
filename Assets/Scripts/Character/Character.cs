@@ -21,6 +21,7 @@ public abstract class Character : MonoBehaviour
     [SerializeField] private float stamina;
     [SerializeField] [InitializationField] private float maxStamina = 0f;
 
+    [SerializeField] [Tooltip("How quickly time disadvantage decreases")] private float comboRate = 1f;
     [SerializeField] private float attackDamage = 0f;
     [Tooltip("Percentage of stamina damage taken when blocking")] [SerializeField] [Range(0f, 1f)] private float blockingModifier = 0.5f;
     [SerializeField] [InitializationField] [Range(1f, 1.2f)] private float height = 1f;
@@ -28,6 +29,11 @@ public abstract class Character : MonoBehaviour
     [SerializeField] [InitializationField] private float drag = 0f; // SHOULD BE CALCULATED GIVEN MASS
     [SerializeField] private List<Move> moveset;
     [SerializeField] private List<Hitbox> hitboxes;
+
+    [Header("Debug")]
+    [SerializeField] private bool noDamage = false;
+    [SerializeField] private bool noDeath = false;
+    [SerializeField] private bool updateMoveset = false;
 
     // Character Variables
     private Entity entity;
@@ -39,15 +45,11 @@ public abstract class Character : MonoBehaviour
     protected float directionSpeed;
 
     protected bool isAttacking, isHurt, isKO, isBlocked, isBlocking;
-    private float disadvantage;
+    [SerializeField] [ReadOnly] private float disadvantage;
+    [SerializeField] [ReadOnly] private int hitCounter;
     private Coroutine hurtCoroutine;
     private int moveIndex = 0;
     private bool hurtExceptions;
-
-    [Header("Debug")]
-    [SerializeField] private bool noDamage = false;
-    [SerializeField] private bool noDeath = false;
-    [SerializeField] private bool updateMoveset = false;
 
     protected virtual void Awake()
     {
@@ -84,6 +86,9 @@ public abstract class Character : MonoBehaviour
         isHurt = anim.GetCurrentAnimatorStateInfo(0).IsName("Hurt");
         isBlocking = (anim.GetCurrentAnimatorStateInfo(0).IsName("Block") || isBlocked);
         anim.SetBool("is_blocking", isBlocking);
+
+        if (!isHurt) hitCounter = 0; // If the character isn't hurt, reset hit counter (opponent didn't combo).
+
         // Character may not attack when they are blocking an attack, when they are hurt or when they are already attacking.
         anim.SetBool("can_attack", !isAttacking && !isBlocked && !isHurt && !isKO);
 
@@ -170,6 +175,18 @@ public abstract class Character : MonoBehaviour
     }
 
     /// <summary>
+    /// Calculates decreasing time disadvantage after consecutive hits,
+    /// so that combos aren't infinite.
+    /// </summary>
+    /// <param name="disadvantage">Current disadvantage in milliseconds.</param>
+    /// <param name="hitNumber">Number of consecutive hits.</param>
+    /// <param name="rate">Decreasing rate.</param>
+    /// <returns>Current time disadvantage.</returns>
+    private float DisadvantageDecay(float disadvantage, float hitNumber, float rate) {
+        return hitNumber <= 1 ? disadvantage : disadvantage / (hitNumber * rate);
+    }
+
+    /// <summary>
     /// Damage character, reducing their stamina and playing a hurt animation.
     /// </summary>
     /// <param name="target">Where were they damaged?</param>
@@ -178,8 +195,8 @@ public abstract class Character : MonoBehaviour
     /// <param name="unblockable">Can the attack be blocked?</param>
     /// <param name="hitSound">Sound if the attack hits character directly.</param>
     /// <param name="blockedSound">Sound if the attack hits character while blocking.</param>
-    /// <param name="disadvantageOnBlock">How many deltaseconds does the character take in blocked animation.</param>
-    /// <param name="disadvantageOnHit">How many deltaseconds does the character take in hit animation.</param>
+    /// <param name="disadvantageOnBlock">How much time (ms) does the character take in blocked animation.</param>
+    /// <param name="disadvantageOnHit">How much time (ms) does the character take in hit animation.</param>
     public virtual void Damage(float target, float power, float dmg, bool unblockable, string hitSound, string blockedSound, 
         float disadvantageOnBlock, float disadvantageOnHit)
     {
@@ -188,7 +205,10 @@ public abstract class Character : MonoBehaviour
         anim.SetFloat("hurt_target", target);
         anim.SetFloat("hurt_power", power);
         anim.SetBool("unblockable", unblockable);
+
+        hitCounter += 1;
         disadvantage = isBlocking && !unblockable ? disadvantageOnBlock : disadvantageOnHit;
+        disadvantage = DisadvantageDecay(disadvantage, hitCounter, comboRate);
 
         // Sound
         AudioManager.Instance.gameSfxSounds.Play(isBlocking && !unblockable ? blockedSound : hitSound, (int) entity);

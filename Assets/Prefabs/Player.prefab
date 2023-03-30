@@ -313,11 +313,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c584565eaef4f6b4ab0e938ece6cd337, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  inputReader: {fileID: 11400000, guid: cb514f7bc969f1e4da23444266f585b7, type: 2}
   debugTracking: 1
   trackingRate: 20
   stamina: 0
   maxStamina: 200
+  comboRate: 5
   attackDamage: 10
   blockingModifier: 0.1
   height: 1
@@ -331,8 +331,10 @@ MonoBehaviour:
   - {fileID: 972517564017927109}
   noDamage: 0
   noDeath: 1
-  enableAttackTimer: 0
-  maxTime: 1000
+  updateMoveset: 0
+  disadvantage: 0
+  hitCounter: 0
+  inputReader: {fileID: 11400000, guid: cb514f7bc969f1e4da23444266f585b7, type: 2}
   stickSpeed: 15
   blockingStickSpeed: 10
   blockedStickSpeed: 5

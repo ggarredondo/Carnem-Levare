@@ -20,7 +20,7 @@ MonoBehaviour:
   hitSound: Hit_Overhand
   blockedSound: Blocked_Default
   power: 2
-  unblockable: 1
+  unblockable: 0
   baseDamage: 20
   startUp: 350
   active: 100
