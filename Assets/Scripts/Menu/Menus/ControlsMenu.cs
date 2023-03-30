@@ -55,9 +55,10 @@ public class ControlsMenu : MonoBehaviour
 
         if (ControlSaver.mapping.ContainsKey(callback.action.bindings[ControlSaver.controlSchemeIndex].effectivePath))
         {
-            if (CheckIfAsigned(callback.action) != null)
+            InputAction result = CheckIfAsigned(callback.action);
+            if (result != null)
             {
-                callback.Cancel();
+                result.ApplyBindingOverride(ControlSaver.controlSchemeIndex, "");
             }
         }
         else callback.Cancel();
@@ -72,9 +73,9 @@ public class ControlsMenu : MonoBehaviour
         ControlSaver.StaticEvent.Invoke();
     }
 
-    private string CheckIfAsigned(InputAction action)
+    private InputAction CheckIfAsigned(InputAction action)
     {
-        string result = null;
+        InputAction result = null;
         InputBinding actualBinding = action.bindings[ControlSaver.controlSchemeIndex];
 
         foreach (InputBinding binding in action.actionMap.bindings) {
@@ -86,7 +87,7 @@ public class ControlsMenu : MonoBehaviour
 
             if (binding.effectivePath == actualBinding.effectivePath)
             {
-                result = binding.action;
+                result = SceneManagement.Instance.PlayerInput.actions.FindActionMap("Main Movement").FindAction(binding.action);
                 break;
             }
         }

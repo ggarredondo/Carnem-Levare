@@ -70,8 +70,18 @@ public class AutoSelect : MonoBehaviour, IPointerEnterHandler, ISelectHandler
     /// </summary>
     private void ChangeInputFont()
     {
+        //Change Font
         transform.GetChild(0).GetComponent<TMP_Text>().font = GlobalMenuVariables.Instance.inputFonts[ControlSaver.controlSchemeIndex];
-        transform.GetChild(0).GetComponent<TMP_Text>().text = ControlSaver.ObtainMapping(gameObject.name);
+
+        //Asign the correct word
+        string mappingKey = ControlSaver.ObtainMapping(gameObject.name);
+
+        if (mappingKey != "-") transform.GetChild(0).GetComponent<TMP_Text>().text = ControlSaver.ObtainMapping(gameObject.name);
+        else
+        {
+            transform.GetChild(0).GetComponent<TMP_Text>().font = GlobalMenuVariables.Instance.inputFonts[0];
+            transform.GetChild(0).GetComponent<TMP_Text>().text = "M";
+        }
     }
 
     #endregion

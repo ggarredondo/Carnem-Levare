@@ -100,6 +100,9 @@ public class ControlSaver : MonoBehaviour
             string[] actionMap = line.Split(':');
             mapping.Add(actionMap[0].Replace(" ",string.Empty) ,actionMap[1].Replace(" ", string.Empty));
         }
+
+        //Empty mapping
+        mapping.Add("", "-");
     }
 
     #endregion
