@@ -12,3 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b859648cdcff2864e896dc565eb21b6b, type: 3}
   m_Name: InputReader
   m_EditorClassIdentifier: 
+  leftAmplitude: 0.5
+  righAmplitude: 0.5
+  duration: 0.1

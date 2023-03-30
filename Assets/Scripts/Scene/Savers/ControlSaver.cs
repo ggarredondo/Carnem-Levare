@@ -26,8 +26,7 @@ public class ControlSaver : MonoBehaviour
             LoadUserRebinds(SceneManagement.Instance.PlayerInput);
 
         OnControlSchemeChanged(SceneManagement.Instance.PlayerInput);
-    }
-
+    }  
 
     #region Public
     /// <summary>

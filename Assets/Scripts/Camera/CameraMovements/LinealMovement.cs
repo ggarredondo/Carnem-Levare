@@ -43,6 +43,5 @@ public class LinealMovement : CameraMovement
     public override void ApplyMove(bool condition)
     {
         transposer.m_FollowOffset = CameraUtilities.Movement(condition, aceleration, ref reduce, new Vector3[] { positions.Item1, positions.Item2 }, CameraUtilities.LinearBezierCurve);
-        Debug.Log(transposer.m_FollowOffset);
     }
 }

@@ -1,3 +1,4 @@
+using Unity.VisualScripting.FullSerializer;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.InputSystem;
@@ -5,6 +6,11 @@ using UnityEngine.InputSystem;
 [CreateAssetMenu(fileName = "InputReader", menuName = "Scriptable Objects/Input Reader")]
 public class InputReader : ScriptableObject
 {
+    [Header("Vibration Parameters")]
+    [SerializeField] private float leftAmplitude;
+    [SerializeField] private float righAmplitude;
+    [SerializeField] private float duration;
+
     // UI
     public event UnityAction MouseClickEvent;
     public event UnityAction MenuBackEvent;
@@ -58,19 +64,23 @@ public class InputReader : ScriptableObject
 
     public void OnAttack0(InputAction.CallbackContext context)
     {
+        if(context.performed) ControllerRumble.Instance.Vibrate(duration, leftAmplitude, 0f);
         Attack0Event.Invoke(context.performed);
     }
     public void OnAttack1(InputAction.CallbackContext context)
     {
+        if (context.performed) ControllerRumble.Instance.Vibrate(duration, 0f, righAmplitude);
         Attack1Event.Invoke(context.performed);
     }
 
     public void OnAttack2(InputAction.CallbackContext context)
     {
+        if (context.performed) ControllerRumble.Instance.Vibrate(duration, leftAmplitude, 0f);
         Attack2Event.Invoke(context.performed);
     }
     public void OnAttack3(InputAction.CallbackContext context)
     {
+        if (context.performed) ControllerRumble.Instance.Vibrate(duration, 0f, righAmplitude);
         Attack3Event.Invoke(context.performed);
     }
 
