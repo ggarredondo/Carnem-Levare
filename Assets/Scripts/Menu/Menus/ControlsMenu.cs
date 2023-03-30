@@ -49,12 +49,12 @@ public class ControlsMenu : MonoBehaviour
 
     private void FinishRebind(RebindingOperation callback)
     {
-        AudioManager.Instance.uiSfxSounds.Play("ApplyRebind");
-
         globalMenuManager.DisablePopUpMenu();
 
         if (ControlSaver.mapping.ContainsKey(callback.action.bindings[ControlSaver.controlSchemeIndex].effectivePath))
         {
+            AudioManager.Instance.uiSfxSounds.Play("ApplyRebind");
+
             InputAction result = CheckIfAsigned(callback.action);
             if (result != null)
             {

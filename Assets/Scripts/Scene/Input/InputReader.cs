@@ -22,7 +22,7 @@ public class InputReader : ScriptableObject
     #region UI
     public void OnMouseClick(InputAction.CallbackContext context)
     {
-        MouseClickEvent.Invoke();
+        MouseClickEvent?.Invoke();
     }
 
     public void OnMenuBack(InputAction.CallbackContext context)

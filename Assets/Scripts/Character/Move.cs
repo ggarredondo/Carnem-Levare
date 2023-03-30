@@ -88,6 +88,7 @@ public class Move : ScriptableObject
     /// </summary>
     public void AssignEvents()
     {
+        #if UNITY_EDITOR
         AnimationEvent startAttackEvent = new AnimationEvent();
         startAttackEvent.functionName = "StartAttack";
         startAttackEvent.time = 0f;
@@ -106,6 +107,7 @@ public class Move : ScriptableObject
 
         AnimationEvent[] events = { startAttackEvent, hitboxActivationEvent, hitboxDeactivationEvent, cancelAnimationEvent };
         UnityEditor.AnimationUtility.SetAnimationEvents(animation, events);
+        #endif
     }
 
     #endregion

@@ -60,7 +60,13 @@ public class ControlSaver : MonoBehaviour
     /// <returns>The letter that defines the input action in the control fonts</returns>
     public static string ObtainMapping(string buttonName)
     {
-        return mapping[SceneManagement.Instance.PlayerInput.actions.FindActionMap("Main Movement").FindAction(buttonName).bindings[controlSchemeIndex].effectivePath];
+        if (mapping.ContainsKey(SceneManagement.Instance.PlayerInput.actions.FindActionMap("Main Movement").FindAction(buttonName).bindings[controlSchemeIndex].effectivePath))
+            return mapping[SceneManagement.Instance.PlayerInput.actions.FindActionMap("Main Movement").FindAction(buttonName).bindings[controlSchemeIndex].effectivePath];
+        else
+        {
+            Debug.LogWarning("key was not found in the dictionary");
+            return "";
+        }
     }
 
     #endregion
