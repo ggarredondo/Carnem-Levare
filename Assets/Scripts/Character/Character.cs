@@ -45,8 +45,8 @@ public abstract class Character : MonoBehaviour
     protected float directionSpeed;
 
     protected bool isAttacking, isHurt, isKO, isBlocked, isBlocking;
-    [SerializeField] [ReadOnly] private float disadvantage;
-    [SerializeField] [ReadOnly] private int hitCounter;
+    [SerializeField] [ReadOnlyField] private float disadvantage;
+    [SerializeField] [ReadOnlyField] private int hitCounter;
     private Coroutine hurtCoroutine;
     private int moveIndex = 0;
     private bool hurtExceptions;

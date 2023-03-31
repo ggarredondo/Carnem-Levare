@@ -8,10 +8,10 @@ using UnityEditor;
 /// Field will be Read-Only in play mode.
 /// </summary>
 [AttributeUsage(AttributeTargets.Field)]
-public sealed class ReadOnly : PropertyAttribute {}
+public sealed class ReadOnlyField : PropertyAttribute {}
 
 #if UNITY_EDITOR
-[CustomPropertyDrawer(typeof(ReadOnly))]
+[CustomPropertyDrawer(typeof(ReadOnlyField))]
 public sealed class ReadOnlyFieldDrawer : PropertyDrawer
 {
     public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
