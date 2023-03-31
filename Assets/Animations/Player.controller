@@ -882,7 +882,7 @@ AnimatorState:
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
   m_Motion: {fileID: -4172014032094377090}
-  m_Tag: 
+  m_Tag: Blocking
   m_SpeedParameter: 
   m_MirrorParameter: 
   m_CycleOffsetParameter: 
@@ -4714,7 +4714,7 @@ AnimatorState:
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
   m_Motion: {fileID: 8395684303347265360}
-  m_Tag: Movement
+  m_Tag: Blocking
   m_SpeedParameter: block_walk_speed
   m_MirrorParameter: 
   m_CycleOffsetParameter: 

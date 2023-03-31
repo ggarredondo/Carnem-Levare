@@ -314,10 +314,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   debugTracking: 1
-  trackingRate: 20
+  trackingRate: 15
   stamina: 0
   maxStamina: 200
-  comboRate: 5
   attackDamage: 10
   blockingModifier: 0.1
   height: 1
@@ -332,6 +331,7 @@ MonoBehaviour:
   noDamage: 0
   noDeath: 1
   updateMoveset: 0
+  state: 0
   disadvantage: 0
   hitCounter: 0
   inputReader: {fileID: 11400000, guid: cb514f7bc969f1e4da23444266f585b7, type: 2}

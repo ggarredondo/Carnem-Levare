@@ -4,6 +4,7 @@ using System.Linq;
 using System.Collections;
 
 public enum Entity { Player, Enemy }
+public enum CharacterState { moving, attacking, hit, ko }
 
 public abstract class Character : MonoBehaviour
 {
@@ -21,7 +22,7 @@ public abstract class Character : MonoBehaviour
     [SerializeField] private float stamina;
     [SerializeField] [InitializationField] private float maxStamina = 0f;
 
-    [SerializeField] [Tooltip("How quickly time disadvantage decreases")] private float comboRate = 1f;
+    //[SerializeField] [Tooltip("How quickly time disadvantage decreases")] private float comboRate = 1f;
     [SerializeField] private float attackDamage = 0f;
     [Tooltip("Percentage of stamina damage taken when blocking")] [SerializeField] [Range(0f, 1f)] private float blockingModifier = 0.5f;
     [SerializeField] [InitializationField] [Range(1f, 1.2f)] private float height = 1f;
@@ -44,7 +45,8 @@ public abstract class Character : MonoBehaviour
     protected Vector2 direction, directionTarget;
     protected float directionSpeed;
 
-    protected bool isAttacking, isHurt, isKO, isBlocked, isBlocking;
+    [SerializeField] [ReadOnlyField] protected CharacterState state = CharacterState.moving;
+    protected bool isBlocking;
     [SerializeField] [ReadOnlyField] private float disadvantage;
     [SerializeField] [ReadOnlyField] private int hitCounter;
     private Coroutine hurtCoroutine;
@@ -72,30 +74,34 @@ public abstract class Character : MonoBehaviour
     {
         InitializeMoveset();
     }
+
     protected virtual void Update()
     {
-        // Character is KO when stamina is equal or below 0.
-        isKO = stamina <= 0;
-        anim.SetBool("ko", isKO);
-        // Character won't be hurt if any of these conditions are met.
-        hurtExceptions = isKO || noDamage;
-
-        // Check current state so that certain behaviours may play accordingly.
-        isAttacking = anim.GetCurrentAnimatorStateInfo(0).IsTag("Attacking") && !anim.IsInTransition(0);
-        isBlocked = anim.GetCurrentAnimatorStateInfo(0).IsName("Blocked");
-        isHurt = anim.GetCurrentAnimatorStateInfo(0).IsName("Hurt");
-        isBlocking = (anim.GetCurrentAnimatorStateInfo(0).IsName("Block") || isBlocked);
+        hurtExceptions = state == CharacterState.ko || noDamage;
+        isBlocking = anim.GetCurrentAnimatorStateInfo(0).IsTag("Blocking");
         anim.SetBool("is_blocking", isBlocking);
+        anim.SetBool("can_attack", state == CharacterState.moving);
 
-        if (!isHurt) hitCounter = 0; // If the character isn't hurt, reset hit counter (opponent didn't combo).
+        switch (state)
+        {
+            case CharacterState.moving:
+                // Softens movement by establishing the direction as a point that approaches the target direction at *directionSpeed* rate.
+                direction = Vector2.Lerp(direction, directionTarget, directionSpeed * Time.deltaTime);
+                anim.SetFloat("horizontal", direction.x);
+                anim.SetFloat("vertical", direction.y);
 
-        // Character may not attack when they are blocking an attack, when they are hurt or when they are already attacking.
-        anim.SetBool("can_attack", !isAttacking && !isBlocked && !isHurt && !isKO);
+                hitCounter = 0;
+                if (stamina <= 0) EnterKOState();
+                break;
 
-        // Softens movement by establishing the direction as a point that approaches the target direction at *directionSpeed* rate.
-        direction = Vector2.Lerp(direction, directionTarget, directionSpeed * Time.deltaTime);
-        anim.SetFloat("horizontal", direction.x);
-        anim.SetFloat("vertical", direction.y);
+            case CharacterState.hit:
+                if (stamina <= 0) EnterKOState();
+                break;
+
+            case CharacterState.ko:
+                if (stamina <= 0) EnterKOState();
+                break;
+        }
 
         // --------------- DEBUG --------------------
         if (updateMoveset) { InitializeMoveset(); updateMoveset = false; }
@@ -103,7 +109,7 @@ public abstract class Character : MonoBehaviour
     protected virtual void FixedUpdate()
     {
         // Rotate towards opponent if character is tracking.
-        if (target != null && debugTracking && !isHurt && !IsIdle && !isKO)
+        if (target != null && debugTracking && state == CharacterState.moving && !IsIdle)
         {
             targetLook = Quaternion.LookRotation(target.position - transform.position);
             transform.rotation = Quaternion.Lerp(transform.rotation, targetLook, trackingRate * Time.fixedDeltaTime);
@@ -156,6 +162,8 @@ public abstract class Character : MonoBehaviour
 
     public void StartAttack()
     {
+        anim.ResetTrigger("cancel");
+        state = CharacterState.attacking;
         AudioManager.Instance.gameSfxSounds.Play(moveset[moveIndex].WhiffSound, (int)entity); // Play sound.
         // Assign move data to hitbox. Must be done this way because hitboxes are reusable.
         hitboxes[(int)moveset[moveIndex].HitboxType].Set(moveset[moveIndex].Power, 
@@ -168,10 +176,18 @@ public abstract class Character : MonoBehaviour
     }
     public void ActivateHitbox() { hitboxes[(int)moveset[moveIndex].HitboxType].Activate(true); }
     public void DeactivateHitbox() { hitboxes[(int)moveset[moveIndex].HitboxType].Activate(false); }
-    public void CancelAnimation() { anim.SetTrigger("cancel"); }
+    public void CancelAnimation() {
+        state = CharacterState.moving;
+        anim.SetTrigger("cancel");
+    }
     private IEnumerator WaitAndCancelAnimation(float time) { 
         yield return new WaitForSeconds(time);
-        anim.SetTrigger("cancel");
+        CancelAnimation();
+    }
+    private void EnterKOState()
+    {
+        anim.SetBool("ko", true);
+        state = CharacterState.ko;
     }
 
     /// <summary>
@@ -200,6 +216,8 @@ public abstract class Character : MonoBehaviour
     public virtual void Damage(float target, float power, float dmg, bool unblockable, string hitSound, string blockedSound, 
         float disadvantageOnBlock, float disadvantageOnHit)
     {
+        state = CharacterState.hit;
+
         // Animation
         anim.SetTrigger("hurt");
         anim.SetFloat("hurt_target", target);
@@ -208,7 +226,7 @@ public abstract class Character : MonoBehaviour
 
         hitCounter += 1;
         disadvantage = isBlocking && !unblockable ? disadvantageOnBlock : disadvantageOnHit;
-        disadvantage = DisadvantageDecay(disadvantage, hitCounter, comboRate);
+        //disadvantage = DisadvantageDecay(disadvantage, hitCounter, comboRate);
 
         // Sound
         AudioManager.Instance.gameSfxSounds.Play(isBlocking && !unblockable ? blockedSound : hitSound, (int) entity);
@@ -250,11 +268,11 @@ public abstract class Character : MonoBehaviour
     /// </summary>
     public Vector2 Direction { get => direction; }
 
-    public bool IsMoving { get => directionTarget.magnitude != 0f && anim.GetCurrentAnimatorStateInfo(0).IsTag("Movement"); }
-    public bool IsIdle { get => directionTarget.magnitude == 0f && anim.GetCurrentAnimatorStateInfo(0).IsTag("Movement"); }
-    public bool IsAttacking { get => isAttacking; }
+    public bool IsMoving { get => directionTarget.magnitude != 0f && state == CharacterState.moving; }
+    public bool IsIdle { get => directionTarget.magnitude == 0f && state == CharacterState.moving; }
+    public bool IsAttacking { get => state == CharacterState.attacking; }
     public bool IsBlocking { get => isBlocking; }
-    public bool IsKO { get => isKO; }
+    public bool IsKO { get => state == CharacterState.ko; }
     public bool HurtExceptions { get => hurtExceptions; }
 
     #endregion

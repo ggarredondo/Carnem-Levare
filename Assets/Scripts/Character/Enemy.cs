@@ -6,6 +6,7 @@ public class Enemy : Character
     [SerializeField] private float enemyDirectionSpeed = 1f;
     [SerializeField] private bool jab;
 
+    [SerializeField] [Range(-1f, 1f)] private float horizontal, vertical;
     [SerializeField] private bool block, lateBlock;
     [SerializeField] private float blockMaxTime = 5f;
     private float blockTimer;
@@ -23,7 +24,10 @@ public class Enemy : Character
     }
 
     private void Behaviour() {
-        if (isHurt || isBlocked) blockTimer = 0f;
+        directionTarget.x = horizontal;
+        directionTarget.y = vertical;
+
+        if (state == CharacterState.hit) blockTimer = 0f;
         Block((blockTimer <= blockMaxTime && lateBlock) || block);
         blockTimer += Time.deltaTime;
         AttackN(jab, 0);
