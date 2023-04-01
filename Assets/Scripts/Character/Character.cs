@@ -150,7 +150,7 @@ public abstract class Character : MonoBehaviour
     protected void Movement(Vector2 dir) { directionTarget = dir; }
     protected void Block(bool performed) { anim.SetBool("block", performed); }
     protected void AttackN(bool performed, int n) {
-        if (moveset.Count > n) {
+        if (moveset.Count > n && state == CharacterState.moving) {
             moveIndex = n;
             anim.SetBool("attack" + n, performed);
         }
