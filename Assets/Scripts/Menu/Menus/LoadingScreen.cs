@@ -33,6 +33,7 @@ public class LoadingScreen : MonoBehaviour
         {
             isStopped = true;
             AudioManager.Instance.uiSfxSounds.Play("MaskAlert");
+            ControllerRumble.Instance.Rumble(0.2f, 1f, 1f);
             maskAnim.speed = 6;
             maskAnim.SetBool("Stop", true);
         }

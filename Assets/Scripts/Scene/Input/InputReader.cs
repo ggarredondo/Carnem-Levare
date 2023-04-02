@@ -1,4 +1,3 @@
-using Unity.VisualScripting.FullSerializer;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.InputSystem;
@@ -32,12 +31,12 @@ public class InputReader : ScriptableObject
 
     public void OnChangeRightMenu(InputAction.CallbackContext context)
     {
-        if (context.performed) ChangeRightMenuEvent?.Invoke();
+        if (context.performed) { ControllerRumble.Instance.Rumble(0.1f, 0f, 1f); ChangeRightMenuEvent?.Invoke(); }
     }
 
     public void OnChangeLeftMenu(InputAction.CallbackContext context)
     {
-        if (context.performed) ChangeLeftMenuEvent?.Invoke();
+        if (context.performed) { ControllerRumble.Instance.Rumble(0.1f, 1f, 0f); ChangeLeftMenuEvent?.Invoke(); }
     }
 
     public void OnStartPauseMenu(InputAction.CallbackContext context)

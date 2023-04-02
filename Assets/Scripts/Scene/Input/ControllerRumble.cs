@@ -38,7 +38,7 @@ public class ControllerRumble : MonoBehaviour
 
     private IEnumerator StopRumble(float duration)
     {
-        yield return new WaitForSeconds(duration);
+        yield return new WaitForSecondsRealtime(duration);
         gamepad.SetMotorSpeeds(0f, 0f);
         isRumbling = false;
     }
