@@ -21,9 +21,10 @@ public abstract class Character : MonoBehaviour
 
     [SerializeField] private float stamina;
     [SerializeField] private float maxStamina = 0f;
-    //[Tooltip("How quickly disadvantage decreases through consecutive hits")] [SerializeField] private float comboRate = 0f;
 
-    //[SerializeField] [Tooltip("How quickly time disadvantage decreases")] private float comboRate = 1f;
+    [Tooltip("How quickly time disadvantage decreases through consecutive hits (time in ms x number of hits)")]
+    [SerializeField] private float comboDecay = 100f;
+
     [SerializeField] private float attackDamage = 0f;
     [Tooltip("Percentage of stamina damage taken when blocking")] [SerializeField] [Range(0f, 1f)] private float blockingModifier = 0.5f;
     [SerializeField] [InitializationField] [Range(1f, 1.2f)] private float height = 1f;
@@ -200,7 +201,7 @@ public abstract class Character : MonoBehaviour
     /// <param name="rate">Decreasing rate.</param>
     /// <returns>Current time disadvantage.</returns>
     private float DisadvantageDecay(float disadvantage, float hitNumber, float rate) {
-        return hitNumber <= 1 ? disadvantage : disadvantage / (hitNumber * rate);
+        return disadvantage - hitNumber * rate;
     }
 
     /// <summary>
@@ -225,9 +226,9 @@ public abstract class Character : MonoBehaviour
         anim.SetFloat("hurt_power", power);
         anim.SetBool("unblockable", unblockable);
 
-        hitCounter += 1;
         disadvantage = isBlocking && !unblockable ? disadvantageOnBlock : disadvantageOnHit;
-        //disadvantage = DisadvantageDecay(disadvantage, hitCounter, comboRate);
+        disadvantage = DisadvantageDecay(disadvantage, hitCounter, comboDecay);
+        hitCounter += 1;
 
         // Sound
         AudioManager.Instance.gameSfxSounds.Play(isBlocking && !unblockable ? blockedSound : hitSound, (int) entity);
