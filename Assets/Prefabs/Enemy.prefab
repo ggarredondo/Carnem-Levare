@@ -437,6 +437,7 @@ MonoBehaviour:
   trackingRate: 15
   stamina: 0
   maxStamina: 200
+  comboRate: 1
   attackDamage: 10
   blockingModifier: 0.1
   height: 1.1

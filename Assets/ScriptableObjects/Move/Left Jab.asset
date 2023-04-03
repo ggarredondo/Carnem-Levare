@@ -24,6 +24,6 @@ MonoBehaviour:
   baseDamage: 10
   startUp: 200
   active: 50
-  recovery: 400
+  recovery: 300
   advantageOnBlock: 500
   advantageOnHit: 900

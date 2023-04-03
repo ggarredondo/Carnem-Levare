@@ -21,6 +21,7 @@ public abstract class Character : MonoBehaviour
 
     [SerializeField] private float stamina;
     [SerializeField] private float maxStamina = 0f;
+    //[Tooltip("How quickly disadvantage decreases through consecutive hits")] [SerializeField] private float comboRate = 0f;
 
     //[SerializeField] [Tooltip("How quickly time disadvantage decreases")] private float comboRate = 1f;
     [SerializeField] private float attackDamage = 0f;
