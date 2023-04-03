@@ -20,7 +20,7 @@ public abstract class Character : MonoBehaviour
     [Header("Stats")]
 
     [SerializeField] private float stamina;
-    [SerializeField] [InitializationField] private float maxStamina = 0f;
+    [SerializeField] private float maxStamina = 0f;
 
     //[SerializeField] [Tooltip("How quickly time disadvantage decreases")] private float comboRate = 1f;
     [SerializeField] private float attackDamage = 0f;
@@ -109,7 +109,7 @@ public abstract class Character : MonoBehaviour
     protected virtual void FixedUpdate()
     {
         // Rotate towards opponent if character is tracking.
-        if (target != null && debugTracking && state == CharacterState.moving && !IsIdle)
+        if (target != null && debugTracking && !IsIdle && (state == CharacterState.moving || state == CharacterState.attacking))
         {
             targetLook = Quaternion.LookRotation(target.position - transform.position);
             transform.rotation = Quaternion.Lerp(transform.rotation, targetLook, trackingRate * Time.fixedDeltaTime);
@@ -152,7 +152,7 @@ public abstract class Character : MonoBehaviour
     protected void AttackN(bool performed, int n) {
         if (moveset.Count > n && state == CharacterState.moving) {
             moveIndex = n;
-            anim.SetBool("attack" + n, performed);
+            if (performed) anim.SetTrigger("attack" + n);
         }
     }
 

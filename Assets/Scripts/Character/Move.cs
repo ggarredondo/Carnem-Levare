@@ -54,7 +54,7 @@ public class Move : ScriptableObject
 
     #endregion
 
-    private void OnEnable() { AssignEvents(); }
+    private void OnEnable() { if (animation != null) AssignEvents(); }
 
     #region PublicMethods
     public string MoveName { get => moveName; }
