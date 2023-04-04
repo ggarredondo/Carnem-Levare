@@ -4,7 +4,7 @@ using System.Linq;
 using System.Collections;
 
 public enum Entity { Player, Enemy }
-public enum CharacterState { moving, attacking, hit, ko }
+public enum CharacterState { moving, attacking, hurt, blocked, ko }
 
 public abstract class Character : MonoBehaviour
 {
@@ -80,8 +80,6 @@ public abstract class Character : MonoBehaviour
     protected virtual void Update()
     {
         hurtExceptions = state == CharacterState.ko || noDamage;
-        isBlocking = anim.GetCurrentAnimatorStateInfo(0).IsTag("Blocking");
-        anim.SetBool("is_blocking", isBlocking);
         anim.SetBool("can_attack", state == CharacterState.moving);
 
         switch (state)
@@ -96,7 +94,11 @@ public abstract class Character : MonoBehaviour
                 if (stamina <= 0) EnterKOState();
                 break;
 
-            case CharacterState.hit:
+            case CharacterState.hurt:
+                if (stamina <= 0) EnterKOState();
+                break;
+
+            case CharacterState.blocked:
                 if (stamina <= 0) EnterKOState();
                 break;
 
@@ -150,7 +152,10 @@ public abstract class Character : MonoBehaviour
     #region Actions
 
     protected void Movement(Vector2 dir) { directionTarget = dir; }
-    protected void Block(bool performed) { anim.SetBool("block", performed); }
+    protected void Block(bool performed) { 
+        isBlocking = performed && (state == CharacterState.moving || state == CharacterState.blocked);
+        anim.SetBool("is_blocking", isBlocking);
+    }
     protected void AttackN(bool performed, int n) {
         if (moveset.Count > n && state == CharacterState.moving) {
             moveIndex = n;
@@ -218,7 +223,7 @@ public abstract class Character : MonoBehaviour
     public virtual void Damage(float target, float power, float dmg, bool unblockable, string hitSound, string blockedSound, 
         float disadvantageOnBlock, float disadvantageOnHit)
     {
-        state = CharacterState.hit;
+        state = isBlocking ? CharacterState.blocked : CharacterState.hurt;
 
         // Animation
         anim.SetTrigger("hurt");
