@@ -4,7 +4,7 @@ using System.Linq;
 using System.Collections;
 
 public enum Entity { Player, Enemy }
-public enum CharacterState { moving, attacking, hurt, blocked, ko }
+public enum CharacterState { standing, attacking, hurt, blocked, ko }
 
 public abstract class Character : MonoBehaviour
 {
@@ -47,7 +47,7 @@ public abstract class Character : MonoBehaviour
     protected Vector2 direction, directionTarget;
     protected float directionSpeed;
 
-    [SerializeField] [ReadOnlyField] protected CharacterState state = CharacterState.moving;
+    [SerializeField] [ReadOnlyField] protected CharacterState state = CharacterState.standing;
     protected bool isBlocking;
     [SerializeField] [ReadOnlyField] private float disadvantage;
     [SerializeField] [ReadOnlyField] private int hitCounter;
@@ -80,11 +80,12 @@ public abstract class Character : MonoBehaviour
     protected virtual void Update()
     {
         hurtExceptions = state == CharacterState.ko || noDamage;
-        anim.SetBool("can_attack", state == CharacterState.moving);
+        anim.SetBool("can_attack", state == CharacterState.standing);
+        anim.SetBool("is_blocking", isBlocking && (state == CharacterState.standing || state == CharacterState.blocked));
 
         switch (state)
         {
-            case CharacterState.moving:
+            case CharacterState.standing:
                 // Softens movement by establishing the direction as a point that approaches the target direction at *directionSpeed* rate.
                 direction = Vector2.Lerp(direction, directionTarget, directionSpeed * Time.deltaTime);
                 anim.SetFloat("horizontal", direction.x);
@@ -113,7 +114,7 @@ public abstract class Character : MonoBehaviour
     protected virtual void FixedUpdate()
     {
         // Rotate towards opponent if character is tracking.
-        if (target != null && debugTracking && !IsIdle && (state == CharacterState.moving || state == CharacterState.attacking))
+        if (target != null && debugTracking && (IsMoving || IsAttacking))
         {
             targetLook = Quaternion.LookRotation(target.position - transform.position);
             transform.rotation = Quaternion.Lerp(transform.rotation, targetLook, trackingRate * Time.fixedDeltaTime);
@@ -152,12 +153,9 @@ public abstract class Character : MonoBehaviour
     #region Actions
 
     protected void Movement(Vector2 dir) { directionTarget = dir; }
-    protected void Block(bool performed) { 
-        isBlocking = performed && (state == CharacterState.moving || state == CharacterState.blocked);
-        anim.SetBool("is_blocking", isBlocking);
-    }
+    protected void Block(bool performed) { isBlocking = performed; }
     protected void AttackN(bool performed, int n) {
-        if (moveset.Count > n && state == CharacterState.moving) {
+        if (moveset.Count > n && state == CharacterState.standing) {
             moveIndex = n;
             if (performed) anim.SetTrigger("attack" + n);
         }
@@ -184,7 +182,7 @@ public abstract class Character : MonoBehaviour
     public void ActivateHitbox() { hitboxes[(int)moveset[moveIndex].HitboxType].Activate(true); }
     public void DeactivateHitbox() { hitboxes[(int)moveset[moveIndex].HitboxType].Activate(false); }
     public void CancelAnimation() {
-        state = CharacterState.moving;
+        state = CharacterState.standing;
         anim.SetTrigger("cancel");
     }
     private IEnumerator WaitAndCancelAnimation(float time) { 
@@ -203,7 +201,7 @@ public abstract class Character : MonoBehaviour
     /// </summary>
     /// <param name="disadvantage">Current disadvantage in milliseconds.</param>
     /// <param name="hitNumber">Number of consecutive hits.</param>
-    /// <param name="rate">Decreasing rate.</param>
+    /// <param name="rate">Decreasing rate in milliseconds.</param>
     /// <returns>Current time disadvantage.</returns>
     private float DisadvantageDecay(float disadvantage, float hitNumber, float rate) {
         return disadvantage - hitNumber * rate;
@@ -275,8 +273,8 @@ public abstract class Character : MonoBehaviour
     /// </summary>
     public Vector2 Direction { get => direction; }
 
-    public bool IsMoving { get => directionTarget.magnitude != 0f && state == CharacterState.moving; }
-    public bool IsIdle { get => directionTarget.magnitude == 0f && state == CharacterState.moving; }
+    public bool IsMoving { get => directionTarget.magnitude != 0f && state == CharacterState.standing; }
+    public bool IsIdle { get => directionTarget.magnitude == 0f && state == CharacterState.standing; }
     public bool IsAttacking { get => state == CharacterState.attacking; }
     public bool IsBlocking { get => isBlocking; }
     public bool IsKO { get => state == CharacterState.ko; }
