@@ -2,10 +2,14 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.EventSystems;
 using static UnityEngine.InputSystem.InputActionRebindingExtensions;
+using UnityEngine.UI;
 
 public class ControlsMenu : MonoBehaviour
 { 
     [SerializeField] private MainMenuManager globalMenuManager;
+
+    [Header("Toggle")]
+    [SerializeField] private Toggle rumbleToggle;
 
     private InputAction action, originalAction;
     public float rebindTimeDelay = 0.25f;
@@ -38,6 +42,13 @@ public class ControlsMenu : MonoBehaviour
                 .Start();
         }
     }
+
+    public void Rumble(bool changeState)
+    {
+        AudioManager.Instance.uiSfxSounds.Play("PressButton");
+        if (changeState) rumbleToggle.isOn = !rumbleToggle.isOn;
+    }
+
     #endregion
 
     #region Private

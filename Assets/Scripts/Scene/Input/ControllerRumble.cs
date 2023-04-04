@@ -7,6 +7,7 @@ public class ControllerRumble : MonoBehaviour
     public static ControllerRumble Instance { get; private set; }
     private Gamepad gamepad;
     private bool isRumbling;
+    private bool canRumble;
 
     private void Awake()
     {
@@ -26,9 +27,11 @@ public class ControllerRumble : MonoBehaviour
         gamepad = Gamepad.current;
     }
 
+    public bool CanRumble { set { canRumble = value; } }
+
     public void Rumble(float duration, float leftAmplitude, float rightAmplitude)
     {
-        if (gamepad != null && SceneManagement.Instance.PlayerInput.currentControlScheme == "Gamepad" && !isRumbling)
+        if (gamepad != null && SceneManagement.Instance.PlayerInput.currentControlScheme == "Gamepad" && !isRumbling && canRumble)
         {
             gamepad.SetMotorSpeeds(leftAmplitude, rightAmplitude);
             isRumbling = true;
