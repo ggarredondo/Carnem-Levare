@@ -2,6 +2,7 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.InputSystem;
+using System.Threading.Tasks;
 
 public class SceneManagement : MonoBehaviour
 {
@@ -141,7 +142,7 @@ public class SceneManagement : MonoBehaviour
     /// </summary>
     /// <param name="sceneId"></param>
     /// <returns></returns>
-    private IEnumerator LoadSceneAsync(int sceneId)
+    private async void LoadSceneAsync(int sceneId)
     {
         asyncOperation = SceneManager.LoadSceneAsync(sceneId);
 
@@ -150,18 +151,15 @@ public class SceneManagement : MonoBehaviour
 
         //Activate the loading screen UI
         loadingScreen.Activate();
+        bool done;
 
-        while (!asyncOperation.isDone)
+        do
         {
-            //Update the progress of the Async load on teh loading screen UI
-            if (loadingScreen.UpdateProgess(asyncOperation.progress))
-            {
-                StartCoroutine(EndAsyncOperation());
-                break;
-            }
+            await Task.Delay(100);
+            done = loadingScreen.UpdateProgess(asyncOperation.progress);
+        } while (!done);
 
-            yield return null;
-        }
+        StartCoroutine(EndAsyncOperation());
     }
 
     /// <summary>
@@ -181,7 +179,7 @@ public class SceneManagement : MonoBehaviour
     private IEnumerator LoadFromLoadingScreen()
     {
         yield return new WaitUntil(() => TransitionEnd);
-        StartCoroutine(LoadSceneAsync(sceneToLoad));
+        LoadSceneAsync(sceneToLoad);
     }
 
     #endregion

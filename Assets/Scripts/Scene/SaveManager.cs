@@ -97,6 +97,9 @@ public class SaveData
     public string resolution;
     public int quality;
 
+    //Control Settings
+    public bool rumble;
+
     public void Load()
     {
         VisualSaver.Instance.LoadChanges();
