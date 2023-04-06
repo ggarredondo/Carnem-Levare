@@ -34,12 +34,12 @@ public class AutoSelect : MonoBehaviour, IPointerEnterHandler, ISelectHandler
 
     private void OnEnable()
     {
-        if (inputButton) ControlSaver.StaticEvent += ChangeInputFont;
+        if (inputButton) ControlSaver.Instance.StaticEvent += ChangeInputFont;
     }
 
     private void OnDisable()
     {
-        if (inputButton) ControlSaver.StaticEvent -= ChangeInputFont;
+        if (inputButton) ControlSaver.Instance.StaticEvent -= ChangeInputFont;
     }
 
     #region Public
@@ -71,12 +71,12 @@ public class AutoSelect : MonoBehaviour, IPointerEnterHandler, ISelectHandler
     private void ChangeInputFont()
     {
         //Change Font
-        transform.GetChild(0).GetComponent<TMP_Text>().font = GlobalMenuVariables.Instance.inputFonts[ControlSaver.controlSchemeIndex];
+        transform.GetChild(0).GetComponent<TMP_Text>().font = GlobalMenuVariables.Instance.inputFonts[ControlSaver.Instance.controlSchemeIndex];
 
         //Asign the correct word
-        string mappingKey = ControlSaver.ObtainMapping(gameObject.name);
+        string mappingKey = ControlSaver.Instance.ObtainMapping(gameObject.name);
 
-        if (mappingKey != "-" && mappingKey != "") transform.GetChild(0).GetComponent<TMP_Text>().text = ControlSaver.ObtainMapping(gameObject.name);
+        if (mappingKey != "-" && mappingKey != "") transform.GetChild(0).GetComponent<TMP_Text>().text = ControlSaver.Instance.ObtainMapping(gameObject.name);
         else
         {
             transform.GetChild(0).GetComponent<TMP_Text>().font = GlobalMenuVariables.Instance.inputFonts[0];

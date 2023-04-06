@@ -5,19 +5,30 @@ using System.IO;
 
 public class ControlSaver : MonoBehaviour
 {
-    public static Dictionary<string, string> mapping = new();
+    public static ControlSaver Instance { get; private set; }
 
-    public static int controlSchemeIndex;
-
+    public Dictionary<string, string> mapping = new();
+    public int controlSchemeIndex;
     public delegate void StaticEventHandler();
-    public static StaticEventHandler StaticEvent;
+    public StaticEventHandler StaticEvent;
+
+    [System.NonSerialized] public bool rumble;
 
     /// <summary>
     /// Read the mapping between the ui and the control fonts
     /// </summary>
     private void Awake()
     {
-        ReadMappingFile();
+        // If there is an instance, and it's not me, delete myself.
+        if (Instance != null && Instance != this)
+        {
+            Destroy(this);
+        }
+        else
+        {
+            Instance = this;
+            ReadMappingFile();
+        }
     }
 
     private void Start()
@@ -33,7 +44,7 @@ public class ControlSaver : MonoBehaviour
     /// Event that trigger when the controls change between Keyboard and gamepad
     /// </summary>
     /// <param name="playerInput"></param>
-    public static void OnControlSchemeChanged(PlayerInput playerInput)
+    public void OnControlSchemeChanged(PlayerInput playerInput)
     {
         switch (playerInput.currentControlScheme)
         {
@@ -45,10 +56,37 @@ public class ControlSaver : MonoBehaviour
     }
 
     /// <summary>
+    /// Save the actual input settings
+    /// </summary>
+    /// <param name="player"></param>
+    public void ApplyChanges()
+    {
+        ApplyUI();
+
+        //PERMANENT CHANGES
+        SaveManager.Instance.activeSave.rumble = rumble;
+    }
+
+    public void ApplyUI()
+    {
+        ControllerRumble.Instance.CanRumble = rumble;
+    }
+
+    /// <summary>
+    /// Load changes from the SaveManager to obtain the initial values
+    /// </summary>
+    public void LoadChanges()
+    {
+        rumble = SaveManager.Instance.activeSave.rumble;
+
+        ApplyUI();
+    }
+
+    /// <summary>
     /// Save the actual input scheme
     /// </summary>
     /// <param name="player"></param>
-    public static void ApplyChanges(PlayerInput player)
+    public void ApplyInputScheme(PlayerInput player)
     {
         SaveUserRebinds(player);
     }
@@ -58,7 +96,7 @@ public class ControlSaver : MonoBehaviour
     /// </summary>
     /// <param name="buttonName">Button name (same name that the input action)</param>
     /// <returns>The letter that defines the input action in the control fonts</returns>
-    public static string ObtainMapping(string buttonName)
+    public string ObtainMapping(string buttonName)
     {
         if (mapping.ContainsKey(SceneManagement.Instance.PlayerInput.actions.FindActionMap("Main Movement").FindAction(buttonName).bindings[controlSchemeIndex].effectivePath))
             return mapping[SceneManagement.Instance.PlayerInput.actions.FindActionMap("Main Movement").FindAction(buttonName).bindings[controlSchemeIndex].effectivePath];
@@ -77,7 +115,7 @@ public class ControlSaver : MonoBehaviour
     /// Save the actual input mapping
     /// </summary>
     /// <param name="player"></param>
-    private static void SaveUserRebinds(PlayerInput player)
+    private void SaveUserRebinds(PlayerInput player)
     {
         var rebinds = player.actions.SaveBindingOverridesAsJson();
         PlayerPrefs.SetString("rebinds", rebinds);
@@ -87,7 +125,7 @@ public class ControlSaver : MonoBehaviour
     /// Load the actual input mapping
     /// </summary>
     /// <param name="player"></param>
-    private static void LoadUserRebinds(PlayerInput player)
+    private void LoadUserRebinds(PlayerInput player)
     {
         var rebinds = PlayerPrefs.GetString("rebinds");
         player.actions.LoadBindingOverridesFromJson(rebinds);

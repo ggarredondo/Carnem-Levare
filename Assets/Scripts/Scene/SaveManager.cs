@@ -104,6 +104,7 @@ public class SaveData
     {
         VisualSaver.Instance.LoadChanges();
         AudioSaver.Instance.LoadChanges();
+        ControlSaver.Instance.LoadChanges();
     }
 }
 

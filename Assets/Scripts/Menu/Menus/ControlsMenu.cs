@@ -14,6 +14,11 @@ public class ControlsMenu : MonoBehaviour
     private InputAction action, originalAction;
     public float rebindTimeDelay = 0.25f;
 
+    private void Awake()
+    {
+        rumbleToggle.isOn = ControlSaver.Instance.rumble;
+    }
+
     private void Start()
     {        
         LoadRemapping();
@@ -34,7 +39,7 @@ public class ControlsMenu : MonoBehaviour
 
             originalAction = action.Clone();
 
-            action.PerformInteractiveRebinding(ControlSaver.controlSchemeIndex)
+            action.PerformInteractiveRebinding(ControlSaver.Instance.controlSchemeIndex)
                 .WithControlsExcluding("Mouse")
                 .OnMatchWaitForAnother(rebindTimeDelay)
                 .OnCancel(callback => CancelRebind(callback))
@@ -47,6 +52,8 @@ public class ControlsMenu : MonoBehaviour
     {
         AudioManager.Instance.uiSfxSounds.Play("PressButton");
         if (changeState) rumbleToggle.isOn = !rumbleToggle.isOn;
+        ControlSaver.Instance.rumble = rumbleToggle.isOn;
+        ControlSaver.Instance.ApplyChanges();
     }
 
     #endregion
@@ -55,39 +62,39 @@ public class ControlsMenu : MonoBehaviour
 
     private void CancelRebind(RebindingOperation callback)
     {
-        callback.action.ApplyBindingOverride(ControlSaver.controlSchemeIndex, originalAction.bindings[ControlSaver.controlSchemeIndex]);
+        callback.action.ApplyBindingOverride(ControlSaver.Instance.controlSchemeIndex, originalAction.bindings[ControlSaver.Instance.controlSchemeIndex]);
     }
 
     private void FinishRebind(RebindingOperation callback)
     {
         globalMenuManager.DisablePopUpMenu();
 
-        if (ControlSaver.mapping.ContainsKey(callback.action.bindings[ControlSaver.controlSchemeIndex].effectivePath))
+        if (ControlSaver.Instance.mapping.ContainsKey(callback.action.bindings[ControlSaver.Instance.controlSchemeIndex].effectivePath))
         {
             AudioManager.Instance.uiSfxSounds.Play("ApplyRebind");
 
             InputAction result = CheckIfAsigned(callback.action);
             if (result != null)
             {
-                result.ApplyBindingOverride(ControlSaver.controlSchemeIndex, "");
+                result.ApplyBindingOverride(ControlSaver.Instance.controlSchemeIndex, "");
             }
         }
         else callback.Cancel();
 
-        ControlSaver.ApplyChanges(SceneManagement.Instance.PlayerInput);
+        ControlSaver.Instance.ApplyInputScheme(SceneManagement.Instance.PlayerInput);
         callback.Dispose();
         LoadRemapping();
     }
 
     private void LoadRemapping()
     {
-        ControlSaver.StaticEvent.Invoke();
+        ControlSaver.Instance.StaticEvent.Invoke();
     }
 
     private InputAction CheckIfAsigned(InputAction action)
     {
         InputAction result = null;
-        InputBinding actualBinding = action.bindings[ControlSaver.controlSchemeIndex];
+        InputBinding actualBinding = action.bindings[ControlSaver.Instance.controlSchemeIndex];
 
         foreach (InputBinding binding in action.actionMap.bindings) {
 

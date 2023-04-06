@@ -64,11 +64,10 @@ public class SceneManagement : MonoBehaviour
         InitializeSoundSources();
 
         //Asign the controlsChangedEvent to the actual playerInput
-        playerInput.controlsChangedEvent.AddListener(ControlSaver.OnControlSchemeChanged);
-        ControlSaver.OnControlSchemeChanged(playerInput);
+        playerInput.controlsChangedEvent.AddListener(ControlSaver.Instance.OnControlSchemeChanged);
+        ControlSaver.Instance.OnControlSchemeChanged(playerInput);
 
         //Show the opening scene transition
-        transitionEnd = false;
         StartCoroutine(EndLoading());
     }
 
@@ -79,6 +78,7 @@ public class SceneManagement : MonoBehaviour
     {
         yield return new WaitUntil(() => TransitionEnd);
         animator.SetBool("isLoading", true);
+        transitionEnd = false;
         yield return new WaitForSecondsRealtime(animator.GetCurrentAnimatorStateInfo(0).length);
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 1);
     }
@@ -94,6 +94,7 @@ public class SceneManagement : MonoBehaviour
 
         //Starting the endScene animation
         animator.SetBool("isLoading", true);
+        transitionEnd = false;
         yield return new WaitForSecondsRealtime(animator.GetCurrentAnimatorStateInfo(0).length);
 
         //Store the scene to load in the loading screen
@@ -169,6 +170,7 @@ public class SceneManagement : MonoBehaviour
     private IEnumerator EndAsyncOperation()
     {
         animator.SetBool("isLoading", true);
+        transitionEnd = false;
         yield return new WaitForSecondsRealtime(animator.GetCurrentAnimatorStateInfo(0).length);
         asyncOperation.allowSceneActivation = true;
     }

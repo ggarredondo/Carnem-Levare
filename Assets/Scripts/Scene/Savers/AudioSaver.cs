@@ -7,11 +7,10 @@ public class AudioSaver : MonoBehaviour
 
     [SerializeField] private AudioMixer audioMixer;
 
-    [Header("Audio Mixer")]
-    public float globalVolume = 1f;
-    public float musicVolume = 1f;
-    public float sfxVolume = 1f;
-    public bool mute = false;
+    [System.NonSerialized] public float globalVolume = 1f;
+    [System.NonSerialized] public float musicVolume = 1f;
+    [System.NonSerialized] public float sfxVolume = 1f;
+    [System.NonSerialized] public bool mute = false;
 
     private void Awake()
     {

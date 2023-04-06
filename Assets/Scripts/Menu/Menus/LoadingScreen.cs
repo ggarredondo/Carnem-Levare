@@ -20,9 +20,9 @@ public class LoadingScreen : MonoBehaviour
     private float actualProgress;
     private bool isStopped;
 
-    private void OnEnable(){ ControlSaver.StaticEvent += ChangeText; }
+    private void OnEnable(){ ControlSaver.Instance.StaticEvent += ChangeText; }
 
-    private void OnDisable(){ ControlSaver.StaticEvent -= ChangeText;}
+    private void OnDisable(){ ControlSaver.Instance.StaticEvent -= ChangeText;}
 
     private void Update()
     {
@@ -81,7 +81,7 @@ public class LoadingScreen : MonoBehaviour
     /// </summary>
     public void ChangeText()
     {
-        continueAction = SceneManagement.Instance.PlayerInput.actions.FindActionMap("LoadingScreen").FindAction("Continue").bindings[ControlSaver.controlSchemeIndex].path.Split("/")[1];
+        continueAction = SceneManagement.Instance.PlayerInput.actions.FindActionMap("LoadingScreen").FindAction("Continue").bindings[ControlSaver.Instance.controlSchemeIndex].path.Split("/")[1];
     }
 
     #endregion

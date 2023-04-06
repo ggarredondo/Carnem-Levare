@@ -27,7 +27,7 @@ public class ControllerRumble : MonoBehaviour
         gamepad = Gamepad.current;
     }
 
-    public bool CanRumble { set { canRumble = value; } }
+    public bool CanRumble { get { return canRumble; } set { canRumble = value; } }
 
     public void Rumble(float duration, float leftAmplitude, float rightAmplitude)
     {

@@ -4,11 +4,10 @@ public class VisualSaver : MonoBehaviour
 {
     public static VisualSaver Instance { get; private set; }
 
-    [Header("Visual Mixer")]
-    public bool fullscreen;
-    public int vsync;
-    public string resolution;
-    public int quality;
+    [System.NonSerialized] public bool fullscreen;
+    [System.NonSerialized] public int vsync;
+    [System.NonSerialized] public string resolution;
+    [System.NonSerialized] public int quality;
 
     private void Awake()
     {
