@@ -372,6 +372,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7481606168508649710}
   - component: {fileID: 7481606168508649708}
+  - component: {fileID: 4108277264256382876}
   - component: {fileID: 7481606168508649709}
   - component: {fileID: 5975427957589119885}
   - component: {fileID: 8958949370764238645}
@@ -421,6 +422,20 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &4108277264256382876
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7481606168508649711}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 44278a82d5b0edc45b3225562f05e51a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  start: 0
+  currentTime: 0
 --- !u!114 &7481606168508649709
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -455,7 +470,8 @@ MonoBehaviour:
   disadvantage: 0
   hitCounter: 0
   enemyDirectionSpeed: 10
-  jab: 0
+  singleJab: 0
+  constantJab: 0
   horizontal: 0
   vertical: 0
   block: 0

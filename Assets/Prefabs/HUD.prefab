@@ -662,7 +662,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6536273633662219891}
   m_Layer: 0
-  m_Name: EnemyStaminaBar
+  m_Name: EnemyInfo
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -697,7 +697,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6536273633843572935}
   m_Layer: 0
-  m_Name: PlayerStaminaBar
+  m_Name: PlayerInfo
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

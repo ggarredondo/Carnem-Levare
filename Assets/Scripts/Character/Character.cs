@@ -81,7 +81,6 @@ public abstract class Character : MonoBehaviour
     {
         hurtExceptions = state == CharacterState.ko || noDamage;
         anim.SetBool("can_attack", state == CharacterState.standing);
-        anim.SetBool("is_blocking", isBlocking && (state == CharacterState.standing || state == CharacterState.blocked));
 
         switch (state)
         {
@@ -153,7 +152,10 @@ public abstract class Character : MonoBehaviour
     #region Actions
 
     protected void Movement(Vector2 dir) { directionTarget = dir; }
-    protected void Block(bool performed) { isBlocking = performed; }
+    protected void Block(bool performed) { 
+        isBlocking = performed;
+        anim.SetBool("is_blocking", isBlocking && (state == CharacterState.standing || state == CharacterState.blocked));
+    }
     protected void AttackN(bool performed, int n) {
         if (moveset.Count > n && state == CharacterState.standing) {
             moveIndex = n;
@@ -178,12 +180,15 @@ public abstract class Character : MonoBehaviour
             moveset[moveIndex].BlockedSound,
             moveset[moveIndex].AdvantageOnBlock,
             moveset[moveIndex].AdvantageOnHit);
+        GetComponent<Timer>().enable = true;
     }
     public void ActivateHitbox() { hitboxes[(int)moveset[moveIndex].HitboxType].Activate(true); }
     public void DeactivateHitbox() { hitboxes[(int)moveset[moveIndex].HitboxType].Activate(false); }
     public void CancelAnimation() {
         state = CharacterState.standing;
+        anim.SetBool("is_blocking", isBlocking);
         anim.SetTrigger("cancel");
+        GetComponent<Timer>().enable = false;
     }
     private IEnumerator WaitAndCancelAnimation(float time) { 
         yield return new WaitForSeconds(time);
@@ -241,7 +246,8 @@ public abstract class Character : MonoBehaviour
         if (stamina <= 0f) stamina = noDeath ? 1f : 0f; // Stamina can't go lower than 0. Can't go lower than 1 if noDeath is activated.
 
         if (hurtCoroutine != null) StopCoroutine(hurtCoroutine);
-        hurtCoroutine = StartCoroutine(WaitAndCancelAnimation(disadvantage / 1000f));
+        GetComponent<Timer>().enable = true;
+        hurtCoroutine = StartCoroutine(WaitAndCancelAnimation(disadvantage / 1000f)); 
     }
 
     /// <summary>
