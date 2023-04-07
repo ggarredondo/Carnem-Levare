@@ -3,7 +3,7 @@ using UnityEngine;
 public class Timer : MonoBehaviour
 {
     [SerializeField] private bool enable = false;
-    [SerializeField] private float currentTime = 0f;
+    [SerializeField] [ReadOnlyField] private float currentTime = 0f;
 
     public void StartTimer() { currentTime = 0f; enable = true; }
     public void StopTimer() { currentTime = 0f; enable = false; }
