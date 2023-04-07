@@ -38,6 +38,7 @@ public abstract class Character : MonoBehaviour
     [SerializeField] private bool noDeath = false;
     [SerializeField] private bool updateMoveAnimations = false;
     [SerializeField] private bool updateTimeData = false;
+    [SerializeField] private bool debugBlock = false;
 
     // Character Variables
     private Entity entity;
@@ -181,7 +182,7 @@ public abstract class Character : MonoBehaviour
             moveset[moveIndex].BlockedSound,
             moveset[moveIndex].AdvantageOnBlock,
             moveset[moveIndex].AdvantageOnHit);
-        GetComponent<Timer>().enable = true;
+        GetComponent<Timer>().StartTimer();
     }
     public void ActivateHitbox() { hitboxes[(int)moveset[moveIndex].HitboxType].Activate(true); }
     public void DeactivateHitbox() { hitboxes[(int)moveset[moveIndex].HitboxType].Activate(false); }
@@ -189,7 +190,7 @@ public abstract class Character : MonoBehaviour
         state = CharacterState.standing;
         anim.SetBool("is_blocking", isBlocking);
         anim.SetTrigger("cancel");
-        GetComponent<Timer>().enable = false;
+        GetComponent<Timer>().StopTimer();
     }
     private IEnumerator WaitAndCancelAnimation(float time) { 
         yield return new WaitForSeconds(time);
@@ -247,7 +248,7 @@ public abstract class Character : MonoBehaviour
         if (stamina <= 0f) stamina = noDeath ? 1f : 0f; // Stamina can't go lower than 0. Can't go lower than 1 if noDeath is activated.
 
         if (hurtCoroutine != null) StopCoroutine(hurtCoroutine);
-        GetComponent<Timer>().enable = true;
+        GetComponent<Timer>().StartTimer();
         hurtCoroutine = StartCoroutine(WaitAndCancelAnimation(disadvantage / 1000f)); 
     }
 

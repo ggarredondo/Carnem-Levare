@@ -2,8 +2,11 @@ using UnityEngine;
 
 public class Timer : MonoBehaviour
 {
-    public bool enable = false;
+    [SerializeField] private bool enable = false;
     [SerializeField] private float currentTime = 0f;
+
+    public void StartTimer() { currentTime = 0f; enable = true; }
+    public void StopTimer() { currentTime = 0f; enable = false; }
 
     private void Update() {
         if (enable) currentTime += Time.deltaTime * 1000f;
