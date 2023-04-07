@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9c101ac1060691f4fb04457c1a701efc, type: 3}
   m_Name: Right Overhand
   m_EditorClassIdentifier: 
-  moveName: Left Jab
+  moveName: Right Overhand
   animation: {fileID: 7400000, guid: 6232cd1526a6c3d40a5382e8b5611702, type: 2}
   animationSpeed: 1
   hitbox: 1
