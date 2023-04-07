@@ -49,6 +49,7 @@ public abstract class Character : MonoBehaviour
     protected float directionSpeed;
 
     [SerializeField] [ReadOnlyField] protected CharacterState state = CharacterState.standing;
+    protected bool block_pressed;
     protected bool isBlocking;
     [SerializeField] [ReadOnlyField] private float disadvantage;
     [SerializeField] [ReadOnlyField] private int hitCounter;
@@ -82,6 +83,8 @@ public abstract class Character : MonoBehaviour
     {
         hurtExceptions = state == CharacterState.ko || noDamage;
         anim.SetBool("can_attack", state == CharacterState.standing);
+        isBlocking = block_pressed && (state == CharacterState.standing || state == CharacterState.blocked);
+        anim.SetBool("is_blocking", isBlocking);
 
         switch (state)
         {
@@ -153,9 +156,8 @@ public abstract class Character : MonoBehaviour
     #region Actions
 
     protected void Movement(Vector2 dir) { directionTarget = dir; }
-    protected void Block(bool performed) { 
-        isBlocking = performed;
-        anim.SetBool("is_blocking", isBlocking && (state == CharacterState.standing || state == CharacterState.blocked));
+    protected void Block(bool performed) {
+        block_pressed = performed;
     }
     protected void AttackN(bool performed, int n) {
         if (moveset.Count > n && state == CharacterState.standing) {
@@ -187,12 +189,11 @@ public abstract class Character : MonoBehaviour
     public void DeactivateHitbox() { hitboxes[(int)moveset[moveIndex].HitboxType].Activate(false); }
     public void CancelAnimation() {
         state = CharacterState.standing;
-        anim.SetBool("is_blocking", isBlocking);
         anim.SetTrigger("cancel");
         GetComponent<Timer>().StopTimer();
     }
-    private IEnumerator WaitAndCancelAnimation(float time) { 
-        yield return new WaitForSeconds(time);
+    private IEnumerator WaitAndCancelAnimation(float ms) { 
+        yield return new WaitForSeconds(ms / 1000f);
         CancelAnimation();
     }
     private void EnterKOState()
@@ -248,7 +249,7 @@ public abstract class Character : MonoBehaviour
 
         if (hurtCoroutine != null) StopCoroutine(hurtCoroutine);
         GetComponent<Timer>().StartTimer();
-        hurtCoroutine = StartCoroutine(WaitAndCancelAnimation(disadvantage / 1000f)); 
+        hurtCoroutine = StartCoroutine(WaitAndCancelAnimation(disadvantage)); 
     }
 
     /// <summary>
