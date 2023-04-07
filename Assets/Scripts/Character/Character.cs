@@ -38,7 +38,6 @@ public abstract class Character : MonoBehaviour
     [SerializeField] private bool noDeath = false;
     [SerializeField] private bool updateMoveAnimations = false;
     [SerializeField] private bool updateTimeData = false;
-    [SerializeField] private bool debugBlock = false;
 
     // Character Variables
     private Entity entity;
