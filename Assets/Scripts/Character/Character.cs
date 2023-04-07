@@ -36,7 +36,8 @@ public abstract class Character : MonoBehaviour
     [Header("Debug")]
     [SerializeField] private bool noDamage = false;
     [SerializeField] private bool noDeath = false;
-    [SerializeField] private bool updateMoveset = false;
+    [SerializeField] private bool updateMoveAnimations = false;
+    [SerializeField] private bool updateTimeData = false;
 
     // Character Variables
     private Entity entity;
@@ -74,7 +75,7 @@ public abstract class Character : MonoBehaviour
     }
     protected virtual void Start()
     {
-        InitializeMoveset();
+        UpdateMovesetAnimations();
     }
 
     protected virtual void Update()
@@ -108,7 +109,8 @@ public abstract class Character : MonoBehaviour
         }
 
         // --------------- DEBUG --------------------
-        if (updateMoveset) { InitializeMoveset(); updateMoveset = false; }
+        if (updateMoveAnimations) { UpdateMovesetAnimations(); updateMoveAnimations = false; }
+        if (updateTimeData) { foreach (Move m in moveset) { m.AssignEvents(); } updateTimeData = false; }
     }
     protected virtual void FixedUpdate()
     {
@@ -138,10 +140,9 @@ public abstract class Character : MonoBehaviour
     /// <summary>
     /// Assigns moves' animations and speed to animator.
     /// </summary>
-    private void InitializeMoveset()
+    private void UpdateMovesetAnimations()
     {
         for (int i = 0; i < moveset.Count; ++i) {
-            moveset[i].AssignEvents();
             UpdateAnimator("AttackClip" + i, moveset[i].Animation);
             anim.SetFloat("attack" + i + "_speed", moveset[i].AnimationSpeed);
         }
