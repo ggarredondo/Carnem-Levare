@@ -141,9 +141,9 @@ public abstract class Character : MonoBehaviour
     private void InitializeMoveset()
     {
         for (int i = 0; i < moveset.Count; ++i) {
+            moveset[i].AssignEvents();
             UpdateAnimator("AttackClip" + i, moveset[i].Animation);
             anim.SetFloat("attack" + i + "_speed", moveset[i].AnimationSpeed);
-            moveset[i].AssignEvents();
         }
     }
 
