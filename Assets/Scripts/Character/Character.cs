@@ -229,7 +229,7 @@ public abstract class Character : MonoBehaviour
     public virtual void Damage(float target, float power, float dmg, bool unblockable, string hitSound, string blockedSound, 
         float disadvantageOnBlock, float disadvantageOnHit)
     {
-        state = isBlocking ? CharacterState.blocked : CharacterState.hurt;
+        state = isBlocking && !unblockable ? CharacterState.blocked : CharacterState.hurt;
 
         // Animation
         anim.SetTrigger("hurt");
