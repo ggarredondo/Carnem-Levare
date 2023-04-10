@@ -66,6 +66,7 @@ public class SelectableMenuManager : MenuManager
     {
         if (gameObject.activeSelf)
         {
+            ControllerRumble.Instance.Rumble(0.1f, 0f, 1f);
             CleanOldButtons(actualActiveMenu);
             int newActualMenu = Mod(actualActiveMenu + 1, selectableButtons.Length);
             SetUpButtons(newActualMenu);
@@ -80,6 +81,7 @@ public class SelectableMenuManager : MenuManager
     {
         if (gameObject.activeSelf)
         {
+            ControllerRumble.Instance.Rumble(0.1f, 1f, 0f);
             CleanOldButtons(actualActiveMenu);
             int newActualMenu = Mod(actualActiveMenu - 1, selectableButtons.Length);
             SetUpButtons(newActualMenu);

@@ -49,7 +49,11 @@ public class AutoSelect : MonoBehaviour, IPointerEnterHandler, ISelectHandler
     /// </summary>
     public void OnSelect(BaseEventData eventData)
     {
-        if(ControlSaver.Instance.controlSchemeIndex == 0) AudioManager.Instance.uiSfxSounds.Play("SelectButton");
+        if (ControlSaver.Instance.controlSchemeIndex == 0)
+        {
+            AudioManager.Instance.uiSfxSounds.Play("SelectButton");
+            ControlSaver.Instance.selected = gameObject;
+        }
     }
 
     /// <summary>

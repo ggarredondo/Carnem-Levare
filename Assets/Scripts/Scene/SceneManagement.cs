@@ -3,6 +3,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.InputSystem;
 using System.Threading.Tasks;
+using UnityEngine.InputSystem.UI;
 
 public class SceneManagement : MonoBehaviour
 {
@@ -11,6 +12,7 @@ public class SceneManagement : MonoBehaviour
     private Animator animator;
     private bool transitionEnd;
     private PlayerInput playerInput;
+    private InputSystemUIInputModule uiInput;
     private AsyncOperation asyncOperation;
     private LoadingScreen loadingScreen;
     private int sceneToLoad;
@@ -36,6 +38,8 @@ public class SceneManagement : MonoBehaviour
             DontDestroyOnLoad(GameObject.FindGameObjectWithTag("MUSIC").transform.parent.gameObject);
             DontDestroyOnLoad(gameObject);
         }
+
+        uiInput = GameObject.FindGameObjectWithTag("UI").GetComponent<InputSystemUIInputModule>();
     }
 
     #region Public
@@ -43,6 +47,8 @@ public class SceneManagement : MonoBehaviour
     public bool TransitionEnd { get { return transitionEnd; } }
 
     public PlayerInput PlayerInput { get { return playerInput; } }
+
+    public InputSystemUIInputModule UiInput { get { return uiInput; } }
 
     /// <summary>
     /// Event that trigger when an scene is loaded

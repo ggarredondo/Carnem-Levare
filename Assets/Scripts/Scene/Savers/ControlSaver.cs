@@ -3,9 +3,12 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.EventSystems;
 using System.IO;
+using System.Collections;
 
 public class ControlSaver : MonoBehaviour
 {
+    private const float GAMEPAD_DETECTION_TIME = 0.2f;
+
     public static ControlSaver Instance { get; private set; }
 
     [System.NonSerialized] public Dictionary<string, string> mapping = new();
@@ -55,14 +58,24 @@ public class ControlSaver : MonoBehaviour
             case "Keyboard&Mouse":
                 controlSchemeIndex = 1;
                 EventSystem.current.SetSelectedGameObject(null);
+                Cursor.visible = true;
                 break;
             case "Gamepad": 
                 controlSchemeIndex = 0;
                 EventSystem.current.SetSelectedGameObject(selected);
+                StartCoroutine(WaitGamepadDetection(GAMEPAD_DETECTION_TIME));
+                Cursor.visible = false;
                 break;
         }
 
         StaticEvent?.Invoke();
+    }
+
+    private  IEnumerator WaitGamepadDetection(float time)
+    {
+        SceneManagement.Instance.UiInput.enabled = false;
+        yield return new WaitForSecondsRealtime(time);
+        SceneManagement.Instance.UiInput.enabled = true;
     }
 
     /// <summary>
