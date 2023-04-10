@@ -236,7 +236,6 @@ public abstract class Character : MonoBehaviour
         anim.SetTrigger("hurt");
         anim.SetFloat("hurt_target", target);
         anim.SetFloat("hurt_power", power);
-        anim.SetBool("unblockable", unblockable);
 
         disadvantage = isBlocking && !unblockable ? disadvantageOnBlock : disadvantageOnHit;
         disadvantage = DisadvantageDecay(disadvantage, hitCounter, comboDecay);
