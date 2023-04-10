@@ -10,7 +10,7 @@ public class ControlSaver : MonoBehaviour
 
     [System.NonSerialized] public Dictionary<string, string> mapping = new();
     [System.NonSerialized] public int controlSchemeIndex;
-    public GameObject selected;
+    [System.NonSerialized] public GameObject selected;
 
     public delegate void StaticEventHandler();
     public StaticEventHandler StaticEvent;

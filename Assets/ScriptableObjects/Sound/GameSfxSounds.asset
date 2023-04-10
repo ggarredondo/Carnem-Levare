@@ -45,7 +45,9 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   soundGroups:
-  - speakersTag: AUDIO_SOURCES
+  - speakersTag:
+    - Player
+    - Enemy
     sounds:
     - name: Whiff_Jab
       clip: {fileID: 8300000, guid: 20a4f733a6b1437478533aa501a59811, type: 3}

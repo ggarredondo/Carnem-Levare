@@ -27,7 +27,8 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   soundGroups:
-  - speakersTag: SFX
+  - speakersTag:
+    - SFX
     sounds:
     - name: Slider
       clip: {fileID: 8300000, guid: 85a922d84d6434047a80a73c2fd9b288, type: 3}

@@ -27,7 +27,8 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   soundGroups:
-  - speakersTag: MUSIC
+  - speakersTag:
+    - MUSIC
     sounds:
     - name: Intro
       clip: {fileID: 8300000, guid: 4de8a92d690abf347a9f0b2123daed4d, type: 3}

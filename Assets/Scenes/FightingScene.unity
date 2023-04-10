@@ -1919,7 +1919,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 62e8d98a5bfefac4fad4596e8b04dcec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  selected: {fileID: 0}
 --- !u!1001 &152464256
 PrefabInstance:
   m_ObjectHideFlags: 0

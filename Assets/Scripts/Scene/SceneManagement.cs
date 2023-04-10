@@ -65,7 +65,6 @@ public class SceneManagement : MonoBehaviour
 
         //Asign the controlsChangedEvent to the actual playerInput
         playerInput.controlsChangedEvent.AddListener(ControlSaver.Instance.OnControlSchemeChanged);
-        ControlSaver.Instance.OnControlSchemeChanged(playerInput);
 
         //Show the opening scene transition
         StartCoroutine(EndLoading());
@@ -119,8 +118,13 @@ public class SceneManagement : MonoBehaviour
             {
                 for (int j = 0; j < allSounds[i].Item1.SoundGroups.GetLength(0); j++)
                 {
-                    GameObject[] speakers = GameObject.FindGameObjectsWithTag(allSounds[i].Item1.SoundGroups[j].speakersTag);
-                    allSounds[i].Item1.SoundGroups[j].speakers = speakers;
+                    allSounds[i].Item1.SoundGroups[j].speakers = new GameObject[allSounds[i].Item1.SoundGroups[j].speakersTag.GetLength(0)];
+
+                    for (int k = 0; k < allSounds[i].Item1.SoundGroups[j].speakersTag.GetLength(0); k++)
+                    {
+                        GameObject speaker = GameObject.FindGameObjectWithTag(allSounds[i].Item1.SoundGroups[j].speakersTag[k]);
+                        allSounds[i].Item1.SoundGroups[j].speakers[k] = speaker;
+                    }
                 }
 
                 allSounds[i].Item1.Initialize();
@@ -135,6 +139,7 @@ public class SceneManagement : MonoBehaviour
     {
         animator.SetBool("endLoading", true);
         yield return new WaitForSecondsRealtime(animator.GetCurrentAnimatorStateInfo(0).length);
+        ControlSaver.Instance.OnControlSchemeChanged(playerInput);
         transitionEnd = true;
     }
 
