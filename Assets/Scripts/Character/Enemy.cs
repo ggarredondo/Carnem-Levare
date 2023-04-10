@@ -27,7 +27,7 @@ public class Enemy : Character
         directionTarget.x = horizontal;
         directionTarget.y = vertical;
 
-        if (state == CharacterState.hurt || state == CharacterState.blocked) blockTimer = 0f;
+        if (state == CharacterState.HURT || state == CharacterState.BLOCKED) blockTimer = 0f;
         Block((blockTimer <= blockMaxTime && lateBlock) || block);
         blockTimer += Time.deltaTime;
         AttackN(singleJab || constantJab, 0);
