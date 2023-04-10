@@ -4,7 +4,7 @@ using System.Linq;
 using System.Collections;
 
 public enum Entity { Player, Enemy }
-public enum CharacterState { standing, attacking, hurt, blocked, ko }
+public enum CharacterState { walking, blocking, attacking, hurt, blocked, ko }
 
 public abstract class Character : MonoBehaviour
 {
@@ -48,9 +48,9 @@ public abstract class Character : MonoBehaviour
     protected Vector2 direction, directionTarget;
     protected float directionSpeed;
 
-    [SerializeField] [ReadOnlyField] protected CharacterState state = CharacterState.standing;
+    [SerializeField] [ReadOnlyField] protected CharacterState state = CharacterState.walking;
     protected bool block_pressed;
-    protected bool isBlocking;
+    private bool canAttack, isBlocking;
     [SerializeField] [ReadOnlyField] private float disadvantage;
     [SerializeField] [ReadOnlyField] private int hitCounter;
     private Coroutine hurtCoroutine;
@@ -82,13 +82,16 @@ public abstract class Character : MonoBehaviour
     protected virtual void Update()
     {
         hurtExceptions = state == CharacterState.ko || noDamage;
-        anim.SetBool("can_attack", state == CharacterState.standing);
-        isBlocking = block_pressed && (state == CharacterState.standing || state == CharacterState.blocked);
+        canAttack = state == CharacterState.walking || state == CharacterState.blocking;
+        anim.SetBool("can_attack", canAttack);
+        isBlocking = state == CharacterState.blocking || state == CharacterState.blocked;
         anim.SetBool("is_blocking", isBlocking);
 
         switch (state)
         {
-            case CharacterState.standing:
+            case CharacterState.walking: case CharacterState.blocking:
+                state = block_pressed ? CharacterState.blocking : CharacterState.walking;
+
                 // Softens movement by establishing the direction as a point that approaches the target direction at *directionSpeed* rate.
                 direction = Vector2.Lerp(direction, directionTarget, directionSpeed * Time.deltaTime);
                 anim.SetFloat("horizontal", direction.x);
@@ -156,11 +159,9 @@ public abstract class Character : MonoBehaviour
     #region Actions
 
     protected void Movement(Vector2 dir) { directionTarget = dir; }
-    protected void Block(bool performed) {
-        block_pressed = performed;
-    }
+    protected void Block(bool performed) { block_pressed = performed; }
     protected void AttackN(bool performed, int n) {
-        if (moveset.Count > n && state == CharacterState.standing) {
+        if (moveset.Count > n && canAttack) {
             moveIndex = n;
             if (performed) anim.SetTrigger("attack" + n);
         }
@@ -188,7 +189,7 @@ public abstract class Character : MonoBehaviour
     public void ActivateHitbox() { hitboxes[(int)moveset[moveIndex].HitboxType].Activate(true); }
     public void DeactivateHitbox() { hitboxes[(int)moveset[moveIndex].HitboxType].Activate(false); }
     public void CancelAnimation() {
-        state = CharacterState.standing;
+        state = block_pressed ? CharacterState.blocking : CharacterState.walking;
         anim.SetTrigger("cancel");
         GetComponent<Timer>().StopTimer();
     }
@@ -281,8 +282,8 @@ public abstract class Character : MonoBehaviour
     /// </summary>
     public Vector2 Direction { get => direction; }
 
-    public bool IsMoving { get => directionTarget.magnitude != 0f && state == CharacterState.standing; }
-    public bool IsIdle { get => directionTarget.magnitude == 0f && state == CharacterState.standing; }
+    public bool IsMoving { get => directionTarget.magnitude != 0f && state == CharacterState.walking; }
+    public bool IsIdle { get => directionTarget.magnitude == 0f && state == CharacterState.walking; }
     public bool IsAttacking { get => state == CharacterState.attacking; }
     public bool IsBlocking { get => isBlocking; }
     public bool IsKO { get => state == CharacterState.ko; }
