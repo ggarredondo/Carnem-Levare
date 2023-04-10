@@ -190,6 +190,7 @@ public abstract class Character : MonoBehaviour
     public void DeactivateHitbox() { hitboxes[(int)moveset[moveIndex].HitboxType].Activate(false); }
     public void CancelAnimation() {
         state = block_pressed ? CharacterState.blocking : CharacterState.walking;
+        anim.SetBool("is_blocking", state == CharacterState.blocking);
         anim.SetTrigger("cancel");
         GetComponent<Timer>().StopTimer();
     }
