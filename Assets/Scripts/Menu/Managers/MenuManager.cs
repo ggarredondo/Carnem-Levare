@@ -29,6 +29,10 @@ public abstract class MenuManager : MonoBehaviour
     protected virtual void Awake()
     {
         actualActiveMenu = firstMenu;
+    }
+
+    private void Start()
+    {
         SetActiveMenuById(actualActiveMenu, true);
     }
 
@@ -102,8 +106,13 @@ public abstract class MenuManager : MonoBehaviour
 
         if (activeFirstButton)
         {
-            EventSystem.current.SetSelectedGameObject(menus[actualActiveMenu].GetFirstButton());
-            AudioManager.Instance?.uiSfxSounds.Stop("SelectButton");
+            ControlSaver.Instance.selected = menus[actualActiveMenu].GetFirstButton();
+
+            if (ControlSaver.Instance.controlSchemeIndex == 0)
+            {
+                EventSystem.current.SetSelectedGameObject(menus[actualActiveMenu].GetFirstButton());
+                AudioManager.Instance?.uiSfxSounds.Stop("SelectButton");
+            }
         }
 
         menus[actualActiveMenu].SetActive(true);

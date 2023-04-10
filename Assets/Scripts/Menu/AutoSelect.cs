@@ -49,7 +49,7 @@ public class AutoSelect : MonoBehaviour, IPointerEnterHandler, ISelectHandler
     /// </summary>
     public void OnSelect(BaseEventData eventData)
     {
-        AudioManager.Instance.uiSfxSounds.Play("SelectButton");
+        if(ControlSaver.Instance.controlSchemeIndex == 0) AudioManager.Instance.uiSfxSounds.Play("SelectButton");
     }
 
     /// <summary>
@@ -57,8 +57,8 @@ public class AutoSelect : MonoBehaviour, IPointerEnterHandler, ISelectHandler
     /// </summary>
     public void OnPointerEnter(PointerEventData eventData)
     {
-        if (mouseCanSelect)
-            GetComponent<Selectable>().Select();
+        //if (mouseCanSelect)
+        //    GetComponent<Selectable>().Select();
     }
 
     #endregion

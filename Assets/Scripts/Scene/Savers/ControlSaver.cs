@@ -1,14 +1,17 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.EventSystems;
 using System.IO;
 
 public class ControlSaver : MonoBehaviour
 {
     public static ControlSaver Instance { get; private set; }
 
-    public Dictionary<string, string> mapping = new();
-    public int controlSchemeIndex;
+    [System.NonSerialized] public Dictionary<string, string> mapping = new();
+    [System.NonSerialized] public int controlSchemeIndex;
+    public GameObject selected;
+
     public delegate void StaticEventHandler();
     public StaticEventHandler StaticEvent;
 
@@ -23,6 +26,7 @@ public class ControlSaver : MonoBehaviour
         if (Instance != null && Instance != this)
         {
             Destroy(this);
+            selected = new GameObject();
         }
         else
         {
@@ -48,8 +52,14 @@ public class ControlSaver : MonoBehaviour
     {
         switch (playerInput.currentControlScheme)
         {
-            case "Keyboard&Mouse": controlSchemeIndex = 1; break;
-            case "Gamepad": controlSchemeIndex = 0; break;
+            case "Keyboard&Mouse":
+                controlSchemeIndex = 1;
+                EventSystem.current.SetSelectedGameObject(null);
+                break;
+            case "Gamepad": 
+                controlSchemeIndex = 0;
+                EventSystem.current.SetSelectedGameObject(selected);
+                break;
         }
 
         StaticEvent?.Invoke();
