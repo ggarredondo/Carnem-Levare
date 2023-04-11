@@ -18,8 +18,10 @@ public class Player : Character
     [Tooltip("Lower stickSpeed to smooth out transitions to idle (when stick is centered)")]
     [SerializeField] private float smoothStickSpeed;
 
-    private void OnEnable()
+    protected override void Start()
     {
+        target = GameObject.FindWithTag("Enemy").transform;
+
         inputReader.MovementEvent += Movement;
         inputReader.BlockEvent += Block;
 
@@ -27,37 +29,22 @@ public class Player : Character
         inputReader.Attack1Event += Attack1;
         inputReader.Attack2Event += Attack2;
         inputReader.Attack3Event += Attack3;
-    }
 
-    protected override void Start()
-    {
-        target = GameObject.FindWithTag("Enemy").transform;
         base.Start();
     }
     protected override void Update()
     {
         // Change movement animation blending speed depending on the situation.
-        if (directionTarget.magnitude == 0f && !anim.GetCurrentAnimatorStateInfo(0).IsName("Block"))
+        if (directionTarget.magnitude == 0f && state == CharacterState.WALKING)
             directionSpeed = smoothStickSpeed;
-        else if (anim.GetCurrentAnimatorStateInfo(0).IsName("Block"))
+        else if (state == CharacterState.BLOCKING)
             directionSpeed = blockingStickSpeed;
-        else if (anim.GetCurrentAnimatorStateInfo(0).IsName("Blocked"))
+        else if (state == CharacterState.BLOCKED)
             directionSpeed = blockedStickSpeed;
         else
             directionSpeed = stickSpeed;
 
         base.Update();
-    }
-
-    private void OnDisable()
-    {
-        inputReader.MovementEvent -= Movement;
-        inputReader.BlockEvent -= Block;
-
-        inputReader.Attack0Event -= Attack0;
-        inputReader.Attack1Event -= Attack1;
-        inputReader.Attack2Event -= Attack2;
-        inputReader.Attack3Event -= Attack3;
     }
 
     #region Actions
