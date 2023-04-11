@@ -32,12 +32,12 @@ public class AutoSelect : MonoBehaviour, IPointerEnterHandler, ISelectHandler
         GetComponent<Button>().colors = colors;
     }
 
-    private void OnEnable()
+    private void Awake()
     {
         if (inputButton) ControlSaver.Instance.StaticEvent += ChangeInputFont;
     }
 
-    private void OnDisable()
+    private void OnDestroy()
     {
         if (inputButton) ControlSaver.Instance.StaticEvent -= ChangeInputFont;
     }
@@ -61,8 +61,8 @@ public class AutoSelect : MonoBehaviour, IPointerEnterHandler, ISelectHandler
     /// </summary>
     public void OnPointerEnter(PointerEventData eventData)
     {
-        //if (mouseCanSelect)
-        //    GetComponent<Selectable>().Select();
+        if (mouseCanSelect)
+            AudioManager.Instance.uiSfxSounds.Play("SelectButton");
     }
 
     #endregion

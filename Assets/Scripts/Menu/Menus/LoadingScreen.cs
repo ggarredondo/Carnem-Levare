@@ -20,12 +20,9 @@ public class LoadingScreen : MonoBehaviour
     private float actualProgress;
     private bool isStopped;
 
-    private void OnEnable(){ ControlSaver.Instance.StaticEvent += ChangeText; }
-
-    private void OnDisable(){ ControlSaver.Instance.StaticEvent -= ChangeText;}
-
     private void Update()
     {
+        ChangeText();
         float xScale = Mathf.Lerp(progressBar.transform.localScale.x, actualProgress, progressBarSpeed * Time.deltaTime);
         progressBar.transform.localScale = new Vector3(xScale, progressBar.transform.localScale.y, progressBar.transform.localScale.z);
 
@@ -63,6 +60,7 @@ public class LoadingScreen : MonoBehaviour
 
         if (progress >= 0.9f)
         {
+            ChangeText();
             percentage.text = "Press " + continueAction + " to continue";
             loadingTextAnim.enabled = true;
 
