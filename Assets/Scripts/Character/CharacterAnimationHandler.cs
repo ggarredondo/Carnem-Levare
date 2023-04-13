@@ -37,10 +37,14 @@ public class CharacterAnimationHandler : MonoBehaviour
     private void Update()
     {
         anim.SetBool("can_attack", logic.CanAttack);
-        anim.SetBool("is_blocking", logic.IsBlocking);
-        anim.SetBool("ko", logic.State == CharacterState.KO);
         anim.SetFloat("horizontal", logic.Direction.x);
         anim.SetFloat("vertical", logic.Direction.y);
+
+        anim.SetBool("STATE_WALKING", logic.State == CharacterState.WALKING);
+        anim.SetBool("STATE_BLOCKING", logic.State == CharacterState.BLOCKING);
+        anim.SetBool("STATE_HURT", logic.State == CharacterState.HURT);
+        anim.SetBool("STATE_BLOCKED", logic.State == CharacterState.BLOCKED);
+        anim.SetBool("STATE_KO", logic.State == CharacterState.KO);
     }
 
     #region AnimatorOverride

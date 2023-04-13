@@ -207,8 +207,8 @@ AnimatorStateTransition:
   - m_ConditionMode: 1
     m_ConditionEvent: cancel
     m_EventTreshold: 0
-  - m_ConditionMode: 2
-    m_ConditionEvent: is_blocking
+  - m_ConditionMode: 1
+    m_ConditionEvent: STATE_WALKING
     m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 3424587908501557869}
@@ -550,7 +550,7 @@ AnimatorStateTransition:
     m_ConditionEvent: cancel
     m_EventTreshold: 0
   - m_ConditionMode: 1
-    m_ConditionEvent: is_blocking
+    m_ConditionEvent: STATE_BLOCKING
     m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: -8277019391944573774}
@@ -652,8 +652,8 @@ AnimatorStateTransition:
   m_PrefabAsset: {fileID: 0}
   m_Name: 
   m_Conditions:
-  - m_ConditionMode: 2
-    m_ConditionEvent: ko
+  - m_ConditionMode: 1
+    m_ConditionEvent: STATE_HURT
     m_EventTreshold: 0
   - m_ConditionMode: 1
     m_ConditionEvent: hurt
@@ -1831,7 +1831,7 @@ AnimatorStateTransition:
   m_Name: 
   m_Conditions:
   - m_ConditionMode: 1
-    m_ConditionEvent: ko
+    m_ConditionEvent: STATE_KO
     m_EventTreshold: 0
   - m_ConditionMode: 1
     m_ConditionEvent: hurt
@@ -1898,7 +1898,7 @@ AnimatorStateTransition:
   m_Name: 
   m_Conditions:
   - m_ConditionMode: 1
-    m_ConditionEvent: is_blocking
+    m_ConditionEvent: STATE_BLOCKING
     m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: -8277019391944573774}
@@ -2274,7 +2274,31 @@ AnimatorController:
   m_Name: Enemy
   serializedVersion: 5
   m_AnimatorParameters:
-  - m_Name: ko
+  - m_Name: STATE_WALKING
+    m_Type: 4
+    m_DefaultFloat: 0
+    m_DefaultInt: 0
+    m_DefaultBool: 0
+    m_Controller: {fileID: 0}
+  - m_Name: STATE_BLOCKING
+    m_Type: 4
+    m_DefaultFloat: 0
+    m_DefaultInt: 0
+    m_DefaultBool: 0
+    m_Controller: {fileID: 0}
+  - m_Name: STATE_HURT
+    m_Type: 4
+    m_DefaultFloat: 0
+    m_DefaultInt: 0
+    m_DefaultBool: 0
+    m_Controller: {fileID: 0}
+  - m_Name: STATE_BLOCKED
+    m_Type: 4
+    m_DefaultFloat: 0
+    m_DefaultInt: 0
+    m_DefaultBool: 0
+    m_Controller: {fileID: 0}
+  - m_Name: STATE_KO
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
@@ -2306,12 +2330,6 @@ AnimatorController:
     m_Controller: {fileID: 0}
   - m_Name: hurt_power
     m_Type: 1
-    m_DefaultFloat: 0
-    m_DefaultInt: 0
-    m_DefaultBool: 0
-    m_Controller: {fileID: 0}
-  - m_Name: is_blocking
-    m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
@@ -2592,7 +2610,7 @@ AnimatorStateTransition:
   m_Name: 
   m_Conditions:
   - m_ConditionMode: 1
-    m_ConditionEvent: is_blocking
+    m_ConditionEvent: STATE_BLOCKED
     m_EventTreshold: 0
   - m_ConditionMode: 1
     m_ConditionEvent: hurt
@@ -3650,8 +3668,8 @@ AnimatorStateTransition:
   m_PrefabAsset: {fileID: 0}
   m_Name: 
   m_Conditions:
-  - m_ConditionMode: 2
-    m_ConditionEvent: is_blocking
+  - m_ConditionMode: 1
+    m_ConditionEvent: STATE_WALKING
     m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 3424587908501557869}
@@ -4193,7 +4211,7 @@ AnimatorStateTransition:
   m_Name: 
   m_Conditions:
   - m_ConditionMode: 1
-    m_ConditionEvent: ko
+    m_ConditionEvent: STATE_KO
     m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: -5930375091127613558}

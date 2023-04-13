@@ -54483,28 +54483,28 @@ AnimationClip:
   m_HasMotionFloatCurves: 1
   m_Events:
   - time: 0
-    functionName: StartAttack
+    functionName: AttackStart
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
   - time: 0.2
-    functionName: ActivateHitbox
+    functionName: AttackActive
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
   - time: 0.25
-    functionName: DeactivateHitbox
+    functionName: AttackRecovery
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
   - time: 0.55
-    functionName: CancelAnimation
+    functionName: AnimationCancel
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
