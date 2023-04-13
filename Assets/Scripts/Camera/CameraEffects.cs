@@ -20,8 +20,8 @@ public class CameraEffects : MonoBehaviour
     [SerializeField] private CameraMovement[] cameraEffects;
 
     //PRIVATE
-    private Player player;
-    private Enemy enemy;
+    private PlayerLogic player;
+    private EnemyLogic enemy;
     private Transform[] alternativeTargets;
 
     private bool[] cameraConditions;
@@ -43,8 +43,8 @@ public class CameraEffects : MonoBehaviour
 
     private void Start()
     {
-        player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
-        enemy = GameObject.FindGameObjectWithTag("Enemy").GetComponent<Enemy>();
+        player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerLogic>();
+        enemy = GameObject.FindGameObjectWithTag("Enemy").GetComponent<EnemyLogic>();
 
         foreach(CameraMovement movement in cameraEffects)
         {
@@ -86,7 +86,7 @@ public class CameraEffects : MonoBehaviour
                     break;
 
                 case TypeCameraMovement.LINEAL_MOVE:
-                    cameraConditions[(int)TypeCameraMovement.LINEAL_MOVE] = player.IsBlocking;
+                    cameraConditions[(int)TypeCameraMovement.LINEAL_MOVE] = player.IsBlockPressed;
                     break;
 
                 case TypeCameraMovement.NOISE:
@@ -143,7 +143,7 @@ public class CameraEffects : MonoBehaviour
         if (Mathf.Abs(player.Direction.x) > 0.1f && player.IsMoving && !cameraConditions[1]) 
             orbitalTransposer.m_XAxis.Value += Mathf.Sign(player.Direction.x) * orbitalValue * Time.deltaTime;
 
-        if (player.IsBlocking) orbitalTransposer.m_XAxis.Value = Mathf.Lerp(orbitalTransposer.m_XAxis.Value, 0, orbitalRecovery * Time.deltaTime);
+        if (player.IsBlockPressed) orbitalTransposer.m_XAxis.Value = Mathf.Lerp(orbitalTransposer.m_XAxis.Value, 0, orbitalRecovery * Time.deltaTime);
 
         orbitalTransposer.m_RecenterToTargetHeading.m_enabled = Mathf.Abs(player.Direction.x) > 0.1f && player.IsMoving && !cameraConditions[1];
     }
@@ -162,7 +162,7 @@ public class CameraEffects : MonoBehaviour
     /// </summary>
     private void TargetUpdate()
     {
-        if (!player.IsBlocking || player.IsAttacking) AsignAlternativeTarget(0);
+        if (!player.IsBlockPressed || player.IsAttacking) AsignAlternativeTarget(0);
         if(!enemy.IsMoving) AsignAlternativeTarget(1);
 
         //Debug Targets with Spheres

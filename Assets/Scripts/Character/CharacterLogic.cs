@@ -5,7 +5,7 @@ using UnityEngine.Events;
 public enum Entity { Player, Enemy }
 public enum CharacterState { WALKING, BLOCKING, ATTACKING, HURT, BLOCKED, KO }
 
-public abstract class Character : MonoBehaviour
+public abstract class CharacterLogic : MonoBehaviour
 {
     // Character Attributes
     [Header("Tracking values")]
@@ -38,20 +38,20 @@ public abstract class Character : MonoBehaviour
 
     // Character Variables
     private Entity entity;
-    private CharacterAnimationHandler animationHandler;
+    private CharacterAnimation animationHandler;
     private Rigidbody rb;
     protected Vector2 direction, directionTarget;
     protected float directionSpeed;
 
     [SerializeField] [ReadOnlyField] protected CharacterState state = CharacterState.WALKING;
-    private bool block_pressed, isBlocking, canAttack;
-    [SerializeField] [ReadOnlyField] private float disadvantage;
-    private float hurtTarget, hurtPower;
-    [SerializeField] [ReadOnlyField] private int hitCounter;
+    private bool blockPressed, isBlocking, canAttack;
     private int moveIndex = 0;
     private bool hurtExceptions;
 
-    public event UnityAction OnAttackPerformed, OnDamage;
+    [SerializeField] [ReadOnlyField] private float disadvantage;
+    [SerializeField] [ReadOnlyField] private int hitCounter;
+    public event UnityAction OnAttackPerformed;
+    private float hurtTarget, hurtPower;
 
     protected virtual void Awake()
     {
@@ -63,8 +63,8 @@ public abstract class Character : MonoBehaviour
         rb.drag = drag;
 
         // Initialize Character Variables
-        entity = this is Player ? Entity.Player : Entity.Enemy;
-        animationHandler = GetComponent<CharacterAnimationHandler>();
+        entity = this is PlayerLogic ? Entity.Player : Entity.Enemy;
+        animationHandler = GetComponent<CharacterAnimation>();
         direction = Vector2.zero;
         directionTarget = Vector2.zero;
     }
@@ -79,13 +79,12 @@ public abstract class Character : MonoBehaviour
     protected virtual void Update()
     {
         hurtExceptions = state == CharacterState.KO || noDamage;
-        isBlocking = state == CharacterState.BLOCKING || state == CharacterState.BLOCKED;
         canAttack = state == CharacterState.WALKING || state == CharacterState.BLOCKING;
 
         switch (state)
         {
             case CharacterState.WALKING: case CharacterState.BLOCKING:
-                state = block_pressed ? CharacterState.BLOCKING : CharacterState.WALKING;
+                state = blockPressed ? CharacterState.BLOCKING : CharacterState.WALKING;
 
                 // Softens movement by establishing the direction as a point that approaches the target direction at *directionSpeed* rate.
                 direction = Vector2.Lerp(direction, directionTarget, directionSpeed * Time.deltaTime);
@@ -120,8 +119,7 @@ public abstract class Character : MonoBehaviour
     #region Actions
 
     protected void Movement(Vector2 dir) { directionTarget = dir; }
-    protected void Block(bool performed) { block_pressed = performed; }
-
+    protected void Block(bool performed) { blockPressed = performed; }
     protected void AttackN(bool performed, int n) {
         if (moveset.Count > n && canAttack) {
             moveIndex = n;
@@ -136,7 +134,6 @@ public abstract class Character : MonoBehaviour
     private void InitializeAttack()
     {
         state = CharacterState.ATTACKING;
-        AudioManager.Instance.gameSfxSounds.Play(moveset[moveIndex].WhiffSound, (int)entity); // Play sound.
         // Assign move data to hitbox. Must be done this way because hitboxes are reusable.
         hitboxes[(int)moveset[moveIndex].HitboxType].Set(moveset[moveIndex].Power, 
             CalculateAttackDamage(moveset[moveIndex].BaseDamage),
@@ -149,7 +146,7 @@ public abstract class Character : MonoBehaviour
     private void ActivateHitbox() { hitboxes[(int)moveset[moveIndex].HitboxType].Activate(true); }
     private void DeactivateHitbox() { hitboxes[(int)moveset[moveIndex].HitboxType].Activate(false); }
     private void ResetState() {
-        state = block_pressed ? CharacterState.BLOCKING : CharacterState.WALKING;
+        state = blockPressed ? CharacterState.BLOCKING : CharacterState.WALKING;
     }
 
     /// <summary>
@@ -167,32 +164,21 @@ public abstract class Character : MonoBehaviour
     /// <summary>
     /// Damage character, reducing their stamina and playing a hurt animation.
     /// </summary>
-    /// <param name="target">Where were they damaged?</param>
-    /// <param name="power">Attack's power.</param>
     /// <param name="dmg">Damage taken.</param>
     /// <param name="unblockable">Can the attack be blocked?</param>
-    /// <param name="hitSound">Sound if the attack hits character directly.</param>
-    /// <param name="blockedSound">Sound if the attack hits character while blocking.</param>
     /// <param name="disadvantageOnBlock">How much time (ms) does the character take in blocked animation.</param>
     /// <param name="disadvantageOnHit">How much time (ms) does the character take in hit animation.</param>
-    public virtual void Damage(float target, float power, float dmg, bool unblockable, string hitSound, string blockedSound, 
-        float disadvantageOnBlock, float disadvantageOnHit)
+    public virtual void Damage(float dmg, bool unblockable, float disadvantageOnBlock, float disadvantageOnHit)
     {
-        hurtTarget = target;
-        hurtPower = power;
-        state = isBlocking && !unblockable ? CharacterState.BLOCKED : CharacterState.HURT;
+        isBlocking = (state == CharacterState.BLOCKING || state == CharacterState.BLOCKED) && !unblockable;
+        state = isBlocking ? CharacterState.BLOCKED : CharacterState.HURT;
 
-        disadvantage = isBlocking && !unblockable ? disadvantageOnBlock : disadvantageOnHit;
+        disadvantage = isBlocking ? disadvantageOnBlock : disadvantageOnHit;
         disadvantage = DisadvantageDecay(disadvantage, hitCounter, comboDecay);
         hitCounter += 1;
 
-        stamina -= isBlocking && !unblockable ? Mathf.Round(dmg * blockingModifier) : dmg; // Take less damage if blocking.
+        stamina -= isBlocking ? Mathf.Round(dmg * blockingModifier) : dmg; // Take less damage if blocking.
         if (stamina <= 0f) stamina = noDeath ? 1f : 0f; // Stamina can't go lower than 0. Can't go lower than 1 if noDeath is activated.
-
-        OnDamage.Invoke();
-
-        // Sound
-        AudioManager.Instance.gameSfxSounds.Play(isBlocking && !unblockable ? blockedSound : hitSound, (int) entity); 
     }
 
     /// <summary>
@@ -206,6 +192,7 @@ public abstract class Character : MonoBehaviour
 
     #region PublicMethods
 
+    public Entity Entity { get => entity; }
     public CharacterState State { get => state; }
 
     public int currentIndex { get => moveIndex; }
@@ -234,8 +221,9 @@ public abstract class Character : MonoBehaviour
     public bool IsIdle { get => directionTarget.magnitude == 0f && (state == CharacterState.WALKING || state == CharacterState.BLOCKING); }
     public bool CanAttack { get => canAttack; }
     public bool IsAttacking { get => state == CharacterState.ATTACKING; }
-    public bool IsBlocking { get => isBlocking; }
     public bool IsKO { get => state == CharacterState.KO; }
+    public bool IsBlockPressed { get => blockPressed; }
+    public bool IsBlocking { get => isBlocking; }
     public bool HurtExceptions { get => hurtExceptions; }
 
     #endregion

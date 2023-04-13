@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class Player : Character
+public class PlayerLogic : CharacterLogic
 {
     [Header("Player-specific Parameters")]
 

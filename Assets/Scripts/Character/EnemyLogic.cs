@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class Enemy : Character
+public class EnemyLogic : CharacterLogic
 {
     [Header("Enemy-specific Parameters")]
     [SerializeField] private float enemyDirectionSpeed = 1f;

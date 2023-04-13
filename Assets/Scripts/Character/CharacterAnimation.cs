@@ -4,10 +4,10 @@ using UnityEngine;
 using UnityEngine.Events;
 using System.Collections;
 
-public class CharacterAnimationHandler : MonoBehaviour
+public class CharacterAnimation : MonoBehaviour
 {
-    private Character logic;
-    private Animator anim;
+    private CharacterLogic logicHandler;
+    private Animator animator;
     private AnimatorOverrideController animOverride;
     private AnimationClip[] animatorDefaults;
 
@@ -15,36 +15,34 @@ public class CharacterAnimationHandler : MonoBehaviour
 
     private void Awake()
     {
-        logic = GetComponent<Character>();
-        anim = GetComponent<Animator>();
-        animatorDefaults = anim.runtimeAnimatorController.animationClips;
-        animOverride = new AnimatorOverrideController(anim.runtimeAnimatorController);
+        logicHandler = GetComponent<CharacterLogic>();
+        animator = GetComponent<Animator>();
+        animatorDefaults = animator.runtimeAnimatorController.animationClips;
+        animOverride = new AnimatorOverrideController(animator.runtimeAnimatorController);
     }
     private void Start()
     {
         UpdateMovesetAnimations();
-
-        logic.OnAttackPerformed += TriggerAttackAnimation;
-        logic.OnDamage += TriggerHurtAnimation;
+        logicHandler.OnAttackPerformed += TriggerAttackAnimation;
     }
 
     private void OnValidate()
     {
         if (updateMoveAnimations) { UpdateMovesetAnimations(); updateMoveAnimations = false; }
-        if (updateMoveTimeData) { foreach (Move m in logic.Moveset) { m.AssignEvents(); } updateMoveTimeData = false; }
+        if (updateMoveTimeData) { foreach (Move m in logicHandler.Moveset) { m.AssignEvents(); } updateMoveTimeData = false; }
     }
 
     private void Update()
     {
-        anim.SetBool("can_attack", logic.CanAttack);
-        anim.SetFloat("horizontal", logic.Direction.x);
-        anim.SetFloat("vertical", logic.Direction.y);
+        animator.SetBool("can_attack", logicHandler.CanAttack);
+        animator.SetFloat("horizontal", logicHandler.Direction.x);
+        animator.SetFloat("vertical", logicHandler.Direction.y);
 
-        anim.SetBool("STATE_WALKING", logic.State == CharacterState.WALKING);
-        anim.SetBool("STATE_BLOCKING", logic.State == CharacterState.BLOCKING);
-        anim.SetBool("STATE_HURT", logic.State == CharacterState.HURT);
-        anim.SetBool("STATE_BLOCKED", logic.State == CharacterState.BLOCKED);
-        anim.SetBool("STATE_KO", logic.State == CharacterState.KO);
+        animator.SetBool("STATE_WALKING", logicHandler.State == CharacterState.WALKING);
+        animator.SetBool("STATE_BLOCKING", logicHandler.State == CharacterState.BLOCKING);
+        animator.SetBool("STATE_HURT", logicHandler.State == CharacterState.HURT);
+        animator.SetBool("STATE_BLOCKED", logicHandler.State == CharacterState.BLOCKED);
+        animator.SetBool("STATE_KO", logicHandler.State == CharacterState.KO);
     }
 
     #region AnimatorOverride
@@ -59,7 +57,7 @@ public class CharacterAnimationHandler : MonoBehaviour
         List<KeyValuePair<AnimationClip, AnimationClip>> overrides = new List<KeyValuePair<AnimationClip, AnimationClip>>();
         overrides.Add(new KeyValuePair<AnimationClip, AnimationClip>(animatorDefaults.Where(clip => clip.name == og_clip).SingleOrDefault(), new_clip));
         animOverride.ApplyOverrides(overrides);
-        anim.runtimeAnimatorController = animOverride;
+        animator.runtimeAnimatorController = animOverride;
     }
 
     /// <summary>
@@ -67,10 +65,10 @@ public class CharacterAnimationHandler : MonoBehaviour
     /// </summary>
     private void UpdateMovesetAnimations()
     {
-        for (int i = 0; i < logic.Moveset.Count; ++i)
+        for (int i = 0; i < logicHandler.Moveset.Count; ++i)
         {
-            UpdateAnimator("AttackClip" + i, logic.Moveset[i].Animation);
-            anim.SetFloat("attack" + i + "_speed", logic.Moveset[i].AnimationSpeed);
+            UpdateAnimator("AttackClip" + i, logicHandler.Moveset[i].Animation);
+            animator.SetFloat("attack" + i + "_speed", logicHandler.Moveset[i].AnimationSpeed);
         }
     }
 
@@ -83,7 +81,7 @@ public class CharacterAnimationHandler : MonoBehaviour
 
     public void AttackStart()
     {
-        anim.ResetTrigger("cancel");
+        animator.ResetTrigger("cancel");
         OnAttackStart.Invoke();
     }
     public void AttackActive()
@@ -97,7 +95,7 @@ public class CharacterAnimationHandler : MonoBehaviour
     public void AnimationCancel()
     {
         OnAnimationCancel.Invoke();
-        anim.SetTrigger("cancel");
+        animator.SetTrigger("cancel");
     }
     private IEnumerator WaitAndCancelAnimation(float ms)
     {
@@ -108,14 +106,16 @@ public class CharacterAnimationHandler : MonoBehaviour
     #endregion
 
     #region AnimationTriggers
-    public void TriggerAttackAnimation() { anim.SetTrigger("attack" + logic.currentIndex); }
-    public void TriggerHurtAnimation()
+
+    public void TriggerAttackAnimation() { animator.SetTrigger("attack" + logicHandler.currentIndex); }
+    public void TriggerHurtAnimation(float target, float power)
     {
-        anim.SetTrigger("hurt");
-        anim.SetFloat("hurt_target", logic.HurtTarget);
-        anim.SetFloat("hurt_power", logic.HurtPower);
+        animator.SetTrigger("hurt");
+        animator.SetFloat("hurt_target", target);
+        animator.SetFloat("hurt_power", power);
         StopAllCoroutines();
-        StartCoroutine(WaitAndCancelAnimation(logic.Disadvantage));
+        StartCoroutine(WaitAndCancelAnimation(logicHandler.Disadvantage));
     }
+
     #endregion
 }
