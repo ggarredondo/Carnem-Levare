@@ -51,7 +51,6 @@ public abstract class CharacterLogic : MonoBehaviour
     [SerializeField] [ReadOnlyField] private float disadvantage;
     [SerializeField] [ReadOnlyField] private int hitCounter;
     public event UnityAction OnAttackPerformed;
-    private float hurtTarget, hurtPower;
 
     protected virtual void Awake()
     {
@@ -204,8 +203,6 @@ public abstract class CharacterLogic : MonoBehaviour
     public float MaxStamina { get => maxStamina; }
 
     public float Disadvantage { get => disadvantage; }
-    public float HurtTarget { get => hurtTarget; }
-    public float HurtPower { get => hurtPower; }
 
     /// <summary>
     /// Returns character's current intended direction.

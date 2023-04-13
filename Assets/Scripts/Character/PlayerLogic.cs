@@ -4,7 +4,7 @@ public class PlayerLogic : CharacterLogic
 {
     [Header("Player-specific Parameters")]
 
-    [SerializeField] protected InputReader inputReader;
+    [SerializeField] private InputReader inputReader;
 
     [Tooltip("How quickly player animations follows stick movement")]
     [SerializeField] private float stickSpeed;
