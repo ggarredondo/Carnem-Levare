@@ -97,7 +97,6 @@ public class CharacterAnimationHandler : MonoBehaviour
     }
     private IEnumerator WaitAndCancelAnimation(float ms)
     {
-        StopAllCoroutines();
         yield return new WaitForSeconds(ms / 1000f);
         AnimationCancel();
     }
@@ -111,6 +110,7 @@ public class CharacterAnimationHandler : MonoBehaviour
         anim.SetTrigger("hurt");
         anim.SetFloat("hurt_target", logic.HurtTarget);
         anim.SetFloat("hurt_power", logic.HurtPower);
+        StopAllCoroutines();
         StartCoroutine(WaitAndCancelAnimation(logic.Disadvantage));
     }
     #endregion
