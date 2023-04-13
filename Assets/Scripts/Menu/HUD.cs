@@ -6,15 +6,15 @@ public enum Axis { x = 0, y = 1, z = 2 }
 
 public class HUD : MonoBehaviour
 {
-    private Character player, enemy;
+    private CharacterLogic player, enemy;
     [SerializeField] private Image playerInstant, playerAnimated, enemyInstant, enemyAnimated;
     [SerializeField] private TMP_Text playerNumber, enemyNumber;
     [Tooltip("Speed at which stamina bars update")] [SerializeField] private float updateSpeed = 5f;
     private float currentP, currentE;
 
     private void Start() {
-        player = GameObject.FindGameObjectWithTag("Player").GetComponent<Character>();
-        enemy = GameObject.FindGameObjectWithTag("Enemy").GetComponent<Character>();
+        player = GameObject.FindGameObjectWithTag("Player").GetComponent<CharacterLogic>();
+        enemy = GameObject.FindGameObjectWithTag("Enemy").GetComponent<CharacterLogic>();
         currentP = player.MaxStamina;
         currentE = enemy.MaxStamina;
     }
@@ -29,7 +29,7 @@ public class HUD : MonoBehaviour
         bar.transform.localScale = newScale;
     }
 
-    private void UpdateCharacterBar(Character charac, ref float current, Image instant, Image animated, TMP_Text number) {
+    private void UpdateCharacterBar(CharacterLogic charac, ref float current, Image instant, Image animated, TMP_Text number) {
         current = Mathf.Lerp(current, charac.Stamina, updateSpeed * Time.deltaTime);
         UpdateBar(current, charac.MaxStamina, animated, Axis.x);
         UpdateBar(charac.Stamina, charac.MaxStamina, instant, Axis.x);

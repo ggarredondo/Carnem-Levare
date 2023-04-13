@@ -90,19 +90,19 @@ public class Move : ScriptableObject
     {
         #if UNITY_EDITOR
         AnimationEvent startAttackEvent = new AnimationEvent();
-        startAttackEvent.functionName = "StartAttack";
+        startAttackEvent.functionName = "AttackStart";
         startAttackEvent.time = 0f;
 
         AnimationEvent hitboxActivationEvent = new AnimationEvent();
-        hitboxActivationEvent.functionName = "ActivateHitbox";
+        hitboxActivationEvent.functionName = "AttackActive";
         hitboxActivationEvent.time = startUp / 1000f;
 
         AnimationEvent hitboxDeactivationEvent = new AnimationEvent();
-        hitboxDeactivationEvent.functionName = "DeactivateHitbox";
+        hitboxDeactivationEvent.functionName = "AttackRecovery";
         hitboxDeactivationEvent.time = (startUp + active) / 1000f;
 
         AnimationEvent cancelAnimationEvent = new AnimationEvent();
-        cancelAnimationEvent.functionName = "CancelAnimation";
+        cancelAnimationEvent.functionName = "AnimationCancel";
         cancelAnimationEvent.time = (startUp + active + recovery) / 1000f;
 
         AnimationEvent[] events = { startAttackEvent, hitboxActivationEvent, hitboxDeactivationEvent, cancelAnimationEvent };
