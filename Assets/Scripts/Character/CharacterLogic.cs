@@ -82,9 +82,9 @@ public abstract class CharacterLogic : MonoBehaviour
 
         switch (state)
         {
-            case CharacterState.WALKING: case CharacterState.BLOCKING:
+            case CharacterState.WALKING: 
+            case CharacterState.BLOCKING:
                 state = blockPressed ? CharacterState.BLOCKING : CharacterState.WALKING;
-
                 // Softens movement by establishing the direction as a point that approaches the target direction at *directionSpeed* rate.
                 direction = Vector2.Lerp(direction, directionTarget, directionSpeed * Time.deltaTime);
 
@@ -92,15 +92,10 @@ public abstract class CharacterLogic : MonoBehaviour
                 if (stamina <= 0) state = CharacterState.KO;
                 break;
 
+            case CharacterState.ATTACKING:
             case CharacterState.HURT:
                 if (stamina <= 0) state = CharacterState.KO;
-                break;
-
             case CharacterState.BLOCKED:
-                if (stamina <= 0) state = CharacterState.KO;
-                break;
-
-            case CharacterState.KO:
                 if (stamina <= 0) state = CharacterState.KO;
                 break;
         }
