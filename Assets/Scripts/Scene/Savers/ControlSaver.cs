@@ -5,11 +5,9 @@ using UnityEngine.EventSystems;
 using System.IO;
 using System.Collections;
 
-public class ControlSaver : MonoBehaviour
+public class ControlSaver : Singleton<ControlSaver>
 {
     private const float GAMEPAD_DETECTION_TIME = 0.2f;
-
-    public static ControlSaver Instance { get; private set; }
 
     [System.NonSerialized] public Dictionary<string, string> mapping = new();
     [System.NonSerialized] public int controlSchemeIndex;
@@ -20,26 +18,11 @@ public class ControlSaver : MonoBehaviour
 
     [System.NonSerialized] public bool rumble;
 
-    /// <summary>
-    /// Read the mapping between the ui and the control fonts
-    /// </summary>
-    private void Awake()
-    {
-        // If there is an instance, and it's not me, delete myself.
-        if (Instance != null && Instance != this)
-        {
-            Destroy(this);
-            selected = new GameObject();
-        }
-        else
-        {
-            Instance = this;
-            ReadMappingFile();
-        }
-    }
-
     private void Start()
     {
+        selected = new GameObject();
+        ReadMappingFile();
+
         if (PlayerPrefs.GetString("rebinds") != null)
             LoadUserRebinds(SceneManagement.Instance.PlayerInput);
 

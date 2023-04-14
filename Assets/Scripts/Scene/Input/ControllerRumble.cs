@@ -2,25 +2,11 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class ControllerRumble : MonoBehaviour
+public class ControllerRumble : Singleton<ControllerRumble>
 {
-    public static ControllerRumble Instance { get; private set; }
     private Gamepad gamepad;
     private bool isRumbling;
     private bool canRumble;
-
-    private void Awake()
-    {
-        // If there is an instance, and it's not me, delete myself.
-        if (Instance != null && Instance != this)
-        {
-            Destroy(this);
-        }
-        else
-        {
-            Instance = this;
-        }
-    }
 
     private void Start()
     {

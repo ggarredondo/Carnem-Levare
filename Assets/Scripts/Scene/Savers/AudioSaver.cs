@@ -1,29 +1,14 @@
 using UnityEngine;
 using UnityEngine.Audio;
 
-public class AudioSaver : MonoBehaviour
-{
-    public static AudioSaver Instance { get; private set; }
-
+public class AudioSaver : Singleton<AudioSaver>
+{ 
     [SerializeField] private AudioMixer audioMixer;
 
     [System.NonSerialized] public float globalVolume = 1f;
     [System.NonSerialized] public float musicVolume = 1f;
     [System.NonSerialized] public float sfxVolume = 1f;
     [System.NonSerialized] public bool mute = false;
-
-    private void Awake()
-    {
-        // If there is an instance, and it's not me, delete myself.
-        if (Instance != null && Instance != this)
-        {
-            Destroy(this);
-        }
-        else
-        {
-            Instance = this;
-        }
-    }
 
     #region Public
 

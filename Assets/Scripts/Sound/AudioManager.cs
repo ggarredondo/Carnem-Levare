@@ -1,30 +1,13 @@
 using System.Collections;
 using UnityEngine;
 
-public class AudioManager : MonoBehaviour
+public class AudioManager : Singleton<AudioManager>
 {
-    public static AudioManager Instance { get; private set; }
-
     public Sounds uiSfxSounds;
     public Sounds gameSfxSounds;
     public Sounds musicSounds;
 
     private bool isPlayingSlider;
-
-    private void Awake()
-    {
-        // If there is an instance, and it's not me, delete myself.
-        if (Instance != null && Instance != this)
-        {
-            Destroy(this);
-        }
-        else
-        {
-            Instance = this;
-        }
-    }
-
-    #region SpecialSounds
 
     public void PlayMusic(string name)
     {
@@ -66,6 +49,4 @@ public class AudioManager : MonoBehaviour
         yield return new WaitForSecondsRealtime(uiSfxSounds.Length("Slider") / 6);
         isPlayingSlider = false;
     }
-
-    #endregion
 }

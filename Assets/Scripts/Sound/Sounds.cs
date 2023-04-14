@@ -12,7 +12,6 @@ public class Sounds : ScriptableObject
     [Header("3D Sound")]
     [SerializeField] private bool threeD;
 
-    // Define the 3D sound settings
     [ConditionalField("threeD")] [Range(0, 5)] [SerializeField] private float dopplerLevel = 1f;
     [ConditionalField("threeD")] [Range(0, 360)] [SerializeField] private float spread = 0f;
     [ConditionalField("threeD")] [SerializeField] private AudioRolloffMode volumeRolloff = AudioRolloffMode.Logarithmic;

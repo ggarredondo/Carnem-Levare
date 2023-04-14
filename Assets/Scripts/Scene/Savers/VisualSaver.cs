@@ -1,28 +1,12 @@
 using UnityEngine;
 
-public class VisualSaver : MonoBehaviour
+public class VisualSaver : Singleton<VisualSaver>
 {
-    public static VisualSaver Instance { get; private set; }
 
     [System.NonSerialized] public bool fullscreen;
     [System.NonSerialized] public int vsync;
     [System.NonSerialized] public string resolution;
     [System.NonSerialized] public int quality;
-
-    private void Awake()
-    {
-        // If there is an instance, and it's not me, delete myself.
-        if (Instance != null && Instance != this)
-        {
-            Destroy(this);
-        }
-        else
-        {
-            Instance = this;
-        }
-    }
-
-    #region Public
 
     /// <summary>
     /// Save and apply the changes made in the visual menu
@@ -63,6 +47,4 @@ public class VisualSaver : MonoBehaviour
 
         ApplyUI();
     }
-
-    #endregion
 }

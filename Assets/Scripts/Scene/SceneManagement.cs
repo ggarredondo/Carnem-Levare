@@ -5,10 +5,8 @@ using UnityEngine.InputSystem;
 using System.Threading.Tasks;
 using UnityEngine.InputSystem.UI;
 
-public class SceneManagement : MonoBehaviour
+public class SceneManagement : Singleton<SceneManagement>
 {
-    public static SceneManagement Instance;
-
     private Animator animator;
     private bool transitionEnd;
     private PlayerInput playerInput;
@@ -18,14 +16,9 @@ public class SceneManagement : MonoBehaviour
     private int sceneToLoad;
     [SerializeField] private Tuple<Sounds, SceneNumber>[] allSounds;
 
-    private void Awake()
-    {
-        Instance = this;
-        Application.backgroundLoadingPriority = ThreadPriority.Low;
-    }
-
     void OnEnable()
     {
+        Application.backgroundLoadingPriority = ThreadPriority.Low;
         SceneManager.sceneLoaded += OnSceneLoaded;
     }
 
