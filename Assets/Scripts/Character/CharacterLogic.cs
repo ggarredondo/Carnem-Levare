@@ -94,7 +94,6 @@ public abstract class CharacterLogic : MonoBehaviour
 
             case CharacterState.ATTACKING:
             case CharacterState.HURT:
-                if (stamina <= 0) state = CharacterState.KO;
             case CharacterState.BLOCKED:
                 if (stamina <= 0) state = CharacterState.KO;
                 break;
