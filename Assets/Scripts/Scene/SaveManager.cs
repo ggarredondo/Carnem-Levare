@@ -24,8 +24,6 @@ public class SaveManager : Singleton<SaveManager>
         FileStream stream = new(dataPath + "/" + activeSave.saveName + ".save", FileMode.Create);
         serializer.Serialize(stream, activeSave);
         stream.Close();
-
-        Debug.Log("Saved");
     }
 
     /// <summary>
@@ -43,8 +41,6 @@ public class SaveManager : Singleton<SaveManager>
             stream.Close();
 
             activeSave.Load();
-
-            Debug.Log("Loaded");
         }
     }
 

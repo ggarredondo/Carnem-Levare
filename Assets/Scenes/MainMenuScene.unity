@@ -429,6 +429,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 734591664}
+  - component: {fileID: 734591665}
   m_Layer: 0
   m_Name: SaveData
   m_TagString: SAVE
@@ -454,6 +455,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &734591665
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 734591663}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8882489a2ba91f34cbc273d089786eb9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  saveConfig: {fileID: 11400000, guid: 14eb6c411bde65746b5ddfc1a1cc2111, type: 2}
 --- !u!1 &981297404 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1955055706903400482, guid: 268a8de8c2e04b947b4676206ac396d7,
@@ -708,7 +722,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 62e8d98a5bfefac4fad4596e8b04dcec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  selected: {fileID: 0}
 --- !u!4 &1817402130
 Transform:
   m_ObjectHideFlags: 0
