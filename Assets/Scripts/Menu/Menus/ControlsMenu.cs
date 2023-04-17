@@ -14,13 +14,9 @@ public class ControlsMenu : MonoBehaviour
     private InputAction action, originalAction;
     public float rebindTimeDelay = 0.25f;
 
-    private void Awake()
-    {
-        rumbleToggle.isOn = ControlSaver.Instance.rumble;
-    }
-
     private void Start()
-    {        
+    {
+        rumbleToggle.isOn = DataSaver.options.rumble;
         LoadRemapping();
     }
 
@@ -52,7 +48,7 @@ public class ControlsMenu : MonoBehaviour
     {
         AudioManager.Instance.uiSfxSounds.Play("PressButton");
         if (changeState) rumbleToggle.isOn = !rumbleToggle.isOn;
-        ControlSaver.Instance.rumble = rumbleToggle.isOn;
+        DataSaver.options.rumble = rumbleToggle.isOn;
         ControlSaver.Instance.ApplyChanges();
     }
 

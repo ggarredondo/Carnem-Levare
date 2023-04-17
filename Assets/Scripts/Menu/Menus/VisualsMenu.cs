@@ -14,11 +14,20 @@ public class VisualsMenu : MonoBehaviour
     [SerializeField] private TMP_Dropdown resolutionDropdown;
     [SerializeField] private TMP_Dropdown qualityDropdown;
 
+    private IOptionsApplier applier;
+
     private void Awake()
     {
+        applier = new VisualApplier();
+    }
+
+    private void Start()
+    {
+        applier.ApplyChanges();
+
         //Initilize Toggles
-        fullscreenToggle.isOn = VisualSaver.Instance.fullscreen;
-        vsyncToggle.isOn = VisualSaver.Instance.vsync == 1;
+        fullscreenToggle.isOn = DataSaver.options.fullscreen;
+        vsyncToggle.isOn = DataSaver.options.vSync == 1;
 
         //Initialize resolution Dropdown
         List<string> options = new()
@@ -35,7 +44,7 @@ public class VisualsMenu : MonoBehaviour
 
         resolutionDropdown.ClearOptions();
         resolutionDropdown.AddOptions(options);
-        resolutionDropdown.value = resolutionDropdown.options.FindIndex(option => option.text == VisualSaver.Instance.resolution);
+        resolutionDropdown.value = resolutionDropdown.options.FindIndex(option => option.text == DataSaver.options.resolution);
 
         //Initialize quality Dropdown
         List<string> quality = new()
@@ -47,7 +56,7 @@ public class VisualsMenu : MonoBehaviour
 
         qualityDropdown.ClearOptions();
         qualityDropdown.AddOptions(quality);
-        qualityDropdown.value = qualityDropdown.options.FindIndex(option => option.text == quality[VisualSaver.Instance.quality]);
+        qualityDropdown.value = qualityDropdown.options.FindIndex(option => option.text == quality[DataSaver.options.quality]);
     }
 
     #region Public
@@ -56,28 +65,28 @@ public class VisualsMenu : MonoBehaviour
     {
         AudioManager.Instance.uiSfxSounds.Play("PressButton");
         if (changeState) vsyncToggle.isOn = !vsyncToggle.isOn;
-        VisualSaver.Instance.vsync = vsyncToggle.isOn ? 1 : 0;
-        VisualSaver.Instance.ApplyChanges();
+        DataSaver.options.vSync = vsyncToggle.isOn ? 1 : 0;
+        applier.ApplyChanges();
     }
 
     public void FullScreen(bool changeState)
     {
         AudioManager.Instance.uiSfxSounds.Play("PressButton");
         if (changeState) fullscreenToggle.isOn = !fullscreenToggle.isOn;
-        VisualSaver.Instance.fullscreen = fullscreenToggle.isOn;
-        VisualSaver.Instance.ApplyChanges();
+        DataSaver.options.fullscreen = fullscreenToggle.isOn;
+        applier.ApplyChanges();
     }
 
     public void ChangeResolution()
     {
-        VisualSaver.Instance.resolution = resolutionDropdown.options[resolutionDropdown.value].text;
-        VisualSaver.Instance.ApplyChanges();
+        DataSaver.options.resolution = resolutionDropdown.options[resolutionDropdown.value].text;
+        applier.ApplyChanges();
     }
 
     public void ChangeQuality()
     {
-        VisualSaver.Instance.quality = qualityDropdown.value;
-        VisualSaver.Instance.ApplyChanges();
+        DataSaver.options.quality = qualityDropdown.value;
+        applier.ApplyChanges();
     }
 
     #endregion

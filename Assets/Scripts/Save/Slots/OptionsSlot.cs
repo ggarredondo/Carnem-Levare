@@ -13,4 +13,5 @@ public class OptionsSlot : SaveSlot
     public int quality;
 
     public bool rumble;
+    public string rebinds;
 }

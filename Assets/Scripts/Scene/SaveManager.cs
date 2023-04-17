@@ -39,8 +39,6 @@ public class SaveManager : Singleton<SaveManager>
             FileStream stream = new(dataPath + "/" + activeSave.saveName + ".save", FileMode.Open);
             activeSave = serializer.Deserialize(stream) as SaveData;
             stream.Close();
-
-            activeSave.Load();
         }
     }
 
@@ -79,12 +77,5 @@ public class SaveData
 
     //Control Settings
     public bool rumble;
-
-    public void Load()
-    {
-        VisualSaver.Instance.LoadChanges();
-        AudioSaver.Instance.LoadChanges();
-        ControlSaver.Instance.LoadChanges();
-    }
 }
 
