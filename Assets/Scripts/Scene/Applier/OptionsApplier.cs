@@ -1,13 +1,16 @@
 using UnityEngine;
 using UnityEngine.Audio;
+using UnityEngine.Events;
 
-public class AudioApplier : IOptionsApplier
-{ 
-    private AudioMixer audioMixer;
+public class OptionsApplier : IApplier
+{
+    private readonly AudioMixer audioMixer;
+    public static UnityAction apply;
 
-    public AudioApplier(AudioMixer audioMixer)
+    public OptionsApplier(AudioMixer audioMixer)
     {
         this.audioMixer = audioMixer;
+        apply += ApplyChanges;
     }
 
     public void ApplyChanges()
@@ -18,5 +21,12 @@ public class AudioApplier : IOptionsApplier
 
         if (DataSaver.options.mute) audioMixer.SetFloat("MasterVolume", -80);
         else audioMixer.SetFloat("MasterVolume", Mathf.Log10(DataSaver.options.masterVolume) * 20);
+
+        QualitySettings.vSyncCount = DataSaver.options.vSync;
+
+        string[] resolutionArray = DataSaver.options.resolution.Split('x');
+        Screen.SetResolution(int.Parse(resolutionArray[0]), int.Parse(resolutionArray[1]), DataSaver.options.fullscreen);
+
+        QualitySettings.SetQualityLevel(DataSaver.options.quality, false);
     }
 }

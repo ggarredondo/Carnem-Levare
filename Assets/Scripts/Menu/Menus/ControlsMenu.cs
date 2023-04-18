@@ -20,7 +20,6 @@ public class ControlsMenu : MonoBehaviour
         LoadRemapping();
     }
 
-    #region Public
     public void Remapping()
     {
         AudioManager.Instance.uiSfxSounds.Play("PressButton");
@@ -49,12 +48,7 @@ public class ControlsMenu : MonoBehaviour
         AudioManager.Instance.uiSfxSounds.Play("PressButton");
         if (changeState) rumbleToggle.isOn = !rumbleToggle.isOn;
         DataSaver.options.rumble = rumbleToggle.isOn;
-        ControlSaver.Instance.ApplyChanges();
     }
-
-    #endregion
-
-    #region Private
 
     private void CancelRebind(RebindingOperation callback)
     {
@@ -108,6 +102,4 @@ public class ControlsMenu : MonoBehaviour
 
         return result;
     }
-
-    #endregion
 }

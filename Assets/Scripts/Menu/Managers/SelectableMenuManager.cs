@@ -37,7 +37,6 @@ public class SelectableMenuManager : MenuManager
             }
 
             firstMenu = actualActiveMenu;
-            SaveManager.Instance.Save();
         }
     }
 

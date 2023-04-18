@@ -14,17 +14,8 @@ public class VisualsMenu : MonoBehaviour
     [SerializeField] private TMP_Dropdown resolutionDropdown;
     [SerializeField] private TMP_Dropdown qualityDropdown;
 
-    private IOptionsApplier applier;
-
-    private void Awake()
-    {
-        applier = new VisualApplier();
-    }
-
     private void Start()
     {
-        applier.ApplyChanges();
-
         //Initilize Toggles
         fullscreenToggle.isOn = DataSaver.options.fullscreen;
         vsyncToggle.isOn = DataSaver.options.vSync == 1;
@@ -59,14 +50,12 @@ public class VisualsMenu : MonoBehaviour
         qualityDropdown.value = qualityDropdown.options.FindIndex(option => option.text == quality[DataSaver.options.quality]);
     }
 
-    #region Public
-
     public void Vsync(bool changeState)
     {
         AudioManager.Instance.uiSfxSounds.Play("PressButton");
         if (changeState) vsyncToggle.isOn = !vsyncToggle.isOn;
         DataSaver.options.vSync = vsyncToggle.isOn ? 1 : 0;
-        applier.ApplyChanges();
+        OptionsApplier.apply.Invoke();
     }
 
     public void FullScreen(bool changeState)
@@ -74,20 +63,18 @@ public class VisualsMenu : MonoBehaviour
         AudioManager.Instance.uiSfxSounds.Play("PressButton");
         if (changeState) fullscreenToggle.isOn = !fullscreenToggle.isOn;
         DataSaver.options.fullscreen = fullscreenToggle.isOn;
-        applier.ApplyChanges();
+        OptionsApplier.apply.Invoke();
     }
 
     public void ChangeResolution()
     {
         DataSaver.options.resolution = resolutionDropdown.options[resolutionDropdown.value].text;
-        applier.ApplyChanges();
+        OptionsApplier.apply.Invoke();
     }
 
     public void ChangeQuality()
     {
         DataSaver.options.quality = qualityDropdown.value;
-        applier.ApplyChanges();
+        OptionsApplier.apply.Invoke();
     }
-
-    #endregion
 }

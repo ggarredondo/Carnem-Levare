@@ -1,12 +1,8 @@
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.Audio;
 
 public class SoundMenu : MonoBehaviour
 {
-    [Header("Requirements")]
-    [SerializeField] private AudioMixer audioMixer;
-
     [Header("Sliders")]
     [SerializeField] private Slider globalSlider;
     [SerializeField] private Slider musicSlider;
@@ -15,17 +11,8 @@ public class SoundMenu : MonoBehaviour
     [Header ("Toggle")]
     [SerializeField] private Toggle muteToggle;
 
-    private IOptionsApplier applier;
-
-    private void Awake()
-    {
-        applier = new AudioApplier(audioMixer);
-    }
-
     private void Start()
     {
-        applier.ApplyChanges();
-
         globalSlider.value = DataSaver.options.masterVolume;
         musicSlider.value = DataSaver.options.musicVolume;
         sfxSlider.value = DataSaver.options.sfxVolume;
@@ -40,7 +27,7 @@ public class SoundMenu : MonoBehaviour
         if (DataSaver.options.musicVolume < 0.1)
             AudioManager.Instance.Slider();
 
-        applier.ApplyChanges();
+        OptionsApplier.apply.Invoke();
     }
 
     public void ChangeSfxVolume()
@@ -48,14 +35,14 @@ public class SoundMenu : MonoBehaviour
         DataSaver.options.sfxVolume = sfxSlider.value;
         AudioManager.Instance.Slider();
 
-        applier.ApplyChanges();
+        OptionsApplier.apply.Invoke();
     }
 
     public void ChangeMusicVolume()
     {
         DataSaver.options.musicVolume = musicSlider.value;
 
-        applier.ApplyChanges();
+        OptionsApplier.apply.Invoke();
     }
 
     public void Mute(bool changeState)
@@ -63,6 +50,6 @@ public class SoundMenu : MonoBehaviour
         AudioManager.Instance.uiSfxSounds.Play("PressButton");
         if (changeState) muteToggle.isOn = !muteToggle.isOn;
         DataSaver.options.mute = muteToggle.isOn;
-        applier.ApplyChanges();
+        OptionsApplier.apply.Invoke();
     }
 }
