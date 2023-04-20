@@ -8,7 +8,7 @@ public abstract class Character : MonoBehaviour
     protected IState currentState;
     protected WalkingState walkingState;
 
-    // Constructors
+    // Initializers
     protected virtual void Awake()
     {
         movement = GetComponent<CharacterMovement>();
