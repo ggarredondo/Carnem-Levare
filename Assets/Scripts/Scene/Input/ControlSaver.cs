@@ -22,9 +22,10 @@ public class ControlSaver : Singleton<ControlSaver>
         ReadMappingFile();
 
         if (DataSaver.options.rebinds != "")
-            LoadUserRebinds(SceneManagement.Instance.PlayerInput);
+            LoadUserRebinds(GameManager.PlayerInput);
 
-        OnControlSchemeChanged(SceneManagement.Instance.PlayerInput);
+        GameManager.PlayerInput.controlsChangedEvent.AddListener(OnControlSchemeChanged);
+        OnControlSchemeChanged(GameManager.PlayerInput);
     }  
 
     public void OnControlSchemeChanged(PlayerInput playerInput)
@@ -49,9 +50,9 @@ public class ControlSaver : Singleton<ControlSaver>
 
     private  IEnumerator WaitGamepadDetection(float time)
     {
-        SceneManagement.Instance.UiInput.enabled = false;
+        GameManager.UiInput.enabled = false;
         yield return new WaitForSecondsRealtime(time);
-        SceneManagement.Instance.UiInput.enabled = true;
+        GameManager.UiInput.enabled = true;
     }
 
     public void ApplyInputScheme(PlayerInput player)
@@ -61,8 +62,8 @@ public class ControlSaver : Singleton<ControlSaver>
 
     public string ObtainMapping(string buttonName)
     {
-        if (mapping.ContainsKey(SceneManagement.Instance.PlayerInput.actions.FindActionMap("Main Movement").FindAction(buttonName).bindings[controlSchemeIndex].effectivePath))
-            return mapping[SceneManagement.Instance.PlayerInput.actions.FindActionMap("Main Movement").FindAction(buttonName).bindings[controlSchemeIndex].effectivePath];
+        if (mapping.ContainsKey(GameManager.PlayerInput.actions.FindActionMap("Main Movement").FindAction(buttonName).bindings[controlSchemeIndex].effectivePath))
+            return mapping[GameManager.PlayerInput.actions.FindActionMap("Main Movement").FindAction(buttonName).bindings[controlSchemeIndex].effectivePath];
         else
         {
             Debug.LogWarning("key was not found in the dictionary");

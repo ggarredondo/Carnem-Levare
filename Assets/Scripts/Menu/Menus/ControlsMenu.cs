@@ -24,7 +24,7 @@ public class ControlsMenu : MonoBehaviour
     {
         AudioManager.Instance.uiSfxSounds.Play("PressButton");
 
-        action = SceneManagement.Instance.PlayerInput.actions.FindActionMap("Main Movement").FindAction(EventSystem.current.currentSelectedGameObject.name);
+        action = GameManager.PlayerInput.actions.FindActionMap("Main Movement").FindAction(EventSystem.current.currentSelectedGameObject.name);
 
         if (action == null)
             Debug.Log("This action not exists");
@@ -71,7 +71,7 @@ public class ControlsMenu : MonoBehaviour
         }
         else callback.Cancel();
 
-        ControlSaver.Instance.ApplyInputScheme(SceneManagement.Instance.PlayerInput);
+        ControlSaver.Instance.ApplyInputScheme(GameManager.PlayerInput);
         callback.Dispose();
         LoadRemapping();
     }
@@ -95,7 +95,7 @@ public class ControlsMenu : MonoBehaviour
 
             if (binding.effectivePath == actualBinding.effectivePath)
             {
-                result = SceneManagement.Instance.PlayerInput.actions.FindActionMap("Main Movement").FindAction(binding.action);
+                result = GameManager.PlayerInput.actions.FindActionMap("Main Movement").FindAction(binding.action);
                 break;
             }
         }

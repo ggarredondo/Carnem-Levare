@@ -28,7 +28,7 @@ public class MainMenu : MonoBehaviour
         {
             AudioManager.Instance.uiSfxSounds.Play("PlayGame");
             isLoading = true;
-            StartCoroutine(SceneManagement.Instance.LoadSceneByIndexAsync(3));
+            StartCoroutine(GameManager.SceneLoader.LoadWithLoadingScreen((int) SceneNumber.GAME));
         }
     }
 

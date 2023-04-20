@@ -2,19 +2,19 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class ControllerRumble : Singleton<ControllerRumble>
+public class ControllerRumble : MonoBehaviour
 {
     private Gamepad gamepad;
     private bool isRumbling;
 
-    private void Start()
+    public ControllerRumble()
     {
         gamepad = Gamepad.current;
     }
 
     public void Rumble(float duration, float leftAmplitude, float rightAmplitude)
     {
-        if (gamepad != null && SceneManagement.Instance.PlayerInput.currentControlScheme == "Gamepad" && !isRumbling && DataSaver.options.rumble)
+        if (gamepad != null && GameManager.PlayerInput.currentControlScheme == "Gamepad" && !isRumbling && DataSaver.options.rumble)
         {
             gamepad.SetMotorSpeeds(leftAmplitude, rightAmplitude);
             isRumbling = true;

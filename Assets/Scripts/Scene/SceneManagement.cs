@@ -190,13 +190,3 @@ public class SceneManagement : Singleton<SceneManagement>
 
     #endregion
 }
-
-/// <summary>
-/// Enumerator that defines the relevant scene numbers
-/// </summary>
-public enum SceneNumber
-{
-    MAIN_MENU = 0,
-    LOADING_MENU = 1,
-    GAME = 3
-}
