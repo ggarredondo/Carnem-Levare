@@ -11,15 +11,19 @@ public class CharacterMovement : MonoBehaviour
     [SerializeField] private bool doTracking = true;
 
     private Rigidbody rb;
+    private Vector2 direction;
+
+    [SerializeField] private float directionSpeed = 1f;
 
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
+        direction = Vector2.zero;
     }
 
-    public void Movement()
+    public void MoveCharacter(Vector2 directionTarget)
     {
-
+        direction = Vector2.Lerp(direction, directionTarget, directionSpeed * Time.deltaTime);
     }
 
     public void LookAtTarget()
