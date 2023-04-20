@@ -17,6 +17,11 @@ public class CharacterMovement : MonoBehaviour
         rb = GetComponent<Rigidbody>();
     }
 
+    public void Movement()
+    {
+
+    }
+
     public void LookAtTarget()
     {
         Quaternion targetRotation;
