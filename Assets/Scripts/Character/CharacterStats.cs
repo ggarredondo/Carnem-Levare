@@ -13,9 +13,6 @@ public class CharacterStats : MonoBehaviour
 
     [SerializeField] [InitializationField] private float height = 1f, mass = 1f, drag;
 
-    [Tooltip("How quickly character rotates towards their opponent")]
-    [SerializeField] private float trackingRate = 1f;
-
     private void Awake()
     {
         stamina = maxStamina;
@@ -33,6 +30,7 @@ public class CharacterStats : MonoBehaviour
         stamina = Mathf.Clamp(stamina + addend, 0f, maxStamina);
     }
 
+    public float Stamina { get => stamina; }
+    public float MaxStamina { get => maxStamina; }
     public float ComboDecay { get => comboDecay; }
-    public float TrackingRate { get => trackingRate; }
 }

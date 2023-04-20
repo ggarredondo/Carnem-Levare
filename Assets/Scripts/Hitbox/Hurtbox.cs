@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public enum Target : uint
+public enum BodyTarget : uint
 {
     LeftHead = 0,
     MidHead = 1,
@@ -16,7 +16,7 @@ public enum Target : uint
 
 public class Hurtbox : MonoBehaviour
 {
-    [SerializeField] private Target target;
+    [SerializeField] private BodyTarget target;
     [SerializeField] private GameObject character;
     private CharacterLogic logicHandler;
     private CharacterAnimation animationHandler;
@@ -39,7 +39,7 @@ public class Hurtbox : MonoBehaviour
 
             logicHandler.Damage(hitbox.Damage,
                 // Can't block attack if it's unblockable or if it hits the back.
-                hitbox.Unblockable || target == Target.BackHead || target == Target.BackBody,
+                hitbox.Unblockable || target == BodyTarget.BackHead || target == BodyTarget.BackBody,
                 hitbox.AdvantageOnBlock, hitbox.AdvantageOnHit);
 
             animationHandler.TriggerHurtAnimation((float) target, (float) hitbox.Power);
