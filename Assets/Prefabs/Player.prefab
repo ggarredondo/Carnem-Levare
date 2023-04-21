@@ -349,7 +349,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   stamina: 0
   maxStamina: 300
-  characterBaseDamage: 10
+  characterDamage: 0
   blockingMultiplier: 0.1
   comboDecay: 300
   height: 1
@@ -369,7 +369,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   trackingRate: 15
   doTracking: 1
-  directionSpeed: 15
+  walkingDirectionSpeed: 15
+  idleDirectionSpeed: 5
 --- !u!114 &4135794495997487276
 MonoBehaviour:
   m_ObjectHideFlags: 0

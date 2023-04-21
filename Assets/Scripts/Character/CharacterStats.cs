@@ -3,7 +3,7 @@ using UnityEngine;
 public class CharacterStats : MonoBehaviour
 {
     [SerializeField] private float stamina, maxStamina;
-    [SerializeField] private float characterBaseDamage;
+    [SerializeField] private float characterDamage;
 
     [Tooltip("Percentage of stamina damage taken when blocking")]
     [SerializeField] [Range(0f, 1f)] private float blockingMultiplier;
@@ -21,9 +21,9 @@ public class CharacterStats : MonoBehaviour
         GetComponent<Rigidbody>().drag = drag;
     }
 
-    public float CalculateAttackDamage(float moveBaseDamage) 
+    public float CalculateAttackDamage(float baseDamage) 
     {
-        return moveBaseDamage + characterBaseDamage;
+        return baseDamage + characterDamage;
     }
     public void AddToStamina(float addend) 
     {

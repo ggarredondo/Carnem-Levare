@@ -10,6 +10,7 @@ public class CharacterAnimation : MonoBehaviour
     {
         movement = GetComponent<CharacterMovement>();
         animator = GetComponent<Animator>();
+        animator.SetBool("STATE_WALKING", true);
     }
     private void Start()
     {
