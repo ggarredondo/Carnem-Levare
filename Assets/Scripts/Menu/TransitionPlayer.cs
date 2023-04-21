@@ -25,12 +25,20 @@ public class TransitionPlayer : MonoBehaviour
     private IEnumerator StartTransition()
     {
         animator.SetBool("isLoading", true);
+        GameManager.PlayerInput.enabled = false;
+        GameManager.UiInput.enabled = false;
         yield return new WaitForSecondsRealtime(animator.GetCurrentAnimatorStateInfo(0).length);
+        GameManager.UiInput.enabled = true;
+        GameManager.PlayerInput.enabled = true;
     }
 
     private IEnumerator EndTransition()
     {
         animator.SetBool("endLoading", true);
+        GameManager.PlayerInput.enabled = false;
+        GameManager.UiInput.enabled = false;
         yield return new WaitForSecondsRealtime(animator.GetCurrentAnimatorStateInfo(0).length);
+        GameManager.UiInput.enabled = true;
+        GameManager.PlayerInput.enabled = true;
     }
 }

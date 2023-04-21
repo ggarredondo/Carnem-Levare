@@ -42,11 +42,6 @@ public class AutoSelect : MonoBehaviour, IPointerEnterHandler, ISelectHandler
         if (inputButton) ControlSaver.Instance.StaticEvent -= ChangeInputFont;
     }
 
-    #region Public
-
-    /// <summary>
-    /// Event that triggers when an ui object is selected
-    /// </summary>
     public void OnSelect(BaseEventData eventData)
     {
         if (ControlSaver.Instance.controlSchemeIndex == 0)
@@ -56,22 +51,12 @@ public class AutoSelect : MonoBehaviour, IPointerEnterHandler, ISelectHandler
         }
     }
 
-    /// <summary>
-    /// Event that triggers when the mouse pointer is on an ui object
-    /// </summary>
     public void OnPointerEnter(PointerEventData eventData)
     {
         if (mouseCanSelect)
             AudioManager.Instance.uiSfxSounds.Play("SelectButton");
     }
 
-    #endregion
-
-    #region Private
-
-    /// <summary>
-    /// Use this functions when the onControlsChange triggers
-    /// </summary>
     private void ChangeInputFont()
     {
         //Change Font
@@ -87,6 +72,4 @@ public class AutoSelect : MonoBehaviour, IPointerEnterHandler, ISelectHandler
             transform.GetChild(0).GetComponent<TMP_Text>().text = "M";
         }
     }
-
-    #endregion
 }

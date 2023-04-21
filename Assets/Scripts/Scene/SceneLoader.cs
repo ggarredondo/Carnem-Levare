@@ -21,14 +21,18 @@ public class SceneLoader : MonoBehaviour
     private void Awake()
     {
         SceneManager.sceneLoaded += OnSceneLoaded;
+        OnSceneLoaded(SceneManager.GetActiveScene(), LoadSceneMode.Single);
     }
 
     void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
         StartCoroutine(EndLoad());
 
-        //if (SceneManager.GetActiveScene().buildIndex == (int) SceneNumber.LOADING_MENU)
-            //LoadSceneAsync();
+        if (SceneManager.GetActiveScene().buildIndex == (int)SceneNumber.LOADING_MENU)
+        {
+            activateLoading.Invoke();
+            LoadSceneAsync();
+        }
     }
 
     private IEnumerator EndLoad()
@@ -51,17 +55,12 @@ public class SceneLoader : MonoBehaviour
 
     private async void LoadSceneAsync()
     {
+        await Task.Delay(1000);
         asyncOperation = SceneManager.LoadSceneAsync(nextSceneIndex);
         asyncOperation.allowSceneActivation = false;
 
-        activateLoading.Invoke();
-
-        bool done;
-        do
-        {
+        while(updateLoading.Invoke(asyncOperation.progress) == false)
             await Task.Delay(100);
-            done = updateLoading.Invoke(asyncOperation.progress);
-        } while (!done);
 
         StartCoroutine(AllowScene());
     }

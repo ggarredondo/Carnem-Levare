@@ -50,13 +50,12 @@ public class LoadingScreen : MonoBehaviour
 
     public void Activate()
     {
+        GameManager.PlayerInput.enabled = true;
         GameManager.PlayerInput.SwitchCurrentActionMap("LoadingScreen");
     }
 
     public bool UpdateProgess(float progress)
     {
-        Debug.Log("holaaaa");
-
         actualProgress = Mathf.Clamp01(progress / 0.9f);
         percentage.text = (int)(Mathf.Clamp01(progress / 0.9f) * 100) + " %";
 

@@ -51,7 +51,7 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         controllerRumble = gameObject.AddComponent<ControllerRumble>();
-        sceneLoader = GetComponent<SceneLoader>();
+        sceneLoader = gameObject.AddComponent<SceneLoader>();
 
         applier.ApplyChanges();
     }
