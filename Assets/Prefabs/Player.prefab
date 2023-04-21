@@ -367,6 +367,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   trackingRate: 15
+  doTracking: 1
+  directionSpeed: 15
 --- !u!114 &252810768578259016
 MonoBehaviour:
   m_ObjectHideFlags: 0

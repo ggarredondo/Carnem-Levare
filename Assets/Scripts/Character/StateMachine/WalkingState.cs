@@ -1,11 +1,10 @@
-using UnityEngine;
 
 public class WalkingState : IState
 {
     public void Enter(Character character) {}
     public void Update(Character character) 
     {
-        //character.Movement.MoveCharacter(direction);
+        character.Movement.MoveCharacter(character.Controller.MovementVector);
     }
     public void FixedUpdate(Character character) 
     {

@@ -26,7 +26,7 @@ public class CharacterMovement : MonoBehaviour
     public void MoveCharacter(Vector2 targetDirection)
     {
         direction = Vector2.Lerp(direction, targetDirection, directionSpeed * Time.deltaTime);
-        OnMoveCharacter.Invoke(direction);
+        OnMoveCharacter?.Invoke(direction);
     }
 
     public void LookAtTarget()

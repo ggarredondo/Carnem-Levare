@@ -2,6 +2,7 @@ using UnityEngine;
 
 public abstract class Character : MonoBehaviour
 {
+    protected IController controller;
     protected CharacterMovement movement;
     protected CharacterStats stats;
 
@@ -36,5 +37,6 @@ public abstract class Character : MonoBehaviour
     }
 
     // Public
+    public IController Controller { get => controller; }
     public CharacterMovement Movement { get => movement; }
 }
