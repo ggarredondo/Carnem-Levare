@@ -285,6 +285,7 @@ GameObject:
   - component: {fileID: 4706402254706946822}
   - component: {fileID: 6932071518813559269}
   - component: {fileID: 7148219384131829495}
+  - component: {fileID: 4135794495997487276}
   - component: {fileID: 252810768578259016}
   - component: {fileID: 2794588595183348619}
   - component: {fileID: 3684604065180434156}
@@ -369,6 +370,19 @@ MonoBehaviour:
   trackingRate: 15
   doTracking: 1
   directionSpeed: 15
+--- !u!114 &4135794495997487276
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4706402254706946816}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9af1cee13a453ff49866a69b63f1c450, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animatorSpeed: 1
 --- !u!114 &252810768578259016
 MonoBehaviour:
   m_ObjectHideFlags: 0

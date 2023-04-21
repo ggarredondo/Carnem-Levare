@@ -19,14 +19,14 @@ public class Hurtbox : MonoBehaviour
     [SerializeField] private BodyTarget target;
     [SerializeField] private GameObject character;
     private CharacterLogic logicHandler;
-    private CharacterAnimation animationHandler;
+    private CharacterAnimationOld animationHandler;
     private CharacterAudio audioHandler;
     private Hitbox hitbox;
 
     private void Awake()
     {
         logicHandler = character.GetComponent<CharacterLogic>();
-        animationHandler = character.GetComponent<CharacterAnimation>();
+        animationHandler = character.GetComponent<CharacterAnimationOld>();
         audioHandler = character.GetComponent<CharacterAudio>();
     }
 

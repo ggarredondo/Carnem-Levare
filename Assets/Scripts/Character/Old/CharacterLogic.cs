@@ -38,7 +38,7 @@ public abstract class CharacterLogic : MonoBehaviour
 
     // Character Variables
     private Entity entity;
-    private CharacterAnimation animationHandler;
+    private CharacterAnimationOld animationHandler;
     private Rigidbody rb;
     protected Vector2 direction, directionTarget;
     protected float directionSpeed;
@@ -63,7 +63,7 @@ public abstract class CharacterLogic : MonoBehaviour
 
         // Initialize Character Variables
         entity = this is PlayerLogic ? Entity.Player : Entity.Enemy;
-        animationHandler = GetComponent<CharacterAnimation>();
+        animationHandler = GetComponent<CharacterAnimationOld>();
         direction = Vector2.zero;
         directionTarget = Vector2.zero;
     }

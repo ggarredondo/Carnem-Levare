@@ -3,12 +3,12 @@ using UnityEngine;
 public class CharacterAudio : MonoBehaviour
 {
     CharacterLogic logicHandler;
-    CharacterAnimation animationHandler;
+    CharacterAnimationOld animationHandler;
 
     private void Awake()
     {
         logicHandler = GetComponent<CharacterLogic>();
-        animationHandler = GetComponent<CharacterAnimation>();
+        animationHandler = GetComponent<CharacterAnimationOld>();
     }
     private void Start()
     {

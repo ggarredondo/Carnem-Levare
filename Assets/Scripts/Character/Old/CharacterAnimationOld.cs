@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.Events;
 using System.Collections;
 
-public class CharacterAnimation : MonoBehaviour
+public class CharacterAnimationOld : MonoBehaviour
 {
     private CharacterLogic logicHandler;
     private Animator animator;
