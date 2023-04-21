@@ -34,20 +34,20 @@ public class AutoSelect : MonoBehaviour, IPointerEnterHandler, ISelectHandler
 
     private void Awake()
     {
-        if (inputButton) ControlSaver.Instance.StaticEvent += ChangeInputFont;
+        if (inputButton) GameManager.InputDetection.controlsChangedEvent += ChangeInputFont;
     }
 
     private void OnDestroy()
     {
-        if (inputButton) ControlSaver.Instance.StaticEvent -= ChangeInputFont;
+        if (inputButton) GameManager.InputDetection.controlsChangedEvent -= ChangeInputFont;
     }
 
     public void OnSelect(BaseEventData eventData)
     {
-        if (ControlSaver.Instance.controlSchemeIndex == 0)
+        if (GameManager.InputDetection.controlSchemeIndex == 0)
         {
             AudioManager.Instance.uiSfxSounds.Play("SelectButton");
-            ControlSaver.Instance.selected = gameObject;
+            GameManager.InputDetection.selected = gameObject;
         }
     }
 
@@ -60,12 +60,12 @@ public class AutoSelect : MonoBehaviour, IPointerEnterHandler, ISelectHandler
     private void ChangeInputFont()
     {
         //Change Font
-        transform.GetChild(0).GetComponent<TMP_Text>().font = GlobalMenuVariables.Instance.inputFonts[ControlSaver.Instance.controlSchemeIndex];
+        transform.GetChild(0).GetComponent<TMP_Text>().font = GlobalMenuVariables.Instance.inputFonts[GameManager.InputDetection.controlSchemeIndex];
 
         //Asign the correct word
-        string mappingKey = ControlSaver.Instance.ObtainMapping(gameObject.name);
+        string mappingKey = GameManager.InputMapping.ObtainMapping(gameObject.name);
 
-        if (mappingKey != "-" && mappingKey != "") transform.GetChild(0).GetComponent<TMP_Text>().text = ControlSaver.Instance.ObtainMapping(gameObject.name);
+        if (mappingKey != "-" && mappingKey != "") transform.GetChild(0).GetComponent<TMP_Text>().text = mappingKey;
         else
         {
             transform.GetChild(0).GetComponent<TMP_Text>().font = GlobalMenuVariables.Instance.inputFonts[0];

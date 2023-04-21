@@ -79,7 +79,7 @@ public class LoadingScreen : MonoBehaviour
 
     public void ChangeText()
     {
-        continueAction = GameManager.PlayerInput.actions.FindActionMap("LoadingScreen").FindAction("Continue").bindings[ControlSaver.Instance.controlSchemeIndex].path.Split("/")[1];
+        continueAction = GameManager.PlayerInput.actions.FindAction("Continue").bindings[GameManager.InputDetection.controlSchemeIndex].path.Split("/")[1];
     }
 
 }

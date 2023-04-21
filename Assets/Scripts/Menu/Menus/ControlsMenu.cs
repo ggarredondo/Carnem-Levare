@@ -12,19 +12,20 @@ public class ControlsMenu : MonoBehaviour
     [SerializeField] private Toggle rumbleToggle;
 
     private InputAction action, originalAction;
+
     public float rebindTimeDelay = 0.25f;
 
-    private void Start()
+    public void Start()
     {
         rumbleToggle.isOn = DataSaver.options.rumble;
-        LoadRemapping();
+        GameManager.InputDetection.controlsChangedEvent.Invoke();
     }
 
     public void Remapping()
     {
         AudioManager.Instance.uiSfxSounds.Play("PressButton");
 
-        action = GameManager.PlayerInput.actions.FindActionMap("Main Movement").FindAction(EventSystem.current.currentSelectedGameObject.name);
+        action = GameManager.PlayerInput.actions.FindAction(EventSystem.current.currentSelectedGameObject.name);
 
         if (action == null)
             Debug.Log("This action not exists");
@@ -34,7 +35,7 @@ public class ControlsMenu : MonoBehaviour
 
             originalAction = action.Clone();
 
-            action.PerformInteractiveRebinding(ControlSaver.Instance.controlSchemeIndex)
+            action.PerformInteractiveRebinding(GameManager.InputDetection.controlSchemeIndex)
                 .WithControlsExcluding("Mouse")
                 .OnMatchWaitForAnother(rebindTimeDelay)
                 .OnCancel(callback => CancelRebind(callback))
@@ -52,39 +53,34 @@ public class ControlsMenu : MonoBehaviour
 
     private void CancelRebind(RebindingOperation callback)
     {
-        callback.action.ApplyBindingOverride(ControlSaver.Instance.controlSchemeIndex, originalAction.bindings[ControlSaver.Instance.controlSchemeIndex]);
+        callback.action.ApplyBindingOverride(GameManager.InputDetection.controlSchemeIndex, originalAction.bindings[GameManager.InputDetection.controlSchemeIndex]);
     }
 
     private void FinishRebind(RebindingOperation callback)
     {
         globalMenuManager.DisablePopUpMenu();
 
-        if (ControlSaver.Instance.mapping.ContainsKey(callback.action.bindings[ControlSaver.Instance.controlSchemeIndex].effectivePath))
+        if (GameManager.InputMapping.Map.ContainsKey(callback.action.bindings[GameManager.InputDetection.controlSchemeIndex].effectivePath))
         {
             AudioManager.Instance.uiSfxSounds.Play("ApplyRebind");
 
             InputAction result = CheckIfAsigned(callback.action);
             if (result != null)
             {
-                result.ApplyBindingOverride(ControlSaver.Instance.controlSchemeIndex, "");
+                result.ApplyBindingOverride(GameManager.InputDetection.controlSchemeIndex, "");
             }
         }
         else callback.Cancel();
 
-        ControlSaver.Instance.ApplyInputScheme(GameManager.PlayerInput);
+        GameManager.InputMapping.SaveUserRebinds(GameManager.PlayerInput);
         callback.Dispose();
-        LoadRemapping();
-    }
-
-    private void LoadRemapping()
-    {
-        ControlSaver.Instance.StaticEvent.Invoke();
+        GameManager.InputDetection.controlsChangedEvent.Invoke();
     }
 
     private InputAction CheckIfAsigned(InputAction action)
     {
         InputAction result = null;
-        InputBinding actualBinding = action.bindings[ControlSaver.Instance.controlSchemeIndex];
+        InputBinding actualBinding = action.bindings[GameManager.InputDetection.controlSchemeIndex];
 
         foreach (InputBinding binding in action.actionMap.bindings) {
 
@@ -95,7 +91,7 @@ public class ControlsMenu : MonoBehaviour
 
             if (binding.effectivePath == actualBinding.effectivePath)
             {
-                result = GameManager.PlayerInput.actions.FindActionMap("Main Movement").FindAction(binding.action);
+                result = GameManager.PlayerInput.actions.FindAction(binding.action);
                 break;
             }
         }

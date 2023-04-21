@@ -106,12 +106,12 @@ public abstract class MenuManager : MonoBehaviour
 
         if (activeFirstButton)
         {
-            ControlSaver.Instance.selected = menus[actualActiveMenu].GetFirstButton();
+            GameManager.InputDetection.selected = menus[actualActiveMenu].GetFirstButton();
 
-            if (ControlSaver.Instance.controlSchemeIndex == 0)
+            if (GameManager.InputDetection.controlSchemeIndex == 0)
             {
                 EventSystem.current.SetSelectedGameObject(menus[actualActiveMenu].GetFirstButton());
-                AudioManager.Instance?.uiSfxSounds.Stop("SelectButton");
+                AudioManager.Instance.uiSfxSounds.Stop("SelectButton");
             }
         }
 

@@ -16,22 +16,17 @@ public class GameManager : MonoBehaviour
     private ISave saver;
     private IApplier applier;
 
-    private static PlayerInput playerInput;
-    private static InputSystemUIInputModule uiInput;
-    private static ControllerRumble controllerRumble;
-    private static SceneLoader sceneLoader;
-
-    public static PlayerInput PlayerInput { get { return playerInput; } }
-
-    public static InputSystemUIInputModule UiInput { get { return uiInput; } }
-
-    public static ControllerRumble ControllerRumble { get { return controllerRumble; } }
-
-    public static SceneLoader SceneLoader { get { return sceneLoader; } }
+    public static PlayerInput PlayerInput { get; private set; }
+    public static InputSystemUIInputModule UiInput { get; private set; }
+    public static ControllerRumble ControllerRumble { get; private set; }
+    public static SceneLoader SceneLoader { get; private set; }
+    public static InputMapping InputMapping { get; private set; }
+    public static InputDetection InputDetection { get; private set; }
 
     private void Awake()
     {
         Application.backgroundLoadingPriority = ThreadPriority.Low;
+        PlayerInput = GameObject.FindGameObjectWithTag("INPUT").GetComponent<PlayerInput>();
 
         if (SceneManager.GetActiveScene().buildIndex == (int)SceneNumber.MAIN_MENU)
         {
@@ -39,19 +34,23 @@ public class GameManager : MonoBehaviour
             DontDestroyOnLoad(gameObject);
         }
 
-        uiInput = GetComponent<InputSystemUIInputModule>();
+        UiInput = GetComponent<InputSystemUIInputModule>();
+
         SceneManager.sceneLoaded += OnSceneLoaded;
 
         saver = new DataSaver(saveConfig);
         applier = new OptionsApplier(audioMixer);
 
         saver.Load();
+
+        InputMapping = new();
+        InputDetection = new();
     }
 
     private void Start()
     {
-        controllerRumble = gameObject.AddComponent<ControllerRumble>();
-        sceneLoader = gameObject.AddComponent<SceneLoader>();
+        ControllerRumble = gameObject.AddComponent<ControllerRumble>();
+        SceneLoader = gameObject.AddComponent<SceneLoader>();
 
         applier.ApplyChanges();
     }
@@ -63,7 +62,8 @@ public class GameManager : MonoBehaviour
 
     void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        playerInput = GameObject.FindGameObjectWithTag("INPUT").GetComponent<PlayerInput>();
+        if (SceneManager.GetActiveScene().buildIndex != (int)SceneNumber.MAIN_MENU)
+            PlayerInput = GameObject.FindGameObjectWithTag("INPUT").GetComponent<PlayerInput>();
 
         InitializeSoundSources();
     }
