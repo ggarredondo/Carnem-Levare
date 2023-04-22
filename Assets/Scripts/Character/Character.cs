@@ -29,7 +29,7 @@ public abstract class Character : MonoBehaviour
     {
         currentState.FixedUpdate(this);
     }
-    protected void ChangeState(IState newState)
+    protected void ChangeState(in IState newState)
     {
         if (currentState != null) currentState.Exit(this);
         currentState = newState;
@@ -37,6 +37,6 @@ public abstract class Character : MonoBehaviour
     }
 
     // Public
-    public IController Controller { get => controller; }
-    public CharacterMovement Movement { get => movement; }
+    public ref readonly IController Controller { get => ref controller; }
+    public ref readonly CharacterMovement Movement { get => ref movement; }
 }

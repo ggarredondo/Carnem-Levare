@@ -22,7 +22,7 @@ public class CharacterAnimation : MonoBehaviour
         if (animator != null) animator.speed = animatorSpeed;
     }
 
-    private void MoveAnimation(Vector2 direction)
+    private void MoveAnimation(in Vector2 direction)
     {
         animator.SetFloat("horizontal", direction.x);
         animator.SetFloat("vertical", direction.y);

@@ -30,7 +30,7 @@ public class CharacterStats : MonoBehaviour
         stamina = Mathf.Clamp(stamina + addend, 0f, maxStamina);
     }
 
-    public float Stamina { get => stamina; }
-    public float MaxStamina { get => maxStamina; }
-    public float ComboDecay { get => comboDecay; }
+    public ref readonly float Stamina { get => ref stamina; }
+    public ref readonly float MaxStamina { get => ref maxStamina; }
+    public ref readonly float ComboDecay { get => ref comboDecay; }
 }

@@ -2,5 +2,5 @@ using UnityEngine;
 
 public interface IController
 {
-    public Vector2 MovementVector { get; }
+    public ref readonly Vector2 MovementVector { get; }
 }

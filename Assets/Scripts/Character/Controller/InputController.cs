@@ -10,5 +10,5 @@ public class InputController : MonoBehaviour, IController
         movementVector = context.ReadValue<Vector2>();
     }
 
-    public Vector2 MovementVector { get => movementVector; }
+    public ref readonly Vector2 MovementVector { get => ref movementVector; }
 }

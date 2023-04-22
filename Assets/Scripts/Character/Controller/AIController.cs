@@ -16,5 +16,5 @@ public class AIController : MonoBehaviour, IController
         movementVector.y = vertical;
     }
 
-    public Vector2 MovementVector { get => movementVector; }
+    public ref readonly Vector2 MovementVector { get => ref movementVector; }
 }
