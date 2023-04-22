@@ -2,19 +2,21 @@ using UnityEngine;
 
 public class CharacterAnimation : MonoBehaviour
 {
-    private CharacterMovement movement;
+    private Character character;
     private Animator animator;
     [SerializeField] private float animatorSpeed = 1f;
 
     private void Awake()
     {
-        movement = GetComponent<CharacterMovement>();
+        character = GetComponent<Character>();
         animator = GetComponent<Animator>();
-        animator.SetBool("STATE_WALKING", true);
+        EnterWalkingState(); // Character enters walking state in Character.cs Awake()
     }
     private void Start()
     {
-        movement.OnMoveCharacter += MoveAnimation;
+        character.Movement.OnMoveCharacter += MoveAnimation;
+        character.WalkingState.OnEnter += EnterWalkingState;
+        character.WalkingState.OnExit += ExitWalkingState;
     }
 
     private void OnValidate()
@@ -27,4 +29,7 @@ public class CharacterAnimation : MonoBehaviour
         animator.SetFloat("horizontal", direction.x);
         animator.SetFloat("vertical", direction.y);
     }
+
+    private void EnterWalkingState() { animator.SetBool("STATE_WALKING", true); }
+    private void ExitWalkingState() { animator.SetBool("STATE_WALKING", false); }
 }

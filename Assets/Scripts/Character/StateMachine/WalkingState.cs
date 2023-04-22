@@ -1,7 +1,13 @@
+using System;
 
 public class WalkingState : IState
 {
-    public void Enter(in Character character) {}
+    public Action OnEnter, OnExit;
+
+    public void Enter(in Character character) 
+    {
+        OnEnter?.Invoke();
+    }
     public void Update(in Character character) 
     {
         character.Movement.MoveCharacter(character.Controller.MovementVector);
@@ -10,5 +16,8 @@ public class WalkingState : IState
     {
         character.Movement.LookAtTarget();
     }
-    public void Exit(in Character character) {}
+    public void Exit(in Character character) 
+    {
+        OnExit?.Invoke();
+    }
 }

@@ -39,4 +39,6 @@ public abstract class Character : MonoBehaviour
     // Public
     public ref readonly IController Controller { get => ref controller; }
     public ref readonly CharacterMovement Movement { get => ref movement; }
+
+    public ref readonly WalkingState WalkingState { get => ref walkingState; }
 }
