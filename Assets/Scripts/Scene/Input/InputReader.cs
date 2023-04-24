@@ -1,20 +1,18 @@
 using UnityEngine;
-using UnityEngine.Events;
 using UnityEngine.InputSystem;
 
 [CreateAssetMenu(fileName = "InputReader", menuName = "Scriptable Objects/Input Reader")]
 public class InputReader : ScriptableObject
 {
-    public event UnityAction MouseClickEvent;
-    public event UnityAction MenuBackEvent;
-    public event UnityAction ChangeRightMenuEvent;
-    public event UnityAction ChangeLeftMenuEvent;
-    public event UnityAction StartPauseMenuEvent;
+    public event System.Action MouseClickEvent;
+    public event System.Action MenuBackEvent;
+    public event System.Action ChangeRightMenuEvent;
+    public event System.Action ChangeLeftMenuEvent;
+    public event System.Action StartPauseMenuEvent;
 
-    public event UnityAction<Vector2> MovementEvent;
-    public event UnityAction<bool> BlockEvent;
-    public event UnityAction<bool> Attack0Event, Attack1Event, 
-        Attack2Event, Attack3Event;
+    public event System.Action<Vector2> MovementEvent;
+    public event System.Action<bool> BlockEvent;
+    public event System.Action<bool> Attack0Event, Attack1Event, Attack2Event, Attack3Event;
 
     #region UI
     public void OnMouseClick(InputAction.CallbackContext context)

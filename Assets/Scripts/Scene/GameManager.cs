@@ -16,18 +16,25 @@ public class GameManager : MonoBehaviour
     private ISave saver;
     private IApplier applier;
 
-    public static PlayerInput PlayerInput { get; private set; }
-    public static InputSystemUIInputModule UiInput { get; private set; }
-    public static ControllerRumble ControllerRumble { get; private set; }
-    public static SceneLoader SceneLoader { get; private set; }
-    public static InputMapping InputMapping { get; private set; }
-    public static InputDetection InputDetection { get; private set; }
+    private static PlayerInput playerInput;
+    private static InputSystemUIInputModule uiInput;
+    private static ControllerRumble controllerRumble;
+    private static SceneLoader sceneLoader;
+    private static InputMapping inputMapping;
+    private static InputDetection inputDetection;
+
+    public static ref readonly PlayerInput PlayerInput { get => ref playerInput; }
+    public static ref readonly InputSystemUIInputModule UiInput { get => ref uiInput; }
+    public static ref readonly ControllerRumble ControllerRumble { get => ref controllerRumble; }
+    public static ref readonly SceneLoader SceneLoader { get => ref sceneLoader; }
+    public static ref readonly InputMapping InputMapping { get => ref inputMapping; }
+    public static ref readonly InputDetection InputDetection { get => ref inputDetection; }
 
     private void Awake()
     {
         Application.backgroundLoadingPriority = ThreadPriority.Low;
-        PlayerInput = GameObject.FindGameObjectWithTag("INPUT").GetComponent<PlayerInput>();
-        UiInput = GetComponent<InputSystemUIInputModule>();
+        playerInput = GameObject.FindGameObjectWithTag("INPUT").GetComponent<PlayerInput>();
+        uiInput = GetComponent<InputSystemUIInputModule>();
 
         if (SceneManager.GetActiveScene().buildIndex == (int)SceneNumber.MAIN_MENU)
         {
@@ -42,14 +49,14 @@ public class GameManager : MonoBehaviour
 
         saver.Load();
 
-        InputMapping = new();
-        InputDetection = new();
+        inputMapping = new();
+        inputDetection = new();
     }
 
     private void Start()
     {
-        ControllerRumble = new();
-        SceneLoader = gameObject.AddComponent<SceneLoader>();
+        controllerRumble = new();
+        sceneLoader = new();
 
         applier.ApplyChanges();
     }
@@ -62,7 +69,7 @@ public class GameManager : MonoBehaviour
     void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
         if (SceneManager.GetActiveScene().buildIndex != (int)SceneNumber.MAIN_MENU)
-            PlayerInput = GameObject.FindGameObjectWithTag("INPUT").GetComponent<PlayerInput>();
+            playerInput = GameObject.FindGameObjectWithTag("INPUT").GetComponent<PlayerInput>();
 
         InputDetection.Configure();
 

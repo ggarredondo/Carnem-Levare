@@ -1,4 +1,4 @@
-using System.Collections;
+using System.Threading.Tasks;
 using UnityEngine;
 
 public class TransitionPlayer : MonoBehaviour
@@ -22,22 +22,22 @@ public class TransitionPlayer : MonoBehaviour
         SceneLoader.endTransition -= EndTransition;
     }
 
-    private IEnumerator StartTransition()
+    private async Task StartTransition()
     {
         animator.SetBool("isLoading", true);
         GameManager.PlayerInput.enabled = false;
         GameManager.UiInput.enabled = false;
-        yield return new WaitForSecondsRealtime(animator.GetCurrentAnimatorStateInfo(0).length);
+        await Task.Delay(System.TimeSpan.FromSeconds(animator.GetCurrentAnimatorStateInfo(0).length));
         GameManager.UiInput.enabled = true;
         GameManager.PlayerInput.enabled = true;
     }
 
-    private IEnumerator EndTransition()
+    private async Task EndTransition()
     {
         animator.SetBool("endLoading", true);
         GameManager.PlayerInput.enabled = false;
         GameManager.UiInput.enabled = false;
-        yield return new WaitForSecondsRealtime(animator.GetCurrentAnimatorStateInfo(0).length);
+        await Task.Delay(System.TimeSpan.FromSeconds(animator.GetCurrentAnimatorStateInfo(0).length));
         GameManager.UiInput.enabled = true;
         GameManager.PlayerInput.enabled = true;
     }

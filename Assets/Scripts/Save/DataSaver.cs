@@ -7,7 +7,7 @@ public class DataSaver : ISave
     public static List<GameSlot> games;
     public static int actualGameSlot;
 
-    public DataSaver(SaveConfiguration config)
+    public DataSaver(in SaveConfiguration config)
     {
         serializer = new();
 

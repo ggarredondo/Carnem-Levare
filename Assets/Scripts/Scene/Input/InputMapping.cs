@@ -16,7 +16,7 @@ public class InputMapping
             LoadUserRebinds(GameManager.PlayerInput);
     }  
 
-    public string ObtainMapping(string buttonName)
+    public string ObtainMapping(in string buttonName)
     {
         string path = GameManager.PlayerInput.actions.FindAction(buttonName).bindings[GameManager.InputDetection.controlSchemeIndex].effectivePath;
         if (Map.ContainsKey(path))
@@ -28,12 +28,12 @@ public class InputMapping
         }
     }
 
-    public void SaveUserRebinds(PlayerInput player)
+    public void SaveUserRebinds(in PlayerInput player)
     {
         DataSaver.options.rebinds = player.actions.SaveBindingOverridesAsJson();
     }
 
-    private void LoadUserRebinds(PlayerInput player)
+    private void LoadUserRebinds(in PlayerInput player)
     {
         player.actions.LoadBindingOverridesFromJson(DataSaver.options.rebinds);
     }

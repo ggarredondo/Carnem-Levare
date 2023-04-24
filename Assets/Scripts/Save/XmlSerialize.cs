@@ -4,7 +4,7 @@ using System.Xml.Serialization;
 
 public class XmlSerialize
 {
-    public void Save(SaveSlot save)
+    public void Save(in SaveSlot save)
     {
         string dataPath = Application.persistentDataPath;
 
@@ -16,7 +16,7 @@ public class XmlSerialize
         Debug.Log("Saved");
     }
 
-    public SaveSlot Load(SaveSlot save)
+    public SaveSlot Load(in SaveSlot save)
     {
         string dataPath = Application.persistentDataPath;
         SaveSlot newSave = save;
@@ -35,7 +35,7 @@ public class XmlSerialize
         return newSave;
     }
 
-    public void DeleteSaveSlot(SaveSlot save)
+    public void DeleteSaveSlot(in SaveSlot save)
     {
         string dataPath = Application.persistentDataPath;
 

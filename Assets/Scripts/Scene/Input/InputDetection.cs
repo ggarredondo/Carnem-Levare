@@ -1,6 +1,5 @@
 using System.Threading.Tasks;
 using UnityEngine;
-using UnityEngine.Events;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 
@@ -11,7 +10,7 @@ public class InputDetection
     public int controlSchemeIndex;
     public GameObject selected;
 
-    public UnityAction controlsChangedEvent;
+    public System.Action controlsChangedEvent;
 
     public InputDetection() 
     {
@@ -47,7 +46,7 @@ public class InputDetection
     private async void WaitGamepadDetection(float time)
     {
         GameManager.UiInput.enabled = false;
-        await Task.Delay((int) (time * 1000));
+        await Task.Delay(System.TimeSpan.FromSeconds(time));
         GameManager.UiInput.enabled = true;
     }
 }

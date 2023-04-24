@@ -1,24 +1,20 @@
 using UnityEngine;
 using System.Threading.Tasks;
 using UnityEngine.SceneManagement;
-using System.Collections;
-using UnityEngine.Events;
 
-public class SceneLoader : MonoBehaviour
+public class SceneLoader
 {
     private AsyncOperation asyncOperation;
 
-    public delegate IEnumerator Transition();
-    public static Transition startTransition;
-    public static Transition endTransition;
+    public static System.Func<Task> startTransition;
+    public static System.Func<Task> endTransition;
 
-    public static UnityAction activateLoading;
-    public delegate bool UpdateLoading(float progress);
-    public static UpdateLoading updateLoading;
+    public static System.Action activateLoading;
+    public static System.Func<float,bool> updateLoading;
 
     private static int nextSceneIndex;
 
-    private void Awake()
+    public SceneLoader()
     {
         SceneManager.sceneLoaded += OnSceneLoaded;
         OnSceneLoaded(SceneManager.GetActiveScene(), LoadSceneMode.Single);
@@ -26,7 +22,7 @@ public class SceneLoader : MonoBehaviour
 
     void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        StartCoroutine(EndLoad());
+        EndLoad();
 
         if (SceneManager.GetActiveScene().buildIndex == (int)SceneNumber.LOADING_MENU)
         {
@@ -35,20 +31,20 @@ public class SceneLoader : MonoBehaviour
         }
     }
 
-    private IEnumerator EndLoad()
+    private async void EndLoad()
     {
-        yield return endTransition.Invoke();
+        await endTransition.Invoke();
     }
 
-    public IEnumerator LoadScene(int sceneIndex)
+    public async void LoadScene(int sceneIndex)
     {
-        yield return startTransition.Invoke();
+        await startTransition.Invoke();
         SceneManager.LoadScene(sceneIndex);
     }
 
-    public IEnumerator LoadWithLoadingScreen(int nextScene)
+    public async void LoadWithLoadingScreen(int nextScene)
     {
-        yield return startTransition.Invoke();
+        await startTransition.Invoke();
         nextSceneIndex = nextScene;
         SceneManager.LoadScene((int) SceneNumber.LOADING_MENU);
     }
@@ -62,12 +58,12 @@ public class SceneLoader : MonoBehaviour
         while(updateLoading.Invoke(asyncOperation.progress) == false)
             await Task.Delay(100);
 
-        StartCoroutine(AllowScene());
+        AllowScene();
     }
 
-    private IEnumerator AllowScene()
+    private async void AllowScene()
     {
-        yield return startTransition.Invoke();
+        await startTransition.Invoke();
         asyncOperation.allowSceneActivation = true;
     }
 }

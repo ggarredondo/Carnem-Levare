@@ -7,7 +7,7 @@ public class OptionsApplier : IApplier
     private readonly AudioMixer audioMixer;
     public static UnityAction apply;
 
-    public OptionsApplier(AudioMixer audioMixer)
+    public OptionsApplier(in AudioMixer audioMixer)
     {
         this.audioMixer = audioMixer;
         apply += ApplyChanges;
