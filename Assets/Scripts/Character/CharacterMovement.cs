@@ -13,7 +13,7 @@ public class CharacterMovement : MonoBehaviour
     [SerializeField] private bool doTracking = true;
 
     [Tooltip("How quickly the character's direction will match the target direction (smoothing movement)")]
-    [SerializeField] private float walkingDirectionSpeed = 1f, blockingDirectionSpeed = 1f, idleDirectionSpeed = 1f;
+    [SerializeField] private float walkingDirectionSpeed = 1f, idleDirectionSpeed = 1f;
     private const float IDLE_THRESHOLD = 0.01f;
     
     private Vector2 direction;
@@ -49,7 +49,4 @@ public class CharacterMovement : MonoBehaviour
             rb.rotation = Quaternion.Lerp(rb.rotation, targetRotation, trackingRate * Time.fixedDeltaTime);
         }
     }
-
-    public ref readonly float WalkingDirectionSpeed { get => ref walkingDirectionSpeed; }
-    public ref readonly float BlockingDirectionSpeed { get => ref blockingDirectionSpeed; }
 }
