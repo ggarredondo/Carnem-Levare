@@ -1,13 +1,17 @@
 using UnityEngine;
+using System;
 
 public abstract class Character : MonoBehaviour
 {
-    protected IController controller;
+    protected Controller controller;
     protected CharacterMovement movement;
     protected CharacterStats stats;
 
     protected IState currentState;
     protected WalkingState walkingState;
+    protected BlockingState blockingState;
+
+    private Action transitionToWalking, transitionToBlocking;
 
     // Initializers
     protected virtual void Awake()
@@ -16,6 +20,11 @@ public abstract class Character : MonoBehaviour
         stats = GetComponent<CharacterStats>();
 
         walkingState = new WalkingState();
+        blockingState = new BlockingState();
+
+        transitionToWalking = () => ChangeState(walkingState);
+        transitionToBlocking = () => ChangeState(blockingState);
+
         ChangeState(walkingState);
     }
     protected virtual void Start() {}
@@ -37,8 +46,12 @@ public abstract class Character : MonoBehaviour
     }
 
     // Public
-    public ref readonly IController Controller { get => ref controller; }
+    public ref readonly Controller Controller { get => ref controller; }
     public ref readonly CharacterMovement Movement { get => ref movement; }
 
     public ref readonly WalkingState WalkingState { get => ref walkingState; }
+    public ref readonly BlockingState BlockingState { get => ref blockingState; }
+
+    public ref readonly Action TransitionToWalking { get => ref transitionToWalking; }
+    public ref readonly Action TransitionToBlocking { get => ref transitionToBlocking; }
 }

@@ -1,14 +1,10 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class InputController : MonoBehaviour, IController
+public class InputController : Controller
 {
-    private Vector2 movementVector;
-
-    public void Movement(InputAction.CallbackContext context)
+    public void DoMovement(InputAction.CallbackContext context)
     {
         movementVector = context.ReadValue<Vector2>();
     }
-
-    public ref readonly Vector2 MovementVector { get => ref movementVector; }
 }

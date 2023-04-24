@@ -17,6 +17,8 @@ public class CharacterAnimation : MonoBehaviour
         character.Movement.OnMoveCharacter += MoveAnimation;
         character.WalkingState.OnEnter += EnterWalkingState;
         character.WalkingState.OnExit += ExitWalkingState;
+        character.BlockingState.OnEnter += EnterBlockingState;
+        character.BlockingState.OnExit += ExitBlockingState;
     }
 
     private void OnValidate()
@@ -32,4 +34,7 @@ public class CharacterAnimation : MonoBehaviour
 
     private void EnterWalkingState() { animator.SetBool("STATE_WALKING", true); }
     private void ExitWalkingState() { animator.SetBool("STATE_WALKING", false); }
+
+    private void EnterBlockingState() { animator.SetBool("STATE_BLOCKING", true); }
+    private void ExitBlockingState() { animator.SetBool("STATE_BLOCKING", false); }
 }
