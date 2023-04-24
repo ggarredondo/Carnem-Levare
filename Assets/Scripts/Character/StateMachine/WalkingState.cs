@@ -2,7 +2,7 @@ using System;
 
 public class WalkingState : IState
 {
-    public Action OnEnter, OnExit;
+    public event Action OnEnter, OnExit;
 
     public void Enter(in Character character) 
     {

@@ -2,10 +2,10 @@ using UnityEngine;
 
 public class Enemy : Character
 {
-    protected override void Start()
+    protected override void Awake()
     {
-        movement.SetTarget(GameObject.FindGameObjectWithTag("Player").transform);
         controller = GetComponent<AIController>();
-        base.Start();
+        base.Awake();
+        movement.SetTarget(GameObject.FindGameObjectWithTag("Player").transform);
     }
 }

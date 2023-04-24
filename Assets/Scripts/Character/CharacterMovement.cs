@@ -15,9 +15,9 @@ public class CharacterMovement : MonoBehaviour
     [Tooltip("How quickly the character's direction will match the target direction (smoothing movement)")]
     [SerializeField] private float walkingDirectionSpeed = 1f, idleDirectionSpeed = 1f;
     private Vector2 direction;
-    public ActionIn<Vector2> OnMoveCharacter;
+    public event ActionIn<Vector2> OnMoveCharacter;
 
-    private void Awake()
+    public void Initialize()
     {
         rb = GetComponent<Rigidbody>();
         direction = Vector2.zero;

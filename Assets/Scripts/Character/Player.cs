@@ -2,10 +2,10 @@ using UnityEngine;
 
 public class Player : Character
 {
-    protected override void Start()
+    protected override void Awake()
     {
-        movement.SetTarget(GameObject.FindGameObjectWithTag("Enemy").transform);
         controller = GameObject.FindGameObjectWithTag("INPUT").GetComponent<InputController>();
-        base.Start();
+        base.Awake();
+        movement.SetTarget(GameObject.FindGameObjectWithTag("Enemy").transform);
     }
 }

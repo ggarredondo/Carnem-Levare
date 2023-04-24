@@ -6,6 +6,7 @@ public abstract class Character : MonoBehaviour
     protected Controller controller;
     protected CharacterMovement movement;
     protected CharacterStats stats;
+    protected CharacterAnimation characAnimation;
 
     protected IState currentState;
     protected WalkingState walkingState;
@@ -16,15 +17,20 @@ public abstract class Character : MonoBehaviour
     // Initializers
     protected virtual void Awake()
     {
-        movement = GetComponent<CharacterMovement>();
-        stats = GetComponent<CharacterStats>();
-
         walkingState = new WalkingState();
         blockingState = new BlockingState();
 
+        movement = GetComponent<CharacterMovement>();
+        movement.Initialize();
+
+        stats = GetComponent<CharacterStats>();
+        stats.Initialize();
+
+        characAnimation = GetComponent<CharacterAnimation>();
+        characAnimation.Initialize();
+
         transitionToWalking = () => ChangeState(walkingState);
         transitionToBlocking = () => ChangeState(blockingState);
-
         ChangeState(walkingState);
     }
     protected virtual void Start() {}

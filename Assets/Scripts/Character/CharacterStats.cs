@@ -13,7 +13,7 @@ public class CharacterStats : MonoBehaviour
 
     [SerializeField] [InitializationField] private float height = 1f, mass = 1f, drag;
 
-    private void Awake()
+    public void Initialize()
     {
         stamina = maxStamina;
         transform.localScale *= height;

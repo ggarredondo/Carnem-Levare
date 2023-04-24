@@ -7,4 +7,8 @@ public class InputController : Controller
     {
         movementVector = context.ReadValue<Vector2>();
     }
+    public void DoBlock(InputAction.CallbackContext context)
+    {
+        OnDoBlockInvoke();
+    }
 }

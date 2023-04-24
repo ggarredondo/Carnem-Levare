@@ -14509,7 +14509,19 @@ MonoBehaviour:
     m_ActionId: 6f6c8496-ad55-4a5b-b196-c474aff84dcb
     m_ActionName: Main Movement/Right Special[/XInputControllerWindows/rightTrigger]
   - m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1216391173}
+        m_TargetAssemblyTypeName: InputController, Assembly-CSharp
+        m_MethodName: DoBlock
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_ActionId: d6656a04-0c7c-49b4-a8bb-803cfa729f0b
     m_ActionName: Main Movement/Parry[/XInputControllerWindows/buttonSouth]
   - m_PersistentCalls:

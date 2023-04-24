@@ -6,17 +6,16 @@ public class CharacterAnimation : MonoBehaviour
     private Animator animator;
     [SerializeField] private float animatorSpeed = 1f;
 
-    private void Awake()
+    public void Initialize()
     {
         character = GetComponent<Character>();
         animator = GetComponent<Animator>();
-        EnterWalkingState(); // Character enters walking state in Character.cs Awake()
-    }
-    private void Start()
-    {
+
         character.Movement.OnMoveCharacter += MoveAnimation;
+
         character.WalkingState.OnEnter += EnterWalkingState;
         character.WalkingState.OnExit += ExitWalkingState;
+
         character.BlockingState.OnEnter += EnterBlockingState;
         character.BlockingState.OnExit += ExitBlockingState;
     }
