@@ -429,6 +429,7 @@ MonoBehaviour:
   trackingRate: 15
   doTracking: 1
   walkingDirectionSpeed: 15
+  blockingDirectionSpeed: 15
   idleDirectionSpeed: 5
 --- !u!114 &6806862736692178901
 MonoBehaviour:
@@ -469,6 +470,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   horizontal: 0
   vertical: 0
+  block: 0
 --- !u!54 &5975427957589119885
 Rigidbody:
   m_ObjectHideFlags: 0

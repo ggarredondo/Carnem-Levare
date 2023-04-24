@@ -6,6 +6,7 @@ public class WalkingState : IState
 
     public void Enter(in Character character) 
     {
+        character.Controller.OnDoBlock += character.TransitionToBlocking;
         OnEnter?.Invoke();
     }
     public void Update(in Character character) 
@@ -18,6 +19,7 @@ public class WalkingState : IState
     }
     public void Exit(in Character character) 
     {
+        character.Controller.OnDoBlock -= character.TransitionToBlocking;
         OnExit?.Invoke();
     }
 }

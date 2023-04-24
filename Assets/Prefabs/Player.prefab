@@ -370,6 +370,7 @@ MonoBehaviour:
   trackingRate: 15
   doTracking: 1
   walkingDirectionSpeed: 15
+  blockingDirectionSpeed: 10
   idleDirectionSpeed: 5
 --- !u!114 &4135794495997487276
 MonoBehaviour:

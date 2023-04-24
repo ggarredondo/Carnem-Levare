@@ -9,6 +9,7 @@ public class InputController : Controller
     }
     public void DoBlock(InputAction.CallbackContext context)
     {
-        OnDoBlockInvoke();
+        if (context.performed) OnDoBlockInvoke();
+        else OnStopBlockInvoke();
     }
 }

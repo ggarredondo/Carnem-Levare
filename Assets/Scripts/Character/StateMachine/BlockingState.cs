@@ -6,6 +6,7 @@ public class BlockingState : IState
 
     public void Enter(in Character character)
     {
+        character.Controller.OnStopBlock += character.TransitionToWalking;
         OnEnter?.Invoke();
     }
     public void Update(in Character character)
@@ -18,6 +19,7 @@ public class BlockingState : IState
     }
     public void Exit(in Character character)
     {
+        character.Controller.OnStopBlock -= character.TransitionToWalking;
         OnExit?.Invoke();
     }
 }
