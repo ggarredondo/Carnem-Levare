@@ -1,8 +1,7 @@
-﻿using System.Collections;
-using UnityEngine;
-using UnityEngine.InputSystem;
+﻿using UnityEngine.InputSystem;
+using System.Threading.Tasks;
 
-public class ControllerRumble : MonoBehaviour
+public class ControllerRumble
 {
     private Gamepad gamepad;
     private bool isRumbling;
@@ -18,13 +17,13 @@ public class ControllerRumble : MonoBehaviour
         {
             gamepad.SetMotorSpeeds(leftAmplitude, rightAmplitude);
             isRumbling = true;
-            StartCoroutine(StopRumble(duration));
+            StopRumble(duration);
         }
     }
 
-    private IEnumerator StopRumble(float duration)
+    private async void StopRumble(float duration)
     {
-        yield return new WaitForSecondsRealtime(duration);
+        await Task.Delay(System.TimeSpan.FromSeconds(duration));
         gamepad.SetMotorSpeeds(0f, 0f);
         isRumbling = false;
     }

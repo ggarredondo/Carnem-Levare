@@ -27,14 +27,13 @@ public class GameManager : MonoBehaviour
     {
         Application.backgroundLoadingPriority = ThreadPriority.Low;
         PlayerInput = GameObject.FindGameObjectWithTag("INPUT").GetComponent<PlayerInput>();
+        UiInput = GetComponent<InputSystemUIInputModule>();
 
         if (SceneManager.GetActiveScene().buildIndex == (int)SceneNumber.MAIN_MENU)
         {
             DontDestroyOnLoad(GameObject.FindGameObjectWithTag("MUSIC").transform.parent.gameObject);
             DontDestroyOnLoad(gameObject);
         }
-
-        UiInput = GetComponent<InputSystemUIInputModule>();
 
         SceneManager.sceneLoaded += OnSceneLoaded;
 
@@ -49,7 +48,7 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
-        ControllerRumble = gameObject.AddComponent<ControllerRumble>();
+        ControllerRumble = new();
         SceneLoader = gameObject.AddComponent<SceneLoader>();
 
         applier.ApplyChanges();
@@ -64,6 +63,8 @@ public class GameManager : MonoBehaviour
     {
         if (SceneManager.GetActiveScene().buildIndex != (int)SceneNumber.MAIN_MENU)
             PlayerInput = GameObject.FindGameObjectWithTag("INPUT").GetComponent<PlayerInput>();
+
+        InputDetection.Configure();
 
         InitializeSoundSources();
     }

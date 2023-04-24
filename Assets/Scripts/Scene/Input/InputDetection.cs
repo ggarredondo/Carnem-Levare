@@ -15,9 +15,7 @@ public class InputDetection
 
     public InputDetection() 
     {
-        selected = new GameObject();
-        GameManager.PlayerInput.controlsChangedEvent.AddListener(OnControlSchemeChanged);
-        OnControlSchemeChanged(GameManager.PlayerInput);
+        selected = EventSystem.current.currentSelectedGameObject;
     }
 
     public void OnControlSchemeChanged(PlayerInput playerInput)
@@ -38,6 +36,12 @@ public class InputDetection
         }
 
         controlsChangedEvent?.Invoke();
+    }
+
+    public void Configure()
+    {
+        GameManager.PlayerInput.controlsChangedEvent.AddListener(OnControlSchemeChanged);
+        OnControlSchemeChanged(GameManager.PlayerInput);
     }
 
     private async void WaitGamepadDetection(float time)
