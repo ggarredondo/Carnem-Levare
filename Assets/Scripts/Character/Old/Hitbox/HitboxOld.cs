@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class Hitbox : MonoBehaviour
+public class HitboxOld : MonoBehaviour
 {
     private Power power;
     private float damage;

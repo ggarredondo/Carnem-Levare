@@ -14,14 +14,14 @@ public enum BodyTarget : uint
     BackBody = 7
 }
 
-public class Hurtbox : MonoBehaviour
+public class HurtboxOld : MonoBehaviour
 {
     [SerializeField] private BodyTarget target;
     [SerializeField] private GameObject character;
     private CharacterLogic logicHandler;
     private CharacterAnimationOld animationHandler;
     private CharacterAudio audioHandler;
-    private Hitbox hitbox;
+    private HitboxOld hitbox;
 
     private void Awake()
     {
@@ -32,7 +32,7 @@ public class Hurtbox : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        hitbox = other.GetComponent<Hitbox>();
+        hitbox = other.GetComponent<HitboxOld>();
         if (!logicHandler.HurtExceptions) {
             // Establish that hitbox has already hit so that it's disabled and it doesn't hit twice.
             hitbox.Activate(false);

@@ -30,7 +30,7 @@ public abstract class CharacterLogic : MonoBehaviour
     [SerializeField] [InitializationField] private float mass = 1f;
     [SerializeField] [InitializationField] private float drag = 0f; // SHOULD BE CALCULATED GIVEN MASS
     [SerializeField] private List<MoveOld> moveset;
-    [SerializeField] private List<Hitbox> hitboxes;
+    [SerializeField] private List<HitboxOld> hitboxes;
 
     [Header("Debug")]
     [SerializeField] private bool noDamage = false;
@@ -191,7 +191,7 @@ public abstract class CharacterLogic : MonoBehaviour
     public int currentIndex { get => moveIndex; }
     public MoveOld currentMove { get => moveset[moveIndex]; }
     public List<MoveOld> Moveset { get => moveset; }
-    public List<Hitbox> Hitboxes { get => hitboxes; }
+    public List<HitboxOld> Hitboxes { get => hitboxes; }
 
     public float Stamina { get => stamina; }
     public float MaxStamina { get => maxStamina; }
