@@ -6,7 +6,7 @@ public abstract class Controller : MonoBehaviour
     protected Vector2 movementVector;
     public event Action OnDoBlock, OnStopBlock;
 
-    public void Initialize()
+    public virtual void Initialize()
     {
         movementVector = Vector2.zero;
     }
