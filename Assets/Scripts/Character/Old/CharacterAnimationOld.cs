@@ -29,7 +29,7 @@ public class CharacterAnimationOld : MonoBehaviour
     private void OnValidate()
     {
         if (updateMoveAnimations) { UpdateMovesetAnimations(); updateMoveAnimations = false; }
-        if (updateMoveTimeData) { foreach (Move m in logicHandler.Moveset) { m.AssignEvents(); } updateMoveTimeData = false; }
+        if (updateMoveTimeData) { foreach (MoveOld m in logicHandler.Moveset) { m.AssignEvents(); } updateMoveTimeData = false; }
     }
 
     private void Update()

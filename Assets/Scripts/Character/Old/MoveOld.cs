@@ -14,8 +14,8 @@ public enum HitboxType : int
     RightFist = 1
 }
 
-[CreateAssetMenu(menuName = "Scriptable Objects/Move")]
-public class Move : ScriptableObject
+[CreateAssetMenu(menuName = "Scriptable Objects/MoveOld")]
+public class MoveOld : ScriptableObject
 {
     [SerializeField] private string moveName;
 
