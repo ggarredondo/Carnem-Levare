@@ -22,14 +22,14 @@ public class LoadingScreen : MonoBehaviour
 
     private void OnEnable()
     {
-        SceneLoader.activateLoading += Activate;
-        SceneLoader.updateLoading += UpdateProgess;
+        SceneLoader.ActivateLoading += Activate;
+        SceneLoader.UpdateLoading += UpdateProgess;
     }
 
     private void OnDisable()
     {
-        SceneLoader.activateLoading -= Activate;
-        SceneLoader.updateLoading -= UpdateProgess;
+        SceneLoader.ActivateLoading -= Activate;
+        SceneLoader.UpdateLoading -= UpdateProgess;
     }
 
     private void Update()

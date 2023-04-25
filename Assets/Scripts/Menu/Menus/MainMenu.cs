@@ -20,7 +20,7 @@ public class MainMenu : MonoBehaviour
         {
             AudioManager.Instance.uiSfxSounds.Play("PlayGame");
             isLoading = true;
-            GameManager.SceneLoader.LoadWithLoadingScreen((int) SceneNumber.GAME);
+            GameManager.SceneLoader.LoadWithLoadingScreen(SceneNumber.GAME);
         }
     }
 }

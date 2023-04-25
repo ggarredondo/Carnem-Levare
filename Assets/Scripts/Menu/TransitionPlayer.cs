@@ -12,14 +12,14 @@ public class TransitionPlayer : MonoBehaviour
 
     private void OnEnable()
     {
-        SceneLoader.startTransition += StartTransition;
-        SceneLoader.endTransition += EndTransition;
+        SceneLoader.StartTransition += StartTransition;
+        SceneLoader.EndTransition += EndTransition;
     }
 
     private void OnDisable()
     {
-        SceneLoader.startTransition -= StartTransition;
-        SceneLoader.endTransition -= EndTransition;
+        SceneLoader.StartTransition -= StartTransition;
+        SceneLoader.EndTransition -= EndTransition;
     }
 
     private async Task StartTransition()

@@ -6,11 +6,11 @@ public class SceneLoader
 {
     private AsyncOperation asyncOperation;
 
-    public static System.Func<Task> startTransition;
-    public static System.Func<Task> endTransition;
+    public static event System.Func<Task> StartTransition;
+    public static event System.Func<Task> EndTransition;
 
-    public static System.Action activateLoading;
-    public static System.Func<float,bool> updateLoading;
+    public static event System.Action ActivateLoading;
+    public static event System.Func<float,bool> UpdateLoading;
 
     private static int nextSceneIndex;
 
@@ -24,28 +24,28 @@ public class SceneLoader
     {
         EndLoad();
 
-        if (SceneManager.GetActiveScene().buildIndex == (int)SceneNumber.LOADING_MENU)
+        if (SceneManager.GetActiveScene().buildIndex == (int) SceneNumber.LOADING_MENU)
         {
-            activateLoading.Invoke();
+            ActivateLoading.Invoke();
             LoadSceneAsync();
         }
     }
 
     private async void EndLoad()
     {
-        await endTransition.Invoke();
+        await EndTransition.Invoke();
     }
 
-    public async void LoadScene(int sceneIndex)
+    public async void LoadScene(SceneNumber sceneIndex)
     {
-        await startTransition.Invoke();
-        SceneManager.LoadScene(sceneIndex);
+        await StartTransition.Invoke();
+        SceneManager.LoadScene((int) sceneIndex);
     }
 
-    public async void LoadWithLoadingScreen(int nextScene)
+    public async void LoadWithLoadingScreen(SceneNumber nextScene)
     {
-        await startTransition.Invoke();
-        nextSceneIndex = nextScene;
+        await StartTransition.Invoke();
+        nextSceneIndex = (int) nextScene;
         SceneManager.LoadScene((int) SceneNumber.LOADING_MENU);
     }
 
@@ -55,7 +55,7 @@ public class SceneLoader
         asyncOperation = SceneManager.LoadSceneAsync(nextSceneIndex);
         asyncOperation.allowSceneActivation = false;
 
-        while(updateLoading.Invoke(asyncOperation.progress) == false)
+        while(UpdateLoading.Invoke(asyncOperation.progress) == false)
             await Task.Delay(100);
 
         AllowScene();
@@ -63,7 +63,7 @@ public class SceneLoader
 
     private async void AllowScene()
     {
-        await startTransition.Invoke();
+        await StartTransition.Invoke();
         asyncOperation.allowSceneActivation = true;
     }
 }

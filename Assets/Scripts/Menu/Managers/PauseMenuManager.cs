@@ -35,7 +35,7 @@ public class PauseMenuManager : MainMenuManager
     {
         ExitPauseMode(false);
         AudioManager.Instance.BackMenu();
-        GameManager.SceneLoader.LoadScene((int) SceneNumber.NON_DESTROY_MAIN_MENU);
+        GameManager.SceneLoader.LoadScene(SceneNumber.NON_DESTROY_MAIN_MENU);
     }
 
     public void ResumeGame()
