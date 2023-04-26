@@ -6,21 +6,16 @@ using UnityEditor;
 public class BehaviourTree : ScriptableObject
 {
     public Node rootNode;
-    public Node.State treeState = Node.State.Running;
     public List<Node> nodes = new();
 
-    public Node.State Update()
+    public void Initialize()
     {
-        if (rootNode.state == Node.State.Running)
-        {
-            treeState = rootNode.Update();
-        }
-        return treeState;
+        rootNode.ChangeState();
     }
 
     public Node CreateNode(System.Type type)
     {
-        Node node = ScriptableObject.CreateInstance(type) as Node;
+        Node node = CreateInstance(type) as Node;
         node.name = type.Name;
         node.guid = GUID.Generate().ToString();
         nodes.Add(node);
@@ -37,53 +32,19 @@ public class BehaviourTree : ScriptableObject
         AssetDatabase.SaveAssets();
     }
 
-    public void AddChild(Node parent, Node child)
+    public void AddChild(IHaveChildren parent, Node child)
     {
-        DecoratorNode decorator = parent as DecoratorNode;
-        if (decorator)
-            decorator.child = child;
-
-        RootNode root = parent as RootNode;
-        if (root)
-            root.child = child;
-
-        CompositeNode composite = parent as CompositeNode;
-        if (composite)
-            composite.children.Add(child);
+        parent.AddChild(child);
     }
 
-    public void RemoveChild(Node parent, Node child)
+    public void RemoveChild(IHaveChildren parent, Node child)
     {
-        DecoratorNode decorator = parent as DecoratorNode;
-        if (decorator)
-            decorator.child = null;
-
-        RootNode root = parent as RootNode;
-        if (root)
-            root.child = null;
-
-        CompositeNode composite = parent as CompositeNode;
-        if (composite)
-            composite.children.Remove(child);
+        parent.RemoveChild(child);
     }
 
-    public List<Node> GetChildren(Node parent)
+    public List<Node> GetChildren(IHaveChildren parent)
     {
-        List<Node> children = new();
-
-        DecoratorNode decorator = parent as DecoratorNode;
-        if (decorator && decorator.child != null)
-            children.Add(decorator.child);
-
-        RootNode root = parent as RootNode;
-        if (root && root.child != null)
-            children.Add(root.child);
-
-        CompositeNode composite = parent as CompositeNode;
-        if (composite)
-            return composite.children;
-
-        return children;
+        return parent.GetChildren();
     }
 
     public BehaviourTree Clone()

@@ -47,15 +47,18 @@ public class BehaviourTreeView : GraphView
 
         tree.nodes.ForEach(n =>
         {
-            var children = tree.GetChildren(n);
-            children.ForEach(c =>
+            if (n is IHaveChildren)
             {
-                NodeView parentView = FindNodeView(n);
-                NodeView childView = FindNodeView(c);
+                var children = tree.GetChildren((IHaveChildren) n);
+                children.ForEach(c =>
+                {
+                    NodeView parentView = FindNodeView(n);
+                    NodeView childView = FindNodeView(c);
 
-                Edge edge = parentView.output.ConnectTo(childView.input);
-                AddElement(edge);
-            });
+                    Edge edge = parentView.output.ConnectTo(childView.input);
+                    AddElement(edge);
+                });
+            }
         });
     }
 
@@ -83,7 +86,7 @@ public class BehaviourTreeView : GraphView
                 {
                     NodeView parentView = edge.output.node as NodeView;
                     NodeView childView = edge.input.node as NodeView;
-                    tree.RemoveChild(parentView.node, childView.node);
+                    tree.RemoveChild((IHaveChildren) parentView.node, childView.node);
                 }
             });
         }
@@ -93,7 +96,7 @@ public class BehaviourTreeView : GraphView
             {
                 NodeView parentView = edge.output.node as NodeView;
                 NodeView childView = edge.input.node as NodeView;
-                tree.AddChild(parentView.node, childView.node);
+                tree.AddChild((IHaveChildren) parentView.node, childView.node);
             });
         }
 
@@ -103,7 +106,7 @@ public class BehaviourTreeView : GraphView
     public override void BuildContextualMenu(ContextualMenuPopulateEvent evt)
     {
         { 
-            var types = TypeCache.GetTypesDerivedFrom<ActionNode>();
+            var types = TypeCache.GetTypesDerivedFrom<LeafNode>();
             foreach (var type in types)
             {
                 evt.menu.AppendAction($"[{type.BaseType.Name}] {type.Name}", (a) => CreateNode(type));
@@ -112,14 +115,6 @@ public class BehaviourTreeView : GraphView
 
         {
             var types = TypeCache.GetTypesDerivedFrom<CompositeNode>();
-            foreach (var type in types)
-            {
-                evt.menu.AppendAction($"[{type.BaseType.Name}] {type.Name}", (a) => CreateNode(type));
-            }
-        }
-
-        {
-            var types = TypeCache.GetTypesDerivedFrom<DecoratorNode>();
             foreach (var type in types)
             {
                 evt.menu.AppendAction($"[{type.BaseType.Name}] {type.Name}", (a) => CreateNode(type));

@@ -23,14 +23,10 @@ public class NodeView : UnityEditor.Experimental.GraphView.Node
 
     private void CreateInputPorts()
     {
-        if(node is ActionNode)
+        if(node is LeafNode)
         {
             input = InstantiatePort(Orientation.Horizontal, Direction.Input, Port.Capacity.Single, typeof(bool)); 
         } else if(node is CompositeNode)
-        {
-            input = InstantiatePort(Orientation.Horizontal, Direction.Input, Port.Capacity.Single, typeof(bool));
-        }
-        else if (node is DecoratorNode)
         {
             input = InstantiatePort(Orientation.Horizontal, Direction.Input, Port.Capacity.Single, typeof(bool));
         }
@@ -47,16 +43,12 @@ public class NodeView : UnityEditor.Experimental.GraphView.Node
 
     private void CreateOutputPorts()
     {
-        if (node is ActionNode)
+        if (node is LeafNode)
         {
         }
         else if (node is CompositeNode)
         {
             output = InstantiatePort(Orientation.Horizontal, Direction.Output, Port.Capacity.Multi, typeof(bool));
-        }
-        else if (node is DecoratorNode)
-        {
-            output = InstantiatePort(Orientation.Horizontal, Direction.Output, Port.Capacity.Single, typeof(bool));
         }
         else if (node is RootNode)
         {

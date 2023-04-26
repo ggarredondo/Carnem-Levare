@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &-740057153848355967
+--- !u!114 &-7852469792761515781
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -10,13 +10,28 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 931b2b08cc23bed4e96e5471c6d7f220, type: 3}
-  m_Name: DebugLogNode
+  m_Name: LeafMenu
   m_EditorClassIdentifier: 
-  state: 0
-  started: 0
-  guid: 8de4eb14904311448afa86c4d4e5c2e4
-  position: {x: 551.44, y: 182}
-  message: EYYYY
+  selected: 0
+  guid: 16f4b3856c8977e4e8d8695cdfcf775c
+  position: {x: 598, y: 306}
+  message: ': Hijo3'
+--- !u!114 &-1354760158581339625
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 931b2b08cc23bed4e96e5471c6d7f220, type: 3}
+  m_Name: LeafMenu
+  m_EditorClassIdentifier: 
+  selected: 0
+  guid: 4e9dfa48f9237c64f9222c308c8b78e3
+  position: {x: 598, y: 152}
+  message: ': Hijo1'
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -29,12 +44,30 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bcbb20d63d5c9934db7d1317750ba75b, type: 3}
   m_Name: Test
   m_EditorClassIdentifier: 
-  rootNode: {fileID: 7256805782942339841}
-  treeState: 0
+  rootNode: {fileID: 7144695608894762535}
   nodes:
-  - {fileID: 7256805782942339841}
-  - {fileID: -740057153848355967}
---- !u!114 &7256805782942339841
+  - {fileID: 7144695608894762535}
+  - {fileID: 7836016636037283239}
+  - {fileID: -1354760158581339625}
+  - {fileID: 1837639527223209952}
+  - {fileID: -7852469792761515781}
+--- !u!114 &1837639527223209952
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 931b2b08cc23bed4e96e5471c6d7f220, type: 3}
+  m_Name: LeafMenu
+  m_EditorClassIdentifier: 
+  selected: 0
+  guid: e07128fc5dff6d54cbbe6b82893a8de7
+  position: {x: 598, y: 229}
+  message: ': Hijo2'
+--- !u!114 &7144695608894762535
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -46,8 +79,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ca4a74c2e47db2847a054984e3d5b680, type: 3}
   m_Name: RootNode
   m_EditorClassIdentifier: 
-  state: 0
-  started: 0
-  guid: e42dcaf22bdf8234c8d285391c455f2c
-  position: {x: 293.68, y: 182.36}
-  child: {fileID: -740057153848355967}
+  selected: 0
+  guid: daa6519e899320d48b27c2b78d76a5a2
+  position: {x: 164, y: 229}
+  child: {fileID: 7836016636037283239}
+--- !u!114 &7836016636037283239
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4cd0ee1d78d28d4418662a63ef8ff17c, type: 3}
+  m_Name: StandardMenu
+  m_EditorClassIdentifier: 
+  selected: 0
+  guid: 2c9f61d6621c70944b9d3738529d9c30
+  position: {x: 344, y: 229}
+  children:
+  - {fileID: -1354760158581339625}
+  - {fileID: 1837639527223209952}
+  - {fileID: -7852469792761515781}

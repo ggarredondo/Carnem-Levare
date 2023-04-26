@@ -7,10 +7,6 @@ public class BehaviourTreeRunner : MonoBehaviour
     private void Start()
     {
         tree = tree.Clone();
-    }
-
-    void Update()
-    {
-        tree.Update();
+        tree.Initialize();
     }
 }
