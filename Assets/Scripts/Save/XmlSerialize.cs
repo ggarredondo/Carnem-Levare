@@ -12,8 +12,6 @@ public class XmlSerialize
         FileStream stream = new(dataPath + "/" + save.name + ".save", FileMode.Create);
         serializer.Serialize(stream, save);
         stream.Close();
-
-        Debug.Log("Saved");
     }
 
     public SaveSlot Load(in SaveSlot save)
@@ -27,8 +25,6 @@ public class XmlSerialize
             FileStream stream = new(dataPath + "/" + save.name + ".save", FileMode.Open);
             newSave = serializer.Deserialize(stream) as SaveSlot;
             stream.Close();
-
-            Debug.Log("Loaded");
         }
         else Debug.LogWarning(save.name + " not exists, no files to load");
 
