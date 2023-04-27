@@ -41,7 +41,6 @@ GameObject:
   m_Component:
   - component: {fileID: 5492428253953418130}
   - component: {fileID: 125701324109848622}
-  - component: {fileID: 3986532354630737285}
   m_Layer: 7
   m_Name: RightFistHitbox
   m_TagString: Untagged
@@ -77,18 +76,6 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 0.1
   m_Center: {x: 0, y: 0.1, z: 0}
---- !u!114 &3986532354630737285
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 757594020485207388}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 218ae39d232858e45940a32735985be4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &2819938756772241842
 GameObject:
   m_ObjectHideFlags: 0
@@ -252,7 +239,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4530388803358255088}
   - component: {fileID: 1145502306408624781}
-  - component: {fileID: 692432875193982508}
   m_Layer: 7
   m_Name: LeftFistHitbox
   m_TagString: Untagged
@@ -288,18 +274,6 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 0.1
   m_Center: {x: 0, y: 0.1, z: 0}
---- !u!114 &692432875193982508
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6258304511305694117}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 218ae39d232858e45940a32735985be4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &7481606168176345811
 GameObject:
   m_ObjectHideFlags: 0
@@ -428,7 +402,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   trackingRate: 15
   doTracking: 1
-  walkingDirectionSpeed: 10
+  movingDirectionSpeed: 10
   idleDirectionSpeed: 5
 --- !u!114 &6806862736692178901
 MonoBehaviour:

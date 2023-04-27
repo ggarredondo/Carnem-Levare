@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 using System;
 
@@ -7,6 +8,7 @@ public abstract class Character : MonoBehaviour
     protected CharacterMovement movement;
     protected CharacterStats stats;
     protected CharacterAnimation characAnimation;
+    [SerializeField] private List<Move> moveList;
 
     protected IState currentState;
     protected WalkingState walkingState;
@@ -54,6 +56,7 @@ public abstract class Character : MonoBehaviour
     // Public
     public ref readonly Controller Controller { get => ref controller; }
     public ref readonly CharacterMovement Movement { get => ref movement; }
+    public ref readonly List<Move> MoveList { get => ref moveList; }
 
     public ref readonly WalkingState WalkingState { get => ref walkingState; }
     public ref readonly BlockingState BlockingState { get => ref blockingState; }

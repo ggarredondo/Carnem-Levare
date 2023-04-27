@@ -7,7 +7,6 @@ TagManager:
   - SFX
   - MUSIC
   - UI
-  - HITBOX
   - Enemy
   - TARGET_GROUP
   - CAMERA

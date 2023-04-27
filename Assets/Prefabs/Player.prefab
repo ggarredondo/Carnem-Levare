@@ -356,7 +356,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   trackingRate: 15
   doTracking: 1
-  movingDirectionSpeed: 1
+  movingDirectionSpeed: 10
   idleDirectionSpeed: 5
 --- !u!114 &4135794495997487276
 MonoBehaviour:
@@ -383,6 +383,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c52d680fb89ff034fbd4f8c0645dc7f7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  moveList: []
 --- !u!54 &2794588595183348619
 Rigidbody:
   m_ObjectHideFlags: 0

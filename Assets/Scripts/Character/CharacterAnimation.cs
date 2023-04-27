@@ -13,11 +13,11 @@ public class CharacterAnimation : MonoBehaviour
 
         character.Movement.OnMoveCharacter += MoveAnimation;
 
-        character.WalkingState.OnEnter += EnterWalkingState;
-        character.WalkingState.OnExit += ExitWalkingState;
+        character.WalkingState.OnEnter += () => EnterState("STATE_WALKING");
+        character.WalkingState.OnExit += () => ExitState("STATE_WALKING");
 
-        character.BlockingState.OnEnter += EnterBlockingState;
-        character.BlockingState.OnExit += ExitBlockingState;
+        character.BlockingState.OnEnter += () => EnterState("STATE_BLOCKING");
+        character.BlockingState.OnExit += () => ExitState("STATE_BLOCKING");
     }
 
     private void OnValidate()
@@ -31,9 +31,6 @@ public class CharacterAnimation : MonoBehaviour
         animator.SetFloat("vertical", direction.y);
     }
 
-    private void EnterWalkingState() { animator.SetBool("STATE_WALKING", true); }
-    private void ExitWalkingState() { animator.SetBool("STATE_WALKING", false); }
-
-    private void EnterBlockingState() { animator.SetBool("STATE_BLOCKING", true); }
-    private void ExitBlockingState() { animator.SetBool("STATE_BLOCKING", false); }
+    private void EnterState(string stateName) { animator.SetBool(stateName, true); }
+    private void ExitState(string stateName) { animator.SetBool(stateName, false); }
 }

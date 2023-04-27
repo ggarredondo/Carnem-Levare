@@ -15,12 +15,15 @@ MonoBehaviour:
   moveName: 
   animation: {fileID: 0}
   animationSpeed: 0
+  initMove: 
   startUp: 0
   active: 0
   recovery: 0
+  hitSound: 
+  blockedSound: 
   advantageOnBlock: 0
   advantageOnHit: 0
-  hitboxTag: LeftFist
+  hitboxTag: HITBOX/LEFT_FIST
   baseDamage: 0
   baseStagger: 0
   unblockable: 1
