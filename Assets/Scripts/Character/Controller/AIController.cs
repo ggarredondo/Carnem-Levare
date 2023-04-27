@@ -9,7 +9,6 @@ public class AIController : Controller
     {
         movementVector.x = horizontal;
         movementVector.y = vertical;
-        if (block) OnDoBlockInvoke();
-        else OnStopBlockInvoke();
+        OnDoBlockInvoke(block);
     }
 }

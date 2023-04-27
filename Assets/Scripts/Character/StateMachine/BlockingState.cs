@@ -2,24 +2,32 @@ using System;
 
 public class BlockingState : IState
 {
+    private readonly Character character;
     public event Action OnEnter, OnExit;
+    private Action<bool> transitionToWalking;
 
-    public void Enter(in Character character)
+    public BlockingState(in Character character)
     {
-        character.Controller.OnStopBlock += character.TransitionToWalking;
+        this.character = character;
+        transitionToWalking = (bool done) => { if (!done) this.character.ChangeState(this.character.WalkingState); };
+    }
+
+    public void Enter()
+    {
+        character.Controller.OnDoBlock += transitionToWalking;
         OnEnter?.Invoke();
     }
-    public void Update(in Character character)
+    public void Update()
     {
         character.Movement.MoveCharacter(character.Controller.MovementVector);
     }
-    public void FixedUpdate(in Character character)
+    public void FixedUpdate()
     {
         character.Movement.LookAtTarget();
     }
-    public void Exit(in Character character)
+    public void Exit()
     {
-        character.Controller.OnStopBlock -= character.TransitionToWalking;
+        character.Controller.OnDoBlock -= transitionToWalking;
         OnExit?.Invoke();
     }
 }

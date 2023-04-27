@@ -7,10 +7,9 @@ public class InputController : Controller
     {
         movementVector = context.ReadValue<Vector2>();
     }
-    public void DoBlock(InputAction.CallbackContext context)
+    public void HoldBlock(InputAction.CallbackContext context)
     {
-        if (context.performed) OnDoBlockInvoke();
-        else OnStopBlockInvoke();
+        OnDoBlockInvoke(context.performed);
     }
 
     public void Action0(InputAction.CallbackContext context)

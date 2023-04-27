@@ -14560,7 +14560,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1216391173}
         m_TargetAssemblyTypeName: InputController, Assembly-CSharp
-        m_MethodName: DoBlock
+        m_MethodName: HoldBlock
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

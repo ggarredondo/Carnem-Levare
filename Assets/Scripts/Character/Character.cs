@@ -14,13 +14,11 @@ public abstract class Character : MonoBehaviour
     protected WalkingState walkingState;
     protected BlockingState blockingState;
 
-    private Action transitionToWalking, transitionToBlocking;
-
     // Initializers
     protected virtual void Awake()
     {
-        walkingState = new WalkingState();
-        blockingState = new BlockingState();
+        walkingState = new WalkingState(this);
+        blockingState = new BlockingState(this);
 
         movement = GetComponent<CharacterMovement>();
         movement.Initialize();
@@ -31,8 +29,6 @@ public abstract class Character : MonoBehaviour
         characAnimation = GetComponent<CharacterAnimation>();
         characAnimation.Initialize();
 
-        transitionToWalking = () => ChangeState(walkingState);
-        transitionToBlocking = () => ChangeState(blockingState);
         ChangeState(walkingState);
     }
     protected virtual void Start() {}
@@ -40,17 +36,17 @@ public abstract class Character : MonoBehaviour
     // State handler
     protected virtual void Update()
     {
-        currentState.Update(this);
+        currentState.Update();
     }
     protected virtual void FixedUpdate()
     {
-        currentState.FixedUpdate(this);
+        currentState.FixedUpdate();
     }
-    protected void ChangeState(in IState newState)
+    public void ChangeState(in IState newState)
     {
-        if (currentState != null) currentState.Exit(this);
+        if (currentState != null) currentState.Exit();
         currentState = newState;
-        currentState.Enter(this);
+        currentState.Enter();
     }
 
     // Public
@@ -60,7 +56,4 @@ public abstract class Character : MonoBehaviour
 
     public ref readonly WalkingState WalkingState { get => ref walkingState; }
     public ref readonly BlockingState BlockingState { get => ref blockingState; }
-
-    public ref readonly Action TransitionToWalking { get => ref transitionToWalking; }
-    public ref readonly Action TransitionToBlocking { get => ref transitionToBlocking; }
 }
