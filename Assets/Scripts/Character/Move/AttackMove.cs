@@ -3,6 +3,11 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "Scriptable Objects/AttackMove")]
 public class AttackMove : Move
 {
+    [Header("Attack-specific Sound")]
+    [SerializeField] private string hitSound;
+    [SerializeField] private string blockedSound;
+
+    [Header("Attack-specific Time Data (ms)")]
     [SerializeField] private double advantageOnBlock;
     [SerializeField] private double advantageOnHit;
 
@@ -23,7 +28,6 @@ public class AttackMove : Move
     {
         // hitbox.Activate();
     }
-
     public override void DeactivateMove()
     {
         // hitbox.Deactivate();

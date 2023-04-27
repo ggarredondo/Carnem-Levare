@@ -9,6 +9,9 @@ public abstract class Move : ScriptableObject
     [SerializeField] private AnimationClip animation;
     [SerializeField] private float animationSpeed = 1f;
 
+    [Header("Move Sound")]
+    [SerializeField] private string initMove;
+
     [Header("Time Data (ms)")]
     [SerializeField] private double startUp;
     [SerializeField] private double active;
@@ -44,5 +47,6 @@ public abstract class Move : ScriptableObject
     public abstract void ActivateMove();
     public abstract void DeactivateMove();
     public abstract void RecoverFromMove();
+
     public ref readonly float AnimationSpeed { get => ref animationSpeed; }
 }
