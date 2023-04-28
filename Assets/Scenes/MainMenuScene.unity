@@ -159,6 +159,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0985f09c77e69c142a23e82d32dbc834, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  input: {fileID: 11400000, guid: cb514f7bc969f1e4da23444266f585b7, type: 2}
   tree: {fileID: 11400000, guid: 8802d2f051e727b4faa324e17a249dee, type: 2}
   menus:
   - {fileID: 1887690774}
@@ -868,6 +869,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: MainMenu
+      objectReference: {fileID: 0}
+    - target: {fileID: 1955055708393937225, guid: 268a8de8c2e04b947b4676206ac396d7,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1955055708399291689, guid: 268a8de8c2e04b947b4676206ac396d7,
         type: 3}

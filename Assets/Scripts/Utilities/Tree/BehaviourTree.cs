@@ -9,7 +9,7 @@ public class BehaviourTree : ScriptableObject
     public Node rootNode;
     public List<Node> nodes = new();
     [SerializeField] private Node currentNode;
-    private readonly Stack<Node> pathNodes = new();
+    private readonly Stack<Node> nodeStack = new();
     [SerializeField] private int selectedDepth;
     public System.Action OnChange;
 
@@ -17,8 +17,8 @@ public class BehaviourTree : ScriptableObject
     {
         selectedDepth = 1;
         currentNode = GetChildren((IHaveChildren)rootNode)[0];
-        pathNodes.Clear();
-        pathNodes.Push(currentNode);
+        nodeStack.Clear();
+        nodeStack.Push(currentNode);
     }
 
     public Node CreateNode(System.Type type)
@@ -74,7 +74,7 @@ public class BehaviourTree : ScriptableObject
         if (currentNode is IHaveChildren node && node.HaveChildren()) 
         {
             currentNode = GetChildren(node)[child];
-            pathNodes.Push(currentNode);
+            nodeStack.Push(currentNode);
 
             if (currentNode is IHaveChildren newNode && newNode.Static())
             {
@@ -91,7 +91,7 @@ public class BehaviourTree : ScriptableObject
         if (currentNode is IHaveParent node)
         {
             currentNode = GetParent(node);
-            pathNodes.Pop();
+            nodeStack.Pop();
 
             if (currentNode is IHaveChildren parent && parent.Static())
             {
@@ -105,19 +105,47 @@ public class BehaviourTree : ScriptableObject
 
     private void GoToSelectableParent()
     {
-        while (pathNodes.Count > 0 && pathNodes.Peek() is not ICanSelect)
+        while (nodeStack.Count > 0 && nodeStack.Peek() is not ICanSelect)
         {
-            pathNodes.Pop();
-
-            if (pathNodes.Peek() is IHaveChildren parent && parent.Static())
+            if (nodeStack.Peek() is IHaveChildren parent && parent.Static())
                 selectedDepth--;
+
+            nodeStack.Pop();
         }
 
-        currentNode = pathNodes.Peek();
+        currentNode = nodeStack.Peek();
+    }
+
+    public void MoveToRightSibling()
+    {
+        if (nodeStack.Any(n => n is ICanSelect))
+        {
+            GoToSelectableParent();
+
+            if (currentNode is ICanSelect selectable)
+            {
+                selectable.MoveRightChild();
+                GoToChild(selectable.GetSelectedChild());
+            }
+        }
+    }
+
+    public void MoveToLeftSibling()
+    {
+        if (nodeStack.Any(n => n is ICanSelect))
+        {
+            GoToSelectableParent();
+
+            if (currentNode is ICanSelect selectable)
+            {
+                selectable.MoveLeftChild();
+                GoToChild(selectable.GetSelectedChild());
+            }
+        }
     }
 
     public List<int> GetSelected()
     {
-        return pathNodes.Take(selectedDepth).Select(node => node.id).ToList();
+        return nodeStack.Take(selectedDepth).Select(node => node.id).ToList();
     }
 }

@@ -4,14 +4,29 @@ public class SelectableMenu : CompositeNode, ICanSelect
 {
     int selectedChild;
 
-    public Node GetSelectedChild()
+    public int GetSelectedChild()
     {
-        return children[selectedChild];
+        return selectedChild;
+    }
+
+    public void MoveLeftChild()
+    {
+        selectedChild = Mod(selectedChild - 1, children.Count);
+    }
+
+    public void MoveRightChild()
+    {
+        selectedChild = Mod(selectedChild + 1, children.Count);
     }
 
     public void SelectChild(int child)
     {
         selectedChild = child % children.Count;
         Debug.Log(selectedChild);
+    }
+
+    private int Mod(int a, int b)
+    {
+        return (a % b + b) % b;
     }
 }

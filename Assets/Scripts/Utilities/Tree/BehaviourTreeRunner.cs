@@ -3,6 +3,7 @@ using UnityEngine;
 
 public class BehaviourTreeRunner : MonoBehaviour
 {
+    public InputReader input;
     public BehaviourTree tree;
     public List<GameObject> menus;
 
@@ -10,6 +11,8 @@ public class BehaviourTreeRunner : MonoBehaviour
     {
         tree.Initialize();
         tree.OnChange += ApplyChanges;
+        input.ChangeRightMenuEvent += MoveRight;
+        input.ChangeLeftMenuEvent += MoveLeft;
     }
 
     public void ChangeMenu()
@@ -24,16 +27,16 @@ public class BehaviourTreeRunner : MonoBehaviour
 
     private void ApplyChanges()
     {
-        tree.GetSelected().ForEach(id => Debug.Log(id));
+        tree.GetSelected().ForEach(id => Debug.Log("Selected: " + id));
     }
 
     public void MoveRight()
     {
-
+        tree.MoveToRightSibling();
     }
 
     public void MoveLeft()
     {
-
+        tree.MoveToLeftSibling();
     }
 }
