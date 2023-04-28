@@ -1,6 +1,6 @@
 using UnityEngine;
 
-[CreateAssetMenu(menuName = "Scriptable Objects/AttackMove")]
+[CreateAssetMenu(menuName = "Scriptable Objects/Move/AttackMove")]
 public class AttackMove : Move
 {
     [Header("Attack-specific Sound")]
@@ -22,7 +22,6 @@ public class AttackMove : Move
     {
         // hitbox = GameObject.FindGameObjectWithTag(hitboxTag).GetComponent<Hitbox>();
         // hitbox.Set(totalDamage, totalStagger, unblockable, advantages);
-        // OnInitMove.Invoke() => Sound, Animation
     }
     public override void ActivateMove()
     {

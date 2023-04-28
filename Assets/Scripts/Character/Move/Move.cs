@@ -10,7 +10,7 @@ public abstract class Move : ScriptableObject
     [SerializeField] private float animationSpeed = 1f;
 
     [Header("Move Sound")]
-    [SerializeField] private string initMove;
+    [SerializeField] private string initSound;
 
     [Header("Time Data (ms)")]
     [SerializeField] private double startUp;

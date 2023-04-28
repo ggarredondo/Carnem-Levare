@@ -10,20 +10,20 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3b1f0431d7ca2da48a12ff07183273eb, type: 3}
-  m_Name: AttackMoveTest
+  m_Name: Left Jab
   m_EditorClassIdentifier: 
-  moveName: 
-  animation: {fileID: 0}
-  animationSpeed: 0
-  initMove: 
-  startUp: 0
-  active: 0
-  recovery: 0
-  hitSound: 
-  blockedSound: 
-  advantageOnBlock: 0
-  advantageOnHit: 0
-  hitboxTag: HITBOX/LEFT_FIST
-  baseDamage: 0
+  moveName: Left Jab
+  animation: {fileID: 7400000, guid: e652c0869035b6b418eef0c72bbb19c0, type: 2}
+  animationSpeed: 1
+  initSound: Whiff_Jab
+  startUp: 200
+  active: 50
+  recovery: 300
+  hitSound: Hit_Jab
+  blockedSound: Blocked_Default
+  advantageOnBlock: 300
+  advantageOnHit: 600
+  hitboxTag: 
+  baseDamage: 10
   baseStagger: 0
-  unblockable: 1
+  unblockable: 0

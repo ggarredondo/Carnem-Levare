@@ -4,17 +4,16 @@ public class WalkingState : IState
 {
     private readonly Character character;
     public event Action OnEnter, OnExit;
-    private Action<bool> transitionToBlocking;
 
     public WalkingState(in Character character)
     {
         this.character = character;
-        transitionToBlocking = (bool done) => { if (done) this.character.ChangeState(this.character.BlockingState); };
     }
 
     public void Enter() 
     {
-        character.Controller.OnDoBlock += transitionToBlocking;
+        character.Controller.OnDoBlock += character.TransitionToBlocking;
+        character.Controller.OnDoMove += character.TransitionToAttacking;
         OnEnter?.Invoke();
     }
     public void Update() 
@@ -27,7 +26,8 @@ public class WalkingState : IState
     }
     public void Exit() 
     {
-        character.Controller.OnDoBlock -= transitionToBlocking;
+        character.Controller.OnDoBlock -= character.TransitionToBlocking;
+        character.Controller.OnDoMove -= character.TransitionToAttacking;
         OnExit?.Invoke();
     }
 }
