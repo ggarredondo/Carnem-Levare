@@ -25,19 +25,28 @@ public class BehaviourTree : ScriptableObject
     {
         Node node = CreateInstance(type) as Node;
         node.name = type.Name;
+#if UNITY_EDITOR
         node.guid = GUID.Generate().ToString();
+#endif
         nodes.Add(node);
 
+#if UNITY_EDITOR
         AssetDatabase.AddObjectToAsset(node, this);
         AssetDatabase.SaveAssets();
+#endif
+
         return node;
     }
 
     public void DeleteNode(Node node)
     {
         nodes.Remove(node);
+
+#if UNITY_EDITOR
         AssetDatabase.RemoveObjectFromAsset(node);
         AssetDatabase.SaveAssets();
+#endif
+
     }
 
     public void AddChild(IHaveChildren parent, IHaveParent child)
@@ -92,6 +101,19 @@ public class BehaviourTree : ScriptableObject
 
             if(depth == 0) OnChange.Invoke();
         }
+    }
+
+    private void GoToSelectableParent()
+    {
+        while (pathNodes.Count > 0 && pathNodes.Peek() is not ICanSelect)
+        {
+            pathNodes.Pop();
+
+            if (pathNodes.Peek() is IHaveChildren parent && parent.Static())
+                selectedDepth--;
+        }
+
+        currentNode = pathNodes.Peek();
     }
 
     public List<int> GetSelected()
