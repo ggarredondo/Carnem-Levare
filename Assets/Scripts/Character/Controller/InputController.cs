@@ -3,29 +3,29 @@ using UnityEngine.InputSystem;
 
 public class InputController : Controller
 {
-    public void DoMovement(InputAction.CallbackContext context)
+    public void PressMovement(InputAction.CallbackContext context)
     {
         movementVector = context.ReadValue<Vector2>();
     }
     public void HoldBlock(InputAction.CallbackContext context)
     {
-        OnDoBlockInvoke(context.performed);
+        DoBlock(context.performed);
     }
 
     public void Action0(InputAction.CallbackContext context)
     {
-        if (context.performed) OnDoMoveInvoke(0);
+        if (context.performed) DoMove(0);
     }
     public void Action1(InputAction.CallbackContext context)
     {
-        if (context.performed) OnDoMoveInvoke(1);
+        if (context.performed) DoMove(1);
     }
     public void Action2(InputAction.CallbackContext context)
     {
-        if (context.performed) OnDoMoveInvoke(2);
+        if (context.performed) DoMove(2);
     }
     public void Action3(InputAction.CallbackContext context)
     {
-        if (context.performed) OnDoMoveInvoke(3);
+        if (context.performed) DoMove(3);
     }
 }

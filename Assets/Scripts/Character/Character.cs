@@ -15,7 +15,7 @@ public abstract class Character : MonoBehaviour
     protected BlockingState blockingState;
     protected AttackingState attackingState;
 
-    private Action<bool> transitionToMovement;
+    private Action transitionToMovement;
     private Action<int> transitionToAttacking;
 
     // Initializers
@@ -25,7 +25,7 @@ public abstract class Character : MonoBehaviour
         blockingState = new BlockingState(this);
         attackingState = new AttackingState(this);
 
-        transitionToMovement = (bool isBlocking) => ChangeState(isBlocking ? blockingState : walkingState);
+        transitionToMovement = () => ChangeState(controller.isBlocking ? blockingState : walkingState);
         transitionToAttacking = (int moveIndex) =>
         {
             if (moveIndex >= 0 && moveIndex < moveList.Count)
@@ -69,7 +69,7 @@ public abstract class Character : MonoBehaviour
     public ref readonly CharacterMovement Movement { get => ref movement; }
     public ref readonly List<Move> MoveList { get => ref moveList; }
 
-    public ref readonly Action<bool> TransitionToMovement { get => ref transitionToMovement; }
+    public ref readonly Action TransitionToMovement { get => ref transitionToMovement; }
     public ref readonly Action<int> TransitionToAttacking { get => ref transitionToAttacking; }
 
     public ref readonly WalkingState WalkingState { get => ref walkingState; }
