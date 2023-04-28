@@ -86,7 +86,7 @@ public class BehaviourTreeView : GraphView
                 {
                     NodeView parentView = edge.output.node as NodeView;
                     NodeView childView = edge.input.node as NodeView;
-                    tree.RemoveChild((IHaveChildren) parentView.node, childView.node);
+                    tree.RemoveChild((IHaveChildren) parentView.node, (IHaveParent) childView.node);
                 }
             });
         }
@@ -96,7 +96,7 @@ public class BehaviourTreeView : GraphView
             {
                 NodeView parentView = edge.output.node as NodeView;
                 NodeView childView = edge.input.node as NodeView;
-                tree.AddChild((IHaveChildren) parentView.node, childView.node);
+                tree.AddChild((IHaveChildren) parentView.node, (IHaveParent) childView.node);
             });
         }
 

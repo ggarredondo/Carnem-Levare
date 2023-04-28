@@ -1,19 +1,14 @@
 using System.Collections.Generic;
+using UnityEngine;
 
 public class RootNode : Node, IHaveChildren
 {
-    public Node child;
+    [HideInInspector] public Node child;
 
-    public override Node Clone()
+    public void AddChild(IHaveParent child)
     {
-        RootNode node = Instantiate(this);
-        node.child = child.Clone();
-        return node;
-    }
-
-    public void AddChild(Node child)
-    {
-        this.child = child;
+        child.SetParent(this);
+        this.child = (Node) child;
     }
 
     public List<Node> GetChildren()
@@ -21,18 +16,18 @@ public class RootNode : Node, IHaveChildren
         return new List<Node>() { child };
     }
 
-    public void RemoveChild(Node Child)
+    public void RemoveChild(IHaveParent Child)
     {
         child = null;
     }
 
-    protected override void OnNotSelected()
+    public bool HaveChildren()
     {
-        child.ChangeState();
+        return child != null;
     }
 
-    protected override void OnSelected()
+    public bool Static()
     {
-        child.ChangeState();
+        return false;
     }
 }
