@@ -12,7 +12,7 @@ public class WalkingState : IState
 
     public void Enter() 
     {
-        character.Controller.OnDoBlock += character.TransitionToBlocking;
+        character.Controller.OnDoBlock += character.TransitionToMovement;
         character.Controller.OnDoMove += character.TransitionToAttacking;
         OnEnter?.Invoke();
     }
@@ -26,7 +26,7 @@ public class WalkingState : IState
     }
     public void Exit() 
     {
-        character.Controller.OnDoBlock -= character.TransitionToBlocking;
+        character.Controller.OnDoBlock -= character.TransitionToMovement;
         character.Controller.OnDoMove -= character.TransitionToAttacking;
         OnExit?.Invoke();
     }

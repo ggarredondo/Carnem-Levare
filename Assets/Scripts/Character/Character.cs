@@ -15,7 +15,7 @@ public abstract class Character : MonoBehaviour
     protected BlockingState blockingState;
     protected AttackingState attackingState;
 
-    private Action<bool> transitionToWalking, transitionToBlocking;
+    private Action<bool> transitionToMovement;
     private Action<int> transitionToAttacking;
 
     // Initializers
@@ -25,8 +25,7 @@ public abstract class Character : MonoBehaviour
         blockingState = new BlockingState(this);
         attackingState = new AttackingState(this);
 
-        transitionToWalking = (bool done) => { if (!done) ChangeState(walkingState); };
-        transitionToBlocking = (bool done) => { if (done) ChangeState(blockingState); };
+        transitionToMovement = (bool isBlocking) => ChangeState(isBlocking ? blockingState : walkingState);
         transitionToAttacking = (int moveIndex) =>
         {
             if (moveIndex >= 0 && moveIndex < moveList.Count)
@@ -58,7 +57,7 @@ public abstract class Character : MonoBehaviour
     {
         currentState.FixedUpdate();
     }
-    public void ChangeState(in IState newState)
+    protected void ChangeState(in IState newState)
     {
         if (currentState != null) currentState.Exit();
         currentState = newState;
@@ -70,8 +69,7 @@ public abstract class Character : MonoBehaviour
     public ref readonly CharacterMovement Movement { get => ref movement; }
     public ref readonly List<Move> MoveList { get => ref moveList; }
 
-    public ref readonly Action<bool> TransitionToWalking { get => ref transitionToWalking; }
-    public ref readonly Action<bool> TransitionToBlocking { get => ref transitionToBlocking; }
+    public ref readonly Action<bool> TransitionToMovement { get => ref transitionToMovement; }
     public ref readonly Action<int> TransitionToAttacking { get => ref transitionToAttacking; }
 
     public ref readonly WalkingState WalkingState { get => ref walkingState; }

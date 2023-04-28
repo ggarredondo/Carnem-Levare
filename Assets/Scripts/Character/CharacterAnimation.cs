@@ -76,7 +76,7 @@ public class CharacterAnimation : MonoBehaviour
     private void RecoverFromMove()
     {
         character.MoveList[character.AttackingState.moveIndex].RecoverFromMove();
-        character.ChangeState(character.WalkingState);
+        character.TransitionToMovement.Invoke(character.Controller.isBlocking);
     }
 
     #endregion
