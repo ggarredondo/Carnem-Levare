@@ -17,7 +17,7 @@ public abstract class Move : ScriptableObject
     [SerializeField] private double active;
     [SerializeField] private double recovery;
 
-    private void Awake()
+    private void OnEnable()
     {
         if (animation != null) AssignEvents();
     }
@@ -48,5 +48,6 @@ public abstract class Move : ScriptableObject
     public abstract void DeactivateMove();
     public abstract void RecoverFromMove();
 
+    public ref readonly AnimationClip Animation { get => ref animation; }
     public ref readonly float AnimationSpeed { get => ref animationSpeed; }
 }

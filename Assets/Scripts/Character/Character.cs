@@ -31,7 +31,7 @@ public abstract class Character : MonoBehaviour
         {
             if (moveIndex >= 0 && moveIndex < moveList.Count)
             {
-                attackingState.SetMoveIndex(moveIndex);
+                attackingState.moveIndex = moveIndex;
                 ChangeState(attackingState);
             }
         };
@@ -58,7 +58,7 @@ public abstract class Character : MonoBehaviour
     {
         currentState.FixedUpdate();
     }
-    protected void ChangeState(in IState newState)
+    public void ChangeState(in IState newState)
     {
         if (currentState != null) currentState.Exit();
         currentState = newState;

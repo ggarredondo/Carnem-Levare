@@ -1,11 +1,9 @@
 using System;
-using UnityEngine;
 
 public class AttackingState : IState
 {
     private readonly Character character;
-    private int moveIndex;
-    public void SetMoveIndex(int moveIndex) => this.moveIndex = moveIndex;
+    public int moveIndex;
     public event Action<int> OnEnter;
     public event Action OnExit;
 
