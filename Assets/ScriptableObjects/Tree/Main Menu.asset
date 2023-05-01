@@ -67,7 +67,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: bcbb20d63d5c9934db7d1317750ba75b, type: 3}
-  m_Name: Test
+  m_Name: Main Menu
   m_EditorClassIdentifier: 
   rootNode: {fileID: 7144695608894762535}
   nodes:

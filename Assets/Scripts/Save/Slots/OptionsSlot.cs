@@ -7,7 +7,7 @@ public class OptionsSlot : SaveSlot
     public float musicVolume;
     public float sfxVolume;
 
-    public int vSync;
+    public bool vSync;
     public bool fullscreen;
     public string resolution;
     public int quality;

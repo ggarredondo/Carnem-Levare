@@ -19,6 +19,7 @@ public class BehaviourTree : ScriptableObject
         currentNode = GetChildren((IHaveChildren)rootNode)[0];
         nodeStack.Clear();
         nodeStack.Push(currentNode);
+        OnChange.Invoke();
     }
 
     public Node CreateNode(System.Type type)
@@ -147,5 +148,10 @@ public class BehaviourTree : ScriptableObject
     public List<int> GetSelected()
     {
         return nodeStack.Take(selectedDepth).Select(node => node.id).ToList();
+    }
+
+    public int CurrentId()
+    {
+        return currentNode.id;
     }
 }

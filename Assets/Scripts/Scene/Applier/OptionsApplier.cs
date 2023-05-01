@@ -22,7 +22,7 @@ public class OptionsApplier : IApplier
         if (DataSaver.options.mute) audioMixer.SetFloat("MasterVolume", -80);
         else audioMixer.SetFloat("MasterVolume", Mathf.Log10(DataSaver.options.masterVolume) * 20);
 
-        QualitySettings.vSyncCount = DataSaver.options.vSync;
+        QualitySettings.vSyncCount = DataSaver.options.vSync ? 1 : 0;
 
         string[] resolutionArray = DataSaver.options.resolution.Split('x');
         Screen.SetResolution(int.Parse(resolutionArray[0]), int.Parse(resolutionArray[1]), DataSaver.options.fullscreen);

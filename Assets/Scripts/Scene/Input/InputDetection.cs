@@ -12,11 +12,6 @@ public class InputDetection
 
     public System.Action controlsChangedEvent;
 
-    public InputDetection() 
-    {
-        selected = EventSystem.current.currentSelectedGameObject;
-    }
-
     public void OnControlSchemeChanged(PlayerInput playerInput)
     {
         switch (playerInput.currentControlScheme)

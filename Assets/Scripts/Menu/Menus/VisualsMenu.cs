@@ -3,7 +3,7 @@ using UnityEngine.UI;
 using System.Collections.Generic;
 using TMPro;
 
-public class VisualsMenu : MonoBehaviour
+public class VisualsMenu : AbstractMenu
 {
 
     [Header("Toggle")]
@@ -14,11 +14,11 @@ public class VisualsMenu : MonoBehaviour
     [SerializeField] private TMP_Dropdown resolutionDropdown;
     [SerializeField] private TMP_Dropdown qualityDropdown;
 
-    private void Start()
+    protected override void Configure()
     {
         //Initilize Toggles
         fullscreenToggle.isOn = DataSaver.options.fullscreen;
-        vsyncToggle.isOn = DataSaver.options.vSync == 1;
+        vsyncToggle.isOn = DataSaver.options.vSync;
 
         //Initialize resolution Dropdown
         List<string> options = new()
@@ -48,33 +48,30 @@ public class VisualsMenu : MonoBehaviour
         qualityDropdown.ClearOptions();
         qualityDropdown.AddOptions(quality);
         qualityDropdown.value = qualityDropdown.options.FindIndex(option => option.text == quality[DataSaver.options.quality]);
+
+        vsyncToggle.onValueChanged.AddListener(Vsync);
+        fullscreenToggle.onValueChanged.AddListener(FullScreen);
+        resolutionDropdown.onValueChanged.AddListener(ChangeResolution);
+        qualityDropdown.onValueChanged.AddListener(ChangeQuality);
     }
 
-    public void Vsync(bool changeState)
+    public void Vsync(bool value)
     {
-        AudioManager.Instance.uiSfxSounds.Play("PressButton");
-        if (changeState) vsyncToggle.isOn = !vsyncToggle.isOn;
-        DataSaver.options.vSync = vsyncToggle.isOn ? 1 : 0;
-        OptionsApplier.apply.Invoke();
+        Toggle(ref DataSaver.options.vSync, value);
     }
 
-    public void FullScreen(bool changeState)
+    public void FullScreen(bool value)
     {
-        AudioManager.Instance.uiSfxSounds.Play("PressButton");
-        if (changeState) fullscreenToggle.isOn = !fullscreenToggle.isOn;
-        DataSaver.options.fullscreen = fullscreenToggle.isOn;
-        OptionsApplier.apply.Invoke();
+        Toggle(ref DataSaver.options.fullscreen, value);
     }
 
-    public void ChangeResolution()
+    public void ChangeResolution(int value)
     {
-        DataSaver.options.resolution = resolutionDropdown.options[resolutionDropdown.value].text;
-        OptionsApplier.apply.Invoke();
+        Dropdown(ref DataSaver.options.resolution, resolutionDropdown.options[value].text);
     }
 
-    public void ChangeQuality()
+    public void ChangeQuality(int value)
     {
-        DataSaver.options.quality = qualityDropdown.value;
-        OptionsApplier.apply.Invoke();
+        Dropdown(ref DataSaver.options.quality, value);
     }
 }

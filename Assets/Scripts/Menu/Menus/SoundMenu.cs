@@ -1,55 +1,46 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class SoundMenu : MonoBehaviour
+public class SoundMenu : AbstractMenu
 {
-    [Header("Sliders")]
-    [SerializeField] private Slider globalSlider;
+    [Header("Slider")]
+    [SerializeField] private Slider masterSlider;
     [SerializeField] private Slider musicSlider;
     [SerializeField] private Slider sfxSlider;
 
     [Header ("Toggle")]
     [SerializeField] private Toggle muteToggle;
 
-    private void Start()
+    protected override void Configure()
     {
-        globalSlider.value = DataSaver.options.masterVolume;
+        masterSlider.onValueChanged.AddListener(ChangeMasterVolume);
+        musicSlider.onValueChanged.AddListener(ChangeMusicVolume);
+        sfxSlider.onValueChanged.AddListener(ChangeSfxVolume);
+        muteToggle.onValueChanged.AddListener(Mute);
+
+        masterSlider.value = DataSaver.options.masterVolume;
         musicSlider.value = DataSaver.options.musicVolume;
         sfxSlider.value = DataSaver.options.sfxVolume;
-
         muteToggle.isOn = DataSaver.options.mute;
     }
 
-    public void ChangeGlobalVolume()
+    public void ChangeMasterVolume(float value)
     {
-        DataSaver.options.masterVolume = globalSlider.value;
-
-        if (DataSaver.options.musicVolume < 0.1)
-            AudioManager.Instance.Slider();
-
-        OptionsApplier.apply.Invoke();
+        Slider(ref DataSaver.options.masterVolume, value, DataSaver.options.musicVolume < 0.1);
     }
 
-    public void ChangeSfxVolume()
+    public void ChangeMusicVolume(float value)
     {
-        DataSaver.options.sfxVolume = sfxSlider.value;
-        AudioManager.Instance.Slider();
-
-        OptionsApplier.apply.Invoke();
+        Slider(ref DataSaver.options.musicVolume, value, false);
     }
 
-    public void ChangeMusicVolume()
+    public void ChangeSfxVolume(float value)
     {
-        DataSaver.options.musicVolume = musicSlider.value;
-
-        OptionsApplier.apply.Invoke();
+        Slider(ref DataSaver.options.sfxVolume, value, true);
     }
 
-    public void Mute(bool changeState)
+    public void Mute(bool value)
     {
-        AudioManager.Instance.uiSfxSounds.Play("PressButton");
-        if (changeState) muteToggle.isOn = !muteToggle.isOn;
-        DataSaver.options.mute = muteToggle.isOn;
-        OptionsApplier.apply.Invoke();
+        Toggle(ref DataSaver.options.mute, value);
     }
 }
