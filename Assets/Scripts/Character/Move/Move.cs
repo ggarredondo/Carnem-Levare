@@ -3,6 +3,7 @@ using System;
 
 public abstract class Move : ScriptableObject
 {
+    protected Character character;
     [SerializeField] private string moveName;
 
     [Header("Move Animation")]
@@ -17,8 +18,9 @@ public abstract class Move : ScriptableObject
     [SerializeField] private double active;
     [SerializeField] private double recovery;
 
-    private void OnEnable()
+    public virtual void Initialize(in Character character)
     {
+        this.character = character;
         if (animation != null) AssignEvents();
     }
 

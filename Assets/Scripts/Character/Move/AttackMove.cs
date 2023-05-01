@@ -1,4 +1,5 @@
 using UnityEngine;
+using System;
 
 [CreateAssetMenu(menuName = "Scriptable Objects/Move/AttackMove")]
 public class AttackMove : Move
@@ -13,26 +14,35 @@ public class AttackMove : Move
 
     private enum Stagger : int { Light, Medium, Hard }
     [Header("Attack Values")]
-    [SerializeField] private string hitboxTag;
+    [SerializeField] private string hitboxSubtag;
+    private Hitbox hitbox;
     [SerializeField] private float baseDamage;
     [SerializeField] private Stagger baseStagger;
     [SerializeField] private bool unblockable;
 
+    public override void Initialize(in Character character)
+    {
+        hitbox = GameObject.FindWithTag(character.HitboxPrefix + hitboxSubtag).GetComponent<Hitbox>();
+        base.Initialize(character);
+    }
+
     public override void InitMove()
     {
-        // hitbox = GameObject.FindGameObjectWithTag(hitboxTag).GetComponent<Hitbox>();
-        // hitbox.Set(totalDamage, totalStagger, unblockable, advantages);
+        hitbox.Set(hitSound, 
+            blockedSound, 
+            (float)baseStagger,
+            character.Stats.CalculateAttackDamage(baseDamage),
+            advantageOnHit, 
+            advantageOnBlock, 
+            unblockable);
     }
     public override void ActivateMove()
     {
-        // hitbox.Activate();
+        hitbox.SetActive(true);
     }
     public override void DeactivateMove()
     {
-        // hitbox.Deactivate();
+        hitbox.SetActive(false);
     }
-    public override void RecoverFromMove()
-    {
-        // volver a estado walking o blocking
-    }
+    public override void RecoverFromMove() {}
 }

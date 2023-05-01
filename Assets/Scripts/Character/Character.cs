@@ -8,7 +8,8 @@ public abstract class Character : MonoBehaviour
     protected CharacterMovement movement;
     protected CharacterStats stats;
     protected CharacterAnimation characAnimation;
-    [SerializeField] private List<Move> moveList;
+    [SerializeField] protected List<Move> moveList;
+    protected string hitboxPrefix;
 
     protected IState currentState;
     protected WalkingState walkingState;
@@ -44,6 +45,9 @@ public abstract class Character : MonoBehaviour
         characAnimation = GetComponent<CharacterAnimation>();
         characAnimation.Initialize();
 
+        foreach (Move m in moveList)
+            m.Initialize(this);
+
         ChangeState(walkingState);
     }
     protected virtual void Start() {}
@@ -67,7 +71,9 @@ public abstract class Character : MonoBehaviour
     // Public
     public ref readonly Controller Controller { get => ref controller; }
     public ref readonly CharacterMovement Movement { get => ref movement; }
+    public ref readonly CharacterStats Stats { get => ref stats; }
     public ref readonly List<Move> MoveList { get => ref moveList; }
+    public ref readonly string HitboxPrefix { get => ref hitboxPrefix; }
 
     public ref readonly Action TransitionToMovement { get => ref transitionToMovement; }
     public ref readonly Action<int> TransitionToAttacking { get => ref transitionToAttacking; }

@@ -41,13 +41,14 @@ GameObject:
   m_Component:
   - component: {fileID: 5492428253953418130}
   - component: {fileID: 125701324109848622}
+  - component: {fileID: 1603956594911505768}
   m_Layer: 7
   m_Name: RightFistHitbox
-  m_TagString: Untagged
+  m_TagString: HITBOX/ENEMY/RIGHT_FIST
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &5492428253953418130
 Transform:
   m_ObjectHideFlags: 0
@@ -76,6 +77,18 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 0.1
   m_Center: {x: 0, y: 0.1, z: 0}
+--- !u!114 &1603956594911505768
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 757594020485207388}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a82aa67ada2d32b4482db86d74ee99d3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2819938756772241842
 GameObject:
   m_ObjectHideFlags: 0
@@ -179,7 +192,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8075281543472940745}
   - component: {fileID: 8756092865474947750}
-  - component: {fileID: 1794099961038323349}
+  - component: {fileID: 6151393581290744710}
   m_Layer: 6
   m_Name: Hurtbox
   m_TagString: Untagged
@@ -215,7 +228,7 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.5, y: 1.5, z: 0.5}
   m_Center: {x: 0, y: 1, z: 0}
---- !u!114 &1794099961038323349
+--- !u!114 &6151393581290744710
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -224,11 +237,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 5343111268736411445}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aa37d1b07b10dce4a80932f87be53208, type: 3}
+  m_Script: {fileID: 11500000, guid: c7812153de0a68f4aad4dc6d0ff39d3d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  target: 4
-  character: {fileID: 7481606168508649711}
 --- !u!1 &6258304511305694117
 GameObject:
   m_ObjectHideFlags: 0
@@ -239,13 +250,14 @@ GameObject:
   m_Component:
   - component: {fileID: 4530388803358255088}
   - component: {fileID: 1145502306408624781}
+  - component: {fileID: 8298185608187347678}
   m_Layer: 7
   m_Name: LeftFistHitbox
-  m_TagString: Untagged
+  m_TagString: HITBOX/ENEMY/LEFT_FIST
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &4530388803358255088
 Transform:
   m_ObjectHideFlags: 0
@@ -274,6 +286,18 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 0.1
   m_Center: {x: 0, y: 0.1, z: 0}
+--- !u!114 &8298185608187347678
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6258304511305694117}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a82aa67ada2d32b4482db86d74ee99d3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &7481606168176345811
 GameObject:
   m_ObjectHideFlags: 0
@@ -417,6 +441,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animatorSpeed: 1
+  updateAnimations: 0
 --- !u!114 &7115871151908366452
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -429,6 +454,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bcdb3411bb47206488fa47ffe01dbf53, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  moveList: []
 --- !u!114 &5388046064025221454
 MonoBehaviour:
   m_ObjectHideFlags: 0

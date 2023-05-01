@@ -102,13 +102,14 @@ GameObject:
   m_Component:
   - component: {fileID: 8785268891604238130}
   - component: {fileID: 730847539452262329}
+  - component: {fileID: 6343724655685897838}
   m_Layer: 9
   m_Name: LeftFistHitbox
-  m_TagString: Untagged
+  m_TagString: HITBOX/PLAYER/LEFT_FIST
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &8785268891604238130
 Transform:
   m_ObjectHideFlags: 0
@@ -137,6 +138,18 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 0.1
   m_Center: {x: 0, y: 0.1, z: 0}
+--- !u!114 &6343724655685897838
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1861379024506984188}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a82aa67ada2d32b4482db86d74ee99d3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2174714693114535593
 GameObject:
   m_ObjectHideFlags: 0
@@ -371,6 +384,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animatorSpeed: 1
+  updateAnimations: 0
 --- !u!114 &252810768578259016
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -572,13 +586,14 @@ GameObject:
   m_Component:
   - component: {fileID: 6481368992884126611}
   - component: {fileID: 3814267820771970520}
+  - component: {fileID: 2801868370514863915}
   m_Layer: 9
   m_Name: RightFistHitbox
-  m_TagString: Untagged
+  m_TagString: HITBOX/PLAYER/RIGHT_FIST
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &6481368992884126611
 Transform:
   m_ObjectHideFlags: 0
@@ -607,6 +622,18 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 0.1
   m_Center: {x: 0, y: 0.1, z: 0}
+--- !u!114 &2801868370514863915
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7620172225672357468}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a82aa67ada2d32b4482db86d74ee99d3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &8701218226778750285
 GameObject:
   m_ObjectHideFlags: 0
@@ -617,6 +644,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5916916886283982682}
   - component: {fileID: 4941813015266750535}
+  - component: {fileID: 6700125651392782015}
   m_Layer: 8
   m_Name: Hurtbox
   m_TagString: Untagged
@@ -652,6 +680,18 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.5, y: 1.5, z: 0.5}
   m_Center: {x: 0, y: 1, z: 0}
+--- !u!114 &6700125651392782015
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8701218226778750285}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c7812153de0a68f4aad4dc6d0ff39d3d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &4706402254103989476
 PrefabInstance:
   m_ObjectHideFlags: 0

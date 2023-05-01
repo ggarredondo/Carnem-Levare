@@ -23,7 +23,7 @@ MonoBehaviour:
   blockedSound: Blocked_Default
   advantageOnBlock: 300
   advantageOnHit: 600
-  hitboxTag: 
+  hitboxSubtag: LEFT_FIST
   baseDamage: 10
   baseStagger: 0
   unblockable: 0
