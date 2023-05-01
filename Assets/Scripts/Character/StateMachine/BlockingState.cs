@@ -5,10 +5,7 @@ public class BlockingState : IState
     private readonly Character character;
     public event Action OnEnter, OnExit;
 
-    public BlockingState(in Character character)
-    {
-        this.character = character;
-    }
+    public BlockingState(in Character character) => this.character = character;
 
     public void Enter()
     {

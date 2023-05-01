@@ -5,10 +5,7 @@ public class WalkingState : IState
     private readonly Character character;
     public event Action OnEnter, OnExit;
 
-    public WalkingState(in Character character)
-    {
-        this.character = character;
-    }
+    public WalkingState(in Character character) => this.character = character;
 
     public void Enter() 
     {

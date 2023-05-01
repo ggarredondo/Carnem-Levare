@@ -20,14 +20,14 @@ public class HurtboxOld : MonoBehaviour
     [SerializeField] private GameObject character;
     private CharacterLogic logicHandler;
     private CharacterAnimationOld animationHandler;
-    private CharacterAudio audioHandler;
+    private CharacterAudioOld audioHandler;
     private HitboxOld hitbox;
 
     private void Awake()
     {
         logicHandler = character.GetComponent<CharacterLogic>();
         animationHandler = character.GetComponent<CharacterAnimationOld>();
-        audioHandler = character.GetComponent<CharacterAudio>();
+        audioHandler = character.GetComponent<CharacterAudioOld>();
     }
 
     private void OnTriggerEnter(Collider other)

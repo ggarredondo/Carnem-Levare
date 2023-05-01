@@ -32,5 +32,6 @@ public class CharacterStats : MonoBehaviour
 
     public ref readonly float Stamina { get => ref stamina; }
     public ref readonly float MaxStamina { get => ref maxStamina; }
+    public ref readonly float BlockingMultiplier { get => ref blockingMultiplier; }
     public ref readonly float ComboDecay { get => ref comboDecay; }
 }

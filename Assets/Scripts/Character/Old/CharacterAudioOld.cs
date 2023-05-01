@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class CharacterAudio : MonoBehaviour
+public class CharacterAudioOld : MonoBehaviour
 {
     CharacterLogic logicHandler;
     CharacterAnimationOld animationHandler;

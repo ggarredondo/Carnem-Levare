@@ -3,9 +3,10 @@ using System;
 public class AttackingState : IState
 {
     private readonly Character character;
-    public int moveIndex;
     public event Action<int> OnEnter;
     public event Action OnExit;
+
+    public int moveIndex;
 
     public AttackingState(in Character character) => this.character = character;
 

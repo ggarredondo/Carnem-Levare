@@ -1,5 +1,4 @@
 using UnityEngine;
-using System;
 
 [CreateAssetMenu(menuName = "Scriptable Objects/Move/AttackMove")]
 public class AttackMove : Move

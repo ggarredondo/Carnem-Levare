@@ -59,6 +59,13 @@ public class CharacterAnimation : MonoBehaviour
         animator.SetFloat("vertical", direction.y);
     }
 
+    private void TriggerHurtAnimation(float target, float stagger)
+    {
+        animator.SetFloat("hurt_target", target);
+        animator.SetFloat("hurt_stagger", stagger);
+        animator.SetTrigger("hurt");
+    }
+
     #region Animation Events
 
     private void InitMove() 

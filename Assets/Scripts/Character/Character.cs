@@ -8,6 +8,7 @@ public abstract class Character : MonoBehaviour
     protected CharacterMovement movement;
     protected CharacterStats stats;
     protected CharacterAnimation characAnimation;
+    protected CharacterAudio characAudio;
     [SerializeField] protected List<Move> moveList;
     protected string hitboxPrefix;
 
@@ -15,6 +16,8 @@ public abstract class Character : MonoBehaviour
     protected WalkingState walkingState;
     protected BlockingState blockingState;
     protected AttackingState attackingState;
+    protected HurtState hurtState;
+    protected BlockedState blockedState;
 
     private Action transitionToMovement;
     private Action<int> transitionToAttacking;
@@ -25,6 +28,8 @@ public abstract class Character : MonoBehaviour
         walkingState = new WalkingState(this);
         blockingState = new BlockingState(this);
         attackingState = new AttackingState(this);
+        hurtState = new HurtState(this);
+        blockedState = new BlockedState(this);
 
         transitionToMovement = () => ChangeState(controller.isBlocking ? blockingState : walkingState);
         transitionToAttacking = (int moveIndex) =>
@@ -45,8 +50,9 @@ public abstract class Character : MonoBehaviour
         characAnimation = GetComponent<CharacterAnimation>();
         characAnimation.Initialize();
 
-        foreach (Move m in moveList)
-            m.Initialize(this);
+        characAudio = new CharacterAudio(this);
+
+        moveList.ForEach(move => move.Initialize(this));
 
         ChangeState(walkingState);
     }
@@ -78,6 +84,7 @@ public abstract class Character : MonoBehaviour
     public ref readonly Action TransitionToMovement { get => ref transitionToMovement; }
     public ref readonly Action<int> TransitionToAttacking { get => ref transitionToAttacking; }
 
+    public ref readonly IState CurrentState { get => ref currentState; }
     public ref readonly WalkingState WalkingState { get => ref walkingState; }
     public ref readonly BlockingState BlockingState { get => ref blockingState; }
     public ref readonly AttackingState AttackingState { get => ref attackingState; }
