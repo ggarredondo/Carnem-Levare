@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using UnityEngine;
 using System;
 
@@ -9,7 +8,6 @@ public abstract class Character : MonoBehaviour
     protected CharacterStats stats;
     protected CharacterAnimation characAnimation;
     protected CharacterAudio characAudio;
-    [SerializeField] protected List<Move> moveList;
     protected string hitboxPrefix;
 
     protected IState currentState;
@@ -34,7 +32,7 @@ public abstract class Character : MonoBehaviour
         transitionToMovement = () => ChangeState(controller.isBlocking ? blockingState : walkingState);
         transitionToAttacking = (int moveIndex) =>
         {
-            if (moveIndex >= 0 && moveIndex < moveList.Count)
+            if (moveIndex >= 0 && moveIndex < stats.MoveList.Count)
             {
                 attackingState.moveIndex = moveIndex;
                 ChangeState(attackingState);
@@ -52,7 +50,7 @@ public abstract class Character : MonoBehaviour
 
         characAudio = new CharacterAudio(this);
 
-        moveList.ForEach(move => move.Initialize(this));
+        stats.MoveList.ForEach(move => move.Initialize(this));
 
         ChangeState(walkingState);
     }
@@ -78,7 +76,6 @@ public abstract class Character : MonoBehaviour
     public ref readonly Controller Controller { get => ref controller; }
     public ref readonly CharacterMovement Movement { get => ref movement; }
     public ref readonly CharacterStats Stats { get => ref stats; }
-    public ref readonly List<Move> MoveList { get => ref moveList; }
     public ref readonly string HitboxPrefix { get => ref hitboxPrefix; }
 
     public ref readonly Action TransitionToMovement { get => ref transitionToMovement; }

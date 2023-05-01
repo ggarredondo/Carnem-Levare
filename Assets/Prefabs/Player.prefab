@@ -355,6 +355,8 @@ MonoBehaviour:
   height: 1
   mass: 1
   drag: 0
+  moveList:
+  - {fileID: 11400000, guid: cb8a3bef13b8ff948b45889b9d0268de, type: 2}
 --- !u!114 &7148219384131829495
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -397,8 +399,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c52d680fb89ff034fbd4f8c0645dc7f7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveList:
-  - {fileID: 11400000, guid: cb8a3bef13b8ff948b45889b9d0268de, type: 2}
 --- !u!54 &2794588595183348619
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -692,6 +692,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c7812153de0a68f4aad4dc6d0ff39d3d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  target: 0
+  character: {fileID: 0}
 --- !u!1001 &4706402254103989476
 PrefabInstance:
   m_ObjectHideFlags: 0

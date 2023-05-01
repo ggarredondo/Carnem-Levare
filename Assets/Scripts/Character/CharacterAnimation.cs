@@ -46,10 +46,10 @@ public class CharacterAnimation : MonoBehaviour
 
     private void UpdateMovesetAnimations()
     {
-        for (int i = 0; i < character.MoveList.Count; ++i)
+        for (int i = 0; i < character.Stats.MoveList.Count; ++i)
         {
-            UpdateAnimation("MoveClip" + i, character.MoveList[i].Animation);
-            animator.SetFloat("move" + i + "_speed", character.MoveList[i].AnimationSpeed);
+            UpdateAnimation("MoveClip" + i, character.Stats.MoveList[i].Animation);
+            animator.SetFloat("move" + i + "_speed", character.Stats.MoveList[i].AnimationSpeed);
         }
     }
 
@@ -70,19 +70,19 @@ public class CharacterAnimation : MonoBehaviour
 
     private void InitMove() 
     {
-        character.MoveList[character.AttackingState.moveIndex].InitMove();
+        character.Stats.MoveList[character.AttackingState.moveIndex].InitMove();
     }
     private void ActivateMove() 
     {
-        character.MoveList[character.AttackingState.moveIndex].ActivateMove();
+        character.Stats.MoveList[character.AttackingState.moveIndex].ActivateMove();
     }
     private void DeactivateMove() 
     {
-        character.MoveList[character.AttackingState.moveIndex].DeactivateMove();
+        character.Stats.MoveList[character.AttackingState.moveIndex].DeactivateMove();
     }
     private void RecoverFromMove()
     {
-        character.MoveList[character.AttackingState.moveIndex].RecoverFromMove();
+        character.Stats.MoveList[character.AttackingState.moveIndex].RecoverFromMove();
         character.TransitionToMovement.Invoke();
     }
 

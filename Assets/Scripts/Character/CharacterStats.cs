@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class CharacterStats : MonoBehaviour
@@ -12,6 +13,8 @@ public class CharacterStats : MonoBehaviour
     [SerializeField] private float comboDecay = 200f;
 
     [SerializeField] [InitializationField] private float height = 1f, mass = 1f, drag;
+
+    [SerializeField] protected List<Move> moveList;
 
     public void Initialize()
     {
@@ -34,4 +37,5 @@ public class CharacterStats : MonoBehaviour
     public ref readonly float MaxStamina { get => ref maxStamina; }
     public ref readonly float BlockingMultiplier { get => ref blockingMultiplier; }
     public ref readonly float ComboDecay { get => ref comboDecay; }
+    public ref readonly List<Move> MoveList { get => ref moveList; }
 }
