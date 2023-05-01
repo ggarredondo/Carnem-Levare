@@ -38,11 +38,11 @@ public class CharacterAnimationOld : MonoBehaviour
         animator.SetFloat("horizontal", logicHandler.Direction.x);
         animator.SetFloat("vertical", logicHandler.Direction.y);
 
-        animator.SetBool("STATE_WALKING", logicHandler.State == CharacterState.WALKING);
-        animator.SetBool("STATE_BLOCKING", logicHandler.State == CharacterState.BLOCKING);
-        animator.SetBool("STATE_HURT", logicHandler.State == CharacterState.HURT);
-        animator.SetBool("STATE_BLOCKED", logicHandler.State == CharacterState.BLOCKED);
-        animator.SetBool("STATE_KO", logicHandler.State == CharacterState.KO);
+        animator.SetBool("STATE_WALKING", logicHandler.State == CharacterStateOld.WALKING);
+        animator.SetBool("STATE_BLOCKING", logicHandler.State == CharacterStateOld.BLOCKING);
+        animator.SetBool("STATE_HURT", logicHandler.State == CharacterStateOld.HURT);
+        animator.SetBool("STATE_BLOCKED", logicHandler.State == CharacterStateOld.BLOCKED);
+        animator.SetBool("STATE_KO", logicHandler.State == CharacterStateOld.KO);
     }
 
     #region AnimatorOverride

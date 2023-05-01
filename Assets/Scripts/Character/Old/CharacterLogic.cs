@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine.Events;
 
 public enum Entity { Player, Enemy }
-public enum CharacterState { WALKING, BLOCKING, ATTACKING, HURT, BLOCKED, KO }
+public enum CharacterStateOld { WALKING, BLOCKING, ATTACKING, HURT, BLOCKED, KO }
 
 public abstract class CharacterLogic : MonoBehaviour
 {
@@ -43,7 +43,7 @@ public abstract class CharacterLogic : MonoBehaviour
     protected Vector2 direction, directionTarget;
     protected float directionSpeed;
 
-    [SerializeField] [ReadOnlyField] protected CharacterState state = CharacterState.WALKING;
+    [SerializeField] [ReadOnlyField] protected CharacterStateOld state = CharacterStateOld.WALKING;
     private bool blockPressed, isBlocking, canAttack;
     private int moveIndex = 0;
     private bool hurtExceptions;
@@ -77,25 +77,25 @@ public abstract class CharacterLogic : MonoBehaviour
 
     protected virtual void Update()
     {
-        hurtExceptions = state == CharacterState.KO || noDamage;
-        canAttack = state == CharacterState.WALKING || state == CharacterState.BLOCKING;
+        hurtExceptions = state == CharacterStateOld.KO || noDamage;
+        canAttack = state == CharacterStateOld.WALKING || state == CharacterStateOld.BLOCKING;
 
         switch (state)
         {
-            case CharacterState.WALKING: 
-            case CharacterState.BLOCKING:
-                state = blockPressed ? CharacterState.BLOCKING : CharacterState.WALKING;
+            case CharacterStateOld.WALKING: 
+            case CharacterStateOld.BLOCKING:
+                state = blockPressed ? CharacterStateOld.BLOCKING : CharacterStateOld.WALKING;
                 // Softens movement by establishing the direction as a point that approaches the target direction at *directionSpeed* rate.
                 direction = Vector2.Lerp(direction, directionTarget, directionSpeed * Time.deltaTime);
 
                 hitCounter = 0;
-                if (stamina <= 0) state = CharacterState.KO;
+                if (stamina <= 0) state = CharacterStateOld.KO;
                 break;
 
-            case CharacterState.ATTACKING:
-            case CharacterState.HURT:
-            case CharacterState.BLOCKED:
-                if (stamina <= 0) state = CharacterState.KO;
+            case CharacterStateOld.ATTACKING:
+            case CharacterStateOld.HURT:
+            case CharacterStateOld.BLOCKED:
+                if (stamina <= 0) state = CharacterStateOld.KO;
                 break;
         }
     }
@@ -126,7 +126,7 @@ public abstract class CharacterLogic : MonoBehaviour
 
     private void InitializeAttack()
     {
-        state = CharacterState.ATTACKING;
+        state = CharacterStateOld.ATTACKING;
         // Assign move data to hitbox. Must be done this way because hitboxes are reusable.
         hitboxes[(int)moveset[moveIndex].HitboxType].Set(moveset[moveIndex].Power, 
             CalculateAttackDamage(moveset[moveIndex].BaseDamage),
@@ -139,7 +139,7 @@ public abstract class CharacterLogic : MonoBehaviour
     private void ActivateHitbox() { hitboxes[(int)moveset[moveIndex].HitboxType].Activate(true); }
     private void DeactivateHitbox() { hitboxes[(int)moveset[moveIndex].HitboxType].Activate(false); }
     private void ResetState() {
-        state = blockPressed ? CharacterState.BLOCKING : CharacterState.WALKING;
+        state = blockPressed ? CharacterStateOld.BLOCKING : CharacterStateOld.WALKING;
     }
 
     /// <summary>
@@ -163,8 +163,8 @@ public abstract class CharacterLogic : MonoBehaviour
     /// <param name="disadvantageOnHit">How much time (ms) does the character take in hit animation.</param>
     public virtual void Damage(float dmg, bool unblockable, float disadvantageOnBlock, float disadvantageOnHit)
     {
-        isBlocking = (state == CharacterState.BLOCKING || state == CharacterState.BLOCKED) && !unblockable;
-        state = isBlocking ? CharacterState.BLOCKED : CharacterState.HURT;
+        isBlocking = (state == CharacterStateOld.BLOCKING || state == CharacterStateOld.BLOCKED) && !unblockable;
+        state = isBlocking ? CharacterStateOld.BLOCKED : CharacterStateOld.HURT;
 
         disadvantage = isBlocking ? disadvantageOnBlock : disadvantageOnHit;
         disadvantage = DisadvantageDecay(disadvantage, hitCounter, comboDecay);
@@ -186,7 +186,7 @@ public abstract class CharacterLogic : MonoBehaviour
     #region PublicMethods
 
     public Entity Entity { get => entity; }
-    public CharacterState State { get => state; }
+    public CharacterStateOld State { get => state; }
 
     public int currentIndex { get => moveIndex; }
     public MoveOld currentMove { get => moveset[moveIndex]; }
@@ -208,11 +208,11 @@ public abstract class CharacterLogic : MonoBehaviour
     /// </summary>
     public Vector2 Direction { get => direction; }
 
-    public bool IsMoving { get => directionTarget.magnitude != 0f && (state == CharacterState.WALKING || state == CharacterState.BLOCKING); }
-    public bool IsIdle { get => directionTarget.magnitude == 0f && (state == CharacterState.WALKING || state == CharacterState.BLOCKING); }
+    public bool IsMoving { get => directionTarget.magnitude != 0f && (state == CharacterStateOld.WALKING || state == CharacterStateOld.BLOCKING); }
+    public bool IsIdle { get => directionTarget.magnitude == 0f && (state == CharacterStateOld.WALKING || state == CharacterStateOld.BLOCKING); }
     public bool CanAttack { get => canAttack; }
-    public bool IsAttacking { get => state == CharacterState.ATTACKING; }
-    public bool IsKO { get => state == CharacterState.KO; }
+    public bool IsAttacking { get => state == CharacterStateOld.ATTACKING; }
+    public bool IsKO { get => state == CharacterStateOld.KO; }
     public bool IsBlockPressed { get => blockPressed; }
     public bool IsBlocking { get => isBlocking; }
     public bool HurtExceptions { get => hurtExceptions; }

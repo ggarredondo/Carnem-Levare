@@ -1,8 +1,8 @@
 using UnityEngine;
-using System;
 
 public abstract class Character : MonoBehaviour
 {
+    protected CharacterStateMachine stateMachine;
     protected Controller controller;
     protected CharacterMovement movement;
     protected CharacterStats stats;
@@ -10,34 +10,11 @@ public abstract class Character : MonoBehaviour
     protected CharacterAudio characAudio;
     protected string hitboxPrefix;
 
-    protected IState currentState;
-    protected WalkingState walkingState;
-    protected BlockingState blockingState;
-    protected AttackingState attackingState;
-    protected HurtState hurtState;
-    protected BlockedState blockedState;
-
-    private Action transitionToMovement;
-    private Action<int> transitionToAttacking;
-
-    // Initializers
     protected virtual void Awake()
     {
-        walkingState = new WalkingState(this);
-        blockingState = new BlockingState(this);
-        attackingState = new AttackingState(this);
-        hurtState = new HurtState(this);
-        blockedState = new BlockedState(this);
-
-        transitionToMovement = () => ChangeState(controller.isBlocking ? blockingState : walkingState);
-        transitionToAttacking = (int moveIndex) =>
-        {
-            if (moveIndex >= 0 && moveIndex < stats.MoveList.Count)
-            {
-                attackingState.moveIndex = moveIndex;
-                ChangeState(attackingState);
-            }
-        };
+        // Must be done first
+        stateMachine = GetComponent<CharacterStateMachine>();
+        stateMachine.Initialize();
 
         movement = GetComponent<CharacterMovement>();
         movement.Initialize();
@@ -52,37 +29,14 @@ public abstract class Character : MonoBehaviour
 
         stats.MoveList.ForEach(move => move.Initialize(this));
 
-        ChangeState(walkingState);
+        // Must be done last
+        stateMachine.TransitionToWalking.Invoke();
     }
     protected virtual void Start() {}
 
-    // State handler
-    protected virtual void Update()
-    {
-        currentState.Update();
-    }
-    protected virtual void FixedUpdate()
-    {
-        currentState.FixedUpdate();
-    }
-    protected void ChangeState(in IState newState)
-    {
-        if (currentState != null) currentState.Exit();
-        currentState = newState;
-        currentState.Enter();
-    }
-
-    // Public
+    public ref readonly CharacterStateMachine StateMachine { get => ref stateMachine; }
     public ref readonly Controller Controller { get => ref controller; }
     public ref readonly CharacterMovement Movement { get => ref movement; }
     public ref readonly CharacterStats Stats { get => ref stats; }
     public ref readonly string HitboxPrefix { get => ref hitboxPrefix; }
-
-    public ref readonly Action TransitionToMovement { get => ref transitionToMovement; }
-    public ref readonly Action<int> TransitionToAttacking { get => ref transitionToAttacking; }
-
-    public ref readonly IState CurrentState { get => ref currentState; }
-    public ref readonly WalkingState WalkingState { get => ref walkingState; }
-    public ref readonly BlockingState BlockingState { get => ref blockingState; }
-    public ref readonly AttackingState AttackingState { get => ref attackingState; }
 }

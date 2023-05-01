@@ -5,6 +5,6 @@ public class CharacterAudio
     public CharacterAudio(in Character character)
     {
         this.character = character;
-        this.character.AttackingState.OnEnter += (int index) => AudioManager.Instance.gameSfxSounds.Play(this.character.Stats.MoveList[index].InitSound);
+        this.character.StateMachine.AttackingState.OnEnter += (int index) => AudioManager.Instance.gameSfxSounds.Play(this.character.Stats.MoveList[index].InitSound);
     }
 }

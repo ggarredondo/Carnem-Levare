@@ -9,8 +9,8 @@ public class BlockingState : IState
 
     public void Enter()
     {
-        character.Controller.OnDoBlock += character.TransitionToMovement;
-        character.Controller.OnDoMove += character.TransitionToAttacking;
+        character.Controller.OnDoBlock += character.StateMachine.TransitionToMovement;
+        character.Controller.OnDoMove += character.StateMachine.TransitionToAttacking;
         OnEnter?.Invoke();
     }
     public void Update()
@@ -23,8 +23,8 @@ public class BlockingState : IState
     }
     public void Exit()
     {
-        character.Controller.OnDoBlock -= character.TransitionToMovement;
-        character.Controller.OnDoMove -= character.TransitionToAttacking;
+        character.Controller.OnDoBlock -= character.StateMachine.TransitionToMovement;
+        character.Controller.OnDoMove -= character.StateMachine.TransitionToAttacking;
         OnExit?.Invoke();
     }
 }

@@ -21,13 +21,13 @@ public class CharacterAnimation : MonoBehaviour
 
         character.Movement.OnMoveCharacter += MoveAnimation;
 
-        character.WalkingState.OnEnter += EnterWalkingState;
-        character.WalkingState.OnExit += ExitWalkingState;
+        character.StateMachine.WalkingState.OnEnter += EnterWalkingState;
+        character.StateMachine.WalkingState.OnExit += ExitWalkingState;
 
-        character.BlockingState.OnEnter += EnterBlockingState;
-        character.BlockingState.OnExit += ExitBlockingState;
+        character.StateMachine.BlockingState.OnEnter += EnterBlockingState;
+        character.StateMachine.BlockingState.OnExit += ExitBlockingState;
 
-        character.AttackingState.OnEnter += EnterAttackingState;
+        character.StateMachine.AttackingState.OnEnter += EnterAttackingState;
     }
 
     private void OnValidate()
@@ -70,20 +70,20 @@ public class CharacterAnimation : MonoBehaviour
 
     private void InitMove() 
     {
-        character.Stats.MoveList[character.AttackingState.moveIndex].InitMove();
+        character.Stats.MoveList[character.StateMachine.AttackingState.moveIndex].InitMove();
     }
     private void ActivateMove() 
     {
-        character.Stats.MoveList[character.AttackingState.moveIndex].ActivateMove();
+        character.Stats.MoveList[character.StateMachine.AttackingState.moveIndex].ActivateMove();
     }
     private void DeactivateMove() 
     {
-        character.Stats.MoveList[character.AttackingState.moveIndex].DeactivateMove();
+        character.Stats.MoveList[character.StateMachine.AttackingState.moveIndex].DeactivateMove();
     }
     private void RecoverFromMove()
     {
-        character.Stats.MoveList[character.AttackingState.moveIndex].RecoverFromMove();
-        character.TransitionToMovement.Invoke();
+        character.Stats.MoveList[character.StateMachine.AttackingState.moveIndex].RecoverFromMove();
+        character.StateMachine.TransitionToMovement.Invoke();
     }
 
     #endregion

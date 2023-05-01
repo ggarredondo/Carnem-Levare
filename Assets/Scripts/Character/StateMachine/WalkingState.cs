@@ -7,10 +7,10 @@ public class WalkingState : IState
 
     public WalkingState(in Character character) => this.character = character;
 
-    public void Enter() 
+    public void Enter()
     {
-        character.Controller.OnDoBlock += character.TransitionToMovement;
-        character.Controller.OnDoMove += character.TransitionToAttacking;
+        character.Controller.OnDoBlock += character.StateMachine.TransitionToMovement;
+        character.Controller.OnDoMove += character.StateMachine.TransitionToAttacking;
         OnEnter?.Invoke();
     }
     public void Update() 
@@ -23,8 +23,8 @@ public class WalkingState : IState
     }
     public void Exit() 
     {
-        character.Controller.OnDoBlock -= character.TransitionToMovement;
-        character.Controller.OnDoMove -= character.TransitionToAttacking;
+        character.Controller.OnDoBlock -= character.StateMachine.TransitionToMovement;
+        character.Controller.OnDoMove -= character.StateMachine.TransitionToAttacking;
         OnExit?.Invoke();
     }
 }

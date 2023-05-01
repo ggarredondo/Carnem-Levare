@@ -35,11 +35,11 @@ public class PlayerLogic : CharacterLogic
     protected override void Update()
     {
         // Change movement animation blending speed depending on the situation.
-        if (directionTarget.magnitude == 0f && state == CharacterState.WALKING)
+        if (directionTarget.magnitude == 0f && state == CharacterStateOld.WALKING)
             directionSpeed = smoothStickSpeed;
-        else if (state == CharacterState.BLOCKING)
+        else if (state == CharacterStateOld.BLOCKING)
             directionSpeed = blockingStickSpeed;
-        else if (state == CharacterState.BLOCKED)
+        else if (state == CharacterStateOld.BLOCKED)
             directionSpeed = blockedStickSpeed;
         else
             directionSpeed = stickSpeed;

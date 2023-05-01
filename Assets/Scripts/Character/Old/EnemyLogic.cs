@@ -27,7 +27,7 @@ public class EnemyLogic : CharacterLogic
         directionTarget.x = horizontal;
         directionTarget.y = vertical;
 
-        if (state == CharacterState.HURT || state == CharacterState.BLOCKED) blockTimer = 0f;
+        if (state == CharacterStateOld.HURT || state == CharacterStateOld.BLOCKED) blockTimer = 0f;
         Block((blockTimer <= blockMaxTime && lateBlock) || block);
         blockTimer += Time.deltaTime;
         AttackN(singleJab || constantJab, 0);
