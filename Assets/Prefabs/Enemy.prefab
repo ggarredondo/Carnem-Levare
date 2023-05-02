@@ -240,8 +240,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c7812153de0a68f4aad4dc6d0ff39d3d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  target: 0
-  character: {fileID: 0}
+  target: 1
+  character: {fileID: 7115871151908366452}
 --- !u!1 &6258304511305694117
 GameObject:
   m_ObjectHideFlags: 0
@@ -409,7 +409,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   stamina: 0
   maxStamina: 300
-  characterDamage: 0
+  characterDamage: 10
   blockingMultiplier: 0.1
   comboDecay: 300
   height: 1.1

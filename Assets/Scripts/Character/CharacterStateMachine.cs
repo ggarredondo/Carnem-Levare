@@ -1,5 +1,6 @@
 using UnityEngine;
 using System;
+using RefDelegates;
 
 public class CharacterStateMachine : MonoBehaviour
 {
@@ -13,6 +14,7 @@ public class CharacterStateMachine : MonoBehaviour
 
     private Action transitionToWalking, transitionToBlocking, transitionToMovement;
     private Action<int> transitionToAttacking;
+    private ActionIn<Hitbox> transitionToHurt, transitionToBlocked, transitionToBlockedOrHurt;
 
     public void Initialize()
     {
@@ -33,6 +35,21 @@ public class CharacterStateMachine : MonoBehaviour
                 attackingState.moveIndex = moveIndex;
                 ChangeState(attackingState);
             }
+        };
+        transitionToHurt = (in Hitbox hitbox) => 
+        {
+            hurtState.Set(hitbox);
+            ChangeState(hurtState);
+        };
+        transitionToBlocked = (in Hitbox hitbox) =>
+        {
+            blockedState.Set(hitbox);
+            ChangeState(blockedState);
+        };
+        transitionToBlockedOrHurt = (in Hitbox hitbox) =>
+        {
+            if (hitbox.Unblockable || !character.Controller.isBlocking) transitionToHurt.Invoke(hitbox);
+            else transitionToBlocked.Invoke(hitbox);
         };
     }
 
@@ -62,4 +79,7 @@ public class CharacterStateMachine : MonoBehaviour
     public ref readonly Action TransitionToBlocking { get => ref transitionToBlocking; }
     public ref readonly Action TransitionToMovement { get => ref transitionToMovement; }
     public ref readonly Action<int> TransitionToAttacking { get => ref transitionToAttacking; }
+    public ref readonly ActionIn<Hitbox> TransitionToHurt { get => ref transitionToHurt; }
+    public ref readonly ActionIn<Hitbox> TransitionToBlocked { get => ref transitionToBlocked; }
+    public ref readonly ActionIn<Hitbox> TransitionToBlockedOrHurt { get => ref transitionToBlockedOrHurt; }
 }

@@ -3,6 +3,7 @@ using UnityEngine;
 
 public class CharacterStats : MonoBehaviour
 {
+    private Character character;
     [SerializeField] private float stamina, maxStamina;
     [SerializeField] private float characterDamage;
 
@@ -18,10 +19,14 @@ public class CharacterStats : MonoBehaviour
 
     public void Initialize()
     {
+        character = GetComponent<Character>();
         stamina = maxStamina;
         transform.localScale *= height;
         GetComponent<Rigidbody>().mass = mass;
         GetComponent<Rigidbody>().drag = drag;
+
+        character.StateMachine.HurtState.OnEnter += () => AddToStamina(-character.StateMachine.HurtState.Hitbox.Damage);
+        character.StateMachine.BlockedState.OnEnter += () => AddToStamina(-character.StateMachine.BlockedState.Hitbox.Damage * blockingMultiplier);
     }
 
     public float CalculateAttackDamage(float baseDamage) 

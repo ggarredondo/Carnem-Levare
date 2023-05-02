@@ -24,6 +24,8 @@ public class Hurtbox : MonoBehaviour
     {
         Hitbox hitbox = other.GetComponent<Hitbox>();
         hitbox.SetActive(false);
+        hitbox.SetUnblockable(hitbox.Unblockable || target == BodyTarget.BackHead || target == BodyTarget.BackBody);
+        hitbox.SetTarget((float)target);
         OnHurt?.Invoke(hitbox);
     }
 }
