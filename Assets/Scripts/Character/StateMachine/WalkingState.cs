@@ -11,7 +11,7 @@ public class WalkingState : IState
     {
         character.Controller.OnDoBlock += character.StateMachine.TransitionToMovement;
         character.Controller.OnDoMove += character.StateMachine.TransitionToAttacking;
-        Hurtbox.OnHurt += character.StateMachine.TransitionToHurt;
+        character.Controller.OnHurt += character.StateMachine.TransitionToHurt;
         OnEnter?.Invoke();
     }
     public void Update() 
@@ -26,7 +26,7 @@ public class WalkingState : IState
     {
         character.Controller.OnDoBlock -= character.StateMachine.TransitionToMovement;
         character.Controller.OnDoMove -= character.StateMachine.TransitionToAttacking;
-        Hurtbox.OnHurt -= character.StateMachine.TransitionToHurt;
+        character.Controller.OnHurt -= character.StateMachine.TransitionToHurt;
         OnExit?.Invoke();
     }
 }

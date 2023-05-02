@@ -11,7 +11,7 @@ public class BlockingState : IState
     {
         character.Controller.OnDoBlock += character.StateMachine.TransitionToMovement;
         character.Controller.OnDoMove += character.StateMachine.TransitionToAttacking;
-        Hurtbox.OnHurt += character.StateMachine.TransitionToBlockedOrHurt;
+        character.Controller.OnHurt += character.StateMachine.TransitionToBlockedOrHurt;
         OnEnter?.Invoke();
     }
     public void Update()
@@ -26,7 +26,7 @@ public class BlockingState : IState
     {
         character.Controller.OnDoBlock -= character.StateMachine.TransitionToMovement;
         character.Controller.OnDoMove -= character.StateMachine.TransitionToAttacking;
-        Hurtbox.OnHurt -= character.StateMachine.TransitionToBlockedOrHurt;
+        character.Controller.OnHurt -= character.StateMachine.TransitionToBlockedOrHurt;
         OnExit?.Invoke();
     }
 }

@@ -11,14 +11,14 @@ public class HurtState : IState
 
     public void Enter() 
     {
-        Hurtbox.OnHurt += character.StateMachine.TransitionToHurt;
+        character.Controller.OnHurt += character.StateMachine.TransitionToHurt;
         OnEnter?.Invoke();
     }
     public void Update() {}
     public void FixedUpdate() {}
     public void Exit()
     {
-        Hurtbox.OnHurt -= character.StateMachine.TransitionToHurt;
+        character.Controller.OnHurt -= character.StateMachine.TransitionToHurt;
         OnExit?.Invoke();
     }
 

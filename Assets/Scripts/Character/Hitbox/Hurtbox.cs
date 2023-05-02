@@ -1,5 +1,4 @@
 using UnityEngine;
-using RefDelegates;
 
 public class Hurtbox : MonoBehaviour
 {
@@ -18,7 +17,6 @@ public class Hurtbox : MonoBehaviour
     }
     [SerializeField] private BodyTarget target;
     [SerializeField] private Character character;
-    public static event ActionIn<Hitbox> OnHurt;
 
     private void OnTriggerEnter(Collider other)
     {
@@ -26,6 +24,6 @@ public class Hurtbox : MonoBehaviour
         hitbox.SetActive(false);
         hitbox.SetUnblockable(hitbox.Unblockable || target == BodyTarget.BackHead || target == BodyTarget.BackBody);
         hitbox.SetTarget((float)target);
-        OnHurt?.Invoke(hitbox);
+        character.Controller.OnHurt?.Invoke(hitbox);
     }
 }

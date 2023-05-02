@@ -11,14 +11,14 @@ public class BlockedState : IState
 
     public void Enter() 
     {
-        Hurtbox.OnHurt += character.StateMachine.TransitionToBlockedOrHurt;
+        character.Controller.OnHurt += character.StateMachine.TransitionToBlockedOrHurt;
         OnEnter?.Invoke();
     }
     public void Update() {}
     public void FixedUpdate() {}
     public void Exit() 
     {
-        Hurtbox.OnHurt -= character.StateMachine.TransitionToBlockedOrHurt;
+        character.Controller.OnHurt -= character.StateMachine.TransitionToBlockedOrHurt;
         OnExit?.Invoke();
     }
 
