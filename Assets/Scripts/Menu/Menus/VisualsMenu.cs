@@ -10,6 +10,10 @@ public class VisualsMenu : AbstractMenu
     [SerializeField] private Toggle fullscreenToggle;
     [SerializeField] private Toggle vsyncToggle;
 
+    [Header("Buttons")]
+    [SerializeField] private Button fullscreenButton;
+    [SerializeField] private Button vsyncButton;
+
     [Header("Dropdown")]
     [SerializeField] private TMP_Dropdown resolutionDropdown;
     [SerializeField] private TMP_Dropdown qualityDropdown;
@@ -53,6 +57,9 @@ public class VisualsMenu : AbstractMenu
         fullscreenToggle.onValueChanged.AddListener(FullScreen);
         resolutionDropdown.onValueChanged.AddListener(ChangeResolution);
         qualityDropdown.onValueChanged.AddListener(ChangeQuality);
+
+        fullscreenButton.onClick.AddListener(() => fullscreenToggle.isOn = !fullscreenToggle.isOn);
+        vsyncButton.onClick.AddListener(() => vsyncToggle.isOn = !vsyncToggle.isOn);
     }
 
     public void Vsync(bool value)

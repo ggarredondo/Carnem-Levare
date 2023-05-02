@@ -8,8 +8,11 @@ public class SoundMenu : AbstractMenu
     [SerializeField] private Slider musicSlider;
     [SerializeField] private Slider sfxSlider;
 
-    [Header ("Toggle")]
+    [Header("Toggle")]
     [SerializeField] private Toggle muteToggle;
+
+    [Header("Button")]
+    [SerializeField] private Button muteButton;
 
     protected override void Configure()
     {
@@ -17,6 +20,8 @@ public class SoundMenu : AbstractMenu
         musicSlider.onValueChanged.AddListener(ChangeMusicVolume);
         sfxSlider.onValueChanged.AddListener(ChangeSfxVolume);
         muteToggle.onValueChanged.AddListener(Mute);
+
+        muteButton.onClick.AddListener(() => muteToggle.isOn = !muteToggle.isOn);
 
         masterSlider.value = DataSaver.options.masterVolume;
         musicSlider.value = DataSaver.options.musicVolume;

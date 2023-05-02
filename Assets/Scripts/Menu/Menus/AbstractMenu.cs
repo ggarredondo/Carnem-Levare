@@ -7,7 +7,7 @@ using System.Linq;
 public abstract class AbstractMenu : MonoBehaviour
 {
     [Header("Requirements")]
-    [SerializeField] private GameObject firstSelected;
+    [SerializeField] protected GameObject firstSelected;
     [SerializeField] private List<Tuple<Button, Selectable>> transitions;
 
     protected virtual void OnEnable()
@@ -20,7 +20,8 @@ public abstract class AbstractMenu : MonoBehaviour
 
     protected virtual void OnDisable()
     {
-        firstSelected = EventSystem.current.currentSelectedGameObject;
+        if(EventSystem.current != null)
+            firstSelected = EventSystem.current.currentSelectedGameObject;
     }
 
     private void Start()
@@ -31,7 +32,11 @@ public abstract class AbstractMenu : MonoBehaviour
 
     private void SetTransitions()
     {
-        transitions.ForEach( tuple => tuple.Item1.onClick.AddListener(() => EventSystem.current.SetSelectedGameObject(tuple.Item2.gameObject)) );
+        transitions.ForEach(tuple => tuple.Item1.onClick.AddListener(() => 
+        { 
+            EventSystem.current.SetSelectedGameObject(tuple.Item2.gameObject);
+            AudioManager.Instance.uiSfxSounds.Play("PressButton");
+        }));
     }
 
     public void Return()
@@ -41,7 +46,10 @@ public abstract class AbstractMenu : MonoBehaviour
 
     public bool HasTransition()
     {
-        return transitions.Any(tuple => tuple.Item2.gameObject == EventSystem.current.currentSelectedGameObject);
+        if (EventSystem.current.currentSelectedGameObject != null && transitions.Count > 0)
+            return transitions.Any(tuple => tuple.Item2.gameObject == EventSystem.current.currentSelectedGameObject);
+        else
+            return false;
     }
 
     protected abstract void Configure();

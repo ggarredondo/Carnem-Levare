@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class SelectableMenu : CompositeNode, ICanSelect
 {
-    int selectedChild;
+    [SerializeField] private int selectedChild;
 
     public int GetSelectedChild()
     {
@@ -21,8 +21,7 @@ public class SelectableMenu : CompositeNode, ICanSelect
 
     public void SelectChild(int child)
     {
-        selectedChild = child % children.Count;
-        Debug.Log(selectedChild);
+        selectedChild = child;
     }
 
     private int Mod(int a, int b)

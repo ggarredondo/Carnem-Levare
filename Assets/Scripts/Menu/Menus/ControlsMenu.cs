@@ -7,6 +7,9 @@ public class ControlsMenu : AbstractMenu
     [Header("Toggle")]
     [SerializeField] private Toggle rumbleToggle;
 
+    [Header("Buttons")]
+    [SerializeField] private Button rumbleButton;
+
     [Header("Remapping buttons")]
     [SerializeField] private List<Button> remapButtons;
 
@@ -24,6 +27,7 @@ public class ControlsMenu : AbstractMenu
         inputRemapping = new();
         remapButtons.ForEach(button => button.onClick.AddListener(Remapping));
         rumbleToggle.onValueChanged.AddListener(Rumble);
+        rumbleButton.onClick.AddListener(() => rumbleToggle.isOn = !rumbleToggle.isOn);
     }
 
     public void Rumble(bool value)
