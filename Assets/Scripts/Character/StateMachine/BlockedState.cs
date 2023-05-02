@@ -14,6 +14,7 @@ public class BlockedState : IState
     {
         character.Controller.OnHurt += character.StateMachine.TransitionToBlockedOrHurt;
         OnEnter?.Invoke();
+        Recover();
     }
     public void Update() {}
     public void FixedUpdate() {}

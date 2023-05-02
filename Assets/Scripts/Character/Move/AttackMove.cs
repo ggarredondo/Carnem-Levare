@@ -31,8 +31,8 @@ public class AttackMove : Move
             blockedSound, 
             (float)animationStagger,
             character.Stats.CalculateAttackDamage(baseDamage),
+            advantageOnBlock,
             advantageOnHit, 
-            advantageOnBlock, 
             unblockable);
     }
     public override void ActivateMove()

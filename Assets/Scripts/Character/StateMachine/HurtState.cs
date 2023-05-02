@@ -14,6 +14,7 @@ public class HurtState : IState
     {
         character.Controller.OnHurt += character.StateMachine.TransitionToHurt;
         OnEnter?.Invoke();
+        Recover();
     }
     public void Update() {}
     public void FixedUpdate() {}

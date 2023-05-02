@@ -25,5 +25,5 @@ MonoBehaviour:
   advantageOnHit: 600
   hitboxSubtag: LEFT_FIST
   baseDamage: 10
-  baseStagger: 0
+  animationStagger: 0
   unblockable: 0
