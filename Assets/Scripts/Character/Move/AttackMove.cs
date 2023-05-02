@@ -16,7 +16,7 @@ public class AttackMove : Move
     [SerializeField] private string hitboxSubtag;
     private Hitbox hitbox;
     [SerializeField] private float baseDamage;
-    [SerializeField] private Stagger baseStagger;
+    [SerializeField] private Stagger animationStagger;
     [SerializeField] private bool unblockable;
 
     public override void Initialize(in Character character)
@@ -29,7 +29,7 @@ public class AttackMove : Move
     {
         hitbox.Set(hitSound, 
             blockedSound, 
-            (float)baseStagger,
+            (float)animationStagger,
             character.Stats.CalculateAttackDamage(baseDamage),
             advantageOnHit, 
             advantageOnBlock, 

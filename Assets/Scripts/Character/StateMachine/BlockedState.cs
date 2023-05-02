@@ -1,4 +1,5 @@
 using System;
+using System.Threading.Tasks;
 
 public class BlockedState : IState
 {
@@ -16,6 +17,11 @@ public class BlockedState : IState
     }
     public void Update() {}
     public void FixedUpdate() {}
+    private async void Recover()
+    {
+        await Task.Delay(TimeSpan.FromMilliseconds(hitbox.AdvantageOnBlock));
+        character.StateMachine.TransitionToMovement();
+    }
     public void Exit() 
     {
         character.Controller.OnHurt -= character.StateMachine.TransitionToBlockedOrHurt;

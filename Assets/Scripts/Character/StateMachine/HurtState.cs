@@ -1,4 +1,5 @@
 using System;
+using System.Threading.Tasks;
 
 public class HurtState : IState
 {
@@ -16,11 +17,16 @@ public class HurtState : IState
     }
     public void Update() {}
     public void FixedUpdate() {}
+    private async void Recover()
+    {
+        await Task.Delay(TimeSpan.FromMilliseconds(hitbox.AdvantageOnHit));
+        character.StateMachine.TransitionToMovement();
+    }
     public void Exit()
     {
         character.Controller.OnHurt -= character.StateMachine.TransitionToHurt;
         OnExit?.Invoke();
     }
-
+    
     public ref readonly IHit Hitbox { get => ref hitbox; }
 }

@@ -89,7 +89,7 @@ public class CharacterAnimation : MonoBehaviour
     private void RecoverFromMove()
     {
         character.Stats.MoveList[character.StateMachine.AttackingState.moveIndex].RecoverFromMove();
-        character.StateMachine.TransitionToMovement.Invoke();
+        character.StateMachine.TransitionToMovement();
     }
 
     #endregion
@@ -106,7 +106,7 @@ public class CharacterAnimation : MonoBehaviour
     {
         IHit hitbox = character.StateMachine.HurtState.Hitbox;
         animator.SetBool("STATE_HURT", true);
-        TriggerHurtAnimation(hitbox.Target, hitbox.Stagger);
+        TriggerHurtAnimation(hitbox.AnimationBodyTarget, hitbox.AnimationStagger);
     }
     private void ExitHurtState()
     {
@@ -117,7 +117,7 @@ public class CharacterAnimation : MonoBehaviour
     {
         IBlocked hitbox = character.StateMachine.BlockedState.Hitbox;
         animator.SetBool("STATE_BLOCKED", true);
-        TriggerHurtAnimation(hitbox.Target, hitbox.Stagger);
+        TriggerHurtAnimation(hitbox.AnimationBodyTarget, hitbox.AnimationStagger);
     }
     private void ExitBlockedState()
     {

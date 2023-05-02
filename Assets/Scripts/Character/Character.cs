@@ -30,7 +30,7 @@ public abstract class Character : MonoBehaviour
         stats.MoveList.ForEach(move => move.Initialize(this));
 
         // Must be done last
-        stateMachine.TransitionToWalking.Invoke();
+        stateMachine.TransitionToWalking();
     }
     protected virtual void Start() {}
 
