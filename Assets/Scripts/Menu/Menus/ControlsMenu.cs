@@ -4,14 +4,11 @@ using UnityEngine.UI;
 
 public class ControlsMenu : AbstractMenu
 { 
-    [Header("Toggle")]
+    [Header("UI Elements")]
     [SerializeField] private Toggle rumbleToggle;
-
-    [Header("Buttons")]
     [SerializeField] private Button rumbleButton;
-
-    [Header("Remapping buttons")]
     [SerializeField] private List<Button> remapButtons;
+    [SerializeField] private PopUpMenu popUpMenu;
 
     [Header("Parameters")]
     [SerializeField] private float rebindTimeDelay = 0.25f;
@@ -37,6 +34,6 @@ public class ControlsMenu : AbstractMenu
 
     public void Remapping()
     {
-        inputRemapping.Remapping(rebindTimeDelay);
+        inputRemapping.Remapping(rebindTimeDelay, popUpMenu);
     }
 }

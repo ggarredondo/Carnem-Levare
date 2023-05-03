@@ -3,15 +3,11 @@ using UnityEngine.UI;
 
 public class SoundMenu : AbstractMenu
 {
-    [Header("Slider")]
+    [Header("UI Elements")]
     [SerializeField] private Slider masterSlider;
     [SerializeField] private Slider musicSlider;
     [SerializeField] private Slider sfxSlider;
-
-    [Header("Toggle")]
     [SerializeField] private Toggle muteToggle;
-
-    [Header("Button")]
     [SerializeField] private Button muteButton;
 
     protected override void Configure()

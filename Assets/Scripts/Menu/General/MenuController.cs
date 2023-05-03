@@ -73,6 +73,6 @@ public class MenuController : MonoBehaviour
     private void ApplyChanges()
     {
         menus.ForEach(menu => menu.SetActive(false));
-        tree.GetSelected().ForEach(id => { menus[id].SetActive(true); });
+        tree.GetSelected().ForEach(id => { menus[id].GetComponent<AbstractMenu>()?.Initialized(); menus[id].SetActive(true); });
     }
 }

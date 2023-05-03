@@ -10,18 +10,18 @@ public abstract class AbstractMenu : MonoBehaviour
     [SerializeField] protected GameObject firstSelected;
     [SerializeField] private List<Tuple<Button, Selectable>> transitions;
 
-    protected virtual void OnEnable()
+    protected virtual void OnDisable()
+    {
+        if(EventSystem.current != null && GameManager.InputDetection.controlSchemeIndex == 0)
+            firstSelected = EventSystem.current.currentSelectedGameObject;
+    }
+
+    public void Initialized()
     {
         if (GameManager.InputDetection.controlSchemeIndex == 0)
             EventSystem.current.SetSelectedGameObject(firstSelected);
         else
             GameManager.InputDetection.selected = firstSelected;
-    }
-
-    protected virtual void OnDisable()
-    {
-        if(EventSystem.current != null)
-            firstSelected = EventSystem.current.currentSelectedGameObject;
     }
 
     private void Start()

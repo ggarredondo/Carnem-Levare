@@ -3,7 +3,7 @@ using UnityEngine.UI;
 
 public class MainMenu : AbstractMenu
 {
-    [Header("Buttons")]
+    [Header("UI Elements")]
     [SerializeField] private Button playButton;
     [SerializeField] private Button quitButton;
 

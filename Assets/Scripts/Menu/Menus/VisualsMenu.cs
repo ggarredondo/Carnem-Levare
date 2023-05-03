@@ -6,15 +6,11 @@ using TMPro;
 public class VisualsMenu : AbstractMenu
 {
 
-    [Header("Toggle")]
+    [Header("UI Elements")]
     [SerializeField] private Toggle fullscreenToggle;
     [SerializeField] private Toggle vsyncToggle;
-
-    [Header("Buttons")]
     [SerializeField] private Button fullscreenButton;
     [SerializeField] private Button vsyncButton;
-
-    [Header("Dropdown")]
     [SerializeField] private TMP_Dropdown resolutionDropdown;
     [SerializeField] private TMP_Dropdown qualityDropdown;
 

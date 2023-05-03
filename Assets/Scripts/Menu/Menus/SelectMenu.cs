@@ -6,7 +6,7 @@ public class SelectMenu : MonoBehaviour
 {
     [SerializeField] private MenuController menuController;
 
-    [Header("Selectable Buttons")]
+    [Header("UI Elements")]
     [SerializeField] private List<Button> selectableButton;
 
     protected void OnEnable()

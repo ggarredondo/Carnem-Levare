@@ -7,7 +7,7 @@ public class InputRemapping
 {
     private InputAction action, originalAction;
 
-    public void Remapping(float rebindTimeDelay)
+    public void Remapping(float rebindTimeDelay, PopUpMenu popUp)
     {
         AudioManager.Instance.uiSfxSounds.Play("PressButton");
 
@@ -17,7 +17,7 @@ public class InputRemapping
             Debug.Log("This action not exists");
         else
         {
-            //globalMenuManager.PopUpMessage("Waiting for input");
+            popUp.PopUpMessage("Waiting for input");
 
             originalAction = action.Clone();
 
@@ -25,7 +25,7 @@ public class InputRemapping
                 .WithControlsExcluding("Mouse")
                 .OnMatchWaitForAnother(rebindTimeDelay)
                 .OnCancel(callback => CancelRebind(callback))
-                .OnComplete(callback => FinishRebind(callback))
+                .OnComplete(callback => FinishRebind(callback, popUp))
                 .Start();
         }
     }
@@ -35,9 +35,9 @@ public class InputRemapping
         callback.action.ApplyBindingOverride(GameManager.InputDetection.controlSchemeIndex, originalAction.bindings[GameManager.InputDetection.controlSchemeIndex]);
     }
 
-    private void FinishRebind(RebindingOperation callback)
+    private void FinishRebind(RebindingOperation callback, PopUpMenu popUp)
     {
-        //globalMenuManager.DisablePopUpMenu();
+        popUp.DisablePopUpMenu();
 
         if (GameManager.InputMapping.Map.ContainsKey(callback.action.bindings[GameManager.InputDetection.controlSchemeIndex].effectivePath))
         {
