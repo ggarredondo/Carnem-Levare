@@ -29,7 +29,7 @@ public class HurtState : IState
             await Task.Delay(TimeSpan.FromMilliseconds(hitbox.AdvantageOnHit), cancellationTokenSource.Token);
             character.StateMachine.TransitionToWalkingOrBlocking();
         }
-        catch {} 
+        catch {}
     }
     public void Exit()
     {

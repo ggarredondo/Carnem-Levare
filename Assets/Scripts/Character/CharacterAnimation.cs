@@ -19,7 +19,7 @@ public class CharacterAnimation : MonoBehaviour
         animatorOverride = new AnimatorOverrideController(animator.runtimeAnimatorController);
         UpdateMovesetAnimations();
 
-        character.Movement.OnMoveCharacter += MoveAnimation;
+        character.Movement.OnMoveCharacter += MovementAnimation;
 
         character.StateMachine.WalkingState.OnEnter += EnterWalkingState;
         character.StateMachine.WalkingState.OnExit += ExitWalkingState;
@@ -59,7 +59,7 @@ public class CharacterAnimation : MonoBehaviour
         }
     }
 
-    private void MoveAnimation(in Vector2 direction)
+    private void MovementAnimation(in Vector2 direction)
     {
         animator.SetFloat("horizontal", direction.x);
         animator.SetFloat("vertical", direction.y);

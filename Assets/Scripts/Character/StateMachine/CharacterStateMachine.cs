@@ -1,6 +1,4 @@
 using UnityEngine;
-using System;
-using RefDelegates;
 
 public class CharacterStateMachine : MonoBehaviour
 {
@@ -11,6 +9,7 @@ public class CharacterStateMachine : MonoBehaviour
     private MoveState moveState;
     private HurtState hurtState;
     private BlockedState blockedState;
+    private KOState koState;
 
     public void Initialize()
     {
@@ -20,6 +19,7 @@ public class CharacterStateMachine : MonoBehaviour
         moveState = new MoveState(character);
         hurtState = new HurtState(character);
         blockedState = new BlockedState(character);
+        koState = new KOState(character);
     }
 
     private void Update()
@@ -43,6 +43,7 @@ public class CharacterStateMachine : MonoBehaviour
     public ref readonly MoveState MoveState { get => ref moveState; }
     public ref readonly HurtState HurtState { get => ref hurtState; }
     public ref readonly BlockedState BlockedState { get => ref blockedState; }
+    public ref readonly KOState KOState { get => ref koState; }
 
     public void TransitionToWalking() => ChangeState(walkingState);
     public void TransitionToBlocking() => ChangeState(blockingState);
