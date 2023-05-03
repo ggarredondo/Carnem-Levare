@@ -1,8 +1,10 @@
 using UnityEngine;
 using UnityEngine.Audio;
+using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.UI;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
@@ -12,6 +14,8 @@ public class GameManager : MonoBehaviour
 
     [Header("Sounds")]
     [SerializeField] private Tuple<Sounds, SceneNumber>[] allSounds;
+
+    private string lastControlScheme;
 
     private ISave saver;
     private IApplier applier;
@@ -70,6 +74,7 @@ public class GameManager : MonoBehaviour
     {
         if (SceneManager.GetActiveScene().buildIndex != (int)SceneNumber.MAIN_MENU)
             playerInput = GameObject.FindGameObjectWithTag("INPUT").GetComponent<PlayerInput>();
+        
 
         InputDetection.Configure();
 

@@ -419,7 +419,7 @@ MonoBehaviour:
     m_ActionName: LoadingScreen/Stop[/XInputControllerWindows/buttonSouth,/Keyboard/a]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
-  m_DefaultActionMap: UI
+  m_DefaultActionMap: LoadingScreen
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 1418685037}
 --- !u!4 &1874459436

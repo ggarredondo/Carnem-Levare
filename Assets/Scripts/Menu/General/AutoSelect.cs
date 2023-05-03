@@ -3,7 +3,7 @@ using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using TMPro;
 
-public class AutoSelect : MonoBehaviour, IPointerEnterHandler, ISelectHandler
+public class AutoSelect : MonoBehaviour, IPointerEnterHandler, ISelectHandler, IPointerUpHandler
 {
     [SerializeField] private int typeButton;
     [SerializeField] private bool mouseCanSelect;
@@ -55,6 +55,12 @@ public class AutoSelect : MonoBehaviour, IPointerEnterHandler, ISelectHandler
     {
         if (mouseCanSelect)
             AudioManager.Instance.uiSfxSounds.Play("SelectButton");
+    }
+
+    public void OnPointerUp(PointerEventData eventData)
+    {
+        if (mouseCanSelect)
+            EventSystem.current.SetSelectedGameObject(null);
     }
 
     private void ChangeInputFont()

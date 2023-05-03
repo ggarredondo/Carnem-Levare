@@ -61,13 +61,13 @@ public class MenuController : MonoBehaviour
 
     public void Return()
     {
-        if (menus[tree.CurrentId()].GetComponent<AbstractMenu>().HasTransition())
-            menus[tree.CurrentId()].GetComponent<AbstractMenu>().Return();
-        else
+        AbstractMenu abs = menus[tree.CurrentId()].GetComponent<AbstractMenu>();
+
+        if(!abs.Return())
         {
             tree.GoToParent();
             AudioManager.Instance.uiSfxSounds.Play("PressButton");
-        }
+        } 
     }
 
     private void ApplyChanges()

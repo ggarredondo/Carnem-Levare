@@ -3,12 +3,17 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using System.Linq;
+using TMPro;
 
 public abstract class AbstractMenu : MonoBehaviour
 {
+    private TMP_Dropdown actualDropDown;
+
     [Header("Requirements")]
     [SerializeField] protected GameObject firstSelected;
     [SerializeField] private List<Tuple<Button, Selectable>> transitions;
+
+    public TMP_Dropdown ActualDropDown { get => actualDropDown; set => actualDropDown = value; }
 
     protected virtual void OnDisable()
     {
@@ -36,15 +41,33 @@ public abstract class AbstractMenu : MonoBehaviour
         { 
             EventSystem.current.SetSelectedGameObject(tuple.Item2.gameObject);
             AudioManager.Instance.uiSfxSounds.Play("PressButton");
+
+            if (tuple.Item2 is TMP_Dropdown item) actualDropDown = item;
         }));
     }
 
-    public void Return()
+    public bool Return()
     {
-        EventSystem.current.SetSelectedGameObject(transitions.FirstOrDefault(tuple => tuple.Item2.gameObject == EventSystem.current.currentSelectedGameObject).Item1.gameObject);
+        bool canReturn = false;
+
+        if (HasTransition())
+        {
+            actualDropDown = null;
+            EventSystem.current.SetSelectedGameObject(transitions.FirstOrDefault(tuple => tuple.Item2.gameObject == EventSystem.current.currentSelectedGameObject).Item1.gameObject);
+            canReturn = true;
+        }
+        
+        if (ActualDropDown != null)
+        {
+            ActualDropDown.Hide();
+            AudioManager.Instance.uiSfxSounds.Play("SelectButton");
+            canReturn = true;
+        }
+
+        return canReturn;
     }
 
-    public bool HasTransition()
+    protected bool HasTransition()
     {
         if (EventSystem.current.currentSelectedGameObject != null && transitions.Count > 0)
             return transitions.Any(tuple => tuple.Item2.gameObject == EventSystem.current.currentSelectedGameObject);
