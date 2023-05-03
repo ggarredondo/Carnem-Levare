@@ -8,7 +8,7 @@ public class CharacterStateMachine : MonoBehaviour
     private IState currentState;
     private WalkingState walkingState;
     private BlockingState blockingState;
-    private AttackingState attackingState;
+    private MoveState moveState;
     private HurtState hurtState;
     private BlockedState blockedState;
 
@@ -17,7 +17,7 @@ public class CharacterStateMachine : MonoBehaviour
         character = GetComponent<Character>();
         walkingState = new WalkingState(character);
         blockingState = new BlockingState(character);
-        attackingState = new AttackingState(character);
+        moveState = new MoveState(character);
         hurtState = new HurtState(character);
         blockedState = new BlockedState(character);
     }
@@ -40,19 +40,19 @@ public class CharacterStateMachine : MonoBehaviour
     public ref readonly IState CurrentState { get => ref currentState; }
     public ref readonly WalkingState WalkingState { get => ref walkingState; }
     public ref readonly BlockingState BlockingState { get => ref blockingState; }
-    public ref readonly AttackingState AttackingState { get => ref attackingState; }
+    public ref readonly MoveState MoveState { get => ref moveState; }
     public ref readonly HurtState HurtState { get => ref hurtState; }
     public ref readonly BlockedState BlockedState { get => ref blockedState; }
 
     public void TransitionToWalking() => ChangeState(walkingState);
     public void TransitionToBlocking() => ChangeState(blockingState);
-    public void TransitionToMovement() => ChangeState(character.Controller.isBlocking ? blockingState : walkingState);
-    public void TransitionToAttacking(int moveIndex)
+    public void TransitionToWalkingOrBlocking() => ChangeState(character.Controller.isBlocking ? blockingState : walkingState);
+    public void TransitionToMove(int moveIndex)
     {
         if (moveIndex >= 0 && moveIndex < character.Stats.MoveList.Count)
         {
-            attackingState.moveIndex = moveIndex;
-            ChangeState(attackingState);
+            moveState.moveIndex = moveIndex;
+            ChangeState(moveState);
         }
     }
     public void TransitionToHurt(in Hitbox hitbox)

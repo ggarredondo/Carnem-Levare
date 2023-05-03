@@ -27,7 +27,7 @@ public class CharacterAnimation : MonoBehaviour
         character.StateMachine.BlockingState.OnEnter += EnterBlockingState;
         character.StateMachine.BlockingState.OnExit += ExitBlockingState;
 
-        character.StateMachine.AttackingState.OnEnter += EnterAttackingState;
+        character.StateMachine.MoveState.OnEnter += EnterMoveState;
 
         character.StateMachine.HurtState.OnEnter += EnterHurtState;
         character.StateMachine.HurtState.OnExit += ExitHurtState;
@@ -76,20 +76,20 @@ public class CharacterAnimation : MonoBehaviour
 
     private void InitMove() 
     {
-        character.Stats.MoveList[character.StateMachine.AttackingState.moveIndex].InitMove();
+        character.Stats.MoveList[character.StateMachine.MoveState.moveIndex].InitMove();
     }
     private void ActivateMove() 
     {
-        character.Stats.MoveList[character.StateMachine.AttackingState.moveIndex].ActivateMove();
+        character.Stats.MoveList[character.StateMachine.MoveState.moveIndex].ActivateMove();
     }
     private void DeactivateMove() 
     {
-        character.Stats.MoveList[character.StateMachine.AttackingState.moveIndex].DeactivateMove();
+        character.Stats.MoveList[character.StateMachine.MoveState.moveIndex].DeactivateMove();
     }
     private void RecoverFromMove()
     {
-        character.Stats.MoveList[character.StateMachine.AttackingState.moveIndex].RecoverFromMove();
-        character.StateMachine.TransitionToMovement();
+        character.Stats.MoveList[character.StateMachine.MoveState.moveIndex].RecoverFromMove();
+        character.StateMachine.TransitionToWalkingOrBlocking();
     }
 
     #endregion
@@ -124,7 +124,7 @@ public class CharacterAnimation : MonoBehaviour
         animator.SetBool("STATE_BLOCKED", false);
     }
 
-    private void EnterAttackingState(int moveIndex) { animator.SetTrigger("move" + moveIndex); }
+    private void EnterMoveState(int moveIndex) { animator.SetTrigger("move" + moveIndex); }
 
     #endregion
 }

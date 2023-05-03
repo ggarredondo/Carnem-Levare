@@ -1,5 +1,6 @@
 using System;
 using System.Threading.Tasks;
+using System.Threading;
 
 public class HurtState : IState
 {
@@ -7,11 +8,13 @@ public class HurtState : IState
     public event Action OnEnter, OnExit;
     private IHit hitbox;
     public void Set(IHit hitbox) => this.hitbox = hitbox;
+    private CancellationTokenSource cancellationTokenSource;
 
     public HurtState(in Character character) => this.character = character;
 
     public void Enter() 
     {
+        cancellationTokenSource?.Cancel();
         character.Controller.OnHurt += character.StateMachine.TransitionToHurt;
         OnEnter?.Invoke();
         Recover();
@@ -20,8 +23,13 @@ public class HurtState : IState
     public void FixedUpdate() {}
     private async void Recover()
     {
-        await Task.Delay(TimeSpan.FromMilliseconds(hitbox.AdvantageOnHit));
-        character.StateMachine.TransitionToMovement();
+        cancellationTokenSource = new CancellationTokenSource();
+
+        try {
+            await Task.Delay(TimeSpan.FromMilliseconds(hitbox.AdvantageOnHit), cancellationTokenSource.Token);
+            character.StateMachine.TransitionToWalkingOrBlocking();
+        }
+        catch {} 
     }
     public void Exit()
     {

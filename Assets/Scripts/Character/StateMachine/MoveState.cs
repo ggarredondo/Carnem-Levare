@@ -1,6 +1,6 @@
 using System;
 
-public class AttackingState : IState
+public class MoveState : IState
 {
     private readonly Character character;
     public event Action<int> OnEnter;
@@ -8,7 +8,7 @@ public class AttackingState : IState
 
     public int moveIndex;
 
-    public AttackingState(in Character character) => this.character = character;
+    public MoveState(in Character character) => this.character = character;
 
     public void Enter() 
     {

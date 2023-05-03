@@ -22,7 +22,7 @@ MonoBehaviour:
   hitSound: Hit_Jab
   blockedSound: Blocked_Default
   advantageOnBlock: 300
-  advantageOnHit: 600
+  advantageOnHit: 700
   hitboxSubtag: LEFT_FIST
   baseDamage: 10
   animationStagger: 0

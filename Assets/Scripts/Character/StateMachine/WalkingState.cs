@@ -9,8 +9,8 @@ public class WalkingState : IState
 
     public void Enter()
     {
-        character.Controller.OnDoBlock += character.StateMachine.TransitionToMovement;
-        character.Controller.OnDoMove += character.StateMachine.TransitionToAttacking;
+        character.Controller.OnDoBlock += character.StateMachine.TransitionToWalkingOrBlocking;
+        character.Controller.OnDoMove += character.StateMachine.TransitionToMove;
         character.Controller.OnHurt += character.StateMachine.TransitionToHurt;
         OnEnter?.Invoke();
     }
@@ -24,8 +24,8 @@ public class WalkingState : IState
     }
     public void Exit() 
     {
-        character.Controller.OnDoBlock -= character.StateMachine.TransitionToMovement;
-        character.Controller.OnDoMove -= character.StateMachine.TransitionToAttacking;
+        character.Controller.OnDoBlock -= character.StateMachine.TransitionToWalkingOrBlocking;
+        character.Controller.OnDoMove -= character.StateMachine.TransitionToMove;
         character.Controller.OnHurt -= character.StateMachine.TransitionToHurt;
         OnExit?.Invoke();
     }
