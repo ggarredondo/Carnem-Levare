@@ -1,83 +1,47 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class SoundMenu : MonoBehaviour
+public class SoundMenu : AbstractMenu
 {
-    [Header("Sliders")]
-    [SerializeField] private Slider globalSlider;
+    [Header("UI Elements")]
+    [SerializeField] private Slider masterSlider;
     [SerializeField] private Slider musicSlider;
     [SerializeField] private Slider sfxSlider;
-
-    [Header ("Toggle")]
     [SerializeField] private Toggle muteToggle;
+    [SerializeField] private Button muteButton;
 
-    private void Awake()
+    protected override void Configure()
     {
-        //Initilize Sliders
-        globalSlider.value = AudioSaver.Instance.globalVolume;
-        musicSlider.value = AudioSaver.Instance.musicVolume;
-        sfxSlider.value = AudioSaver.Instance.sfxVolume;
+        masterSlider.onValueChanged.AddListener(ChangeMasterVolume);
+        musicSlider.onValueChanged.AddListener(ChangeMusicVolume);
+        sfxSlider.onValueChanged.AddListener(ChangeSfxVolume);
+        muteToggle.onValueChanged.AddListener(Mute);
 
-        //Initialize Mute Toggle
-        muteToggle.isOn = AudioSaver.Instance.mute;
+        muteButton.onClick.AddListener(() => muteToggle.isOn = !muteToggle.isOn);
+
+        masterSlider.value = DataSaver.options.masterVolume;
+        musicSlider.value = DataSaver.options.musicVolume;
+        sfxSlider.value = DataSaver.options.sfxVolume;
+        muteToggle.isOn = DataSaver.options.mute;
     }
 
-    #region Public
-
-    /// <summary>
-    /// Slider to change the global volume
-    /// </summary>
-    public void ChangeGlobalVolume()
+    public void ChangeMasterVolume(float value)
     {
-        if (globalSlider != null)
-        {
-            AudioSaver.Instance.globalVolume = globalSlider.value;
-
-            if (AudioSaver.Instance.musicVolume < 0.1)
-                AudioManager.Instance.Slider();
-        }
-
-        AudioSaver.Instance.ApplyChanges();
+        Slider(ref DataSaver.options.masterVolume, value, DataSaver.options.musicVolume < 0.1);
     }
 
-    /// <summary>
-    /// Slider to change the Sfx volume
-    /// </summary>
-    public void ChangeSfxVolume()
+    public void ChangeMusicVolume(float value)
     {
-        if (sfxSlider != null)
-        {
-            AudioSaver.Instance.sfxVolume = sfxSlider.value;
-            AudioManager.Instance.Slider();
-        }
-
-        AudioSaver.Instance.ApplyChanges();
+        Slider(ref DataSaver.options.musicVolume, value, false);
     }
 
-    /// <summary>
-    /// Slider to change the Music volume
-    /// </summary>
-    public void ChangeMusicVolume()
+    public void ChangeSfxVolume(float value)
     {
-        if (musicSlider != null)
-        {
-            AudioSaver.Instance.musicVolume = musicSlider.value;
-        }
-
-        AudioSaver.Instance.ApplyChanges();
+        Slider(ref DataSaver.options.sfxVolume, value, true);
     }
 
-    /// <summary>
-    /// Mue or unMute the sounds
-    /// </summary>
-    /// <param name="changeState"></param>
-    public void Mute(bool changeState)
+    public void Mute(bool value)
     {
-        AudioManager.Instance.uiSfxSounds.Play("PressButton");
-        if (changeState) muteToggle.isOn = !muteToggle.isOn;
-        AudioSaver.Instance.mute = muteToggle.isOn;
-        AudioSaver.Instance.ApplyChanges();
+        Toggle(ref DataSaver.options.mute, value);
     }
-
-    #endregion
 }

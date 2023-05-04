@@ -1,33 +1,29 @@
-﻿using System.Collections;
-using UnityEngine;
-using UnityEngine.InputSystem;
+﻿using UnityEngine.InputSystem;
+using System.Threading.Tasks;
 
-public class ControllerRumble : Singleton<ControllerRumble>
+public class ControllerRumble
 {
     private Gamepad gamepad;
     private bool isRumbling;
-    private bool canRumble;
 
-    private void Start()
+    public ControllerRumble()
     {
         gamepad = Gamepad.current;
     }
 
-    public bool CanRumble { get { return canRumble; } set { canRumble = value; } }
-
     public void Rumble(float duration, float leftAmplitude, float rightAmplitude)
     {
-        if (gamepad != null && SceneManagement.Instance.PlayerInput.currentControlScheme == "Gamepad" && !isRumbling && canRumble)
+        if (gamepad != null && GameManager.PlayerInput.currentControlScheme == "Gamepad" && !isRumbling && DataSaver.options.rumble)
         {
             gamepad.SetMotorSpeeds(leftAmplitude, rightAmplitude);
             isRumbling = true;
-            StartCoroutine(StopRumble(duration));
+            StopRumble(duration);
         }
     }
 
-    private IEnumerator StopRumble(float duration)
+    private async void StopRumble(float duration)
     {
-        yield return new WaitForSecondsRealtime(duration);
+        await Task.Delay(System.TimeSpan.FromSeconds(duration));
         gamepad.SetMotorSpeeds(0f, 0f);
         isRumbling = false;
     }

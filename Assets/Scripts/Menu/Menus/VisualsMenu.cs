@@ -3,22 +3,22 @@ using UnityEngine.UI;
 using System.Collections.Generic;
 using TMPro;
 
-public class VisualsMenu : MonoBehaviour
+public class VisualsMenu : AbstractMenu
 {
 
-    [Header("Toggle")]
+    [Header("UI Elements")]
     [SerializeField] private Toggle fullscreenToggle;
     [SerializeField] private Toggle vsyncToggle;
-
-    [Header("Dropdown")]
+    [SerializeField] private Button fullscreenButton;
+    [SerializeField] private Button vsyncButton;
     [SerializeField] private TMP_Dropdown resolutionDropdown;
     [SerializeField] private TMP_Dropdown qualityDropdown;
 
-    private void Awake()
+    protected override void Configure()
     {
         //Initilize Toggles
-        fullscreenToggle.isOn = VisualSaver.Instance.fullscreen;
-        vsyncToggle.isOn = VisualSaver.Instance.vsync == 1;
+        fullscreenToggle.isOn = DataSaver.options.fullscreen;
+        vsyncToggle.isOn = DataSaver.options.vSync;
 
         //Initialize resolution Dropdown
         List<string> options = new()
@@ -35,7 +35,7 @@ public class VisualsMenu : MonoBehaviour
 
         resolutionDropdown.ClearOptions();
         resolutionDropdown.AddOptions(options);
-        resolutionDropdown.value = resolutionDropdown.options.FindIndex(option => option.text == VisualSaver.Instance.resolution);
+        resolutionDropdown.value = resolutionDropdown.options.FindIndex(option => option.text == DataSaver.options.resolution);
 
         //Initialize quality Dropdown
         List<string> quality = new()
@@ -47,38 +47,34 @@ public class VisualsMenu : MonoBehaviour
 
         qualityDropdown.ClearOptions();
         qualityDropdown.AddOptions(quality);
-        qualityDropdown.value = qualityDropdown.options.FindIndex(option => option.text == quality[VisualSaver.Instance.quality]);
+        qualityDropdown.value = qualityDropdown.options.FindIndex(option => option.text == quality[DataSaver.options.quality]);
+
+        vsyncToggle.onValueChanged.AddListener(Vsync);
+        fullscreenToggle.onValueChanged.AddListener(FullScreen);
+        resolutionDropdown.onValueChanged.AddListener(ChangeResolution);
+        qualityDropdown.onValueChanged.AddListener(ChangeQuality);
+
+        fullscreenButton.onClick.AddListener(() => fullscreenToggle.isOn = !fullscreenToggle.isOn);
+        vsyncButton.onClick.AddListener(() => vsyncToggle.isOn = !vsyncToggle.isOn);
     }
 
-    #region Public
-
-    public void Vsync(bool changeState)
+    public void Vsync(bool value)
     {
-        AudioManager.Instance.uiSfxSounds.Play("PressButton");
-        if (changeState) vsyncToggle.isOn = !vsyncToggle.isOn;
-        VisualSaver.Instance.vsync = vsyncToggle.isOn ? 1 : 0;
-        VisualSaver.Instance.ApplyChanges();
+        Toggle(ref DataSaver.options.vSync, value);
     }
 
-    public void FullScreen(bool changeState)
+    public void FullScreen(bool value)
     {
-        AudioManager.Instance.uiSfxSounds.Play("PressButton");
-        if (changeState) fullscreenToggle.isOn = !fullscreenToggle.isOn;
-        VisualSaver.Instance.fullscreen = fullscreenToggle.isOn;
-        VisualSaver.Instance.ApplyChanges();
+        Toggle(ref DataSaver.options.fullscreen, value);
     }
 
-    public void ChangeResolution()
+    public void ChangeResolution(int value)
     {
-        VisualSaver.Instance.resolution = resolutionDropdown.options[resolutionDropdown.value].text;
-        VisualSaver.Instance.ApplyChanges();
+        Dropdown(ref DataSaver.options.resolution, resolutionDropdown.options[value].text);
     }
 
-    public void ChangeQuality()
+    public void ChangeQuality(int value)
     {
-        VisualSaver.Instance.quality = qualityDropdown.value;
-        VisualSaver.Instance.ApplyChanges();
+        Dropdown(ref DataSaver.options.quality, value);
     }
-
-    #endregion
 }

@@ -1,36 +1,34 @@
 using UnityEngine;
+using UnityEngine.UI;
 
-public class MainMenu : MonoBehaviour
+public class MainMenu : AbstractMenu
 {
+    [Header("UI Elements")]
+    [SerializeField] private Button playButton;
+    [SerializeField] private Button quitButton;
+
     private bool isLoading;
 
-    private void Start()
+    protected override void Configure()
     {
         AudioManager.Instance.PlayMusic("Intro");
+
+        playButton.onClick.AddListener(PlayGame);
+        quitButton.onClick.AddListener(QuitGame);
     }
 
-    #region Public
-
-    /// <summary>
-    /// Quit the game, exit to the desk
-    /// </summary>
     public void QuitGame()
     {
         Application.Quit();
     }
 
-    /// <summary>
-    /// Start the game
-    /// </summary>
     public void PlayGame()
     {
         if (!isLoading)
         {
             AudioManager.Instance.uiSfxSounds.Play("PlayGame");
             isLoading = true;
-            StartCoroutine(SceneManagement.Instance.LoadSceneByIndexAsync(3));
+            GameManager.SceneLoader.LoadWithLoadingScreen(SceneNumber.GAME);
         }
     }
-
-    #endregion
 }
