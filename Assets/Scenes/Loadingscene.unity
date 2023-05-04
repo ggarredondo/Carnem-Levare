@@ -418,7 +418,7 @@ MonoBehaviour:
     m_ActionId: 8f006f83-0367-4932-80f0-42ce968fad13
     m_ActionName: LoadingScreen/Stop[/XInputControllerWindows/buttonSouth,/Keyboard/a]
   m_NeverAutoSwitchControlSchemes: 0
-  m_DefaultControlScheme: 
+  m_DefaultControlScheme: Gamepad
   m_DefaultActionMap: LoadingScreen
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 1418685037}

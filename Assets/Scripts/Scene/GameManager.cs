@@ -1,10 +1,8 @@
 using UnityEngine;
 using UnityEngine.Audio;
-using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.UI;
 using UnityEngine.SceneManagement;
-using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
@@ -71,9 +69,8 @@ public class GameManager : MonoBehaviour
     void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
         if (SceneManager.GetActiveScene().buildIndex != (int)SceneNumber.MAIN_MENU)
-            playerInput = GameObject.FindGameObjectWithTag("INPUT").GetComponent<PlayerInput>();
+            playerInput = GameObject.FindGameObjectWithTag("INPUT").GetComponent<PlayerInput>();   
         
-
         InputDetection.Configure();
 
         InitializeSoundSources();
@@ -99,5 +96,10 @@ public class GameManager : MonoBehaviour
                 allSounds[i].Item1.Initialize();
             }
         }
+    }
+
+    private void Update()
+    {
+        Debug.Log(inputDetection.controlSchemeIndex);
     }
 }

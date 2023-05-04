@@ -39,6 +39,7 @@ public class SceneLoader
     public async void LoadScene(SceneNumber sceneIndex)
     {
         await StartTransition.Invoke();
+        GameManager.PlayerInput.controlsChangedEvent.RemoveAllListeners();
         SceneManager.LoadScene((int) sceneIndex);
     }
 
@@ -46,6 +47,7 @@ public class SceneLoader
     {
         await StartTransition.Invoke();
         nextSceneIndex = (int) nextScene;
+        GameManager.PlayerInput.controlsChangedEvent.RemoveAllListeners();
         SceneManager.LoadScene((int) SceneNumber.LOADING_MENU);
     }
 
