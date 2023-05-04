@@ -84,12 +84,14 @@ public class CharacterAnimation : MonoBehaviour
     }
     private void DeactivateMove() 
     {
-        character.Stats.MoveList[character.StateMachine.MoveState.moveIndex].DeactivateMove();
+        character.StateMachine.MoveState.BUFFER_FLAG = true;
+        character.Stats.MoveList[character.StateMachine.MoveState.moveIndex].DeactivateMove(); 
     }
     private void RecoverFromMove()
     {
+        character.StateMachine.MoveState.BUFFER_FLAG = false;
         character.Stats.MoveList[character.StateMachine.MoveState.moveIndex].RecoverFromMove();
-        character.StateMachine.TransitionToWalkingOrBlocking();
+        character.StateMachine.TransitionToRecovery.Invoke();
     }
 
     #endregion

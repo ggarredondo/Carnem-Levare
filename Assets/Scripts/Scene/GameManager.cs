@@ -97,9 +97,4 @@ public class GameManager : MonoBehaviour
             }
         }
     }
-
-    private void Update()
-    {
-        Debug.Log(inputDetection.controlSchemeIndex);
-    }
 }

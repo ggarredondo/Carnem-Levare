@@ -1,6 +1,7 @@
 using System;
 using System.Threading.Tasks;
 using System.Threading;
+using UnityEngine;
 
 public class BlockedState : IState
 {
@@ -14,7 +15,6 @@ public class BlockedState : IState
 
     public void Enter() 
     {
-        cancellationTokenSource?.Cancel();
         character.Controller.OnHurt += character.StateMachine.TransitionToBlockedOrHurt;
         OnEnter?.Invoke();
         Recover();
@@ -26,13 +26,16 @@ public class BlockedState : IState
         cancellationTokenSource = new CancellationTokenSource();
 
         try {
-            await Task.Delay(TimeSpan.FromMilliseconds(hitbox.AdvantageOnBlock));
+            Debug.Log("Stunlocked for " + hitbox.AdvantageOnBlock + " ms");
+            await Task.Delay(TimeSpan.FromMilliseconds(hitbox.AdvantageOnBlock), cancellationTokenSource.Token);
+            Debug.Log("Finished Stunlock");
             character.StateMachine.TransitionToWalkingOrBlocking();
         }
         catch {}
     }
     public void Exit() 
     {
+        cancellationTokenSource?.Cancel();
         character.Controller.OnHurt -= character.StateMachine.TransitionToBlockedOrHurt;
         OnExit?.Invoke();
     }

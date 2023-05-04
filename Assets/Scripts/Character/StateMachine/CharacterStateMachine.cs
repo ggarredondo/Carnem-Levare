@@ -1,4 +1,5 @@
 using UnityEngine;
+using System;
 
 public class CharacterStateMachine : MonoBehaviour
 {
@@ -56,6 +57,7 @@ public class CharacterStateMachine : MonoBehaviour
             ChangeState(moveState);
         }
     }
+    public Action TransitionToRecovery;
     public void TransitionToHurt(in Hitbox hitbox)
     {
         hurtState.Set(hitbox);
