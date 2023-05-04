@@ -15,8 +15,6 @@ public class GameManager : MonoBehaviour
     [Header("Sounds")]
     [SerializeField] private Tuple<Sounds, SceneNumber>[] allSounds;
 
-    private string lastControlScheme;
-
     private ISave saver;
     private IApplier applier;
 

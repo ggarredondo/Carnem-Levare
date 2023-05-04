@@ -25,8 +25,8 @@ public abstract class AbstractMenu : MonoBehaviour
     {
         if (GameManager.InputDetection.controlSchemeIndex == 0)
             EventSystem.current.SetSelectedGameObject(firstSelected);
-        else
-            GameManager.InputDetection.selected = firstSelected;
+
+        GameManager.InputDetection.selected = firstSelected;
     }
 
     private void Start()

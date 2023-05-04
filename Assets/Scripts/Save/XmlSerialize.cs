@@ -26,7 +26,7 @@ public class XmlSerialize
             newSave = serializer.Deserialize(stream) as SaveSlot;
             stream.Close();
         }
-        else Debug.LogWarning(save.name + " not exists, no files to load");
+        else Debug.LogWarning(save.name + " dont't exist, no files to load");
 
         return newSave;
     }
