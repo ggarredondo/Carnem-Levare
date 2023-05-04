@@ -86,7 +86,7 @@ public class BehaviourTree : ScriptableObject
 
     public void GoToParent(int depth = 0)
     {
-        if (nodeStack.Peek() is IHaveParent node)
+        if (nodeStack.Peek() is IHaveParent node && node.GetParent() is not RootNode)
         {
             nodeStack.Pop();
 

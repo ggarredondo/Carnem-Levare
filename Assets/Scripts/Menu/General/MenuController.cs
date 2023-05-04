@@ -7,9 +7,11 @@ public class MenuController : MonoBehaviour
     public BehaviourTree tree;
     public List<GameObject> menus;
 
+    public bool pauseMenu;
+
     public event System.Action<int> OnSiblingChange;
 
-    private void OnEnable()
+    private void Awake()
     {
         tree.OnChange += ApplyChanges;
         input.ChangeRightMenuEvent += MoveRight;
@@ -17,7 +19,7 @@ public class MenuController : MonoBehaviour
         input.MenuBackEvent += Return;
     }
 
-    private void OnDisable()
+    private void OnDestroy()
     {
         tree.OnChange -= ApplyChanges;
         input.ChangeRightMenuEvent -= MoveRight;
@@ -27,7 +29,8 @@ public class MenuController : MonoBehaviour
 
     private void Start()
     {
-        tree.Initialize();
+        if(!pauseMenu)
+            tree.Initialize();
     }
 
     public void ChangeMenu()
@@ -72,7 +75,12 @@ public class MenuController : MonoBehaviour
 
     private void ApplyChanges()
     {
-        menus.ForEach(menu => menu.SetActive(false));
+        DisableMenus();
         tree.GetSelected().ForEach(id => { menus[id].GetComponent<AbstractMenu>()?.Initialized(); menus[id].SetActive(true); });
+    }
+
+    public void DisableMenus()
+    {
+        menus.ForEach(menu => menu.SetActive(false));
     }
 }
