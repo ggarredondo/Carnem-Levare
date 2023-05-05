@@ -17,6 +17,7 @@ public abstract class Move : ScriptableObject
     [SerializeField] private double startUp;
     [SerializeField] private double active;
     [SerializeField] private double recovery;
+    [SerializeField] private double buffering;
 
     public virtual void Initialize(in Character character)
     {
@@ -39,8 +40,9 @@ public abstract class Move : ScriptableObject
         AnimationEvent activateMoveEvent = CreateAnimationEvent("ActivateMove", startUp);
         AnimationEvent deactiveMoveEvent = CreateAnimationEvent("DeactivateMove", startUp + active);
         AnimationEvent recoverFromMoveEvent = CreateAnimationEvent("RecoverFromMove", startUp + active + recovery);
+        AnimationEvent enableBufferingEvent = CreateAnimationEvent("EnableBuffering", buffering);
 
-        AnimationEvent[] events = { initMoveEvent, activateMoveEvent, deactiveMoveEvent, recoverFromMoveEvent };
+        AnimationEvent[] events = { initMoveEvent, activateMoveEvent, deactiveMoveEvent, recoverFromMoveEvent, enableBufferingEvent };
         UnityEditor.AnimationUtility.SetAnimationEvents(animation, events);
         #endif
     }

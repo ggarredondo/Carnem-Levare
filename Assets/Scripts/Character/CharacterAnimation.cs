@@ -83,9 +83,12 @@ public class CharacterAnimation : MonoBehaviour
         character.Stats.MoveList[character.StateMachine.MoveState.moveIndex].ActivateMove();
     }
     private void DeactivateMove() 
+    { 
+        character.Stats.MoveList[character.StateMachine.MoveState.moveIndex].DeactivateMove(); 
+    }
+    private void EnableBuffering()
     {
         character.StateMachine.MoveState.BUFFER_FLAG = true;
-        character.Stats.MoveList[character.StateMachine.MoveState.moveIndex].DeactivateMove(); 
     }
     private void RecoverFromMove()
     {

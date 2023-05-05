@@ -1,7 +1,6 @@
 using System;
 using System.Threading.Tasks;
 using System.Threading;
-using UnityEngine;
 
 public class HurtState : IState
 {
@@ -26,9 +25,7 @@ public class HurtState : IState
         cancellationTokenSource = new CancellationTokenSource();
 
         try {
-            Debug.Log("Stunlocked for " + hitbox.AdvantageOnHit + " ms");
             await Task.Delay(TimeSpan.FromMilliseconds(hitbox.AdvantageOnHit), cancellationTokenSource.Token);
-            Debug.Log("Finished Stunlock");
             character.StateMachine.TransitionToWalkingOrBlocking();
         }
         catch {}
