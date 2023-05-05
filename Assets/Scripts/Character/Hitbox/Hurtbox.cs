@@ -17,6 +17,12 @@ public class Hurtbox : MonoBehaviour
     }
     [SerializeField] private BodyTarget target;
     [SerializeField] private Character character;
+    private Controller controller;
+
+    private void Start()
+    {
+        controller = character.Controller;
+    }
 
     private void OnTriggerEnter(Collider other)
     {
@@ -24,6 +30,6 @@ public class Hurtbox : MonoBehaviour
         hitbox.SetActive(false);
         hitbox.SetUnblockable(hitbox.Unblockable || target == BodyTarget.BackHead || target == BodyTarget.BackBody);
         hitbox.SetAnimationBodyTarget((float)target);
-        character.Controller.OnHurt?.Invoke(hitbox);
+        controller.OnHurt?.Invoke(hitbox);
     }
 }

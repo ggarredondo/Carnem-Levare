@@ -13,8 +13,8 @@ public class HUD : MonoBehaviour
     private float currentP, currentE;
 
     private void Start() {
-        player = GameObject.FindGameObjectWithTag("Player").GetComponent<Character>().Stats;
-        enemy = GameObject.FindGameObjectWithTag("Enemy").GetComponent<Character>().Stats;
+        player = GameObject.FindGameObjectWithTag("Player").GetComponent<Character>().CharacterStats;
+        enemy = GameObject.FindGameObjectWithTag("Enemy").GetComponent<Character>().CharacterStats;
         currentP = player.MaxStamina;
         currentE = enemy.MaxStamina;
     }

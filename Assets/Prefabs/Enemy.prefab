@@ -416,24 +416,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bcdb3411bb47206488fa47ffe01dbf53, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  movement:
-    trackingRate: 5
-    doTracking: 1
-    movingDirectionSpeed: 10
-    idleDirectionSpeed: 5
-  stats:
+  characterStats:
     stamina: 0
     maxStamina: 300
     characterDamage: 10
     blockingMultiplier: 0.1
-    comboDecay: 300
+    comboDecay: 200
     height: 1.1
     mass: 1
     drag: 0
     moveList: []
+  characterMovement:
+    trackingRate: 5
+    doTracking: 1
+    movingDirectionSpeed: 10
+    idleDirectionSpeed: 5
   characterAnimation:
-    animatorSpeed: 0
-    updateAnimations: 0
+    animatorSpeed: 1
+    updateMovesetAnimations: 0
 --- !u!114 &5388046064025221454
 MonoBehaviour:
   m_ObjectHideFlags: 0

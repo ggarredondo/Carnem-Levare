@@ -27,10 +27,11 @@ public class CharacterStats
         foreach (Move move in moveList)
             move.Initialize(character, this);
     }
-    public void SubscribeEvents(CharacterStateMachine stateMachine)
+    public void Reference(in CharacterStateMachine stateMachine)
     {
-        stateMachine.HurtState.OnEnter += () => AddToStamina(-stateMachine.HurtState.Hitbox.Damage);
-        stateMachine.BlockedState.OnEnter += () => AddToStamina(-stateMachine.BlockedState.Hitbox.Damage * blockingMultiplier);
+        CharacterStateMachine stateMachineLocal = stateMachine;
+        stateMachine.HurtState.OnEnter += () => AddToStamina(-stateMachineLocal.HurtState.Hitbox.Damage);
+        stateMachine.BlockedState.OnEnter += () => AddToStamina(-stateMachineLocal.BlockedState.Hitbox.Damage * blockingMultiplier);
     }
 
     public float CalculateAttackDamage(float baseDamage) 

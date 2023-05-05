@@ -12,10 +12,10 @@ public class HurtState : IState
     public void Set(Hitbox hitbox) => this.hitbox = hitbox;
     private CancellationTokenSource cancellationTokenSource;
 
-    public HurtState(in Character character)
+    public HurtState(in CharacterStateMachine stateMachine, in Controller controller)
     {
-        controller = character.Controller;
-        stateMachine = character.StateMachine;
+        this.stateMachine = stateMachine;
+        this.controller = controller;
     }
 
     public void Enter() 

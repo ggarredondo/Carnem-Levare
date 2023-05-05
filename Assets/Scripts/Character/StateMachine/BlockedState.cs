@@ -12,10 +12,10 @@ public class BlockedState : IState
     public void Set(Hitbox hitbox) => this.hitbox = hitbox;
     private CancellationTokenSource cancellationTokenSource;
 
-    public BlockedState(in Character character)
+    public BlockedState(in CharacterStateMachine stateMachine, in Controller controller)
     {
-        controller = character.Controller;
-        stateMachine = character.StateMachine;
+        this.stateMachine = stateMachine;
+        this.controller = controller;
     }
 
     public void Enter() 

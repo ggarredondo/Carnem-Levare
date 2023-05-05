@@ -17,19 +17,18 @@ public class CharacterStateMachine : MonoBehaviour
     private BlockedState blockedState;
     private KOState koState;
 
-    public void Initialize()
+    public void Reference(in Controller controller, in CharacterStats stats, in CharacterMovement movement)
     {
-        Character character = GetComponent<Character>();
-        controller = character.Controller;
-        stats = character.Stats;
+        this.controller = controller;
+        this.stats = stats;
         moveList = stats.MoveList;
 
-        walkingState = new WalkingState(character);
-        blockingState = new BlockingState(character);
-        moveState = new MoveState(character);
-        hurtState = new HurtState(character);
-        blockedState = new BlockedState(character);
-        koState = new KOState(character);
+        walkingState = new WalkingState(this, controller, movement);
+        blockingState = new BlockingState(this, controller, movement);
+        moveState = new MoveState(this, controller, stats);
+        hurtState = new HurtState(this, controller);
+        blockedState = new BlockedState(this, controller);
+        koState = new KOState();
     }
 
     private void Update()

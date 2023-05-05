@@ -357,17 +357,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c52d680fb89ff034fbd4f8c0645dc7f7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  movement:
-    trackingRate: 5
-    doTracking: 1
-    movingDirectionSpeed: 10
-    idleDirectionSpeed: 5
-  stats:
+  characterStats:
     stamina: 0
     maxStamina: 300
     characterDamage: 10
     blockingMultiplier: 0.1
-    comboDecay: 300
+    comboDecay: 200
     height: 1
     mass: 1
     drag: 0
@@ -376,9 +371,14 @@ MonoBehaviour:
     - {fileID: 11400000, guid: 20e698f21bf5aa84cb0cad575ccd63cf, type: 2}
     - {fileID: 11400000, guid: 57b017aabdc8caf4fa11ee93fb5a5714, type: 2}
     - {fileID: 11400000, guid: 19854063ba4a509409698682dd6d1ef5, type: 2}
+  characterMovement:
+    trackingRate: 5
+    doTracking: 1
+    movingDirectionSpeed: 10
+    idleDirectionSpeed: 5
   characterAnimation:
-    animatorSpeed: 0
-    updateAnimations: 0
+    animatorSpeed: 1
+    updateMovesetAnimations: 0
 --- !u!54 &2794588595183348619
 Rigidbody:
   m_ObjectHideFlags: 0

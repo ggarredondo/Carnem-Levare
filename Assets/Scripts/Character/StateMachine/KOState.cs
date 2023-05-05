@@ -2,10 +2,9 @@ using System;
 
 public class KOState : IState
 {
-    private readonly Character character;
     public event Action OnEnter, OnExit;
 
-    public KOState(in Character character) => this.character = character;
+    public KOState() {}
 
     public void Enter()
     {

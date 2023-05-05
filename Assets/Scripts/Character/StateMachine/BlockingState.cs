@@ -7,11 +7,11 @@ public class BlockingState : IState
     private readonly CharacterMovement movement;
     public event Action OnEnter, OnExit;
 
-    public BlockingState(in Character character)
+    public BlockingState(in CharacterStateMachine stateMachine, in Controller controller, in CharacterMovement movement)
     {
-        controller = character.Controller;
-        stateMachine = character.StateMachine;
-        movement = character.Movement;
+        this.stateMachine = stateMachine;
+        this.controller = controller;
+        this.movement = movement;
     }
 
     public void Enter()

@@ -11,11 +11,11 @@ public class MoveState : IState
     public int moveIndex, bufferedMoveIndex = -1;
     public bool BUFFER_FLAG = false;
 
-    public MoveState(in Character character)
+    public MoveState(in CharacterStateMachine stateMachine, in Controller controller, in CharacterStats stats)
     {
-        controller = character.Controller;
-        stateMachine = character.StateMachine;
-        moveListCount = character.Stats.MoveList != null ? character.Stats.MoveList.Count : 0;
+        this.stateMachine = stateMachine;
+        this.controller = controller;
+        moveListCount = stats.MoveList != null ? stats.MoveList.Count : 0;
     }
 
     public void Enter() 

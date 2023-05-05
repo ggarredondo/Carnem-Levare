@@ -14,18 +14,18 @@ public class CharacterAnimation
     private AnimationClip[] animatorDefaults;
 
     [SerializeField] private float animatorSpeed = 1f;
-    [SerializeField] private bool updateAnimations = false;
+    [SerializeField] private bool updateMovesetAnimations = false;
 
-    public void Initialize(in Character character, in Animator animator)
+    public void Initialize(in Animator animator)
     {
-        moveList = character.Stats.MoveList;
         this.animator = animator;
         animatorDefaults = animator.runtimeAnimatorController.animationClips;
         animatorOverride = new AnimatorOverrideController(animator.runtimeAnimatorController);
-        UpdateMovesetAnimations();
     }
-    public void SubscribeEvents(CharacterStateMachine stateMachine, CharacterMovement movement)
+    public void Reference(in CharacterStateMachine stateMachine, in CharacterStats stats, in CharacterMovement movement)
     {
+        moveList = stats.MoveList;
+        UpdateMovesetAnimations();
         hurtState = stateMachine.HurtState;
         blockedState = stateMachine.BlockedState;
 
@@ -51,7 +51,7 @@ public class CharacterAnimation
     public void OnValidate()
     {
         if (animator != null) animator.speed = animatorSpeed;
-        if (updateAnimations) { UpdateMovesetAnimations(); updateAnimations = false; }
+        if (updateMovesetAnimations) { UpdateMovesetAnimations(); updateMovesetAnimations = false; }
     }
 
     private void UpdateAnimation(string originalClip, AnimationClip newClip)

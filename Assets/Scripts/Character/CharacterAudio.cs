@@ -1,12 +1,14 @@
 
+[System.Serializable]
 public class CharacterAudio
 {
-    private readonly Character character;
-    public CharacterAudio(in Character character)
+    public void Initialize() {}
+    public void Reference(in CharacterStateMachine stateMachine, in CharacterStats stats)
     {
-        this.character = character;
-        this.character.StateMachine.MoveState.OnEnterInteger += (int index) => AudioManager.Instance.gameSfxSounds.Play(this.character.Stats.MoveList[index].InitSound);
-        this.character.StateMachine.HurtState.OnEnter += () => AudioManager.Instance.gameSfxSounds.Play(this.character.StateMachine.HurtState.Hitbox.HitSound);
-        this.character.StateMachine.BlockedState.OnEnter += () => AudioManager.Instance.gameSfxSounds.Play(this.character.StateMachine.BlockedState.Hitbox.BlockedSound);
+        CharacterStateMachine stateMachineLocal = stateMachine;
+        CharacterStats statsValueLocal = stats;
+        stateMachine.MoveState.OnEnterInteger += (int index) => AudioManager.Instance.gameSfxSounds.Play(statsValueLocal.MoveList[index].InitSound);
+        stateMachine.HurtState.OnEnter += () => AudioManager.Instance.gameSfxSounds.Play(stateMachineLocal.HurtState.Hitbox.HitSound);
+        stateMachine.BlockedState.OnEnter += () => AudioManager.Instance.gameSfxSounds.Play(stateMachineLocal.BlockedState.Hitbox.BlockedSound);
     }
 }
