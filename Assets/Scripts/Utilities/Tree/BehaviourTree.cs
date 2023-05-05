@@ -103,7 +103,7 @@ public class BehaviourTree : ScriptableObject
             nodeStack.Pop();
     }
 
-    public void ChangeSibling(int sibling)
+    public bool ChangeSibling(int sibling)
     {
         if (nodeStack.Any(n => n is ICanSelect))
         {
@@ -114,10 +114,13 @@ public class BehaviourTree : ScriptableObject
                 selectable.SelectChild(sibling);
                 GoToChild(selectable.GetSelectedChild());
             }
+
+            return true;
         }
+        else return false;
     }
 
-    public void MoveToRightSibling()
+    public bool MoveToRightSibling()
     {
         if (nodeStack.Any(n => n is ICanSelect))
         {
@@ -128,10 +131,13 @@ public class BehaviourTree : ScriptableObject
                 selectable.MoveRightChild();
                 GoToChild(selectable.GetSelectedChild());
             }
+
+            return true;
         }
+        else return false;
     }
 
-    public void MoveToLeftSibling()
+    public bool MoveToLeftSibling()
     {
         if (nodeStack.Any(n => n is ICanSelect))
         {
@@ -142,7 +148,10 @@ public class BehaviourTree : ScriptableObject
                 selectable.MoveLeftChild();
                 GoToChild(selectable.GetSelectedChild());
             }
+
+            return true;
         }
+        else return false;
     }
 
     public int ActualSelectableID()

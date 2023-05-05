@@ -364,7 +364,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 2009558922346199477}
         m_TargetAssemblyTypeName: MenuController, Assembly-CSharp
-        m_MethodName: Return
+        m_MethodName: GoToParent
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -821,7 +821,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 2009558922346199477}
         m_TargetAssemblyTypeName: MenuController, Assembly-CSharp
-        m_MethodName: Return
+        m_MethodName: GoToParent
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1030,7 +1030,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 2009558922346199477}
         m_TargetAssemblyTypeName: MenuController, Assembly-CSharp
-        m_MethodName: Return
+        m_MethodName: GoToParent
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1304,7 +1304,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 2009558922346199477}
         m_TargetAssemblyTypeName: MenuController, Assembly-CSharp
-        m_MethodName: Return
+        m_MethodName: GoToParent
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1995,6 +1995,7 @@ MonoBehaviour:
   - {fileID: 3406496836221508604}
   - {fileID: 3406496835210927912}
   - {fileID: 3406496836030297622}
+  pauseMenu: 0
 --- !u!1 &637911161023131808
 GameObject:
   m_ObjectHideFlags: 0

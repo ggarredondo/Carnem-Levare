@@ -52,8 +52,6 @@ public class CameraEffects : MonoBehaviour
         }
     }
 
-    #region Public
-
     public void InitializeTargetGroup(Transform playerTarget, Transform enemyTarget)
     {
         targetGroup = GameObject.FindGameObjectWithTag("TARGET_GROUP").GetComponent<CinemachineTargetGroup>();
@@ -68,13 +66,6 @@ public class CameraEffects : MonoBehaviour
         alternativeTargets[1] = enemyAlternative;
     }
 
-    #endregion
-
-    #region Private
-
-    /// <summary>
-    /// Update the conditions that enable/disable the camera effects
-    /// </summary>
     private void UpdateCameraConditions()
     {
         foreach (CameraMovement movement in cameraEffects)
@@ -135,9 +126,6 @@ public class CameraEffects : MonoBehaviour
         }
     }
 
-    /// <summary>
-    /// Camera orbital movement between the player and the enemy
-    /// </summary>
     private void OrbitalMovement()
     {
         if (Mathf.Abs(player.Direction.x) > 0.1f && player.IsMoving && !cameraConditions[1]) 
@@ -148,18 +136,12 @@ public class CameraEffects : MonoBehaviour
         orbitalTransposer.m_RecenterToTargetHeading.m_enabled = Mathf.Abs(player.Direction.x) > 0.1f && player.IsMoving && !cameraConditions[1];
     }
 
-    /// <summary>
-    /// Change the target group position to the alternative target position
-    /// </summary>
-    /// <param name="index">0 (player target), 1 (enemy target)</param>
+
     private void AsignAlternativeTarget(int index)
     {
         targetGroup.m_Targets[index].target.position = Vector3.Lerp(targetGroup.m_Targets[index].target.position, alternativeTargets[index].position, targetingSpeed * Time.deltaTime);
     }
 
-    /// <summary>
-    /// Change the target of enemy and player depending on a condition
-    /// </summary>
     private void TargetUpdate()
     {
         if (!player.IsBlockPressed || player.IsAttacking) AsignAlternativeTarget(0);
@@ -172,6 +154,4 @@ public class CameraEffects : MonoBehaviour
         targetDebug[0].SetActive(debug);
         targetDebug[1].SetActive(debug);
     }
-
-    #endregion
 }
