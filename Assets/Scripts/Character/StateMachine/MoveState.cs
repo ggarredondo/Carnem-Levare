@@ -2,20 +2,28 @@ using System;
 
 public class MoveState : IState
 {
-    private readonly Character character;
+    private readonly Controller controller;
+    private readonly CharacterStateMachine stateMachine;
     public event Action<int> OnEnterInteger;
     public event Action OnEnter, OnExit;
 
+    private int moveListCount;
     public int moveIndex, bufferedMoveIndex = -1;
     public bool BUFFER_FLAG = false;
 
-    public MoveState(in Character character) => this.character = character;
+    public MoveState(in Character character)
+    {
+        controller = character.Controller;
+        stateMachine = character.StateMachine;
+        moveListCount = character.Stats.MoveList != null ? character.Stats.MoveList.Count : 0;
+    }
 
     public void Enter() 
     {
-        character.Controller.OnDoMove += BufferMove;
-        character.Controller.OnHurt += character.StateMachine.TransitionToHurt;
-        character.StateMachine.TransitionToRecovery = character.StateMachine.TransitionToWalkingOrBlocking;
+        stateMachine.enabled = false;
+        controller.OnDoMove += BufferMove;
+        controller.OnHurt += stateMachine.TransitionToHurt;
+        stateMachine.TransitionToRecovery = stateMachine.TransitionToWalkingOrBlocking;
         OnEnterInteger?.Invoke(moveIndex);
         OnEnter?.Invoke();
     }
@@ -24,16 +32,16 @@ public class MoveState : IState
     public void Exit()
     {
         bufferedMoveIndex = -1;
-        character.Controller.OnDoMove -= BufferMove;
-        character.Controller.OnHurt -= character.StateMachine.TransitionToHurt;
+        controller.OnDoMove -= BufferMove;
+        controller.OnHurt -= stateMachine.TransitionToHurt;
         OnExit?.Invoke();
     }
 
     private void BufferMove(int moveIndex)
     {
-        if (bufferedMoveIndex == -1 && BUFFER_FLAG && moveIndex >= 0 && moveIndex < character.Stats.MoveList.Count) {
+        if (bufferedMoveIndex == -1 && BUFFER_FLAG && moveIndex >= 0 && moveIndex < moveListCount) {
             bufferedMoveIndex = moveIndex;
-            character.StateMachine.TransitionToRecovery = () => character.StateMachine.TransitionToMove(moveIndex);
+            stateMachine.TransitionToRecovery = () => stateMachine.TransitionToMove(moveIndex);
         }
     }
 }

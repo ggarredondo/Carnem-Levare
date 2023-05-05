@@ -2,31 +2,39 @@ using System;
 
 public class WalkingState : IState
 {
-    private readonly Character character;
+    private readonly Controller controller;
+    private readonly CharacterStateMachine stateMachine;
+    private readonly CharacterMovement movement;
     public event Action OnEnter, OnExit;
 
-    public WalkingState(in Character character) => this.character = character;
+    public WalkingState(in Character character)
+    {
+        controller = character.Controller;
+        stateMachine = character.StateMachine;
+        movement = character.Movement;
+    }
 
     public void Enter()
     {
-        character.Controller.OnDoBlock += character.StateMachine.TransitionToWalkingOrBlocking;
-        character.Controller.OnDoMove += character.StateMachine.TransitionToMove;
-        character.Controller.OnHurt += character.StateMachine.TransitionToHurt;
+        stateMachine.enabled = true;
+        controller.OnDoBlock += stateMachine.TransitionToWalkingOrBlocking;
+        controller.OnDoMove += stateMachine.TransitionToMove;
+        controller.OnHurt += stateMachine.TransitionToHurt;
         OnEnter?.Invoke();
     }
     public void Update() 
     {
-        character.Movement.MoveCharacter(character.Controller.MovementVector);
+        movement.MoveCharacter(controller.MovementVector);
     }
     public void FixedUpdate() 
     {
-        character.Movement.LookAtTarget();
+        movement.LookAtTarget();
     }
     public void Exit() 
     {
-        character.Controller.OnDoBlock -= character.StateMachine.TransitionToWalkingOrBlocking;
-        character.Controller.OnDoMove -= character.StateMachine.TransitionToMove;
-        character.Controller.OnHurt -= character.StateMachine.TransitionToHurt;
+        controller.OnDoBlock -= stateMachine.TransitionToWalkingOrBlocking;
+        controller.OnDoMove -= stateMachine.TransitionToMove;
+        controller.OnHurt -= stateMachine.TransitionToHurt;
         OnExit?.Invoke();
     }
 }

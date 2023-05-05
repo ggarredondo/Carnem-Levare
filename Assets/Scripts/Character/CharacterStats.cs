@@ -35,7 +35,7 @@ public class CharacterStats : MonoBehaviour
     }
     public void AddToStamina(float addend) 
     {
-        stamina = Mathf.Clamp(stamina + addend, 0f, maxStamina);
+        stamina = Mathf.Clamp(stamina + Mathf.Round(addend), 0f, maxStamina);
     }
 
     public ref readonly float Stamina { get => ref stamina; }

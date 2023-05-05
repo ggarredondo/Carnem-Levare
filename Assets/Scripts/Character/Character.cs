@@ -12,25 +12,19 @@ public abstract class Character : MonoBehaviour
 
     protected virtual void Awake()
     {
-        // Must be done first
         stateMachine = GetComponent<CharacterStateMachine>();
-        stateMachine.Initialize();
-
         movement = GetComponent<CharacterMovement>();
-        movement.Initialize();
-
         stats = GetComponent<CharacterStats>();
-        stats.Initialize();
-
         characAnimation = GetComponent<CharacterAnimation>();
-        characAnimation.Initialize();
 
+        stateMachine.Initialize();
+        movement.Initialize();
+        stats.Initialize();
+        stats.MoveList.ForEach(move => move.Initialize(this));
+        characAnimation.Initialize();
         characAudio = new CharacterAudio(this);
 
-        stats.MoveList.ForEach(move => move.Initialize(this));
-
-        // Must be done last
-        stateMachine.TransitionToWalking();
+        stateMachine.TransitionToWalking(); // Must be done last
     }
     protected virtual void Start() {}
 

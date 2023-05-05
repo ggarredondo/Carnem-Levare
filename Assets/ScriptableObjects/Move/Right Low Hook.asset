@@ -21,7 +21,7 @@ MonoBehaviour:
   recovery: 400
   buffering: 500
   hitSound: Hit_Mid_Hook
-  blockedSound: Blocked_Mid_Hook
+  blockedSound: Blocked_Default
   advantageOnBlock: 400
   advantageOnHit: 800
   hitboxSubtag: RIGHT_FIST

@@ -4,7 +4,14 @@ using System.Linq;
 
 public class CharacterAnimation : MonoBehaviour
 {
-    private Character character;
+    private CharacterMovement movement;
+    private CharacterStateMachine stateMachine;
+    private MoveState moveState;
+    private HurtState hurtState;
+    private BlockedState blockedState;
+    private List<Move> moveList;
+    private Move currentMove;
+
     private Animator animator;
     private AnimatorOverrideController animatorOverride;
     private AnimationClip[] animatorDefaults;
@@ -13,30 +20,36 @@ public class CharacterAnimation : MonoBehaviour
 
     public void Initialize()
     {
-        character = GetComponent<Character>();
+        movement = GetComponent<CharacterMovement>();
+        stateMachine = GetComponent<CharacterStateMachine>();
+        moveState = stateMachine.MoveState;
+        hurtState = stateMachine.HurtState;
+        blockedState = stateMachine.BlockedState;
+        moveList = GetComponent<CharacterStats>().MoveList;
+
         animator = GetComponent<Animator>();
         animatorDefaults = animator.runtimeAnimatorController.animationClips;
         animatorOverride = new AnimatorOverrideController(animator.runtimeAnimatorController);
         UpdateMovesetAnimations();
 
-        character.Movement.OnMoveCharacter += MovementAnimation;
+        movement.OnMoveCharacter += MovementAnimation;
 
-        character.StateMachine.WalkingState.OnEnter += EnterWalkingState;
-        character.StateMachine.WalkingState.OnExit += ExitWalkingState;
+        stateMachine.WalkingState.OnEnter += EnterWalkingState;
+        stateMachine.WalkingState.OnExit += ExitWalkingState;
 
-        character.StateMachine.BlockingState.OnEnter += EnterBlockingState;
-        character.StateMachine.BlockingState.OnExit += ExitBlockingState;
+        stateMachine.BlockingState.OnEnter += EnterBlockingState;
+        stateMachine.BlockingState.OnExit += ExitBlockingState;
 
-        character.StateMachine.MoveState.OnEnterInteger += EnterMoveState;
+        stateMachine.MoveState.OnEnterInteger += EnterMoveState;
 
-        character.StateMachine.HurtState.OnEnter += EnterHurtState;
-        character.StateMachine.HurtState.OnExit += ExitHurtState;
+        stateMachine.HurtState.OnEnter += EnterHurtState;
+        stateMachine.HurtState.OnExit += ExitHurtState;
 
-        character.StateMachine.BlockedState.OnEnter += EnterBlockedState;
-        character.StateMachine.BlockedState.OnExit += ExitBlockedState;
+        stateMachine.BlockedState.OnEnter += EnterBlockedState;
+        stateMachine.BlockedState.OnExit += ExitBlockedState;
 
-        character.StateMachine.KOState.OnEnter += EnterKOState;
-        character.StateMachine.KOState.OnExit += ExitKOState;
+        stateMachine.KOState.OnEnter += EnterKOState;
+        stateMachine.KOState.OnExit += ExitKOState;
     }
 
     private void OnValidate()
@@ -55,10 +68,10 @@ public class CharacterAnimation : MonoBehaviour
 
     private void UpdateMovesetAnimations()
     {
-        for (int i = 0; i < character.Stats.MoveList.Count; ++i)
+        for (int i = 0; i < moveList.Count; ++i)
         {
-            UpdateAnimation("MoveClip" + i, character.Stats.MoveList[i].Animation);
-            animator.SetFloat("move" + i + "_speed", character.Stats.MoveList[i].AnimationSpeed);
+            UpdateAnimation("MoveClip" + i, moveList[i].Animation);
+            animator.SetFloat("move" + i + "_speed", moveList[i].AnimationSpeed);
         }
     }
 
@@ -79,25 +92,26 @@ public class CharacterAnimation : MonoBehaviour
 
     private void InitMove() 
     {
-        character.Stats.MoveList[character.StateMachine.MoveState.moveIndex].InitMove();
+        currentMove = moveList[moveState.moveIndex];
+        currentMove.InitMove();
     }
     private void ActivateMove() 
     {
-        character.Stats.MoveList[character.StateMachine.MoveState.moveIndex].ActivateMove();
+        currentMove.ActivateMove();
     }
     private void DeactivateMove() 
     { 
-        character.Stats.MoveList[character.StateMachine.MoveState.moveIndex].DeactivateMove(); 
+        currentMove.DeactivateMove(); 
     }
     private void EnableBuffering()
     {
-        character.StateMachine.MoveState.BUFFER_FLAG = true;
+        moveState.BUFFER_FLAG = true;
     }
     private void RecoverFromMove()
     {
-        character.StateMachine.MoveState.BUFFER_FLAG = false;
-        character.Stats.MoveList[character.StateMachine.MoveState.moveIndex].RecoverFromMove();
-        character.StateMachine.TransitionToRecovery.Invoke();
+        moveState.BUFFER_FLAG = false;
+        currentMove.RecoverFromMove();
+        stateMachine.TransitionToRecovery.Invoke();
     }
 
     #endregion
@@ -114,7 +128,7 @@ public class CharacterAnimation : MonoBehaviour
 
     private void EnterHurtState() 
     {
-        IHit hitbox = character.StateMachine.HurtState.Hitbox;
+        IHit hitbox = hurtState.Hitbox;
         animator.SetBool("STATE_HURT", true);
         TriggerHurtAnimation(hitbox.AnimationBodyTarget, hitbox.AnimationStagger);
     }
@@ -122,7 +136,7 @@ public class CharacterAnimation : MonoBehaviour
 
     private void EnterBlockedState()
     {
-        IBlocked hitbox = character.StateMachine.BlockedState.Hitbox;
+        IBlocked hitbox = blockedState.Hitbox;
         animator.SetBool("STATE_BLOCKED", true);
         TriggerHurtAnimation(hitbox.AnimationBodyTarget, hitbox.AnimationStagger);
     }

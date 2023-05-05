@@ -236,7 +236,7 @@ public class Sounds : ScriptableObject
     {
         if (!SoundsTable.ContainsKey(name))
         {
-            Debug.LogWarning("Sound: " + name + " not exist");
+            Debug.LogWarning("Sound: " + name + " doesn't exist");
             return null;
         }
         else
