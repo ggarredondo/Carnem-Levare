@@ -10,21 +10,21 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3b1f0431d7ca2da48a12ff07183273eb, type: 3}
-  m_Name: Left Jab
+  m_Name: Right Low Hook
   m_EditorClassIdentifier: 
-  moveName: Left Jab
-  animation: {fileID: 7400000, guid: e652c0869035b6b418eef0c72bbb19c0, type: 2}
+  moveName: Right Low Hook
+  animation: {fileID: 7400000, guid: 75b8e477760a6904aa34988cc45c114a, type: 2}
   animationSpeed: 1
-  initSound: Whiff_Jab
-  startUp: 200
-  active: 50
-  recovery: 300
-  buffering: 300
-  hitSound: Hit_Jab
-  blockedSound: Blocked_Default
+  initSound: Whiff_Mid_Hook
+  startUp: 350
+  active: 120
+  recovery: 400
+  buffering: 500
+  hitSound: Hit_Mid_Hook
+  blockedSound: Blocked_Mid_Hook
   advantageOnBlock: 400
   advantageOnHit: 800
-  hitboxSubtag: LEFT_FIST
-  baseDamage: 10
-  animationStagger: 0
+  hitboxSubtag: RIGHT_FIST
+  baseDamage: 15
+  animationStagger: 1
   unblockable: 0

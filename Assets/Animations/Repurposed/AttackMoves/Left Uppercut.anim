@@ -32036,28 +32036,35 @@ AnimationClip:
   m_HasMotionFloatCurves: 1
   m_Events:
   - time: 0
-    functionName: AttackStart
+    functionName: InitMove
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
   - time: 0.2
-    functionName: AttackActive
+    functionName: ActivateMove
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
   - time: 0.27
-    functionName: AttackRecovery
+    functionName: DeactivateMove
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0
+  - time: 0.32
+    functionName: EnableBuffering
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
   - time: 0.57
-    functionName: AnimationCancel
+    functionName: RecoverFromMove
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0

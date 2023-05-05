@@ -10,21 +10,21 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3b1f0431d7ca2da48a12ff07183273eb, type: 3}
-  m_Name: Left Jab
+  m_Name: Left Uppercut
   m_EditorClassIdentifier: 
-  moveName: Left Jab
-  animation: {fileID: 7400000, guid: e652c0869035b6b418eef0c72bbb19c0, type: 2}
+  moveName: Left Uppercut
+  animation: {fileID: 7400000, guid: c8ea972d3fdf705449eeced1a0d40d6c, type: 2}
   animationSpeed: 1
-  initSound: Whiff_Jab
+  initSound: Whiff_Hook
   startUp: 200
-  active: 50
+  active: 70
   recovery: 300
-  buffering: 300
-  hitSound: Hit_Jab
+  buffering: 320
+  hitSound: Hit_Hook
   blockedSound: Blocked_Default
   advantageOnBlock: 400
   advantageOnHit: 800
   hitboxSubtag: LEFT_FIST
-  baseDamage: 10
-  animationStagger: 0
+  baseDamage: 12
+  animationStagger: 1
   unblockable: 0

@@ -34,6 +34,9 @@ public class CharacterAnimation : MonoBehaviour
 
         character.StateMachine.BlockedState.OnEnter += EnterBlockedState;
         character.StateMachine.BlockedState.OnExit += ExitBlockedState;
+
+        character.StateMachine.KOState.OnEnter += EnterKOState;
+        character.StateMachine.KOState.OnExit += ExitKOState;
     }
 
     private void OnValidate()
@@ -107,16 +110,15 @@ public class CharacterAnimation : MonoBehaviour
     private void EnterBlockingState() { animator.SetBool("STATE_BLOCKING", true); }
     private void ExitBlockingState() { animator.SetBool("STATE_BLOCKING", false); }
 
+    private void EnterMoveState(int moveIndex) { animator.SetTrigger("move" + moveIndex); }
+
     private void EnterHurtState() 
     {
         IHit hitbox = character.StateMachine.HurtState.Hitbox;
         animator.SetBool("STATE_HURT", true);
         TriggerHurtAnimation(hitbox.AnimationBodyTarget, hitbox.AnimationStagger);
     }
-    private void ExitHurtState()
-    {
-        animator.SetBool("STATE_HURT", false);
-    }
+    private void ExitHurtState() { animator.SetBool("STATE_HURT", false); }
 
     private void EnterBlockedState()
     {
@@ -124,12 +126,15 @@ public class CharacterAnimation : MonoBehaviour
         animator.SetBool("STATE_BLOCKED", true);
         TriggerHurtAnimation(hitbox.AnimationBodyTarget, hitbox.AnimationStagger);
     }
-    private void ExitBlockedState()
-    {
-        animator.SetBool("STATE_BLOCKED", false);
-    }
+    private void ExitBlockedState() { animator.SetBool("STATE_BLOCKED", false); }
 
-    private void EnterMoveState(int moveIndex) { animator.SetTrigger("move" + moveIndex); }
+    private void EnterKOState()
+    {
+        //animator.SetFloat("hurt_target", target);
+        //animator.SetFloat("hurt_stagger", stagger);
+        animator.SetBool("STATE_KO", true);
+    }
+    private void ExitKOState() { animator.SetBool("STATE_KO", false); }
 
     #endregion
 }
