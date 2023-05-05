@@ -23,8 +23,9 @@ public class CharacterStats
         character.transform.localScale *= height;
         rb.mass = mass;
         rb.drag = drag;
-        Character charac = character;
-        moveList.ForEach(move => move.Initialize(charac));
+
+        foreach (Move move in moveList)
+            move.Initialize(character, this);
     }
     public void SubscribeEvents(CharacterStateMachine stateMachine)
     {

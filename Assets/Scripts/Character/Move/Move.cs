@@ -3,6 +3,7 @@ using System;
 
 public abstract class Move : ScriptableObject
 {
+    protected CharacterStats stats;
     protected Character character;
     [SerializeField] private string moveName;
 
@@ -19,9 +20,10 @@ public abstract class Move : ScriptableObject
     [SerializeField] private double recovery;
     [SerializeField] private double buffering;
 
-    public virtual void Initialize(in Character character)
+    public virtual void Initialize(in Character character, in CharacterStats stats)
     {
         this.character = character;
+        this.stats = stats;
         if (animation != null) AssignEvents();
     }
 
