@@ -20,9 +20,10 @@ public class CameraEffects : MonoBehaviour
     [SerializeField] private CameraMovement[] cameraEffects;
 
     //PRIVATE
-    private PlayerLogic player;
-    private EnemyLogic enemy;
+    private Player player;
+    private Enemy enemy;
     private Transform[] alternativeTargets;
+    private bool changePlayerTargets, changeEnemyTargets, isBlocking, isMoving;
 
     private bool[] cameraConditions;
     private Queue<CameraMovement> cameraStack = new();
@@ -43,13 +44,15 @@ public class CameraEffects : MonoBehaviour
 
     private void Start()
     {
-        player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerLogic>();
-        enemy = GameObject.FindGameObjectWithTag("Enemy").GetComponent<EnemyLogic>();
+        player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
+        enemy = GameObject.FindGameObjectWithTag("Enemy").GetComponent<Enemy>();
 
         foreach(CameraMovement movement in cameraEffects)
         {
             movement.Initialize(vcam);
         }
+
+        UpdateCameraConditions();
     }
 
     public void InitializeTargetGroup(Transform playerTarget, Transform enemyTarget)
@@ -68,27 +71,46 @@ public class CameraEffects : MonoBehaviour
 
     private void UpdateCameraConditions()
     {
-        foreach (CameraMovement movement in cameraEffects)
+        player.StateMachine.BlockingState.OnEnter += () =>
         {
-            switch (movement.ID)
-            {
-                case TypeCameraMovement.SMOOTH_FOLLOW:
-                    cameraConditions[(int)TypeCameraMovement.SMOOTH_FOLLOW] = !player.IsIdle;
-                    break;
+            cameraConditions[(int)TypeCameraMovement.LINEAL_MOVE] = true;
+            isBlocking = true;
+        };
 
-                case TypeCameraMovement.LINEAL_MOVE:
-                    cameraConditions[(int)TypeCameraMovement.LINEAL_MOVE] = player.IsBlockPressed;
-                    break;
+        player.StateMachine.BlockingState.OnExit += () =>
+        {
+            cameraConditions[(int)TypeCameraMovement.LINEAL_MOVE] = false;
+            isBlocking = false;
+        };
 
-                case TypeCameraMovement.NOISE:
-                    cameraConditions[(int)TypeCameraMovement.NOISE] = player.IsIdle || player.IsMoving;
-                    break;
+        player.StateMachine.MoveState.OnEnter += () =>
+        {
+            cameraConditions[(int)TypeCameraMovement.DOLLY_ZOOM] = true;
+            changePlayerTargets = true;
+            isMoving = true;
+        };
 
-                case TypeCameraMovement.DOLLY_ZOOM:
-                    cameraConditions[(int)TypeCameraMovement.DOLLY_ZOOM] = player.IsAttacking;
-                    break;
-            }
-        }
+        player.StateMachine.MoveState.OnExit += () =>
+        {
+            cameraConditions[(int)TypeCameraMovement.DOLLY_ZOOM] = false;
+            changePlayerTargets = false;
+            isMoving = false;
+        };
+
+        player.StateMachine.WalkingState.OnEnter += () =>
+        {
+            cameraConditions[(int)TypeCameraMovement.SMOOTH_FOLLOW] = true;
+            cameraConditions[(int)TypeCameraMovement.NOISE] = true;
+        };
+
+        player.StateMachine.WalkingState.OnExit += () =>
+        {
+            cameraConditions[(int)TypeCameraMovement.SMOOTH_FOLLOW] = false;
+            cameraConditions[(int)TypeCameraMovement.NOISE] = false;
+        };
+
+        enemy.StateMachine.WalkingState.OnEnter += () => changeEnemyTargets = true;
+        enemy.StateMachine.WalkingState.OnExit += () => changeEnemyTargets = false;
     }
 
     private void LateUpdate()
@@ -99,8 +121,6 @@ public class CameraEffects : MonoBehaviour
 
             //Change the camera targets to create more hitting impact
             if(alternativeTargets[0] != null && alternativeTargets[1] != null) TargetUpdate();
-
-            UpdateCameraConditions();
 
             //Apply the camera movement to each effect depending of his condition
             foreach (CameraMovement movement in cameraEffects)
@@ -126,15 +146,17 @@ public class CameraEffects : MonoBehaviour
         }
     }
 
+    
     private void OrbitalMovement()
     {
-        if (Mathf.Abs(player.Direction.x) > 0.1f && player.IsMoving && !cameraConditions[1]) 
-            orbitalTransposer.m_XAxis.Value += Mathf.Sign(player.Direction.x) * orbitalValue * Time.deltaTime;
+        if (player.Controller.MovementVector != new Vector2(0,0) && !isBlocking && !isMoving) 
+            orbitalTransposer.m_XAxis.Value += player.Controller.MovementVector.x * orbitalValue * Time.deltaTime;
 
-        if (player.IsBlockPressed) orbitalTransposer.m_XAxis.Value = Mathf.Lerp(orbitalTransposer.m_XAxis.Value, 0, orbitalRecovery * Time.deltaTime);
+        if (isBlocking) orbitalTransposer.m_XAxis.Value = Mathf.Lerp(orbitalTransposer.m_XAxis.Value, 0, orbitalRecovery * Time.deltaTime);
 
-        orbitalTransposer.m_RecenterToTargetHeading.m_enabled = Mathf.Abs(player.Direction.x) > 0.1f && player.IsMoving && !cameraConditions[1];
+        orbitalTransposer.m_RecenterToTargetHeading.m_enabled = player.Controller.MovementVector != new Vector2(0, 0) && !isBlocking && !isMoving;
     }
+    
 
 
     private void AsignAlternativeTarget(int index)
@@ -142,10 +164,11 @@ public class CameraEffects : MonoBehaviour
         targetGroup.m_Targets[index].target.position = Vector3.Lerp(targetGroup.m_Targets[index].target.position, alternativeTargets[index].position, targetingSpeed * Time.deltaTime);
     }
 
+    
     private void TargetUpdate()
     {
-        if (!player.IsBlockPressed || player.IsAttacking) AsignAlternativeTarget(0);
-        if(!enemy.IsMoving) AsignAlternativeTarget(1);
+        if (changePlayerTargets) AsignAlternativeTarget(0);
+        if(changeEnemyTargets) AsignAlternativeTarget(1);
 
         //Debug Targets with Spheres
         targetDebug[0].transform.position = targetGroup.m_Targets[0].target.position;
@@ -153,5 +176,5 @@ public class CameraEffects : MonoBehaviour
 
         targetDebug[0].SetActive(debug);
         targetDebug[1].SetActive(debug);
-    }
+    }  
 }

@@ -25656,16 +25656,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 2835685394191603324, guid: 5cbd378e28601cf4dbc2f17b819dd819,
-        type: 3}
-      propertyPath: m_AmplitudeGain
-      value: 0.1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2835685394191603324, guid: 5cbd378e28601cf4dbc2f17b819dd819,
-        type: 3}
-      propertyPath: m_FrequencyGain
-      value: 3
-      objectReference: {fileID: 0}
     - target: {fileID: 2835685395483145561, guid: 5cbd378e28601cf4dbc2f17b819dd819,
         type: 3}
       propertyPath: m_RootOrder
@@ -25725,11 +25715,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Camera
-      objectReference: {fileID: 0}
-    - target: {fileID: 2835685396104087955, guid: 5cbd378e28601cf4dbc2f17b819dd819,
-        type: 3}
-      propertyPath: m_Enabled
-      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5cbd378e28601cf4dbc2f17b819dd819, type: 3}

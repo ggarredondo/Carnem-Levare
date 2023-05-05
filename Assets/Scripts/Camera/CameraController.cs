@@ -1,7 +1,7 @@
 using UnityEngine;
 using Cinemachine;
 
-public class CameraManager : MonoBehaviour
+public class CameraController : MonoBehaviour
 {
     public VirtualCameras changeVirtualCamera;
     public static VirtualCameras actualVirtualCamera;
