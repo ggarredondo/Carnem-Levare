@@ -2,35 +2,32 @@ using UnityEngine;
 using System.Collections.Generic;
 using System.Linq;
 
-public class CharacterAnimation : MonoBehaviour
+[System.Serializable]
+public class CharacterAnimation
 {
-    private CharacterMovement movement;
-    private CharacterStateMachine stateMachine;
-    private MoveState moveState;
     private HurtState hurtState;
     private BlockedState blockedState;
     private List<Move> moveList;
-    private Move currentMove;
 
     private Animator animator;
     private AnimatorOverrideController animatorOverride;
     private AnimationClip[] animatorDefaults;
+
     [SerializeField] private float animatorSpeed = 1f;
     [SerializeField] private bool updateAnimations = false;
 
-    public void Initialize()
+    public void Initialize(in Character character, in Animator animator)
     {
-        movement = GetComponent<CharacterMovement>();
-        stateMachine = GetComponent<CharacterStateMachine>();
-        moveState = stateMachine.MoveState;
-        hurtState = stateMachine.HurtState;
-        blockedState = stateMachine.BlockedState;
-        moveList = GetComponent<CharacterStats>().MoveList;
-
-        animator = GetComponent<Animator>();
+        moveList = character.Stats.MoveList;
+        this.animator = animator;
         animatorDefaults = animator.runtimeAnimatorController.animationClips;
         animatorOverride = new AnimatorOverrideController(animator.runtimeAnimatorController);
         UpdateMovesetAnimations();
+    }
+    public void SubscribeEvents(CharacterStateMachine stateMachine, CharacterMovement movement)
+    {
+        hurtState = stateMachine.HurtState;
+        blockedState = stateMachine.BlockedState;
 
         movement.OnMoveCharacter += MovementAnimation;
 
@@ -51,8 +48,7 @@ public class CharacterAnimation : MonoBehaviour
         stateMachine.KOState.OnEnter += EnterKOState;
         stateMachine.KOState.OnExit += ExitKOState;
     }
-
-    private void OnValidate()
+    public void OnValidate()
     {
         if (animator != null) animator.speed = animatorSpeed;
         if (updateAnimations) { UpdateMovesetAnimations(); updateAnimations = false; }
@@ -87,34 +83,6 @@ public class CharacterAnimation : MonoBehaviour
         animator.SetFloat("hurt_stagger", stagger);
         animator.SetTrigger("hurt");
     }
-
-    #region Animation Events
-
-    private void InitMove() 
-    {
-        currentMove = moveList[moveState.moveIndex];
-        currentMove.InitMove();
-    }
-    private void ActivateMove() 
-    {
-        currentMove.ActivateMove();
-    }
-    private void DeactivateMove() 
-    { 
-        currentMove.DeactivateMove(); 
-    }
-    private void EnableBuffering()
-    {
-        moveState.BUFFER_FLAG = true;
-    }
-    private void RecoverFromMove()
-    {
-        moveState.BUFFER_FLAG = false;
-        currentMove.RecoverFromMove();
-        stateMachine.TransitionToRecovery.Invoke();
-    }
-
-    #endregion
 
     #region Enter/Exit States
 

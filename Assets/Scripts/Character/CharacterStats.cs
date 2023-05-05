@@ -1,7 +1,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CharacterStats : MonoBehaviour
+[System.Serializable]
+public class CharacterStats
 {
     [SerializeField] private float stamina, maxStamina;
     [SerializeField] private float characterDamage;
@@ -16,14 +17,17 @@ public class CharacterStats : MonoBehaviour
 
     [SerializeField] protected List<Move> moveList;
 
-    public void Initialize()
+    public void Initialize(in Character character, in Rigidbody rb)
     {
         stamina = maxStamina;
-        transform.localScale *= height;
-        GetComponent<Rigidbody>().mass = mass;
-        GetComponent<Rigidbody>().drag = drag;
-
-        CharacterStateMachine stateMachine = GetComponent<CharacterStateMachine>();
+        character.transform.localScale *= height;
+        rb.mass = mass;
+        rb.drag = drag;
+        Character charac = character;
+        moveList.ForEach(move => move.Initialize(charac));
+    }
+    public void SubscribeEvents(CharacterStateMachine stateMachine)
+    {
         stateMachine.HurtState.OnEnter += () => AddToStamina(-stateMachine.HurtState.Hitbox.Damage);
         stateMachine.BlockedState.OnEnter += () => AddToStamina(-stateMachine.BlockedState.Hitbox.Damage * blockingMultiplier);
     }

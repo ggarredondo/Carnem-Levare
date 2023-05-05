@@ -3,6 +3,8 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "Scriptable Objects/Move/AttackMove")]
 public class AttackMove : Move
 {
+    private CharacterStats stats;
+
     [Header("Attack-specific Sound")]
     [SerializeField] private string hitSound;
     [SerializeField] private string blockedSound;
@@ -21,6 +23,7 @@ public class AttackMove : Move
 
     public override void Initialize(in Character character)
     {
+        stats = character.Stats;
         hitbox = GameObject.FindWithTag(character.HitboxPrefix + hitboxSubtag).GetComponent<Hitbox>();
         base.Initialize(character);
     }
@@ -30,7 +33,7 @@ public class AttackMove : Move
         hitbox.Set(hitSound, 
             blockedSound, 
             (float)animationStagger,
-            character.Stats.CalculateAttackDamage(baseDamage),
+            stats.CalculateAttackDamage(baseDamage),
             advantageOnBlock,
             advantageOnHit, 
             unblockable);

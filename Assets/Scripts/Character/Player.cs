@@ -6,7 +6,7 @@ public class Player : Character
     {
         controller = GameObject.FindGameObjectWithTag("INPUT").GetComponent<InputController>();
         hitboxPrefix = "HITBOX/PLAYER/";
+        target = GameObject.FindGameObjectWithTag("Enemy").transform;
         base.Awake();
-        movement.SetTarget(GameObject.FindGameObjectWithTag("Enemy").transform);
     }
 }

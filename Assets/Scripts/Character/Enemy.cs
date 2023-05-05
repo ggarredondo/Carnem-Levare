@@ -6,7 +6,7 @@ public class Enemy : Character
     {
         controller = GetComponent<AIController>();
         hitboxPrefix = "HITBOX/ENEMY/";
+        target = GameObject.FindGameObjectWithTag("Player").transform;
         base.Awake();
-        movement.SetTarget(GameObject.FindGameObjectWithTag("Player").transform);
     }
 }

@@ -1,10 +1,11 @@
 using UnityEngine;
 using RefDelegates;
 
-public class CharacterMovement : MonoBehaviour
+[System.Serializable]
+public class CharacterMovement
 {
     private Rigidbody rb;
-    private Transform target;
+    private Transform character, target;
     public void SetTarget(in Transform target) => this.target = target;
     
     [Tooltip("How quickly character rotates towards their opponent")]
@@ -19,9 +20,11 @@ public class CharacterMovement : MonoBehaviour
     private Vector2 direction;
     public event ActionIn<Vector2> OnMoveCharacter;
 
-    public void Initialize()
-    {
-        rb = GetComponent<Rigidbody>();
+    public void Initialize(in Transform character, in Transform target, in Rigidbody rb)
+    { 
+        this.character = character;
+        this.target = target;
+        this.rb = rb;
         direction = Vector2.zero;
     }
 
@@ -45,7 +48,7 @@ public class CharacterMovement : MonoBehaviour
         Quaternion targetRotation;
         if (target != null && doTracking && direction.magnitude > IDLE_THRESHOLD)
         {
-            targetRotation = Quaternion.LookRotation(target.position - transform.position).normalized;
+            targetRotation = Quaternion.LookRotation(target.position - character.position).normalized;
             rb.rotation = Quaternion.Lerp(rb.rotation, targetRotation, trackingRate * Time.fixedDeltaTime);
         }
     }

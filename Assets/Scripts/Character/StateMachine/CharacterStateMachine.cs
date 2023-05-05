@@ -1,9 +1,14 @@
 using UnityEngine;
 using System;
+using System.Collections.Generic;
 
 public class CharacterStateMachine : MonoBehaviour
 {
-    private Character character;
+    private Controller controller;
+    private CharacterStats stats;
+    private List<Move> moveList;
+    private Move currentMove;
+
     private IState currentState;
     private WalkingState walkingState;
     private BlockingState blockingState;
@@ -14,7 +19,11 @@ public class CharacterStateMachine : MonoBehaviour
 
     public void Initialize()
     {
-        character = GetComponent<Character>();
+        Character character = GetComponent<Character>();
+        controller = character.Controller;
+        stats = character.Stats;
+        moveList = stats.MoveList;
+
         walkingState = new WalkingState(character);
         blockingState = new BlockingState(character);
         moveState = new MoveState(character);
@@ -38,6 +47,30 @@ public class CharacterStateMachine : MonoBehaviour
         currentState.Enter();
     }
 
+    private void InitMove()
+    {
+        currentMove = moveList[moveState.moveIndex];
+        currentMove.InitMove();
+    }
+    private void ActivateMove()
+    {
+        currentMove.ActivateMove();
+    }
+    private void DeactivateMove()
+    {
+        currentMove.DeactivateMove();
+    }
+    private void EnableBuffering()
+    {
+        moveState.BUFFER_FLAG = true;
+    }
+    private void RecoverFromMove()
+    {
+        moveState.BUFFER_FLAG = false;
+        currentMove.RecoverFromMove();
+        TransitionToRecovery.Invoke();
+    }
+
     public ref readonly IState CurrentState { get => ref currentState; }
     public ref readonly WalkingState WalkingState { get => ref walkingState; }
     public ref readonly BlockingState BlockingState { get => ref blockingState; }
@@ -48,10 +81,10 @@ public class CharacterStateMachine : MonoBehaviour
 
     public void TransitionToWalking() => ChangeState(walkingState);
     public void TransitionToBlocking() => ChangeState(blockingState);
-    public void TransitionToWalkingOrBlocking() => ChangeState(character.Controller.isBlocking ? blockingState : walkingState);
+    public void TransitionToWalkingOrBlocking() => ChangeState(controller.isBlocking ? blockingState : walkingState);
     public void TransitionToMove(int moveIndex)
     {
-        if (moveIndex >= 0 && moveIndex < character.Stats.MoveList.Count)
+        if (moveIndex >= 0 && moveIndex < stats.MoveList.Count)
         {
             moveState.moveIndex = moveIndex;
             ChangeState(moveState);
@@ -70,7 +103,7 @@ public class CharacterStateMachine : MonoBehaviour
     }
     public void TransitionToBlockedOrHurt(in Hitbox hitbox)
     {
-        if (hitbox.Unblockable || !character.Controller.isBlocking) TransitionToHurt(hitbox);
+        if (hitbox.Unblockable || !controller.isBlocking) TransitionToHurt(hitbox);
         else TransitionToBlocked(hitbox);
     }
 }
