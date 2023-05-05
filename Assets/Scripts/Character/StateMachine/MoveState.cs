@@ -30,7 +30,7 @@ public class MoveState : IState
 
     private void BufferMove(int moveIndex)
     {
-        if (bufferedMoveIndex == -1 && BUFFER_FLAG) {
+        if (bufferedMoveIndex == -1 && BUFFER_FLAG && moveIndex >= 0 && moveIndex < character.Stats.MoveList.Count) {
             bufferedMoveIndex = moveIndex;
             character.StateMachine.TransitionToRecovery = () => character.StateMachine.TransitionToMove(moveIndex);
         }
