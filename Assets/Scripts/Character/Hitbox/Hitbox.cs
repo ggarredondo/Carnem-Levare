@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class Hitbox : MonoBehaviour, IHit, IBlocked
+public class Hitbox : MonoBehaviour
 {
     private string hitSound, blockedSound;
     private float animationBodyTarget, animationStagger, damage;

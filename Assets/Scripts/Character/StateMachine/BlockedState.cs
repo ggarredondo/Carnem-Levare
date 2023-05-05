@@ -8,8 +8,8 @@ public class BlockedState : IState
     private readonly CharacterStateMachine stateMachine;
     public event Action OnEnter, OnExit;
 
-    private IBlocked hitbox;
-    public void Set(IBlocked hitbox) => this.hitbox = hitbox;
+    private Hitbox hitbox;
+    public void Set(Hitbox hitbox) => this.hitbox = hitbox;
     private CancellationTokenSource cancellationTokenSource;
 
     public BlockedState(in Character character)
@@ -44,5 +44,5 @@ public class BlockedState : IState
         OnExit?.Invoke();
     }
 
-    public ref readonly IBlocked Hitbox { get => ref hitbox; }
+    public ref readonly Hitbox Hitbox { get => ref hitbox; }
 }

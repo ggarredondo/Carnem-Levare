@@ -128,7 +128,7 @@ public class CharacterAnimation : MonoBehaviour
 
     private void EnterHurtState() 
     {
-        IHit hitbox = hurtState.Hitbox;
+        Hitbox hitbox = hurtState.Hitbox;
         animator.SetBool("STATE_HURT", true);
         TriggerHurtAnimation(hitbox.AnimationBodyTarget, hitbox.AnimationStagger);
     }
@@ -136,7 +136,7 @@ public class CharacterAnimation : MonoBehaviour
 
     private void EnterBlockedState()
     {
-        IBlocked hitbox = blockedState.Hitbox;
+        Hitbox hitbox = blockedState.Hitbox;
         animator.SetBool("STATE_BLOCKED", true);
         TriggerHurtAnimation(hitbox.AnimationBodyTarget, hitbox.AnimationStagger);
     }

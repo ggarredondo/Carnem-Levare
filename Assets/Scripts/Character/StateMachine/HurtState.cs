@@ -8,8 +8,8 @@ public class HurtState : IState
     private readonly CharacterStateMachine stateMachine;
     public event Action OnEnter, OnExit;
 
-    private IHit hitbox;
-    public void Set(IHit hitbox) => this.hitbox = hitbox;
+    private Hitbox hitbox;
+    public void Set(Hitbox hitbox) => this.hitbox = hitbox;
     private CancellationTokenSource cancellationTokenSource;
 
     public HurtState(in Character character)
@@ -44,5 +44,5 @@ public class HurtState : IState
         OnExit?.Invoke();
     }
     
-    public ref readonly IHit Hitbox { get => ref hitbox; }
+    public ref readonly Hitbox Hitbox { get => ref hitbox; }
 }
