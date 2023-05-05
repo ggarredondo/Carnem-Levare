@@ -3,8 +3,8 @@ using System;
 public class MoveState : IState
 {
     private readonly Character character;
-    public event Action<int> OnEnter;
-    public event Action OnExit;
+    public event Action<int> OnEnterInteger;
+    public event Action OnEnter, OnExit;
 
     public int moveIndex, bufferedMoveIndex = -1;
     public bool BUFFER_FLAG = false;
@@ -16,7 +16,8 @@ public class MoveState : IState
         character.Controller.OnDoMove += BufferMove;
         character.Controller.OnHurt += character.StateMachine.TransitionToHurt;
         character.StateMachine.TransitionToRecovery = character.StateMachine.TransitionToWalkingOrBlocking;
-        OnEnter?.Invoke(moveIndex);
+        OnEnterInteger?.Invoke(moveIndex);
+        OnEnter?.Invoke();
     }
     public void Update() {}
     public void FixedUpdate() {}

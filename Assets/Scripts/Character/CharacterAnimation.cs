@@ -27,7 +27,7 @@ public class CharacterAnimation : MonoBehaviour
         character.StateMachine.BlockingState.OnEnter += EnterBlockingState;
         character.StateMachine.BlockingState.OnExit += ExitBlockingState;
 
-        character.StateMachine.MoveState.OnEnter += EnterMoveState;
+        character.StateMachine.MoveState.OnEnterInteger += EnterMoveState;
 
         character.StateMachine.HurtState.OnEnter += EnterHurtState;
         character.StateMachine.HurtState.OnExit += ExitHurtState;
