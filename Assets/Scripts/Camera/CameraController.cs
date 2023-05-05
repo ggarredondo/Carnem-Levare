@@ -21,7 +21,7 @@ public class CameraController : MonoBehaviour
         if (actualVirtualCamera != changeVirtualCamera) ChangeVirtualCamera();
 
         actualTransform.position = playerTargets.GetTarget((int)actualVirtualCamera, false).position;
-        actualTransform.LookAt(enemyTargets.GetTarget((int)actualVirtualCamera, false).position);
+        if(actualVirtualCamera == 0) actualTransform.LookAt(enemyTargets.GetTarget((int)actualVirtualCamera, false).position);
     }
 
     private void InitializeTargets()

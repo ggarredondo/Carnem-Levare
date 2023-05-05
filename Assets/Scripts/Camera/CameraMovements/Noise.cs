@@ -10,15 +10,15 @@ public class Noise : CameraMovement
     private float reduceAmplitude, reduceFrequency;
     private CinemachineBasicMultiChannelPerlin noiseTransposer;
 
-    public override void Initialize(CinemachineVirtualCamera vcam)
+    public override void Initialize(ref CinemachineVirtualCamera vcam)
     {
         this.vcam = vcam;
         noiseTransposer = vcam.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>();
     }
 
-    public override void ApplyMove(bool condition)
+    public override void ApplyMove()
     {
-        noiseTransposer.m_FrequencyGain = CameraUtilities.OscillateParameter(condition, aceleration, ref reduceFrequency, frequency, CameraUtilities.Exponential);
-        noiseTransposer.m_AmplitudeGain = CameraUtilities.OscillateParameter(condition, aceleration, ref reduceAmplitude, amplitude, CameraUtilities.Exponential);
+        noiseTransposer.m_FrequencyGain = CameraUtilities.OscillateParameter(applyCondition, aceleration, ref reduceFrequency, frequency, CameraUtilities.Exponential);
+        noiseTransposer.m_AmplitudeGain = CameraUtilities.OscillateParameter(applyCondition, aceleration, ref reduceAmplitude, amplitude, CameraUtilities.Exponential);
     }
 }

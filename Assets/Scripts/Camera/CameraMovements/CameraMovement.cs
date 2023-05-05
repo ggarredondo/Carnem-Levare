@@ -5,6 +5,8 @@ public abstract class CameraMovement : ScriptableObject
 {
     protected CinemachineVirtualCamera vcam;
 
+    protected bool applyCondition;
+
     [Header("Management")]
 
     [SerializeField] protected TypeCameraMovement id;
@@ -15,7 +17,7 @@ public abstract class CameraMovement : ScriptableObject
 
     public Tuple<float> aceleration;
 
-    public abstract void Initialize(CinemachineVirtualCamera vcam);
+    public abstract void Initialize(ref CinemachineVirtualCamera vcam);
 
     protected virtual void UpdateParameters(){ }
 
@@ -23,11 +25,13 @@ public abstract class CameraMovement : ScriptableObject
 
     public virtual void UpdateInitialPosition() { }
 
-    public abstract void ApplyMove(bool condition);
+    public abstract void ApplyMove();
 
     public TypeCameraMovement ID { get { return id; } }
 
     public bool Stackable { get { return stackable; } }
+
+    public bool ApplyCondition { get { return applyCondition; } set { applyCondition = value; } }
 }
 
 public enum TypeCameraMovement

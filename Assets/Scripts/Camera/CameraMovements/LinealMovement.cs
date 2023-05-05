@@ -1,5 +1,4 @@
 using Cinemachine;
-using Unity.VisualScripting.FullSerializer;
 using UnityEngine;
 
 [CreateAssetMenu(menuName = "Scriptable Objects/CameraEffects/LinealMovement")]
@@ -14,7 +13,7 @@ public class LinealMovement : CameraMovement
     //SaveInitialPosition
     private Vector3 initialPosition;
 
-    public override void Initialize(CinemachineVirtualCamera vcam)
+    public override void Initialize(ref CinemachineVirtualCamera vcam)
     {
         this.vcam = vcam;
         transposer = vcam.GetCinemachineComponent<CinemachineOrbitalTransposer>();
@@ -40,8 +39,8 @@ public class LinealMovement : CameraMovement
         positions.Item1 = initialPosition;
     }
 
-    public override void ApplyMove(bool condition)
+    public override void ApplyMove()
     {
-        transposer.m_FollowOffset = CameraUtilities.Movement(condition, aceleration, ref reduce, new Vector3[] { positions.Item1, positions.Item2 }, CameraUtilities.LinearBezierCurve);
+        transposer.m_FollowOffset = CameraUtilities.Movement(applyCondition, aceleration, ref reduce, new Vector3[] { positions.Item1, positions.Item2 }, CameraUtilities.LinearBezierCurve);
     }
 }

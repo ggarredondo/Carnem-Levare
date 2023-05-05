@@ -1462,7 +1462,7 @@ MonoBehaviour:
   targetDebug:
   - {fileID: 2835685395472132083}
   - {fileID: 2835685394071100821}
-  targetingSpeed: 4
+  targetingSpeed: 1
   debug: 0
   orbitalValue: 10
   orbitalRecovery: 3
