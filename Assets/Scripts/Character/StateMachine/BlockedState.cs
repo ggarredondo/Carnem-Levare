@@ -4,24 +4,26 @@ using System.Threading;
 
 public class BlockedState : IState
 {
-    private readonly Controller controller;
     private readonly CharacterStateMachine stateMachine;
+    private readonly Controller controller;
+    private readonly CharacterStats stats;
     public event Action OnEnter, OnExit;
 
     private Hitbox hitbox;
-    public void Set(Hitbox hitbox) => this.hitbox = hitbox;
+    public void Set(in Hitbox hitbox) => this.hitbox = hitbox;
     private CancellationTokenSource cancellationTokenSource;
 
-    public BlockedState(in CharacterStateMachine stateMachine, in Controller controller)
+    public BlockedState(in CharacterStateMachine stateMachine, in Controller controller, in CharacterStats stats)
     {
         this.stateMachine = stateMachine;
         this.controller = controller;
+        this.stats = stats;
     }
 
     public void Enter() 
     {
         stateMachine.enabled = false;
-        controller.OnHurt += stateMachine.TransitionToBlockedOrHurt;
+        controller.OnHurt += Blocked;
         OnEnter?.Invoke();
         Recover();
     }
@@ -40,8 +42,14 @@ public class BlockedState : IState
     public void Exit() 
     {
         cancellationTokenSource?.Cancel();
-        controller.OnHurt -= stateMachine.TransitionToBlockedOrHurt;
+        controller.OnHurt -= Blocked;
         OnExit?.Invoke();
+    }
+
+    private void Blocked(in Hitbox hitbox)
+    {
+        if (!hitbox.Unblockable && controller.isBlocking) stats.DamageStaminaBlocked(hitbox);
+        else stats.DamageStamina(hitbox);
     }
 
     public ref readonly Hitbox Hitbox { get => ref hitbox; }

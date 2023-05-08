@@ -4,6 +4,8 @@ using UnityEngine;
 [System.Serializable]
 public class CharacterStats
 {
+    private CharacterStateMachine stateMachine;
+
     [SerializeField] private float stamina, maxStamina;
     [SerializeField] private float characterDamage;
 
@@ -15,7 +17,10 @@ public class CharacterStats
 
     [SerializeField] [InitializationField] private float height = 1f, mass = 1f, drag;
 
-    [SerializeField] protected List<Move> moveList;
+    [SerializeField] private List<Move> moveList;
+
+    [SerializeField] private bool noHurt;
+    [SerializeField] private bool noDeath;
 
     public void Initialize(in Character character, in Rigidbody rb)
     {
@@ -27,20 +32,31 @@ public class CharacterStats
         foreach (Move move in moveList)
             move.Initialize(character, this);
     }
-    public void Reference(in CharacterStateMachine stateMachine)
-    {
-        CharacterStateMachine stateMachineLocal = stateMachine;
-        stateMachine.HurtState.OnEnter += () => AddToStamina(-stateMachineLocal.HurtState.Hitbox.Damage);
-        stateMachine.BlockedState.OnEnter += () => AddToStamina(-stateMachineLocal.BlockedState.Hitbox.Damage * blockingMultiplier);
-    }
+    public void Reference(in CharacterStateMachine stateMachine) => this.stateMachine = stateMachine;
 
     public float CalculateAttackDamage(float baseDamage) 
     {
         return baseDamage + characterDamage;
     }
-    public void AddToStamina(float addend) 
+
+    private void AddToStamina(float addend) => stamina = Mathf.Clamp(stamina + addend, 0f + System.Convert.ToSingle(noDeath), maxStamina);
+    public void DamageStamina(in Hitbox hitbox)
     {
-        stamina = Mathf.Clamp(stamina + Mathf.Round(addend), 0f, maxStamina);
+        if (!noHurt)
+        {
+            AddToStamina(-hitbox.Damage);
+            if (stamina <= 0) stateMachine.TransitionToKO(hitbox);
+            else stateMachine.TransitionToHurt(hitbox);
+        }
+    }
+    public void DamageStaminaBlocked(in Hitbox hitbox)
+    {
+        if (!noHurt)
+        {
+            AddToStamina(-hitbox.Damage);
+            if (stamina <= 0) stateMachine.TransitionToKO(hitbox);
+            else stateMachine.TransitionToBlocked(hitbox);
+        }
     }
 
     public ref readonly float Stamina { get => ref stamina; }

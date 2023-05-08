@@ -23,12 +23,12 @@ public class CharacterStateMachine : MonoBehaviour
         this.stats = stats;
         moveList = stats.MoveList;
 
-        walkingState = new WalkingState(this, controller, movement);
-        blockingState = new BlockingState(this, controller, movement);
+        walkingState = new WalkingState(this, controller, stats, movement);
+        blockingState = new BlockingState(this, controller, stats, movement);
         moveState = new MoveState(this, controller, stats);
-        hurtState = new HurtState(this, controller);
-        blockedState = new BlockedState(this, controller);
-        koState = new KOState();
+        hurtState = new HurtState(this, controller, stats);
+        blockedState = new BlockedState(this, controller, stats);
+        koState = new KOState(this);
     }
 
     private void Update()
@@ -104,9 +104,9 @@ public class CharacterStateMachine : MonoBehaviour
         blockedState.Set(hitbox);
         ChangeState(blockedState);
     }
-    public void TransitionToBlockedOrHurt(in Hitbox hitbox)
+    public void TransitionToKO(in Hitbox hitbox)
     {
-        if (hitbox.Unblockable || !controller.isBlocking) TransitionToHurt(hitbox);
-        else TransitionToBlocked(hitbox);
+        koState.Set(hitbox);
+        ChangeState(koState);
     }
 }

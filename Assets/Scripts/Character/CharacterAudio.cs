@@ -8,6 +8,7 @@ public class CharacterAudio
         CharacterStats statsValueLocal = stats;
         stateMachine.MoveState.OnEnterInteger += (int index) => AudioManager.Instance.gameSfxSounds.Play(statsValueLocal.MoveList[index].InitSound);
         stateMachine.HurtState.OnEnter += () => AudioManager.Instance.gameSfxSounds.Play(stateMachineLocal.HurtState.Hitbox.HitSound);
+        stateMachine.KOState.OnEnter += () => AudioManager.Instance.gameSfxSounds.Play(stateMachineLocal.KOState.Hitbox.HitSound);
         stateMachine.BlockedState.OnEnter += () => AudioManager.Instance.gameSfxSounds.Play(stateMachineLocal.BlockedState.Hitbox.BlockedSound);
     }
 }

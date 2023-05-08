@@ -7,6 +7,7 @@ public class CharacterAnimation
 {
     private HurtState hurtState;
     private BlockedState blockedState;
+    private KOState koState;
     private List<Move> moveList;
 
     private Animator animator;
@@ -28,6 +29,7 @@ public class CharacterAnimation
         UpdateMovesetAnimations();
         hurtState = stateMachine.HurtState;
         blockedState = stateMachine.BlockedState;
+        koState = stateMachine.KOState;
 
         movement.OnMoveCharacter += MovementAnimation;
 
@@ -112,8 +114,9 @@ public class CharacterAnimation
 
     private void EnterKOState()
     {
-        //animator.SetFloat("hurt_target", target);
-        //animator.SetFloat("hurt_stagger", stagger);
+        Hitbox hitbox = koState.Hitbox;
+        animator.SetFloat("hurt_target", hitbox.AnimationBodyTarget);
+        animator.SetFloat("hurt_stagger", hitbox.AnimationStagger);
         animator.SetBool("STATE_KO", true);
     }
     private void ExitKOState() { animator.SetBool("STATE_KO", false); }

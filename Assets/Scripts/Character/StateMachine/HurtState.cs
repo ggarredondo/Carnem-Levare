@@ -3,25 +3,27 @@ using System.Threading.Tasks;
 using System.Threading;
 
 public class HurtState : IState
-{
-    private readonly Controller controller;
+{  
     private readonly CharacterStateMachine stateMachine;
+    private readonly Controller controller;
+    private readonly CharacterStats stats;
     public event Action OnEnter, OnExit;
 
     private Hitbox hitbox;
-    public void Set(Hitbox hitbox) => this.hitbox = hitbox;
+    public void Set(in Hitbox hitbox) => this.hitbox = hitbox;
     private CancellationTokenSource cancellationTokenSource;
 
-    public HurtState(in CharacterStateMachine stateMachine, in Controller controller)
+    public HurtState(in CharacterStateMachine stateMachine, in Controller controller, in CharacterStats stats)
     {
         this.stateMachine = stateMachine;
         this.controller = controller;
+        this.stats = stats;
     }
 
     public void Enter() 
     {
         stateMachine.enabled = false;
-        controller.OnHurt += stateMachine.TransitionToHurt;
+        controller.OnHurt += stats.DamageStamina;
         OnEnter?.Invoke();
         Recover();
     }
@@ -40,7 +42,7 @@ public class HurtState : IState
     public void Exit()
     {
         cancellationTokenSource?.Cancel();
-        controller.OnHurt -= stateMachine.TransitionToHurt;
+        controller.OnHurt -= stats.DamageStamina;
         OnExit?.Invoke();
     }
     

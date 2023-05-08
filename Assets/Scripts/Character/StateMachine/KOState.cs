@@ -4,7 +4,13 @@ public class KOState : IState
 {
     public event Action OnEnter, OnExit;
 
-    public KOState() {}
+    private Hitbox hitbox;
+    public void Set(in Hitbox hitbox) => this.hitbox = hitbox;
+
+    public KOState(in CharacterStateMachine stateMachine) 
+    {
+        stateMachine.enabled = false;
+    }
 
     public void Enter()
     {
@@ -16,4 +22,6 @@ public class KOState : IState
     {
         OnExit?.Invoke();
     }
+
+    public ref readonly Hitbox Hitbox { get => ref hitbox; }
 }

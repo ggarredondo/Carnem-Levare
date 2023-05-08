@@ -2,15 +2,17 @@ using System;
 
 public class BlockingState : IState
 {
-    private readonly Controller controller;
     private readonly CharacterStateMachine stateMachine;
+    private readonly Controller controller;
+    private readonly CharacterStats stats;
     private readonly CharacterMovement movement;
     public event Action OnEnter, OnExit;
 
-    public BlockingState(in CharacterStateMachine stateMachine, in Controller controller, in CharacterMovement movement)
+    public BlockingState(in CharacterStateMachine stateMachine, in Controller controller, in CharacterStats stats, in CharacterMovement movement)
     {
         this.stateMachine = stateMachine;
         this.controller = controller;
+        this.stats = stats;
         this.movement = movement;
     }
 
@@ -19,7 +21,7 @@ public class BlockingState : IState
         stateMachine.enabled = true;
         controller.OnDoBlock += stateMachine.TransitionToWalkingOrBlocking;
         controller.OnDoMove += stateMachine.TransitionToMove;
-        controller.OnHurt += stateMachine.TransitionToBlockedOrHurt;
+        controller.OnHurt += Blocked;
         OnEnter?.Invoke();
     }
     public void Update()
@@ -34,7 +36,13 @@ public class BlockingState : IState
     {
         controller.OnDoBlock -= stateMachine.TransitionToWalkingOrBlocking;
         controller.OnDoMove -= stateMachine.TransitionToMove;
-        controller.OnHurt -= stateMachine.TransitionToBlockedOrHurt;
+        controller.OnHurt -= Blocked;
         OnExit?.Invoke();
+    }
+
+    private void Blocked(in Hitbox hitbox) 
+    {
+        if (!hitbox.Unblockable) stats.DamageStaminaBlocked(hitbox);
+        else stats.DamageStamina(hitbox);
     }
 }

@@ -2,8 +2,9 @@ using System;
 
 public class MoveState : IState
 {
-    private readonly Controller controller;
     private readonly CharacterStateMachine stateMachine;
+    private readonly Controller controller;
+    private readonly CharacterStats stats;
     public event Action<int> OnEnterInteger;
     public event Action OnEnter, OnExit;
 
@@ -15,6 +16,7 @@ public class MoveState : IState
     {
         this.stateMachine = stateMachine;
         this.controller = controller;
+        this.stats = stats;
         moveListCount = stats.MoveList != null ? stats.MoveList.Count : 0;
     }
 
@@ -22,7 +24,7 @@ public class MoveState : IState
     {
         stateMachine.enabled = false;
         controller.OnDoMove += BufferMove;
-        controller.OnHurt += stateMachine.TransitionToHurt;
+        controller.OnHurt += stats.DamageStamina;
         stateMachine.TransitionToRecovery = stateMachine.TransitionToWalkingOrBlocking;
         OnEnterInteger?.Invoke(moveIndex);
         OnEnter?.Invoke();
@@ -33,7 +35,7 @@ public class MoveState : IState
     {
         bufferedMoveIndex = -1;
         controller.OnDoMove -= BufferMove;
-        controller.OnHurt -= stateMachine.TransitionToHurt;
+        controller.OnHurt -= stats.DamageStamina;
         OnExit?.Invoke();
     }
 

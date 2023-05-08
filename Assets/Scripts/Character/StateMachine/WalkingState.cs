@@ -2,15 +2,17 @@ using System;
 
 public class WalkingState : IState
 {
-    private readonly Controller controller;
     private readonly CharacterStateMachine stateMachine;
+    private readonly Controller controller;
+    private readonly CharacterStats stats;
     private readonly CharacterMovement movement;
     public event Action OnEnter, OnExit;
 
-    public WalkingState(in CharacterStateMachine stateMachine, in Controller controller, in CharacterMovement movement)
+    public WalkingState(in CharacterStateMachine stateMachine, in Controller controller, in CharacterStats stats, in CharacterMovement movement)
     {
         this.stateMachine = stateMachine;
         this.controller = controller;
+        this.stats = stats;
         this.movement = movement;
     }
 
@@ -19,7 +21,7 @@ public class WalkingState : IState
         stateMachine.enabled = true;
         controller.OnDoBlock += stateMachine.TransitionToWalkingOrBlocking;
         controller.OnDoMove += stateMachine.TransitionToMove;
-        controller.OnHurt += stateMachine.TransitionToHurt;
+        controller.OnHurt += stats.DamageStamina;
         OnEnter?.Invoke();
     }
     public void Update() 
@@ -34,7 +36,7 @@ public class WalkingState : IState
     {
         controller.OnDoBlock -= stateMachine.TransitionToWalkingOrBlocking;
         controller.OnDoMove -= stateMachine.TransitionToMove;
-        controller.OnHurt -= stateMachine.TransitionToHurt;
+        controller.OnHurt -= stats.DamageStamina;
         OnExit?.Invoke();
     }
 }
