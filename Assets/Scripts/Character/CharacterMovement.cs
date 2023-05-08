@@ -48,7 +48,7 @@ public class CharacterMovement
         Quaternion targetRotation;
         if (target != null && doTracking && direction.magnitude > IDLE_THRESHOLD)
         {
-            targetRotation = Quaternion.LookRotation(target.position - character.position).normalized;
+            targetRotation = Quaternion.Euler(0f, Quaternion.LookRotation(target.position - character.position).normalized.eulerAngles.y, 0f);
             rb.rotation = Quaternion.Lerp(rb.rotation, targetRotation, trackingRate * Time.fixedDeltaTime);
         }
     }
