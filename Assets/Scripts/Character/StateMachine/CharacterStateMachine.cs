@@ -46,6 +46,8 @@ public class CharacterStateMachine : MonoBehaviour
         currentState.Enter();
     }
 
+    #region Animation Events
+
     private void InitMove()
     {
         currentMove = moveList[moveState.moveIndex];
@@ -69,6 +71,8 @@ public class CharacterStateMachine : MonoBehaviour
         currentMove.RecoverFromMove();
         TransitionToRecovery.Invoke();
     }
+
+    #endregion
 
     public ref readonly IState CurrentState { get => ref currentState; }
     public ref readonly WalkingState WalkingState { get => ref walkingState; }

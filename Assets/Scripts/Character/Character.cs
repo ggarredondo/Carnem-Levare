@@ -17,19 +17,15 @@ public abstract class Character : MonoBehaviour
         characterStats.Initialize(this, GetComponent<Rigidbody>());
         characterMovement.Initialize(transform, target, GetComponent<Rigidbody>());
         characterAnimation.Initialize(GetComponent<Animator>());
-        characterAudio.Initialize();
 
         stateMachine.Reference(controller, characterStats, characterMovement);
         characterStats.Reference(stateMachine);
-        characterMovement.Reference();
         characterAudio.Reference(stateMachine, characterStats);
         characterAnimation.Reference(stateMachine, characterStats, characterMovement);
 
         stateMachine.TransitionToWalking(); // Must be done last
     }
-    protected virtual void Start() {}
-
-    protected virtual void OnValidate()
+    private void OnValidate()
     {
         characterAnimation.OnValidate();
     }

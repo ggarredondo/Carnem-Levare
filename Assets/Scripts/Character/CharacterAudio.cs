@@ -2,7 +2,6 @@
 [System.Serializable]
 public class CharacterAudio
 {
-    public void Initialize() {}
     public void Reference(in CharacterStateMachine stateMachine, in CharacterStats stats)
     {
         CharacterStateMachine stateMachineLocal = stateMachine;

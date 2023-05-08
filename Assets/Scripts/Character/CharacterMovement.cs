@@ -27,7 +27,6 @@ public class CharacterMovement
         this.rb = rb;
         direction = Vector2.zero;
     }
-    public void Reference() {}
 
     /// <summary>
     /// Smooths move direction using Lerp and invokes OnMoveCharacter
