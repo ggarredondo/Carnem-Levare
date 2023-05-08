@@ -3,16 +3,27 @@ using Cinemachine;
 
 public class CameraController : MonoBehaviour
 {
-    public VirtualCameras changeVirtualCamera;
-    public static VirtualCameras actualVirtualCamera;
+    public CameraType changeVirtualCamera;
+    public static CameraType actualVirtualCamera;
 
     private CameraTargets playerTargets, enemyTargets;
     [SerializeField] private Transform actualTransform;
+
+    private Player player;
+    private Enemy enemy;
+
+    private CinemachineTargetGroup targetGroup;
 
     private void Start()
     {
         playerTargets = GameObject.FindGameObjectWithTag("Player").GetComponent<CameraTargets>();
         enemyTargets = GameObject.FindGameObjectWithTag("Enemy").GetComponent<CameraTargets>();
+
+        player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
+        enemy = GameObject.FindGameObjectWithTag("Enemy").GetComponent<Enemy>();
+
+        targetGroup = GameObject.FindGameObjectWithTag("TARGET_GROUP").GetComponent<CinemachineTargetGroup>();
+
         InitializeTargets();
     }
 
@@ -20,26 +31,31 @@ public class CameraController : MonoBehaviour
     {
         if (actualVirtualCamera != changeVirtualCamera) ChangeVirtualCamera();
 
-        actualTransform.position = playerTargets.GetTarget((int)actualVirtualCamera, false).position;
-        if(actualVirtualCamera == 0) actualTransform.LookAt(enemyTargets.GetTarget((int)actualVirtualCamera, false).position);
+        actualTransform.position = playerTargets.GetDefaultTarget(actualVirtualCamera).position;
+        if(actualVirtualCamera == 0) actualTransform.LookAt(enemyTargets.GetDefaultTarget(actualVirtualCamera).position);
     }
 
     private void InitializeTargets()
     {
-        int cont = 0;
+        targetGroup.m_Targets[0].target = playerTargets.GetDefaultTarget(CameraType.DEFAULT);
+        targetGroup.m_Targets[1].target = enemyTargets.GetDefaultTarget(CameraType.DEFAULT);
+
         foreach (CinemachineVirtualCamera camera in GetComponentsInChildren<CinemachineVirtualCamera>())
         {
-
             camera.m_Follow = actualTransform;
-            camera.GetComponent<CameraEffects>().InitializeTargetGroup(playerTargets.GetTarget(0, false), enemyTargets.GetTarget(0, false));
 
-            if (cont != 2 && cont != 1)
-                camera.GetComponent<CameraEffects>().InitializeTargets(playerTargets.GetTarget(cont, true), enemyTargets.GetTarget(cont, true));
+            CinemachineVirtualCamera tmp = camera;
 
-            if (cont == 2)
-                camera.m_LookAt = playerTargets.GetTarget(cont, true);
+            if (camera.TryGetComponent(out CameraEffects effects)) 
+            {
+                effects.Initialize(ref tmp, ref player);
+            }
 
-            cont++;
+            if(camera.TryGetComponent(out ITargeting targeting))
+            {
+                targeting.Initialize(ref targetGroup, ref tmp, ref player, ref enemy);
+                targeting.InitializeTarget(ref playerTargets, ref enemyTargets);
+            }
         }
     }
 
@@ -67,9 +83,9 @@ public class CameraController : MonoBehaviour
 
 }
 
-public enum VirtualCameras
+public enum CameraType
 {
-    STANDARD = 0,
+    DEFAULT = 0,
     FIRST_PERSON = 1,
     GOPRO = 2,
     DRONE = 3

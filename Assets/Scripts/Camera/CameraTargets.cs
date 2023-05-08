@@ -4,8 +4,13 @@ public class CameraTargets : MonoBehaviour
 {
     [SerializeField] private Tuple<Transform>[] targets;
 
-    public Transform GetTarget(int camera, bool alternative)
+    public Transform GetDefaultTarget(CameraType camera)
     {
-        return alternative == true ? targets[camera].Item2 : targets[camera].Item1;
+        return targets[(int) camera].Item1;
+    }
+
+    public Transform GetAlternativeTarget(CameraType camera)
+    {
+        return targets[(int)camera].Item2;
     }
 }

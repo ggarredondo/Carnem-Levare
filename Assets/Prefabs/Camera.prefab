@@ -866,14 +866,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 96a0b26df394cd74db24fe997d0a97c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  targetDebug:
-  - {fileID: 2835685395472132083}
-  - {fileID: 2835685394071100821}
-  alternativeTargeting: 0
-  targetingSpeed: 4
-  debug: 0
-  orbitalValue: 18
-  orbitalRecovery: 6
   cameraEffects: []
 --- !u!1 &2835685394845596711
 GameObject:
@@ -1074,6 +1066,7 @@ GameObject:
   - component: {fileID: 2835685395348398057}
   - component: {fileID: 2835685395348398053}
   - component: {fileID: 2835685395348398052}
+  - component: {fileID: 8390451431572817712}
   m_Layer: 0
   m_Name: GoPro
   m_TagString: Untagged
@@ -1145,15 +1138,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 96a0b26df394cd74db24fe997d0a97c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  targetDebug:
-  - {fileID: 2835685395472132083}
-  - {fileID: 2835685394071100821}
-  alternativeTargeting: 0
-  targetingSpeed: 4
-  debug: 0
-  orbitalValue: 18
-  orbitalRecovery: 6
   cameraEffects: []
+--- !u!114 &8390451431572817712
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2835685395348398056}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f5ea4e0de7e0ebf4da6acc4cf8bafc83, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2835685395472132083
 GameObject:
   m_ObjectHideFlags: 0
@@ -1371,14 +1368,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 96a0b26df394cd74db24fe997d0a97c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  targetDebug:
-  - {fileID: 2835685395472132083}
-  - {fileID: 2835685394071100821}
-  alternativeTargeting: 0
-  targetingSpeed: 4
-  debug: 0
-  orbitalValue: 18
-  orbitalRecovery: 6
   cameraEffects: []
 --- !u!1 &2835685396104087961
 GameObject:
@@ -1390,6 +1379,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2835685396104087958}
   - component: {fileID: 2835685396104087952}
+  - component: {fileID: 2809826132323349587}
   - component: {fileID: 2835685396104087955}
   m_Layer: 0
   m_Name: Virtual Camera
@@ -1450,6 +1440,21 @@ MonoBehaviour:
         m_Calls: []
   m_LegacyBlendHint: 0
   m_ComponentOwner: {fileID: 2835685394191603326}
+--- !u!114 &2809826132323349587
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2835685396104087961}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9cb33386e0b6f524494d1bca37ede385, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  targetingSpeed: 1
+  orbitalValue: 10
+  orbitalRecovery: 3
 --- !u!114 &2835685396104087955
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1462,14 +1467,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 96a0b26df394cd74db24fe997d0a97c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  targetDebug:
-  - {fileID: 2835685395472132083}
-  - {fileID: 2835685394071100821}
-  alternativeTargeting: 1
-  targetingSpeed: 1
-  debug: 0
-  orbitalValue: 10
-  orbitalRecovery: 3
   cameraEffects:
   - {fileID: 11400000, guid: c0ef79e48f3d5cc46adb9c5c31918ec2, type: 2}
   - {fileID: 11400000, guid: e9c3a4d31ca76584cab921ddbf6f857e, type: 2}
