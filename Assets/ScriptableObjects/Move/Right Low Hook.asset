@@ -18,7 +18,7 @@ MonoBehaviour:
   initSound: Whiff_Mid_Hook
   startUp: 350
   active: 120
-  recovery: 400
+  recovery: 300
   buffering: 500
   hitSound: Hit_Mid_Hook
   blockedSound: Blocked_Default

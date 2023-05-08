@@ -30422,7 +30422,7 @@ AnimationClip:
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
-  - time: 0.87
+  - time: 0.77
     functionName: RecoverFromMove
     data: 
     objectReferenceParameter: {fileID: 0}

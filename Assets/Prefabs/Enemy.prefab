@@ -426,6 +426,8 @@ MonoBehaviour:
     mass: 1
     drag: 0
     moveList: []
+    noHurt: 0
+    noDeath: 1
   characterMovement:
     trackingRate: 5
     doTracking: 1
@@ -434,6 +436,7 @@ MonoBehaviour:
   characterAnimation:
     animatorSpeed: 1
     updateMovesetAnimations: 0
+    updateAnimationEvents: 0
 --- !u!114 &5388046064025221454
 MonoBehaviour:
   m_ObjectHideFlags: 0

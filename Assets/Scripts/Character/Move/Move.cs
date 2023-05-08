@@ -35,7 +35,7 @@ public abstract class Move : ScriptableObject
         return animationEvent;
     }
 
-    private void AssignEvents()
+    public void AssignEvents()
     {
         #if UNITY_EDITOR
         AnimationEvent initMoveEvent = CreateAnimationEvent("InitMove", 0.0);

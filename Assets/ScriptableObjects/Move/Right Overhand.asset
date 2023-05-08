@@ -14,11 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveName: Right Overhand
   animation: {fileID: 7400000, guid: 6232cd1526a6c3d40a5382e8b5611702, type: 2}
-  animationSpeed: 1
+  animationSpeed: 1.1
   initSound: Whiff_Overhand
   startUp: 350
   active: 100
-  recovery: 400
+  recovery: 500
   buffering: 500
   hitSound: Hit_Overhand
   blockedSound: Blocked_Default

@@ -16,6 +16,7 @@ public class CharacterAnimation
 
     [SerializeField] private float animatorSpeed = 1f;
     [SerializeField] private bool updateMovesetAnimations = false;
+    [SerializeField] private bool updateAnimationEvents = false;
 
     public void Initialize(in Animator animator)
     {
@@ -54,6 +55,7 @@ public class CharacterAnimation
     {
         if (animator != null) animator.speed = animatorSpeed;
         if (updateMovesetAnimations) { UpdateMovesetAnimations(); updateMovesetAnimations = false; }
+        if (updateAnimationEvents) { moveList.ForEach(m => m.AssignEvents()); }
     }
 
     private void UpdateAnimation(string originalClip, AnimationClip newClip)

@@ -371,6 +371,8 @@ MonoBehaviour:
     - {fileID: 11400000, guid: 20e698f21bf5aa84cb0cad575ccd63cf, type: 2}
     - {fileID: 11400000, guid: 57b017aabdc8caf4fa11ee93fb5a5714, type: 2}
     - {fileID: 11400000, guid: 19854063ba4a509409698682dd6d1ef5, type: 2}
+    noHurt: 0
+    noDeath: 1
   characterMovement:
     trackingRate: 5
     doTracking: 1
@@ -379,6 +381,7 @@ MonoBehaviour:
   characterAnimation:
     animatorSpeed: 1
     updateMovesetAnimations: 0
+    updateAnimationEvents: 0
 --- !u!54 &2794588595183348619
 Rigidbody:
   m_ObjectHideFlags: 0
