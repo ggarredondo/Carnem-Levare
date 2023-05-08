@@ -23,6 +23,12 @@ public class LinealMovement : CameraMovement
         initialPosition = positions.Item1;
     }
 
+    public override void UpdateCondition(ref Player player)
+    {
+        player.StateMachine.BlockingState.OnEnter += () => applyCondition = true;
+        player.StateMachine.BlockingState.OnExit += () => applyCondition = false;
+    }
+
     protected override void UpdateParameters()
     {
         positions.Item1 = transposer.m_FollowOffset;

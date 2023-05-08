@@ -8,8 +8,6 @@ public class SmoothFollow : CameraMovement
 
     private float reduce;
     private CinemachineOrbitalTransposer transposer;
-    public enum Parameter { DAMPING, ORBITAL }
-    public Parameter parameter;
 
     public override void Initialize(ref CinemachineVirtualCamera vcam)
     {
@@ -17,11 +15,14 @@ public class SmoothFollow : CameraMovement
         transposer = vcam.GetCinemachineComponent<CinemachineOrbitalTransposer>();
     }
 
+    public override void UpdateCondition(ref Player player)
+    {
+        player.StateMachine.WalkingState.OnEnter += () => applyCondition = true;
+        player.StateMachine.WalkingState.OnExit += () => applyCondition = false;
+    }
+
     public override void ApplyMove()
     {
-        if(parameter == Parameter.DAMPING)
-            transposer.m_YawDamping = CameraUtilities.OscillateParameter(applyCondition, aceleration, ref reduce, variation, CameraUtilities.Exponential);
-        else
-            transposer.m_XAxis.Value = CameraUtilities.OscillateParameter(applyCondition, aceleration, ref reduce, variation, CameraUtilities.Exponential);
+        transposer.m_YawDamping = CameraUtilities.OscillateParameter(applyCondition, aceleration, ref reduce, variation, CameraUtilities.Exponential);
     }
 }

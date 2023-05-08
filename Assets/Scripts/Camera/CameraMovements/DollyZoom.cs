@@ -30,6 +30,12 @@ public class DollyZoom : CameraMovement
         initialNearPlane = nearPlane.Item1;
     }
 
+    public override void UpdateCondition(ref Player player)
+    {
+        player.StateMachine.MoveState.OnEnter += () => applyCondition = true;
+        player.StateMachine.MoveState.OnExit += () => applyCondition = false;
+    }
+
     protected override void UpdateParameters()
     {
         nearPlane.Item1 = vcam.m_Lens.NearClipPlane;

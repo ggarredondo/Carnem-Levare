@@ -9,6 +9,7 @@ public class CameraEffects : MonoBehaviour
     [SerializeField] private GameObject[] targetDebug;
 
     [Header("Target Group Parameters")]
+    [SerializeField] private bool alternativeTargeting;
     [Range(0, 40)] [SerializeField] private float targetingSpeed;
     [SerializeField] private bool debug;
 
@@ -25,9 +26,6 @@ public class CameraEffects : MonoBehaviour
     private Transform[] alternativeTargets;
     private bool changePlayerTargets, changeEnemyTargets, isBlocking, isMoving;
 
-    private Queue<CameraMovement> cameraStack = new();
-    private Dictionary<TypeCameraMovement, CameraMovement> cameraDictionary = new();
-
     private CinemachineVirtualCamera vcam;
     private CinemachineOrbitalTransposer orbitalTransposer;
     private CinemachineTargetGroup targetGroup;
@@ -38,8 +36,6 @@ public class CameraEffects : MonoBehaviour
 
         vcam = GetComponent<CinemachineVirtualCamera>();
         orbitalTransposer = vcam.GetCinemachineComponent<CinemachineOrbitalTransposer>();
-
-        cameraEffects.ForEach(effect => cameraDictionary.Add(effect.ID, effect));
     }
 
     private void Start()
@@ -47,7 +43,7 @@ public class CameraEffects : MonoBehaviour
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
         enemy = GameObject.FindGameObjectWithTag("Enemy").GetComponent<Enemy>();
 
-        cameraEffects.ForEach(movement => movement.Initialize(ref vcam));
+        cameraEffects.ForEach(movement => { movement.Initialize(ref vcam); movement.UpdateCondition(ref player); });
 
         UpdateCameraConditions();
     }
@@ -68,17 +64,9 @@ public class CameraEffects : MonoBehaviour
 
     private void UpdateCameraConditions()
     {
-        player.StateMachine.BlockingState.OnEnter += () =>
-        {
-            cameraDictionary[TypeCameraMovement.LINEAL_MOVE].ApplyCondition = true;
-            isBlocking = true;
-        };
+        player.StateMachine.BlockingState.OnEnter += () => isBlocking = true;
 
-        player.StateMachine.BlockingState.OnExit += () =>
-        {
-            cameraDictionary[TypeCameraMovement.LINEAL_MOVE].ApplyCondition = false;
-            isBlocking = false;
-        };
+        player.StateMachine.BlockingState.OnExit += () => isBlocking = false;
 
         player.StateMachine.MoveState.OnEnter += () =>
         {
@@ -92,18 +80,6 @@ public class CameraEffects : MonoBehaviour
             isMoving = false;
         };
 
-        player.StateMachine.WalkingState.OnEnter += () =>
-        {
-            cameraDictionary[TypeCameraMovement.SMOOTH_FOLLOW].ApplyCondition = true;
-            cameraDictionary[TypeCameraMovement.NOISE].ApplyCondition = true;
-        };
-
-        player.StateMachine.WalkingState.OnExit += () =>
-        {
-            cameraDictionary[TypeCameraMovement.SMOOTH_FOLLOW].ApplyCondition = false;
-            cameraDictionary[TypeCameraMovement.NOISE].ApplyCondition = false;
-        };
-
         enemy.StateMachine.WalkingState.OnEnter += () => changeEnemyTargets = true;
         enemy.StateMachine.WalkingState.OnExit += () => changeEnemyTargets = false;
     }
@@ -114,34 +90,12 @@ public class CameraEffects : MonoBehaviour
         {
             if(orbitalTransposer != null) OrbitalMovement();
 
-            //Change the camera targets to create more hitting impact
-            if(alternativeTargets[0] != null && alternativeTargets[1] != null) TargetUpdate();
+            if(alternativeTargets[0] != null && alternativeTargets[1] != null && alternativeTargeting) TargetUpdate();
 
-            //Apply the camera movement to each effect depending of his condition
-            foreach (CameraMovement movement in cameraEffects)
-            {
-                if(!movement.Stackable) movement.ApplyMove();
-                else
-                {
-                    cameraStack.TryPeek(out CameraMovement peek);
-                    
-                    if(!movement.ApplyCondition) movement.ReturnInitialPosition();
-
-                    if (movement.ApplyCondition && peek != movement)
-                    {
-                        movement.UpdateInitialPosition();
-                        cameraStack.Enqueue(movement);
-                    }
-                }
-            }
-
-            if(cameraStack.Count > 3) cameraStack.Dequeue();
-
-            if(cameraStack.Count != 0) cameraStack.Peek().ApplyMove();
+            cameraEffects.ForEach(movement => movement.ApplyMove());
         }
     }
-
-    
+ 
     private void OrbitalMovement()
     {
         if (player.Controller.MovementVector != new Vector2(0,0) && !isBlocking && !isMoving) 
@@ -153,14 +107,11 @@ public class CameraEffects : MonoBehaviour
         orbitalTransposer.m_RecenterToTargetHeading.m_enabled = player.Controller.MovementVector != new Vector2(0, 0) && !isBlocking && !isMoving;
     }
     
-
-
     private void AsignAlternativeTarget(int index)
     {
         targetGroup.m_Targets[index].target.position = Vector3.Lerp(targetGroup.m_Targets[index].target.position, alternativeTargets[index].position, targetingSpeed * Time.deltaTime);
     }
 
-    
     private void TargetUpdate()
     {
         if (changePlayerTargets) AsignAlternativeTarget(0);
