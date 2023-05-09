@@ -7,6 +7,10 @@ public class AttackMove : Move
     [SerializeField] private string hitSound;
     [SerializeField] private string blockedSound;
 
+    [Header("Attack-specifyc Camera Movement")]
+    [SerializeField] private double hitShakeTime;
+    [SerializeField] private float hitShakeIntensity;
+
     [Header("Attack-specific Time Data (ms)")]
     [SerializeField] private double advantageOnBlock;
     [SerializeField] private double advantageOnHit;
@@ -28,7 +32,9 @@ public class AttackMove : Move
     public override void InitMove()
     {
         hitbox.Set(hitSound, 
-            blockedSound, 
+            blockedSound,
+            hitShakeTime,
+            hitShakeIntensity,
             (float)animationStagger,
             stats.CalculateAttackDamage(baseDamage),
             advantageOnBlock,

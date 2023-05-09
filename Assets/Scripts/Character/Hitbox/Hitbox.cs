@@ -3,8 +3,8 @@ using UnityEngine;
 public class Hitbox : MonoBehaviour
 {
     private string hitSound, blockedSound;
-    private float animationBodyTarget, animationStagger, damage;
-    private double advantageOnBlock, advantageOnHit;
+    private float animationBodyTarget, animationStagger, damage, hitShakeIntensity;
+    private double advantageOnBlock, advantageOnHit, hitShakeTime;
     private bool unblockable;
 
     private void Start()
@@ -12,11 +12,13 @@ public class Hitbox : MonoBehaviour
         SetActive(false);
     }
 
-    public void Set(string hitSound, string blockedSound, float animationStagger, float damage,
+    public void Set(string hitSound, string blockedSound, double hitShakeTime, float hitShakeIntensity, float animationStagger, float damage,
         double advantageOnBlock, double advantageOnHit, bool unblockable)
     {
         this.hitSound = hitSound;
         this.blockedSound = blockedSound;
+        this.hitShakeTime = hitShakeTime;
+        this.hitShakeIntensity = hitShakeIntensity;
         this.animationStagger = animationStagger;
         this.damage = damage;
         this.advantageOnBlock = advantageOnBlock;
@@ -31,6 +33,9 @@ public class Hitbox : MonoBehaviour
 
     public string HitSound { get => hitSound; }
     public string BlockedSound { get => blockedSound; }
+
+    public double HitShakeTime { get => hitShakeTime; }
+    public float HitShakeIntensity { get => hitShakeIntensity; }
     public void SetAnimationBodyTarget(float animationBodyTarget) => this.animationBodyTarget = animationBodyTarget;
     public float AnimationBodyTarget { get => animationBodyTarget; }
     public float AnimationStagger { get => animationStagger; }

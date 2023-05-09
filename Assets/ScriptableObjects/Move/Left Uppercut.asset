@@ -22,6 +22,8 @@ MonoBehaviour:
   buffering: 320
   hitSound: Hit_Hook
   blockedSound: Blocked_Default
+  hitShakeTime: 70
+  hitShakeIntensity: 5
   advantageOnBlock: 400
   advantageOnHit: 800
   hitboxSubtag: LEFT_FIST

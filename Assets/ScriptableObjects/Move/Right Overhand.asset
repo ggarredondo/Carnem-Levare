@@ -22,6 +22,8 @@ MonoBehaviour:
   buffering: 500
   hitSound: Hit_Overhand
   blockedSound: Blocked_Default
+  hitShakeTime: 250
+  hitShakeIntensity: 5
   advantageOnBlock: 800
   advantageOnHit: 1000
   hitboxSubtag: RIGHT_FIST
