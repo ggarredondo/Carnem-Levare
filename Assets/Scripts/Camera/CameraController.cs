@@ -51,7 +51,7 @@ public class CameraController : MonoBehaviour
                 effects.Initialize(ref tmp, ref player);
             }
 
-            if(camera.TryGetComponent(out ITargeting targeting))
+            if(camera.TryGetComponent(out ICameraInitialize targeting))
             {
                 targeting.Initialize(ref targetGroup, ref tmp, ref player, ref enemy);
                 targeting.InitializeTarget(ref playerTargets, ref enemyTargets);
@@ -69,12 +69,20 @@ public class CameraController : MonoBehaviour
             if (cont == (int) actualVirtualCamera)
             {
                 camera.enabled = true;
-                camera.GetComponent<CameraEffects>().enabled = true;
+
+                if (camera.TryGetComponent(out CameraEffects effects))
+                {
+                    effects.enabled = true;
+                }
             }
             else
             {
                 camera.enabled = false;
-                camera.GetComponent<CameraEffects>().enabled = false;
+
+                if (camera.TryGetComponent(out CameraEffects effects))
+                {
+                    effects.enabled = false;
+                }
             }
 
             cont++;

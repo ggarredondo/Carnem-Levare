@@ -25,8 +25,8 @@ public class LinealMovement : CameraMovement
 
     public override void UpdateCondition(ref Player player)
     {
-        player.StateMachine.BlockingState.OnEnter += () => applyCondition = true;
-        player.StateMachine.BlockingState.OnExit += () => applyCondition = false;
+        Player playerLocal = player;
+        player.Controller.OnDoBlock += () => applyCondition = playerLocal.Controller.isBlocking;
     }
 
     protected override void UpdateParameters()

@@ -1,10 +1,12 @@
 using UnityEngine;
 using Cinemachine;
+using System.Threading.Tasks;
 
-public class DefaultCamera : MonoBehaviour, ITargeting
+public class DefaultCamera : MonoBehaviour, ICameraInitialize
 {
     [Header("Target Group Parameters")]
-    [Range(0, 40)] [SerializeField] private float targetingSpeed;
+    [Range(0, 100)] [SerializeField] private float targetingSpeed;
+    [SerializeField] private float hurtTime;
 
     [Header("Orbital Movement")]
     [Range(0, 20)] [SerializeField] private float orbitalValue;
@@ -13,7 +15,7 @@ public class DefaultCamera : MonoBehaviour, ITargeting
     private Player player;
     private Enemy enemy;
     private Transform[] alternativeTargets;
-    private bool changePlayerTargets, changeEnemyTargets, isBlocking, isMoving;
+    private bool hurtEnemy, isBlocking, isDoingMove;
 
     private CinemachineOrbitalTransposer orbitalTransposer;
     private CinemachineTargetGroup targetGroup;
@@ -37,24 +39,11 @@ public class DefaultCamera : MonoBehaviour, ITargeting
 
     private void UpdateCameraConditions()
     {
-        player.StateMachine.BlockingState.OnEnter += () => isBlocking = true;
+        player.StateMachine.MoveState.OnEnter += () => isDoingMove = true;
+        player.StateMachine.MoveState.OnExit += () => isDoingMove = false;
 
-        player.StateMachine.BlockingState.OnExit += () => isBlocking = false;
-
-        player.StateMachine.MoveState.OnEnter += () =>
-        {
-            changePlayerTargets = true;
-            isMoving = true;
-        };
-
-        player.StateMachine.MoveState.OnExit += () =>
-        {
-            changePlayerTargets = false;
-            isMoving = false;
-        };
-
-        enemy.StateMachine.WalkingState.OnEnter += () => changeEnemyTargets = true;
-        enemy.StateMachine.WalkingState.OnExit += () => changeEnemyTargets = false;
+        enemy.StateMachine.HurtState.OnEnter += () => { hurtEnemy = true; HurtTime(); };
+        enemy.StateMachine.HurtState.OnExit += () => hurtEnemy = false;
     }
 
     private void LateUpdate()
@@ -68,13 +57,13 @@ public class DefaultCamera : MonoBehaviour, ITargeting
 
     private void OrbitalMovement()
     {
-        if (player.Controller.MovementVector != new Vector2(0, 0) && !isBlocking && !isMoving)
+        if (player.Controller.MovementVector != new Vector2(0, 0) && !player.Controller.isBlocking && !isDoingMove)
             orbitalTransposer.m_XAxis.Value += player.Controller.MovementVector.x * orbitalValue * Time.deltaTime;
 
-        if (isBlocking)
+        if (!player.Controller.isBlocking)
             orbitalTransposer.m_XAxis.Value = Mathf.Lerp(orbitalTransposer.m_XAxis.Value, 0, orbitalRecovery * Time.deltaTime);
 
-        orbitalTransposer.m_RecenterToTargetHeading.m_enabled = player.Controller.MovementVector != new Vector2(0, 0) && !isBlocking && !isMoving;
+        orbitalTransposer.m_RecenterToTargetHeading.m_enabled = player.Controller.MovementVector != new Vector2(0, 0) && !!player.Controller.isBlocking && !isDoingMove;
     }
 
     private void AsignAlternativeTarget(int index)
@@ -84,7 +73,16 @@ public class DefaultCamera : MonoBehaviour, ITargeting
 
     private void TargetUpdate()
     {
-        if (changePlayerTargets) AsignAlternativeTarget(0);
-        if (changeEnemyTargets) AsignAlternativeTarget(1);
+        if (hurtEnemy)
+        {
+            AsignAlternativeTarget(0);
+            AsignAlternativeTarget(1);
+        }
+    }
+
+    private async void HurtTime()
+    {
+        await Task.Delay(System.TimeSpan.FromMilliseconds(hurtTime));
+        hurtEnemy = false;
     }
 }

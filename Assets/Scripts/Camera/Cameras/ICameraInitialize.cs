@@ -1,6 +1,6 @@
 using Cinemachine;
 
-public interface ITargeting
+public interface ICameraInitialize
 {
     public void Initialize(ref CinemachineTargetGroup targetGroup, ref CinemachineVirtualCamera vcam, ref Player player, ref Enemy enemy);
 

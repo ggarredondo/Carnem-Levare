@@ -1,7 +1,7 @@
 using Cinemachine;
 using UnityEngine;
 
-public class GoProCamera : MonoBehaviour, ITargeting
+public class GoProCamera : MonoBehaviour, ICameraInitialize
 {
     private CinemachineVirtualCamera vcam;
 
