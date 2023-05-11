@@ -425,7 +425,11 @@ MonoBehaviour:
     height: 1.1
     mass: 1
     drag: 0
-    moveList: []
+    moveList:
+    - {fileID: 11400000, guid: cb8a3bef13b8ff948b45889b9d0268de, type: 2}
+    - {fileID: 11400000, guid: 20e698f21bf5aa84cb0cad575ccd63cf, type: 2}
+    - {fileID: 11400000, guid: 57b017aabdc8caf4fa11ee93fb5a5714, type: 2}
+    - {fileID: 11400000, guid: 19854063ba4a509409698682dd6d1ef5, type: 2}
     noHurt: 0
     noDeath: 1
   characterMovement:
@@ -452,6 +456,7 @@ MonoBehaviour:
   horizontal: 0
   vertical: 0
   block: 0
+  doMove: 
 --- !u!54 &5975427957589119885
 Rigidbody:
   m_ObjectHideFlags: 0
