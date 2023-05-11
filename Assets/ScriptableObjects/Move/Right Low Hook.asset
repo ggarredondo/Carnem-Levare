@@ -26,7 +26,7 @@ MonoBehaviour:
   hitShakeIntensity: 4
   advantageOnBlock: 400
   advantageOnHit: 800
-  hitboxSubtag: RIGHT_FIST
+  hitbox: 1
   baseDamage: 15
   animationStagger: 1
   unblockable: 0
