@@ -1,5 +1,6 @@
 using UnityEngine;
 using RefDelegates;
+using System.Linq;
 
 [System.Serializable]
 public class CharacterMovement
@@ -43,13 +44,15 @@ public class CharacterMovement
     /// <summary>
     /// Physics-related. Use in Fixed Update.
     /// </summary>
-    public void LookAtTarget()
+    public void LookAtTarget(params bool[] conditions)
     {
         Quaternion targetRotation;
-        if (target != null && doTracking && direction.magnitude > IDLE_THRESHOLD)
+        if (target != null && doTracking && conditions.All(b => b))
         {
             targetRotation = Quaternion.Euler(0f, Quaternion.LookRotation(target.position - character.position).normalized.eulerAngles.y, 0f);
             rb.rotation = Quaternion.Lerp(rb.rotation, targetRotation, trackingRate * Time.fixedDeltaTime);
         }
     }
+
+    public bool IsIdle => (direction.magnitude <= IDLE_THRESHOLD);
 }

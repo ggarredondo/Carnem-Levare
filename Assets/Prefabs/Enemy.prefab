@@ -436,7 +436,7 @@ MonoBehaviour:
     noHurt: 0
     noDeath: 1
   characterMovement:
-    trackingRate: 5
+    trackingRate: 10
     doTracking: 1
     movingDirectionSpeed: 10
     idleDirectionSpeed: 5

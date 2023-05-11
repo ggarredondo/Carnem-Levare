@@ -15,9 +15,17 @@ public abstract class Move : ScriptableObject
     [SerializeField] private string initSound;
 
     [Header("Time Data (ms)")]
+
+    [Tooltip("[0, startUp): move is starting.")]
     [SerializeField] private double startUp;
+
+    [Tooltip("[startUp, active): move is active.")]
     [SerializeField] private double active;
+
+    [Tooltip("[active, recovery): move is recovering.")]
     [SerializeField] private double recovery;
+
+    [Tooltip("Another move can be input buffered at *buffering* ms of performing this move")]
     [SerializeField] private double buffering;
 
     public virtual void Initialize()

@@ -30,7 +30,7 @@ public class BlockingState : IState
     }
     public void FixedUpdate()
     {
-        movement.LookAtTarget();
+        movement.LookAtTarget(!movement.IsIdle);
     }
     public void Exit()
     {
