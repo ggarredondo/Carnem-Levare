@@ -25,7 +25,7 @@ public class CharacterStateMachine : MonoBehaviour
 
         walkingState = new WalkingState(this, controller, stats, movement);
         blockingState = new BlockingState(this, controller, stats, movement);
-        moveState = new MoveState(this, controller, stats);
+        moveState = new MoveState(this, controller, stats, movement);
         hurtState = new HurtState(this, controller, stats);
         blockedState = new BlockedState(this, controller, stats);
         koState = new KOState(this);
@@ -51,7 +51,7 @@ public class CharacterStateMachine : MonoBehaviour
     private void InitMove()
     {
         currentMove = moveList[moveState.moveIndex];
-        currentMove.InitMove();
+        currentMove.InitMove(stats);
     }
     private void ActivateMove()
     {

@@ -105,7 +105,7 @@ GameObject:
   - component: {fileID: 6343724655685897838}
   m_Layer: 9
   m_Name: LeftFistHitbox
-  m_TagString: HITBOX/PLAYER/LEFT_FIST
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -432,6 +432,9 @@ MonoBehaviour:
     - {fileID: 11400000, guid: 20e698f21bf5aa84cb0cad575ccd63cf, type: 2}
     - {fileID: 11400000, guid: 57b017aabdc8caf4fa11ee93fb5a5714, type: 2}
     - {fileID: 11400000, guid: 19854063ba4a509409698682dd6d1ef5, type: 2}
+    hitboxList:
+    - {fileID: 6343724655685897838}
+    - {fileID: 2801868370514863915}
     noHurt: 0
     noDeath: 1
   characterMovement:
@@ -634,7 +637,7 @@ GameObject:
   - component: {fileID: 2801868370514863915}
   m_Layer: 9
   m_Name: RightFistHitbox
-  m_TagString: HITBOX/PLAYER/RIGHT_FIST
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

@@ -5,6 +5,7 @@ public class MoveState : IState
     private readonly CharacterStateMachine stateMachine;
     private readonly Controller controller;
     private readonly CharacterStats stats;
+    private readonly CharacterMovement movement;
     public event Action<int> OnEnterInteger;
     public event Action OnEnter, OnExit;
 
@@ -12,17 +13,18 @@ public class MoveState : IState
     public int moveIndex, bufferedMoveIndex = -1;
     public bool BUFFER_FLAG = false;
 
-    public MoveState(in CharacterStateMachine stateMachine, in Controller controller, in CharacterStats stats)
+    public MoveState(in CharacterStateMachine stateMachine, in Controller controller, in CharacterStats stats, in CharacterMovement movement)
     {
         this.stateMachine = stateMachine;
         this.controller = controller;
         this.stats = stats;
+        this.movement = movement;
         moveListCount = stats.MoveList != null ? stats.MoveList.Count : 0;
     }
 
     public void Enter() 
     {
-        stateMachine.enabled = false;
+        stateMachine.enabled = true;
         controller.OnDoMove += BufferMove;
         controller.OnHurt += stats.DamageStamina;
         stateMachine.TransitionToRecovery = stateMachine.TransitionToWalkingOrBlocking;
@@ -30,7 +32,10 @@ public class MoveState : IState
         OnEnter?.Invoke();
     }
     public void Update() {}
-    public void FixedUpdate() {}
+    public void FixedUpdate() 
+    {
+        movement.LookAtTarget();
+    }
     public void Exit()
     {
         bufferedMoveIndex = -1;

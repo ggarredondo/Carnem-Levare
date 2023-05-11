@@ -44,7 +44,7 @@ GameObject:
   - component: {fileID: 1603956594911505768}
   m_Layer: 7
   m_Name: RightFistHitbox
-  m_TagString: HITBOX/ENEMY/RIGHT_FIST
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -255,7 +255,7 @@ GameObject:
   - component: {fileID: 8298185608187347678}
   m_Layer: 7
   m_Name: LeftFistHitbox
-  m_TagString: HITBOX/ENEMY/LEFT_FIST
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -430,6 +430,9 @@ MonoBehaviour:
     - {fileID: 11400000, guid: 20e698f21bf5aa84cb0cad575ccd63cf, type: 2}
     - {fileID: 11400000, guid: 57b017aabdc8caf4fa11ee93fb5a5714, type: 2}
     - {fileID: 11400000, guid: 19854063ba4a509409698682dd6d1ef5, type: 2}
+    hitboxList:
+    - {fileID: 8298185608187347678}
+    - {fileID: 1603956594911505768}
     noHurt: 0
     noDeath: 1
   characterMovement:
@@ -456,7 +459,10 @@ MonoBehaviour:
   horizontal: 0
   vertical: 0
   block: 0
-  doMove: 
+  move0: 0
+  move1: 0
+  move2: 0
+  move3: 0
 --- !u!54 &5975427957589119885
 Rigidbody:
   m_ObjectHideFlags: 0

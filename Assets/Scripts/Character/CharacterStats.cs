@@ -18,6 +18,7 @@ public class CharacterStats
     [SerializeField] [InitializationField] private float height = 1f, mass = 1f, drag;
 
     [SerializeField] private List<Move> moveList;
+    [SerializeField] private List<Hitbox> hitboxList;
 
     [SerializeField] private bool noHurt;
     [SerializeField] private bool noDeath;
@@ -28,11 +29,7 @@ public class CharacterStats
         character.transform.localScale *= height;
         rb.mass = mass;
         rb.drag = drag;
-
-        for (int i = 0; i < moveList.Count; ++i) {
-            moveList[i] = Object.Instantiate(moveList[i]);
-            moveList[i].Initialize(character, this);
-        }
+        moveList.ForEach(m => m.Initialize());
     }
     public void Reference(in CharacterStateMachine stateMachine) => this.stateMachine = stateMachine;
 
@@ -66,4 +63,5 @@ public class CharacterStats
     public ref readonly float BlockingMultiplier { get => ref blockingMultiplier; }
     public ref readonly float ComboDecay { get => ref comboDecay; }
     public ref readonly List<Move> MoveList { get => ref moveList; }
+    public ref readonly List<Hitbox> HitboxList { get => ref hitboxList; }
 }

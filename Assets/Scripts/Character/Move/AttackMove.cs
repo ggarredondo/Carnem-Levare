@@ -16,22 +16,19 @@ public class AttackMove : Move
     [SerializeField] private double advantageOnHit;
 
     private enum Stagger : int { Light, Medium, Hard }
+    private enum HitboxType : int { LeftFist, RightFist, LeftElbow, RightElbow }
     [Header("Attack Values")]
-    [SerializeField] private string hitboxSubtag;
-    private Hitbox hitbox;
+    [SerializeField] private HitboxType hitbox;
+    private Hitbox currentHitbox;
     [SerializeField] private float baseDamage;
     [SerializeField] private Stagger animationStagger;
     [SerializeField] private bool unblockable;
 
-    public override void Initialize(in Character character, in CharacterStats stats)
+    public override void InitMove(in CharacterStats stats)
     {
-        hitbox = GameObject.FindWithTag(character.HitboxPrefix + hitboxSubtag).GetComponent<Hitbox>();
-        base.Initialize(character, stats);
-    }
+        currentHitbox = stats.HitboxList[(int) hitbox];
 
-    public override void InitMove()
-    {
-        hitbox.Set(hitSound, 
+        currentHitbox.Set(hitSound, 
             blockedSound,
             hitShakeTime,
             hitShakeIntensity,
@@ -43,11 +40,11 @@ public class AttackMove : Move
     }
     public override void ActivateMove()
     {
-        hitbox.SetActive(true);
+        currentHitbox.SetActive(true);
     }
     public override void DeactivateMove()
     {
-        hitbox.SetActive(false);
+        currentHitbox.SetActive(false);
     }
     public override void RecoverFromMove() {}
 }

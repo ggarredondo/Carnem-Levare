@@ -20,10 +20,8 @@ public abstract class Move : ScriptableObject
     [SerializeField] private double recovery;
     [SerializeField] private double buffering;
 
-    public virtual void Initialize(in Character character, in CharacterStats stats)
+    public virtual void Initialize()
     {
-        this.character = character;
-        this.stats = stats;
         if (animation != null) AssignEvents();
     }
 
@@ -49,7 +47,7 @@ public abstract class Move : ScriptableObject
         #endif
     }
 
-    public abstract void InitMove();
+    public abstract void InitMove(in CharacterStats stats);
     public abstract void ActivateMove();
     public abstract void DeactivateMove();
     public abstract void RecoverFromMove();
