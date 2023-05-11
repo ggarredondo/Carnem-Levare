@@ -7,7 +7,7 @@ public class AttackMove : Move
     [SerializeField] private string hitSound;
     [SerializeField] private string blockedSound;
 
-    [Header("Attack-specifyc Camera Movement")]
+    [Header("Attack-specific Camera Movement")]
     [SerializeField] private double hitShakeTime;
     [SerializeField] private float hitShakeIntensity;
 
