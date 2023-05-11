@@ -38,7 +38,7 @@ public class AttackMove : Move
             (float)animationStagger,
             stats.CalculateAttackDamage(baseDamage),
             advantageOnBlock,
-            advantageOnHit, 
+            advantageOnHit,
             unblockable);
     }
     public override void ActivateMove()
