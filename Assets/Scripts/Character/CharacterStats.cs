@@ -29,8 +29,10 @@ public class CharacterStats
         rb.mass = mass;
         rb.drag = drag;
 
-        foreach (Move move in moveList)
-            move.Initialize(character, this);
+        for (int i = 0; i < moveList.Count; ++i) {
+            moveList[i] = Object.Instantiate(moveList[i]);
+            moveList[i].Initialize(character, this);
+        }
     }
     public void Reference(in CharacterStateMachine stateMachine) => this.stateMachine = stateMachine;
 
