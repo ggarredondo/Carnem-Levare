@@ -40,7 +40,7 @@ public abstract class AbstractMenu : MonoBehaviour
         transitions.ForEach(tuple => tuple.Item1.onClick.AddListener(() => 
         { 
             EventSystem.current.SetSelectedGameObject(tuple.Item2.gameObject);
-            AudioManager.Instance.uiSfxSounds.Play("PressButton");
+            AudioController.Instance.uiSfxSounds.Play("PressButton");
 
             if (tuple.Item2 is TMP_Dropdown item) actualDropDown = item;
         }));
@@ -60,7 +60,7 @@ public abstract class AbstractMenu : MonoBehaviour
         if (ActualDropDown != null)
         {
             ActualDropDown.Hide();
-            AudioManager.Instance.uiSfxSounds.Play("SelectButton");
+            AudioController.Instance.uiSfxSounds.Play("SelectButton");
             canReturn = true;
         }
 
@@ -80,28 +80,28 @@ public abstract class AbstractMenu : MonoBehaviour
     protected void Slider(ref float save, float value, bool hasSound)
     {
         save = value;
-        if(hasSound) AudioManager.Instance.Slider();
+        if(hasSound) AudioController.Instance.Slider();
         OptionsApplier.apply.Invoke();
     }
 
     protected void Toggle(ref bool save, bool value)
     {
         save = value;
-        AudioManager.Instance.uiSfxSounds.Play("PressButton");
+        AudioController.Instance.uiSfxSounds.Play("PressButton");
         OptionsApplier.apply.Invoke();
     }
 
     protected void Dropdown(ref string save, string value)
     {
         save = value;
-        AudioManager.Instance.uiSfxSounds.Play("PressButton");
+        AudioController.Instance.uiSfxSounds.Play("PressButton");
         OptionsApplier.apply.Invoke();
     }
 
     protected void Dropdown(ref int save, int value)
     {
         save = value;
-        AudioManager.Instance.uiSfxSounds.Play("PressButton");
+        AudioController.Instance.uiSfxSounds.Play("PressButton");
         OptionsApplier.apply.Invoke();
     }
 }

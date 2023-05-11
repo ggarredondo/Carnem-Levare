@@ -12,11 +12,11 @@ public class CharacterAudioOld : MonoBehaviour
     }
     private void Start()
     {
-        animationHandler.OnAttackStart += () => AudioManager.Instance.gameSfxSounds.Play(logicHandler.currentMove.WhiffSound, (int)logicHandler.Entity);
+        animationHandler.OnAttackStart += () => AudioController.Instance.gameSfxSounds.Play(logicHandler.currentMove.WhiffSound, (int)logicHandler.Entity);
     }
 
     public void PlayHurtSound(string blockedSound, string hitSound)
     {
-        AudioManager.Instance.gameSfxSounds.Play(logicHandler.IsBlocking ? blockedSound : hitSound, (int)logicHandler.Entity);
+        AudioController.Instance.gameSfxSounds.Play(logicHandler.IsBlocking ? blockedSound : hitSound, (int)logicHandler.Entity);
     }
 }

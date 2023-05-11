@@ -7,7 +7,7 @@ public class FootstepSound : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        AudioManager.Instance.Walking((int) foot, entity);
+        AudioController.Instance.Walking((int) foot, entity);
     }
 
     enum Foot

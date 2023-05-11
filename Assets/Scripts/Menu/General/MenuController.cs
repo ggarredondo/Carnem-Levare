@@ -36,14 +36,14 @@ public class MenuController : MonoBehaviour
     public void ChangeMenu()
     {
         tree.GoToChild();
-        AudioManager.Instance.uiSfxSounds.Play("PressButton");
+        AudioController.Instance.uiSfxSounds.Play("PressButton");
     }
 
     public void ChangeSibling(int child)
     {
         if (tree.ChangeSibling(child))
         {
-            AudioManager.Instance.uiSfxSounds.Play("PressButton");
+            AudioController.Instance.uiSfxSounds.Play("PressButton");
             OnSiblingChange.Invoke(tree.ActualSelectableID());
         }
     }
@@ -53,7 +53,7 @@ public class MenuController : MonoBehaviour
         if (tree.MoveToRightSibling())
         {
             GameManager.ControllerRumble.Rumble(0.1f, 0f, 1f);
-            AudioManager.Instance.uiSfxSounds.Play("PressButton");
+            AudioController.Instance.uiSfxSounds.Play("PressButton");
             OnSiblingChange.Invoke(tree.ActualSelectableID());
         }
     }
@@ -63,7 +63,7 @@ public class MenuController : MonoBehaviour
         if (tree.MoveToLeftSibling())
         {
             GameManager.ControllerRumble.Rumble(0.1f, 1f, 0f);
-            AudioManager.Instance.uiSfxSounds.Play("PressButton");
+            AudioController.Instance.uiSfxSounds.Play("PressButton");
             OnSiblingChange.Invoke(tree.ActualSelectableID());
         }
     }
@@ -71,7 +71,7 @@ public class MenuController : MonoBehaviour
     public void GoToParent()
     {
         tree.GoToParent();
-        AudioManager.Instance.uiSfxSounds.Play("PressButton");
+        AudioController.Instance.uiSfxSounds.Play("PressButton");
     }
 
     public void Return()

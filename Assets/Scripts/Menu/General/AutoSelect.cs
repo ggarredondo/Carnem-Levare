@@ -47,14 +47,14 @@ public class AutoSelect : MonoBehaviour, IPointerEnterHandler, ISelectHandler, I
         if (GameManager.InputDetection.controlSchemeIndex == 0)
         {
             GameManager.InputDetection.selected = EventSystem.current.currentSelectedGameObject;
-            AudioManager.Instance.uiSfxSounds.Play("SelectButton");
+            AudioController.Instance.uiSfxSounds.Play("SelectButton");
         }
     }
 
     public void OnPointerEnter(PointerEventData eventData)
     {
         if (mouseCanSelect)
-            AudioManager.Instance.uiSfxSounds.Play("SelectButton");
+            AudioController.Instance.uiSfxSounds.Play("SelectButton");
     }
 
     public void OnPointerUp(PointerEventData eventData)

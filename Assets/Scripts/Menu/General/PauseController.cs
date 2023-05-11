@@ -38,7 +38,7 @@ public class PauseController : MonoBehaviour
         menuController.tree.Initialize();
         pauseMenuActivated = true;
         GameManager.PlayerInput.SwitchCurrentActionMap("UI");
-        AudioManager.Instance.PauseGame(true);
+        AudioController.Instance.PauseGame(true);
     }
 
     public void ExitPauseMode(bool resumeSounds)
@@ -47,6 +47,6 @@ public class PauseController : MonoBehaviour
         menuController.DisableMenus();
         pauseMenuActivated = false;
         GameManager.PlayerInput.SwitchCurrentActionMap("Main Movement");
-        AudioManager.Instance.PauseGame(false && resumeSounds);
+        AudioController.Instance.PauseGame(false && resumeSounds);
     }
 }

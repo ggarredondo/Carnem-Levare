@@ -18,23 +18,7 @@ public class WebcamTexture : MonoBehaviour
         {
             AttachWebCamTexture();
         }
-    }
 
-    private void AttachWebCamTexture()
-    {
-        // Get the size of the object's bounding box
-        Vector3 objectSize = meshRenderer.bounds.size;
-
-        // Set the size of the webcam texture to match the object's aspect ratio
-        if (objectSize.x > objectSize.y) webcamTexture.requestedWidth = (int)(objectSize.x / objectSize.y * webcamTexture.requestedHeight);
-        else webcamTexture.requestedHeight = (int)(objectSize.y / objectSize.x * webcamTexture.requestedWidth);
-
-        initialTexture = meshRenderer.materials[materialIndex].GetTexture("_MainTex");
-
-    }
-
-    private void Update()
-    {
         if (WebCamTexture.devices.Length > 0)
         {
             if (play && !webcamTexture.isPlaying)
@@ -49,5 +33,18 @@ public class WebcamTexture : MonoBehaviour
                 webcamTexture.Stop();
             }
         }
+    }
+
+    private void AttachWebCamTexture()
+    {
+        // Get the size of the object's bounding box
+        Vector3 objectSize = meshRenderer.bounds.size;
+
+        // Set the size of the webcam texture to match the object's aspect ratio
+        if (objectSize.x > objectSize.y) webcamTexture.requestedWidth = (int)(objectSize.x / objectSize.y * webcamTexture.requestedHeight);
+        else webcamTexture.requestedHeight = (int)(objectSize.y / objectSize.x * webcamTexture.requestedWidth);
+
+        initialTexture = meshRenderer.materials[materialIndex].GetTexture("_MainTex");
+
     }
 }

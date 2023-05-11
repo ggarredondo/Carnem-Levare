@@ -1,7 +1,7 @@
 using System.Collections;
 using UnityEngine;
 
-public class AudioManager : Singleton<AudioManager>
+public class AudioController : Singleton<AudioController>
 {
     public Sounds uiSfxSounds;
     public Sounds gameSfxSounds;

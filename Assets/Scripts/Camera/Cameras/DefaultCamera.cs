@@ -13,7 +13,7 @@ public class DefaultCamera : MonoBehaviour, ICameraInitialize
 
     private Transform[] alternativeTargets;
     private Vector3[] defaultTargets;
-    private bool hurtEnemy, isDoingMove;
+    private bool hurt, isDoingMove;
     private float targetingSpeed;
 
     private CinemachineOrbitalTransposer orbitalTransposer;
@@ -48,12 +48,39 @@ public class DefaultCamera : MonoBehaviour, ICameraInitialize
 
         enemy.StateMachine.HurtState.OnEnter += () => 
         { 
-            hurtEnemy = true;
+            hurt = true;
             targetingSpeed = enemy.StateMachine.HurtState.Hitbox.HitShakeIntensity;
             HurtTime(enemy.StateMachine.HurtState.Hitbox.HitShakeTime); 
         };
 
-        enemy.StateMachine.HurtState.OnExit += () => hurtEnemy = false;
+        enemy.StateMachine.HurtState.OnExit += () => hurt = false;
+
+        player.StateMachine.HurtState.OnEnter += () =>
+        {
+            hurt = true;
+            targetingSpeed = player.StateMachine.HurtState.Hitbox.HitShakeIntensity;
+            HurtTime(player.StateMachine.HurtState.Hitbox.HitShakeTime);
+        };
+
+        player.StateMachine.HurtState.OnExit += () => hurt = false;
+
+        player.StateMachine.BlockedState.OnEnter += () =>
+        {
+            hurt = true;
+            targetingSpeed = player.StateMachine.HurtState.Hitbox.HitShakeIntensity / 2;
+            HurtTime(player.StateMachine.HurtState.Hitbox.HitShakeTime);
+        };
+
+        player.StateMachine.BlockedState.OnExit += () => hurt = false;
+
+        enemy.StateMachine.BlockedState.OnEnter += () =>
+        {
+            hurt = true;
+            targetingSpeed = enemy.StateMachine.HurtState.Hitbox.HitShakeIntensity / 2;
+            HurtTime(enemy.StateMachine.HurtState.Hitbox.HitShakeTime);
+        };
+
+        enemy.StateMachine.BlockedState.OnExit += () => hurt = false;
     }
 
     private void LateUpdate()
@@ -90,7 +117,7 @@ public class DefaultCamera : MonoBehaviour, ICameraInitialize
 
     private void TargetUpdate()
     {
-        if (hurtEnemy)
+        if (hurt)
         {
             AsignAlternativeTarget();
         }
@@ -103,6 +130,6 @@ public class DefaultCamera : MonoBehaviour, ICameraInitialize
     private async void HurtTime(double time)
     {
         await Task.Delay(System.TimeSpan.FromMilliseconds(time));
-        hurtEnemy = false;
+        hurt = false;
     }
 }

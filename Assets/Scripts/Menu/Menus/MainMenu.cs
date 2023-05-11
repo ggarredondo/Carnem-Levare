@@ -11,7 +11,7 @@ public class MainMenu : AbstractMenu
 
     protected override void Configure()
     {
-        AudioManager.Instance.PlayMusic("Intro");
+        AudioController.Instance.PlayMusic("Intro");
 
         playButton.onClick.AddListener(PlayGame);
         quitButton.onClick.AddListener(QuitGame);
@@ -26,7 +26,7 @@ public class MainMenu : AbstractMenu
     {
         if (!isLoading)
         {
-            AudioManager.Instance.uiSfxSounds.Play("PlayGame");
+            AudioController.Instance.uiSfxSounds.Play("PlayGame");
             isLoading = true;
             GameManager.SceneLoader.LoadWithLoadingScreen(SceneNumber.GAME);
         }

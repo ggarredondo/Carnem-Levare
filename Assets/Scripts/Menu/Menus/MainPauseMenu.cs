@@ -11,7 +11,7 @@ public class MainPauseMenu : AbstractMenu
 
     protected override void Configure()
     {
-        AudioManager.Instance.PlayMusic("Fight");
+        AudioController.Instance.PlayMusic("Fight");
 
         resumeButton.onClick.AddListener(ResumeGame);
         backButton.onClick.AddListener(BackToMenu);
@@ -25,7 +25,7 @@ public class MainPauseMenu : AbstractMenu
     private void BackToMenu()
     {
         pauseController.ExitPauseMode(false);
-        AudioManager.Instance.BackMenu();
+        AudioController.Instance.BackMenu();
         GameManager.SceneLoader.LoadScene(SceneNumber.NON_DESTROY_MAIN_MENU);
     }
 }

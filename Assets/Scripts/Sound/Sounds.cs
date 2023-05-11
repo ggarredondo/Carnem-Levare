@@ -25,8 +25,6 @@ public class Sounds : ScriptableObject
     private int spatialBlend;
     private Hashtable SoundsTable;
 
-    #region Initialization
-
     public SoundGroup[] SoundGroups { get { return soundGroups; } }
 
     public void Initialize()
@@ -67,84 +65,41 @@ public class Sounds : ScriptableObject
         }
     }
 
-    #endregion
-
-    #region Individual_Utilities
-
-    /// <summary>
-    /// Change the pitch of any sound
-    /// </summary>
-    /// <param name="name">Sound name</param>
-    /// <param name="pitch">Pitch we want to change to</param>
     public void ChangePitch(string name, float pitch, int actualSource = 0)
     {
         FindSound(name).source[actualSource].pitch = pitch;
     }
 
-    /// <summary>
-    /// Know the duration of a sound
-    /// </summary>
-    /// <param name="name">Sound name</param>
-    /// <returns></returns>
     public float Length(string name)
     {
         return FindSound(name).clip.length;
     }
 
-    /// <summary>
-    /// Play a sound
-    /// </summary>
-    /// <param name="name">Sound name</param>
     public void Play(string name, int actualSource = 0)
     {
         FindSound(name)?.source[actualSource].Play();
     }
 
-    /// <summary>
-    /// Play a sound at point in 3D
-    /// </summary>
-    /// <param name="name">Sound name</param>
-    /// <param name="point">Point in space</param>
     public void PlayAtPoint(string name, Vector3 point)
     {
         AudioSource.PlayClipAtPoint(FindSound(name).clip, point);
     }
 
-    /// <summary>
-    /// Know if a sound is playing
-    /// </summary>
-    /// <param name="name">Sound name</param>
-    /// <returns></returns>
     public bool IsPlaying(string name, int actualSource = 0)
     {
         return FindSound(name).source[actualSource].isPlaying;
     }
 
-    /// <summary>
-    /// Stop a sound
-    /// </summary>
-    /// <param name="name">Sound name</param>
     public void Stop(string name, int actualSource = 0)
     {
         FindSound(name)?.source[actualSource].Stop();
     }
 
-    /// <summary>
-    /// Pause a sound
-    /// </summary>
-    /// <param name="name">Sound name</param>
     public void Pause(string name, int actualSource = 0)
     {
         FindSound(name)?.source[actualSource].Pause();
     }
 
-    #endregion
-
-    #region All_Sounds_Utilities
-
-    /// <summary>
-    /// Pause all the sounds included in audioManager
-    /// </summary>
     public void PauseAllSounds()
     {
         foreach (DictionaryEntry entry in SoundsTable)
@@ -160,9 +115,6 @@ public class Sounds : ScriptableObject
         }
     }
 
-    /// <summary>
-    /// Play all the sounds that have been paused
-    /// </summary>
     public void ResumeAllSounds()
     {
         foreach (DictionaryEntry entry in SoundsTable)
@@ -175,9 +127,6 @@ public class Sounds : ScriptableObject
         }
     }
 
-    /// <summary>
-    /// Play all the sounds that have been paused
-    /// </summary>
     public void MuteAllSounds()
     {
         foreach (DictionaryEntry entry in SoundsTable)
@@ -188,9 +137,6 @@ public class Sounds : ScriptableObject
         }
     }
 
-    /// <summary>
-    /// Play all the sounds that have been paused
-    /// </summary>
     public void UnMuteAllSounds()
     {
         foreach (DictionaryEntry entry in SoundsTable)
@@ -201,9 +147,6 @@ public class Sounds : ScriptableObject
         }
     }
 
-    /// <summary>
-    /// Stop all the sounds included in audiomanager
-    /// </summary>
     public void StopAllSounds()
     {
         foreach (DictionaryEntry entry in SoundsTable)
@@ -214,10 +157,6 @@ public class Sounds : ScriptableObject
         }
     }
 
-    /// <summary>
-    /// Change the volume of all the AudioManager sounds
-    /// </summary>
-    /// <param name="volume">The percentage of volume that we want to apply</param>
     public void ChangeVolume(float volume)
     {
         foreach (DictionaryEntry entry in SoundsTable)
@@ -227,10 +166,6 @@ public class Sounds : ScriptableObject
                 s.source[i].volume = s.volume * volume;
         }
     }
-
-    #endregion
-
-    #region Private
 
     private Sound FindSound(string name)
     {
@@ -244,6 +179,4 @@ public class Sounds : ScriptableObject
             return (Sound) SoundsTable[name];
         }
     }
-
-    #endregion
 }

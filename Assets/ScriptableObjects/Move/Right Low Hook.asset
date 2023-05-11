@@ -23,7 +23,7 @@ MonoBehaviour:
   hitSound: Hit_Mid_Hook
   blockedSound: Blocked_Default
   hitShakeTime: 250
-  hitShakeIntensity: 5
+  hitShakeIntensity: 4
   advantageOnBlock: 400
   advantageOnHit: 800
   hitboxSubtag: RIGHT_FIST
