@@ -11,7 +11,7 @@ public class MoveState : IState
 
     private int moveListCount;
     public int moveIndex, bufferedMoveIndex = -1;
-    public bool BUFFER_FLAG = false;
+    public bool BUFFER_FLAG = false, TRACKING_FLAG = false;
 
     public MoveState(in CharacterStateMachine stateMachine, in Controller controller, in CharacterStats stats, in CharacterMovement movement)
     {
@@ -34,7 +34,7 @@ public class MoveState : IState
     public void Update() {}
     public void FixedUpdate() 
     {
-        movement.LookAtTarget();
+        movement.LookAtTarget(TRACKING_FLAG);
     }
     public void Exit()
     {

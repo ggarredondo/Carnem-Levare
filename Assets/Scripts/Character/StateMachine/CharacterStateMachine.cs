@@ -53,24 +53,18 @@ public class CharacterStateMachine : MonoBehaviour
         currentMove = moveList[moveState.moveIndex];
         currentMove.InitMove(stats);
     }
-    private void ActivateMove()
-    {
-        currentMove.ActivateMove();
-    }
-    private void DeactivateMove()
-    {
-        currentMove.DeactivateMove();
-    }
-    private void EnableBuffering()
-    {
-        moveState.BUFFER_FLAG = true;
-    }
-    private void RecoverFromMove()
+    private void ActivateMove() => currentMove.ActivateMove();
+    private void DeactivateMove() => currentMove.DeactivateMove();
+    private void EnableBuffering() => moveState.BUFFER_FLAG = true;
+    private void EndMove()
     {
         moveState.BUFFER_FLAG = false;
         currentMove.RecoverFromMove();
         TransitionToRecovery.Invoke();
     }
+
+    private void StartTracking() => moveState.TRACKING_FLAG = true;
+    private void StopTracking() => moveState.TRACKING_FLAG = false;
 
     #endregion
 

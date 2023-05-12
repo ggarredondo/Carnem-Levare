@@ -20,13 +20,15 @@ MonoBehaviour:
   active: 50
   recovery: 300
   buffering: 300
+  startTracking: 0
+  trackingLength: 200
   hitSound: Hit_Jab
   blockedSound: Blocked_Default
   hitShakeTime: 100
   hitShakeIntensity: 3
   advantageOnBlock: 400
   advantageOnHit: 800
-  hitboxSubtag: LEFT_FIST
+  hitbox: 0
   baseDamage: 10
   animationStagger: 0
   unblockable: 0

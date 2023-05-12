@@ -20,6 +20,8 @@ MonoBehaviour:
   active: 70
   recovery: 300
   buffering: 320
+  startTracking: 0
+  trackingLength: 200
   hitSound: Hit_Hook
   blockedSound: Blocked_Default
   hitShakeTime: 50

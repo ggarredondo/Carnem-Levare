@@ -14,19 +14,27 @@ public abstract class Move : ScriptableObject
     [Header("Move Sound")]
     [SerializeField] private string initSound;
 
-    [Header("Time Data (ms)")]
+    [Header("Time Data (ms) (animation events)")]
 
     [Tooltip("[0, startUp): move is starting.")]
     [SerializeField] private double startUp;
 
-    [Tooltip("[startUp, active): move is active.")]
+    [Tooltip("[startUp, startUp+active): move is active.")]
     [SerializeField] private double active;
 
-    [Tooltip("[active, recovery): move is recovering.")]
+    [Tooltip("[startUp+active, startUp+active+recovery): move is recovering.")]
     [SerializeField] private double recovery;
+
+    [Header("Other Time Data (ms) (animation events)")]
 
     [Tooltip("Another move can be input buffered at *buffering* ms of performing this move")]
     [SerializeField] private double buffering;
+
+    [Tooltip("Move starts tracking at *startTracking* ms from being performed")]
+    [SerializeField] private double startTracking;
+
+    [Tooltip("Move will track for *trackingLength* ms after enabling tracking")]
+    [SerializeField] private double trackingLength;
 
     public virtual void Initialize()
     {
@@ -47,10 +55,14 @@ public abstract class Move : ScriptableObject
         AnimationEvent initMoveEvent = CreateAnimationEvent("InitMove", 0.0);
         AnimationEvent activateMoveEvent = CreateAnimationEvent("ActivateMove", startUp);
         AnimationEvent deactiveMoveEvent = CreateAnimationEvent("DeactivateMove", startUp + active);
-        AnimationEvent recoverFromMoveEvent = CreateAnimationEvent("RecoverFromMove", startUp + active + recovery);
-        AnimationEvent enableBufferingEvent = CreateAnimationEvent("EnableBuffering", buffering);
+        AnimationEvent endMoveEvent = CreateAnimationEvent("EndMove", startUp + active + recovery);
 
-        AnimationEvent[] events = { initMoveEvent, activateMoveEvent, deactiveMoveEvent, recoverFromMoveEvent, enableBufferingEvent };
+        AnimationEvent enableBufferingEvent = CreateAnimationEvent("EnableBuffering", buffering);
+        AnimationEvent startTrackingEvent = CreateAnimationEvent("StartTracking", startTracking);
+        AnimationEvent stopTrackingEvent = CreateAnimationEvent("StopTracking", startTracking + trackingLength);
+
+        AnimationEvent[] events = { initMoveEvent, activateMoveEvent, deactiveMoveEvent, endMoveEvent, 
+            enableBufferingEvent, startTrackingEvent, stopTrackingEvent };
         UnityEditor.AnimationUtility.SetAnimationEvents(animation, events);
         #endif
     }
