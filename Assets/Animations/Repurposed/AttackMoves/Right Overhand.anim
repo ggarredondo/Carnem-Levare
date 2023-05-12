@@ -85197,8 +85197,22 @@ AnimationClip:
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
+  - time: 0
+    functionName: StartTracking
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0
   - time: 0.35
     functionName: ActivateMove
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0
+  - time: 0.35
+    functionName: StopTracking
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
@@ -85219,7 +85233,7 @@ AnimationClip:
     intParameter: 0
     messageOptions: 0
   - time: 0.95
-    functionName: RecoverFromMove
+    functionName: EndMove
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
