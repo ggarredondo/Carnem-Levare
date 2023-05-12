@@ -1,10 +1,10 @@
 #node-border {
-    -unity-background-image-tint-color: rgba(255, 255, 255, 255);
-    background-color: rgba(173, 56, 115, 255);
-    border-left-color: rgba(0, 0, 0, 255);
-    border-right-color: rgba(0, 0, 0, 255);
-    border-top-color: rgba(0, 0, 0, 255);
-    border-bottom-color: rgba(0, 0, 0, 255);
+    -unity-background-image-tint-color: rgb(255, 255, 255);
+    background-color: rgb(65, 65, 65);
+    border-left-color: rgb(0, 0, 0);
+    border-right-color: rgb(0, 0, 0);
+    border-top-color: rgb(0, 0, 0);
+    border-bottom-color: rgb(0, 0, 0);
     border-left-width: 1px;
     border-right-width: 1px;
     border-top-width: 1px;
@@ -24,24 +24,15 @@
 }
 
 #selection-border {
-    border-left-color: rgba(25, 146, 226, 255);
-    border-right-color: rgba(25, 146, 226, 255);
-    border-top-color: rgba(25, 146, 226, 255);
-    border-bottom-color: rgba(25, 146, 226, 255);
-    border-left-width: 0;
-    border-right-width: 0;
-    border-top-width: 0;
-    border-bottom-width: 0;
     position: absolute;
     left: 0;
     top: 0;
     right: 0;
     bottom: 0;
-    border-top-left-radius: 5px;
-    border-bottom-left-radius: 5px;
-    border-top-right-radius: 5px;
-    border-bottom-right-radius: 5px;
-    min-width: auto;
+    border-left-color: rgba(255, 255, 255, 255);
+    border-right-color: rgba(255, 255, 255, 255);
+    border-top-color: rgba(255, 255, 255, 255);
+    border-bottom-color: rgba(255, 255, 255, 255);
 }
 
 :hover > #selection-border {
@@ -49,6 +40,10 @@
     border-right-width: 1px;
     border-top-width: 1px;
     border-bottom-width: 1px;
+    border-left-color: rgba(255, 255, 255, 255);
+    border-right-color: rgba(255, 255, 255, 255);
+    border-top-color: rgba(255, 255, 255, 255);
+    border-bottom-color: rgba(255, 255, 255, 255);
 }
 
 :selected > #selection-border {
@@ -56,13 +51,34 @@
     border-right-width: 2px;
     border-top-width: 2px;
     border-bottom-width: 2px;
-}
-
-.node {
-    min-width: 100px;
+    border-left-color: rgba(255, 255, 255, 255);
+    border-right-color: rgba(255, 255, 255, 255);
+    border-top-color: rgba(255, 255, 255, 255);
+    border-bottom-color: rgba(255, 255, 255, 255);
 }
 
 #title {
     -unity-font-style: bold;
     -unity-text-align: upper-center;
+}
+
+.node {
+    min-width: 110px;
+    margin-left: 0;
+    margin-right: 0;
+    margin-top: 0;
+    margin-bottom: 0;
+    max-width: 110px;
+}
+
+.leaf #input {
+    background-color: rgba(162, 59, 114, 255);
+}
+
+.composite #input {
+    background-color: rgba(128, 147, 241, 255);
+}
+
+.root #output {
+    background-color: rgba(185, 226, 140, 255);
 }
