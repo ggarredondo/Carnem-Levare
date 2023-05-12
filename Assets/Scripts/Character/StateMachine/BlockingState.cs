@@ -19,9 +19,12 @@ public class BlockingState : IState
     public void Enter()
     {
         stateMachine.enabled = true;
+        stateMachine.hitNumber = -1;
+
         controller.OnDoBlock += stateMachine.TransitionToWalkingOrBlocking;
         controller.OnDoMove += stateMachine.TransitionToMove;
         controller.OnHurt += Blocked;
+
         OnEnter?.Invoke();
     }
     public void Update()

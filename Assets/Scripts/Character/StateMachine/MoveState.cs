@@ -25,9 +25,12 @@ public class MoveState : IState
     public void Enter() 
     {
         stateMachine.enabled = true;
+        stateMachine.hitNumber = -1;
+
         controller.OnDoMove += BufferMove;
         controller.OnHurt += stats.DamageStamina;
         stateMachine.TransitionToRecovery = stateMachine.TransitionToWalkingOrBlocking;
+
         OnEnterInteger?.Invoke(moveIndex);
         OnEnter?.Invoke();
     }

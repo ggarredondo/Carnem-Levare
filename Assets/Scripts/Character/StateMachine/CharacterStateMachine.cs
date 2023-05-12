@@ -17,6 +17,8 @@ public class CharacterStateMachine : MonoBehaviour
     private BlockedState blockedState;
     private KOState koState;
 
+    [NonSerialized] public int hitNumber = -1;
+
     public void Reference(in Controller controller, in CharacterStats stats, in CharacterMovement movement)
     {
         this.controller = controller;

@@ -13,7 +13,7 @@ public class CharacterStats
     [SerializeField] [Range(0f, 1f)] private float blockingMultiplier;
 
     [Tooltip("How quickly time disadvantage decreases through consecutive hits (combo decay in ms x number of hits)")]
-    [SerializeField] private float comboDecay = 200f;
+    [SerializeField] private double comboDecay = 200.0;
 
     [SerializeField] [InitializationField] private float height = 1f, mass = 1f, drag;
 
@@ -33,10 +33,8 @@ public class CharacterStats
     }
     public void Reference(in CharacterStateMachine stateMachine) => this.stateMachine = stateMachine;
 
-    public float CalculateAttackDamage(float baseDamage) 
-    {
-        return baseDamage + characterDamage;
-    }
+    public float CalculateAttackDamage(float baseDamage) => baseDamage + characterDamage;
+    public double CalculateDisadvantage(double disadvantage, float hitNumber) => disadvantage - hitNumber * comboDecay;
 
     private void AddToStamina(float addend) => stamina = Mathf.Clamp(stamina + addend, 0f + System.Convert.ToSingle(noDeath), maxStamina);
     public void DamageStamina(in Hitbox hitbox)
@@ -52,7 +50,7 @@ public class CharacterStats
     {
         if (!noHurt)
         {
-            AddToStamina(-hitbox.Damage);
+            AddToStamina(Mathf.Round(-hitbox.Damage * blockingMultiplier));
             if (stamina <= 0) stateMachine.TransitionToKO(hitbox);
             else stateMachine.TransitionToBlocked(hitbox);
         }
@@ -60,8 +58,6 @@ public class CharacterStats
 
     public ref readonly float Stamina { get => ref stamina; }
     public ref readonly float MaxStamina { get => ref maxStamina; }
-    public ref readonly float BlockingMultiplier { get => ref blockingMultiplier; }
-    public ref readonly float ComboDecay { get => ref comboDecay; }
     public ref readonly List<Move> MoveList { get => ref moveList; }
     public ref readonly List<Hitbox> HitboxList { get => ref hitboxList; }
 }

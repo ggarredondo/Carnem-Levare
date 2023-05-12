@@ -19,9 +19,12 @@ public class WalkingState : IState
     public void Enter()
     {
         stateMachine.enabled = true;
+        stateMachine.hitNumber = -1;
+
         controller.OnDoBlock += stateMachine.TransitionToWalkingOrBlocking;
         controller.OnDoMove += stateMachine.TransitionToMove;
         controller.OnHurt += stats.DamageStamina;
+
         OnEnter?.Invoke();
     }
     public void Update() 

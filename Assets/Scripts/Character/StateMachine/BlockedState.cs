@@ -23,7 +23,10 @@ public class BlockedState : IState
     public void Enter() 
     {
         stateMachine.enabled = false;
+        stateMachine.hitNumber++;
+
         controller.OnHurt += Blocked;
+
         OnEnter?.Invoke();
         Recover();
     }
@@ -34,7 +37,10 @@ public class BlockedState : IState
         cancellationTokenSource = new CancellationTokenSource();
 
         try {
-            await Task.Delay(TimeSpan.FromMilliseconds(hitbox.AdvantageOnBlock), cancellationTokenSource.Token);
+            await Task.Delay(
+                TimeSpan.FromMilliseconds(stats.CalculateDisadvantage(hitbox.AdvantageOnBlock, stateMachine.hitNumber)), 
+                cancellationTokenSource.Token);
+
             stateMachine.TransitionToWalkingOrBlocking();
         }
         catch {}

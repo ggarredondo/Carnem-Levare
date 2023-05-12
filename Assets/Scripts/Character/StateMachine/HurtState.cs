@@ -23,7 +23,10 @@ public class HurtState : IState
     public void Enter() 
     {
         stateMachine.enabled = false;
+        stateMachine.hitNumber++;
+
         controller.OnHurt += stats.DamageStamina;
+
         OnEnter?.Invoke();
         Recover();
     }
@@ -34,7 +37,10 @@ public class HurtState : IState
         cancellationTokenSource = new CancellationTokenSource();
 
         try {
-            await Task.Delay(TimeSpan.FromMilliseconds(hitbox.AdvantageOnHit), cancellationTokenSource.Token);
+            await Task.Delay(
+                TimeSpan.FromMilliseconds(stats.CalculateDisadvantage(hitbox.AdvantageOnHit, stateMachine.hitNumber)), 
+                cancellationTokenSource.Token);
+
             stateMachine.TransitionToWalkingOrBlocking();
         }
         catch {}
