@@ -15,6 +15,8 @@ public class CharacterStats
     [Tooltip("How quickly time disadvantage decreases through consecutive hits (combo decay in ms x number of hits)")]
     [SerializeField] private double comboDecay = 200.0;
 
+    [SerializeField] private double minDisadvantage = 100.0;
+
     [SerializeField] [InitializationField] private float height = 1f, mass = 1f, drag;
 
     [SerializeField] private List<Move> moveList;
@@ -34,7 +36,7 @@ public class CharacterStats
     public void Reference(in CharacterStateMachine stateMachine) => this.stateMachine = stateMachine;
 
     public float CalculateAttackDamage(float baseDamage) => baseDamage + characterDamage;
-    public double CalculateDisadvantage(double disadvantage, float hitNumber) => disadvantage - hitNumber * comboDecay;
+    public double CalculateDisadvantage(double disadvantage, float hitNumber) => System.Math.Max(minDisadvantage, disadvantage - hitNumber * comboDecay);
 
     private void AddToStamina(float addend) => stamina = Mathf.Clamp(stamina + addend, 0f + System.Convert.ToSingle(noDeath), maxStamina);
     public void DamageStamina(in Hitbox hitbox)

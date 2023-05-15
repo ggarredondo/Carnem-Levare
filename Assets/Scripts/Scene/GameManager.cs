@@ -13,6 +13,9 @@ public class GameManager : MonoBehaviour
     [Header("Sounds")]
     [SerializeField] private Tuple<Sounds, SceneNumber>[] allSounds;
 
+    [Header("Debug")]
+    [SerializeField] [Range(0f, 1f)] private float timeScale = 1f;
+
     private ISave saver;
     private IApplier applier;
 
@@ -59,6 +62,11 @@ public class GameManager : MonoBehaviour
         sceneLoader = new();
 
         applier.ApplyChanges();
+    }
+
+    private void OnValidate()
+    {
+        Time.timeScale = timeScale;
     }
 
     private void OnDestroy()
