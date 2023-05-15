@@ -8,5 +8,7 @@ public interface IHaveChildren
 
     public bool HaveChildren();
 
+    public void InitializeChildren();
+
     public bool Static();
 }

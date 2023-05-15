@@ -88,4 +88,16 @@ public class NodeView : UnityEditor.Experimental.GraphView.Node
         base.OnSelected();
         OnNodeSelected?.Invoke(this);
     }
+
+    public void UpdateState()
+    {
+        RemoveFromClassList("selected");
+        RemoveFromClassList("not_selected");
+
+        if (Application.isPlaying)
+            if (node.selected) AddToClassList("selected");
+            else AddToClassList("not_selected");
+    }
+
+
 }

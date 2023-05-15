@@ -181,14 +181,20 @@ public class BehaviourTree : ScriptableObject
 
     public List<int> GetSelected()
     {
+        rootNode.Initialize();
+
         List<int> returnList = new();
 
         returnList.Add(nodeStack.Peek().id);
+        nodeStack.Peek().selected = true;
 
         for (int i = nodeStack.Count-1; i >= 0; i--)
         {
             if (nodeStack.ElementAt(i) is IHaveChildren newNode && newNode.Static())
+            {
                 returnList.Add(nodeStack.ElementAt(i).id);
+                nodeStack.ElementAt(i).selected = true;
+            }
         }
 
         return returnList;

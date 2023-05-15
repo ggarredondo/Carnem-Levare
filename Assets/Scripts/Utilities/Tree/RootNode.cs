@@ -30,4 +30,10 @@ public class RootNode : Node, IHaveChildren
     {
         return false;
     }
+
+    public void InitializeChildren()
+    {
+        if (HaveChildren())
+            child.Initialize();
+    }
 }

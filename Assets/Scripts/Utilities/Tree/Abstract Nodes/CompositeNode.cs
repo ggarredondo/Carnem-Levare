@@ -42,4 +42,10 @@ public abstract class CompositeNode : Node, IHaveChildren, IHaveParent
     {
         return isStatic;
     }
+
+    public void InitializeChildren()
+    {
+        if (HaveChildren())
+            children.ForEach(c => c.Initialize());
+    }
 }
