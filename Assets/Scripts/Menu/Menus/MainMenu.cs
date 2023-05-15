@@ -11,8 +11,6 @@ public class MainMenu : AbstractMenu
 
     protected override void Configure()
     {
-        AudioController.Instance.PlayMusic("Intro");
-
         playButton.onClick.AddListener(PlayGame);
         quitButton.onClick.AddListener(QuitGame);
     }

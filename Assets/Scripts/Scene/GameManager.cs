@@ -74,6 +74,20 @@ public class GameManager : MonoBehaviour
         InputDetection.Configure();
 
         InitializeSoundSources();
+
+        PlayMusic();
+    }
+
+    private void PlayMusic()
+    {
+        if (SceneManager.GetActiveScene().buildIndex == (int)SceneNumber.MAIN_MENU)
+            AudioController.Instance.PlayMusic("Intro");
+
+        if (SceneManager.GetActiveScene().buildIndex == (int)SceneNumber.NON_DESTROY_MAIN_MENU)
+            AudioController.Instance.PlayMusic("Intro");
+
+        if (SceneManager.GetActiveScene().buildIndex == (int)SceneNumber.GAME)
+            AudioController.Instance.PlayMusic("Fight");
     }
 
     private void InitializeSoundSources()

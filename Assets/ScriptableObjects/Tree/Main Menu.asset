@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 0
   guid: b28f004b9cd69444c8cd5c42802f09e6
-  position: {x: 179.91292, y: 133.36089}
+  position: {x: 326, y: 71}
   child: {fileID: 696521932462182144}
 --- !u!114 &-4661959856457781889
 MonoBehaviour:
@@ -30,7 +30,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 3
   guid: e4fdc53fca442424f8fb790f226af851
-  position: {x: 818, y: 70.665955}
+  position: {x: 394, y: 337}
   parent: {fileID: 1950605399513506307}
 --- !u!114 &11400000
 MonoBehaviour:
@@ -86,7 +86,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 1
   guid: bcac240612da9614199bb1eb783f3e45
-  position: {x: 503.47916, y: 132.99997}
+  position: {x: 326, y: 219}
   isStatic: 1
   children:
   - {fileID: 2393809908458928090}
@@ -109,7 +109,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 2
   guid: 8b7faa8fc83fe9f44b1f618c7a217603
-  position: {x: 818, y: -25.33406}
+  position: {x: 504, y: 337}
   parent: {fileID: 1950605399513506307}
 --- !u!114 &4679995406102583850
 MonoBehaviour:
@@ -125,7 +125,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 4
   guid: 263af1b641645f74fb088a11eb11eca7
-  position: {x: 818, y: 171.5}
+  position: {x: 250, y: 337}
   parent: {fileID: 1950605399513506307}
 --- !u!114 &7141191078464048408
 MonoBehaviour:
@@ -141,5 +141,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 5
   guid: 6881cbac1b08a424fb017479cce646e0
-  position: {x: 818, y: 258}
+  position: {x: 140, y: 337}
   parent: {fileID: 1950605399513506307}
