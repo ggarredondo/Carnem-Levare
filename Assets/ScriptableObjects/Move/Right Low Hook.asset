@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveName: Right Low Hook
   animation: {fileID: 7400000, guid: 75b8e477760a6904aa34988cc45c114a, type: 2}
-  animationSpeed: 1.1
+  animationSpeed: 1.2
   initSound: Whiff_Mid_Hook
   startUp: 350
   active: 120

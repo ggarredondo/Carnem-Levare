@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveName: Left Jab
   animation: {fileID: 7400000, guid: e652c0869035b6b418eef0c72bbb19c0, type: 2}
-  animationSpeed: 1
+  animationSpeed: 1.2
   initSound: Whiff_Jab
   startUp: 200
   active: 50

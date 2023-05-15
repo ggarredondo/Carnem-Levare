@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveName: Left Uppercut
   animation: {fileID: 7400000, guid: c8ea972d3fdf705449eeced1a0d40d6c, type: 2}
-  animationSpeed: 1
+  animationSpeed: 1.1
   initSound: Whiff_Hook
   startUp: 200
   active: 70
