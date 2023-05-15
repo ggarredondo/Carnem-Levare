@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3b1f0431d7ca2da48a12ff07183273eb, type: 3}
-  m_Name: Left Jab
+  m_Name: Left Leading Jab
   m_EditorClassIdentifier: 
-  moveName: Left Jab
+  moveName: Left Leading Jab
   animation: {fileID: 7400000, guid: e652c0869035b6b418eef0c72bbb19c0, type: 2}
   animationSpeed: 1.2
   initSound: Whiff_Jab
