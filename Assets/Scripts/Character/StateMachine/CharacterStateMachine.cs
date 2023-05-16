@@ -29,7 +29,7 @@ public class CharacterStateMachine : MonoBehaviour
         blockingState = new BlockingState(this, controller, stats, movement);
         moveState = new MoveState(this, controller, stats, movement);
         hurtState = new HurtState(this, controller, stats);
-        blockedState = new BlockedState(this, controller, stats);
+        blockedState = new BlockedState(this, controller, stats, movement);
         koState = new KOState(this);
     }
 
