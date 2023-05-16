@@ -27,7 +27,7 @@ MonoBehaviour:
   hitShakeTime: 250
   hitShakeIntensity: 5
   advantageOnBlock: 800
-  advantageOnHit: 1000
+  advantageOnHit: 795
   hitbox: 1
   baseDamage: 20
   animationStagger: 2

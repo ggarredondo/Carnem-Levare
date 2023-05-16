@@ -37,11 +37,9 @@ public class HurtState : IState
         cancellationTokenSource = new CancellationTokenSource();
 
         try {
-            UnityEngine.Debug.Log("Stunlocked for " + stats.CalculateDisadvantage(hitbox.AdvantageOnHit, stateMachine.hitNumber) + " ms");
             await Task.Delay(
                 TimeSpan.FromMilliseconds(stats.CalculateDisadvantage(hitbox.AdvantageOnHit, stateMachine.hitNumber)), 
                 cancellationTokenSource.Token);
-            UnityEngine.Debug.Log("Left stunlock");
 
             stateMachine.TransitionToWalkingOrBlocking();
         }
