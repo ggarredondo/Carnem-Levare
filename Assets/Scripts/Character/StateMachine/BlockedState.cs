@@ -1,6 +1,5 @@
 using System;
-using System.Threading.Tasks;
-using System.Threading;
+using System.Collections;
 
 public class BlockedState : IState
 {
@@ -11,7 +10,7 @@ public class BlockedState : IState
 
     private Hitbox hitbox;
     public void Set(in Hitbox hitbox) => this.hitbox = hitbox;
-    private CancellationTokenSource cancellationTokenSource;
+    private IEnumerator coroutine;
 
     public BlockedState(in CharacterStateMachine stateMachine, in Controller controller, in CharacterStats stats)
     {
@@ -28,26 +27,15 @@ public class BlockedState : IState
         controller.OnHurt += Blocked;
 
         OnEnter?.Invoke();
-        Recover();
+
+        coroutine = StateFunctions.Recover(stats, stateMachine, hitbox.AdvantageOnBlock);
+        stateMachine.StartCoroutine(coroutine);
     }
     public void Update() {}
     public void FixedUpdate() {}
-    private async void Recover()
-    {
-        cancellationTokenSource = new CancellationTokenSource();
-
-        try {
-            await Task.Delay(
-                TimeSpan.FromMilliseconds(stats.CalculateDisadvantage(hitbox.AdvantageOnBlock, stateMachine.hitNumber)), 
-                cancellationTokenSource.Token);
-
-            stateMachine.TransitionToWalkingOrBlocking();
-        }
-        catch {}
-    }
     public void Exit() 
     {
-        cancellationTokenSource?.Cancel();
+        stateMachine.StopCoroutine(coroutine);
         controller.OnHurt -= Blocked;
         OnExit?.Invoke();
     }

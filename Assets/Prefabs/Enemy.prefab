@@ -421,7 +421,7 @@ MonoBehaviour:
     maxStamina: 300
     characterDamage: 10
     blockingMultiplier: 0.1
-    comboDecay: 0
+    comboDecay: 200
     minDisadvantage: 100
     height: 1.1
     mass: 1

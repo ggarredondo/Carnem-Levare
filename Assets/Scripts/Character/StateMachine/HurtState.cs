@@ -1,6 +1,5 @@
 using System;
-using System.Threading.Tasks;
-using System.Threading;
+using System.Collections;
 
 public class HurtState : IState
 {  
@@ -11,7 +10,7 @@ public class HurtState : IState
 
     private Hitbox hitbox;
     public void Set(in Hitbox hitbox) => this.hitbox = hitbox;
-    private CancellationTokenSource cancellationTokenSource;
+    private IEnumerator coroutine;
 
     public HurtState(in CharacterStateMachine stateMachine, in Controller controller, in CharacterStats stats)
     {
@@ -28,26 +27,15 @@ public class HurtState : IState
         controller.OnHurt += stats.DamageStamina;
 
         OnEnter?.Invoke();
-        Recover();
+
+        coroutine = StateFunctions.Recover(stats, stateMachine, hitbox.AdvantageOnHit);
+        stateMachine.StartCoroutine(coroutine);
     }
     public void Update() {}
     public void FixedUpdate() {}
-    private async void Recover()
-    {
-        cancellationTokenSource = new CancellationTokenSource();
-
-        try {
-            await Task.Delay(
-                TimeSpan.FromMilliseconds(stats.CalculateDisadvantage(hitbox.AdvantageOnHit, stateMachine.hitNumber)), 
-                cancellationTokenSource.Token);
-
-            stateMachine.TransitionToWalkingOrBlocking();
-        }
-        catch {}
-    }
     public void Exit()
     {
-        cancellationTokenSource?.Cancel();
+        stateMachine.StopCoroutine(coroutine);
         controller.OnHurt -= stats.DamageStamina;
         OnExit?.Invoke();
     }
