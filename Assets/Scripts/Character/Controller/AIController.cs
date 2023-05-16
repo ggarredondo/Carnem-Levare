@@ -2,9 +2,10 @@ using UnityEngine;
 
 public class AIController : Controller
 {
-    [SerializeField] [Range(-1f, 1f)] private float horizontal, vertical;
-    [SerializeField] private bool block = false, lateBlock = false;
-    [SerializeField] private bool move0, move1, move2, move3;
+    [SerializeField] private bool debug;
+    [SerializeField] [ConditionalField("debug")] [Range(-1f, 1f)] private float horizontal, vertical;
+    [SerializeField] [ConditionalField("debug")] private bool block = false, lateBlock = false;
+    [SerializeField] [ConditionalField("debug")] private bool move0, move1, move2, move3;
 
     public override void Initialize()
     {
@@ -18,13 +19,13 @@ public class AIController : Controller
 
     private void OnValidate()
     {
-        movementVector.x = horizontal;
-        movementVector.y = vertical;
-        DoBlock(block);
+        movementVector.x = debug ? horizontal : 0f;
+        movementVector.y = debug ? vertical : 0f;
+        DoBlock(debug && block);
 
-        if (move0) { move0 = false; DoMove(0); }
-        if (move1) { move1 = false; DoMove(1); }
-        if (move2) { move2 = false; DoMove(2); }
-        if (move3) { move3 = false; DoMove(3); }
+        if (debug && move0) { move0 = false; DoMove(0); }
+        if (debug && move1) { move1 = false; DoMove(1); }
+        if (debug && move2) { move2 = false; DoMove(2); }
+        if (debug && move3) { move3 = false; DoMove(3); }
     }
 }
