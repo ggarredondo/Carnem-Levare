@@ -1,23 +1,11 @@
 using UnityEngine;
 using System.Collections.Generic;
 using UnityEditor;
-using System.Linq;
 
-[CreateAssetMenu(menuName = "Scriptable Objects/Tree/BehaviourTree")]
 public class BehaviourTree : ScriptableObject
 {
     public Node rootNode;
     public List<Node> nodes = new();
-    private readonly Stack<Node> nodeStack = new();
-    public System.Action OnChange;
-
-    public void Initialize()
-    {
-        nodeStack.Clear();
-        nodeStack.Push(rootNode);
-        GoToChild();
-        OnChange.Invoke();
-    }
 
     public Node CreateNode(System.Type type)
     {
@@ -55,7 +43,7 @@ public class BehaviourTree : ScriptableObject
     public void AddChild(IHaveChildren parent, IHaveParent child)
     {
 #if UNITY_EDITOR
-        Undo.RecordObject((Node) parent, "Behaviour Tree (AddChild)");
+        Undo.RecordObject((Node)parent, "Behaviour Tree (AddChild)");
 #endif
         parent.AddChild(child);
 #if UNITY_EDITOR
@@ -79,157 +67,4 @@ public class BehaviourTree : ScriptableObject
         return parent.GetChildren();
     }
 
-    public Node GetParent(IHaveParent child)
-    {
-        return child.GetParent();
-    }
-
-    public void GoToChild(int child = 0, int depth = 0)
-    {
-        if (nodeStack.Peek() is IHaveChildren node && node.HaveChildren()) 
-        {
-            nodeStack.Push(GetChildren(node)[child]);
-
-            if (nodeStack.Peek() is IHaveChildren newNode && newNode.Static()) 
-            {
-                if (newNode is ICanSelect selectable)
-                    GoToChild(selectable.GetSelectedChild(), depth + 1);
-                else
-                    GoToChild(child, depth + 1);
-            }
-
-            if (depth == 0) OnChange.Invoke();
-        }
-    }
-
-    public void GoToParent(int depth = 0)
-    {
-        if (nodeStack.Peek() is IHaveParent node && node.GetParent() is not RootNode && CanReturn())
-        {
-            nodeStack.Pop();
-
-            if (nodeStack.Peek() is IHaveChildren parent && parent.Static())
-                GoToParent(depth + 1);
-            
-            if(depth == 0) OnChange.Invoke();
-        }
-    }
-
-    private void GoToSelectableParent()
-    {
-        while (nodeStack.Count > 0 && nodeStack.Peek() is not ICanSelect && nodeStack.ElementAt(nodeStack.Count - 2).selected)
-            nodeStack.Pop();
-    }
-
-    public bool ChangeSibling(int sibling)
-    {
-        bool result = false;
-
-        if (nodeStack.Any(n => n is ICanSelect))
-        {
-            GoToSelectableParent();
-
-            if (nodeStack.Peek() is ICanSelect selectable)
-            {
-                selectable.SelectChild(sibling);
-                GoToChild(selectable.GetSelectedChild());
-                result = true;
-            }
-        }
-
-        return result;
-    }
-
-    public bool MoveToRightSibling()
-    {
-        bool result = false;
-
-        if (nodeStack.Any(n => n is ICanSelect))
-        {
-            GoToSelectableParent();
-
-            if (nodeStack.Peek() is ICanSelect selectable)
-            {
-                selectable.MoveRightChild();
-                GoToChild(selectable.GetSelectedChild());
-                result = true;
-            }
-        }
-
-        return result;
-    }
-
-    public bool MoveToLeftSibling()
-    {
-        bool result = false;
-
-        if (nodeStack.Any(n => n is ICanSelect))
-        {
-            GoToSelectableParent();
-
-            if (nodeStack.Peek() is ICanSelect selectable)
-            {
-                selectable.MoveLeftChild();
-                GoToChild(selectable.GetSelectedChild());
-                result = true;
-            }
-        }
-
-        return result;
-    }
-
-    public int ActualSelectableID()
-    {
-        if (nodeStack.Any(n => n is ICanSelect))
-            return ((ICanSelect)nodeStack.FirstOrDefault(n => n is ICanSelect)).GetSelectedChild();
-        else 
-            return 0;
-    }
-
-    private bool CanReturn()
-    {
-        for (int i = 0; i < nodeStack.Count; i++)
-        {
-            if (nodeStack.ElementAt(i).selected)
-            {
-                continue;
-            }
-            else if(nodeStack.ElementAt(i) is not RootNode && nodeStack.ElementAt(i) is IHaveChildren parent && !parent.Static())
-            {
-                return true;
-            }
-        }
-
-        return false;
-    }
-
-    public List<int> GetSelected()
-    {
-        rootNode.Initialize();
-
-        List<int> returnList = new();
-
-        returnList.Add(nodeStack.Peek().id);
-        nodeStack.Peek().selected = true;
-
-        for (int i = 1; i < nodeStack.Count; i++)
-        {
-            if (nodeStack.ElementAt(i) is IHaveChildren newNode)
-            {
-                if (newNode.Static())
-                {
-                    returnList.Add(nodeStack.ElementAt(i).id);
-                    nodeStack.ElementAt(i).selected = true;
-                }
-                else break;
-            }
-        }
-
-        return returnList;
-    }
-
-    public int CurrentId()
-    {
-        return nodeStack.Peek().id;
-    }
 }

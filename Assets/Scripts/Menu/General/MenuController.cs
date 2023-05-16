@@ -4,7 +4,7 @@ using UnityEngine;
 public class MenuController : MonoBehaviour
 {
     public InputReader input;
-    public BehaviourTree tree;
+    public MenuTree tree;
     public List<GameObject> menus;
 
     [System.NonSerialized] public bool pauseMenu;

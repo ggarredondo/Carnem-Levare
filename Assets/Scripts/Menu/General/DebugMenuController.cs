@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class DebugMenuController : MonoBehaviour
 {
-    public BehaviourTree tree;
+    public MenuTree tree;
 
     private void Start()
     {
