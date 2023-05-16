@@ -14,7 +14,8 @@ public class BehaviourTree : ScriptableObject
     public void Initialize()
     {
         nodeStack.Clear();
-        nodeStack.Push(GetChildren((IHaveChildren)rootNode)[0]);
+        nodeStack.Push(rootNode);
+        GoToChild();
         OnChange.Invoke();
     }
 
@@ -103,7 +104,7 @@ public class BehaviourTree : ScriptableObject
 
     public void GoToParent(int depth = 0)
     {
-        if (nodeStack.Peek() is IHaveParent node && node.GetParent() is not RootNode)
+        if (nodeStack.Peek() is IHaveParent node && node.GetParent() is not RootNode && CanReturn())
         {
             nodeStack.Pop();
 
@@ -116,12 +117,14 @@ public class BehaviourTree : ScriptableObject
 
     private void GoToSelectableParent()
     {
-        while (nodeStack.Count > 0 && nodeStack.Peek() is not ICanSelect)
+        while (nodeStack.Count > 0 && nodeStack.Peek() is not ICanSelect && nodeStack.ElementAt(nodeStack.Count - 2).selected)
             nodeStack.Pop();
     }
 
     public bool ChangeSibling(int sibling)
     {
+        bool result = false;
+
         if (nodeStack.Any(n => n is ICanSelect))
         {
             GoToSelectableParent();
@@ -130,15 +133,17 @@ public class BehaviourTree : ScriptableObject
             {
                 selectable.SelectChild(sibling);
                 GoToChild(selectable.GetSelectedChild());
+                result = true;
             }
-
-            return true;
         }
-        else return false;
+
+        return result;
     }
 
     public bool MoveToRightSibling()
     {
+        bool result = false;
+
         if (nodeStack.Any(n => n is ICanSelect))
         {
             GoToSelectableParent();
@@ -147,15 +152,17 @@ public class BehaviourTree : ScriptableObject
             {
                 selectable.MoveRightChild();
                 GoToChild(selectable.GetSelectedChild());
+                result = true;
             }
-
-            return true;
         }
-        else return false;
+
+        return result;
     }
 
     public bool MoveToLeftSibling()
     {
+        bool result = false;
+
         if (nodeStack.Any(n => n is ICanSelect))
         {
             GoToSelectableParent();
@@ -164,11 +171,11 @@ public class BehaviourTree : ScriptableObject
             {
                 selectable.MoveLeftChild();
                 GoToChild(selectable.GetSelectedChild());
+                result = true;
             }
-
-            return true;
         }
-        else return false;
+
+        return result;
     }
 
     public int ActualSelectableID()
@@ -177,6 +184,23 @@ public class BehaviourTree : ScriptableObject
             return ((ICanSelect)nodeStack.FirstOrDefault(n => n is ICanSelect)).GetSelectedChild();
         else 
             return 0;
+    }
+
+    private bool CanReturn()
+    {
+        for (int i = 0; i < nodeStack.Count; i++)
+        {
+            if (nodeStack.ElementAt(i).selected)
+            {
+                continue;
+            }
+            else if(nodeStack.ElementAt(i) is not RootNode && nodeStack.ElementAt(i) is IHaveChildren parent && !parent.Static())
+            {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     public List<int> GetSelected()
@@ -188,12 +212,16 @@ public class BehaviourTree : ScriptableObject
         returnList.Add(nodeStack.Peek().id);
         nodeStack.Peek().selected = true;
 
-        for (int i = nodeStack.Count-1; i >= 0; i--)
+        for (int i = 1; i < nodeStack.Count; i++)
         {
-            if (nodeStack.ElementAt(i) is IHaveChildren newNode && newNode.Static())
+            if (nodeStack.ElementAt(i) is IHaveChildren newNode)
             {
-                returnList.Add(nodeStack.ElementAt(i).id);
-                nodeStack.ElementAt(i).selected = true;
+                if (newNode.Static())
+                {
+                    returnList.Add(nodeStack.ElementAt(i).id);
+                    nodeStack.ElementAt(i).selected = true;
+                }
+                else break;
             }
         }
 

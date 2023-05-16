@@ -7,7 +7,7 @@ public class MenuController : MonoBehaviour
     public BehaviourTree tree;
     public List<GameObject> menus;
 
-    public bool pauseMenu;
+    [System.NonSerialized] public bool pauseMenu;
 
     public event System.Action<int> OnSiblingChange;
 
