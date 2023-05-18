@@ -14930,7 +14930,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1216391171}
-  - component: {fileID: 1216391173}
   - component: {fileID: 1216391172}
   m_Layer: 0
   m_Name: InputManager
@@ -14982,7 +14981,7 @@ MonoBehaviour:
   m_ActionEvents:
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1216391173}
+      - m_Target: {fileID: 11400000, guid: aabe1c04bb809c5438ed1430dd3c8b2e, type: 2}
         m_TargetAssemblyTypeName: InputController, Assembly-CSharp
         m_MethodName: PressMovement
         m_Mode: 0
@@ -15002,7 +15001,7 @@ MonoBehaviour:
     m_ActionName: Main Movement/CameraMovement[/XInputControllerWindows/rightStick]
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1216391173}
+      - m_Target: {fileID: 11400000, guid: aabe1c04bb809c5438ed1430dd3c8b2e, type: 2}
         m_TargetAssemblyTypeName: InputController, Assembly-CSharp
         m_MethodName: Action0
         m_Mode: 0
@@ -15018,7 +15017,7 @@ MonoBehaviour:
     m_ActionName: Main Movement/Left Jab[/XInputControllerWindows/leftShoulder]
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1216391173}
+      - m_Target: {fileID: 11400000, guid: aabe1c04bb809c5438ed1430dd3c8b2e, type: 2}
         m_TargetAssemblyTypeName: InputController, Assembly-CSharp
         m_MethodName: Action1
         m_Mode: 0
@@ -15034,7 +15033,7 @@ MonoBehaviour:
     m_ActionName: Main Movement/Right Jab[/XInputControllerWindows/rightShoulder]
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1216391173}
+      - m_Target: {fileID: 11400000, guid: aabe1c04bb809c5438ed1430dd3c8b2e, type: 2}
         m_TargetAssemblyTypeName: InputController, Assembly-CSharp
         m_MethodName: Action2
         m_Mode: 0
@@ -15050,7 +15049,7 @@ MonoBehaviour:
     m_ActionName: Main Movement/Left Special[/XInputControllerWindows/leftTrigger]
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1216391173}
+      - m_Target: {fileID: 11400000, guid: aabe1c04bb809c5438ed1430dd3c8b2e, type: 2}
         m_TargetAssemblyTypeName: InputController, Assembly-CSharp
         m_MethodName: Action3
         m_Mode: 0
@@ -15066,7 +15065,7 @@ MonoBehaviour:
     m_ActionName: Main Movement/Right Special[/XInputControllerWindows/rightTrigger]
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1216391173}
+      - m_Target: {fileID: 11400000, guid: aabe1c04bb809c5438ed1430dd3c8b2e, type: 2}
         m_TargetAssemblyTypeName: InputController, Assembly-CSharp
         m_MethodName: HoldBlock
         m_Mode: 0
@@ -15229,18 +15228,6 @@ MonoBehaviour:
   m_DefaultActionMap: Main Movement
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
---- !u!114 &1216391173
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1216391170}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 072400a3141bc664485729ff590b307c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1222756936
 GameObject:
   m_ObjectHideFlags: 0

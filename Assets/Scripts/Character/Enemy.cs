@@ -2,19 +2,16 @@ using UnityEngine;
 
 public class Enemy : Character
 {
-    private GameObject player;
-
     protected override void Awake()
     {
-        controller = GetComponent<AIController>();
-        player = GameObject.FindGameObjectWithTag("Player");
-        target = player.transform;
+        target = GameObject.FindGameObjectWithTag("Player").transform;
         base.Awake();
     }
 
     protected override void Start()
     {
         base.Start();
-        GetComponent<AIController>().Reference(stateMachine, player.GetComponent<CharacterStateMachine>());
+        AIController aiController = (AIController)controller;
+        aiController.Reference(stateMachine, GameObject.FindGameObjectWithTag("Player").GetComponent<CharacterStateMachine>());
     }
 }

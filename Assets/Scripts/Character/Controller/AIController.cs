@@ -1,5 +1,6 @@
 using UnityEngine;
 
+[CreateAssetMenu(menuName = "Scriptable Objects/Controller/AIController")]
 public class AIController : Controller
 {
     [SerializeField] private bool debug;
