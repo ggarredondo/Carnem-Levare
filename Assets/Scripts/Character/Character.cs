@@ -8,7 +8,6 @@ public abstract class Character : MonoBehaviour
     [SerializeField] protected CharacterMovement characterMovement;
     [SerializeField] protected CharacterAnimation characterAnimation;
     [SerializeField] protected CharacterAudio characterAudio;
-    protected string hitboxPrefix;
     protected Transform target;
 
     protected virtual void Awake()
@@ -26,10 +25,8 @@ public abstract class Character : MonoBehaviour
 
         stateMachine.TransitionToWalking(); // Must be done last
     }
-    private void OnValidate()
-    {
-        characterAnimation.OnValidate();
-    }
+    protected virtual void Start() {}
+    protected void OnValidate() => characterAnimation.OnValidate();
 
     public ref readonly CharacterStateMachine StateMachine { get => ref stateMachine; }
     public ref readonly Controller Controller { get => ref controller; }
@@ -37,5 +34,4 @@ public abstract class Character : MonoBehaviour
     public ref readonly CharacterStats CharacterStats { get => ref characterStats; }
     public ref readonly CharacterAnimation CharacterAnimation { get => ref characterAnimation; }
     public ref readonly CharacterAudio CharacterAudio { get => ref characterAudio; }
-    public ref readonly string HitboxPrefix { get => ref hitboxPrefix; }
 }
