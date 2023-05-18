@@ -1,6 +1,7 @@
 using System.Collections;
 using UnityEngine;
 
+public enum Entity { Player, Enemy }
 public class AudioController : Singleton<AudioController>
 {
     public Sounds uiSfxSounds;

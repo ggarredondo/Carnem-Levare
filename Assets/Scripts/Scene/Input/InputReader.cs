@@ -10,11 +10,6 @@ public class InputReader : ScriptableObject
     public event System.Action ChangeLeftMenuEvent;
     public event System.Action StartPauseMenuEvent;
 
-    public event System.Action<Vector2> MovementEvent;
-    public event System.Action<bool> BlockEvent;
-    public event System.Action<bool> Attack0Event, Attack1Event, Attack2Event, Attack3Event;
-
-    #region UI
     public void OnMouseClick(InputAction.CallbackContext context)
     {
         MouseClickEvent?.Invoke();
@@ -39,36 +34,4 @@ public class InputReader : ScriptableObject
     {
         if (context.performed) StartPauseMenuEvent?.Invoke();
     }
-    #endregion
-
-    #region Main Movement
-
-    public void OnMovement(InputAction.CallbackContext context)
-    {
-        MovementEvent?.Invoke(context.ReadValue<Vector2>());
-    }
-    public void OnBlock(InputAction.CallbackContext context)
-    {
-        BlockEvent.Invoke(context.performed);
-    }
-
-    public void OnAttack0(InputAction.CallbackContext context)
-    {
-        Attack0Event.Invoke(context.performed);
-    }
-    public void OnAttack1(InputAction.CallbackContext context)
-    {
-        Attack1Event.Invoke(context.performed);
-    }
-
-    public void OnAttack2(InputAction.CallbackContext context)
-    {
-        Attack2Event.Invoke(context.performed);
-    }
-    public void OnAttack3(InputAction.CallbackContext context)
-    {
-        Attack3Event.Invoke(context.performed);
-    }
-
-    #endregion
 }
