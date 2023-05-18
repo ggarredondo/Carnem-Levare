@@ -1,6 +1,6 @@
 using System;
 
-public class BlockingState : IState
+public class BlockingState : CharacterState
 {
     private readonly CharacterStateMachine stateMachine;
     private readonly Controller controller;

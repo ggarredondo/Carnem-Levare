@@ -2,16 +2,19 @@ using UnityEngine;
 
 public class AIController : Controller
 {
-    [SerializeField] private bool debug;
-    [SerializeField] [ConditionalField("debug")] [Range(-1f, 1f)] private float horizontal, vertical;
-    [SerializeField] [ConditionalField("debug")] private bool block = false, lateBlock = false;
-    [SerializeField] [ConditionalField("debug")] private bool move0, move1, move2, move3;
-
+    
     public override void Initialize()
     {
         base.Initialize();
         OnHurt += LateBlock;
     }
+
+    #region Debug
+
+    [SerializeField] private bool debug;
+    [SerializeField] [ConditionalField("debug")] [Range(-1f, 1f)] private float horizontal, vertical;
+    [SerializeField] [ConditionalField("debug")] private bool block = false, lateBlock = false;
+    [SerializeField] [ConditionalField("debug")] private bool move0, move1, move2, move3;
 
     private void LateBlock(in Hitbox hitbox) {
         if (lateBlock) DoBlock(block = true);
@@ -27,5 +30,20 @@ public class AIController : Controller
         if (debug && move1) { move1 = false; DoMove(1); }
         if (debug && move2) { move2 = false; DoMove(2); }
         if (debug && move3) { move3 = false; DoMove(3); }
+    }
+
+    #endregion
+
+    private AIState currentState;
+
+    //private void Update()
+    //{
+    //    currentState.Update();
+    //}
+    private void ChangeState(in AIState newState)
+    {
+        if (currentState != null) currentState.Exit();
+        currentState = newState;
+        currentState.Enter();
     }
 }

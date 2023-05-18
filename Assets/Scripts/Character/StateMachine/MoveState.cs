@@ -1,6 +1,6 @@
 using System;
 
-public class MoveState : IState
+public class MoveState : CharacterState
 {
     private readonly CharacterStateMachine stateMachine;
     private readonly Controller controller;

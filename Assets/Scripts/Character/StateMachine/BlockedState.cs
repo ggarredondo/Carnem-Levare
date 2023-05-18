@@ -1,7 +1,7 @@
 using System;
 using System.Collections;
 
-public class BlockedState : IState
+public class BlockedState : CharacterState
 {
     private readonly CharacterStateMachine stateMachine;
     private readonly Controller controller;

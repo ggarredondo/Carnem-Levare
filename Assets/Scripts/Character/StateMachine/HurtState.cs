@@ -1,7 +1,7 @@
 using System;
 using System.Collections;
 
-public class HurtState : IState
+public class HurtState : CharacterState
 {  
     private readonly CharacterStateMachine stateMachine;
     private readonly Controller controller;

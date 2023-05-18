@@ -1,6 +1,6 @@
 using System;
 
-public class KOState : IState
+public class KOState : CharacterState
 {
     public event Action OnEnter, OnExit;
 

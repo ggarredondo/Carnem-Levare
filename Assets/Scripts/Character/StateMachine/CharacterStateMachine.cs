@@ -9,7 +9,7 @@ public class CharacterStateMachine : MonoBehaviour
     private List<Move> moveList;
     private Move currentMove;
 
-    private IState currentState;
+    private CharacterState currentState;
     private WalkingState walkingState;
     private BlockingState blockingState;
     private MoveState moveState;
@@ -41,7 +41,7 @@ public class CharacterStateMachine : MonoBehaviour
     {
         currentState.FixedUpdate();
     }
-    private void ChangeState(in IState newState)
+    private void ChangeState(in CharacterState newState)
     {
         if (currentState != null) currentState.Exit();
         currentState = newState;
@@ -70,7 +70,7 @@ public class CharacterStateMachine : MonoBehaviour
 
     #endregion
 
-    public ref readonly IState CurrentState { get => ref currentState; }
+    public ref readonly CharacterState CurrentState { get => ref currentState; }
     public ref readonly WalkingState WalkingState { get => ref walkingState; }
     public ref readonly BlockingState BlockingState { get => ref blockingState; }
     public ref readonly MoveState MoveState { get => ref moveState; }
