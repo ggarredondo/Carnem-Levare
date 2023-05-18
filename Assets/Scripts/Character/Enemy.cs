@@ -12,6 +12,6 @@ public class Enemy : Character
     {
         base.Start();
         AIController aiController = (AIController)controller;
-        aiController.Reference(stateMachine, GameObject.FindGameObjectWithTag("Player").GetComponent<CharacterStateMachine>());
+        aiController.Reference(characterStats, stateMachine, GameObject.FindGameObjectWithTag("Player").GetComponent<CharacterStateMachine>());
     }
 }

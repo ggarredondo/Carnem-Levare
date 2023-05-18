@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b8b6bc01c697e3b4693e9f790e66cd99, type: 3}
-  m_Name: AI Controller
+  m_Name: Basic AI
   m_EditorClassIdentifier: 
   debug: 0
   horizontal: 0
@@ -21,3 +21,4 @@ MonoBehaviour:
   move1: 0
   move2: 0
   move3: 0
+  moveSequences: []

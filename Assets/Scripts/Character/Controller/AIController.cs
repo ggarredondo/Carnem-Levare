@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(menuName = "Scriptable Objects/Controller/AIController")]
@@ -10,6 +11,7 @@ public class AIController : Controller
 
     private GameKnowledge gameKnowledge;
     private AIStateMachine aiFSM;
+    [SerializeField] private List<MoveSequence> sequences;
 
     public override void Initialize()
     {
@@ -17,9 +19,9 @@ public class AIController : Controller
         OnHurt += LateBlock;
     }
 
-    public void Reference(in CharacterStateMachine agentStateMachine, in CharacterStateMachine opponentStateMachine)
+    public void Reference(in CharacterStats agentStats, in CharacterStateMachine agentStateMachine, in CharacterStateMachine opponentStateMachine)
     {
-        gameKnowledge = new GameKnowledge(agentStateMachine, opponentStateMachine);
+        gameKnowledge = new GameKnowledge(agentStats, agentStateMachine, opponentStateMachine);
         aiFSM = new AIStateMachine(this, gameKnowledge);
     }
 
@@ -39,4 +41,6 @@ public class AIController : Controller
         if (debug && move2) { move2 = false; DoMove(2); }
         if (debug && move3) { move3 = false; DoMove(3); }
     }
+
+    public ref readonly List<MoveSequence> Sequences => ref sequences;
 }
