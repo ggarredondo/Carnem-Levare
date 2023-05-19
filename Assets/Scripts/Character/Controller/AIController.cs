@@ -9,6 +9,9 @@ public class AIController : Controller
     [SerializeField] [ConditionalField("debug")] private bool move0, move1, move2, move3;
 
     [SerializeField] private AIStateMachine AIBehaviour;
+    [SerializeField] private double reactionTimeMs;
+    [SerializeField] private float spacingError;
+    [SerializeField] private double timingError;
     [SerializeField] private List<MoveSequence> sequences;
 
     public override void Initialize()
