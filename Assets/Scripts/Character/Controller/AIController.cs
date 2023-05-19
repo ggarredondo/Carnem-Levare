@@ -8,8 +8,7 @@ public class AIController : Controller
     [SerializeField] [ConditionalField("debug")] private bool block = false, lateBlock = false;
     [SerializeField] [ConditionalField("debug")] private bool move0, move1, move2, move3;
 
-    private GameKnowledge gameKnowledge;
-    private AIStateMachine aiFSM;
+    [SerializeField] private AIStateMachine AIBehaviour;
     [SerializeField] private List<MoveSequence> sequences;
 
     public override void Initialize()
@@ -18,10 +17,11 @@ public class AIController : Controller
         OnHurt += LateBlock;
     }
 
-    public void Reference(in CharacterStats agentStats, in CharacterStateMachine agentStateMachine, in CharacterStateMachine opponentStateMachine)
+    public void Reference(in CharacterStats agentStats, in CharacterStats opponentStats,
+        in CharacterStateMachine agentStateMachine, in CharacterStateMachine opponentStateMachine)
     {
-        gameKnowledge = new GameKnowledge(agentStats, agentStateMachine, opponentStateMachine);
-        aiFSM = new AIStateMachine(this, gameKnowledge);
+        GameKnowledge gameKnowledge = new GameKnowledge(agentStats, opponentStats, agentStateMachine, opponentStateMachine);
+        AIBehaviour.Reference(this, gameKnowledge);
     }
 
     private void LateBlock(in Hitbox hitbox) {
@@ -30,7 +30,7 @@ public class AIController : Controller
 
     private void OnValidate()
     {
-        aiFSM?.Enable(!debug);
+        AIBehaviour?.Enable(!debug);
         movementVector.x = debug ? horizontal : 0f;
         movementVector.y = debug ? vertical : 0f;
         DoBlock(debug && block);
@@ -41,7 +41,7 @@ public class AIController : Controller
         if (debug && move3) { move3 = false; DoMove(3); }
     }
 
-    private void Update() => aiFSM.CurrentState.Update();
+    private void Update() => AIBehaviour.CurrentState.Update();
 
     public void Movement(float x, float y)
     {

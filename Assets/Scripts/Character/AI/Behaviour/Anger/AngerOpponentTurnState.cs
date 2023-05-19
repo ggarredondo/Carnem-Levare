@@ -1,10 +1,10 @@
 
-public class AngerNeutralState : AIState
+public class AngerOpponentTurnState : AIState
 {
     private AIStateMachine aiFSM;
     private AIController controller;
     private GameKnowledge gameKnowledge;
-    public AngerNeutralState(in AIStateMachine aiFSM, in AIController controller, in GameKnowledge gameKnowledge)
+    public AngerOpponentTurnState(in AIStateMachine aiFSM, in AIController controller, in GameKnowledge gameKnowledge)
     {
         this.aiFSM = aiFSM;
         this.controller = controller;
@@ -12,9 +12,6 @@ public class AngerNeutralState : AIState
     }
 
     public void Enter() {}
-    public void Update() 
-    {
-        controller.Movement(0f, gameKnowledge.Distance <= 2f ? 0f : 1f);
-    }
+    public void Update() {}
     public void Exit() {}
 }

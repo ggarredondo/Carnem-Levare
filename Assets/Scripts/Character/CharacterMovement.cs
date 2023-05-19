@@ -16,7 +16,8 @@ public class CharacterMovement
 
     [Tooltip("How quickly the character's direction will match the target direction (smoothing movement)")]
     [SerializeField] private float movingDirectionSpeed = 1f, idleDirectionSpeed = 1f;
-    private const float IDLE_THRESHOLD = 0.01f;
+
+    [SerializeField] private float targetingMinimumMagnitude = 0.1f;
     
     private Vector2 direction;
     public event ActionIn<Vector2> OnMoveCharacter;
@@ -54,5 +55,5 @@ public class CharacterMovement
         }
     }
 
-    public bool IsIdle => (direction.magnitude <= IDLE_THRESHOLD);
+    public bool IsIdle => (direction.magnitude <= targetingMinimumMagnitude);
 }

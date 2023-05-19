@@ -416,7 +416,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bcdb3411bb47206488fa47ffe01dbf53, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  controller: {fileID: 11400000, guid: f4eacaca3185f4b43932aa4485145f50, type: 2}
   characterStats:
     stamina: 0
     maxStamina: 300
@@ -438,10 +437,11 @@ MonoBehaviour:
     noHurt: 0
     noDeath: 1
   characterMovement:
-    trackingRate: 10
+    trackingRate: 5
     doTracking: 1
     movingDirectionSpeed: 10
-    idleDirectionSpeed: 5
+    idleDirectionSpeed: 1
+    targetingMinimumMagnitude: 0.1
   characterAnimation:
     animatorSpeed: 1
     updateMovesetAnimations: 0
@@ -467,6 +467,7 @@ MonoBehaviour:
   move1: 0
   move2: 0
   move3: 0
+  AIBehaviour: {fileID: 11400000, guid: d685f91f6ec7ecb44bc435195bb44e1f, type: 2}
   sequences: []
 --- !u!54 &5975427957589119885
 Rigidbody:
