@@ -41,5 +41,13 @@ public class AIController : Controller
         if (debug && move3) { move3 = false; DoMove(3); }
     }
 
+    private void Update() => aiFSM.CurrentState.Update();
+
+    public void Movement(float x, float y)
+    {
+        movementVector.x = x;
+        movementVector.y = y;
+    }
+
     public ref readonly List<MoveSequence> Sequences => ref sequences;
 }

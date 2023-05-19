@@ -17,5 +17,4 @@ public class GameKnowledge
     }
 
     public float Distance => Vector3.Distance(agentTransform.position, opponentTransform.position);
-    public bool InRange(float range) => (Distance <= range);
 }

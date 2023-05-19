@@ -4,19 +4,16 @@ public class AIStateMachine
     private readonly AIController controller;
     private readonly GameKnowledge gameKnowledge;
 
-    private AIState currentState;
-    private NeutralState neutralState;
+    private AIState currentState, neutralState;
 
     public AIStateMachine(in AIController controller, in GameKnowledge gameKnowledge)
     {
         this.controller = controller;
         this.gameKnowledge = gameKnowledge;
 
-        neutralState = new NeutralState();
+        neutralState = new AngerNeutralState(this, controller, gameKnowledge);
         currentState = neutralState;
     }
-
-    private void Think() => currentState.Think();
 
     private void ChangeState(in AIState newState)
     {
@@ -26,4 +23,6 @@ public class AIStateMachine
     }
 
     public void Enable(bool enabled) {}
+
+    public ref readonly AIState CurrentState => ref currentState;
 }
