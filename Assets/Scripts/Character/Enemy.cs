@@ -4,6 +4,7 @@ public class Enemy : Character
 {
     protected override void Awake()
     {
+        controller = GetComponent<AIController>();
         target = GameObject.FindGameObjectWithTag("Player").transform;
         base.Awake();
     }

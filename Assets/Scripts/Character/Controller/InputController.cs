@@ -1,7 +1,6 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-[CreateAssetMenu(menuName = "Scriptable Objects/Controller/InputController")]
 public class InputController : Controller
 {
     public void PressMovement(InputAction.CallbackContext context)

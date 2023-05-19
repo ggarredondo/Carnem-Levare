@@ -2,7 +2,7 @@ using UnityEngine;
 
 public abstract class Character : MonoBehaviour
 {
-    [SerializeField] protected Controller controller;
+    protected Controller controller;
     protected CharacterStateMachine stateMachine;
     [SerializeField] protected CharacterStats characterStats;
     [SerializeField] protected CharacterMovement characterMovement;

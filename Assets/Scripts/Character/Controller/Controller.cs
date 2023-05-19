@@ -2,7 +2,7 @@ using UnityEngine;
 using System;
 using RefDelegates;
 
-public abstract class Controller : ScriptableObject
+public abstract class Controller : MonoBehaviour
 {
     protected Vector2 movementVector;
     public bool isBlocking { get; private set; }

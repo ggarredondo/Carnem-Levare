@@ -4,7 +4,7 @@ public class GameKnowledge
 {
     private readonly CharacterStats agentStats;
     private readonly CharacterStateMachine agentStateMachine, opponentStateMachine;
-    private readonly Transform agentPosition, opponentPosition;
+    private readonly Transform agentTransform, opponentTransform;
 
     public GameKnowledge(in CharacterStats agentStats, in CharacterStateMachine agentStateMachine, in CharacterStateMachine opponentStateMachine)
     {
@@ -12,7 +12,10 @@ public class GameKnowledge
         this.agentStateMachine = agentStateMachine;
         this.opponentStateMachine = opponentStateMachine;
 
-        agentPosition = agentStateMachine.transform;
-        opponentPosition = opponentStateMachine.transform;
+        agentTransform = agentStateMachine.transform;
+        opponentTransform = opponentStateMachine.transform;
     }
+
+    public float Distance => Vector3.Distance(agentTransform.position, opponentTransform.position);
+    public bool InRange(float range) => (Distance <= range);
 }
