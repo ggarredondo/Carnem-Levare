@@ -3,6 +3,7 @@ using UnityEngine.UIElements;
 using UnityEditor.Experimental.GraphView;
 using System.Linq;
 using System.Collections.Generic;
+using UnityEngine;
 
 public class BehaviourTreeView : GraphView
 {
@@ -46,12 +47,12 @@ public class BehaviourTreeView : GraphView
 
         if(tree.rootNode == null)
         {
-            tree.rootNode = tree.CreateNode(typeof(RootNode)) as RootNode;
+            tree.rootNode = tree.CreateNode(typeof(RootNode), new Vector2(0,0)) as RootNode;
             EditorUtility.SetDirty(tree);
             AssetDatabase.SaveAssets();
         }
 
-        tree.nodes.ForEach(n => CreateNodeView(n));
+        tree.nodes.ForEach(n => CreateNodeView(ref n));
 
         tree.nodes.ForEach(n =>
         {
@@ -115,11 +116,13 @@ public class BehaviourTreeView : GraphView
 
     public override void BuildContextualMenu(ContextualMenuPopulateEvent evt)
     {
+        Vector2 actualPosition = evt.localMousePosition;
+
         { 
             var types = TypeCache.GetTypesDerivedFrom<LeafNode>();
             foreach (var type in types)
             {
-                evt.menu.AppendAction($"[{type.BaseType.Name}] {type.Name}", (a) => CreateNode(type));
+                evt.menu.AppendAction($"[{type.BaseType.Name}] {type.Name}", (a) => CreateNode(type, actualPosition));
             }
         }
 
@@ -127,18 +130,18 @@ public class BehaviourTreeView : GraphView
             var types = TypeCache.GetTypesDerivedFrom<CompositeNode>();
             foreach (var type in types)
             {
-                evt.menu.AppendAction($"[{type.BaseType.Name}] {type.Name}", (a) => CreateNode(type));
+                evt.menu.AppendAction($"[{type.BaseType.Name}] {type.Name}", (a) => CreateNode(type, actualPosition));
             }
         }
     }
 
-    void CreateNode(System.Type type)
+    void CreateNode(System.Type type, Vector2 position)
     {
-        Node node = tree.CreateNode(type);
-        CreateNodeView(node);
+        Node node = tree.CreateNode(type, position);
+        CreateNodeView(ref node);
     }
 
-    void CreateNodeView(Node node)
+    void CreateNodeView(ref Node node)
     {
         NodeView nodeView = new(node);
         nodeView.OnNodeSelected = OnNodeSelected;

@@ -7,9 +7,10 @@ public class BehaviourTree : ScriptableObject
     public Node rootNode;
     public List<Node> nodes = new();
 
-    public Node CreateNode(System.Type type)
+    public Node CreateNode(System.Type type, Vector2 position)
     {
         Node node = CreateInstance(type) as Node;
+        node.position = position;
         node.name = type.Name;
 #if UNITY_EDITOR
         node.guid = GUID.Generate().ToString();
