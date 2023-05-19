@@ -3,9 +3,17 @@ using UnityEngine;
 
 public class MenuController : MonoBehaviour
 {
+    [System.Serializable]
+    public struct Menu
+    {
+        public GameObject UI;
+        public int logicIndex;
+    }
+
     public InputReader input;
     public MenuTree tree;
-    public List<GameObject> menus;
+    public List<Menu> menus;
+    public Dictionary<int, GameObject> menuDictionary = new();
 
     [System.NonSerialized] public bool pauseMenu;
 
@@ -13,6 +21,8 @@ public class MenuController : MonoBehaviour
 
     private void Awake()
     {
+        menus.ForEach(m => menuDictionary.Add(m.logicIndex, m.UI));
+
         tree.OnChange += ApplyChanges;
         input.ChangeRightMenuEvent += MoveRight;
         input.ChangeLeftMenuEvent += MoveLeft;
@@ -76,7 +86,7 @@ public class MenuController : MonoBehaviour
 
     public void Return()
     {
-        AbstractMenu abs = menus[tree.CurrentId()].GetComponent<AbstractMenu>();
+        AbstractMenu abs = menuDictionary[tree.CurrentId()].GetComponent<AbstractMenu>();
 
         if(!abs.Return())
         {
@@ -87,11 +97,11 @@ public class MenuController : MonoBehaviour
     private void ApplyChanges()
     {
         DisableMenus();
-        tree.GetSelected().ForEach(id => { menus[id].GetComponent<AbstractMenu>()?.Initialized(); menus[id].SetActive(true); });
+        tree.GetSelected().ForEach(id => { menuDictionary[id].GetComponent<AbstractMenu>()?.Initialized(); menuDictionary[id].SetActive(true); });
     }
 
     public void DisableMenus()
     {
-        menus.ForEach(menu => menu.SetActive(false));
+        menus.ForEach(menu => menu.UI.SetActive(false));
     }
 }

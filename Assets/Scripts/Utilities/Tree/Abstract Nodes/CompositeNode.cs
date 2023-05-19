@@ -48,4 +48,14 @@ public abstract class CompositeNode : Node, IHaveChildren, IHaveParent
         if (HaveChildren())
             children.ForEach(c => c.Initialize());
     }
+
+    public int InitializeChildrenID()
+    {
+        int actualID = ID;
+
+        if (HaveChildren())
+            children.ForEach(c => actualID = c.InitializeID(actualID) );
+
+        return actualID;
+    }
 }

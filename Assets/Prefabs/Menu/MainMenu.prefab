@@ -1989,13 +1989,18 @@ MonoBehaviour:
   input: {fileID: 11400000, guid: cb514f7bc969f1e4da23444266f585b7, type: 2}
   tree: {fileID: 11400000, guid: 8802d2f051e727b4faa324e17a249dee, type: 2}
   menus:
-  - {fileID: 518473306548130838}
-  - {fileID: 3406496834805908317}
-  - {fileID: 3406496834183848649}
-  - {fileID: 3406496836221508604}
-  - {fileID: 3406496835210927912}
-  - {fileID: 3406496836030297622}
-  pauseMenu: 0
+  - UI: {fileID: 518473306548130838}
+    logicIndex: 1
+  - UI: {fileID: 3406496834805908317}
+    logicIndex: 2
+  - UI: {fileID: 3406496834183848649}
+    logicIndex: 3
+  - UI: {fileID: 3406496836221508604}
+    logicIndex: 4
+  - UI: {fileID: 3406496835210927912}
+    logicIndex: 5
+  - UI: {fileID: 3406496836030297622}
+    logicIndex: 6
 --- !u!1 &637911161023131808
 GameObject:
   m_ObjectHideFlags: 0

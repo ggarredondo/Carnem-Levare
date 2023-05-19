@@ -36,4 +36,12 @@ public class RootNode : Node, IHaveChildren
         if (HaveChildren())
             child.Initialize();
     }
+
+    public int InitializeChildrenID()
+    {
+        if (HaveChildren())
+            child.InitializeID(ID);
+
+        return ID;
+    }
 }

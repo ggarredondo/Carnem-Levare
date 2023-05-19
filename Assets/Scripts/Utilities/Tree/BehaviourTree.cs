@@ -68,4 +68,11 @@ public class BehaviourTree : ScriptableObject
         return parent.GetChildren();
     }
 
+
+    public void AsignID()
+    {
+        if(nodes.Count > 1)
+            rootNode.InitializeID(-1);
+    }
+
 }

@@ -9839,13 +9839,18 @@ MonoBehaviour:
   input: {fileID: 11400000, guid: cb514f7bc969f1e4da23444266f585b7, type: 2}
   tree: {fileID: 11400000, guid: 8802d2f051e727b4faa324e17a249dee, type: 2}
   menus:
-  - {fileID: 2506615480835820414}
-  - {fileID: 774332252543605813}
-  - {fileID: 774332253162536353}
-  - {fileID: 774332251933344916}
-  - {fileID: 774332252943892544}
-  - {fileID: 774332251788274046}
-  pauseMenu: 0
+  - UI: {fileID: 2506615480835820414}
+    logicIndex: 1
+  - UI: {fileID: 774332252543605813}
+    logicIndex: 2
+  - UI: {fileID: 774332253162536353}
+    logicIndex: 3
+  - UI: {fileID: 774332251933344916}
+    logicIndex: 4
+  - UI: {fileID: 774332252943892544}
+    logicIndex: 5
+  - UI: {fileID: 774332251788274046}
+    logicIndex: 6
 --- !u!114 &5032696558048650697
 MonoBehaviour:
   m_ObjectHideFlags: 0

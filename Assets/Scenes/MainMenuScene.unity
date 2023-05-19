@@ -179,6 +179,7 @@ MonoBehaviour:
     Item2: 0
   - Item1: {fileID: 11400000, guid: 5579dd4c23fd5554397d995ec5221c28, type: 2}
     Item2: 0
+  timeScale: 1
 --- !u!114 &734591667
 MonoBehaviour:
   m_ObjectHideFlags: 0

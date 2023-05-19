@@ -134,7 +134,7 @@ public class MenuTree : BehaviourTree
 
         List<int> returnList = new();
 
-        returnList.Add(nodeStack.Peek().id);
+        returnList.Add(nodeStack.Peek().ID);
         nodeStack.Peek().selected = true;
 
         for (int i = 1; i < nodeStack.Count; i++)
@@ -143,7 +143,7 @@ public class MenuTree : BehaviourTree
             {
                 if (newNode.Static())
                 {
-                    returnList.Add(nodeStack.ElementAt(i).id);
+                    returnList.Add(nodeStack.ElementAt(i).ID);
                     nodeStack.ElementAt(i).selected = true;
                 }
                 else break;
@@ -155,6 +155,6 @@ public class MenuTree : BehaviourTree
 
     public int CurrentId()
     {
-        return nodeStack.Peek().id;
+        return nodeStack.Peek().ID;
     }
 }
