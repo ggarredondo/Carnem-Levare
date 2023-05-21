@@ -12,7 +12,6 @@ public class AIController : Controller
     [SerializeField] private double reactionTimeMs;
     [SerializeField] private float spacingError;
     [SerializeField] private double timingError;
-    [SerializeField] private List<MoveSequence> sequences;
 
     public override void Initialize()
     {
@@ -51,6 +50,4 @@ public class AIController : Controller
         movementVector.x = x;
         movementVector.y = y;
     }
-
-    public ref readonly List<MoveSequence> Sequences => ref sequences;
 }
