@@ -17,14 +17,17 @@ public class InspectorView : VisualElement
     {
         Clear();
 
-        UnityEngine.Object.DestroyImmediate(editor);
-
-        if (Application.isPlaying) Debug.Log(nodeView.node);
+        Object.DestroyImmediate(editor);
         editor = Editor.CreateEditor(nodeView.node, typeof(NodeEditor));
 
         IMGUIContainer container = new(() => 
         {
-            if (editor.target) editor.OnInspectorGUI();
+            if (editor.target)
+            {
+                EditorGUILayout.BeginVertical(GUILayout.Width(200));
+                editor.OnInspectorGUI();
+                EditorGUILayout.EndVertical();
+            }
         });
 
         Add(container);

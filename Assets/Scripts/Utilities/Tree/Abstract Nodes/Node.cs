@@ -3,9 +3,9 @@ using UnityEngine;
 public abstract class Node : ScriptableObject
 {
     public int ID;
-    [HideInInspector] public bool selected;
-    [HideInInspector] public string guid;
-    [HideInInspector] public Vector2 position;
+    public bool selected;
+    public string guid;
+    public Vector2 position;
 
     public ref readonly int GetID { get => ref ID; }
 
