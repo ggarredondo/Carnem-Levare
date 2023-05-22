@@ -15,9 +15,8 @@ public class AIController : Controller
     [SerializeField] private AIStateMachine AIBehaviour;
     private GameKnowledge gameKnowledge;
 
-    [SerializeField] private double reactionTimeMs;
+    [SerializeField] private double minReactionTimeMs, maxReactionTimeMs;
     private WaitForSeconds reactionDelay;
-    [SerializeField] private double reactionTimeError;
     [SerializeField] private float spacingError;
     [SerializeField] private double timingError;
 
@@ -25,7 +24,7 @@ public class AIController : Controller
     {
         base.Initialize();
         OnHurt += LateBlock;
-        reactionDelay = new WaitForSeconds((float)TimeSpan.FromMilliseconds(reactionTimeMs).TotalSeconds);
+        reactionDelay = new WaitForSeconds((float)TimeSpan.FromMilliseconds(minReactionTimeMs).TotalSeconds);
     }
 
     public void Reference(in CharacterStats agentStats, in CharacterStats opponentStats,
@@ -42,7 +41,7 @@ public class AIController : Controller
 
     private void OnValidate()
     {
-        reactionDelay = new WaitForSeconds((float)TimeSpan.FromMilliseconds(reactionTimeMs).TotalSeconds);
+        reactionDelay = new WaitForSeconds((float)TimeSpan.FromMilliseconds(minReactionTimeMs).TotalSeconds);
 
         AIBehaviour?.Enable(!enableDebug);
         movementVector.x = enableDebug ? horizontal : 0f;

@@ -468,8 +468,8 @@ MonoBehaviour:
   move2: 0
   move3: 0
   AIBehaviour: {fileID: 11400000, guid: d685f91f6ec7ecb44bc435195bb44e1f, type: 2}
-  reactionTimeMs: 250
-  reactionTimeError: 100
+  minReactionTimeMs: 220
+  maxReactionTimeMs: 320
   spacingError: 0
   timingError: 0
 --- !u!54 &5975427957589119885
