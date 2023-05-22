@@ -1,5 +1,5 @@
 
-public class DebugState : AIState
+public class EmptyState : AIState
 {
     public void Enter() {}
     public void Update() {}

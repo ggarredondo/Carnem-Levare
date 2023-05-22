@@ -2,11 +2,11 @@ using UnityEngine;
 
 public abstract class AIStateMachine : ScriptableObject
 {
-    protected AIState currentState, ownTurnState, neutralState, opponentTurnState, debugState;
+    protected AIState currentState, ownTurnState, neutralState, opponentTurnState, emptyState;
 
     public virtual void Reference(in AIController controller, in GameKnowledge gameKnowledge)
     {
-        debugState = new DebugState();
+        emptyState = new EmptyState();
         currentState = neutralState;
     }
 
@@ -20,12 +20,12 @@ public abstract class AIStateMachine : ScriptableObject
     public void Enable(bool enabled)
     {
         if (enabled && neutralState != null) TransitionToNeutral();
-        else if (debugState != null) TransitionToDebug();
+        else if (emptyState != null) TransitionToEmpty();
     }
 
     public void TransitionToOwnTurn() => ChangeState(ownTurnState);
     public void TransitionToNeutral() => ChangeState(neutralState);
     public void TransitionToOpponentTurn() => ChangeState(opponentTurnState);
-    public void TransitionToDebug() => ChangeState(debugState);
+    public void TransitionToEmpty() => ChangeState(emptyState);
     public ref readonly AIState CurrentState => ref currentState;
 }
