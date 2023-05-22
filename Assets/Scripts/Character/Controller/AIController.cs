@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using UnityEngine;
 
 public class AIController : Controller
@@ -10,6 +9,7 @@ public class AIController : Controller
 
     [SerializeField] private AIStateMachine AIBehaviour;
     [SerializeField] private double reactionTimeMs;
+    [SerializeField] private double reactionTimeError;
     [SerializeField] private float spacingError;
     [SerializeField] private double timingError;
 
