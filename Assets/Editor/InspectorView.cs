@@ -1,5 +1,6 @@
 using UnityEngine.UIElements;
 using UnityEditor;
+using UnityEngine;
 
 public class InspectorView : VisualElement
 {
@@ -17,11 +18,15 @@ public class InspectorView : VisualElement
         Clear();
 
         UnityEngine.Object.DestroyImmediate(editor);
-        editor = Editor.CreateEditor(nodeView.node);
+
+        if (Application.isPlaying) Debug.Log(nodeView.node);
+        editor = Editor.CreateEditor(nodeView.node, typeof(NodeEditor));
+
         IMGUIContainer container = new(() => 
         {
-            if(editor.target) editor.OnInspectorGUI(); 
+            if (editor.target) editor.OnInspectorGUI();
         });
+
         Add(container);
     }
 }

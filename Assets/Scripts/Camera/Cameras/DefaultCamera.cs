@@ -76,7 +76,7 @@ public class DefaultCamera : MonoBehaviour, ICameraInitialize
             orbitalTransposer.m_XAxis.Value += player.Controller.MovementVector.x * orbitalValue * Time.deltaTime;
 
         if (player.Controller.isBlocking)
-            orbitalTransposer.m_XAxis.Value = Mathf.Lerp(orbitalTransposer.m_XAxis.Value, 0, orbitalRecovery * Time.deltaTime);
+            orbitalTransposer.m_XAxis.Value = Mathf.Lerp(orbitalTransposer.m_XAxis.Value, 0.5f, orbitalRecovery * Time.deltaTime);
 
         orbitalTransposer.m_RecenterToTargetHeading.m_enabled = player.Controller.MovementVector != new Vector2(0, 0) && !player.Controller.isBlocking && !isDoingMove;
     }
