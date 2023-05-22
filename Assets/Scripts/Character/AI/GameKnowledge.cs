@@ -6,6 +6,8 @@ public class GameKnowledge
     private readonly CharacterStateMachine agentStateMachine, opponentStateMachine;
     private readonly Transform agentTransform, opponentTransform;
 
+    private Vector3 agentPosition, opponentPosition;
+
     public GameKnowledge(in CharacterStats agentStats, in CharacterStats opponentStats, 
         in CharacterStateMachine agentStateMachine, in CharacterStateMachine opponentStateMachine)
     {
@@ -16,7 +18,14 @@ public class GameKnowledge
 
         agentTransform = agentStateMachine.transform;
         opponentTransform = opponentStateMachine.transform;
+        UpdateKnowledge();
     }
 
-    public float Distance => Vector3.Distance(agentTransform.position, opponentTransform.position);
+    public void UpdateKnowledge()
+    {
+        agentPosition = agentTransform.position;
+        opponentPosition = opponentTransform.position;
+    }
+
+    public float Distance => Vector3.Distance(agentPosition, opponentPosition);
 }
