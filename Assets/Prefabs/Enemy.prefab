@@ -458,7 +458,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b8b6bc01c697e3b4693e9f790e66cd99, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  debug: 0
+  enableDebug: 0
   horizontal: 0
   vertical: 0
   block: 0
@@ -468,8 +468,8 @@ MonoBehaviour:
   move2: 0
   move3: 0
   AIBehaviour: {fileID: 11400000, guid: d685f91f6ec7ecb44bc435195bb44e1f, type: 2}
-  reactionTimeMs: 0
-  reactionTimeError: 0
+  reactionTimeMs: 250
+  reactionTimeError: 100
   spacingError: 0
   timingError: 0
 --- !u!54 &5975427957589119885
