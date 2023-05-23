@@ -10,6 +10,7 @@ public class BehaviourTreeView : GraphView
     public System.Action<NodeView> OnNodeSelected;
     public new class UxmlFactory : UxmlFactory<BehaviourTreeView, UxmlTraits> { }
     public BehaviourTree tree;
+    private Vector2 localMousePosition;
 
     public BehaviourTreeView()
     {
@@ -24,6 +25,7 @@ public class BehaviourTreeView : GraphView
         styleSheets.Add(styleSheet);
 
         Undo.undoRedoPerformed += OnUndoRedo;
+        RegisterCallback<MouseMoveEvent>(OnMouseMove);
     }
 
     private void OnUndoRedo()
@@ -77,6 +79,11 @@ public class BehaviourTreeView : GraphView
         });
     }
 
+    private void OnMouseMove(MouseMoveEvent e)
+    {
+        localMousePosition = (e.currentTarget as GraphView).contentViewContainer.WorldToLocal(e.mousePosition);
+    }
+
     public override List<Port> GetCompatiblePorts(Port startPort, NodeAdapter nodeAdapter)
     {
         return ports.ToList().Where(endPort =>
@@ -113,13 +120,11 @@ public class BehaviourTreeView : GraphView
 
     public override void BuildContextualMenu(ContextualMenuPopulateEvent evt)
     {
-        Vector2 actualPosition = evt.localMousePosition;
-
         foreach (var type in TypeCache.GetTypesDerivedFrom<LeafNode>())
-            evt.menu.AppendAction($"[{type.BaseType.Name}] {type.Name}", (a) => CreateNode(type, actualPosition));
+            evt.menu.AppendAction($"[{type.BaseType.Name}] {type.Name}", (a) => CreateNode(type, localMousePosition));
 
         foreach (var type in TypeCache.GetTypesDerivedFrom<CompositeNode>())
-            evt.menu.AppendAction($"[{type.BaseType.Name}] {type.Name}", (a) => CreateNode(type, actualPosition));     
+            evt.menu.AppendAction($"[{type.BaseType.Name}] {type.Name}", (a) => CreateNode(type, localMousePosition));     
     }
 
     void CreateNode(System.Type type, Vector2 position)

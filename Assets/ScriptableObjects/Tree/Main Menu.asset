@@ -93,7 +93,7 @@ MonoBehaviour:
   ID: 6
   selected: 0
   guid: 62cdd3a1fe850d542bd54fb3e0722880
-  position: {x: 167, y: 283}
+  position: {x: 166.99997, y: 283.00003}
   parent: {fileID: -8687199901837452373}
 --- !u!114 &11400000
 MonoBehaviour:
