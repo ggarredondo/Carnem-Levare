@@ -14,7 +14,7 @@ public class AngerNeutralState : AIState
     public void Enter() {}
     public void Update() 
     {
-        controller.Movement(0f, gameKnowledge.Distance <= aiFSM.MinDistanceToOpponent ? 0f : 1f);
+        controller.Movement(0f, gameKnowledge.ImperfectDistance <= aiFSM.MinDistanceToOpponent ? 0f : 1f);
     }
     public void Exit() {}
 }

@@ -56,7 +56,7 @@ public class AIController : Controller
     {
         while (true) {
             yield return new WaitForSeconds((float)TimeSpan.FromMilliseconds(rng.RangeInt(minReactionTimeMs, maxReactionTimeMs)).TotalSeconds);
-            gameKnowledge.UpdateKnowledge(rng.RangeFloat(-spacingError, spacingError));
+            gameKnowledge.UpdateImperfectKnowledge(rng.RangeFloat(-spacingError, spacingError));
         }
     }
 
