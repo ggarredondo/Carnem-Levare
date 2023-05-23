@@ -64,19 +64,74 @@ public class BehaviourTreeView : GraphView
 
                 if (children[0] != null)
                 {
-                    int cont = 0;
+                    float cont = 0;
                     children.ForEach(c =>
                     {
                         NodeView parentView = FindNodeView(n);
                         NodeView childView = FindNodeView(c);
 
-                        Edge edge = parentView.output.ConnectTo(childView.input);
+                        EdgeView edge = parentView.output.ConnectTo<EdgeView>(childView.input);
+                        Color newColor = GetNewColor(cont);
+                        edge.UpdateColor(newColor, newColor);
                         AddElement(edge);
-                        cont++;
+
+                        cont += 1.0f / children.Count;
                     });
                 }
             }
         });
+    }
+
+    private Color GetNewRainbowColor(float percentage)
+    {
+        Gradient gradient = new();
+        GradientColorKey[] colorKey;
+        GradientAlphaKey[] alphaKey;
+
+        colorKey = new GradientColorKey[5]; 
+        colorKey[0].color = Color.white;
+        colorKey[0].time = 0.0f;
+        colorKey[1].color = Color.red;
+        colorKey[1].time = 0.25f;
+        colorKey[2].color = Color.green;
+        colorKey[2].time = 0.50f;
+        colorKey[3].color = Color.blue;
+        colorKey[3].time = 0.75f;
+        colorKey[4].color = Color.magenta;
+        colorKey[4].time = 1f;
+
+        alphaKey = new GradientAlphaKey[2];
+        alphaKey[0].alpha = 1.0f;
+        alphaKey[0].time = 0.0f;
+        alphaKey[1].alpha = 1.0f;
+        alphaKey[1].time = 1.0f;
+
+        gradient.SetKeys(colorKey, alphaKey);
+
+        return gradient.Evaluate(percentage);
+    }
+
+    private Color GetNewColor(float percentage)
+    {
+        Gradient gradient = new();
+        GradientColorKey[] colorKey;
+        GradientAlphaKey[] alphaKey;
+
+        colorKey = new GradientColorKey[2];
+        colorKey[0].color = new Color32(255, 250, 227, 255);
+        colorKey[0].time = 0.0f;
+        colorKey[1].color = new Color32(163, 22, 33, 255);
+        colorKey[1].time = 1.0f;
+
+        alphaKey = new GradientAlphaKey[2];
+        alphaKey[0].alpha = 1.0f;
+        alphaKey[0].time = 0.0f;
+        alphaKey[1].alpha = 1.0f;
+        alphaKey[1].time = 1.0f;
+
+        gradient.SetKeys(colorKey, alphaKey);
+
+        return gradient.Evaluate(percentage);
     }
 
     private void OnMouseMove(MouseMoveEvent e)
