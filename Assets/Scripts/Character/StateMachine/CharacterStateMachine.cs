@@ -50,19 +50,34 @@ public class CharacterStateMachine : MonoBehaviour
 
     #region Animation Events
 
+    public event Action OnInitMove, OnActivateMove, OnDeactiveMove, OnEnableBuffering, OnEndMove;
     private void InitMove()
     {
         currentMove = moveList[moveState.moveIndex];
         currentMove.InitMove(stats);
+        OnInitMove.Invoke();
     }
-    private void ActivateMove() => currentMove.ActivateMove();
-    private void DeactivateMove() => currentMove.DeactivateMove();
-    private void EnableBuffering() => moveState.BUFFER_FLAG = true;
+    private void ActivateMove()
+    {
+        currentMove.ActivateMove();
+        OnActivateMove.Invoke();
+    }
+    private void DeactivateMove()
+    {
+        currentMove.DeactivateMove();
+        OnDeactiveMove.Invoke();
+    }
+    private void EnableBuffering()
+    {
+        moveState.BUFFER_FLAG = true;
+        OnEnableBuffering.Invoke();
+    }
     private void EndMove()
     {
         moveState.BUFFER_FLAG = false;
         currentMove.RecoverFromMove();
         TransitionToRecovery.Invoke();
+        OnEndMove.Invoke();
     }
 
     private void StartTracking() => moveState.TRACKING_FLAG = true;

@@ -12,3 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 54ff6fbda21850b45b8485368172a59a, type: 3}
   m_Name: Anger
   m_EditorClassIdentifier: 
+  minDistanceToOpponent: 2

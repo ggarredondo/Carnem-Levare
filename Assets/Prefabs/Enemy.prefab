@@ -468,9 +468,21 @@ MonoBehaviour:
   move2: 0
   move3: 0
   AIBehaviour: {fileID: 11400000, guid: d685f91f6ec7ecb44bc435195bb44e1f, type: 2}
+  ownTurnSequences:
+  - sequence:
+    - moveIndex: 0
+      msUntilNextMove: 0
+    - moveIndex: 3
+      msUntilNextMove: 0
+    - moveIndex: 2
+      msUntilNextMove: 0
+    - moveIndex: 1
+      msUntilNextMove: 0
+  neutralTurnSequences: []
+  opponentTurnSequences: []
   minReactionTimeMs: 220
   maxReactionTimeMs: 320
-  spacingError: 1
+  spacingError: 0.5
   timingError: 0
 --- !u!54 &5975427957589119885
 Rigidbody:

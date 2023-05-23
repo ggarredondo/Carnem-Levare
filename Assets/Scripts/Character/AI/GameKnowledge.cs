@@ -26,4 +26,9 @@ public class GameKnowledge
 
     public float Distance => Vector3.Distance(agentTransform.position, opponentTransform.position);
     public float ImperfectDistance { get; private set; }
+
+    public ref readonly CharacterStats AgentStats => ref agentStats;
+    public ref readonly CharacterStats OpponentStats => ref opponentStats;
+    public ref readonly CharacterStateMachine AgentStateMachine => ref agentStateMachine;
+    public ref readonly CharacterStateMachine OpponentStateMachine => ref opponentStateMachine;
 }
