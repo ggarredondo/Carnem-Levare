@@ -4,7 +4,7 @@ using System;
 
 public class AIController : Controller
 {
-    private System.Random rng;
+    private RNG rng;
 
     [SerializeField] private bool enableDebug;
     [SerializeField] [ConditionalField("enableDebug")] [Range(-1f, 1f)] private float horizontal, vertical;
@@ -15,16 +15,15 @@ public class AIController : Controller
     [SerializeField] private AIStateMachine AIBehaviour;
     private GameKnowledge gameKnowledge;
 
-    [SerializeField] private double minReactionTimeMs, maxReactionTimeMs;
-    private WaitForSeconds reactionDelay;
+    [SerializeField] private int minReactionTimeMs, maxReactionTimeMs;
     [SerializeField] private float spacingError;
     [SerializeField] private double timingError;
 
     public override void Initialize()
     {
         base.Initialize();
+        rng = new RNG(Guid.NewGuid().GetHashCode());
         OnHurt += LateBlock;
-        reactionDelay = new WaitForSeconds((float)TimeSpan.FromMilliseconds(minReactionTimeMs).TotalSeconds);
     }
 
     public void Reference(in CharacterStats agentStats, in CharacterStats opponentStats,
@@ -41,8 +40,6 @@ public class AIController : Controller
 
     private void OnValidate()
     {
-        reactionDelay = new WaitForSeconds((float)TimeSpan.FromMilliseconds(minReactionTimeMs).TotalSeconds);
-
         AIBehaviour?.Enable(!enableDebug);
         movementVector.x = enableDebug ? horizontal : 0f;
         movementVector.y = enableDebug ? vertical : 0f;
@@ -58,8 +55,8 @@ public class AIController : Controller
     private IEnumerator React()
     {
         while (true) {
-            yield return reactionDelay;
-            gameKnowledge.UpdateKnowledge();
+            yield return new WaitForSeconds((float)TimeSpan.FromMilliseconds(rng.RangeInt(minReactionTimeMs, maxReactionTimeMs)).TotalSeconds);
+            gameKnowledge.UpdateKnowledge(rng.RangeFloat(-spacingError, spacingError));
         }
     }
 
