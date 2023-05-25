@@ -11,6 +11,9 @@ public abstract class Move : ScriptableObject
     [SerializeField] private AnimationClip animation;
     [SerializeField] private float animationSpeed = 1f;
 
+    [Tooltip("Will reset animators if in play mode")]
+    [SerializeField] private bool applyAnimationEvents = false;
+
     [Header("Move Sound")]
     [SerializeField] private string initSound;
 
@@ -36,9 +39,13 @@ public abstract class Move : ScriptableObject
     [Tooltip("Move will track for *trackingLength* ms after enabling tracking")]
     [SerializeField] private double trackingLength;
 
-    public virtual void Initialize()
+    private void OnValidate()
     {
-        if (animation != null) AssignEvents();
+        if (applyAnimationEvents)
+        {
+            AssignEvents();
+            applyAnimationEvents = false;
+        }
     }
 
     private AnimationEvent CreateAnimationEvent(string functionName, double timeInMs)

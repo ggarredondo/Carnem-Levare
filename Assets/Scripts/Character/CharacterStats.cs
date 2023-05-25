@@ -31,7 +31,6 @@ public class CharacterStats
         character.transform.localScale *= height;
         rb.mass = mass;
         rb.drag = drag;
-        moveList.ForEach(m => m.Initialize());
     }
     public void Reference(in CharacterStateMachine stateMachine) => this.stateMachine = stateMachine;
 
