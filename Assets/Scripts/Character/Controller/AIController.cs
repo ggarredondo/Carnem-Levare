@@ -5,7 +5,7 @@ using System;
 
 public class AIController : Controller
 {
-    private RNG reactionRNG, spacingRNG, sequenceRNG;
+    private RNG reactionRNG;
 
     [SerializeField] private bool enableDebug;
     [SerializeField] [ConditionalField("enableDebug")] [Range(-1f, 1f)] private float horizontal, vertical;
@@ -20,15 +20,11 @@ public class AIController : Controller
     [Header("Numeric Parameters")]
     [SerializeField] private int minReactionTimeMs;
     [SerializeField] private int maxReactionTimeMs;
-    [SerializeField] private float spacingError;
-    [SerializeField] private double timingError;
 
     public override void Initialize()
     {
         base.Initialize();
-        reactionRNG = new RNG(Guid.NewGuid().GetHashCode());
-        spacingRNG = new RNG(Guid.NewGuid().GetHashCode());
-        sequenceRNG = new RNG(Guid.NewGuid().GetHashCode());
+        reactionRNG = new RNG(GameManager.RANDOM_SEED);
         OnHurt += LateBlock;
     }
     public void Reference(in CharacterStats agentStats, in CharacterStats opponentStats,
@@ -59,12 +55,11 @@ public class AIController : Controller
         }
     }
 
-    private void Update() => AIBehaviour.CurrentState.Update();
     private IEnumerator React()
     {
         while (true) {
             yield return new WaitForSeconds((float)TimeSpan.FromMilliseconds(reactionRNG.RangeInt(minReactionTimeMs, maxReactionTimeMs)).TotalSeconds);
-            gameKnowledge.UpdateImperfectKnowledge(spacingRNG.RangeFloat(-spacingError, spacingError));
+            AIBehaviour.CurrentState.React();
         }
     }
 
@@ -77,5 +72,4 @@ public class AIController : Controller
     public void PerformBlock(bool done) => DoBlock(done);
 
     public ref readonly List<MoveSequence> MoveSequences => ref moveSequences;
-    public ref readonly RNG SequenceRNG => ref sequenceRNG;
 }

@@ -16,16 +16,9 @@ public class GameKnowledge
 
         agentTransform = agentStateMachine.transform;
         opponentTransform = opponentStateMachine.transform;
-        UpdateImperfectKnowledge(0f);
-    }
-
-    public void UpdateImperfectKnowledge(float distanceError)
-    {
-        ImperfectDistance = Distance + distanceError;
     }
 
     public float Distance => Vector3.Distance(agentTransform.position, opponentTransform.position);
-    public float ImperfectDistance { get; private set; }
 
     public ref readonly CharacterStats AgentStats => ref agentStats;
     public ref readonly CharacterStats OpponentStats => ref opponentStats;

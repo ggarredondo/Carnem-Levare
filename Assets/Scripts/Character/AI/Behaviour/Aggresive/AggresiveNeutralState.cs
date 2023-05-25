@@ -16,9 +16,9 @@ public class AggresiveNeutralState : AIState
         controller.PerformBlock(false);
         controller.Movement(0f, 1f);
     }
-    public void Update() 
+    public void React() 
     {
-        if (gameKnowledge.ImperfectDistance <= aiFSM.MinDistanceToOpponent)
+        if (gameKnowledge.Distance <= aiFSM.MinDistanceToOpponent)
         {
             controller.Movement(0f, 0f);
             aiFSM.TransitionToOwnTurn();

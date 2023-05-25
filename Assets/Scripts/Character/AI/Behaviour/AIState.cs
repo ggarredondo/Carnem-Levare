@@ -2,6 +2,6 @@
 public interface AIState
 {
     public void Enter();
-    public void Update();
+    public void React();
     public void Exit();
 }

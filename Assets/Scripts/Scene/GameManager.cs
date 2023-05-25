@@ -33,6 +33,8 @@ public class GameManager : MonoBehaviour
     public static ref readonly InputMapping InputMapping { get => ref inputMapping; }
     public static ref readonly InputDetection InputDetection { get => ref inputDetection; }
 
+    public static int RANDOM_SEED => System.Guid.NewGuid().GetHashCode();
+
     private void Awake()
     {
         Application.backgroundLoadingPriority = ThreadPriority.Low;

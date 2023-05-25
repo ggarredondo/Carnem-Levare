@@ -17,7 +17,7 @@ public class AggresiveOwnTurnState : AIState
         this.controller = controller;
         this.gameKnowledge = gameKnowledge;
 
-        sequenceRNG = controller.SequenceRNG;
+        sequenceRNG = new RNG(GameManager.RANDOM_SEED);
         agentStateMachine = gameKnowledge.AgentStateMachine;
         sequences = controller.MoveSequences;
         sequencesCount = sequences.Count;
@@ -30,9 +30,9 @@ public class AggresiveOwnTurnState : AIState
         agentStateMachine.WalkingState.OnEnter += NextMove;
         NextMove();
     }
-    public void Update()
+    public void React()
     {
-        if (gameKnowledge.ImperfectDistance > aiFSM.MinDistanceToOpponent)
+        if (gameKnowledge.Distance > aiFSM.MinDistanceToOpponent)
             aiFSM.TransitionToNeutral();
     }
     public void Exit()
