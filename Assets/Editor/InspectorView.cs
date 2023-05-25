@@ -5,12 +5,20 @@ using UnityEngine;
 public class InspectorView : VisualElement
 {
     public new class UxmlFactory : UxmlFactory<InspectorView, UxmlTraits> { }
-
+    public event System.Action UpdateEvent;
     Editor editor;
 
     public InspectorView()
     {
+        IMGUIContainer container = new(() =>
+        {
+            if (GUILayout.Button("UPDATE"))
+            {
+                UpdateEvent?.Invoke();
+            }
+        });
 
+        Add(container);
     }
 
     internal void UpdateSelection(NodeView nodeView)
@@ -22,6 +30,11 @@ public class InspectorView : VisualElement
 
         IMGUIContainer container = new(() => 
         {
+            if (GUILayout.Button("UPDATE"))
+            {
+                UpdateEvent?.Invoke();
+            }
+
             if (editor.target)
             {
                 EditorGUILayout.BeginVertical(GUILayout.Width(200));

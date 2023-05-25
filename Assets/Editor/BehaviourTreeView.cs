@@ -56,6 +56,13 @@ public class BehaviourTreeView : GraphView
 
         tree.nodes.ForEach(n => CreateNodeView(ref n));
 
+        UpdateEdges();
+
+        tree.AsignID();
+    }
+
+    private void UpdateEdges()
+    {
         tree.nodes.ForEach(n =>
         {
             if (n is IHaveChildren children1)
@@ -72,7 +79,7 @@ public class BehaviourTreeView : GraphView
 
                         EdgeView edge = parentView.output.ConnectTo<EdgeView>(childView.input);
                         Color newColor = GetNewColor(cont);
-                        edge.UpdateColor(newColor, newColor);
+                        edge.UpdateColor(newColor, Color.white);
                         AddElement(edge);
 
                         cont += 1.0f / children.Count;
@@ -80,6 +87,11 @@ public class BehaviourTreeView : GraphView
                 }
             }
         });
+    }
+
+    public void OnUpdate()
+    {
+        PopulateView(tree);
     }
 
     private Color GetNewRainbowColor(float percentage)
@@ -197,8 +209,6 @@ public class BehaviourTreeView : GraphView
 
     public void UpdateNodeState()
     {
-        tree?.AsignID();
-
         nodes.ForEach(n =>
         {
             NodeView view = n as NodeView;
