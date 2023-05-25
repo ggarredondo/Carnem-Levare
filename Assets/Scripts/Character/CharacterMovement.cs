@@ -15,7 +15,7 @@ public class CharacterMovement
     [SerializeField] private bool doTracking = true;
 
     [Tooltip("How quickly the character's direction will match the target direction (smoothing movement)")]
-    [SerializeField] private float movingDirectionSpeed = 1f, idleDirectionSpeed = 1f;
+    [SerializeField] private float walkingDirectionSpeed = 1f, blockingDirectionSpeed = 1f, blockedDirectionSpeed = 1f, idleDirectionSpeed = 1f;
 
     [SerializeField] private float targetingMinimumMagnitude = 0.1f;
     
@@ -35,10 +35,10 @@ public class CharacterMovement
     /// event with that smoothed direction as parameter.
     /// Doesn't do anything on its own.
     /// </summary>
-    public void MoveCharacter(in Vector2 targetDirection)
+    public void MoveCharacter(in Vector2 targetDirection, float directionSpeed)
     {
-        float directionSpeed = targetDirection.magnitude > 0f ? movingDirectionSpeed : idleDirectionSpeed;
-        direction = Vector2.Lerp(direction, targetDirection, directionSpeed * Time.deltaTime);
+        float finalDirectionSpeed = targetDirection.magnitude > 0f ? directionSpeed : idleDirectionSpeed;
+        direction = Vector2.Lerp(direction, targetDirection, finalDirectionSpeed * Time.deltaTime);
         OnMoveCharacter?.Invoke(direction);
     }
 
@@ -56,4 +56,7 @@ public class CharacterMovement
     }
 
     public bool IsIdle => (direction.magnitude <= targetingMinimumMagnitude);
+    public ref readonly float WalkingDirectionSpeed => ref walkingDirectionSpeed;
+    public ref readonly float BlockingDirectionSpeed => ref blockingDirectionSpeed;
+    public ref readonly float BlockedDirectionSpeed => ref blockedDirectionSpeed;
 }

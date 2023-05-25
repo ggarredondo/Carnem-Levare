@@ -29,7 +29,7 @@ public class BlockingState : CharacterState
     }
     public void Update()
     {
-        movement.MoveCharacter(controller.MovementVector);
+        movement.MoveCharacter(controller.MovementVector, movement.BlockingDirectionSpeed);
     }
     public void FixedUpdate()
     {

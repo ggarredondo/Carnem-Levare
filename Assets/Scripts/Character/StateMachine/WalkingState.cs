@@ -29,7 +29,7 @@ public class WalkingState : CharacterState
     }
     public void Update() 
     {
-        movement.MoveCharacter(controller.MovementVector);
+        movement.MoveCharacter(controller.MovementVector, movement.WalkingDirectionSpeed);
     }
     public void FixedUpdate() 
     {

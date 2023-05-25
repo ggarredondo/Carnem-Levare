@@ -46,7 +46,7 @@ public class AIController : Controller
 
     private void OnValidate()
     {
-        AIBehaviour?.Enable(!enableDebug);
+        if (gameKnowledge?.AgentStateMachine != null) AIBehaviour?.Enable(!enableDebug);
         if (enableDebug) {
             movementVector.x = horizontal;
             movementVector.y = vertical;
