@@ -11,16 +11,17 @@ public class AggresiveNeutralState : AIState
         this.gameKnowledge = gameKnowledge;
     }
 
-    public void Enter() {}
+    public void Enter() 
+    {
+        controller.Movement(0f, 1f);
+    }
     public void Update() 
     {
-        if (gameKnowledge.ImperfectDistance > aiFSM.MinDistanceToOpponent)
-            controller.Movement(0f, 1f);
-        else
+        if (gameKnowledge.ImperfectDistance <= aiFSM.MinDistanceToOpponent)
         {
             controller.Movement(0f, 0f);
-            //aiFSM.TransitionToOwnTurn();
-        }    
+            aiFSM.TransitionToOwnTurn();
+        }
     }
     public void Exit() {}
 }

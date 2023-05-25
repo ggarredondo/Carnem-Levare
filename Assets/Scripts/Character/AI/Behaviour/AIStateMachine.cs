@@ -7,7 +7,7 @@ public abstract class AIStateMachine : ScriptableObject
     public virtual void Reference(in AIController controller, in GameKnowledge gameKnowledge)
     {
         emptyState = new EmptyState();
-        currentState = neutralState;
+        ChangeState(neutralState);
     }
 
     private void ChangeState(in AIState newState)

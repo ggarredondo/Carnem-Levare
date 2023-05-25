@@ -5,7 +5,7 @@ using System;
 
 public class AIController : Controller
 {
-    private RNG reactionRNG, spacingRNG;
+    private RNG reactionRNG, spacingRNG, sequenceRNG;
 
     [SerializeField] private bool enableDebug;
     [SerializeField] [ConditionalField("enableDebug")] [Range(-1f, 1f)] private float horizontal, vertical;
@@ -15,7 +15,7 @@ public class AIController : Controller
     [Header("Object Parameters")]
     [SerializeField] private AIStateMachine AIBehaviour;
     private GameKnowledge gameKnowledge;
-    [SerializeField] private List<MoveSequence> ownTurnSequences, neutralTurnSequences, opponentTurnSequences;
+    [SerializeField] private List<MoveSequence> moveSequences;
 
     [Header("Numeric Parameters")]
     [SerializeField] private int minReactionTimeMs;
@@ -28,6 +28,7 @@ public class AIController : Controller
         base.Initialize();
         reactionRNG = new RNG(Guid.NewGuid().GetHashCode());
         spacingRNG = new RNG(Guid.NewGuid().GetHashCode());
+        sequenceRNG = new RNG(Guid.NewGuid().GetHashCode());
         OnHurt += LateBlock;
     }
     public void Reference(in CharacterStats agentStats, in CharacterStats opponentStats,
@@ -45,14 +46,16 @@ public class AIController : Controller
     private void OnValidate()
     {
         AIBehaviour?.Enable(!enableDebug);
-        movementVector.x = enableDebug ? horizontal : 0f;
-        movementVector.y = enableDebug ? vertical : 0f;
-        DoBlock(enableDebug && block);
+        if (enableDebug) {
+            movementVector.x = horizontal;
+            movementVector.y = vertical;
+            DoBlock(block);
 
-        if (enableDebug && move0) { move0 = false; DoMove(0); }
-        if (enableDebug && move1) { move1 = false; DoMove(1); }
-        if (enableDebug && move2) { move2 = false; DoMove(2); }
-        if (enableDebug && move3) { move3 = false; DoMove(3); }
+            if (move0) { move0 = false; DoMove(0); }
+            if (move1) { move1 = false; DoMove(1); }
+            if (move2) { move2 = false; DoMove(2); }
+            if (move3) { move3 = false; DoMove(3); }
+        }
     }
 
     private void Update() => AIBehaviour.CurrentState.Update();
@@ -71,7 +74,6 @@ public class AIController : Controller
     }
     public void PerformMove(int index) => DoMove(index);
 
-    public ref readonly List<MoveSequence> OwnTurnSequences => ref ownTurnSequences;
-    public ref readonly List<MoveSequence> NeutralTurnSequences => ref neutralTurnSequences;
-    public ref readonly List<MoveSequence> OpponentTurnSequences => ref opponentTurnSequences;
+    public ref readonly List<MoveSequence> MoveSequences => ref moveSequences;
+    public ref readonly RNG SequenceRNG => ref sequenceRNG;
 }

@@ -15,4 +15,5 @@ public class MoveSequence
 {
     [SerializeField] private List<MovePair> sequence;
     public MovePair this[int index] => sequence[index];
+    public int Count => sequence.Count;
 }

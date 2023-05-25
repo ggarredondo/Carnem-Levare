@@ -10,6 +10,6 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 54ff6fbda21850b45b8485368172a59a, type: 3}
-  m_Name: Anger
+  m_Name: Basic Aggresive
   m_EditorClassIdentifier: 
   minDistanceToOpponent: 2
