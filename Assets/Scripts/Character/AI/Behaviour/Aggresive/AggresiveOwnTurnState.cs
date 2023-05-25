@@ -8,7 +8,6 @@ public class AggresiveOwnTurnState : AIState
 
     private RNG sequenceRNG;
     private CharacterStateMachine agentStateMachine;
-    private HurtState hurtState;
     private List<MoveSequence> sequences;
     private int selectedSequence, selectedMove, sequencesCount;
 
@@ -20,7 +19,6 @@ public class AggresiveOwnTurnState : AIState
 
         sequenceRNG = controller.SequenceRNG;
         agentStateMachine = gameKnowledge.AgentStateMachine;
-        hurtState = agentStateMachine.HurtState;
         sequences = controller.MoveSequences;
         sequencesCount = sequences.Count;
     }
@@ -29,6 +27,7 @@ public class AggresiveOwnTurnState : AIState
     {
         InitializeMove();
         agentStateMachine.OnEnableBuffering += NextMove;
+        agentStateMachine.WalkingState.OnEnter += NextMove;
         NextMove();
     }
     public void Update()
@@ -39,6 +38,7 @@ public class AggresiveOwnTurnState : AIState
     public void Exit()
     {
         agentStateMachine.OnEnableBuffering -= NextMove;
+        agentStateMachine.WalkingState.OnEnter -= NextMove;
     }
 
     private void InitializeMove()

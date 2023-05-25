@@ -13,6 +13,7 @@ public class AggresiveNeutralState : AIState
 
     public void Enter() 
     {
+        controller.PerformBlock(false);
         controller.Movement(0f, 1f);
     }
     public void Update() 

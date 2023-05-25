@@ -36,11 +36,12 @@ public class AIController : Controller
     {
         gameKnowledge = new GameKnowledge(agentStats, opponentStats, agentStateMachine, opponentStateMachine);
         AIBehaviour.Reference(this, gameKnowledge);
+        OnValidate();
         StartCoroutine(React());
     }
 
     private void LateBlock(in Hitbox hitbox) {
-        if (lateBlock) DoBlock(block = true);
+        if (lateBlock && enableDebug) DoBlock(block = true);
     }
 
     private void OnValidate()
@@ -73,6 +74,7 @@ public class AIController : Controller
         movementVector.y = y;
     }
     public void PerformMove(int index) => DoMove(index);
+    public void PerformBlock(bool done) => DoBlock(done);
 
     public ref readonly List<MoveSequence> MoveSequences => ref moveSequences;
     public ref readonly RNG SequenceRNG => ref sequenceRNG;
