@@ -439,7 +439,9 @@ MonoBehaviour:
   characterMovement:
     trackingRate: 5
     doTracking: 1
-    movingDirectionSpeed: 5
+    walkingDirectionSpeed: 5
+    blockingDirectionSpeed: 5
+    blockedDirectionSpeed: 1
     idleDirectionSpeed: 3
     targetingMinimumMagnitude: 0.1
   characterAnimation:

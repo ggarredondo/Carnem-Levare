@@ -750,7 +750,9 @@ MonoBehaviour:
   characterMovement:
     trackingRate: 10
     doTracking: 1
-    movingDirectionSpeed: 10
+    walkingDirectionSpeed: 10
+    blockingDirectionSpeed: 10
+    blockedDirectionSpeed: 2
     idleDirectionSpeed: 5
     targetingMinimumMagnitude: 0.1
   characterAnimation:

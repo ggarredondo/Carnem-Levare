@@ -441,7 +441,7 @@ MonoBehaviour:
     doTracking: 1
     walkingDirectionSpeed: 5
     blockingDirectionSpeed: 5
-    blockedDirectionSpeed: 5
+    blockedDirectionSpeed: 1
     idleDirectionSpeed: 3
     targetingMinimumMagnitude: 0.1
   characterAnimation:
