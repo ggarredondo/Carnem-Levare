@@ -1,10 +1,10 @@
 
-public class AngerNeutralState : AIState
+public class AggresiveNeutralState : AIState
 {
-    private AngerAIStateMachine aiFSM;
+    private AggresiveAIStateMachine aiFSM;
     private AIController controller;
     private GameKnowledge gameKnowledge;
-    public AngerNeutralState(in AngerAIStateMachine aiFSM, in AIController controller, in GameKnowledge gameKnowledge)
+    public AggresiveNeutralState(in AggresiveAIStateMachine aiFSM, in AIController controller, in GameKnowledge gameKnowledge)
     {
         this.aiFSM = aiFSM;
         this.controller = controller;
