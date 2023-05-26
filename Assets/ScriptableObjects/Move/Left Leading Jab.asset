@@ -15,6 +15,7 @@ MonoBehaviour:
   moveName: Left Leading Jab
   animation: {fileID: 7400000, guid: e652c0869035b6b418eef0c72bbb19c0, type: 2}
   animationSpeed: 1.2
+  applyAnimationEvents: 0
   initSound: Whiff_Jab
   startUp: 200
   active: 50
@@ -26,8 +27,8 @@ MonoBehaviour:
   blockedSound: Blocked_Default
   hitShakeTime: 100
   hitShakeIntensity: 3
-  advantageOnBlock: 400
-  advantageOnHit: 800
+  blockStun: 400
+  hitStun: 800
   hitbox: 0
   baseDamage: 10
   animationStagger: 0

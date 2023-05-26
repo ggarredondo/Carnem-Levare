@@ -28,7 +28,7 @@ public class HurtState : CharacterState
 
         OnEnter?.Invoke();
 
-        coroutine = StateFunctions.Recover(stats, stateMachine, hitbox.AdvantageOnHit);
+        coroutine = StateFunctions.Recover(stats, stateMachine, hitbox.HitStun);
         stateMachine.StartCoroutine(coroutine);
     }
     public void Update() {}

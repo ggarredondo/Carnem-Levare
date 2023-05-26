@@ -12,8 +12,8 @@ public class AttackMove : Move
     [SerializeField] private float hitShakeIntensity;
 
     [Header("Attack-specific Time Data (ms)")]
-    [SerializeField] private double advantageOnBlock;
-    [SerializeField] private double advantageOnHit;
+    [SerializeField] private double blockStun;
+    [SerializeField] private double hitStun;
 
     private enum Stagger : int { Light, Medium, Hard }
     private enum HitboxType : int { LeftFist, RightFist, LeftElbow, RightElbow }
@@ -34,8 +34,8 @@ public class AttackMove : Move
             hitShakeIntensity,
             (float)animationStagger,
             stats.CalculateAttackDamage(baseDamage),
-            advantageOnBlock,
-            advantageOnHit,
+            blockStun,
+            hitStun,
             unblockable);
     }
     public override void ActivateMove()
@@ -46,5 +46,5 @@ public class AttackMove : Move
     {
         currentHitbox.SetActive(false);
     }
-    public override void RecoverFromMove() {}
+    public override void EndMove() {}
 }

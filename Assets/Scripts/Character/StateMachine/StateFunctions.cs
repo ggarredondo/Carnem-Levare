@@ -4,10 +4,11 @@ using UnityEngine;
 
 public static class StateFunctions
 {
-    public static IEnumerator Recover(CharacterStats stats, CharacterStateMachine stateMachine, double disadvantage)
+    public static IEnumerator Recover(CharacterStats stats, CharacterStateMachine stateMachine, double stun)
     {
-        double totalDisadvantage = stats.CalculateDisadvantage(disadvantage, stateMachine.hitNumber);
-        yield return new WaitForSeconds((float) TimeSpan.FromMilliseconds(totalDisadvantage).TotalSeconds);
+        double totalStun = stats.CalculateDisadvantage(stun, stateMachine.hitNumber);
+        Debug.Log("Stunlocked for " + totalStun + " ms");
+        yield return new WaitForSeconds((float) TimeSpan.FromMilliseconds(totalStun).TotalSeconds);
         stateMachine.TransitionToWalkingOrBlocking();
     }
 }

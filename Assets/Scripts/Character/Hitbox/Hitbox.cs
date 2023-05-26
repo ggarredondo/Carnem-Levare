@@ -4,7 +4,7 @@ public class Hitbox : MonoBehaviour
 {
     private string hitSound, blockedSound;
     private float animationBodyTarget, animationStagger, damage, hitShakeIntensity;
-    private double advantageOnBlock, advantageOnHit, hitShakeTime;
+    private double blockStun, hitStun, hitShakeTime;
     private bool unblockable;
 
     private void Start()
@@ -13,7 +13,7 @@ public class Hitbox : MonoBehaviour
     }
 
     public void Set(string hitSound, string blockedSound, double hitShakeTime, float hitShakeIntensity, float animationStagger, float damage,
-        double advantageOnBlock, double advantageOnHit, bool unblockable)
+        double blockStun, double hitStun, bool unblockable)
     {
         this.hitSound = hitSound;
         this.blockedSound = blockedSound;
@@ -21,8 +21,8 @@ public class Hitbox : MonoBehaviour
         this.hitShakeIntensity = hitShakeIntensity;
         this.animationStagger = animationStagger;
         this.damage = damage;
-        this.advantageOnBlock = advantageOnBlock;
-        this.advantageOnHit = advantageOnHit;
+        this.blockStun = blockStun;
+        this.hitStun = hitStun;
         this.unblockable = unblockable;
     }
 
@@ -40,8 +40,8 @@ public class Hitbox : MonoBehaviour
     public float AnimationBodyTarget { get => animationBodyTarget; }
     public float AnimationStagger { get => animationStagger; }
     public float Damage { get => damage; }
-    public double AdvantageOnBlock { get => advantageOnBlock; }
-    public double AdvantageOnHit { get => advantageOnHit; }
+    public double BlockStun { get => blockStun; }
+    public double HitStun { get => hitStun; }
     public void SetUnblockable(bool unblockable) => this.unblockable = unblockable;
     public bool Unblockable { get => unblockable; }
 }

@@ -26,7 +26,6 @@ public class AggresiveOwnTurnState : AIState
     public void Enter() 
     {
         InitializeMove();
-        agentStateMachine.OnEnableBuffering += NextMove;
         agentStateMachine.WalkingState.OnEnter += NextMove;
         NextMove();
     }
@@ -37,7 +36,6 @@ public class AggresiveOwnTurnState : AIState
     }
     public void Exit()
     {
-        agentStateMachine.OnEnableBuffering -= NextMove;
         agentStateMachine.WalkingState.OnEnter -= NextMove;
     }
 

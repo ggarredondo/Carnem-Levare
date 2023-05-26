@@ -15,6 +15,7 @@ MonoBehaviour:
   moveName: Right Overhand
   animation: {fileID: 7400000, guid: 6232cd1526a6c3d40a5382e8b5611702, type: 2}
   animationSpeed: 1.2
+  applyAnimationEvents: 0
   initSound: Whiff_Overhand
   startUp: 350
   active: 100
@@ -26,8 +27,8 @@ MonoBehaviour:
   blockedSound: Blocked_Default
   hitShakeTime: 250
   hitShakeIntensity: 5
-  advantageOnBlock: 800
-  advantageOnHit: 1000
+  blockStun: 800
+  hitStun: 1000
   hitbox: 1
   baseDamage: 20
   animationStagger: 2

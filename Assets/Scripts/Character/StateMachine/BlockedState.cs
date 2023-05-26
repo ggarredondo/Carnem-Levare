@@ -31,7 +31,7 @@ public class BlockedState : CharacterState
 
         OnEnter?.Invoke();
 
-        coroutine = StateFunctions.Recover(stats, stateMachine, hitbox.AdvantageOnBlock);
+        coroutine = StateFunctions.Recover(stats, stateMachine, hitbox.BlockStun);
         stateMachine.StartCoroutine(coroutine);
     }
     public void Update() 

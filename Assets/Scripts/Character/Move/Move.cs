@@ -77,7 +77,7 @@ public abstract class Move : ScriptableObject
     public abstract void InitMove(in CharacterStats stats);
     public abstract void ActivateMove();
     public abstract void DeactivateMove();
-    public abstract void RecoverFromMove();
+    public abstract void EndMove();
 
     public ref readonly AnimationClip Animation { get => ref animation; }
     public ref readonly float AnimationSpeed { get => ref animationSpeed; }

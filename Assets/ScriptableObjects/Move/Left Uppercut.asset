@@ -15,6 +15,7 @@ MonoBehaviour:
   moveName: Left Uppercut
   animation: {fileID: 7400000, guid: c8ea972d3fdf705449eeced1a0d40d6c, type: 2}
   animationSpeed: 1.1
+  applyAnimationEvents: 0
   initSound: Whiff_Hook
   startUp: 200
   active: 70
@@ -26,8 +27,8 @@ MonoBehaviour:
   blockedSound: Blocked_Default
   hitShakeTime: 50
   hitShakeIntensity: 3
-  advantageOnBlock: 400
-  advantageOnHit: 800
+  blockStun: 500
+  hitStun: 900
   hitbox: 0
   baseDamage: 12
   animationStagger: 1
