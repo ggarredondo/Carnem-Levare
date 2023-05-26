@@ -459,7 +459,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b8b6bc01c697e3b4693e9f790e66cd99, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enableDebug: 0
+  enableDebug: 1
   horizontal: 0
   vertical: 0
   block: 0
