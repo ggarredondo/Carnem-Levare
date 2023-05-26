@@ -28,7 +28,7 @@ public class AttackMove : Move
     {
         currentHitbox = stats.HitboxList[(int) hitbox];
 
-        currentHitbox.Set(hitSound, 
+        currentHitbox.Set(hitSound,
             blockedSound,
             hitShakeTime,
             hitShakeIntensity,
