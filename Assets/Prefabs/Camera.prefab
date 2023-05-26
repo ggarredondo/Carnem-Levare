@@ -138,15 +138,15 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1913514060604836180}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.3, y: 0.3, z: 0.3}
+  m_LocalRotation: {x: 0.050729122, y: 0.000009550188, z: -0.00018801606, w: 0.9987125}
+  m_LocalPosition: {x: 0, y: 2.1799998, z: -5.5}
+  m_LocalScale: {x: 0.29999998, y: 0.3, z: 0.30000004}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 7977386585358654210}
   - {fileID: 3791101467617855438}
-  m_Father: {fileID: 2835685396104087958}
-  m_RootOrder: 1
+  m_Father: {fileID: 2835685395483145561}
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2835685394079182386
 GameObject:
@@ -158,7 +158,6 @@ GameObject:
   m_Component:
   - component: {fileID: 2835685394079182387}
   - component: {fileID: 2835685394079182383}
-  - component: {fileID: 2835685394079182382}
   - component: {fileID: 2835685394079182385}
   - component: {fileID: 2835685394079182384}
   m_Layer: 0
@@ -195,23 +194,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac0b09e7857660247b1477e93731de29, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &2835685394079182382
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2835685394079182386}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 68bb026fafb42b14791938953eaace77, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_NoiseProfile: {fileID: 11400000, guid: a3dacaec0287d7444b4bd276816e1666, type: 2}
-  m_PivotOffset: {x: 0, y: 0, z: 0}
-  m_AmplitudeGain: 1
-  m_FrequencyGain: 1
-  mNoiseOffsets: {x: 0, y: 0, z: 0}
 --- !u!114 &2835685394079182385
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -225,7 +207,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_BindingMode: 1
-  m_FollowOffset: {x: 0, y: 0, z: 0}
+  m_FollowOffset: {x: 0, y: 0.2, z: 4}
   m_XDamping: 0
   m_YDamping: 0
   m_ZDamping: 0
@@ -456,7 +438,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2835685395483145561}
-  m_RootOrder: 6
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: -1.33, y: 0, z: 0}
 --- !u!20 &2835685394306887700
 Camera:
@@ -489,7 +471,7 @@ Camera:
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 4087
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
@@ -733,7 +715,7 @@ Transform:
   m_Children:
   - {fileID: 2835685394845596708}
   m_Father: {fileID: 2835685395483145561}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: -0.04, y: 0.04, z: 0}
 --- !u!114 &2835685394733476226
 MonoBehaviour:
@@ -989,7 +971,7 @@ Transform:
   m_Children:
   - {fileID: 2835685394079182387}
   m_Father: {fileID: 2835685395483145561}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: -0.04, y: 0.04, z: 0}
 --- !u!114 &2835685395348398053
 MonoBehaviour:
@@ -1012,7 +994,7 @@ MonoBehaviour:
   m_LookAt: {fileID: 0}
   m_Follow: {fileID: 0}
   m_Lens:
-    FieldOfView: 100
+    FieldOfView: 25
     OrthographicSize: 1.55
     NearClipPlane: 0.001
     FarClipPlane: 1000
@@ -1069,6 +1051,7 @@ Transform:
   m_Children:
   - {fileID: 2437912868694387621}
   - {fileID: 2835685395184203567}
+  - {fileID: 1280704868106982382}
   - {fileID: 2835685396104087958}
   - {fileID: 2835685395923890379}
   - {fileID: 2835685395348398057}
@@ -1091,6 +1074,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   changeVirtualCamera: 0
   actualTransform: {fileID: 2437912868694387621}
+  followObject: {fileID: 1913514060604836180}
 --- !u!1 &2835685395923890378
 GameObject:
   m_ObjectHideFlags: 0
@@ -1122,7 +1106,7 @@ Transform:
   m_Children:
   - {fileID: 2835685394315603463}
   m_Father: {fileID: 2835685395483145561}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: -0.04, y: 0.04, z: 0}
 --- !u!114 &2835685395923890375
 MonoBehaviour:
@@ -1191,9 +1175,8 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2835685394191603326}
-  - {fileID: 1280704868106982382}
   m_Father: {fileID: 2835685395483145561}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: -0.04, y: 0.04, z: 0}
 --- !u!114 &2835685396104087952
 MonoBehaviour:
@@ -1242,8 +1225,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9cb33386e0b6f524494d1bca37ede385, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  targetingSpeed: 5
-  hurtTime: 250
   orbitalValue: 10
   orbitalRecovery: 3
 --- !u!114 &2835685396104087955

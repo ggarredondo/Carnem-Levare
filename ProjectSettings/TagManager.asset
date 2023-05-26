@@ -28,7 +28,7 @@ TagManager:
   - PlayerHitbox
   - GroundDetection
   - StepDetection
-  - 
+  - NoCamera
   - 
   - 
   - 

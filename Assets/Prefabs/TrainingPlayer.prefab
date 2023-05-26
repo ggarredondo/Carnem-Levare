@@ -302,6 +302,38 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: 8f006f83-0367-4932-80f0-42ce968fad13
     m_ActionName: LoadingScreen/Stop[/XInputControllerWindows/buttonSouth,/Keyboard/a]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 11400000, guid: cb514f7bc969f1e4da23444266f585b7, type: 2}
+        m_TargetAssemblyTypeName: InputReader, Assembly-CSharp
+        m_MethodName: OnSelectMenu
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 25f016b5-d5f3-4e09-af4f-b475577e7c3f
+    m_ActionName: Main Movement/Select[/XInputControllerWindows/select,/Keyboard/tab]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 11400000, guid: cb514f7bc969f1e4da23444266f585b7, type: 2}
+        m_TargetAssemblyTypeName: InputReader, Assembly-CSharp
+        m_MethodName: OnDPAd
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 86c7ae0b-39d3-4ed7-ade8-84f2a8bd7c84
+    m_ActionName: Main Movement/D-Pad
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Main Movement
@@ -758,7 +790,6 @@ MonoBehaviour:
   characterAnimation:
     animatorSpeed: 1
     updateMovesetAnimations: 0
-    updateAnimationEvents: 0
 --- !u!114 &1658105093767166710
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -878,7 +909,7 @@ Transform:
   m_GameObject: {fileID: 6321546568339977083}
   m_LocalRotation: {x: -0.000000052154057, y: 0.00000038743013, z: -0.00000003352761,
     w: 1}
-  m_LocalPosition: {x: 0.2, y: 0.52617025, z: -2.297624}
+  m_LocalPosition: {x: 0, y: 1.4, z: -2.3}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
