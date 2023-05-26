@@ -17,11 +17,11 @@ public class Hurtbox : MonoBehaviour
     }
     [SerializeField] private BodyTarget target;
     [SerializeField] private Character character;
-    private Controller controller;
+    private CharacterStateMachine stateMachine;
 
     private void Start()
     {
-        controller = character.Controller;
+        stateMachine = character.StateMachine;
     }
 
     private void OnTriggerEnter(Collider other)
@@ -30,6 +30,6 @@ public class Hurtbox : MonoBehaviour
         hitbox.SetActive(false);
         hitbox.SetUnblockable(hitbox.Unblockable || target == BodyTarget.BackHead || target == BodyTarget.BackBody);
         hitbox.SetAnimationBodyTarget((float)target);
-        controller.OnHurt?.Invoke(hitbox);
+        stateMachine.OnHurt?.Invoke(hitbox);
     }
 }

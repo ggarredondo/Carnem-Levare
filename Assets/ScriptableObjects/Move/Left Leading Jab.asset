@@ -20,7 +20,6 @@ MonoBehaviour:
   startUp: 200
   active: 50
   recovery: 300
-  buffering: 300
   startTracking: 0
   trackingLength: 200
   hitSound: Hit_Jab

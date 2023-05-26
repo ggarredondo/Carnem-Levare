@@ -4,7 +4,6 @@ using System.Collections;
 public class HurtState : CharacterState
 {  
     private readonly CharacterStateMachine stateMachine;
-    private readonly Controller controller;
     private readonly CharacterStats stats;
     public event Action OnEnter, OnExit;
 
@@ -12,10 +11,9 @@ public class HurtState : CharacterState
     public void Set(in Hitbox hitbox) => this.hitbox = hitbox;
     private IEnumerator coroutine;
 
-    public HurtState(in CharacterStateMachine stateMachine, in Controller controller, in CharacterStats stats)
+    public HurtState(in CharacterStateMachine stateMachine, in CharacterStats stats)
     {
         this.stateMachine = stateMachine;
-        this.controller = controller;
         this.stats = stats;
     }
 
@@ -24,7 +22,7 @@ public class HurtState : CharacterState
         stateMachine.enabled = false;
         stateMachine.hitNumber++;
 
-        controller.OnHurt += stats.DamageStamina;
+        stateMachine.OnHurt += stats.DamageStamina;
 
         OnEnter?.Invoke();
 
@@ -36,7 +34,7 @@ public class HurtState : CharacterState
     public void Exit()
     {
         stateMachine.StopCoroutine(coroutine);
-        controller.OnHurt -= stats.DamageStamina;
+        stateMachine.OnHurt -= stats.DamageStamina;
         OnExit?.Invoke();
     }
     

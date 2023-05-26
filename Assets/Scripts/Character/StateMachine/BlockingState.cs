@@ -23,7 +23,7 @@ public class BlockingState : CharacterState
 
         controller.OnDoBlock += stateMachine.TransitionToWalkingOrBlocking;
         controller.OnDoMove += stateMachine.TransitionToMove;
-        controller.OnHurt += Blocked;
+        stateMachine.OnHurt += Blocked;
 
         OnEnter?.Invoke();
     }
@@ -39,7 +39,7 @@ public class BlockingState : CharacterState
     {
         controller.OnDoBlock -= stateMachine.TransitionToWalkingOrBlocking;
         controller.OnDoMove -= stateMachine.TransitionToMove;
-        controller.OnHurt -= Blocked;
+        stateMachine.OnHurt -= Blocked;
         OnExit?.Invoke();
     }
 

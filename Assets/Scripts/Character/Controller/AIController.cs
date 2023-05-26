@@ -25,11 +25,11 @@ public class AIController : Controller
     {
         base.Initialize();
         reactionRNG = new RNG(GameManager.RANDOM_SEED);
-        OnHurt += LateBlock;
     }
     public void Reference(in CharacterStats agentStats, in CharacterStats opponentStats,
         in CharacterStateMachine agentStateMachine, in CharacterStateMachine opponentStateMachine)
     {
+        agentStateMachine.OnHurt += LateBlock;
         gameKnowledge = new GameKnowledge(agentStats, opponentStats, agentStateMachine, opponentStateMachine);
         AIBehaviour.Reference(this, gameKnowledge);
         OnValidate();

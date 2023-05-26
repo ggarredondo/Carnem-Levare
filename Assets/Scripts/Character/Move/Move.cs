@@ -30,9 +30,6 @@ public abstract class Move : ScriptableObject
 
     [Header("Other Time Data (ms) (animation events)")]
 
-    [Tooltip("Another move can be input buffered at *buffering* ms of performing this move")]
-    [SerializeField] private double buffering;
-
     [Tooltip("Move starts tracking at *startTracking* ms from being performed")]
     [SerializeField] private double startTracking;
 
@@ -64,12 +61,10 @@ public abstract class Move : ScriptableObject
         AnimationEvent deactiveMoveEvent = CreateAnimationEvent("DeactivateMove", startUp + active);
         AnimationEvent endMoveEvent = CreateAnimationEvent("EndMove", startUp + active + recovery);
 
-        AnimationEvent enableBufferingEvent = CreateAnimationEvent("EnableBuffering", buffering);
         AnimationEvent startTrackingEvent = CreateAnimationEvent("StartTracking", startTracking);
         AnimationEvent stopTrackingEvent = CreateAnimationEvent("StopTracking", startTracking + trackingLength);
 
-        AnimationEvent[] events = { initMoveEvent, activateMoveEvent, deactiveMoveEvent, endMoveEvent, 
-            enableBufferingEvent, startTrackingEvent, stopTrackingEvent };
+        AnimationEvent[] events = { initMoveEvent, activateMoveEvent, deactiveMoveEvent, endMoveEvent, startTrackingEvent, stopTrackingEvent };
         UnityEditor.AnimationUtility.SetAnimationEvents(animation, events);
         #endif
     }

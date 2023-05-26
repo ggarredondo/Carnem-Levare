@@ -20,7 +20,6 @@ MonoBehaviour:
   startUp: 350
   active: 120
   recovery: 300
-  buffering: 500
   startTracking: 0
   trackingLength: 350
   hitSound: Hit_Mid_Hook

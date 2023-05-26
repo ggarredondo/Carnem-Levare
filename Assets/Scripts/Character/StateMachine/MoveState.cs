@@ -1,25 +1,25 @@
 using System;
+using System.Collections.Generic;
 
 public class MoveState : CharacterState
 {
     private readonly CharacterStateMachine stateMachine;
-    private readonly Controller controller;
     private readonly CharacterStats stats;
     private readonly CharacterMovement movement;
     public event Action<int> OnEnterInteger;
     public event Action OnEnter, OnExit;
 
-    private int moveListCount;
-    public int moveIndex, bufferedMoveIndex = -1;
-    public bool BUFFER_FLAG = false, TRACKING_FLAG = false;
+    public int moveIndex;
+    private Move currentMove;
+    private List<Move> moveList;
+    private bool TRACKING_FLAG = false;
 
-    public MoveState(in CharacterStateMachine stateMachine, in Controller controller, in CharacterStats stats, in CharacterMovement movement)
+    public MoveState(in CharacterStateMachine stateMachine, in CharacterStats stats, in CharacterMovement movement)
     {
         this.stateMachine = stateMachine;
-        this.controller = controller;
         this.stats = stats;
+        moveList = stats.MoveList;
         this.movement = movement;
-        moveListCount = stats.MoveList != null ? stats.MoveList.Count : 0;
     }
 
     public void Enter() 
@@ -27,9 +27,15 @@ public class MoveState : CharacterState
         stateMachine.enabled = true;
         stateMachine.hitNumber = -1;
 
-        controller.OnDoMove += BufferMove;
-        controller.OnHurt += stats.DamageStamina;
-        stateMachine.TransitionToRecovery = stateMachine.TransitionToWalkingOrBlocking;
+        stateMachine.OnHurt += stats.DamageStamina;
+        currentMove = moveList[moveIndex];
+
+        stateMachine.OnInitMove += InitMove;
+        stateMachine.OnActivateMove += ActivateMove;
+        stateMachine.OnDeactiveMove += DeactivateMove;
+        stateMachine.OnEndMove += EndMove;
+        stateMachine.OnStartTracking += StartTracking;
+        stateMachine.OnStopTracking += StopTracking;
 
         OnEnterInteger?.Invoke(moveIndex);
         OnEnter?.Invoke();
@@ -41,17 +47,30 @@ public class MoveState : CharacterState
     }
     public void Exit()
     {
-        bufferedMoveIndex = -1;
-        controller.OnDoMove -= BufferMove;
-        controller.OnHurt -= stats.DamageStamina;
+        stateMachine.OnHurt -= stats.DamageStamina;
+
+        stateMachine.OnInitMove -= InitMove;
+        stateMachine.OnActivateMove -= ActivateMove;
+        stateMachine.OnDeactiveMove -= DeactivateMove;
+        stateMachine.OnEndMove -= EndMove;
+        stateMachine.OnStartTracking -= StartTracking;
+        stateMachine.OnStopTracking -= StopTracking;
+
+        // Disable Move and stop tracking in case
+        // the animation event didn't trigger.
+        DeactivateMove();
+        StopTracking();
+
         OnExit?.Invoke();
     }
 
-    private void BufferMove(int moveIndex)
-    {
-        if (bufferedMoveIndex == -1 && BUFFER_FLAG && moveIndex >= 0 && moveIndex < moveListCount) {
-            bufferedMoveIndex = moveIndex;
-            stateMachine.TransitionToRecovery = () => stateMachine.TransitionToMove(moveIndex);
-        }
+    private void InitMove() => currentMove.InitMove(stats);
+    private void ActivateMove() => currentMove.ActivateMove();
+    private void DeactivateMove() => currentMove.DeactivateMove();
+    private void EndMove() {
+        currentMove.EndMove();
+        stateMachine.TransitionToWalkingOrBlocking();
     }
+    private void StartTracking() => TRACKING_FLAG = true;
+    private void StopTracking() => TRACKING_FLAG = false;
 }

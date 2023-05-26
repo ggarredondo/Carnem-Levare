@@ -8,7 +8,6 @@ public abstract class Controller : MonoBehaviour
     public bool isBlocking { get; private set; }
     public event Action OnDoBlock;
     public event Action<int> OnDoMove;
-    public ActionIn<Hitbox> OnHurt;
 
     public virtual void Initialize()
     {

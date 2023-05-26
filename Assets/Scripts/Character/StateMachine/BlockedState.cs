@@ -27,7 +27,7 @@ public class BlockedState : CharacterState
         stateMachine.enabled = true;
         stateMachine.hitNumber++;
 
-        controller.OnHurt += Blocked;
+        stateMachine.OnHurt += Blocked;
 
         OnEnter?.Invoke();
 
@@ -45,7 +45,7 @@ public class BlockedState : CharacterState
     public void Exit() 
     {
         stateMachine.StopCoroutine(coroutine);
-        controller.OnHurt -= Blocked;
+        stateMachine.OnHurt -= Blocked;
         OnExit?.Invoke();
     }
 

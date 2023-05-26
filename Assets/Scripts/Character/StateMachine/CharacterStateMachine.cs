@@ -1,13 +1,11 @@
 using UnityEngine;
 using System;
-using System.Collections.Generic;
+using RefDelegates;
 
 public class CharacterStateMachine : MonoBehaviour
 {
     private Controller controller;
     private CharacterStats stats;
-    private List<Move> moveList;
-    private Move currentMove;
 
     private CharacterState currentState;
     private WalkingState walkingState;
@@ -23,12 +21,11 @@ public class CharacterStateMachine : MonoBehaviour
     {
         this.controller = controller;
         this.stats = stats;
-        moveList = stats.MoveList;
 
         walkingState = new WalkingState(this, controller, stats, movement);
         blockingState = new BlockingState(this, controller, stats, movement);
-        moveState = new MoveState(this, controller, stats, movement);
-        hurtState = new HurtState(this, controller, stats);
+        moveState = new MoveState(this, stats, movement);
+        hurtState = new HurtState(this, stats);
         blockedState = new BlockedState(this, controller, stats, movement);
         koState = new KOState(this);
     }
@@ -50,33 +47,15 @@ public class CharacterStateMachine : MonoBehaviour
 
     #region Animation Events
 
-    //public event Action OnInitMove, OnActivateMove, OnDeactiveMove, OnEndMove;
-    private void InitMove()
-    {
-        currentMove = moveList[moveState.moveIndex];
-        currentMove.InitMove(stats);
-    }
-    private void ActivateMove()
-    {
-        currentMove.ActivateMove();
-    }
-    private void DeactivateMove()
-    {
-        currentMove.DeactivateMove();
-    }
-    private void EnableBuffering()
-    {
-        moveState.BUFFER_FLAG = true;
-    }
-    private void EndMove()
-    {
-        moveState.BUFFER_FLAG = false;
-        currentMove.EndMove();
-        TransitionToRecovery.Invoke();
-    }
+    public event Action OnInitMove, OnActivateMove, OnDeactiveMove, OnEndMove,
+        OnStartTracking, OnStopTracking;
+    private void InitMove() => OnInitMove?.Invoke();
+    private void ActivateMove() => OnActivateMove?.Invoke();
+    private void DeactivateMove() => OnDeactiveMove?.Invoke();
+    private void EndMove() => OnEndMove?.Invoke();
 
-    private void StartTracking() => moveState.TRACKING_FLAG = true;
-    private void StopTracking() => moveState.TRACKING_FLAG = false;
+    private void StartTracking() => OnStartTracking?.Invoke();
+    private void StopTracking() => OnStopTracking?.Invoke();
 
     #endregion
 
@@ -99,7 +78,7 @@ public class CharacterStateMachine : MonoBehaviour
             ChangeState(moveState);
         }
     }
-    public Action TransitionToRecovery;
+    public ActionIn<Hitbox> OnHurt;
     public void TransitionToHurt(in Hitbox hitbox)
     {
         hurtState.Set(hitbox);
