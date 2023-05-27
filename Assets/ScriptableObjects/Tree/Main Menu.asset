@@ -56,7 +56,7 @@ MonoBehaviour:
   ID: 1
   selected: 1
   guid: d78b2d2f6ebaddc4a8d6f19181a448a7
-  position: {x: 0, y: 66}
+  position: {x: 0, y: 74}
   isStatic: 0
   children:
   - {fileID: -8687199901837452373}
@@ -93,7 +93,7 @@ MonoBehaviour:
   ID: 6
   selected: 0
   guid: 62cdd3a1fe850d542bd54fb3e0722880
-  position: {x: 166.99997, y: 283.00003}
+  position: {x: 167, y: 283}
   parent: {fileID: -8687199901837452373}
 --- !u!114 &11400000
 MonoBehaviour:

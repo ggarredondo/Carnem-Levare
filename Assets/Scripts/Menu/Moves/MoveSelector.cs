@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -10,6 +11,7 @@ public class MoveSelector : MonoBehaviour
     [SerializeField] private float distanceBetweenBlocks;
     [Range(0, 1)] [SerializeField] private float scaleDifference;
     [Range(0, 1)] [SerializeField] private float alphaDifference;
+    [Range(0, 1)] [SerializeField] private float lerpDuration;
 
     [Header("Requirements")]
     [SerializeField] private List<Move> moves;
@@ -91,6 +93,27 @@ public class MoveSelector : MonoBehaviour
         }
     }
 
+    public IEnumerator LerpRectTransformAsync(RectTransform rectTransform, Vector3 targetPosition, Vector3 targetScale, float duration)
+    {
+        Vector3 startPosition = rectTransform.localPosition;
+        Vector3 startScale = rectTransform.localScale;
+        float elapsedTime = 0f;
+
+        while (elapsedTime < duration)
+        {
+            elapsedTime += Time.deltaTime;
+            float t = Mathf.Clamp01(elapsedTime / duration);
+
+            rectTransform.localPosition = Vector3.Lerp(startPosition, targetPosition, t);
+            rectTransform.localScale = Vector3.Lerp(startScale, targetScale, t);
+
+            yield return null;
+        }
+
+        rectTransform.localPosition = targetPosition;
+        rectTransform.localScale = targetScale;
+    }
+
     private void UpdateSelectedBlocks()
     {
         moveBlocks.ForEach(b => b.gameObject.SetActive(false));
@@ -101,10 +124,11 @@ public class MoveSelector : MonoBehaviour
             {
                 moveBlocks[actualIndex + i].gameObject.SetActive(true);
 
-                moveBlocks[actualIndex + i].localPosition = new Vector3(i * distanceBetweenBlocks, 0, 0);
-
                 float scale = initialScale.x - Mathf.Abs(i) * scaleDifference;
-                moveBlocks[actualIndex + i].localScale = new Vector3(scale, scale, 0);
+                StartCoroutine(LerpRectTransformAsync(moveBlocks[actualIndex + i],
+                                                      new Vector3(i * distanceBetweenBlocks, 0, 0),
+                                                      new Vector3(scale, scale, 0),
+                                                      lerpDuration));
 
                 Image current = moveBlocks[actualIndex + i].GetComponent<Image>();
                 float alpha = initialAlpha - Mathf.Abs(i) * alphaDifference;
