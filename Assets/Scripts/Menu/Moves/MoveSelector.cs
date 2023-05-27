@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class MoveSelector : MonoBehaviour
 {
-    private const int NUM_SELECTED_BLOCKS = 5;
+    private const int NUM_SELECTED_BLOCKS = 7;
 
     [Header("Parameters")]
     [SerializeField] private float distanceBetweenBlocks;
@@ -61,10 +61,17 @@ public class MoveSelector : MonoBehaviour
             GameObject tmp = Instantiate(moveBlockPrefab);
             tmp.transform.SetParent(gameObject.transform, false);
             moveBlocks.Add(tmp.GetComponent<RectTransform>());
-        }
 
-        initialScale = moveBlocks[0].localScale;
-        initialAlpha = moveBlocks[0].GetComponent<Image>().color.a;
+            if(i == 0)
+            {
+                initialScale = moveBlocks[i].localScale;
+                initialAlpha = moveBlocks[i].GetComponent<Image>().color.a;
+            }
+
+            moveBlocks[i].localPosition = new Vector3(900, 0, 0);
+            moveBlocks[i].localScale = new Vector3(0.4f, 0.4f, 0);
+            moveBlocks[i].GetComponent<Image>().color = new Color(255, 255, 255, 0);
+        }
     }
 
     private void DPad(Vector2 value)
@@ -93,7 +100,7 @@ public class MoveSelector : MonoBehaviour
         }
     }
 
-    public IEnumerator LerpRectTransformAsync(RectTransform rectTransform, Vector3 targetPosition, Vector3 targetScale, float duration)
+    public IEnumerator LerpRectTransform(RectTransform rectTransform, Vector3 targetPosition, Vector3 targetScale, float duration)
     {
         Vector3 startPosition = rectTransform.localPosition;
         Vector3 startScale = rectTransform.localScale;
@@ -114,6 +121,24 @@ public class MoveSelector : MonoBehaviour
         rectTransform.localScale = targetScale;
     }
 
+    public IEnumerator LerpColor(Image image, Color color, float duration)
+    {
+        Color startColor = image.color;
+        float elapsedTime = 0f;
+
+        while (elapsedTime < duration)
+        {
+            elapsedTime += Time.deltaTime;
+            float t = Mathf.Clamp01(elapsedTime / duration);
+
+            image.color = Color.Lerp(startColor, color, t);
+
+            yield return null;
+        }
+
+        image.color = color;
+    }
+
     private void UpdateSelectedBlocks()
     {
         moveBlocks.ForEach(b => b.gameObject.SetActive(false));
@@ -125,14 +150,16 @@ public class MoveSelector : MonoBehaviour
                 moveBlocks[actualIndex + i].gameObject.SetActive(true);
 
                 float scale = initialScale.x - Mathf.Abs(i) * scaleDifference;
-                StartCoroutine(LerpRectTransformAsync(moveBlocks[actualIndex + i],
+                float alpha = initialAlpha - Mathf.Abs(i) * alphaDifference;
+
+                StartCoroutine(LerpRectTransform(moveBlocks[actualIndex + i],
                                                       new Vector3(i * distanceBetweenBlocks, 0, 0),
                                                       new Vector3(scale, scale, 0),
                                                       lerpDuration));
 
-                Image current = moveBlocks[actualIndex + i].GetComponent<Image>();
-                float alpha = initialAlpha - Mathf.Abs(i) * alphaDifference;
-                current.color = new Color(255, 255, 255, alpha); 
+                StartCoroutine(LerpColor(moveBlocks[actualIndex + i].GetComponent<Image>(),
+                                         new Color(255, 255, 255, alpha),
+                                         lerpDuration));
             }
         });
     }

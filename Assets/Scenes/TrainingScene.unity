@@ -765,12 +765,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   distanceBetweenBlocks: 300
   scaleDifference: 0.2
-  alphaDifference: 0.1
+  alphaDifference: 0.2
   lerpDuration: 0.25
   moves:
   - {fileID: 11400000, guid: cb8a3bef13b8ff948b45889b9d0268de, type: 2}
   - {fileID: 11400000, guid: 57b017aabdc8caf4fa11ee93fb5a5714, type: 2}
   - {fileID: 11400000, guid: 19854063ba4a509409698682dd6d1ef5, type: 2}
+  - {fileID: 11400000, guid: 20e698f21bf5aa84cb0cad575ccd63cf, type: 2}
+  - {fileID: 11400000, guid: 20e698f21bf5aa84cb0cad575ccd63cf, type: 2}
+  - {fileID: 11400000, guid: 20e698f21bf5aa84cb0cad575ccd63cf, type: 2}
   - {fileID: 11400000, guid: 20e698f21bf5aa84cb0cad575ccd63cf, type: 2}
   moveBlockPrefab: {fileID: 4541972726985063503, guid: 4810a815e6003224bb0f8e9850bf63ac,
     type: 3}
