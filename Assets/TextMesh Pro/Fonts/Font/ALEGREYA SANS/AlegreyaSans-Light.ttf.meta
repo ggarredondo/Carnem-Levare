@@ -1,0 +1,22 @@
+fileFormatVersion: 2
+guid: 7c510d4394e14f64eaa561ee16c746e2
+TrueTypeFontImporter:
+  externalObjects: {}
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontNames:
+  - Alegreya Sans Light
+  fallbackFontReferences:
+  - {fileID: 12800000, guid: f8b137b75b2e19b438625a1c1708f932, type: 3}
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  useLegacyBoundsCalculation: 0
+  shouldRoundAdvanceValue: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

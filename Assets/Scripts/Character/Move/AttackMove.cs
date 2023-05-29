@@ -34,8 +34,8 @@ public class AttackMove : Move
         stringData?.Add("Active"); stringData?.Add((int)RelativeActive + " ms");
         stringData?.Add("Recovery"); stringData?.Add((int)RelativeRecovery + " ms");
 
-        stringData?.Add("Adv. On Hit"); stringData?.Add(((int) AdvantageOnHit).ToString());
-        stringData?.Add("Adv. On Block"); stringData?.Add(((int) AdvantageOnBlock).ToString());
+        stringData?.Add("Adv. On Hit"); stringData?.Add((int) AdvantageOnHit + " ms");
+        stringData?.Add("Adv. On Block"); stringData?.Add((int) AdvantageOnBlock + " ms");
     }
 
     public override void InitMove(in CharacterStats stats)

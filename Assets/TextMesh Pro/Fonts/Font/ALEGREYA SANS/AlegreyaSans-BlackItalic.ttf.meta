@@ -1,0 +1,22 @@
+fileFormatVersion: 2
+guid: d3f3db3e3778a3d40beac09cea49e1ad
+TrueTypeFontImporter:
+  externalObjects: {}
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontNames:
+  - Alegreya Sans Black
+  fallbackFontReferences:
+  - {fileID: 12800000, guid: 11f5eb18b12e0ab40935f3d462aaad95, type: 3}
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  useLegacyBoundsCalculation: 0
+  shouldRoundAdvanceValue: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
