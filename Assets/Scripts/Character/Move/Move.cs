@@ -48,6 +48,7 @@ public abstract class Move : ScriptableObject
             AssignEvents();
             applyAnimationEvents = false;
         }
+        UpdateStringData();
     }
 
     private AnimationEvent CreateAnimationEvent(string functionName, double timeInMs)
