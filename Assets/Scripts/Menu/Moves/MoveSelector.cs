@@ -1,60 +1,72 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class MoveSelector : MonoBehaviour
 {
-    private const int NUM_SELECTED_BLOCKS = 7;
-
     [Header("Parameters")]
+    [SerializeField] private int numSelectedBlocks = 7;
     [SerializeField] private float distanceBetweenBlocks;
     [Range(0, 1)] [SerializeField] private float scaleDifference;
     [Range(0, 1)] [SerializeField] private float alphaDifference;
     [Range(0, 1)] [SerializeField] private float lerpDuration;
 
     [Header("Requirements")]
-    [SerializeField] private List<Move> moves;
     [SerializeField] private GameObject moveBlockPrefab;
-    [SerializeField] private InputReader inputReader;
 
     private List<RectTransform> moveBlocks = new();
-    private List<int> selectedIndex = new(NUM_SELECTED_BLOCKS);
+    private List<int> selectedIndex;
     private int actualIndex = 0;
 
     private Vector3 initialScale;
     private float initialAlpha;
 
-    private void OnEnable()
+    public void RightMoveBlock()
     {
-        inputReader.DPAdEvent += DPad;
+        if (actualIndex + 1 < moveBlocks.Count)
+        {
+            actualIndex++;
+            UpdateSelectedBlocks();
+        }
     }
 
-    private void OnDisable()
+    public void LeftMoveBlock()
     {
-        inputReader.DPAdEvent -= DPad;
+        if (actualIndex - 1 >= 0)
+        {
+            actualIndex--;
+            UpdateSelectedBlocks();
+        }
     }
 
-    private void Awake()
+    public int GetActualIndex()
+    {
+        return actualIndex;
+    }
+
+    public void Initialize(ref List<Move> moves)
     {
         InitializeBlockIndex();
-        InitializeMoveBlocks();
+        InitializeMoveBlocks(ref moves);
         UpdateSelectedBlocks();
     }
 
     private void InitializeBlockIndex()
     {
-        int start = NUM_SELECTED_BLOCKS / 2;
+        selectedIndex = new(numSelectedBlocks);
+        int start = numSelectedBlocks / 2;
         start *= -1;
 
-        for (int i = 0; i < NUM_SELECTED_BLOCKS; i++)
+        for (int i = 0; i < numSelectedBlocks; i++)
         {
             selectedIndex.Add(start);
             start++;
         }
     }
 
-    private void InitializeMoveBlocks()
+    private void InitializeMoveBlocks(ref List<Move> moves)
     {
         for (int i = 0; i < moves.Count; i++)
         {
@@ -68,39 +80,16 @@ public class MoveSelector : MonoBehaviour
                 initialAlpha = moveBlocks[i].GetComponent<Image>().color.a;
             }
 
-            moveBlocks[i].localPosition = new Vector3(900, 0, 0);
-            moveBlocks[i].localScale = new Vector3(0.4f, 0.4f, 0);
+            moveBlocks[i].localPosition = new Vector3(selectedIndex[^1] * distanceBetweenBlocks, 0, 0);
+
+            float scale = initialScale.x - selectedIndex[^1] * scaleDifference;
+            moveBlocks[i].localScale = new Vector3(scale, scale, 0);
+
             moveBlocks[i].GetComponent<Image>().color = new Color(255, 255, 255, 0);
         }
     }
 
-    private void DPad(Vector2 value)
-    {
-        if (value == new Vector2(-1, 0))
-            LeftMoveBlock();
-        if (value == new Vector2(1, 0))
-            RightMoveBlock();
-    }
-
-    private void RightMoveBlock()
-    {
-        if (actualIndex + 1 < moveBlocks.Count)
-        {
-            actualIndex++;
-            UpdateSelectedBlocks();
-        }
-    }
-
-    private void LeftMoveBlock()
-    {
-        if (actualIndex - 1 >= 0)
-        {
-            actualIndex--;
-            UpdateSelectedBlocks();
-        }
-    }
-
-    public IEnumerator LerpRectTransform(RectTransform rectTransform, Vector3 targetPosition, Vector3 targetScale, float duration)
+    public async void LerpRectTransform(RectTransform rectTransform, Vector3 targetPosition, Vector3 targetScale, float duration)
     {
         Vector3 startPosition = rectTransform.localPosition;
         Vector3 startScale = rectTransform.localScale;
@@ -114,14 +103,14 @@ public class MoveSelector : MonoBehaviour
             rectTransform.localPosition = Vector3.Lerp(startPosition, targetPosition, t);
             rectTransform.localScale = Vector3.Lerp(startScale, targetScale, t);
 
-            yield return null;
+            await Task.Yield();
         }
 
         rectTransform.localPosition = targetPosition;
         rectTransform.localScale = targetScale;
     }
 
-    public IEnumerator LerpColor(Image image, Color color, float duration)
+    public async void LerpColor(Image image, Color color, float duration)
     {
         Color startColor = image.color;
         float elapsedTime = 0f;
@@ -133,7 +122,7 @@ public class MoveSelector : MonoBehaviour
 
             image.color = Color.Lerp(startColor, color, t);
 
-            yield return null;
+            await Task.Yield();
         }
 
         image.color = color;
@@ -152,14 +141,14 @@ public class MoveSelector : MonoBehaviour
                 float scale = initialScale.x - Mathf.Abs(i) * scaleDifference;
                 float alpha = initialAlpha - Mathf.Abs(i) * alphaDifference;
 
-                StartCoroutine(LerpRectTransform(moveBlocks[actualIndex + i],
-                                                      new Vector3(i * distanceBetweenBlocks, 0, 0),
-                                                      new Vector3(scale, scale, 0),
-                                                      lerpDuration));
+                LerpRectTransform(moveBlocks[actualIndex + i],
+                                  new Vector3(i * distanceBetweenBlocks, 0, 0),
+                                  new Vector3(scale, scale, 0),
+                                  lerpDuration);
 
-                StartCoroutine(LerpColor(moveBlocks[actualIndex + i].GetComponent<Image>(),
-                                         new Color(255, 255, 255, alpha),
-                                         lerpDuration));
+                LerpColor(moveBlocks[actualIndex + i].GetComponent<Image>(),
+                          new Color(255, 255, 255, alpha),
+                          lerpDuration);
             }
         });
     }
