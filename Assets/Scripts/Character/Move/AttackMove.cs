@@ -48,6 +48,9 @@ public class AttackMove : Move
     }
     public override void EndMove() {}
 
+    public float BaseDamage => baseDamage;
+    public bool Unblockable => unblockable;
+
     public double AdvantageOnBlock => blockStun - (RelativeActive + RelativeRecovery);
     public double AdvantageOnHit => hitStun - (RelativeActive + RelativeRecovery);
 }
