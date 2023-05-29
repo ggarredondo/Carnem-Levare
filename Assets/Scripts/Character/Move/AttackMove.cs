@@ -47,4 +47,7 @@ public class AttackMove : Move
         currentHitbox.SetActive(false);
     }
     public override void EndMove() {}
+
+    public double AdvantageOnBlock => blockStun - (RelativeActive + RelativeRecovery);
+    public double AdvantageOnHit => hitStun - (RelativeActive + RelativeRecovery);
 }

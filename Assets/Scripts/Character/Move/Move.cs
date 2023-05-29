@@ -77,4 +77,8 @@ public abstract class Move : ScriptableObject
     public ref readonly AnimationClip Animation { get => ref animation; }
     public ref readonly float AnimationSpeed { get => ref animationSpeed; }
     public ref readonly string InitSound { get => ref initSound; }
+
+    public double RelativeStartUp => startUp / animationSpeed;
+    public double RelativeActive => active / animationSpeed;
+    public double RelativeRecovery => recovery / animationSpeed;
 }
