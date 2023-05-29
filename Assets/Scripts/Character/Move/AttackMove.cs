@@ -26,6 +26,7 @@ public class AttackMove : Move
 
     protected override void UpdateStringData()
     {
+        stringData.Clear();
         stringData.Add("Name"); stringData.Add(moveName);
         stringData.Add("Damage"); stringData.Add(baseDamage.ToString());
 
