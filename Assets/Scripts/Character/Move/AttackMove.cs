@@ -27,15 +27,15 @@ public class AttackMove : Move
     protected override void UpdateStringData()
     {
         stringData?.Clear();
-        stringData.Add("Name"); stringData.Add(moveName);
-        stringData.Add("Damage"); stringData.Add(baseDamage.ToString());
+        stringData?.Add("Name"); stringData?.Add(moveName);
+        stringData?.Add("Damage"); stringData?.Add(baseDamage.ToString());
 
-        stringData.Add("Start Up"); stringData.Add((int)RelativeStartUp + " ms");
-        stringData.Add("Active"); stringData.Add((int)RelativeActive + " ms");
-        stringData.Add("Recovery"); stringData.Add((int)RelativeRecovery + " ms");
+        stringData?.Add("Start Up"); stringData?.Add((int)RelativeStartUp + " ms");
+        stringData?.Add("Active"); stringData?.Add((int)RelativeActive + " ms");
+        stringData?.Add("Recovery"); stringData?.Add((int)RelativeRecovery + " ms");
 
-        stringData.Add("Advantage On Hit"); stringData.Add(((int) AdvantageOnHit).ToString());
-        stringData.Add("Advantage On Block"); stringData.Add(((int) AdvantageOnBlock).ToString());
+        stringData?.Add("Advantage On Hit"); stringData?.Add(((int) AdvantageOnHit).ToString());
+        stringData?.Add("Advantage On Block"); stringData?.Add(((int) AdvantageOnBlock).ToString());
     }
 
     public override void InitMove(in CharacterStats stats)
