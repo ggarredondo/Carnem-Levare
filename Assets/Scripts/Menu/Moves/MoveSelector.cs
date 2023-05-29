@@ -6,22 +6,51 @@ using UnityEngine.UI;
 
 public class MoveSelector : MonoBehaviour
 {
-    [Header("Parameters")]
+    [Header("Right/Left Parameters")]
     [SerializeField] private int numSelectedBlocks = 7;
     [SerializeField] private float distanceBetweenBlocks;
     [Range(0, 1)] [SerializeField] private float scaleDifference;
     [Range(0, 1)] [SerializeField] private float alphaDifference;
     [Range(0, 1)] [SerializeField] private float lerpDuration;
 
+    [Header("Select Parameters")]
+    [SerializeField] private Vector3 selectPosition;
+    [SerializeField] private float selectScale;
+    [Range(0, 1)] [SerializeField] private float selectLerpDuration;
+
     [Header("Requirements")]
     [SerializeField] private GameObject moveBlockPrefab;
 
-    private List<RectTransform> moveBlocks = new();
+    private readonly List<RectTransform> moveBlocks = new();
     private List<int> selectedIndex;
     private int actualIndex = 0;
 
     private Vector3 initialScale;
     private float initialAlpha;
+
+    public void SelectBlock()
+    {
+        LerpRectTransform(moveBlocks[actualIndex],
+                          selectPosition,
+                          new Vector3(selectScale, selectScale, 0),
+                          selectLerpDuration);
+
+        LerpColor(moveBlocks[actualIndex].GetComponent<Image>(),
+                  new Color(1, 1, 1, 1),
+                  selectLerpDuration);
+    }
+
+    public void DeselectBlock()
+    {
+        LerpRectTransform(moveBlocks[actualIndex],
+                          new Vector3(0,0,0),
+                          initialScale,
+                          selectLerpDuration);
+
+        LerpColor(moveBlocks[actualIndex].GetComponent<Image>(),
+                  new Color(1, 1, 1, initialAlpha),
+                  selectLerpDuration);
+    }
 
     public void RightMoveBlock()
     {
@@ -89,7 +118,7 @@ public class MoveSelector : MonoBehaviour
         }
     }
 
-    public async void LerpRectTransform(RectTransform rectTransform, Vector3 targetPosition, Vector3 targetScale, float duration)
+    private async void LerpRectTransform(RectTransform rectTransform, Vector3 targetPosition, Vector3 targetScale, float duration)
     {
         Vector3 startPosition = rectTransform.localPosition;
         Vector3 startScale = rectTransform.localScale;
@@ -110,7 +139,7 @@ public class MoveSelector : MonoBehaviour
         rectTransform.localScale = targetScale;
     }
 
-    public async void LerpColor(Image image, Color color, float duration)
+    private async void LerpColor(Image image, Color color, float duration)
     {
         Color startColor = image.color;
         float elapsedTime = 0f;

@@ -2,6 +2,7 @@ using System.Threading.Tasks;
 using UnityEngine;
 using TMPro;
 using System.Collections.Generic;
+using UnityEngine.UI;
 
 public class MoveInfo : MonoBehaviour
 {
@@ -16,18 +17,23 @@ public class MoveInfo : MonoBehaviour
     private bool isMoving;
 
     private RectTransform rectTransform;
+    private Image image;
+    private float initialAlpha;
 
-    public void Initialize()
+    public void Initialize(in List<string> list)
     {
         rectTransform = GetComponent<RectTransform>();
+        image = GetComponent<Image>();
+        initialAlpha = image.color.a;
+        UpdateInfoBox(in list);
     }
 
-    public void UpdateInfoBox(ref Move move)
+    public void UpdateInfoBox(in List<string> list)
     {
         if(!isMoving)
             Movement();
 
-        UpdateText(in move.StringData);
+        UpdateText(in list);
     }
 
     private void UpdateText(in List<string> list)
@@ -45,19 +51,24 @@ public class MoveInfo : MonoBehaviour
     private async void Movement()
     {
         isMoving = true;
-        await LerpRectTransform(rectTransform, new Vector3(rectTransform.localPosition.x,
-                                                           rectTransform.localPosition.y + yPositionDifference, 
-                                                           rectTransform.localPosition.z), lerpDuration);
+        await LerpRectTransform(new Vector3(rectTransform.localPosition.x,
+                                            rectTransform.localPosition.y + yPositionDifference, 
+                                            rectTransform.localPosition.z),
+                                            new Color(255,255,255, initialAlpha/2),
+                                            lerpDuration);
 
-        await LerpRectTransform(rectTransform, new Vector3(rectTransform.localPosition.x,
-                                                   rectTransform.localPosition.y - yPositionDifference,
-                                                   rectTransform.localPosition.z), lerpDuration);
+        await LerpRectTransform(new Vector3(rectTransform.localPosition.x,
+                                            rectTransform.localPosition.y - yPositionDifference,
+                                            rectTransform.localPosition.z),
+                                            new Color(255, 255, 255, initialAlpha),
+                                            lerpDuration);
         isMoving = false;
     }
 
-    private async Task LerpRectTransform(RectTransform rectTransform, Vector3 targetPosition, float duration)
+    private async Task LerpRectTransform(Vector3 targetPosition, Color targetColor, float duration)
     {
         Vector3 startPosition = rectTransform.localPosition;
+        Color startColor = image.color;
         float elapsedTime = 0f;
 
         while (elapsedTime < duration)
@@ -66,10 +77,12 @@ public class MoveInfo : MonoBehaviour
             float t = Mathf.Clamp01(elapsedTime / duration);
 
             rectTransform.localPosition = Vector3.Lerp(startPosition, targetPosition, t);
+            image.color = Color.Lerp(startColor, targetColor, t);
 
             await Task.Yield();
         }
 
         rectTransform.localPosition = targetPosition;
+        image.color = targetColor;
     }
 }
