@@ -997,15 +997,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bcdf7d66540e58d418b01e6516b2f898, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moves:
-  - {fileID: 11400000, guid: cb8a3bef13b8ff948b45889b9d0268de, type: 2}
-  - {fileID: 11400000, guid: 57b017aabdc8caf4fa11ee93fb5a5714, type: 2}
-  - {fileID: 11400000, guid: 19854063ba4a509409698682dd6d1ef5, type: 2}
-  - {fileID: 11400000, guid: 20e698f21bf5aa84cb0cad575ccd63cf, type: 2}
-  - {fileID: 11400000, guid: 20e698f21bf5aa84cb0cad575ccd63cf, type: 2}
-  - {fileID: 11400000, guid: 20e698f21bf5aa84cb0cad575ccd63cf, type: 2}
-  - {fileID: 11400000, guid: 20e698f21bf5aa84cb0cad575ccd63cf, type: 2}
-  - {fileID: 11400000, guid: 20e698f21bf5aa84cb0cad575ccd63cf, type: 2}
   moveSelector: {fileID: 470376220}
   infoBox: {fileID: 117470340}
   inputReader: {fileID: 11400000, guid: cb514f7bc969f1e4da23444266f585b7, type: 2}

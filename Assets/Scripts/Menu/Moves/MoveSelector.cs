@@ -52,22 +52,26 @@ public class MoveSelector : MonoBehaviour
                   selectLerpDuration);
     }
 
-    public void RightMoveBlock()
+    public bool RightMoveBlock()
     {
         if (actualIndex + 1 < moveBlocks.Count)
         {
             actualIndex++;
             UpdateSelectedBlocks();
+            return true;
         }
+        else return false;
     }
 
-    public void LeftMoveBlock()
+    public bool LeftMoveBlock()
     {
         if (actualIndex - 1 >= 0)
         {
             actualIndex--;
             UpdateSelectedBlocks();
+            return true;
         }
+        else return false;
     }
 
     public int GetActualIndex()

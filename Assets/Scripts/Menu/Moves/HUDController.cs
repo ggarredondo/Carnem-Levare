@@ -10,16 +10,50 @@ public class HUDController : MonoBehaviour
     [Header("Parameters")]
     [Range(0,1)] [SerializeField] private float lerpDuration;
 
+
+    private Player player;
+    private GameObject enemy;
+    private CameraController cameraController;
+    private bool cameraChanged;
+
     private int actualHUDMenu = 0;
+
+    private void Awake()
+    {
+        player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
+        enemy = GameObject.FindGameObjectWithTag("Enemy");
+        cameraController = GameObject.FindGameObjectWithTag("CAMERA").GetComponent<CameraController>();
+    }
 
     private void OnEnable()
     {
         inputReader.SelectMenuEvent += ChangeHUDMenu;
+        inputReader.ChangeCamera += ChangeCamera;
     }
 
     private void OnDisable()
     {
         inputReader.SelectMenuEvent -= ChangeHUDMenu;
+        inputReader.ChangeCamera -= ChangeCamera;
+    }
+
+    private void ChangeCamera()
+    {
+        if (!cameraChanged)
+        {
+            player.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
+            cameraController.changeVirtualCamera = CameraType.GOPRO;
+            enemy.SetActive(false);
+        }
+        else
+        {
+            player.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeRotation;
+            cameraController.changeVirtualCamera = CameraType.DEFAULT;
+            enemy.SetActive(true);
+            AudioController.Instance.gameSfxSounds.StopAllSounds();
+        }
+
+        cameraChanged = !cameraChanged;
     }
 
     public async void ChangeHUDMenu()

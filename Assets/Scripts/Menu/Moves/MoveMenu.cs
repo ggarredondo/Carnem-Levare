@@ -29,23 +29,27 @@ public class MoveMenu : MonoBehaviour
 
     private void DPad(Vector2 value)
     {
-        Move actualMove = moves[moveSelector.GetActualIndex()];
-
         if (value == new Vector2(-1, 0))
         {
-            moveSelector.LeftMoveBlock();
-            infoBox.UpdateInfoBox(in moves[moveSelector.GetActualIndex()].StringData);
+            if (moveSelector.LeftMoveBlock())
+                infoBox.UpdateInfoBox(in moves[moveSelector.GetActualIndex()].StringData);
+            else infoBox.Movement(new Color(0.5f,0.5f,0.5f));
         }
         if (value == new Vector2(1, 0))
         {
-            moveSelector.RightMoveBlock();
-            infoBox.UpdateInfoBox(in moves[moveSelector.GetActualIndex()].StringData);
+            if(moveSelector.RightMoveBlock())
+                infoBox.UpdateInfoBox(in moves[moveSelector.GetActualIndex()].StringData);
+            else infoBox.Movement(new Color(0.5f, 0.5f, 0.5f));
         }
 
-        if(value == new Vector2(0, 1))
+        if (value == new Vector2(0, 1))
+        {
             moveSelector.SelectBlock();
+        }
 
         if (value == new Vector2(0, -1))
+        {
             moveSelector.DeselectBlock();
+        }
     }
 }

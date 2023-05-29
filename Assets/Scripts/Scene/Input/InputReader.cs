@@ -11,6 +11,7 @@ public class InputReader : ScriptableObject
     public event System.Action StartPauseMenuEvent;
 
     public event System.Action SelectMenuEvent;
+    public event System.Action ChangeCamera;
     public event System.Action<Vector2> DPAdEvent;
 
     public void OnMouseClick(InputAction.CallbackContext context)
@@ -46,5 +47,10 @@ public class InputReader : ScriptableObject
     public void OnDPAd(InputAction.CallbackContext context)
     {
         if (context.performed) DPAdEvent?.Invoke(context.ReadValue<Vector2>());
+    }
+
+    public void OnChangeCamera(InputAction.CallbackContext context)
+    {
+        if (context.performed) ChangeCamera?.Invoke();
     }
 }

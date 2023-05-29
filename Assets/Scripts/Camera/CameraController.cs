@@ -91,12 +91,10 @@ public class CameraController : MonoBehaviour
         {
             if (actualVirtualCamera == CameraType.GOPRO)
             {
-                SetLayerAllChildren(enemy.gameObject.transform, LayerMask.NameToLayer("NoCamera"));
                 SetLayerAllChildren(followObject.transform, LayerMask.NameToLayer("NoCamera"));
             }
             else
             {
-                SetLayerAllChildren(enemy.gameObject.transform, LayerMask.NameToLayer("Default"));
                 SetLayerAllChildren(followObject.transform, LayerMask.NameToLayer("Default"));
             }
 

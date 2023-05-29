@@ -535,7 +535,7 @@ MonoBehaviour:
   m_UpdateMethod: 1
   m_BlendUpdateMethod: 1
   m_DefaultBlend:
-    m_Style: 1
+    m_Style: 0
     m_Time: 2
     m_CustomCurve:
       serializedVersion: 2
@@ -1032,7 +1032,7 @@ GameObject:
   - component: {fileID: 2835685395483145560}
   m_Layer: 0
   m_Name: Camera
-  m_TagString: Untagged
+  m_TagString: CAMERA
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1157,7 +1157,7 @@ GameObject:
   - component: {fileID: 2835685396104087955}
   m_Layer: 0
   m_Name: Virtual Camera
-  m_TagString: CAMERA
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

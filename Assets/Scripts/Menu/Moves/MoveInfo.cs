@@ -31,7 +31,7 @@ public class MoveInfo : MonoBehaviour
     public void UpdateInfoBox(in List<string> list)
     {
         if(!isMoving)
-            Movement();
+            Movement(new Color(1,1,1));
 
         UpdateText(in list);
     }
@@ -48,19 +48,19 @@ public class MoveInfo : MonoBehaviour
         }
     }
 
-    private async void Movement()
+    public async void Movement(Color color)
     {
         isMoving = true;
         await LerpRectTransform(new Vector3(rectTransform.localPosition.x,
                                             rectTransform.localPosition.y + yPositionDifference, 
                                             rectTransform.localPosition.z),
-                                            new Color(255,255,255, initialAlpha/2),
+                                            new Color(color.r,color.g,color.b, initialAlpha/2),
                                             lerpDuration);
 
         await LerpRectTransform(new Vector3(rectTransform.localPosition.x,
                                             rectTransform.localPosition.y - yPositionDifference,
                                             rectTransform.localPosition.z),
-                                            new Color(255, 255, 255, initialAlpha),
+                                            new Color(1, 1, 1, initialAlpha),
                                             lerpDuration);
         isMoving = false;
     }
