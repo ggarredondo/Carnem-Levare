@@ -39,7 +39,11 @@ public abstract class Move : ScriptableObject
     [SerializeField] protected double trackingLength;
 
     protected abstract void UpdateStringData();
-    private void OnEnable() => UpdateStringData();
+    private void OnEnable()
+    {
+        stringData = new List<string>();
+        UpdateStringData();
+    }
 
     private void OnValidate()
     {
