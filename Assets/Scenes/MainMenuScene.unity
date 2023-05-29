@@ -645,6 +645,14 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: 8f006f83-0367-4932-80f0-42ce968fad13
     m_ActionName: LoadingScreen/Stop[/XInputControllerWindows/buttonSouth,/Keyboard/a]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 25f016b5-d5f3-4e09-af4f-b475577e7c3f
+    m_ActionName: Main Movement/Select[/XInputControllerWindows/select,/Keyboard/tab]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 86c7ae0b-39d3-4ed7-ade8-84f2a8bd7c84
+    m_ActionName: Main Movement/D-Pad[/XInputControllerWindows/dpad/up,/XInputControllerWindows/dpad/down,/XInputControllerWindows/dpad/left,/XInputControllerWindows/dpad/right]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: UI
