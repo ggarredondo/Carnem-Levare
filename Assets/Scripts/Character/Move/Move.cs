@@ -1,40 +1,45 @@
 using UnityEngine;
 using System;
+using System.Collections.Generic;
 
 public abstract class Move : ScriptableObject
 {
+    protected List<string> stringData;
     protected CharacterStats stats;
     protected Character character;
-    [SerializeField] private string moveName;
+    [SerializeField] protected string moveName;
 
     [Header("Move Animation")]
-    [SerializeField] private AnimationClip animation;
-    [SerializeField] private float animationSpeed = 1f;
+    [SerializeField] protected AnimationClip animation;
+    [SerializeField] protected float animationSpeed = 1f;
 
     [Tooltip("Will reset animators if in play mode")]
-    [SerializeField] private bool applyAnimationEvents = false;
+    [SerializeField] protected bool applyAnimationEvents = false;
 
     [Header("Move Sound")]
-    [SerializeField] private string initSound;
+    [SerializeField] protected string initSound;
 
     [Header("Time Data (ms) (animation events)")]
 
     [Tooltip("[0, startUp): move is starting.")]
-    [SerializeField] private double startUp;
+    [SerializeField] protected double startUp;
 
     [Tooltip("[startUp, startUp+active): move is active.")]
-    [SerializeField] private double active;
+    [SerializeField] protected double active;
 
     [Tooltip("[startUp+active, startUp+active+recovery): move is recovering.")]
-    [SerializeField] private double recovery;
+    [SerializeField] protected double recovery;
 
     [Header("Other Time Data (ms) (animation events)")]
 
     [Tooltip("Move starts tracking at *startTracking* ms from being performed")]
-    [SerializeField] private double startTracking;
+    [SerializeField] protected double startTracking;
 
     [Tooltip("Move will track for *trackingLength* ms after enabling tracking")]
-    [SerializeField] private double trackingLength;
+    [SerializeField] protected double trackingLength;
+
+    protected abstract void UpdateStringData();
+    private void OnEnable() => UpdateStringData();
 
     private void OnValidate()
     {
@@ -78,7 +83,13 @@ public abstract class Move : ScriptableObject
     public ref readonly float AnimationSpeed { get => ref animationSpeed; }
     public ref readonly string InitSound { get => ref initSound; }
 
+    public double StartUp => startUp;
+    public double Active => active;
+    public double Recovery => recovery;
+
     public double RelativeStartUp => startUp / animationSpeed;
     public double RelativeActive => active / animationSpeed;
     public double RelativeRecovery => recovery / animationSpeed;
+
+    public ref readonly List<string> StringData => ref stringData;
 }

@@ -24,6 +24,19 @@ public class AttackMove : Move
     [SerializeField] private Stagger animationStagger;
     [SerializeField] private bool unblockable;
 
+    protected override void UpdateStringData()
+    {
+        stringData.Add("Name"); stringData.Add(moveName);
+        stringData.Add("Damage"); stringData.Add(baseDamage.ToString());
+
+        stringData.Add("Start Up"); stringData.Add((int)RelativeStartUp + " ms");
+        stringData.Add("Active"); stringData.Add((int)RelativeActive + " ms");
+        stringData.Add("Recovery"); stringData.Add((int)RelativeRecovery + " ms");
+
+        stringData.Add("Advantage On Hit"); stringData.Add(((int) AdvantageOnHit).ToString());
+        stringData.Add("Advantage On Block"); stringData.Add(((int) AdvantageOnBlock).ToString());
+    }
+
     public override void InitMove(in CharacterStats stats)
     {
         currentHitbox = stats.HitboxList[(int) hitbox];
@@ -50,6 +63,9 @@ public class AttackMove : Move
 
     public float BaseDamage => baseDamage;
     public bool Unblockable => unblockable;
+
+    public double BlockStun => blockStun;
+    public double HitStun => hitStun;
 
     public double AdvantageOnBlock => blockStun - (RelativeActive + RelativeRecovery);
     public double AdvantageOnHit => hitStun - (RelativeActive + RelativeRecovery);
