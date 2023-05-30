@@ -7,6 +7,8 @@ public abstract class Move : ScriptableObject
     protected List<string> stringData;
     protected CharacterStats stats;
     protected Character character;
+
+    [SerializeField] protected Sprite icon;
     [SerializeField] protected string moveName;
 
     [Header("Move Animation")]

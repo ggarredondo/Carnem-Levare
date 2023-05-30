@@ -3,7 +3,7 @@ using UnityEngine.InputSystem;
 
 public class InputController : Controller
 {
-    public int ACTION0_INDEX = 0, ACTION1_INDEX = 1, ACTION2_INDEX = 2, ACTION3_INDEX = 3;
+    [ReadOnlyField] public int ACTION0_INDEX = 0, ACTION1_INDEX = 1, ACTION2_INDEX = 2, ACTION3_INDEX = 3;
 
     public void PressMovement(InputAction.CallbackContext context)
     {
