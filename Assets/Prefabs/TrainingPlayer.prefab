@@ -790,6 +790,9 @@ MonoBehaviour:
     - {fileID: 11400000, guid: 20e698f21bf5aa84cb0cad575ccd63cf, type: 2}
     - {fileID: 11400000, guid: 57b017aabdc8caf4fa11ee93fb5a5714, type: 2}
     - {fileID: 11400000, guid: 19854063ba4a509409698682dd6d1ef5, type: 2}
+    - {fileID: 11400000, guid: fed6e55389eb6344083a2e7797c2d516, type: 2}
+    - {fileID: 11400000, guid: 7e2bf30cc617dce4e8409007dd2808fe, type: 2}
+    - {fileID: 11400000, guid: 248b1a05a995d4a49a2fe680287cdf59, type: 2}
     hitboxList:
     - {fileID: 6343724655685897838}
     - {fileID: 2801868370514863915}
@@ -818,6 +821,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 072400a3141bc664485729ff590b307c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ACTION0_INDEX: 0
+  ACTION1_INDEX: 1
+  ACTION2_INDEX: 2
+  ACTION3_INDEX: 3
 --- !u!54 &2794588595183348619
 Rigidbody:
   m_ObjectHideFlags: 0
