@@ -20,6 +20,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/TrainingScene.unity
     guid: 71d302a04e8093b4d9f2a74bc98b053c
+  - enabled: 1
+    path: Assets/Scenes/PhotoshopScene.unity
+    guid: b8abac98fa3ef9d4fafebb7d6bc0254d
   m_configObjects:
     com.unity.input.settings: {fileID: 11400000, guid: 1936298257426d14bb0fc56d57eeedf8,
       type: 2}
