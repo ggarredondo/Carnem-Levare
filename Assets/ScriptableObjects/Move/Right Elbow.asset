@@ -1,0 +1,35 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3b1f0431d7ca2da48a12ff07183273eb, type: 3}
+  m_Name: Right Elbow
+  m_EditorClassIdentifier: 
+  icon: {fileID: 0}
+  moveName: Right Elbow
+  animation: {fileID: 7400000, guid: b0b1f1fa4e9c56c43ba528b7b9a03ec2, type: 2}
+  animationSpeed: 0.8
+  applyAnimationEvents: 0
+  initSound: Whiff_Jab
+  startUp: 100
+  active: 50
+  recovery: 350
+  startTracking: 0
+  trackingLength: 100
+  hitSound: Hit_Jab
+  blockedSound: Blocked_Default
+  hitShakeTime: 100
+  hitShakeIntensity: 7
+  blockStun: 400
+  hitStun: 800
+  hitbox: 3
+  baseDamage: 12
+  animationStagger: 1
+  unblockable: 0
