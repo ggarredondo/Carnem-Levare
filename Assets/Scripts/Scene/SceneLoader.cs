@@ -76,5 +76,6 @@ public enum SceneNumber
     LOADING_MENU = 1,
     NON_DESTROY_MAIN_MENU = 2,
     GAME = 3,
-    TRAINING = 4
+    TRAINING = 4,
+    PHOTOSHOP = 5
 }
