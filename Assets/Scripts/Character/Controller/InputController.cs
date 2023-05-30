@@ -3,6 +3,8 @@ using UnityEngine.InputSystem;
 
 public class InputController : Controller
 {
+    public int ACTION0_INDEX = 0, ACTION1_INDEX = 1, ACTION2_INDEX = 2, ACTION3_INDEX = 3;
+
     public void PressMovement(InputAction.CallbackContext context)
     {
         movementVector = context.ReadValue<Vector2>();
@@ -14,18 +16,18 @@ public class InputController : Controller
 
     public void Action0(InputAction.CallbackContext context)
     {
-        if (context.performed) DoMove(0);
+        if (context.performed) DoMove(ACTION0_INDEX);
     }
     public void Action1(InputAction.CallbackContext context)
     {
-        if (context.performed) DoMove(1);
+        if (context.performed) DoMove(ACTION1_INDEX);
     }
     public void Action2(InputAction.CallbackContext context)
     {
-        if (context.performed) DoMove(2);
+        if (context.performed) DoMove(ACTION2_INDEX);
     }
     public void Action3(InputAction.CallbackContext context)
     {
-        if (context.performed) DoMove(3);
+        if (context.performed) DoMove(ACTION3_INDEX);
     }
 }
