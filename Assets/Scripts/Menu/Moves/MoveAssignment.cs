@@ -71,11 +71,7 @@ public class MoveAssignment : MonoBehaviour
         await ChangeInput();
 
         if (inputController.assigning)
-        {
             inputController.actionIndexes[newMove] = moveSelected;
-            Debug.Log(moveSelected);
-            inputController.assigning = false;
-        }
     }
 
     public void EndChangeInput()

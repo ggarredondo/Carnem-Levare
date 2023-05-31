@@ -46,6 +46,7 @@ public class MoveSelector : MonoBehaviour
 
         await moveAssignment.StartChangeInput(actualIndex);
         moveAssignment.UpdateInput(ref moveBlocks);
+        DeselectBlock();
     }
 
     public void DeselectBlock()
@@ -67,6 +68,7 @@ public class MoveSelector : MonoBehaviour
         if (actualIndex + 1 < moveBlocks.Count)
         {
             actualIndex++;
+            moveAssignment.EndChangeInput();
             UpdateSelectedBlocks();
             return true;
         }
@@ -78,6 +80,7 @@ public class MoveSelector : MonoBehaviour
         if (actualIndex - 1 >= 0)
         {
             actualIndex--;
+            moveAssignment.EndChangeInput();
             UpdateSelectedBlocks();
             return true;
         }
