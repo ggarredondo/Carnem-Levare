@@ -4,8 +4,8 @@ using UnityEngine.InputSystem;
 
 public class InputController : Controller
 {
-    [ReadOnlyField] public List<int> ACTION_INDEX = new(4) { 0, 1, 2, 3 };
-    [ReadOnlyField] public bool assigning;
+    public List<int> actionIndexes = new(4) { 0, 1, 2, 3 };
+    [System.NonSerialized] public bool assigning;
 
     public void PressMovement(InputAction.CallbackContext context)
     {
@@ -18,18 +18,18 @@ public class InputController : Controller
 
     public void Action0(InputAction.CallbackContext context)
     {
-        if (context.performed && !assigning) DoMove(ACTION_INDEX[0]);
+        if (context.performed && !assigning) DoMove(actionIndexes[0]);
     }
     public void Action1(InputAction.CallbackContext context)
     {
-        if (context.performed && !assigning) DoMove(ACTION_INDEX[1]);
+        if (context.performed && !assigning) DoMove(actionIndexes[1]);
     }
     public void Action2(InputAction.CallbackContext context)
     {
-        if (context.performed && !assigning) DoMove(ACTION_INDEX[2]);
+        if (context.performed && !assigning) DoMove(actionIndexes[2]);
     }
     public void Action3(InputAction.CallbackContext context)
     {
-        if (context.performed && !assigning) DoMove(ACTION_INDEX[3]);
+        if (context.performed && !assigning) DoMove(actionIndexes[3]);
     }
 }

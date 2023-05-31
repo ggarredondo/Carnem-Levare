@@ -242,6 +242,64 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   target: 1
   character: {fileID: 7115871151908366452}
+--- !u!1 &5838331529888928801
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4241571213124366150}
+  - component: {fileID: 6443509204047346027}
+  - component: {fileID: 903136000488697184}
+  m_Layer: 7
+  m_Name: RightElbowHitbox
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4241571213124366150
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5838331529888928801}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 4920006408200123047}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!135 &6443509204047346027
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5838331529888928801}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.1
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &903136000488697184
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5838331529888928801}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a82aa67ada2d32b4482db86d74ee99d3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &6258304511305694117
 GameObject:
   m_ObjectHideFlags: 0
@@ -434,6 +492,8 @@ MonoBehaviour:
     hitboxList:
     - {fileID: 8298185608187347678}
     - {fileID: 1603956594911505768}
+    - {fileID: 6476973125119121845}
+    - {fileID: 903136000488697184}
     noHurt: 0
     noDeath: 1
   characterMovement:
@@ -447,7 +507,6 @@ MonoBehaviour:
   characterAnimation:
     animatorSpeed: 1
     updateMovesetAnimations: 0
-    updateAnimationEvents: 0
 --- !u!114 &1878726773391280501
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -482,8 +541,6 @@ MonoBehaviour:
       msUntilNextMove: 0
   minReactionTimeMs: 220
   maxReactionTimeMs: 320
-  spacingError: 0.5
-  timingError: 0
 --- !u!54 &5975427957589119885
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -510,7 +567,7 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 0.4
+  m_Radius: 0.3
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 1, z: 0}
@@ -535,6 +592,64 @@ MonoBehaviour:
     Item2: {fileID: 0}
   - Item1: {fileID: 0}
     Item2: {fileID: 2438128927966419538}
+--- !u!1 &7694901448823797697
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 205234585547245973}
+  - component: {fileID: 254053610150560295}
+  - component: {fileID: 6476973125119121845}
+  m_Layer: 7
+  m_Name: LeftElbowHitbox
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &205234585547245973
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7694901448823797697}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 72973766600931830}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!135 &254053610150560295
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7694901448823797697}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.1
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &6476973125119121845
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7694901448823797697}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a82aa67ada2d32b4482db86d74ee99d3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &7785335661098190231
 GameObject:
   m_ObjectHideFlags: 0
@@ -874,6 +989,12 @@ PrefabInstance:
     m_RemovedComponents:
     - {fileID: 5866666021909216657, guid: df8e8b4e49896f543828b277b6764350, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: df8e8b4e49896f543828b277b6764350, type: 3}
+--- !u!4 &72973766600931830 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -1812909498023395591, guid: df8e8b4e49896f543828b277b6764350,
+    type: 3}
+  m_PrefabInstance: {fileID: 7481606168323393295}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &3905230701384036967 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -3321919801592875672, guid: df8e8b4e49896f543828b277b6764350,
@@ -883,6 +1004,12 @@ Transform:
 --- !u!4 &4460927564057875148 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6502182839619065283, guid: df8e8b4e49896f543828b277b6764350,
+    type: 3}
+  m_PrefabInstance: {fileID: 7481606168323393295}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &4920006408200123047 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2563496969622287784, guid: df8e8b4e49896f543828b277b6764350,
     type: 3}
   m_PrefabInstance: {fileID: 7481606168323393295}
   m_PrefabAsset: {fileID: 0}

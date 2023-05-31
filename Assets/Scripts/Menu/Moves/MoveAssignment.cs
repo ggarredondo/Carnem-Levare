@@ -43,9 +43,9 @@ public class MoveAssignment : MonoBehaviour
 
         moves.ForEach(m => m.GetComponent<MoveBlock>().Disable());
 
-        for(int i = 0; i < inputController.ACTION_INDEX.Count; i++)
+        for(int i = 0; i < inputController.actionIndexes.Count; i++)
         {
-            moves[inputController.ACTION_INDEX[i]].GetComponent<MoveBlock>().AsignInput(inputAssignments[i]);
+            moves[inputController.actionIndexes[i]].GetComponent<MoveBlock>().AsignInput(inputAssignments[i]);
         }
     }
 
@@ -72,7 +72,7 @@ public class MoveAssignment : MonoBehaviour
 
         if (inputController.assigning)
         {
-            inputController.ACTION_INDEX[newMove] = moveSelected;
+            inputController.actionIndexes[newMove] = moveSelected;
             Debug.Log(moveSelected);
             inputController.assigning = false;
         }
