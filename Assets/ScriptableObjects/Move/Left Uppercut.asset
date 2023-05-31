@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3b1f0431d7ca2da48a12ff07183273eb, type: 3}
   m_Name: Left Uppercut
   m_EditorClassIdentifier: 
-  icon: {fileID: -1082560904, guid: c9f03137a6f3a894a92981fe0899fac9, type: 3}
+  icon: {fileID: 21300000, guid: bf9640e443f95eb4cb9c506ac3b3c833, type: 3}
   moveName: Left Uppercut
   animation: {fileID: 7400000, guid: c8ea972d3fdf705449eeced1a0d40d6c, type: 2}
   animationSpeed: 1.1
