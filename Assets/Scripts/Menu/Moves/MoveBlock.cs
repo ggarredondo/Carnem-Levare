@@ -10,11 +10,12 @@ public class MoveBlock : MonoBehaviour
     {
         inputGameobject.SetActive(true);
         text.font = GlobalMenuVariables.Instance.inputFonts[GameManager.InputDetection.controlSchemeIndex];
-        text.text = input;
+        text.text += input;
     }
 
     public void Disable()
     {
         inputGameobject.SetActive(false);
+        text.text = "";
     }
 }
