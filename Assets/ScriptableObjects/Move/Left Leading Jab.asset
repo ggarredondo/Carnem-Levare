@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3b1f0431d7ca2da48a12ff07183273eb, type: 3}
   m_Name: Left Leading Jab
   m_EditorClassIdentifier: 
+  icon: {fileID: -847058214, guid: c9f03137a6f3a894a92981fe0899fac9, type: 3}
   moveName: Left Leading Jab
   animation: {fileID: 7400000, guid: e652c0869035b6b418eef0c72bbb19c0, type: 2}
   animationSpeed: 1.2

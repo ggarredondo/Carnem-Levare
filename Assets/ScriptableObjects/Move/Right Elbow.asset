@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3b1f0431d7ca2da48a12ff07183273eb, type: 3}
   m_Name: Right Elbow
   m_EditorClassIdentifier: 
-  icon: {fileID: 0}
+  icon: {fileID: -369492287, guid: c9f03137a6f3a894a92981fe0899fac9, type: 3}
   moveName: Right Elbow
   animation: {fileID: 7400000, guid: b0b1f1fa4e9c56c43ba528b7b9a03ec2, type: 2}
   animationSpeed: 0.8

@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3b1f0431d7ca2da48a12ff07183273eb, type: 3}
   m_Name: Left Round Elbow
   m_EditorClassIdentifier: 
-  icon: {fileID: 0}
+  icon: {fileID: -523389472, guid: a375e1238eaccb240b4c5188e7aad187, type: 3}
   moveName: Left Round Elbow
   animation: {fileID: 7400000, guid: 088168ba900c122458581df0d340e87f, type: 2}
   animationSpeed: 1.1

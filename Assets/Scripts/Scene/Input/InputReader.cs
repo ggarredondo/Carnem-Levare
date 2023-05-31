@@ -14,6 +14,11 @@ public class InputReader : ScriptableObject
     public event System.Action ChangeCamera;
     public event System.Action<Vector2> DPAdEvent;
 
+    public event System.Action<int> Action0;
+    public event System.Action<int> Action1;
+    public event System.Action<int> Action2;
+    public event System.Action<int> Action3;
+
     public void OnMouseClick(InputAction.CallbackContext context)
     {
         MouseClickEvent?.Invoke();
@@ -52,5 +57,23 @@ public class InputReader : ScriptableObject
     public void OnChangeCamera(InputAction.CallbackContext context)
     {
         if (context.performed) ChangeCamera?.Invoke();
+    }
+
+    public void OnAction0(InputAction.CallbackContext context)
+    {
+        if (context.performed) Action0?.Invoke(0);
+    }
+
+    public void OnAction1(InputAction.CallbackContext context)
+    {
+        if (context.performed) Action1?.Invoke(1);
+    }
+    public void OnAction2(InputAction.CallbackContext context)
+    {
+        if (context.performed) Action2?.Invoke(2);
+    }
+    public void OnAction3(InputAction.CallbackContext context)
+    {
+        if (context.performed) Action3?.Invoke(3);
     }
 }

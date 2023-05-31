@@ -9,12 +9,15 @@ public class MoveMenu : MonoBehaviour
     [SerializeField] private InputReader inputReader;
 
     private List<Move> moves;
+    private InputController inputController;
 
-    private void Awake()
+    private void Start()
     {
         moves = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>().CharacterStats.MoveList;
-        moveSelector.Initialize(ref moves);
+        inputController = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>().Controller as InputController;
+        moveSelector.Initialize(ref moves, ref inputController);
         infoBox.Initialize(in moves[moveSelector.GetActualIndex()].StringData);
+        GameManager.InputDetection.controlsChangedEvent += moveSelector.ChangeInputMap;
     }
 
     private void OnEnable()
@@ -25,6 +28,11 @@ public class MoveMenu : MonoBehaviour
     private void OnDisable()
     {
         inputReader.DPAdEvent -= DPad;
+    }
+
+    private void OnDestroy()
+    {
+        GameManager.InputDetection.controlsChangedEvent -= moveSelector.ChangeInputMap;
     }
 
     private void DPad(Vector2 value)
