@@ -9,6 +9,7 @@ public static class StateFunctions
         double totalStun = stats.CalculateDisadvantage(stun, stateMachine.hitNumber);
         //Debug.Log("Stunlocked for " + totalStun + " ms");
         yield return new WaitForSeconds((float) TimeSpan.FromMilliseconds(totalStun).TotalSeconds);
+        //Debug.Log("Left stunlock");
         stateMachine.TransitionToWalkingOrBlocking();
     }
 }

@@ -12,10 +12,9 @@ public class CharacterStats
     [Tooltip("Percentage of stamina damage taken when blocking")]
     [SerializeField] [Range(0f, 1f)] private float blockingMultiplier;
 
-    [Tooltip("How quickly time disadvantage decreases through consecutive hits (combo decay in ms x number of hits)")]
-    [SerializeField] private double comboDecay = 200.0;
-
-    [SerializeField] private double minDisadvantage = 100.0;
+    [Tooltip("How quickly time disadvantage decreases through consecutive hits given by decayFunction(comboDecay, number of hits)")]
+    [SerializeField] private double comboDecay;
+    [SerializeField] private double minDisadvantage;
 
     [SerializeField] [InitializationField] private float height = 1f, mass = 1f, drag;
 
@@ -35,7 +34,9 @@ public class CharacterStats
     public void Reference(in CharacterStateMachine stateMachine) => this.stateMachine = stateMachine;
 
     public float CalculateAttackDamage(float baseDamage) => baseDamage + characterDamage;
-    public double CalculateDisadvantage(double disadvantage, float hitNumber) => System.Math.Max(minDisadvantage, disadvantage - hitNumber * comboDecay);
+    public double CalculateDisadvantage(double disadvantage, float hitNumber) => HitCounterDecay(disadvantage, hitNumber);
+    public double StepDecay(double disadvantage, float hitNumber) => System.Math.Max(minDisadvantage, disadvantage - hitNumber * comboDecay);
+    public double HitCounterDecay(double disadvantage, float hitNumber) => hitNumber < comboDecay ? disadvantage : minDisadvantage;
 
     private void AddToStamina(float addend) => stamina = Mathf.Clamp(stamina + addend, 0f + System.Convert.ToSingle(noDeath), maxStamina);
     public void DamageStamina(in Hitbox hitbox)
