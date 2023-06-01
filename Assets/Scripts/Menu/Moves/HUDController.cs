@@ -53,6 +53,7 @@ public class HUDController : MonoBehaviour
             AudioController.Instance.gameSfxSounds.StopAllSounds();
         }
 
+        AudioController.Instance.uiSfxSounds.Play("CameraSwitch");
         cameraChanged = !cameraChanged;
     }
 

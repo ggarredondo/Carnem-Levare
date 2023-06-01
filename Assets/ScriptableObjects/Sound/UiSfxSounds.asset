@@ -108,3 +108,8 @@ MonoBehaviour:
       volume: 0.5
       pitch: 1
       loop: 0
+    - name: CameraSwitch
+      clip: {fileID: 8300000, guid: 77bb2439f7b4460448cce6c15936eec8, type: 3}
+      volume: 0.3
+      pitch: 1
+      loop: 0
