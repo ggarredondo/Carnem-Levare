@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: SelectableMenu
   m_EditorClassIdentifier: 
   ID: 2
-  selected: 0
+  selected: 1
   guid: 67ba99c6b6d6d2d49b96d4bdbf543dd4
-  position: {x: 0, y: 171}
+  position: {x: 0, y: 170}
   isStatic: 1
   children:
   - {fileID: 8937252348170008779}
@@ -23,7 +23,7 @@ MonoBehaviour:
   - {fileID: -7484607151588060627}
   - {fileID: -1064163247548762}
   parent: {fileID: -6677758487912984073}
-  selectedChild: 3
+  selectedChild: 1
 --- !u!114 &-7484607151588060627
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -54,7 +54,7 @@ MonoBehaviour:
   m_Name: StandardMenu
   m_EditorClassIdentifier: 
   ID: 1
-  selected: 1
+  selected: 0
   guid: d78b2d2f6ebaddc4a8d6f19181a448a7
   position: {x: 0, y: 74}
   isStatic: 0
@@ -129,7 +129,7 @@ MonoBehaviour:
   m_Name: LeafMenu
   m_EditorClassIdentifier: 
   ID: 4
-  selected: 0
+  selected: 1
   guid: c1c68bb144b2b434ea51a9ab9b159378
   position: {x: -55, y: 283}
   parent: {fileID: -8687199901837452373}
@@ -148,5 +148,5 @@ MonoBehaviour:
   ID: 3
   selected: 0
   guid: f4cfb461ab15bed40a11d03e764266d4
-  position: {x: -164.99997, y: 283}
+  position: {x: -165, y: 283}
   parent: {fileID: -8687199901837452373}

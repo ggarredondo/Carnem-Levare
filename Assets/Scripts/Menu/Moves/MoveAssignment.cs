@@ -27,13 +27,13 @@ public class MoveAssignment : MonoBehaviour
         inputReader.Action3 += ReadInput;
     }
 
-    public void Initialize(ref List<RectTransform> moves, ref InputController inputController)
+    public void Initialize(ref List<MoveBlock> moves, ref InputController inputController)
     {
         this.inputController = inputController;
         UpdateInput(ref moves);
     }
 
-    public void UpdateInput(ref List<RectTransform> moves)
+    public void UpdateInput(ref List<MoveBlock> moves)
     {
         inputAssignments.Clear();
         inputAssignments.Add(GameManager.InputMapping.ObtainMapping("Action0"));

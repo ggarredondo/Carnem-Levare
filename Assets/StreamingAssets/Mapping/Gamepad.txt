@@ -8,10 +8,6 @@
 <Gamepad>/rightTrigger : b
 <Gamepad>/leftStickPress : e
 <Gamepad>/rightStickPress : \
-<Gamepad>/dpad/left : P
-<Gamepad>/dpad/up : O
-<Gamepad>/dpad/right : I
-<Gamepad>/dpad/down : U
 <Keyboard>/q : Q
 <Keyboard>/w : W
 <Keyboard>/e : E

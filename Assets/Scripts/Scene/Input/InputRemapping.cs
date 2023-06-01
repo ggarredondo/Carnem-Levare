@@ -7,11 +7,11 @@ public class InputRemapping
 {
     private InputAction action, originalAction;
 
-    public void Remapping(float rebindTimeDelay, PopUpMenu popUp)
+    public void Remapping(float rebindTimeDelay, PopUpMenu popUp, string name)
     {
         AudioController.Instance.uiSfxSounds.Play("PressButton");
 
-        action = GameManager.PlayerInput.actions.FindAction(EventSystem.current.currentSelectedGameObject.name);
+        action = GameManager.PlayerInput.actions.FindAction(name);
 
         if (action == null)
             Debug.Log("This action not exists");

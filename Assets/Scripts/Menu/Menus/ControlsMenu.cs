@@ -22,7 +22,7 @@ public class ControlsMenu : AbstractMenu
         GameManager.InputDetection.controlsChangedEvent.Invoke();
 
         inputRemapping = new();
-        remapButtons.ForEach(button => button.onClick.AddListener(Remapping));
+        remapButtons.ForEach(button => button.onClick.AddListener(delegate { Remapping(button.name); } ));
         rumbleToggle.onValueChanged.AddListener(Rumble);
         rumbleButton.onClick.AddListener(() => rumbleToggle.isOn = !rumbleToggle.isOn);
     }
@@ -32,8 +32,8 @@ public class ControlsMenu : AbstractMenu
         Toggle(ref DataSaver.options.rumble, value);
     }
 
-    public void Remapping()
+    public void Remapping(string name)
     {
-        inputRemapping.Remapping(rebindTimeDelay, popUpMenu);
+        inputRemapping.Remapping(rebindTimeDelay, popUpMenu, name);
     }
 }
