@@ -1,6 +1,8 @@
 
+using System.Collections.Generic;
+
 [System.Serializable]
 public class GameSlot : SaveSlot
 {
-    public int punchCounter;
+    public List<int> moves;
 }

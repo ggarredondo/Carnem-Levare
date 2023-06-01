@@ -14,9 +14,9 @@ public class DataSaver : ISave
         options = (OptionsSlot) config.defaultOptions.Clone();
         games = new List<GameSlot>(config.numGameSlots);
 
-        for(int i = 0; i < games.Count; i++)
+        for (int i = 0; i < config.numGameSlots; i++)
         {
-            games[i] = (GameSlot) config.defaultGame.Clone();
+            games.Add((GameSlot) config.defaultGame.Clone());
             games[i].name += i + 1;
         }
     }
@@ -24,10 +24,12 @@ public class DataSaver : ISave
     public void Load()
     {
         options = (OptionsSlot) serializer.Load(options);
+        games[actualGameSlot] = (GameSlot) serializer.Load(games[actualGameSlot]);
     }
 
     public void Save()
     {
         serializer.Save(options);
+        serializer.Save(games[actualGameSlot]);
     }
 }

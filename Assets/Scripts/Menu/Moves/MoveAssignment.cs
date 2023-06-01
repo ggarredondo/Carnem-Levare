@@ -21,16 +21,25 @@ public class MoveAssignment : MonoBehaviour
 
     private void OnDisable()
     {
-        inputReader.Action0 += ReadInput;
-        inputReader.Action1 += ReadInput;
-        inputReader.Action2 += ReadInput;
-        inputReader.Action3 += ReadInput;
+        inputReader.Action0 -= ReadInput;
+        inputReader.Action1 -= ReadInput;
+        inputReader.Action2 -= ReadInput;
+        inputReader.Action3 -= ReadInput;
     }
 
     public void Initialize(ref List<MoveBlock> moves, ref InputController inputController)
     {
         this.inputController = inputController;
+        InitializeInput();
         UpdateInput(ref moves);
+    }
+
+    private void InitializeInput()
+    {
+        for (int i = 0; i < inputController.actionIndexes.Count; i++)
+        {
+            inputController.actionIndexes[i] = DataSaver.games[DataSaver.actualGameSlot].moves[i];
+        }
     }
 
     public void UpdateInput(ref List<MoveBlock> moves)
@@ -45,6 +54,7 @@ public class MoveAssignment : MonoBehaviour
 
         for(int i = 0; i < inputController.actionIndexes.Count; i++)
         {
+            DataSaver.games[DataSaver.actualGameSlot].moves[i] = inputController.actionIndexes[i];
             moves[inputController.actionIndexes[i]].GetComponent<MoveBlock>().AsignInput(inputAssignments[i]);
         }
     }
@@ -71,7 +81,10 @@ public class MoveAssignment : MonoBehaviour
         await ChangeInput();
 
         if (inputController.assigning)
+        {
+            AudioController.Instance.uiSfxSounds.Play("ApplyMoveMenu");
             inputController.actionIndexes[newMove] = moveSelected;
+        }
     }
 
     public void EndChangeInput()

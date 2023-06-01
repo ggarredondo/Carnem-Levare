@@ -75,3 +75,36 @@ MonoBehaviour:
       volume: 1
       pitch: 1
       loop: 0
+  - speakersTag:
+    - SFX
+    sounds:
+    - name: InteractMoveMenu
+      clip: {fileID: 8300000, guid: f212489be7147d44695be7d68564c8f2, type: 3}
+      volume: 1
+      pitch: 1
+      loop: 0
+    - name: SelectMoveMenu
+      clip: {fileID: 8300000, guid: 26872fccc9cca314aa35bb5379b3915e, type: 3}
+      volume: 1
+      pitch: 1
+      loop: 0
+    - name: ApplyMoveMenu
+      clip: {fileID: 8300000, guid: 010a4b978d5c3ce47bd6e190f5c3cb42, type: 3}
+      volume: 1
+      pitch: 1
+      loop: 0
+    - name: NotInteractMoveMenu
+      clip: {fileID: 8300000, guid: bb750b58a3aed8845a44ab393141680d, type: 3}
+      volume: 0.5
+      pitch: 1
+      loop: 0
+    - name: EnterMoveMenu
+      clip: {fileID: 8300000, guid: 2f5c248ffd71ffa4bb4fbb29544ad53b, type: 3}
+      volume: 0.5
+      pitch: 1
+      loop: 0
+    - name: ExitMoveMenu
+      clip: {fileID: 8300000, guid: e396b59429159354095af9cbdf144a13, type: 3}
+      volume: 0.5
+      pitch: 1
+      loop: 0

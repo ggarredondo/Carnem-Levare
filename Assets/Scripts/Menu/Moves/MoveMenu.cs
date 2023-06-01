@@ -40,24 +40,40 @@ public class MoveMenu : MonoBehaviour
         if (value == new Vector2(-1, 0))
         {
             if (moveSelector.LeftMoveBlock())
+            {
                 infoBox.UpdateInfoBox(in moves[moveSelector.GetActualIndex()].StringData);
-            else infoBox.Movement(new Color(0.5f,0.5f,0.5f));
+                AudioController.Instance.uiSfxSounds.Play("InteractMoveMenu");
+            }
+            else
+            {
+                infoBox.Movement(new Color(0.5f, 0.5f, 0.5f));
+                AudioController.Instance.uiSfxSounds.Play("NotInteractMoveMenu");
+            }
         }
         if (value == new Vector2(1, 0))
         {
-            if(moveSelector.RightMoveBlock())
+            if (moveSelector.RightMoveBlock())
+            {
                 infoBox.UpdateInfoBox(in moves[moveSelector.GetActualIndex()].StringData);
-            else infoBox.Movement(new Color(0.5f, 0.5f, 0.5f));
+                AudioController.Instance.uiSfxSounds.Play("InteractMoveMenu");
+            }
+            else
+            {
+                infoBox.Movement(new Color(0.5f, 0.5f, 0.5f));
+                AudioController.Instance.uiSfxSounds.Play("NotInteractMoveMenu");
+            }
         }
 
         if (value == new Vector2(0, 1))
         {
             moveSelector.SelectBlock();
+            AudioController.Instance.uiSfxSounds.Play("SelectMoveMenu");
         }
 
         if (value == new Vector2(0, -1))
         {
             moveSelector.DeselectBlock();
+            AudioController.Instance.uiSfxSounds.Play("InteractMoveMenu");
         }
     }
 }

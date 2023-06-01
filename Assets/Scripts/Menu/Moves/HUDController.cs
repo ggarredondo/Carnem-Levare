@@ -61,7 +61,10 @@ public class HUDController : MonoBehaviour
         CanvasGroup actualCanvas = HUDMenus[actualHUDMenu].GetComponent<CanvasGroup>();
 
         if (actualCanvas != null)
-            await LerpCanvasAlpha(actualCanvas, 0, 0.1f);
+        {
+            AudioController.Instance.uiSfxSounds.Play("ExitMoveMenu");
+            await LerpCanvasAlpha(actualCanvas, 0, lerpDuration);
+        }
 
         HUDMenus.ForEach(m => m.SetActive(false));
         actualHUDMenu = (actualHUDMenu + 1) % HUDMenus.Count;
@@ -70,7 +73,10 @@ public class HUDController : MonoBehaviour
         actualCanvas = HUDMenus[actualHUDMenu].GetComponent<CanvasGroup>();
 
         if (actualCanvas != null)
+        {
+            AudioController.Instance.uiSfxSounds.Play("EnterMoveMenu");
             await LerpCanvasAlpha(actualCanvas, 1, lerpDuration);
+        }
     }
 
     private async Task LerpCanvasAlpha(CanvasGroup canvasGroup,float targetAlpha, float duration)

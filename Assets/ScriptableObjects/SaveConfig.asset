@@ -16,7 +16,7 @@ MonoBehaviour:
   defaultOptions:
     name: GameSettings
     mute: 0
-    globalVolume: 1
+    masterVolume: 0
     musicVolume: 1
     sfxVolume: 1
     vSync: 1
@@ -24,6 +24,7 @@ MonoBehaviour:
     resolution: 1920x1080
     quality: 0
     rumble: 1
+    rebinds: 
   defaultGame:
     name: GameSlot
-    punchCounter: 0
+    moves: 00000000010000000200000003000000

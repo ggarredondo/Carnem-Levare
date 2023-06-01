@@ -1,6 +1,5 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.EventSystems;
 using static UnityEngine.InputSystem.InputActionRebindingExtensions;
 
 public class InputRemapping
