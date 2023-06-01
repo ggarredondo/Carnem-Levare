@@ -38,7 +38,7 @@ public class MoveAssignment : MonoBehaviour
     {
         for (int i = 0; i < inputController.actionIndexes.Count; i++)
         {
-            inputController.actionIndexes[i] = DataSaver.games[DataSaver.actualGameSlot].moves[i];
+            inputController.actionIndexes[i] = DataSaver.games[DataSaver.currentGameSlot].moves[i];
         }
     }
 
@@ -54,7 +54,7 @@ public class MoveAssignment : MonoBehaviour
 
         for(int i = 0; i < inputController.actionIndexes.Count; i++)
         {
-            DataSaver.games[DataSaver.actualGameSlot].moves[i] = inputController.actionIndexes[i];
+            DataSaver.games[DataSaver.currentGameSlot].moves[i] = inputController.actionIndexes[i];
             moves[inputController.actionIndexes[i]].GetComponent<MoveBlock>().AsignInput(inputAssignments[i]);
         }
     }

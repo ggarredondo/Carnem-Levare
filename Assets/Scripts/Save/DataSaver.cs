@@ -5,7 +5,7 @@ public class DataSaver : ISave
     private readonly XmlSerialize serializer;
     public static OptionsSlot options;
     public static List<GameSlot> games;
-    public static int actualGameSlot;
+    public static int currentGameSlot;
 
     public DataSaver(in SaveConfiguration config)
     {
@@ -24,12 +24,12 @@ public class DataSaver : ISave
     public void Load()
     {
         options = (OptionsSlot) serializer.Load(options);
-        games[actualGameSlot] = (GameSlot) serializer.Load(games[actualGameSlot]);
+        games[currentGameSlot] = (GameSlot) serializer.Load(games[currentGameSlot]);
     }
 
     public void Save()
     {
         serializer.Save(options);
-        serializer.Save(games[actualGameSlot]);
+        serializer.Save(games[currentGameSlot]);
     }
 }
