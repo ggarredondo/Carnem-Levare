@@ -23,7 +23,7 @@ public class InputMapping
             return Map[path];
         else
         {
-            Debug.LogWarning("key was not found in the dictionary");
+            Debug.LogWarning(path + ": key was not found in the dictionary");
             return "";
         }
     }

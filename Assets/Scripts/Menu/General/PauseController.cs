@@ -18,11 +18,13 @@ public class PauseController : MonoBehaviour
 
     protected void OnEnable()
     {
+        menuController.ExitPauseMenuEvent += EnterPauseMenu;
         inputReader.StartPauseMenuEvent += EnterPauseMenu;
     }
 
     protected void OnDisable()
     {
+        menuController.ExitPauseMenuEvent -= EnterPauseMenu;
         inputReader.StartPauseMenuEvent -= EnterPauseMenu;
     }
 

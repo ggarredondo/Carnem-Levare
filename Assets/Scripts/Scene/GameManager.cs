@@ -54,8 +54,6 @@ public class GameManager : MonoBehaviour
 
         saver.Load();
 
-        ((InputController)GameObject.FindGameObjectWithTag("Player").GetComponent<Player>().Controller).actionIndexes = DataSaver.games[DataSaver.currentGameSlot].moves;
-
         inputMapping = new();
         inputDetection = new();
     }
@@ -99,7 +97,16 @@ public class GameManager : MonoBehaviour
             AudioController.Instance.PlayMusic("Intro");
 
         if (SceneManager.GetActiveScene().buildIndex == (int)SceneNumber.GAME)
+        {
+            ((InputController)GameObject.FindGameObjectWithTag("Player").GetComponent<Player>().Controller).actionIndexes = DataSaver.games[DataSaver.currentGameSlot].moves;
             AudioController.Instance.PlayMusic("Fight");
+        }
+
+        if (SceneManager.GetActiveScene().buildIndex == (int)SceneNumber.TRAINING)
+        {
+            ((InputController)GameObject.FindGameObjectWithTag("Player").GetComponent<Player>().Controller).actionIndexes = DataSaver.games[DataSaver.currentGameSlot].moves;
+            AudioController.Instance.PlayMusic("Fight");
+        }
     }
 
     private void InitializeSoundSources()

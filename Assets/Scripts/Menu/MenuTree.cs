@@ -32,7 +32,7 @@ public class MenuTree : BehaviourTree
         }
     }
 
-    public void GoToParent()
+    public bool GoToParent()
     {
         if (CanGoToParent())
         {
@@ -43,9 +43,12 @@ public class MenuTree : BehaviourTree
                 if (nodeStack.Peek().selected) continue;
                 else break;
             }
-            
+
             OnChange.Invoke();
+
+            return true;
         }
+        else return false;
     }
 
     private bool CanGoToParent()

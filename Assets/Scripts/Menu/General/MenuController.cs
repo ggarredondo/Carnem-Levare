@@ -18,6 +18,7 @@ public class MenuController : MonoBehaviour
     [System.NonSerialized] public bool pauseMenu;
 
     public event System.Action<int> OnSiblingChange;
+    public event System.Action ExitPauseMenuEvent;
 
     private void Awake()
     {
@@ -78,9 +79,11 @@ public class MenuController : MonoBehaviour
         }
     }
 
-    public void GoToParent()
+    private void GoToParent()
     {
-        tree.GoToParent();
+        if (!tree.GoToParent() && pauseMenu)
+            ExitPauseMenuEvent.Invoke();
+
         AudioController.Instance.uiSfxSounds.Play("PressButton");
     }
 
