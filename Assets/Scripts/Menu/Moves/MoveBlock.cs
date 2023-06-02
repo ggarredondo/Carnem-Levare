@@ -20,7 +20,13 @@ public class MoveBlock : MonoBehaviour
     {
         inputGameobject.SetActive(true);
         text.font = GlobalMenuVariables.Instance.inputFonts[GameManager.InputDetection.controlSchemeIndex];
-        text.text += input;
+
+        if (input != "-" && input != "") text.text += input;
+        else
+        {
+            text.font = GlobalMenuVariables.Instance.inputFonts[0];
+            text.text = "M";
+        }
     }
 
     public void Disable()

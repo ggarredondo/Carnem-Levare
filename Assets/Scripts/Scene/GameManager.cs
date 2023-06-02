@@ -54,6 +54,8 @@ public class GameManager : MonoBehaviour
 
         saver.Load();
 
+        ((InputController)GameObject.FindGameObjectWithTag("Player").GetComponent<Player>().Controller).actionIndexes = DataSaver.games[DataSaver.currentGameSlot].moves;
+
         inputMapping = new();
         inputDetection = new();
     }

@@ -30,16 +30,7 @@ public class MoveAssignment : MonoBehaviour
     public void Initialize(ref List<MoveBlock> moves, ref InputController inputController)
     {
         this.inputController = inputController;
-        InitializeInput();
         UpdateInput(ref moves);
-    }
-
-    private void InitializeInput()
-    {
-        for (int i = 0; i < inputController.actionIndexes.Count; i++)
-        {
-            inputController.actionIndexes[i] = DataSaver.games[DataSaver.currentGameSlot].moves[i];
-        }
     }
 
     public void UpdateInput(ref List<MoveBlock> moves)
