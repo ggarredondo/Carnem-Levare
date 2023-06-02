@@ -15,7 +15,6 @@ public class Enemy : Character
     protected override void Start()
     {
         base.Start();
-        AIController aiController = (AIController) controller;
-        aiController.Reference(characterStats, player.CharacterStats, stateMachine, player.StateMachine);
+        ((AIController) controller).Reference(characterStats, player.CharacterStats, stateMachine, player.StateMachine);
     }
 }
