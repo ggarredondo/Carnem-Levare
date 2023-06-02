@@ -127,7 +127,5 @@ public class CameraController : MonoBehaviour
 public enum CameraType
 {
     DEFAULT = 0,
-    FIRST_PERSON = 1,
-    GOPRO = 2,
-    DRONE = 3
+    GOPRO = 1
 }

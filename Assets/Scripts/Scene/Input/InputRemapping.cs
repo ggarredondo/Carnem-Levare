@@ -43,7 +43,7 @@ public class InputRemapping
             AudioController.Instance.uiSfxSounds.Play("ApplyRebind");
 
             InputAction result = CheckIfAsigned(callback.action);
-            if (result != null)
+            if (result != null && !result.bindings[GameManager.InputDetection.controlSchemeIndex].isComposite)
             {
                 result.ApplyBindingOverride(GameManager.InputDetection.controlSchemeIndex, "");
             }
