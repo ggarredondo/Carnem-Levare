@@ -6,7 +6,7 @@ public abstract class Controller : MonoBehaviour
     protected Vector2 movementVector;
     public bool isBlocking { get; private set; }
     public event Action OnDoBlock;
-    public event Action<int> OnDoMove;
+    public Action<int> OnDoMove;
 
     public virtual void Initialize()
     {
