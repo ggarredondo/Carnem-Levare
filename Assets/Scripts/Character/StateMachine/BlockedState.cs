@@ -25,12 +25,10 @@ public class BlockedState : CharacterState
     public void Enter() 
     {
         stateMachine.enabled = true;
-        stateMachine.hitNumber++;
-
         stateMachine.OnHurt += Blocked;
-
         OnEnter?.Invoke();
 
+        stateMachine.hitNumber++;
         coroutine = StateFunctions.Recover(stats, stateMachine, hitbox.BlockStun);
         stateMachine.StartCoroutine(coroutine);
     }

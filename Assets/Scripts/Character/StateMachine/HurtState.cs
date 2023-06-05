@@ -20,12 +20,10 @@ public class HurtState : CharacterState
     public void Enter() 
     {
         stateMachine.enabled = false;
-        stateMachine.hitNumber++;
-
         stateMachine.OnHurt += stats.DamageStamina;
-
         OnEnter?.Invoke();
 
+        stateMachine.hitNumber++;
         coroutine = StateFunctions.Recover(stats, stateMachine, hitbox.HitStun);
         stateMachine.StartCoroutine(coroutine);
     }

@@ -25,7 +25,7 @@ public class MoveState : CharacterState
     public void Enter() 
     {
         stateMachine.enabled = true;
-        stateMachine.hitNumber = -1;
+        stateMachine.hitNumber = 0;
 
         stateMachine.OnHurt += stats.DamageStamina;
         currentMove = moveList[moveIndex];

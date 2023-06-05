@@ -19,7 +19,7 @@ public class WalkingState : CharacterState
     public void Enter()
     {
         stateMachine.enabled = true;
-        stateMachine.hitNumber = -1;
+        stateMachine.hitNumber = 0;
 
         controller.OnDoBlock += stateMachine.TransitionToWalkingOrBlocking;
         controller.OnDoMove += stateMachine.TransitionToMove;
