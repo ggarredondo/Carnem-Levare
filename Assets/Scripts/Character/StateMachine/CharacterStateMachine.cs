@@ -72,11 +72,13 @@ public class CharacterStateMachine : MonoBehaviour
     public void TransitionToWalkingOrBlocking() => ChangeState(controller.isBlocking ? blockingState : walkingState);
     public void TransitionToMove(int moveIndex)
     {
+        moveState.moveIndex = moveIndex;
+        ChangeState(moveState);
+    }
+    public void SafeTransitionToMove(int moveIndex)
+    {
         if (moveIndex >= 0 && moveIndex < stats.MoveList.Count)
-        {
-            moveState.moveIndex = moveIndex;
-            ChangeState(moveState);
-        }
+            TransitionToMove(moveIndex);
     }
     public ActionIn<Hitbox> OnHurt;
     public void TransitionToHurt(in Hitbox hitbox)

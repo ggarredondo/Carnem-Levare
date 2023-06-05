@@ -22,7 +22,7 @@ public class WalkingState : CharacterState
         stateMachine.hitNumber = 0;
 
         controller.OnDoBlock += stateMachine.TransitionToWalkingOrBlocking;
-        controller.OnDoMove += stateMachine.TransitionToMove;
+        controller.OnDoMove += stateMachine.SafeTransitionToMove;
         stateMachine.OnHurt += stats.DamageStamina;
 
         OnEnter?.Invoke();
@@ -38,7 +38,7 @@ public class WalkingState : CharacterState
     public void Exit() 
     {
         controller.OnDoBlock -= stateMachine.TransitionToWalkingOrBlocking;
-        controller.OnDoMove -= stateMachine.TransitionToMove;
+        controller.OnDoMove -= stateMachine.SafeTransitionToMove;
         stateMachine.OnHurt -= stats.DamageStamina;
         OnExit?.Invoke();
     }
