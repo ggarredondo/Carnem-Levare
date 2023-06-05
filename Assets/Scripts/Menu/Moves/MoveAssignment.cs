@@ -43,10 +43,10 @@ public class MoveAssignment : MonoBehaviour
 
         moves.ForEach(m => m.GetComponent<MoveBlock>().Disable());
 
-        for(int i = 0; i < inputController.actionIndexes.Count; i++)
+        for(int i = 0; i < inputController.moveIndexes.Count; i++)
         {
-            DataSaver.games[DataSaver.currentGameSlot].moves[i] = inputController.actionIndexes[i];
-            moves[inputController.actionIndexes[i]].GetComponent<MoveBlock>().AsignInput(inputAssignments[i]);
+            DataSaver.games[DataSaver.currentGameSlot].moves[i] = inputController.moveIndexes[i];
+            moves[inputController.moveIndexes[i]].GetComponent<MoveBlock>().AsignInput(inputAssignments[i]);
         }
     }
 
@@ -74,7 +74,7 @@ public class MoveAssignment : MonoBehaviour
         if (inputController.assigning)
         {
             AudioController.Instance.uiSfxSounds.Play("ApplyMoveMenu");
-            inputController.actionIndexes[newMove] = moveSelected;
+            inputController.moveIndexes[newMove] = moveSelected;
         }
     }
 

@@ -4,7 +4,6 @@ using System.Collections.Generic;
 public class MoveState : CharacterState
 {
     private readonly CharacterStateMachine stateMachine;
-    private readonly Controller controller;
     private readonly CharacterStats stats;
     private readonly CharacterMovement movement;
     public event Action<int> OnEnterInteger;
@@ -15,25 +14,19 @@ public class MoveState : CharacterState
     private List<Move> moveList;
     private bool TRACKING_FLAG = false;
 
-    private MoveBuffer moveBuffer;
-    private double TIME_BEFORE_BUFFERING = 300.0;
-
-    public MoveState(in CharacterStateMachine stateMachine, in Controller controller, in CharacterStats stats, in CharacterMovement movement)
+    public MoveState(in CharacterStateMachine stateMachine, in CharacterStats stats, in CharacterMovement movement)
     {
         this.stateMachine = stateMachine;
-        this.controller = controller;
         this.stats = stats;
         moveList = stats.MoveList;
         this.movement = movement;
-        moveBuffer = new MoveBuffer(TIME_BEFORE_BUFFERING, stateMachine, stats);
     }
 
-    public void Enter() 
+    public void Enter()
     {
         stateMachine.enabled = true;
         stateMachine.hitNumber = 0;
 
-        moveBuffer.ListenTo(ref controller.OnDoMove);
         stateMachine.OnHurt += stats.DamageStamina;
         currentMove = moveList[moveIndex];
 
@@ -48,13 +41,12 @@ public class MoveState : CharacterState
         OnEnter?.Invoke();
     }
     public void Update() {}
-    public void FixedUpdate() 
+    public void FixedUpdate()
     {
         movement.LookAtTarget(TRACKING_FLAG);
     }
     public void Exit()
     {
-        moveBuffer.StopListening(ref controller.OnDoMove);
         stateMachine.OnHurt -= stats.DamageStamina;
 
         stateMachine.OnInitMove -= InitMove;
@@ -77,7 +69,7 @@ public class MoveState : CharacterState
     private void DeactivateMove() => currentMove.DeactivateMove();
     private void EndMove() {
         currentMove.EndMove();
-        moveBuffer.NextTransition();
+        stateMachine.TransitionToWalkingOrBlocking();
     }
     private void StartTracking() => TRACKING_FLAG = true;
     private void StopTracking() => TRACKING_FLAG = false;

@@ -98,13 +98,13 @@ public class GameManager : MonoBehaviour
 
         if (SceneManager.GetActiveScene().buildIndex == (int)SceneNumber.GAME)
         {
-            ((InputController)GameObject.FindGameObjectWithTag("Player").GetComponent<Player>().Controller).actionIndexes = DataSaver.games[DataSaver.currentGameSlot].moves;
+            ((InputController)GameObject.FindGameObjectWithTag("Player").GetComponent<Player>().Controller).moveIndexes = DataSaver.games[DataSaver.currentGameSlot].moves;
             AudioController.Instance.PlayMusic("Fight");
         }
 
         if (SceneManager.GetActiveScene().buildIndex == (int)SceneNumber.TRAINING)
         {
-            ((InputController)GameObject.FindGameObjectWithTag("Player").GetComponent<Player>().Controller).actionIndexes = DataSaver.games[DataSaver.currentGameSlot].moves;
+            ((InputController)GameObject.FindGameObjectWithTag("Player").GetComponent<Player>().Controller).moveIndexes = DataSaver.games[DataSaver.currentGameSlot].moves;
             AudioController.Instance.PlayMusic("Fight");
         }
     }

@@ -8,4 +8,10 @@ public class Player : Character
         target = GameObject.FindGameObjectWithTag("Enemy").transform;
         base.Awake();
     }
+
+    protected override void Start()
+    {
+        base.Start();
+        ((InputController)controller).Reference(stateMachine);
+    }
 }
