@@ -16,10 +16,7 @@ public class TextAutoSet : MonoBehaviour
             case 2: tmpText.color = GlobalMenuVariables.Instance.selectedButtonColor2;
                 break;
         }
-    }
 
-    private void Awake()
-    {
         if (inputButton) GameManager.InputDetection.controlsChangedEvent += ChangeInputFont;
     }
 

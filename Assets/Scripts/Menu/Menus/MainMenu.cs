@@ -26,7 +26,7 @@ public class MainMenu : AbstractMenu
         {
             AudioController.Instance.uiSfxSounds.Play("PlayGame");
             isLoading = true;
-            GameManager.SceneLoader.LoadWithLoadingScreen(SceneNumber.GAME);
+            GameManager.SceneLoader.LoadWithLoadingScreen(SceneNumber.TRAINING);
         }
     }
 }

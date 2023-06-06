@@ -99,12 +99,12 @@ MonoBehaviour:
       pitch: 1
       loop: 0
     - name: EnterMoveMenu
-      clip: {fileID: 8300000, guid: 2f5c248ffd71ffa4bb4fbb29544ad53b, type: 3}
+      clip: {fileID: 8300000, guid: 26acfa73d03fba14a8585509e2b405e9, type: 3}
       volume: 0.5
       pitch: 1
       loop: 0
     - name: ExitMoveMenu
-      clip: {fileID: 8300000, guid: e396b59429159354095af9cbdf144a13, type: 3}
+      clip: {fileID: 8300000, guid: a317e0d83d3579241a37ff79353b6be2, type: 3}
       volume: 0.5
       pitch: 1
       loop: 0

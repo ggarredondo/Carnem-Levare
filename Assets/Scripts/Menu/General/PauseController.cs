@@ -1,10 +1,12 @@
 using UnityEngine;
+using UnityEngine.Rendering;
 
 public class PauseController : MonoBehaviour
 {
     [Header("Requirements")]
     [SerializeField] private MenuController menuController;
     [SerializeField] private InputReader inputReader;
+    [SerializeField] private GameObject volume;
 
     [Header("Parameters")]
     [SerializeField] [Range(0f, 1f)] private float slowMotion;
@@ -39,6 +41,7 @@ public class PauseController : MonoBehaviour
         Time.timeScale = slowMotion;
         menuController.tree.Initialize();
         pauseMenuActivated = true;
+        volume.SetActive(true);
         GameManager.PlayerInput.SwitchCurrentActionMap("UI");
         AudioController.Instance.PauseGame(true);
     }
@@ -48,6 +51,7 @@ public class PauseController : MonoBehaviour
         Time.timeScale = 1;
         menuController.DisableMenus();
         pauseMenuActivated = false;
+        volume.SetActive(false);
         GameManager.PlayerInput.SwitchCurrentActionMap("Main Movement");
         AudioController.Instance.PauseGame(false && resumeSounds);
     }

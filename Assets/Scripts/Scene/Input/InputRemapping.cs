@@ -38,7 +38,7 @@ public class InputRemapping
     {
         popUp.DisablePopUpMenu();
 
-        if (GameManager.InputMapping.Map.ContainsKey(callback.action.bindings[GameManager.InputDetection.controlSchemeIndex].effectivePath))
+        if (GameManager.InputMapping.AllowedMap.ContainsKey(callback.action.bindings[GameManager.InputDetection.controlSchemeIndex].effectivePath))
         {
             AudioController.Instance.uiSfxSounds.Play("ApplyRebind");
 

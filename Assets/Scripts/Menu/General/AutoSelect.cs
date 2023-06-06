@@ -69,7 +69,7 @@ public class AutoSelect : MonoBehaviour, IPointerEnterHandler, ISelectHandler, I
         transform.GetChild(0).GetComponent<TMP_Text>().font = GlobalMenuVariables.Instance.inputFonts[GameManager.InputDetection.controlSchemeIndex];
 
         //Asign the correct word
-        string mappingKey = GameManager.InputMapping.ObtainMapping(gameObject.name);
+        string mappingKey = GameManager.InputMapping.ObtainAllowedMapping(gameObject.name);
 
         if (mappingKey != "-" && mappingKey != "") transform.GetChild(0).GetComponent<TMP_Text>().text = mappingKey;
         else
