@@ -5,6 +5,7 @@ using UnityEngine;
 public class HUDController : MonoBehaviour
 {
     [SerializeField] private InputReader inputReader;
+    [SerializeField] private List<GameObject> StaticHUDMenus;
     [SerializeField] private List<GameObject> HUDMenus;
 
     [Header("Parameters")]
@@ -29,12 +30,28 @@ public class HUDController : MonoBehaviour
     {
         inputReader.SelectMenuEvent += ChangeHUDMenu;
         inputReader.ChangeCamera += ChangeCamera;
+        PauseController.EnterPause += DisableHUD;
+        PauseController.ExitPause += EnableHUD;
     }
 
     private void OnDisable()
     {
         inputReader.SelectMenuEvent -= ChangeHUDMenu;
         inputReader.ChangeCamera -= ChangeCamera;
+        PauseController.EnterPause -= DisableHUD;
+        PauseController.ExitPause -= EnableHUD;
+    }
+
+    private void DisableHUD()
+    {
+        HUDMenus.ForEach(m => m.SetActive(false));
+        StaticHUDMenus.ForEach(m => m.SetActive(false));
+    }
+
+    private void EnableHUD()
+    {
+        HUDMenus[actualHUDMenu].SetActive(true);
+        StaticHUDMenus.ForEach(m => m.SetActive(true));
     }
 
     private void ChangeCamera()
@@ -67,9 +84,9 @@ public class HUDController : MonoBehaviour
             await LerpCanvasAlpha(actualCanvas, 0, lerpDuration);
         }
 
-        HUDMenus.ForEach(m => m.SetActive(false));
+        DisableHUD();
         actualHUDMenu = (actualHUDMenu + 1) % HUDMenus.Count;
-        HUDMenus[actualHUDMenu].SetActive(true);
+        EnableHUD();
 
         actualCanvas = HUDMenus[actualHUDMenu].GetComponent<CanvasGroup>();
 

@@ -1,5 +1,6 @@
 using UnityEngine;
 using Cinemachine;
+using UnityEngine.Rendering;
 
 public class CameraController : MonoBehaviour
 {
@@ -107,6 +108,11 @@ public class CameraController : MonoBehaviour
                 {
                     effects.enabled = true;
                 }
+
+                if (camera.TryGetComponent(out Volume postProcess ))
+                {
+                    postProcess.enabled = true;
+                }
             }
             else
             {
@@ -115,6 +121,11 @@ public class CameraController : MonoBehaviour
                 if (camera.TryGetComponent(out CameraEffects effects))
                 {
                     effects.enabled = false;
+                }
+
+                if (camera.TryGetComponent(out Volume postProcess))
+                {
+                    postProcess.enabled = false;
                 }
             }
 

@@ -83,8 +83,8 @@ public class MenuController : MonoBehaviour
     {
         if (!tree.GoToParent() && pauseMenu)
             ExitPauseMenuEvent.Invoke();
-
-        AudioController.Instance.uiSfxSounds.Play("PressButton");
+        else
+            AudioController.Instance.uiSfxSounds.Play("PressButton");
     }
 
     public void Return()
