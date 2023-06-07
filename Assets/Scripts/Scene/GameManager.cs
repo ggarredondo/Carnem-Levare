@@ -78,12 +78,12 @@ public class GameManager : MonoBehaviour
 
     void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        if (Time.timeScale < 1)
+        if(Time.timeScale < 1)
             Time.timeScale = 1;
 
         if (SceneManager.GetActiveScene().buildIndex != (int)SceneNumber.MAIN_MENU)
-            playerInput = GameObject.FindGameObjectWithTag("INPUT").GetComponent<PlayerInput>();   
-        
+            playerInput = GameObject.FindGameObjectWithTag("INPUT").GetComponent<PlayerInput>();
+
         InputDetection.Configure();
 
         InitializeSoundSources();
@@ -101,13 +101,11 @@ public class GameManager : MonoBehaviour
 
         if (SceneManager.GetActiveScene().buildIndex == (int)SceneNumber.GAME)
         {
-            ((InputController)GameObject.FindGameObjectWithTag("Player").GetComponent<Player>().Controller).moveIndexes = DataSaver.games[DataSaver.currentGameSlot].moves;
             AudioController.Instance.PlayMusic("Fight");
         }
 
         if (SceneManager.GetActiveScene().buildIndex == (int)SceneNumber.TRAINING)
         {
-            ((InputController)GameObject.FindGameObjectWithTag("Player").GetComponent<Player>().Controller).moveIndexes = DataSaver.games[DataSaver.currentGameSlot].moves;
             AudioController.Instance.PlayMusic("Fight");
         }
     }

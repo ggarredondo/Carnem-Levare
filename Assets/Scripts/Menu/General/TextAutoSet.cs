@@ -17,7 +17,11 @@ public class TextAutoSet : MonoBehaviour
                 break;
         }
 
-        if (inputButton) GameManager.InputDetection.controlsChangedEvent += ChangeInputFont;
+        if (inputButton)
+        {
+            GameManager.InputDetection.controlsChangedEvent += ChangeInputFont;
+            ChangeInputFont();
+        }
     }
 
     private void OnDestroy()

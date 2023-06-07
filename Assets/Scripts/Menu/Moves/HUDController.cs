@@ -28,7 +28,8 @@ public class HUDController : MonoBehaviour
 
     private void OnEnable()
     {
-        inputReader.SelectMenuEvent += ChangeHUDMenu;
+        if(HUDMenus.Count > 1)
+            inputReader.SelectMenuEvent += ChangeHUDMenu;
         inputReader.ChangeCamera += ChangeCamera;
         PauseController.EnterPause += DisableHUD;
         PauseController.ExitPause += EnableHUD;
@@ -36,7 +37,8 @@ public class HUDController : MonoBehaviour
 
     private void OnDisable()
     {
-        inputReader.SelectMenuEvent -= ChangeHUDMenu;
+        if (HUDMenus.Count > 1)
+            inputReader.SelectMenuEvent -= ChangeHUDMenu;
         inputReader.ChangeCamera -= ChangeCamera;
         PauseController.EnterPause -= DisableHUD;
         PauseController.ExitPause -= EnableHUD;
@@ -44,13 +46,15 @@ public class HUDController : MonoBehaviour
 
     private void DisableHUD()
     {
-        HUDMenus.ForEach(m => m.SetActive(false));
+        if (HUDMenus.Count > 1)
+            HUDMenus.ForEach(m => m.SetActive(false));
         StaticHUDMenus.ForEach(m => m.SetActive(false));
     }
 
     private void EnableHUD()
     {
-        HUDMenus[actualHUDMenu].SetActive(true);
+        if (HUDMenus.Count > 1)
+            HUDMenus[actualHUDMenu].SetActive(true);
         StaticHUDMenus.ForEach(m => m.SetActive(true));
     }
 

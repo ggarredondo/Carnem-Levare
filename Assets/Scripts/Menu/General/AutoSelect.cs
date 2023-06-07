@@ -34,7 +34,11 @@ public class AutoSelect : MonoBehaviour, IPointerEnterHandler, ISelectHandler, I
 
     private void Awake()
     {
-        if (inputButton) GameManager.InputDetection.controlsChangedEvent += ChangeInputFont;
+        if (inputButton)
+        {
+            GameManager.InputDetection.controlsChangedEvent += ChangeInputFont;
+            ChangeInputFont();
+        }
     }
 
     private void OnDestroy()
