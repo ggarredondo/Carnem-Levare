@@ -85218,14 +85218,14 @@ AnimationClip:
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
-  - time: 0.45
+  - time: 0.5
     functionName: DeactivateMove
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
-  - time: 0.95
+  - time: 0.9
     functionName: EndMove
     data: 
     objectReferenceParameter: {fileID: 0}

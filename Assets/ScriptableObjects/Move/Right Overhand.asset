@@ -19,8 +19,8 @@ MonoBehaviour:
   applyAnimationEvents: 0
   initSound: Whiff_Overhand
   startUp: 350
-  active: 100
-  recovery: 500
+  active: 150
+  recovery: 400
   startTracking: 0
   trackingLength: 350
   hitSound: Hit_Overhand
