@@ -415,7 +415,7 @@ MonoBehaviour:
     m_ActionId: 5615a560-70a5-4c6d-a0b0-edfa9c6ea921
     m_ActionName: Main Movement/StartHold[/XInputControllerWindows/start,/Keyboard/escape]
   m_NeverAutoSwitchControlSchemes: 0
-  m_DefaultControlScheme: 
+  m_DefaultControlScheme: Gamepad
   m_DefaultActionMap: Main Movement
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}

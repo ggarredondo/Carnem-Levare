@@ -139,7 +139,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &71918041
 Transform:
   m_ObjectHideFlags: 0
@@ -934,11 +934,6 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: f93543a752193d243a102bfbba956363, type: 2}
-    - target: {fileID: 5975427957589119885, guid: 597ff9b00a9e7804681f9e3db89066c3,
-        type: 3}
-      propertyPath: m_Constraints
-      value: 112
-      objectReference: {fileID: 0}
     - target: {fileID: 7481606168508649710, guid: 597ff9b00a9e7804681f9e3db89066c3,
         type: 3}
       propertyPath: m_RootOrder
@@ -2539,10 +2534,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 309256731}
     m_Modifications:
-    - target: {fileID: 1216391172, guid: 730b6f15cbfa96c4db1930def4556da9, type: 3}
-      propertyPath: m_DefaultControlScheme
-      value: Gamepad
-      objectReference: {fileID: 0}
     - target: {fileID: 1269643871391488199, guid: 730b6f15cbfa96c4db1930def4556da9,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
