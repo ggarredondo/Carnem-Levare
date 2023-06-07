@@ -9,6 +9,7 @@
 <Gamepad>/leftStickPress : e
 <Gamepad>/rightStickPress : \
 <Gamepad>/select : B
+<Gamepad>/start : V
 <Keyboard>/q : Q
 <Keyboard>/w : W
 <Keyboard>/e : E
@@ -46,6 +47,7 @@
 <Keyboard>/9 : 9
 <Keyboard>/0 : 0
 <Keyboard>/tab : e
+<Keyboard>/escape : m
 <Keyboard>/leftShift : g
 <Keyboard>/rightShift : g
 <Keyboard>/leftAlt : b

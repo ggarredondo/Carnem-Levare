@@ -1,6 +1,6 @@
 using UnityEngine;
 using TMPro;
-using System.Threading.Tasks;
+using LerpUtilities;
 
 public class MoveBlock : MonoBehaviour
 {
@@ -37,40 +37,11 @@ public class MoveBlock : MonoBehaviour
 
     public async void LerpRectTransform(Vector3 targetPosition, Vector3 targetScale, float duration)
     {
-        Vector3 startPosition = rectTransform.localPosition;
-        Vector3 startScale = rectTransform.localScale;
-        float elapsedTime = 0f;
-
-        while (elapsedTime < duration)
-        {
-            elapsedTime += Time.deltaTime;
-            float t = Mathf.Clamp01(elapsedTime / duration);
-
-            rectTransform.localPosition = Vector3.Lerp(startPosition, targetPosition, t);
-            rectTransform.localScale = Vector3.Lerp(startScale, targetScale, t);
-
-            await Task.Yield();
-        }
-
-        rectTransform.localPosition = targetPosition;
-        rectTransform.localScale = targetScale;
+        await Lerp.RectTransform(rectTransform, targetPosition, targetScale, duration);
     }
 
     public async void LerpColor(float targetAlpha, float duration)
     {
-        float startAlpha = canvasGroup.alpha;
-        float elapsedTime = 0f;
-
-        while (elapsedTime < duration)
-        {
-            elapsedTime += Time.deltaTime;
-            float t = Mathf.Clamp01(elapsedTime / duration);
-
-            canvasGroup.alpha = Mathf.Lerp(startAlpha, targetAlpha, t);
-
-            await Task.Yield();
-        }
-
-        canvasGroup.alpha = targetAlpha;
+        await Lerp.CanvasAlpha(canvasGroup, targetAlpha, duration);
     }
 }

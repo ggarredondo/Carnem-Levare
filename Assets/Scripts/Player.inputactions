@@ -74,7 +74,16 @@
                     "id": "12629714-7bd3-4252-a238-67c8108a2f19",
                     "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": "",
+                    "interactions": "Tap",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "StartHold",
+                    "type": "Button",
+                    "id": "5615a560-70a5-4c6d-a0b0-edfa9c6ea921",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "Hold(duration=0.8)",
                     "initialStateCheck": false
                 },
                 {
@@ -466,6 +475,28 @@
                     "processors": "",
                     "groups": "Keyboard&Mouse",
                     "action": "ChangeCamera",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "58e2c429-a920-4860-92b4-c20781ca0ef1",
+                    "path": "<Gamepad>/start",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Gamepad",
+                    "action": "StartHold",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "e112e917-7ea8-4332-93ab-28ec02736dc4",
+                    "path": "<Keyboard>/escape",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard&Mouse",
+                    "action": "StartHold",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

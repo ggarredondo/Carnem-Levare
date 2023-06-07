@@ -1,8 +1,8 @@
-using System.Threading.Tasks;
 using UnityEngine;
 using TMPro;
 using System.Collections.Generic;
 using UnityEngine.UI;
+using LerpUtilities;
 
 public class MoveInfo : MonoBehaviour
 {
@@ -51,38 +51,21 @@ public class MoveInfo : MonoBehaviour
     public async void Movement(Color color)
     {
         isMoving = true;
-        await LerpRectTransform(new Vector3(rectTransform.localPosition.x,
-                                            rectTransform.localPosition.y + yPositionDifference, 
-                                            rectTransform.localPosition.z),
-                                            new Color(color.r,color.g,color.b, initialAlpha/2),
-                                            lerpDuration);
+        await Lerp.RectTransform_Color(rectTransform,
+                                       image,
+                                       new Vector3(rectTransform.localPosition.x,
+                                                   rectTransform.localPosition.y + yPositionDifference, 
+                                                   rectTransform.localPosition.z),
+                                       new Color(color.r,color.g,color.b, initialAlpha/2),
+                                       lerpDuration);
 
-        await LerpRectTransform(new Vector3(rectTransform.localPosition.x,
-                                            rectTransform.localPosition.y - yPositionDifference,
-                                            rectTransform.localPosition.z),
-                                            new Color(1, 1, 1, initialAlpha),
-                                            lerpDuration);
+        await Lerp.RectTransform_Color(rectTransform,
+                                       image,
+                                       new Vector3(rectTransform.localPosition.x,
+                                                   rectTransform.localPosition.y - yPositionDifference,
+                                                   rectTransform.localPosition.z),
+                                       new Color(1, 1, 1, initialAlpha),
+                                       lerpDuration);
         isMoving = false;
-    }
-
-    private async Task LerpRectTransform(Vector3 targetPosition, Color targetColor, float duration)
-    {
-        Vector3 startPosition = rectTransform.localPosition;
-        Color startColor = image.color;
-        float elapsedTime = 0f;
-
-        while (elapsedTime < duration)
-        {
-            elapsedTime += Time.deltaTime;
-            float t = Mathf.Clamp01(elapsedTime / duration);
-
-            rectTransform.localPosition = Vector3.Lerp(startPosition, targetPosition, t);
-            image.color = Color.Lerp(startColor, targetColor, t);
-
-            await Task.Yield();
-        }
-
-        rectTransform.localPosition = targetPosition;
-        image.color = targetColor;
     }
 }

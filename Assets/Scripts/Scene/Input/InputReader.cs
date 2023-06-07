@@ -10,6 +10,9 @@ public class InputReader : ScriptableObject
     public event System.Action ChangeLeftMenuEvent;
     public event System.Action StartPauseMenuEvent;
 
+    public event System.Action StartHoldEvent;
+    public event System.Action StartHoldInitEvent;
+
     public event System.Action SelectMenuEvent;
     public event System.Action ChangeCamera;
     public event System.Action<Vector2> DPAdEvent;
@@ -42,6 +45,12 @@ public class InputReader : ScriptableObject
     public void OnStartPauseMenu(InputAction.CallbackContext context)
     {
         if (context.performed) StartPauseMenuEvent?.Invoke();
+    }
+
+    public void OnStartHold(InputAction.CallbackContext context)
+    {
+        if (context.started) StartHoldInitEvent?.Invoke();
+        if (context.performed) StartHoldEvent?.Invoke();
     }
 
     public void OnSelectMenu(InputAction.CallbackContext context)

@@ -1,6 +1,6 @@
 using System.Collections.Generic;
-using System.Threading.Tasks;
 using UnityEngine;
+using LerpUtilities;
 
 public class HUDController : MonoBehaviour
 {
@@ -81,7 +81,7 @@ public class HUDController : MonoBehaviour
         if (actualCanvas != null)
         {
             AudioController.Instance.uiSfxSounds.Play("ExitMoveMenu");
-            await LerpCanvasAlpha(actualCanvas, 0, lerpDuration);
+            await Lerp.CanvasAlpha(actualCanvas, 0, lerpDuration);
         }
 
         DisableHUD();
@@ -93,25 +93,7 @@ public class HUDController : MonoBehaviour
         if (actualCanvas != null)
         {
             AudioController.Instance.uiSfxSounds.Play("EnterMoveMenu");
-            await LerpCanvasAlpha(actualCanvas, 1, lerpDuration);
+            await Lerp.CanvasAlpha(actualCanvas, 1, lerpDuration);
         }
-    }
-
-    private async Task LerpCanvasAlpha(CanvasGroup canvasGroup,float targetAlpha, float duration)
-    {
-        float startAlpha = canvasGroup.alpha;
-        float elapsedTime = 0f;
-
-        while (elapsedTime < duration)
-        {
-            elapsedTime += Time.deltaTime;
-            float t = Mathf.Clamp01(elapsedTime / duration);
-
-            canvasGroup.alpha = Mathf.Lerp(startAlpha, targetAlpha, t);
-
-            await Task.Yield();
-        }
-
-        canvasGroup.alpha = targetAlpha;
-    }
+    }    
 }

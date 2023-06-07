@@ -1,5 +1,5 @@
-using System.Threading.Tasks;
 using UnityEngine;
+using LerpUtilities;
 
 public class PauseController : MonoBehaviour
 {
@@ -50,36 +50,18 @@ public class PauseController : MonoBehaviour
         EnterPause.Invoke();
         GameManager.PlayerInput.SwitchCurrentActionMap("UI");
         AudioController.Instance.PauseGame(true);
-        await LerpCanvasAlpha(canvasGroup, 1, 0.1f);
+        await Lerp.CanvasAlpha_Unscaled(canvasGroup, 1, 0.1f);
     }
 
     public async void ExitPauseMode(bool resumeSounds)
     {
         Time.timeScale = 1;
         AudioController.Instance.PauseGame(false && resumeSounds);
-        await LerpCanvasAlpha(canvasGroup, 0, 0.1f);
+        GameManager.PlayerInput.SwitchCurrentActionMap("Main Movement");
+        await Lerp.CanvasAlpha_Unscaled(canvasGroup, 0, 0.1f);
         menuController.DisableMenus();
         pauseMenuActivated = false;
         volume.SetActive(false);
         ExitPause.Invoke();
-        GameManager.PlayerInput.SwitchCurrentActionMap("Main Movement");
-    }
-
-    private async Task LerpCanvasAlpha(CanvasGroup canvasGroup, float targetAlpha, float duration)
-    {
-        float startAlpha = canvasGroup.alpha;
-        float elapsedTime = 0f;
-
-        while (elapsedTime < duration)
-        {
-            elapsedTime += Time.unscaledDeltaTime;
-            float t = Mathf.Clamp01(elapsedTime / duration);
-
-            canvasGroup.alpha = Mathf.Lerp(startAlpha, targetAlpha, t);
-
-            await Task.Yield();
-        }
-
-        canvasGroup.alpha = targetAlpha;
     }
 }

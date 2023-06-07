@@ -78,6 +78,9 @@ public class GameManager : MonoBehaviour
 
     void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
+        if (Time.timeScale < 1)
+            Time.timeScale = 1;
+
         if (SceneManager.GetActiveScene().buildIndex != (int)SceneNumber.MAIN_MENU)
             playerInput = GameObject.FindGameObjectWithTag("INPUT").GetComponent<PlayerInput>();   
         

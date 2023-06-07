@@ -1,13 +1,16 @@
 using System.Threading.Tasks;
 using UnityEngine;
+using LerpUtilities;
 
 public class TransitionPlayer : MonoBehaviour
 {
-    private Animator animator;
+    private CanvasGroup canvasGroup;
+
+    [SerializeField] private float lerpDuration;
 
     private void Awake()
     {
-        animator = GetComponent<Animator>();
+        canvasGroup = GetComponent<CanvasGroup>();
     }
 
     private void OnEnable()
@@ -24,20 +27,18 @@ public class TransitionPlayer : MonoBehaviour
 
     private async Task StartTransition()
     {
-        animator.SetBool("isLoading", true);
         GameManager.PlayerInput.enabled = false;
         GameManager.UiInput.enabled = false;
-        await Task.Delay(System.TimeSpan.FromSeconds(animator.GetCurrentAnimatorStateInfo(0).length));
+        await Lerp.CanvasAlpha_Unscaled(canvasGroup, 1, lerpDuration);
         GameManager.UiInput.enabled = true;
         GameManager.PlayerInput.enabled = true;
     }
 
     private async Task EndTransition()
     {
-        animator.SetBool("endLoading", true);
         GameManager.PlayerInput.enabled = false;
         GameManager.UiInput.enabled = false;
-        await Task.Delay(System.TimeSpan.FromSeconds(animator.GetCurrentAnimatorStateInfo(0).length));
+        await Lerp.CanvasAlpha(canvasGroup, 0, lerpDuration);
         GameManager.UiInput.enabled = true;
         GameManager.PlayerInput.enabled = true;
     }
