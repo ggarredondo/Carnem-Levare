@@ -20,7 +20,7 @@ MonoBehaviour:
   initSound: Whiff_Jab
   startUp: 100
   active: 50
-  recovery: 350
+  recovery: 250
   startTracking: 0
   trackingLength: 100
   hitSound: Hit_Jab
