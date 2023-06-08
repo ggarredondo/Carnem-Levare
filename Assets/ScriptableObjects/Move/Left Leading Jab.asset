@@ -15,7 +15,7 @@ MonoBehaviour:
   icon: {fileID: 21300000, guid: 73f2e0e785a93fd4982fae306299f5e2, type: 3}
   moveName: Left Leading Jab
   animation: {fileID: 7400000, guid: e652c0869035b6b418eef0c72bbb19c0, type: 2}
-  animationSpeed: 1.2
+  animationSpeed: 1.4
   applyAnimationEvents: 0
   initSound: Whiff_Jab
   startUp: 200

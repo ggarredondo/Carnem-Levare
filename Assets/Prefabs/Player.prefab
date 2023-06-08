@@ -948,7 +948,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 072400a3141bc664485729ff590b307c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  msBeforeBuffering: 300
+  msBeforeBuffering: 100
   moveIndexes: 00000000010000000200000003000000
 --- !u!54 &2794588595183348619
 Rigidbody:
