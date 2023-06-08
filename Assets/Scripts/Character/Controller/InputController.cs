@@ -12,7 +12,7 @@ public class InputController : Controller
 
     private WaitForSeconds waitForSeconds;
     private IEnumerator couscous;
-    [SerializeField] [InitializationField] private double msBeforeBuffering = 300.0;
+    [SerializeField] private double msBeforeBuffering = 300.0;
     private bool BUFFER_FLAG = false;
 
     public List<int> moveIndexes = new(4) { 0, 1, 2, 3 };
@@ -36,6 +36,8 @@ public class InputController : Controller
             BUFFER_FLAG = false;
         };
     }
+
+    private void OnValidate() => waitForSeconds = new WaitForSeconds((float)TimeSpan.FromMilliseconds(msBeforeBuffering).TotalSeconds);
 
     private void BufferMove(int moveIndex)
     {

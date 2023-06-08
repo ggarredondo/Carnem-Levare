@@ -905,7 +905,7 @@ MonoBehaviour:
     characterDamage: 10
     blockingMultiplier: 0.1
     comboDecay: 4
-    minStun: 300
+    minStun: 200
     height: 1
     mass: 1
     drag: 0
@@ -948,7 +948,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 072400a3141bc664485729ff590b307c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  msBeforeBuffering: 100
+  msBeforeBuffering: 150
   moveIndexes: 00000000010000000200000003000000
 --- !u!54 &2794588595183348619
 Rigidbody:

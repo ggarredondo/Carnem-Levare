@@ -424,7 +424,7 @@ MonoBehaviour:
     characterDamage: 10
     blockingMultiplier: 0.1
     comboDecay: 4
-    minStun: 300
+    minStun: 200
     height: 1.1
     mass: 1
     drag: 0
