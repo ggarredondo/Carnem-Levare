@@ -35,7 +35,7 @@ public class CharacterStats
 
     public float CalculateAttackDamage(float baseDamage) => baseDamage + characterDamage;
     public double CalculateStun(double stun, float hitNumber) => HitCounterDecay(stun, hitNumber);
-    public double StepDecay(double stun, float hitNumber) => System.Math.Max(minStun, stun - hitNumber * comboDecay);
+    public double StepDecay(double stun, float hitNumber) => System.Math.Max(minStun, stun - (hitNumber-1) * comboDecay);
     public double HitCounterDecay(double stun, float hitNumber) => hitNumber < comboDecay ? stun : minStun;
 
     private void AddToStamina(float addend) => stamina = Mathf.Clamp(stamina + addend, 0f + System.Convert.ToSingle(noDeath), maxStamina);
