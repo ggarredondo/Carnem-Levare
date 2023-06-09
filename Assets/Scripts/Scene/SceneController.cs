@@ -28,9 +28,15 @@ public class SceneController
         currentScene = nextScene;
     }
 
-    public string GetCurrentMusic()
+    public void PlayMusic()
     {
-        return scenesTable[currentScene].initialSong;
+        if(scenesTable[currentScene].playMusic)
+            AudioController.Instance.PlayMusic(scenesTable[currentScene].music);
+    }
+
+    public List<Sounds> GetCurrentSounds()
+    {
+        return scenesTable[currentScene].sounds;
     }
 
     public void NextScene()
@@ -61,7 +67,7 @@ public class SceneController
 public enum SceneNumber
 {
     MAIN_MENU = 0,
-    LOADING_MENU = 1,
+    LOADING = 1,
     NON_DESTROY_MAIN_MENU = 2,
     COMBAT = 3,
     TRAINING = 4,

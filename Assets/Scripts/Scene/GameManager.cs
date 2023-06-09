@@ -10,9 +10,6 @@ public class GameManager : MonoBehaviour
     [Header("Settings")]
     [SerializeField] private AudioMixer audioMixer;
     [SerializeField] private SaveConfiguration saveConfig;
-
-    [Header("Scene")]
-    [SerializeField] private Tuple<Sounds, SceneNumber>[] allSounds;
     [SerializeField] private List<SceneLogic> scenes;
 
     [Header("Debug")]
@@ -58,7 +55,7 @@ public class GameManager : MonoBehaviour
 
         inputMapping = new();
         inputDetection = new();
-                sceneController = new(SceneManager.GetActiveScene().buildIndex, scenes);
+        sceneController = new(SceneManager.GetActiveScene().buildIndex, scenes);
     }
 
     private void Start()
@@ -87,35 +84,10 @@ public class GameManager : MonoBehaviour
 
         InputDetection.Configure();
 
-        InitializeSoundSources();
-
-        PlayMusic();
-    }
-
-    private void PlayMusic()
-    {
-        AudioController.Instance.PlayMusic(sceneController.GetCurrentMusic());
-    }
-
-    private void InitializeSoundSources()
-    {
-        for (int i = 0; i < allSounds.GetLength(0); i++)
+        if (SceneManager.GetActiveScene().buildIndex != (int)SceneNumber.LOADING)
         {
-            if (SceneManager.GetActiveScene().buildIndex == (int)allSounds[i].Item2)
-            {
-                for (int j = 0; j < allSounds[i].Item1.SoundGroups.GetLength(0); j++)
-                {
-                    allSounds[i].Item1.SoundGroups[j].speakers = new GameObject[allSounds[i].Item1.SoundGroups[j].speakersTag.GetLength(0)];
-
-                    for (int k = 0; k < allSounds[i].Item1.SoundGroups[j].speakersTag.GetLength(0); k++)
-                    {
-                        GameObject speaker = GameObject.FindGameObjectWithTag(allSounds[i].Item1.SoundGroups[j].speakersTag[k]);
-                        allSounds[i].Item1.SoundGroups[j].speakers[k] = speaker;
-                    }
-                }
-
-                allSounds[i].Item1.Initialize();
-            }
+            AudioController.Instance.InitializeSoundSources(sceneController.GetCurrentSounds());
+            sceneController.PlayMusic();
         }
     }
 }

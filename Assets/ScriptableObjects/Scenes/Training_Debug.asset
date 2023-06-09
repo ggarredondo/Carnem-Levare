@@ -10,17 +10,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d66219019227eb34c927cb1bf1fd9889, type: 3}
-  m_Name: MainMenu
+  m_Name: Training_Debug
   m_EditorClassIdentifier: 
-  ID: 0
+  ID: 4
   nextScene:
     withLoadScreen: 1
-    ID: 4
+    ID: 3
   previousScene:
     withLoadScreen: 0
-    ID: 0
+    ID: 2
   playMusic: 1
-  music: Intro
+  music: Fight
   sounds:
-  - {fileID: 11400000, guid: 5579dd4c23fd5554397d995ec5221c28, type: 2}
+  - {fileID: 11400000, guid: 7bb960d4926ae204ca58b6e854dceac3, type: 2}
   - {fileID: 11400000, guid: c92730399fa649c4f84f69f30d845b4b, type: 2}
+  - {fileID: 11400000, guid: 5579dd4c23fd5554397d995ec5221c28, type: 2}

@@ -19,4 +19,6 @@ MonoBehaviour:
   previousScene:
     withLoadScreen: 0
     ID: 2
-  initialSong: Intro
+  playMusic: 1
+  music: Intro
+  sounds: []

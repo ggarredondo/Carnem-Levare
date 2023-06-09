@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "SceneLogic", menuName = "Scriptable Objects/Scene Logic")]
@@ -15,6 +16,8 @@ public class SceneLogic : ScriptableObject
     public Scene nextScene;
     public Scene previousScene;
 
-    [Header("Music")]
-    public string initialSong;
+    [Header("Sound")]
+    public bool playMusic;
+    [ConditionalField("playMusic")] public string music;
+    public List<Sounds> sounds;
 }

@@ -24,7 +24,7 @@ public class SceneLoader
     {
         EndLoad();
 
-        if (SceneManager.GetActiveScene().buildIndex == (int) SceneNumber.LOADING_MENU)
+        if (SceneManager.GetActiveScene().buildIndex == (int) SceneNumber.LOADING)
         {
             ActivateLoading.Invoke();
             LoadSceneAsync();
@@ -48,7 +48,7 @@ public class SceneLoader
         await StartTransition.Invoke();
         nextSceneIndex = (int) nextScene;
         GameManager.PlayerInput.controlsChangedEvent.RemoveAllListeners();
-        SceneManager.LoadScene((int) SceneNumber.LOADING_MENU);
+        SceneManager.LoadScene((int) SceneNumber.LOADING);
     }
 
     private async void LoadSceneAsync()

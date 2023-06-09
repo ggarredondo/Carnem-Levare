@@ -19,4 +19,7 @@ MonoBehaviour:
   previousScene:
     withLoadScreen: 0
     ID: 2
-  initialSong: Fight
+  playMusic: 1
+  music: Fight
+  sounds:
+  - {fileID: 11400000, guid: 7bb960d4926ae204ca58b6e854dceac3, type: 2}
