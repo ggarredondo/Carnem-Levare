@@ -26,6 +26,7 @@ public class BlockedState : CharacterState
     {
         stateMachine.enabled = true;
         stateMachine.OnHurt += Blocked;
+        movement.SetKnockback(hitbox.KnockbackDirection, hitbox.KnockbackSpeed);
         OnEnter?.Invoke();
 
         stateMachine.hitNumber++;
@@ -39,6 +40,7 @@ public class BlockedState : CharacterState
     public void FixedUpdate() 
     {
         movement.LookAtTarget();
+        movement.PushCharacter();
     }
     public void Exit() 
     {

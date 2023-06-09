@@ -5,6 +5,8 @@ public class Hitbox : MonoBehaviour
     private string hitSound, blockedSound;
     private float animationBodyTarget, animationStagger, damage, hitShakeIntensity;
     private double blockStun, hitStun, hitShakeTime;
+    private Vector3 knockbackDirection;
+    private float knockbackSpeed;
     private bool unblockable;
 
     private void Start()
@@ -13,7 +15,7 @@ public class Hitbox : MonoBehaviour
     }
 
     public void Set(string hitSound, string blockedSound, double hitShakeTime, float hitShakeIntensity, float animationStagger, float damage,
-        double blockStun, double hitStun, bool unblockable)
+        double blockStun, double hitStun, in Vector3 knockbackDirection, float knockbackSpeed, bool unblockable)
     {
         this.hitSound = hitSound;
         this.blockedSound = blockedSound;
@@ -23,6 +25,8 @@ public class Hitbox : MonoBehaviour
         this.damage = damage;
         this.blockStun = blockStun;
         this.hitStun = hitStun;
+        this.knockbackDirection = knockbackDirection;
+        this.knockbackSpeed = knockbackSpeed;
         this.unblockable = unblockable;
     }
 
@@ -42,6 +46,8 @@ public class Hitbox : MonoBehaviour
     public float Damage { get => damage; }
     public double BlockStun { get => blockStun; }
     public double HitStun { get => hitStun; }
+    public ref readonly Vector3 KnockbackDirection => ref knockbackDirection;
+    public float KnockbackSpeed => knockbackSpeed;
     public void SetUnblockable(bool unblockable) => this.unblockable = unblockable;
     public bool Unblockable { get => unblockable; }
 }

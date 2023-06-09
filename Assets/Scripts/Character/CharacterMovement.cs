@@ -22,6 +22,9 @@ public class CharacterMovement
     private Vector2 direction;
     public event ActionIn<Vector2> OnMoveCharacter;
 
+    private Vector3 knockbackPosition;
+    private float knockbackSpeed;
+
     public void Initialize(in Transform character, in Transform target, in Rigidbody rb)
     { 
         this.character = character;
@@ -41,6 +44,19 @@ public class CharacterMovement
         direction = Vector2.Lerp(direction, targetDirection, finalDirectionSpeed * Time.deltaTime);
         OnMoveCharacter?.Invoke(direction);
     }
+
+    public void SetKnockback(in Vector3 knockbackDirection, float knockbackSpeed)
+    {
+        knockbackPosition = character.position + 
+            (target.right * knockbackDirection.x + target.up * knockbackDirection.y + target.forward * knockbackDirection.z);
+        this.knockbackSpeed = knockbackSpeed;
+    }
+
+    /// <summary>
+    /// Physics-related. Use in Fixed Update.
+    /// </summary>
+    public void PushCharacter() => 
+        rb.position = Vector3.Lerp(character.position, knockbackPosition, Time.deltaTime * knockbackSpeed);
 
     /// <summary>
     /// Physics-related. Use in Fixed Update.

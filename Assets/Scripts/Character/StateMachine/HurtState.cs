@@ -23,6 +23,7 @@ public class HurtState : CharacterState
     {
         stateMachine.enabled = true;
         stateMachine.OnHurt += stats.DamageStamina;
+        movement.SetKnockback(hitbox.KnockbackDirection, hitbox.KnockbackSpeed);
         OnEnter?.Invoke();
 
         stateMachine.hitNumber++;
@@ -33,6 +34,7 @@ public class HurtState : CharacterState
     public void FixedUpdate() 
     {
         movement.LookAtTarget();
+        movement.PushCharacter();
     }
     public void Exit()
     {
