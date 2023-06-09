@@ -23,6 +23,6 @@ public class MainPauseMenu : AbstractMenu
     private void BackToMenu()
     {
         AudioController.Instance.BackMenu();
-        GameManager.SceneLoader.LoadScene(SceneNumber.NON_DESTROY_MAIN_MENU);
+        GameManager.SceneController.PreviousScene();
     }
 }

@@ -12,6 +12,7 @@ public class InputReader : ScriptableObject
 
     public event System.Action StartHoldEvent;
     public event System.Action StartHoldInitEvent;
+    public event System.Action StartHoldReleaseEvent;
 
     public event System.Action SelectMenuEvent;
     public event System.Action ChangeCamera;
@@ -49,8 +50,9 @@ public class InputReader : ScriptableObject
 
     public void OnStartHold(InputAction.CallbackContext context)
     {
-        if (context.started) StartHoldInitEvent?.Invoke();
+        if (context.phase == InputActionPhase.Started) StartHoldInitEvent?.Invoke();
         if (context.performed) StartHoldEvent?.Invoke();
+        if (context.phase == InputActionPhase.Canceled) StartHoldReleaseEvent?.Invoke();
     }
 
     public void OnSelectMenu(InputAction.CallbackContext context)

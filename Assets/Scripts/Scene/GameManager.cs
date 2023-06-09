@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Audio;
 using UnityEngine.InputSystem;
@@ -10,8 +11,9 @@ public class GameManager : MonoBehaviour
     [SerializeField] private AudioMixer audioMixer;
     [SerializeField] private SaveConfiguration saveConfig;
 
-    [Header("Sounds")]
+    [Header("Scene")]
     [SerializeField] private Tuple<Sounds, SceneNumber>[] allSounds;
+    [SerializeField] private List<SceneLogic> scenes;
 
     [Header("Debug")]
     [SerializeField] [Range(0f, 1f)] private float timeScale = 1f;
@@ -22,14 +24,14 @@ public class GameManager : MonoBehaviour
     private static PlayerInput playerInput;
     private static InputSystemUIInputModule uiInput;
     private static ControllerRumble controllerRumble;
-    private static SceneLoader sceneLoader;
+    private static SceneController sceneController;
     private static InputMapping inputMapping;
     private static InputDetection inputDetection;
 
     public static ref readonly PlayerInput PlayerInput { get => ref playerInput; }
     public static ref readonly InputSystemUIInputModule UiInput { get => ref uiInput; }
     public static ref readonly ControllerRumble ControllerRumble { get => ref controllerRumble; }
-    public static ref readonly SceneLoader SceneLoader { get => ref sceneLoader; }
+    public static ref readonly SceneController SceneController { get => ref sceneController; }
     public static ref readonly InputMapping InputMapping { get => ref inputMapping; }
     public static ref readonly InputDetection InputDetection { get => ref inputDetection; }
 
@@ -56,13 +58,12 @@ public class GameManager : MonoBehaviour
 
         inputMapping = new();
         inputDetection = new();
+                sceneController = new(SceneManager.GetActiveScene().buildIndex, scenes);
     }
 
     private void Start()
     {
         controllerRumble = new();
-        sceneLoader = new();
-
         applier.ApplyChanges();
     }
 
@@ -93,21 +94,7 @@ public class GameManager : MonoBehaviour
 
     private void PlayMusic()
     {
-        if (SceneManager.GetActiveScene().buildIndex == (int)SceneNumber.MAIN_MENU)
-            AudioController.Instance.PlayMusic("Intro");
-
-        if (SceneManager.GetActiveScene().buildIndex == (int)SceneNumber.NON_DESTROY_MAIN_MENU)
-            AudioController.Instance.PlayMusic("Intro");
-
-        if (SceneManager.GetActiveScene().buildIndex == (int)SceneNumber.GAME)
-        {
-            AudioController.Instance.PlayMusic("Fight");
-        }
-
-        if (SceneManager.GetActiveScene().buildIndex == (int)SceneNumber.TRAINING)
-        {
-            AudioController.Instance.PlayMusic("Fight");
-        }
+        AudioController.Instance.PlayMusic(sceneController.GetCurrentMusic());
     }
 
     private void InitializeSoundSources()

@@ -1,6 +1,7 @@
 using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 namespace LerpUtilities
 {
@@ -82,6 +83,24 @@ namespace LerpUtilities
 
             rectTransform.localPosition = targetPosition;
             image.color = targetColor;
+        }
+
+        public static async Task Text_Color(TMP_Text text, Color targetColor, float duration)
+        {
+            Color startColor = text.color;
+            float elapsedTime = 0f;
+
+            while (elapsedTime < duration)
+            {
+                elapsedTime += Time.deltaTime;
+                float t = Mathf.Clamp01(elapsedTime / duration);
+
+                text.color = Color.Lerp(startColor, targetColor, t);
+
+                await Task.Yield();
+            }
+
+            text.color = targetColor;
         }
     }
 }
