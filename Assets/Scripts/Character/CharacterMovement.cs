@@ -23,9 +23,6 @@ public class CharacterMovement
     private Vector2 direction;
     public event ActionIn<Vector2> OnMoveCharacter;
 
-    [Header("Knockback")]
-    [SerializeField] private float knockbackMultiplier = 100f;
-
     public void Initialize(in Transform character, in Transform target, in Rigidbody rb)
     { 
         this.character = character;
@@ -52,7 +49,7 @@ public class CharacterMovement
     public void PushCharacter(in Vector3 knockback)
     {
         Vector3 knockbackDirection = target.right * knockback.x + target.up * knockback.y + target.forward * knockback.z;
-        rb.AddForce(knockbackDirection * knockbackMultiplier);
+        rb.AddForce(knockbackDirection, ForceMode.Impulse);
     }
 
     /// <summary>
