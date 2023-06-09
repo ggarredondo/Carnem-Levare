@@ -1,18 +1,17 @@
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 [CreateAssetMenu(fileName = "InputReader", menuName = "Scriptable Objects/Input Reader")]
 public class InputReader : ScriptableObject
 {
+    [SerializeField] private List<InputActionReference> holdInputActions;
+
     public event System.Action MouseClickEvent;
     public event System.Action MenuBackEvent;
     public event System.Action ChangeRightMenuEvent;
     public event System.Action ChangeLeftMenuEvent;
     public event System.Action StartPauseMenuEvent;
-
-    public event System.Action StartHoldEvent;
-    public event System.Action StartHoldInitEvent;
-    public event System.Action StartHoldReleaseEvent;
 
     public event System.Action SelectMenuEvent;
     public event System.Action ChangeCamera;
@@ -23,6 +22,14 @@ public class InputReader : ScriptableObject
     public event System.Action<int> Action2;
     public event System.Action<int> Action3;
 
+    public Dictionary<InputAction, System.Action<InputAction.CallbackContext>> HoldEvents;
+
+    public void Initialize()
+    {
+        HoldEvents = new();
+        holdInputActions.ForEach(a => HoldEvents.Add(a.action, null));
+    }
+
     public void OnMouseClick(InputAction.CallbackContext context)
     {
         MouseClickEvent?.Invoke();
@@ -30,7 +37,7 @@ public class InputReader : ScriptableObject
 
     public void OnMenuBack(InputAction.CallbackContext context)
     {
-        if (context.performed) MenuBackEvent.Invoke();
+        if (context.performed) MenuBackEvent?.Invoke();
     }
 
     public void OnChangeRightMenu(InputAction.CallbackContext context)
@@ -50,9 +57,7 @@ public class InputReader : ScriptableObject
 
     public void OnStartHold(InputAction.CallbackContext context)
     {
-        if (context.phase == InputActionPhase.Started) StartHoldInitEvent?.Invoke();
-        if (context.performed) StartHoldEvent?.Invoke();
-        if (context.phase == InputActionPhase.Canceled) StartHoldReleaseEvent?.Invoke();
+        HoldEvents[context.action]?.Invoke(context);
     }
 
     public void OnSelectMenu(InputAction.CallbackContext context)

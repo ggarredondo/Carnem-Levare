@@ -2,6 +2,7 @@ using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using System.Threading;
 
 namespace LerpUtilities
 {
@@ -85,13 +86,18 @@ namespace LerpUtilities
             image.color = targetColor;
         }
 
-        public static async Task Text_Color(TMP_Text text, Color targetColor, float duration)
+        public static async Task Text_Color(TMP_Text text, Color targetColor, float duration, CancellationToken cancel)
         {
             Color startColor = text.color;
             float elapsedTime = 0f;
 
             while (elapsedTime < duration)
             {
+                if (cancel.IsCancellationRequested)
+                {
+                    throw new TaskCanceledException();
+                }
+
                 elapsedTime += Time.deltaTime;
                 float t = Mathf.Clamp01(elapsedTime / duration);
 

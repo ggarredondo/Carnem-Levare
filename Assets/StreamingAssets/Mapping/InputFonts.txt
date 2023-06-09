@@ -46,6 +46,7 @@
 <Keyboard>/8 : 8
 <Keyboard>/9 : 9
 <Keyboard>/0 : 0
+<Keyboard>/enter : a
 <Keyboard>/tab : e
 <Keyboard>/escape : m
 <Keyboard>/leftShift : g

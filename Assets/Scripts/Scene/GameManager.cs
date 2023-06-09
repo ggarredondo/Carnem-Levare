@@ -9,6 +9,7 @@ public class GameManager : MonoBehaviour
 {
     [Header("Settings")]
     [SerializeField] private AudioMixer audioMixer;
+    [SerializeField] private InputReader inputReader;
     [SerializeField] private SaveConfiguration saveConfig;
     [SerializeField] private List<SceneLogic> scenes;
 
@@ -36,6 +37,7 @@ public class GameManager : MonoBehaviour
 
     private void Awake()
     {
+        inputReader.Initialize();
         Application.backgroundLoadingPriority = ThreadPriority.Low;
         playerInput = GameObject.FindGameObjectWithTag("INPUT").GetComponent<PlayerInput>();
         uiInput = GetComponent<InputSystemUIInputModule>();

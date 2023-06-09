@@ -44,7 +44,6 @@
 <Keyboard>/8 : 8
 <Keyboard>/9 : 9
 <Keyboard>/0 : 0
-<Keyboard>/tab : e
 <Keyboard>/leftShift : g
 <Keyboard>/rightShift : g
 <Keyboard>/leftAlt : b

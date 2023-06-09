@@ -1,39 +1,67 @@
 using UnityEngine;
 using TMPro;
 using LerpUtilities;
+using System.Threading;
+using System.Threading.Tasks;
+using UnityEngine.InputSystem;
 
 public class HoldText : MonoBehaviour
 {
+    [Header("Requirements")]
     [SerializeField] private InputReader inputReader;
-
+    [SerializeField] private InputActionReference inputReference;
     [SerializeField] private TMP_Text tmpText;
 
-    private void OnEnable()
+    [Header("Parameters")]
+    [SerializeField] private float minHoldTime;
+    [SerializeField] private float holdTIme;
+
+    private CancellationTokenSource cancellationTokenSource;
+    private bool hasTrigger;
+
+    private void Start()
     {
-        inputReader.StartHoldInitEvent += StartHolding;
-        inputReader.StartHoldEvent += TriggerHold;
-        inputReader.StartHoldReleaseEvent += ReleaseHold;
+        inputReader.HoldEvents[inputReference.action] += Hold;
     }
 
-    private void OnDisable()
+    private void OnDestroy()
     {
-        inputReader.StartHoldInitEvent -= StartHolding;
-        inputReader.StartHoldEvent -= TriggerHold;
-        inputReader.StartHoldReleaseEvent -= ReleaseHold;
+        inputReader.HoldEvents[inputReference.action] -= Hold;
+    }
+
+    private void Hold(InputAction.CallbackContext context)
+    {
+        if (context.started) StartHolding();
+        if (context.performed) TriggerHold();
+        if (context.canceled && !hasTrigger) ReleaseHold();
     }
 
     private void ReleaseHold()
     {
+        cancellationTokenSource?.Cancel();
         tmpText.color = new Color(1, 1, 1);
     }
 
     private async void StartHolding()
     {
-        await Lerp.Text_Color(tmpText, new Color(1, 0, 0), 0.8f);
+        cancellationTokenSource = new();
+        CancellationToken cancellationToken = cancellationTokenSource.Token;
+
+        try
+        {
+            await Task.Delay(System.TimeSpan.FromSeconds(minHoldTime));
+            await Lerp.Text_Color(tmpText, new Color(1, 0, 0), holdTIme, cancellationToken);
+        }
+        catch (TaskCanceledException) { }
+        finally
+        {
+            cancellationTokenSource.Dispose();
+        }
     }
 
     private void TriggerHold()
     {
+        hasTrigger = true;
         GameManager.SceneController.NextScene();
     }
 }
