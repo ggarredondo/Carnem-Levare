@@ -139,7 +139,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &71918041
 Transform:
   m_ObjectHideFlags: 0
@@ -2854,6 +2854,8 @@ MonoBehaviour:
     Item2: 4
   - Item1: {fileID: 11400000, guid: 5579dd4c23fd5554397d995ec5221c28, type: 2}
     Item2: 4
+  scenes:
+  - {fileID: 11400000, guid: 55607cf643206fe41bb7ca5a6d3f1862, type: 2}
   timeScale: 1
 --- !u!114 &1938814320
 MonoBehaviour:

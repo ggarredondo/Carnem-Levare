@@ -25,7 +25,7 @@ public class CharacterStateMachine : MonoBehaviour
         walkingState = new WalkingState(this, controller, stats, movement);
         blockingState = new BlockingState(this, controller, stats, movement);
         moveState = new MoveState(this, stats, movement);
-        hurtState = new HurtState(this, stats);
+        hurtState = new HurtState(this, stats, movement);
         blockedState = new BlockedState(this, controller, stats, movement);
         koState = new KOState(this);
     }

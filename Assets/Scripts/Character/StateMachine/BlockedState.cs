@@ -38,7 +38,7 @@ public class BlockedState : CharacterState
     }
     public void FixedUpdate() 
     {
-        movement.LookAtTarget(!movement.IsIdle);
+        movement.LookAtTarget();
     }
     public void Exit() 
     {

@@ -5,21 +5,23 @@ public class HurtState : CharacterState
 {  
     private readonly CharacterStateMachine stateMachine;
     private readonly CharacterStats stats;
+    private readonly CharacterMovement movement;
     public event Action OnEnter, OnExit;
 
     private Hitbox hitbox;
     public void Set(in Hitbox hitbox) => this.hitbox = hitbox;
     private IEnumerator coroutine;
 
-    public HurtState(in CharacterStateMachine stateMachine, in CharacterStats stats)
+    public HurtState(in CharacterStateMachine stateMachine, in CharacterStats stats, in CharacterMovement movement)
     {
         this.stateMachine = stateMachine;
         this.stats = stats;
+        this.movement = movement;
     }
 
     public void Enter() 
     {
-        stateMachine.enabled = false;
+        stateMachine.enabled = true;
         stateMachine.OnHurt += stats.DamageStamina;
         OnEnter?.Invoke();
 
@@ -28,7 +30,10 @@ public class HurtState : CharacterState
         stateMachine.StartCoroutine(coroutine);
     }
     public void Update() {}
-    public void FixedUpdate() {}
+    public void FixedUpdate() 
+    {
+        movement.LookAtTarget();
+    }
     public void Exit()
     {
         stateMachine.StopCoroutine(coroutine);
