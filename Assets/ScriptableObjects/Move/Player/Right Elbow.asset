@@ -32,4 +32,5 @@ MonoBehaviour:
   hitbox: 3
   baseDamage: 12
   animationStagger: 1
+  knockback: {x: -1, y: 0, z: 0}
   unblockable: 0

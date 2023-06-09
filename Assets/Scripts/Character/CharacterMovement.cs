@@ -9,21 +9,22 @@ public class CharacterMovement
     private Transform character, target;
     public void SetTarget(in Transform target) => this.target = target;
     
+    [Header("Tracking")]
     [Tooltip("How quickly character rotates towards their opponent")]
     [SerializeField] private float trackingRate = 1f;
-
+    [SerializeField] private float targetingMinimumMagnitude = 0.1f;
     [SerializeField] private bool doTracking = true;
 
+    [Header("Direction Speeds")]
     [Tooltip("How quickly the character's direction will match the target direction (smoothing movement)")]
-    [SerializeField] private float walkingDirectionSpeed = 1f, blockingDirectionSpeed = 1f, blockedDirectionSpeed = 1f, idleDirectionSpeed = 1f;
-
-    [SerializeField] private float targetingMinimumMagnitude = 0.1f;
+    [SerializeField] private float walkingDirectionSpeed = 1f;
+    [SerializeField] private float blockingDirectionSpeed = 1f, blockedDirectionSpeed = 1f, idleDirectionSpeed = 1f;
     
     private Vector2 direction;
     public event ActionIn<Vector2> OnMoveCharacter;
 
-    private Vector3 knockbackPosition;
-    private float knockbackSpeed;
+    [Header("Knockback")]
+    [SerializeField] private float knockbackMultiplier = 100f;
 
     public void Initialize(in Transform character, in Transform target, in Rigidbody rb)
     { 
@@ -45,18 +46,14 @@ public class CharacterMovement
         OnMoveCharacter?.Invoke(direction);
     }
 
-    public void SetKnockback(in Vector3 knockbackDirection, float knockbackSpeed)
-    {
-        knockbackPosition = character.position + 
-            (target.right * knockbackDirection.x + target.up * knockbackDirection.y + target.forward * knockbackDirection.z);
-        this.knockbackSpeed = knockbackSpeed;
-    }
-
     /// <summary>
     /// Physics-related. Use in Fixed Update.
     /// </summary>
-    public void PushCharacter() => 
-        rb.position = Vector3.Lerp(character.position, knockbackPosition, Time.deltaTime * knockbackSpeed);
+    public void PushCharacter(in Vector3 knockback)
+    {
+        Vector3 knockbackDirection = target.right * knockback.x + target.up * knockback.y + target.forward * knockback.z;
+        rb.AddForce(knockbackDirection * knockbackMultiplier);
+    }
 
     /// <summary>
     /// Physics-related. Use in Fixed Update.

@@ -26,12 +26,12 @@ public class BlockedState : CharacterState
     {
         stateMachine.enabled = true;
         stateMachine.OnHurt += Blocked;
-        movement.SetKnockback(hitbox.KnockbackDirection, hitbox.KnockbackSpeed);
         OnEnter?.Invoke();
 
         stateMachine.hitNumber++;
         coroutine = StateFunctions.Recover(stats, stateMachine, hitbox.BlockStun);
         stateMachine.StartCoroutine(coroutine);
+        movement.PushCharacter(hitbox.Knockback);
     }
     public void Update() 
     {
@@ -40,7 +40,6 @@ public class BlockedState : CharacterState
     public void FixedUpdate() 
     {
         movement.LookAtTarget();
-        movement.PushCharacter();
     }
     public void Exit() 
     {

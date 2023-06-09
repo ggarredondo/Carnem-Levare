@@ -23,18 +23,17 @@ public class HurtState : CharacterState
     {
         stateMachine.enabled = true;
         stateMachine.OnHurt += stats.DamageStamina;
-        movement.SetKnockback(hitbox.KnockbackDirection, hitbox.KnockbackSpeed);
         OnEnter?.Invoke();
 
         stateMachine.hitNumber++;
         coroutine = StateFunctions.Recover(stats, stateMachine, hitbox.HitStun);
         stateMachine.StartCoroutine(coroutine);
+        movement.PushCharacter(hitbox.Knockback);
     }
     public void Update() {}
     public void FixedUpdate() 
     {
         movement.LookAtTarget();
-        movement.PushCharacter();
     }
     public void Exit()
     {
