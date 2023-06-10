@@ -75,7 +75,7 @@ GameObject:
   - component: {fileID: 6484111237425751761}
   - component: {fileID: 8914790918072458434}
   m_Layer: 11
-  m_Name: Righ Foot Hitbox
+  m_Name: Righ Foot Triggerbox
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -442,12 +442,12 @@ MonoBehaviour:
     noDeath: 1
   characterMovement:
     trackingRate: 5
+    targetingMinimumMagnitude: 0.1
     doTracking: 1
     walkingDirectionSpeed: 5
     blockingDirectionSpeed: 5
     blockedDirectionSpeed: 1
     idleDirectionSpeed: 3
-    targetingMinimumMagnitude: 0.1
   characterAnimation:
     animatorSpeed: 1
     updateMovesetAnimations: 0
@@ -609,7 +609,7 @@ GameObject:
   - component: {fileID: 3757015322014419729}
   - component: {fileID: 3045914790319639691}
   m_Layer: 11
-  m_Name: Left Foot Hitbox
+  m_Name: Left Foot Triggerbox
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

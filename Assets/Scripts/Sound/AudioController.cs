@@ -57,10 +57,10 @@ public class AudioController : Singleton<AudioController>
         if (!enter) gameSfxSounds.ResumeAllSounds();
     }
 
-    public void Walking(int foot, Entity actualSource)
+    public void Walking(int foot, Entity currentSource)
     {
-        if (foot == 0) gameSfxSounds.Play("Left_Foot", (int)actualSource);
-        else gameSfxSounds.Play("Right_Foot", (int)actualSource);
+        if (foot == 0) gameSfxSounds.Play("Left_Foot", (int)currentSource);
+        else gameSfxSounds.Play("Right_Foot", (int)currentSource);
     }
 
     private IEnumerator PlaySlider()

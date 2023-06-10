@@ -5,9 +5,6 @@ using System.Linq;
 [System.Serializable]
 public class CharacterAnimation
 {
-    private HurtState hurtState;
-    private BlockedState blockedState;
-    private KOState koState;
     private List<Move> moveList;
 
     private Animator animator;
@@ -27,28 +24,42 @@ public class CharacterAnimation
     {
         moveList = stats.MoveList;
         UpdateMovesetAnimations();
-        hurtState = stateMachine.HurtState;
-        blockedState = stateMachine.BlockedState;
-        koState = stateMachine.KOState;
+
+        HurtState hurtState = stateMachine.HurtState;
+        BlockedState blockedState = stateMachine.BlockedState;
+        KOState koState = stateMachine.KOState;
 
         movement.OnMoveCharacter += MovementAnimation;
 
-        stateMachine.WalkingState.OnEnter += EnterWalkingState;
-        stateMachine.WalkingState.OnExit += ExitWalkingState;
+        stateMachine.WalkingState.OnEnter += () => animator.SetBool("STATE_WALKING", true);
+        stateMachine.WalkingState.OnExit += () => animator.SetBool("STATE_WALKING", false);
 
-        stateMachine.BlockingState.OnEnter += EnterBlockingState;
-        stateMachine.BlockingState.OnExit += ExitBlockingState;
+        stateMachine.BlockingState.OnEnter += () => animator.SetBool("STATE_BLOCKING", true);
+        stateMachine.BlockingState.OnExit += () => animator.SetBool("STATE_BLOCKING", false);
 
-        stateMachine.MoveState.OnEnterInteger += EnterMoveState;
+        stateMachine.MoveState.OnEnterInteger += (int moveIndex) => animator.SetTrigger("move" + moveIndex);
 
-        stateMachine.HurtState.OnEnter += EnterHurtState;
-        stateMachine.HurtState.OnExit += ExitHurtState;
+        stateMachine.HurtState.OnEnter += () => {
+            Hitbox hitbox = hurtState.Hitbox;
+            animator.SetBool("STATE_HURT", true);
+            TriggerHurtAnimation(hitbox.AnimationBodyTarget, hitbox.AnimationStagger);
+        };
+        stateMachine.HurtState.OnExit += () => animator.SetBool("STATE_HURT", false);
 
-        stateMachine.BlockedState.OnEnter += EnterBlockedState;
-        stateMachine.BlockedState.OnExit += ExitBlockedState;
+        stateMachine.BlockedState.OnEnter += () => {
+            Hitbox hitbox = blockedState.Hitbox;
+            animator.SetBool("STATE_BLOCKED", true);
+            TriggerHurtAnimation(hitbox.AnimationBodyTarget, hitbox.AnimationStagger);
+        };
+        stateMachine.BlockedState.OnExit += () => animator.SetBool("STATE_BLOCKED", false);
 
-        stateMachine.KOState.OnEnter += EnterKOState;
-        stateMachine.KOState.OnExit += ExitKOState;
+        stateMachine.KOState.OnEnter += () => {
+            Hitbox hitbox = koState.Hitbox;
+            animator.SetFloat("hurt_target", hitbox.AnimationBodyTarget);
+            animator.SetFloat("hurt_stagger", hitbox.AnimationStagger);
+            animator.SetBool("STATE_KO", true);
+        };
+        stateMachine.KOState.OnExit += () => animator.SetBool("STATE_KO", false);
     }
     public void OnValidate()
     {
@@ -85,41 +96,4 @@ public class CharacterAnimation
         animator.SetFloat("hurt_stagger", stagger);
         animator.SetTrigger("hurt");
     }
-
-    #region Enter/Exit States
-
-    private void EnterWalkingState() { animator.SetBool("STATE_WALKING", true); }
-    private void ExitWalkingState() { animator.SetBool("STATE_WALKING", false); }
-
-    private void EnterBlockingState() { animator.SetBool("STATE_BLOCKING", true); }
-    private void ExitBlockingState() { animator.SetBool("STATE_BLOCKING", false); }
-
-    private void EnterMoveState(int moveIndex) { animator.SetTrigger("move" + moveIndex); }
-
-    private void EnterHurtState() 
-    {
-        Hitbox hitbox = hurtState.Hitbox;
-        animator.SetBool("STATE_HURT", true);
-        TriggerHurtAnimation(hitbox.AnimationBodyTarget, hitbox.AnimationStagger);
-    }
-    private void ExitHurtState() { animator.SetBool("STATE_HURT", false); }
-
-    private void EnterBlockedState()
-    {
-        Hitbox hitbox = blockedState.Hitbox;
-        animator.SetBool("STATE_BLOCKED", true);
-        TriggerHurtAnimation(hitbox.AnimationBodyTarget, hitbox.AnimationStagger);
-    }
-    private void ExitBlockedState() { animator.SetBool("STATE_BLOCKED", false); }
-
-    private void EnterKOState()
-    {
-        Hitbox hitbox = koState.Hitbox;
-        animator.SetFloat("hurt_target", hitbox.AnimationBodyTarget);
-        animator.SetFloat("hurt_stagger", hitbox.AnimationStagger);
-        animator.SetBool("STATE_KO", true);
-    }
-    private void ExitKOState() { animator.SetBool("STATE_KO", false); }
-
-    #endregion
 }

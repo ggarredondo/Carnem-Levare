@@ -15,6 +15,10 @@ public class AttackMove : Move
     [SerializeField] private double blockStun;
     [SerializeField] private double hitStun;
 
+    [Header("Attack Knockback")]
+    [SerializeField] private Vector3 knockbackOnHit;
+    [SerializeField] private Vector3 knockbackOnBlock;
+
     private enum Stagger : int { Light, Medium, Hard }
     private enum HitboxType : int { LeftFist, RightFist, LeftElbow, RightElbow }
     [Header("Attack Values")]
@@ -22,7 +26,6 @@ public class AttackMove : Move
     private Hitbox currentHitbox;
     [SerializeField] private float baseDamage;
     [SerializeField] private Stagger animationStagger;
-    [SerializeField] private Vector3 knockback;
     [SerializeField] private bool unblockable;
 
     protected override void UpdateStringData()
@@ -51,7 +54,8 @@ public class AttackMove : Move
             stats.CalculateAttackDamage(baseDamage),
             blockStun,
             hitStun,
-            knockback,
+            knockbackOnHit,
+            knockbackOnBlock,
             unblockable);
     }
     public override void ActivateMove()
