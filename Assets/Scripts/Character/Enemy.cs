@@ -6,7 +6,6 @@ public class Enemy : Character
 
     protected override void Awake()
     {
-        controller = GetComponent<AIController>();
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<Character>();
         target = player.transform;
         base.Awake();

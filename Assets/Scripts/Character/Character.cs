@@ -12,6 +12,7 @@ public abstract class Character : MonoBehaviour
 
     protected virtual void Awake()
     {
+        controller = GetComponent<Controller>();
         controller.Initialize();
         stateMachine = GetComponent<CharacterStateMachine>();
         characterStats.Initialize(this, GetComponent<Rigidbody>());
