@@ -12,7 +12,7 @@ public class CharacterMovement
     [Header("Tracking")]
     [Tooltip("How quickly character rotates towards their opponent")]
     [SerializeField] private float trackingRate = 1f;
-    [SerializeField] private float targetingMinimumMagnitude = 0.1f;
+    [SerializeField] private float trackingMinimumMagnitude = 0.1f;
     [SerializeField] private bool doTracking = true;
 
     [Header("Direction Speeds")]
@@ -65,7 +65,7 @@ public class CharacterMovement
         }
     }
 
-    public bool IsIdle => (direction.magnitude <= targetingMinimumMagnitude);
+    public bool IsIdle => (direction.magnitude <= trackingMinimumMagnitude);
     public ref readonly float WalkingDirectionSpeed => ref walkingDirectionSpeed;
     public ref readonly float BlockingDirectionSpeed => ref blockingDirectionSpeed;
     public ref readonly float BlockedDirectionSpeed => ref blockedDirectionSpeed;
