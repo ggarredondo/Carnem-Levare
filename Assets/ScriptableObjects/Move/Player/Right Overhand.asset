@@ -27,8 +27,8 @@ MonoBehaviour:
   blockedSound: Blocked_Default
   hitShakeTime: 250
   hitShakeIntensity: 5
-  blockStun: 800
-  hitStun: 1000
+  blockStun: 400
+  hitStun: 1100
   knockbackOnHit: {x: 0, y: 0, z: 10}
   knockbackOnBlock: {x: 0, y: 0, z: 0}
   hitbox: 1
