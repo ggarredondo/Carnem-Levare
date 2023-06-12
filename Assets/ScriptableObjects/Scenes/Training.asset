@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ID: 4
   nextScene:
-    withLoadScreen: 1
+    withLoadScreen: 0
     ID: 3
   previousScene:
     withLoadScreen: 0
