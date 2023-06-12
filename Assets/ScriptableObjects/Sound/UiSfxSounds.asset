@@ -113,3 +113,13 @@ MonoBehaviour:
       volume: 0.3
       pitch: 1
       loop: 0
+    - name: NewMove1
+      clip: {fileID: 8300000, guid: 3f53423b498c2024b97431135566986c, type: 3}
+      volume: 0.3
+      pitch: 1
+      loop: 0
+    - name: NewMove2
+      clip: {fileID: 8300000, guid: 16fe2cf87ede87845beff9854ca59a03, type: 3}
+      volume: 0.3
+      pitch: 1
+      loop: 0

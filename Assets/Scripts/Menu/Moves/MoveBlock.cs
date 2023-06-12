@@ -1,13 +1,14 @@
 using UnityEngine;
 using TMPro;
 using LerpUtilities;
+using System.Threading.Tasks;
 
 public class MoveBlock : MonoBehaviour
 {
     [SerializeField] private GameObject inputGameobject;
     [SerializeField] private TMP_Text text;
 
-    private RectTransform rectTransform;
+    [System.NonSerialized] public RectTransform rectTransform;
     private CanvasGroup canvasGroup;
 
     private void Awake()
@@ -33,6 +34,11 @@ public class MoveBlock : MonoBehaviour
     {
         inputGameobject.SetActive(false);
         text.text = "";
+    }
+
+    public async Task LerpScale(Vector3 targetScale, float duration)
+    {
+        await Lerp.Scale(rectTransform, targetScale, duration);
     }
 
     public async void LerpRectTransform(Vector3 targetPosition, Vector3 targetScale, float duration)

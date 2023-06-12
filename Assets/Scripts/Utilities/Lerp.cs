@@ -65,6 +65,24 @@ namespace LerpUtilities
             rectTransform.localScale = targetScale;
         }
 
+        public static async Task Scale(RectTransform rectTransform, Vector3 targetScale, float duration)
+        {
+            Vector3 startScale = rectTransform.localScale;
+            float elapsedTime = 0f;
+
+            while (elapsedTime < duration)
+            {
+                elapsedTime += Time.deltaTime;
+                float t = Mathf.Clamp01(elapsedTime / duration);
+
+                rectTransform.localScale = Vector3.Lerp(startScale, targetScale, t);
+
+                await Task.Yield();
+            }
+
+            rectTransform.localScale = targetScale;
+        }
+
         public static async Task RectTransform_Color(RectTransform rectTransform, Image image, Vector3 targetPosition, Color targetColor, float duration)
         {
             Vector3 startPosition = rectTransform.localPosition;
