@@ -924,10 +924,10 @@ MonoBehaviour:
     - {fileID: 8886858689977247297}
     - {fileID: 4959984437175193577}
     noHurt: 0
-    noDeath: 1
+    noDeath: 0
   characterMovement:
     trackingRate: 10
-    targetingMinimumMagnitude: 0.1
+    trackingMinimumMagnitude: 0.1
     doTracking: 1
     walkingDirectionSpeed: 10
     blockingDirectionSpeed: 10

@@ -439,10 +439,10 @@ MonoBehaviour:
     - {fileID: 3544833091616213104}
     - {fileID: 7922484474212002442}
     noHurt: 0
-    noDeath: 1
+    noDeath: 0
   characterMovement:
     trackingRate: 5
-    targetingMinimumMagnitude: 0.1
+    trackingMinimumMagnitude: 0.1
     doTracking: 1
     walkingDirectionSpeed: 5
     blockingDirectionSpeed: 5
@@ -463,7 +463,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b8b6bc01c697e3b4693e9f790e66cd99, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enableDebug: 1
+  enableDebug: 0
   horizontal: 0
   vertical: 0
   block: 0
