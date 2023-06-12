@@ -27,6 +27,8 @@ public class AggresiveOwnTurnState : AIState
     {
         InitializeMove();
         agentStateMachine.WalkingState.OnEnter += NextMove;
+        agentStateMachine.BlockingState.OnEnter += NextMove;
+        agentStateMachine.HurtState.OnEnter += aiFSM.TransitionToOpponentTurn;
         NextMove();
     }
     public void React()
@@ -37,6 +39,8 @@ public class AggresiveOwnTurnState : AIState
     public void Exit()
     {
         agentStateMachine.WalkingState.OnEnter -= NextMove;
+        agentStateMachine.BlockingState.OnEnter -= NextMove;
+        agentStateMachine.HurtState.OnEnter -= aiFSM.TransitionToOpponentTurn;
     }
 
     private void InitializeMove()

@@ -34,7 +34,7 @@ public class CharacterStats
     public void Reference(in CharacterStateMachine stateMachine) => this.stateMachine = stateMachine;
 
     public float CalculateAttackDamage(float baseDamage) => baseDamage + characterDamage;
-    public double CalculateStun(double stun, float hitNumber) => stun;
+    public double CalculateStun(double stun, float hitNumber) => StepDecay(stun, hitNumber);
     public double StepDecay(double stun, float hitNumber) => System.Math.Max(minStun, stun - (hitNumber-1) * comboDecay);
     public double HitCounterDecay(double stun, float hitNumber) => hitNumber < comboDecay ? stun : minStun;
 
