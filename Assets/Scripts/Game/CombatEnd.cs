@@ -35,6 +35,12 @@ public class CombatEnd : MonoBehaviour
     {
         await Task.Delay(System.TimeSpan.FromSeconds(waitAfterDeath));
         GameManager.PlayerInput.enabled = false;
+        enemy.EnemyDrops.ForEach(m =>
+        {
+            DataSaver.games[DataSaver.currentGameSlot].moves.Add(m);
+            DataSaver.games[DataSaver.currentGameSlot].newMoves.Add(true);
+        });
+
         await rewardGenerator.GenerateMove(enemy.EnemyDrops);
         await Task.Delay(System.TimeSpan.FromSeconds(waitAfterReward));
 

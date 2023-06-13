@@ -10,9 +10,9 @@ public class Player : Character
 
     protected override void Start()
     {
-        base.Start();
         ((InputController)controller).Reference(stateMachine);
         ((InputController)controller).moveIndexes = DataSaver.games[DataSaver.currentGameSlot].selectedMoves;
         characterStats.MoveList = DataSaver.games[DataSaver.currentGameSlot].moves;
+        base.Start();
     }
 }

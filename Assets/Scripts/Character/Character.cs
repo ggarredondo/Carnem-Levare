@@ -22,11 +22,10 @@ public abstract class Character : MonoBehaviour
         stateMachine.Reference(controller, characterStats, characterMovement);
         characterStats.Reference(stateMachine);
         characterAudio.Reference(stateMachine, characterStats);
-        characterAnimation.Reference(stateMachine, characterStats, characterMovement);
 
         stateMachine.TransitionToWalking(); // Must be done last
     }
-    protected virtual void Start() {}
+    protected virtual void Start() => characterAnimation.Reference(stateMachine, characterStats, characterMovement);
     protected void OnValidate() => characterAnimation.OnValidate();
 
     public ref readonly CharacterStateMachine StateMachine { get => ref stateMachine; }

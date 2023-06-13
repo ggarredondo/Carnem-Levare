@@ -452,10 +452,10 @@ MonoBehaviour:
     animatorSpeed: 1
     updateMovesetAnimations: 0
   enemyDrops:
-  - {fileID: 11400000, guid: 20e698f21bf5aa84cb0cad575ccd63cf, type: 2}
-  - {fileID: 11400000, guid: 19854063ba4a509409698682dd6d1ef5, type: 2}
+  - {fileID: 11400000, guid: 6e52423bf3c63b9438cc8f9ee314bacd, type: 2}
+  - {fileID: 11400000, guid: fed6e55389eb6344083a2e7797c2d516, type: 2}
+  - {fileID: 11400000, guid: 7e2bf30cc617dce4e8409007dd2808fe, type: 2}
   - {fileID: 11400000, guid: 248b1a05a995d4a49a2fe680287cdf59, type: 2}
-  - {fileID: 11400000, guid: 57b017aabdc8caf4fa11ee93fb5a5714, type: 2}
 --- !u!114 &1878726773391280501
 MonoBehaviour:
   m_ObjectHideFlags: 0
