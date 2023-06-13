@@ -6,10 +6,12 @@ using System.Threading.Tasks;
 public class MoveBlock : MonoBehaviour
 {
     [SerializeField] private GameObject inputGameobject;
+    [SerializeField] private GameObject isNewMove;
     [SerializeField] private TMP_Text text;
 
     [System.NonSerialized] public RectTransform rectTransform;
     private CanvasGroup canvasGroup;
+    private int ID;
 
     private void Awake()
     {
@@ -17,7 +19,7 @@ public class MoveBlock : MonoBehaviour
         canvasGroup = GetComponent<CanvasGroup>();
     }
 
-    public void AsignInput(string input)
+    public void AsignInput(string input, int ID)
     {
         inputGameobject.SetActive(true);
         text.font = GlobalMenuVariables.Instance.inputFonts[GameManager.InputDetection.controlSchemeIndex];
@@ -28,12 +30,24 @@ public class MoveBlock : MonoBehaviour
             text.font = GlobalMenuVariables.Instance.inputFonts[0];
             text.text = "M";
         }
+
+        this.ID = ID;
+        isNewMove.SetActive(DataSaver.games[DataSaver.currentGameSlot].newMoves[ID]);
     }
 
     public void Disable()
     {
         inputGameobject.SetActive(false);
         text.text = "";
+    }
+
+    public void CheckIfNew()
+    {
+        if (isNewMove.activeSelf)
+        {
+            DataSaver.games[DataSaver.currentGameSlot].newMoves[ID] = false;
+            isNewMove.SetActive(false);
+        }
     }
 
     public async Task LerpScale(Vector3 targetScale, float duration)

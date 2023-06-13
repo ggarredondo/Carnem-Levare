@@ -24,12 +24,12 @@ public class DataSaver : ISave
     public void Load()
     {
         options = (OptionsSlot) serializer.Load(options);
-        games[currentGameSlot] = (GameSlot) serializer.Load(games[currentGameSlot]);
+        //games[currentGameSlot] = (GameSlot) serializer.Load(games[currentGameSlot]);
     }
 
     public void Save()
     {
         serializer.Save(options);
-        serializer.Save(games[currentGameSlot]);
+        //serializer.Save(games[currentGameSlot]);
     }
 }

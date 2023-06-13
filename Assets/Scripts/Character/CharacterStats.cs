@@ -60,6 +60,6 @@ public class CharacterStats
 
     public ref readonly float Stamina { get => ref stamina; }
     public ref readonly float MaxStamina { get => ref maxStamina; }
-    public ref readonly List<Move> MoveList { get => ref moveList; }
+    public List<Move> MoveList { get => moveList;  set => moveList = value; }
     public ref readonly List<Hitbox> HitboxList { get => ref hitboxList; }
 }

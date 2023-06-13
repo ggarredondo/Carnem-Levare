@@ -41,6 +41,7 @@ public class MoveSelector : MonoBehaviour
     {
         moveBlocks[actualIndex].LerpRectTransform(selectPosition, new Vector3(selectScale, selectScale, 0), selectLerpDuration);
         moveBlocks[actualIndex].LerpColor(1,selectLerpDuration);
+        moveBlocks[actualIndex].CheckIfNew();
 
         await moveAssignment.StartChangeInput(actualIndex);
         moveAssignment.UpdateInput(ref moveBlocks);
