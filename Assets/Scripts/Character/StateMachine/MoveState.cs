@@ -3,9 +3,9 @@ using System.Collections.Generic;
 
 public class MoveState : CharacterState
 {
-    private readonly CharacterStateMachine stateMachine;
-    private readonly CharacterStats stats;
-    private readonly CharacterMovement movement;
+    private CharacterStateMachine stateMachine;
+    private CharacterStats stats;
+    private CharacterMovement movement;
     public event Action<int> OnEnterInteger;
     public event Action OnEnter, OnExit;
 
@@ -14,7 +14,7 @@ public class MoveState : CharacterState
     private List<Move> moveList;
     private bool TRACKING_FLAG = false;
 
-    public MoveState(in CharacterStateMachine stateMachine, in CharacterStats stats, in CharacterMovement movement)
+    public void Reference(in CharacterStateMachine stateMachine, in CharacterStats stats, in CharacterMovement movement)
     {
         this.stateMachine = stateMachine;
         this.stats = stats;

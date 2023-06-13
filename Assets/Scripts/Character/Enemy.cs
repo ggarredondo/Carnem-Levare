@@ -15,8 +15,8 @@ public class Enemy : Character
 
     protected override void Start()
     {
-        base.Start();
         ((AIController) controller).Reference(characterStats, player.CharacterStats, stateMachine, player.StateMachine);
+        base.Start();
     }
 
     public ref readonly List<Move> EnemyDrops => ref enemyDrops;

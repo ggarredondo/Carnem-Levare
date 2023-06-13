@@ -3,16 +3,16 @@ using System.Collections;
 
 public class HurtState : CharacterState
 {  
-    private readonly CharacterStateMachine stateMachine;
-    private readonly CharacterStats stats;
-    private readonly CharacterMovement movement;
+    private CharacterStateMachine stateMachine;
+    private CharacterStats stats;
+    private CharacterMovement movement;
     public event Action OnEnter, OnExit;
 
     private Hitbox hitbox;
     public void Set(in Hitbox hitbox) => this.hitbox = hitbox;
     private IEnumerator coroutine;
 
-    public HurtState(in CharacterStateMachine stateMachine, in CharacterStats stats, in CharacterMovement movement)
+    public void Reference(in CharacterStateMachine stateMachine, in CharacterStats stats, in CharacterMovement movement)
     {
         this.stateMachine = stateMachine;
         this.stats = stats;

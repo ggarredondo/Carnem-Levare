@@ -7,7 +7,7 @@ public class KOState : CharacterState
     private Hitbox hitbox;
     public void Set(in Hitbox hitbox) => this.hitbox = hitbox;
 
-    public KOState(in CharacterStateMachine stateMachine) 
+    public void Reference(in CharacterStateMachine stateMachine) 
     {
         stateMachine.enabled = false;
     }

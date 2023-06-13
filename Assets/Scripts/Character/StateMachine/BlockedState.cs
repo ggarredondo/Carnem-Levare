@@ -3,10 +3,10 @@ using System.Collections;
 
 public class BlockedState : CharacterState
 {
-    private readonly CharacterStateMachine stateMachine;
-    private readonly Controller controller;
-    private readonly CharacterStats stats;
-    private readonly CharacterMovement movement;
+    private CharacterStateMachine stateMachine;
+    private Controller controller;
+    private CharacterStats stats;
+    private CharacterMovement movement;
 
     public event Action OnEnter, OnExit;
 
@@ -14,7 +14,7 @@ public class BlockedState : CharacterState
     public void Set(in Hitbox hitbox) => this.hitbox = hitbox;
     private IEnumerator coroutine;
 
-    public BlockedState(in CharacterStateMachine stateMachine, in Controller controller, in CharacterStats stats, in CharacterMovement movement)
+    public void Reference(in CharacterStateMachine stateMachine, in Controller controller, in CharacterStats stats, in CharacterMovement movement)
     {
         this.stateMachine = stateMachine;
         this.controller = controller;
