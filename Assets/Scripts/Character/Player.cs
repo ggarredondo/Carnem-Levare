@@ -12,5 +12,7 @@ public class Player : Character
     {
         base.Start();
         ((InputController)controller).Reference(stateMachine);
+        ((InputController)controller).moveIndexes = DataSaver.games[DataSaver.currentGameSlot].selectedMoves;
+        characterStats.MoveList = DataSaver.games[DataSaver.currentGameSlot].moves;
     }
 }
