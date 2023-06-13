@@ -48,11 +48,7 @@ public class DefaultCamera : MonoBehaviour, ICameraInitialize
 
         enemy.StateMachine.HurtState.OnEnter += () => CameraShake(enemy.StateMachine.HurtState.Hitbox);
         enemy.StateMachine.BlockedState.OnEnter += () => CameraShake(enemy.StateMachine.BlockedState.Hitbox, 0.5f);
-        player.StateMachine.HurtState.OnEnter += () => 
-        { 
-            GameManager.ControllerRumble.Rumble(0.1f, 1, 1);
-            CameraShake(player.StateMachine.HurtState.Hitbox); 
-        };
+        player.StateMachine.HurtState.OnEnter += () => CameraShake(player.StateMachine.HurtState.Hitbox);
         player.StateMachine.BlockedState.OnEnter += () => CameraShake(player.StateMachine.BlockedState.Hitbox, 0.5f);
 
         enemy.StateMachine.HurtState.OnExit += () => hurt = false;

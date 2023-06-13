@@ -50,7 +50,7 @@ public class HoldText : MonoBehaviour
         try
         {
             await Task.Delay(System.TimeSpan.FromSeconds(minHoldTime));
-            await Lerp.Text_Color(tmpText, new Color(1, 0, 0), holdTIme, cancellationToken);
+            await Lerp.Value_Cancel(tmpText.color, new Color(1, 0, 0),(c) => tmpText.color = c , holdTIme, cancellationToken);
         }
         catch (TaskCanceledException) { }
         finally

@@ -37,8 +37,8 @@ public class TransitionPlayer : MonoBehaviour
     {
         GameManager.PlayerInput.enabled = false;
         GameManager.UiInput.enabled = false;
-        await Lerp.CanvasAlpha_Unscaled(canvasGroup, 1, lerpDuration);
-        await Lerp.CanvasAlpha_Unscaled(childCanvasGroup, 1, childLerpDuration);
+        await Lerp.Value_Unscaled(canvasGroup.alpha, 1, (a) => canvasGroup.alpha = a, lerpDuration);
+        await Lerp.Value_Unscaled(childCanvasGroup.alpha, 1, (a) => childCanvasGroup.alpha = a, childLerpDuration);
         await Task.Delay(System.TimeSpan.FromSeconds(extraTime));
         GameManager.UiInput.enabled = true;
         GameManager.PlayerInput.enabled = true;
@@ -48,8 +48,8 @@ public class TransitionPlayer : MonoBehaviour
     {
         GameManager.PlayerInput.enabled = false;
         GameManager.UiInput.enabled = false;
-        await Lerp.CanvasAlpha(childCanvasGroup, 0, childLerpDuration);
-        await Lerp.CanvasAlpha(canvasGroup, 0, lerpDuration);
+        await Lerp.Value(childCanvasGroup.alpha, 0, (a) => childCanvasGroup.alpha = a, childLerpDuration);
+        await Lerp.Value(canvasGroup.alpha, 0, (a) => canvasGroup.alpha = a, lerpDuration);
         GameManager.UiInput.enabled = true;
         GameManager.PlayerInput.enabled = true;
 

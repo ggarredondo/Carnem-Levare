@@ -30,7 +30,16 @@ public class MoveAssignment : MonoBehaviour
     public void Initialize(ref List<MoveBlock> moves, ref InputController inputController)
     {
         this.inputController = inputController;
+        InitializeNewMoves(ref moves);
         UpdateInput(ref moves);
+    }
+
+    private void InitializeNewMoves(ref List<MoveBlock> moves)
+    {
+        for (int i = 0; i < moves.Count; i++)
+        {
+            moves[i].SetNewMove(i);
+        }
     }
 
     public void UpdateInput(ref List<MoveBlock> moves)
@@ -46,7 +55,7 @@ public class MoveAssignment : MonoBehaviour
         for(int i = 0; i < inputController.moveIndexes.Count; i++)
         {
             DataSaver.games[DataSaver.currentGameSlot].selectedMoves[i] = inputController.moveIndexes[i];
-            moves[inputController.moveIndexes[i]].GetComponent<MoveBlock>().AsignInput(inputAssignments[i], inputController.moveIndexes[i]);
+            moves[inputController.moveIndexes[i]].GetComponent<MoveBlock>().AsignInput(inputAssignments[i]);
         }
     }
 

@@ -3,6 +3,7 @@ using TMPro;
 using System.Collections.Generic;
 using UnityEngine.UI;
 using LerpUtilities;
+using System.Threading.Tasks;
 
 public class MoveInfo : MonoBehaviour
 {
@@ -51,21 +52,20 @@ public class MoveInfo : MonoBehaviour
     public async void Movement(Color color)
     {
         isMoving = true;
-        await Lerp.RectTransform_Color(rectTransform,
-                                       image,
-                                       new Vector3(rectTransform.localPosition.x,
-                                                   rectTransform.localPosition.y + yPositionDifference, 
-                                                   rectTransform.localPosition.z),
-                                       new Color(color.r,color.g,color.b, initialAlpha/2),
-                                       lerpDuration);
+        Vector3 newPosition = new(rectTransform.localPosition.x, rectTransform.localPosition.y + yPositionDifference, rectTransform.localPosition.z);
 
-        await Lerp.RectTransform_Color(rectTransform,
-                                       image,
-                                       new Vector3(rectTransform.localPosition.x,
-                                                   rectTransform.localPosition.y - yPositionDifference,
-                                                   rectTransform.localPosition.z),
-                                       new Color(1, 1, 1, initialAlpha),
-                                       lerpDuration);
+        Color newColor = new(color.r, color.g, color.b, initialAlpha / 2);
+
+        await Task.WhenAll(Lerp.Value(rectTransform.localPosition, newPosition, (v) => rectTransform.localPosition = v, lerpDuration),
+                           Lerp.Value(image.color, newColor, (c) => image.color = c, lerpDuration));
+
+        newPosition = new Vector3(rectTransform.localPosition.x, rectTransform.localPosition.y - yPositionDifference, rectTransform.localPosition.z);
+
+        newColor = new Color(1, 1, 1, initialAlpha);
+
+        await Task.WhenAll(Lerp.Value(rectTransform.localPosition, newPosition, (v) => rectTransform.localPosition = v, lerpDuration),
+                           Lerp.Value(image.color, newColor, (c) => image.color = c, lerpDuration));
+
         isMoving = false;
     }
 }

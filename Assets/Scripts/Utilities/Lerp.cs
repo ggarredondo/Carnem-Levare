@@ -1,16 +1,14 @@
 using System.Threading.Tasks;
 using UnityEngine;
-using UnityEngine.UI;
-using TMPro;
 using System.Threading;
+using System;
 
 namespace LerpUtilities
 {
     public class Lerp
     {
-        public static async Task CanvasAlpha(CanvasGroup canvasGroup, float targetAlpha, float duration)
+        public static async Task Value<T>(T startValue, T targetValue, Action<T> setValue, float duration)
         {
-            float startAlpha = canvasGroup.alpha;
             float elapsedTime = 0f;
 
             while (elapsedTime < duration)
@@ -18,17 +16,17 @@ namespace LerpUtilities
                 elapsedTime += Time.deltaTime;
                 float t = Mathf.Clamp01(elapsedTime / duration);
 
-                canvasGroup.alpha = Mathf.Lerp(startAlpha, targetAlpha, t);
+                T interpolatedValue = LocalLerp(startValue, targetValue, t);
+                setValue(interpolatedValue);
 
                 await Task.Yield();
             }
 
-            canvasGroup.alpha = targetAlpha;
+            setValue(targetValue);
         }
 
-        public static async Task CanvasAlpha_Unscaled(CanvasGroup canvasGroup, float targetAlpha, float duration)
+        public static async Task Value_Unscaled<T>(T startValue, T targetValue, Action<T> setValue, float duration)
         {
-            float startAlpha = canvasGroup.alpha;
             float elapsedTime = 0f;
 
             while (elapsedTime < duration)
@@ -36,81 +34,22 @@ namespace LerpUtilities
                 elapsedTime += Time.unscaledDeltaTime;
                 float t = Mathf.Clamp01(elapsedTime / duration);
 
-                canvasGroup.alpha = Mathf.Lerp(startAlpha, targetAlpha, t);
+                T interpolatedValue = LocalLerp(startValue, targetValue, t);
+                setValue(interpolatedValue);
 
                 await Task.Yield();
             }
 
-            canvasGroup.alpha = targetAlpha;
+            setValue(targetValue);
         }
 
-        public static async Task RectTransform(RectTransform rectTransform, Vector3 targetPosition, Vector3 targetScale, float duration)
+        public static async Task Value_Cancel<T>(T startValue, T targetValue, Action<T> setValue, float duration, CancellationToken cancel)
         {
-            Vector3 startPosition = rectTransform.localPosition;
-            Vector3 startScale = rectTransform.localScale;
             float elapsedTime = 0f;
 
             while (elapsedTime < duration)
             {
-                elapsedTime += Time.deltaTime;
-                float t = Mathf.Clamp01(elapsedTime / duration);
 
-                rectTransform.localPosition = Vector3.Lerp(startPosition, targetPosition, t);
-                rectTransform.localScale = Vector3.Lerp(startScale, targetScale, t);
-
-                await Task.Yield();
-            }
-
-            rectTransform.localPosition = targetPosition;
-            rectTransform.localScale = targetScale;
-        }
-
-        public static async Task Scale(RectTransform rectTransform, Vector3 targetScale, float duration)
-        {
-            Vector3 startScale = rectTransform.localScale;
-            float elapsedTime = 0f;
-
-            while (elapsedTime < duration)
-            {
-                elapsedTime += Time.deltaTime;
-                float t = Mathf.Clamp01(elapsedTime / duration);
-
-                rectTransform.localScale = Vector3.Lerp(startScale, targetScale, t);
-
-                await Task.Yield();
-            }
-
-            rectTransform.localScale = targetScale;
-        }
-
-        public static async Task RectTransform_Color(RectTransform rectTransform, Image image, Vector3 targetPosition, Color targetColor, float duration)
-        {
-            Vector3 startPosition = rectTransform.localPosition;
-            Color startColor = image.color;
-            float elapsedTime = 0f;
-
-            while (elapsedTime < duration)
-            {
-                elapsedTime += Time.deltaTime;
-                float t = Mathf.Clamp01(elapsedTime / duration);
-
-                rectTransform.localPosition = Vector3.Lerp(startPosition, targetPosition, t);
-                image.color = Color.Lerp(startColor, targetColor, t);
-
-                await Task.Yield();
-            }
-
-            rectTransform.localPosition = targetPosition;
-            image.color = targetColor;
-        }
-
-        public static async Task Text_Color(TMP_Text text, Color targetColor, float duration, CancellationToken cancel)
-        {
-            Color startColor = text.color;
-            float elapsedTime = 0f;
-
-            while (elapsedTime < duration)
-            {
                 if (cancel.IsCancellationRequested)
                 {
                     throw new TaskCanceledException();
@@ -119,12 +58,35 @@ namespace LerpUtilities
                 elapsedTime += Time.deltaTime;
                 float t = Mathf.Clamp01(elapsedTime / duration);
 
-                text.color = Color.Lerp(startColor, targetColor, t);
+                T interpolatedValue = LocalLerp(startValue, targetValue, t);
+                setValue(interpolatedValue);
 
                 await Task.Yield();
             }
 
-            text.color = targetColor;
+            setValue(targetValue);
+        }
+
+        private static T LocalLerp<T>(T startValue, T targetValue, float t)
+        {
+            if (typeof(T) == typeof(float))
+            {
+                return (T)(object)Mathf.Lerp(Convert.ToSingle(startValue), Convert.ToSingle(targetValue), t);
+            }
+            else if (typeof(T) == typeof(Vector2))
+            {
+                return (T)(object)Vector2.Lerp((Vector2)(object)startValue, (Vector2)(object)targetValue, t);
+            }
+            else if (typeof(T) == typeof(Vector3))
+            {
+                return (T)(object)Vector3.Lerp((Vector3)(object)startValue, (Vector3)(object)targetValue, t);
+            }
+            else if (typeof(T) == typeof(Color))
+            {
+                return (T)(object)Color.Lerp((Color)(object)startValue, (Color)(object)targetValue, t);
+            }
+
+            throw new ArgumentException("Unsupported type for lerping: " + typeof(T).Name);
         }
     }
 }

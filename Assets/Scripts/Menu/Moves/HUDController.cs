@@ -85,7 +85,7 @@ public class HUDController : MonoBehaviour
         if (actualCanvas != null)
         {
             AudioController.Instance.uiSfxSounds.Play("ExitMoveMenu");
-            await Lerp.CanvasAlpha(actualCanvas, 0, lerpDuration);
+            await Lerp.Value(actualCanvas.alpha, 0, (a) => actualCanvas.alpha = a, lerpDuration);
         }
 
         DisableHUD();
@@ -97,7 +97,7 @@ public class HUDController : MonoBehaviour
         if (actualCanvas != null)
         {
             AudioController.Instance.uiSfxSounds.Play("EnterMoveMenu");
-            await Lerp.CanvasAlpha(actualCanvas, 1, lerpDuration);
+            await Lerp.Value(actualCanvas.alpha, 1, (a) => actualCanvas.alpha = a, lerpDuration);
         }
     }    
 }

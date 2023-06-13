@@ -19,7 +19,7 @@ public class MoveBlock : MonoBehaviour
         canvasGroup = GetComponent<CanvasGroup>();
     }
 
-    public void AsignInput(string input, int ID)
+    public void AsignInput(string input)
     {
         inputGameobject.SetActive(true);
         text.font = GlobalMenuVariables.Instance.inputFonts[GameManager.InputDetection.controlSchemeIndex];
@@ -30,7 +30,10 @@ public class MoveBlock : MonoBehaviour
             text.font = GlobalMenuVariables.Instance.inputFonts[0];
             text.text = "M";
         }
+    }
 
+    public void SetNewMove(int ID)
+    {
         this.ID = ID;
         isNewMove.SetActive(DataSaver.games[DataSaver.currentGameSlot].newMoves[ID]);
     }
@@ -52,16 +55,17 @@ public class MoveBlock : MonoBehaviour
 
     public async Task LerpScale(Vector3 targetScale, float duration)
     {
-        await Lerp.Scale(rectTransform, targetScale, duration);
+        await Lerp.Value(rectTransform.localScale, targetScale, (v) => rectTransform.localScale = v, duration);
     }
 
     public async void LerpRectTransform(Vector3 targetPosition, Vector3 targetScale, float duration)
     {
-        await Lerp.RectTransform(rectTransform, targetPosition, targetScale, duration);
+        await Task.WhenAll(Lerp.Value(rectTransform.localPosition, targetPosition, (p) => rectTransform.localPosition = p, duration),
+                           Lerp.Value(rectTransform.localScale, targetScale, (v) => rectTransform.localScale = v, duration));
     }
 
     public async void LerpColor(float targetAlpha, float duration)
     {
-        await Lerp.CanvasAlpha(canvasGroup, targetAlpha, duration);
+        await Lerp.Value(canvasGroup.alpha, targetAlpha, (a) => canvasGroup.alpha = a , duration);
     }
 }
