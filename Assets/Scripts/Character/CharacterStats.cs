@@ -39,7 +39,7 @@ public class CharacterStats
     public double HitCounterDecay(double stun, float hitNumber) => hitNumber < comboDecay ? stun : minStun;
 
     private void AddToStamina(float addend) => stamina = Mathf.Clamp(stamina + addend, 0f + System.Convert.ToSingle(noDeath), maxStamina);
-    public void DamageStamina(in Hitbox hitbox)
+    public void HurtDamage(in Hitbox hitbox)
     {
         if (!noHurt)
         {
@@ -48,7 +48,7 @@ public class CharacterStats
             else stateMachine.TransitionToHurt(hitbox);
         }
     }
-    public void DamageStaminaBlocked(in Hitbox hitbox)
+    public void BlockedDamage(in Hitbox hitbox)
     {
         if (!noHurt)
         {

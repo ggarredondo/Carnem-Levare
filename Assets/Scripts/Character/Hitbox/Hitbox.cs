@@ -6,15 +6,15 @@ public class Hitbox : MonoBehaviour
     private float animationBodyTarget, animationStagger, damage, targetShakeIntensity, screenShakeFrequency, screenShakeAmplitude;
     private double blockStun, hitStun, targetShakeTime, screenShakeTime;
     private Vector3 knockbackOnHit, knockbackOnBlock;
-    private bool unblockable;
 
     private void Start()
     {
         SetActive(false);
     }
 
-    public void Set(string hitSound, string blockedSound, double targetShakeTime, float targetShakeIntensity, double screenShakeTime, float screenShakeFrequency, float screenShakeAmplitude, float animationStagger, float damage,
-        double blockStun, double hitStun, in Vector3 knockbackOnHit, in Vector3 knockbackOnBlock, bool unblockable)
+    public void Set(string hitSound, string blockedSound, double targetShakeTime, float targetShakeIntensity, double screenShakeTime, 
+        float screenShakeFrequency, float screenShakeAmplitude, float animationStagger, float damage,
+        double blockStun, double hitStun, in Vector3 knockbackOnHit, in Vector3 knockbackOnBlock)
     {
         this.hitSound = hitSound;
         this.blockedSound = blockedSound;
@@ -29,7 +29,6 @@ public class Hitbox : MonoBehaviour
         this.hitStun = hitStun;
         this.knockbackOnHit = knockbackOnHit;
         this.knockbackOnBlock = knockbackOnBlock;
-        this.unblockable = unblockable;
     }
 
     public void SetActive(bool active)
@@ -53,6 +52,4 @@ public class Hitbox : MonoBehaviour
     public double HitStun { get => hitStun; }
     public ref readonly Vector3 KnockbackOnHit => ref knockbackOnHit;
     public ref readonly Vector3 KnockbackOnBlock => ref knockbackOnBlock;
-    public void SetUnblockable(bool unblockable) => this.unblockable = unblockable;
-    public bool Unblockable { get => unblockable; }
 }

@@ -28,7 +28,6 @@ public class Hurtbox : MonoBehaviour
     {
         Hitbox hitbox = other.GetComponent<Hitbox>();
         hitbox.SetActive(false);
-        hitbox.SetUnblockable(hitbox.Unblockable || target == BodyTarget.BackHead || target == BodyTarget.BackBody);
         hitbox.SetAnimationBodyTarget((float)target);
         stateMachine.OnHurt?.Invoke(hitbox);
     }

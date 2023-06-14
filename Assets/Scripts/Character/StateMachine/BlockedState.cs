@@ -25,7 +25,7 @@ public class BlockedState : CharacterState
     public void Enter() 
     {
         stateMachine.enabled = true;
-        stateMachine.OnHurt += Blocked;
+        stateMachine.OnHurt += stats.BlockedDamage;
         OnEnter?.Invoke();
 
         stateMachine.hitNumber++;
@@ -44,14 +44,8 @@ public class BlockedState : CharacterState
     public void Exit() 
     {
         stateMachine.StopCoroutine(coroutine);
-        stateMachine.OnHurt -= Blocked;
+        stateMachine.OnHurt -= stats.BlockedDamage;
         OnExit?.Invoke();
-    }
-
-    private void Blocked(in Hitbox hitbox)
-    {
-        if (!hitbox.Unblockable && controller.isBlocking) stats.DamageStaminaBlocked(hitbox);
-        else stats.DamageStamina(hitbox);
     }
 
     public ref readonly Hitbox Hitbox { get => ref hitbox; }

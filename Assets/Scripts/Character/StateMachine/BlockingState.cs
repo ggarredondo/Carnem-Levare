@@ -23,7 +23,7 @@ public class BlockingState : CharacterState
 
         controller.OnDoBlock += stateMachine.TransitionToWalkingOrBlocking;
         controller.OnDoMove += stateMachine.SafeTransitionToMove;
-        stateMachine.OnHurt += Blocked;
+        stateMachine.OnHurt += stats.BlockedDamage;
 
         OnEnter?.Invoke();
     }
@@ -39,13 +39,7 @@ public class BlockingState : CharacterState
     {
         controller.OnDoBlock -= stateMachine.TransitionToWalkingOrBlocking;
         controller.OnDoMove -= stateMachine.SafeTransitionToMove;
-        stateMachine.OnHurt -= Blocked;
+        stateMachine.OnHurt -= stats.BlockedDamage;
         OnExit?.Invoke();
-    }
-
-    private void Blocked(in Hitbox hitbox) 
-    {
-        if (!hitbox.Unblockable) stats.DamageStaminaBlocked(hitbox);
-        else stats.DamageStamina(hitbox);
     }
 }

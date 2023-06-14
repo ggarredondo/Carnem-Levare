@@ -29,7 +29,6 @@ public class AttackMove : Move
     private Hitbox currentHitbox;
     [SerializeField] private float baseDamage;
     [SerializeField] private Stagger animationStagger;
-    [SerializeField] private bool unblockable;
 
     protected override void UpdateStringData()
     {
@@ -61,8 +60,7 @@ public class AttackMove : Move
             blockStun,
             hitStun,
             knockbackOnHit,
-            knockbackOnBlock,
-            unblockable);
+            knockbackOnBlock);
     }
     public override void ActivateMove()
     {
@@ -75,7 +73,6 @@ public class AttackMove : Move
     public override void EndMove() {}
 
     public float BaseDamage => baseDamage;
-    public bool Unblockable => unblockable;
 
     public double BlockStun => blockStun;
     public double HitStun => hitStun;

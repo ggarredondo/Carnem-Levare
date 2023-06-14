@@ -22,7 +22,7 @@ public class HurtState : CharacterState
     public void Enter() 
     {
         stateMachine.enabled = true;
-        stateMachine.OnHurt += stats.DamageStamina;
+        stateMachine.OnHurt += stats.HurtDamage;
         OnEnter?.Invoke();
 
         stateMachine.hitNumber++;
@@ -38,7 +38,7 @@ public class HurtState : CharacterState
     public void Exit()
     {
         stateMachine.StopCoroutine(coroutine);
-        stateMachine.OnHurt -= stats.DamageStamina;
+        stateMachine.OnHurt -= stats.HurtDamage;
         OnExit?.Invoke();
     }
     

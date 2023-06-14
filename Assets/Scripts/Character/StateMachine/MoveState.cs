@@ -27,7 +27,7 @@ public class MoveState : CharacterState
         stateMachine.enabled = true;
         stateMachine.hitNumber = 0;
 
-        stateMachine.OnHurt += stats.DamageStamina;
+        stateMachine.OnHurt += stats.HurtDamage;
         currentMove = moveList[moveIndex];
 
         stateMachine.OnInitMove += InitMove;
@@ -47,7 +47,7 @@ public class MoveState : CharacterState
     }
     public void Exit()
     {
-        stateMachine.OnHurt -= stats.DamageStamina;
+        stateMachine.OnHurt -= stats.HurtDamage;
 
         stateMachine.OnInitMove -= InitMove;
         stateMachine.OnActivateMove -= ActivateMove;
