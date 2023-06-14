@@ -28,7 +28,7 @@ MonoBehaviour:
   defaultGame:
     name: GameSlot
     selectedMoves: 00000000010000000200000003000000
-    newMoves: 01010101
+    newMoves: 0000000000000000
     moves:
     - {fileID: 11400000, guid: cb8a3bef13b8ff948b45889b9d0268de, type: 2}
     - {fileID: 11400000, guid: 20e698f21bf5aa84cb0cad575ccd63cf, type: 2}
