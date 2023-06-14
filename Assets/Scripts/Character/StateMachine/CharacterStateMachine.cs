@@ -40,14 +40,8 @@ public class CharacterStateMachine : MonoBehaviour
         koState.Reference(this);
     }
 
-    private void Update()
-    {
-        currentState.Update();
-    }
-    private void FixedUpdate()
-    {
-        currentState.FixedUpdate();
-    }
+    private void Update() => currentState.Update();
+    private void FixedUpdate() => currentState.FixedUpdate();
     private void ChangeState(in CharacterState newState)
     {
         if (currentState != null) currentState.Exit();

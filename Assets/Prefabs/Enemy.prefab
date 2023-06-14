@@ -429,10 +429,11 @@ MonoBehaviour:
     mass: 1
     drag: 0
     moveList:
-    - {fileID: 11400000, guid: cb8a3bef13b8ff948b45889b9d0268de, type: 2}
-    - {fileID: 11400000, guid: 20e698f21bf5aa84cb0cad575ccd63cf, type: 2}
-    - {fileID: 11400000, guid: 57b017aabdc8caf4fa11ee93fb5a5714, type: 2}
-    - {fileID: 11400000, guid: 19854063ba4a509409698682dd6d1ef5, type: 2}
+    - {fileID: 11400000, guid: 497bfd8be14091647b8de46645cacc29, type: 2}
+    - {fileID: 11400000, guid: e6c23cc1427dc4c41890f4e508655766, type: 2}
+    - {fileID: 11400000, guid: e03363bce22c0774c92d7ce5d94d02ca, type: 2}
+    - {fileID: 11400000, guid: bd4a4ef12ca73594b8b0920eceee264d, type: 2}
+    - {fileID: 11400000, guid: 50f2442faa6a5434e88ea3d0016597e8, type: 2}
     hitboxList:
     - {fileID: 3544833091616213104}
     - {fileID: 7922484474212002442}
@@ -452,7 +453,6 @@ MonoBehaviour:
     animatorSpeed: 1
     updateMovesetAnimations: 0
   enemyDrops:
-  - {fileID: 11400000, guid: 6e52423bf3c63b9438cc8f9ee314bacd, type: 2}
   - {fileID: 11400000, guid: fed6e55389eb6344083a2e7797c2d516, type: 2}
   - {fileID: 11400000, guid: 7e2bf30cc617dce4e8409007dd2808fe, type: 2}
   - {fileID: 11400000, guid: 248b1a05a995d4a49a2fe680287cdf59, type: 2}
