@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   icon: {fileID: 21300000, guid: 752d51523fe91b7449fa29ff2299d664, type: 3}
   moveName: Left Top Elbow
+  hyperarmor: 1
   animation: {fileID: 7400000, guid: 68b832e78e145be409aa8f05c9625667, type: 2}
   animationSpeed: 1
   applyAnimationEvents: 0
@@ -25,13 +26,16 @@ MonoBehaviour:
   trackingLength: 350
   hitSound: Hit_Mid_Hook
   blockedSound: Blocked_Default
-  hitShakeTime: 100
-  hitShakeIntensity: 3
+  targetShakeTime: 0
+  targetShakeIntensity: 0
+  screenShakeTime: 0
+  screenShakeFrequency: 0
+  screenShakeAmplitude: 0
   blockStun: 400
   hitStun: 1100
   knockbackOnHit: {x: 0, y: 0, z: 2}
   knockbackOnBlock: {x: 0, y: 0, z: 0}
   hitbox: 2
-  baseDamage: 20
-  animationStagger: 2
-  unblockable: 0
+  hurtAnimation: 0
+  damageToHealth: 0
+  damageToStamina: 0
