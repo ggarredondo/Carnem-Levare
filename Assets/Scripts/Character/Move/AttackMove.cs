@@ -22,19 +22,20 @@ public class AttackMove : Move
     [SerializeField] private Vector3 knockbackOnHit;
     [SerializeField] private Vector3 knockbackOnBlock;
 
-    private enum Stagger : int { Light, Medium, Hard }
+    private enum HurtAnimation : int { LightHit, MediumHit, HardHit }
     private enum HitboxType : int { LeftFist, RightFist, LeftElbow, RightElbow }
     [Header("Attack Values")]
     [SerializeField] private HitboxType hitbox;
+    [SerializeField] private HurtAnimation hurtAnimation;
     private Hitbox currentHitbox;
-    [SerializeField] private float baseDamage;
-    [SerializeField] private Stagger animationStagger;
+    [SerializeField] private int damageToHealth, damageToStamina;
 
     protected override void UpdateStringData()
     {
         stringData?.Clear();
         stringData?.Add(""); stringData?.Add(moveName);
-        stringData?.Add("Damage"); stringData?.Add(baseDamage.ToString());
+        stringData?.Add("Power"); stringData?.Add(damageToHealth.ToString());
+        stringData?.Add("Inertia"); stringData?.Add(damageToStamina.ToString());
 
         stringData?.Add("Start Up"); stringData?.Add((int)RelativeStartUp + " ms");
         stringData?.Add("Active"); stringData?.Add((int)RelativeActive + " ms");
@@ -55,8 +56,9 @@ public class AttackMove : Move
             screenShakeTime,
             screenShakeFrequency,
             screenShakeAmplitude,
-            (float)animationStagger,
-            stats.CalculateAttackDamage(baseDamage),
+            (float)hurtAnimation,
+            stats.CalculateDamageToHealth(damageToHealth),
+            stats.CalculateDamageToStamina(damageToStamina),
             blockStun,
             hitStun,
             knockbackOnHit,
@@ -72,7 +74,8 @@ public class AttackMove : Move
     }
     public override void EndMove() {}
 
-    public float BaseDamage => baseDamage;
+    public float DamageToHealth => damageToHealth;
+    public float DamageToStamina => damageToStamina;
 
     public double BlockStun => blockStun;
     public double HitStun => hitStun;

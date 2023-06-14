@@ -10,6 +10,7 @@ public abstract class Move : ScriptableObject
 
     [SerializeField] protected Sprite icon;
     [SerializeField] protected string moveName;
+    [SerializeField] protected bool hyperarmor;
 
     [Header("Move Animation")]
     [SerializeField] protected AnimationClip animation;
@@ -100,4 +101,6 @@ public abstract class Move : ScriptableObject
     public double RelativeRecovery => recovery / animationSpeed;
 
     public ref readonly List<string> StringData => ref stringData;
+
+    public ref readonly bool Hyperarmor => ref hyperarmor;
 }

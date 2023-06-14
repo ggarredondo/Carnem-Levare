@@ -27,14 +27,14 @@ MonoBehaviour:
   blockedSound: Blocked_Default
   targetShakeTime: 100
   targetShakeIntensity: 3
-  screenShakeTime: 100
-  screenShakeFrequency: 50
-  screenShakeAmplitude: 0.25
+  screenShakeTime: 0
+  screenShakeFrequency: 0
+  screenShakeAmplitude: 0
   blockStun: 200
   hitStun: 500
   knockbackOnHit: {x: 0, y: 0, z: 5}
   knockbackOnBlock: {x: 0, y: 0, z: 0}
   hitbox: 0
-  baseDamage: 10
+  damageToHealth: 10
+  damageToStamina: 5
   animationStagger: 0
-  unblockable: 0

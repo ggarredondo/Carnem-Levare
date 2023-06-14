@@ -6,11 +6,10 @@ public class CharacterStats
 {
     private CharacterStateMachine stateMachine;
 
-    [SerializeField] private float stamina, maxStamina;
-    [SerializeField] private float characterDamage;
-
-    [Tooltip("Percentage of stamina damage taken when blocking")]
-    [SerializeField] [Range(0f, 1f)] private float blockingMultiplier;
+    [SerializeField] private int health, maxHealth;
+    [SerializeField] private int stamina, maxStamina;
+    [SerializeField] private int damageToHealth, damageToStamina;
+    [System.NonSerialized] public bool HYPERARMOR_FLAG = false;
 
     [Tooltip("How quickly time stun decreases through consecutive hits given by decayFunction(comboDecay, number of hits)")]
     [SerializeField] private double comboDecay;
@@ -20,12 +19,13 @@ public class CharacterStats
 
     [SerializeField] private List<Move> moveList;
     [SerializeField] private List<Hitbox> hitboxList;
-
+ 
     [SerializeField] private bool noHurt;
     [SerializeField] private bool noDeath;
 
     public void Initialize(in Character character, in Rigidbody rb)
     {
+        health = maxHealth;
         stamina = maxStamina;
         character.transform.localScale *= height;
         rb.mass = mass;
@@ -33,18 +33,22 @@ public class CharacterStats
     }
     public void Reference(in CharacterStateMachine stateMachine) => this.stateMachine = stateMachine;
 
-    public float CalculateAttackDamage(float baseDamage) => baseDamage + characterDamage;
-    public double CalculateStun(double stun, float hitNumber) => StepDecay(stun, hitNumber);
-    public double StepDecay(double stun, float hitNumber) => System.Math.Max(minStun, stun - (hitNumber-1) * comboDecay);
-    public double HitCounterDecay(double stun, float hitNumber) => hitNumber < comboDecay ? stun : minStun;
+    public int CalculateDamageToHealth(int moveDmgToHealth) => damageToHealth + moveDmgToHealth;
+    public int CalculateDamageToStamina(int moveDmgToStamina) => damageToStamina + moveDmgToStamina;
 
-    private void AddToStamina(float addend) => stamina = Mathf.Clamp(stamina + addend, 0f + System.Convert.ToSingle(noDeath), maxStamina);
+    public double CalculateStun(double stun, int hitNumber) => StepDecay(stun, hitNumber);
+    public double StepDecay(double stun, int hitNumber) => System.Math.Max(minStun, stun - (hitNumber-1) * comboDecay);
+    public double HitCounterDecay(double stun, int hitNumber) => hitNumber < comboDecay ? stun : minStun;
+
+    private void AddToHealth(float addend) => health = (int) Mathf.Clamp(health + addend, 0f + System.Convert.ToSingle(noDeath), maxHealth);
+    private void AddToStamina(float addend) => stamina = (int) Mathf.Clamp(stamina + addend, 0f, maxStamina);
+
     public void HurtDamage(in Hitbox hitbox)
     {
         if (!noHurt)
         {
-            AddToStamina(-hitbox.Damage);
-            if (stamina <= 0) stateMachine.TransitionToKO(hitbox);
+            AddToHealth(-hitbox.DamageToHealth);
+            if (health <= 0) stateMachine.TransitionToKO(hitbox);
             else stateMachine.TransitionToHurt(hitbox);
         }
     }
@@ -52,14 +56,17 @@ public class CharacterStats
     {
         if (!noHurt)
         {
-            AddToStamina(Mathf.Round(-hitbox.Damage * blockingMultiplier));
-            if (stamina <= 0) stateMachine.TransitionToKO(hitbox);
-            else stateMachine.TransitionToBlocked(hitbox);
+            AddToStamina(-hitbox.DamageToStamina);
+            //if (stamina <= 0) stateMachine.TransitionToStaggered(hitbox);
+            //else stateMachine.TransitionToBlocked(hitbox);
+            stateMachine.TransitionToBlocked(hitbox);
         }
     }
 
-    public ref readonly float Stamina { get => ref stamina; }
-    public ref readonly float MaxStamina { get => ref maxStamina; }
+    public ref readonly int Health => ref health;
+    public ref readonly int MaxHealth => ref maxHealth;
+    public ref readonly int Stamina => ref stamina;
+    public ref readonly int MaxStamina => ref maxStamina;
     public List<Move> MoveList { get => moveList;  set => moveList = value; }
-    public ref readonly List<Hitbox> HitboxList { get => ref hitboxList; }
+    public ref readonly List<Hitbox> HitboxList => ref hitboxList;
 }

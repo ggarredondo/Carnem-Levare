@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   icon: {fileID: 21300000, guid: 36957d3f72e7301458613eed393de2f4, type: 3}
   moveName: Right Low Hook
+  hyperarmor: 0
   animation: {fileID: 7400000, guid: 75b8e477760a6904aa34988cc45c114a, type: 2}
   animationSpeed: 1.4
   applyAnimationEvents: 0
@@ -27,14 +28,14 @@ MonoBehaviour:
   blockedSound: Blocked_Default
   targetShakeTime: 250
   targetShakeIntensity: 4
-  screenShakeTime: 0
-  screenShakeFrequency: 0
-  screenShakeAmplitude: 0
+  screenShakeTime: 70
+  screenShakeFrequency: 50
+  screenShakeAmplitude: 0.25
   blockStun: 250
   hitStun: 800
   knockbackOnHit: {x: -3, y: 0, z: 0}
   knockbackOnBlock: {x: 0, y: 0, z: 0}
   hitbox: 1
-  baseDamage: 15
-  animationStagger: 1
-  unblockable: 0
+  hurtAnimation: 1
+  damageToHealth: 14
+  damageToStamina: 9

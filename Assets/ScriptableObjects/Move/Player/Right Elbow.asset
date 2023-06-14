@@ -35,6 +35,6 @@ MonoBehaviour:
   knockbackOnHit: {x: -2, y: 0, z: 0}
   knockbackOnBlock: {x: 0, y: 0, z: 0}
   hitbox: 3
-  baseDamage: 12
+  damageToHealth: 10
+  damageToStamina: 5
   animationStagger: 1
-  unblockable: 0

@@ -26,6 +26,7 @@ public class MoveState : CharacterState
     {
         stateMachine.enabled = true;
         stateMachine.hitNumber = 0;
+        stats.HYPERARMOR_FLAG = moveList[moveIndex].Hyperarmor;
 
         stateMachine.OnHurt += stats.HurtDamage;
         currentMove = moveList[moveIndex];
@@ -47,6 +48,8 @@ public class MoveState : CharacterState
     }
     public void Exit()
     {
+        stats.HYPERARMOR_FLAG = false;
+
         stateMachine.OnHurt -= stats.HurtDamage;
 
         stateMachine.OnInitMove -= InitMove;

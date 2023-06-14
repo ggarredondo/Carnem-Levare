@@ -3,7 +3,8 @@ using UnityEngine;
 public class Hitbox : MonoBehaviour
 {
     private string hitSound, blockedSound;
-    private float animationBodyTarget, animationStagger, damage, targetShakeIntensity, screenShakeFrequency, screenShakeAmplitude;
+    private int damageToHealth, damageToStamina;
+    private float animationBodyTarget, hurtAnimation, targetShakeIntensity, screenShakeFrequency, screenShakeAmplitude;
     private double blockStun, hitStun, targetShakeTime, screenShakeTime;
     private Vector3 knockbackOnHit, knockbackOnBlock;
 
@@ -13,7 +14,7 @@ public class Hitbox : MonoBehaviour
     }
 
     public void Set(string hitSound, string blockedSound, double targetShakeTime, float targetShakeIntensity, double screenShakeTime, 
-        float screenShakeFrequency, float screenShakeAmplitude, float animationStagger, float damage,
+        float screenShakeFrequency, float screenShakeAmplitude, float hurtAnimation, int damageToHealth, int damageToStamina,
         double blockStun, double hitStun, in Vector3 knockbackOnHit, in Vector3 knockbackOnBlock)
     {
         this.hitSound = hitSound;
@@ -23,8 +24,9 @@ public class Hitbox : MonoBehaviour
         this.screenShakeTime = screenShakeTime;
         this.screenShakeFrequency = screenShakeFrequency;
         this.screenShakeAmplitude = screenShakeAmplitude;
-        this.animationStagger = animationStagger;
-        this.damage = damage;
+        this.hurtAnimation = hurtAnimation;
+        this.damageToHealth = damageToHealth;
+        this.damageToStamina = damageToStamina;
         this.blockStun = blockStun;
         this.hitStun = hitStun;
         this.knockbackOnHit = knockbackOnHit;
@@ -46,8 +48,9 @@ public class Hitbox : MonoBehaviour
     public float ScreenShakeAmplitude { get => screenShakeAmplitude; }
     public void SetAnimationBodyTarget(float animationBodyTarget) => this.animationBodyTarget = animationBodyTarget;
     public float AnimationBodyTarget { get => animationBodyTarget; }
-    public float AnimationStagger { get => animationStagger; }
-    public float Damage { get => damage; }
+    public float HurtAnimation { get => hurtAnimation; }
+    public float DamageToHealth { get => damageToHealth; }
+    public float DamageToStamina { get => damageToStamina; }
     public double BlockStun { get => blockStun; }
     public double HitStun { get => hitStun; }
     public ref readonly Vector3 KnockbackOnHit => ref knockbackOnHit;

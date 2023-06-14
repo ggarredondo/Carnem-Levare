@@ -42,21 +42,21 @@ public class CharacterAnimation
         stateMachine.HurtState.OnEnter += () => {
             Hitbox hitbox = hurtState.Hitbox;
             animator.SetBool("STATE_HURT", true);
-            TriggerHurtAnimation(hitbox.AnimationBodyTarget, hitbox.AnimationStagger);
+            TriggerHurtAnimation(hitbox.AnimationBodyTarget, hitbox.HurtAnimation);
         };
         stateMachine.HurtState.OnExit += () => animator.SetBool("STATE_HURT", false);
 
         stateMachine.BlockedState.OnEnter += () => {
             Hitbox hitbox = blockedState.Hitbox;
             animator.SetBool("STATE_BLOCKED", true);
-            TriggerHurtAnimation(hitbox.AnimationBodyTarget, hitbox.AnimationStagger);
+            TriggerHurtAnimation(hitbox.AnimationBodyTarget, hitbox.HurtAnimation);
         };
         stateMachine.BlockedState.OnExit += () => animator.SetBool("STATE_BLOCKED", false);
 
         stateMachine.KOState.OnEnter += () => {
             Hitbox hitbox = koState.Hitbox;
             animator.SetFloat("hurt_target", hitbox.AnimationBodyTarget);
-            animator.SetFloat("hurt_stagger", hitbox.AnimationStagger);
+            animator.SetFloat("hurt_stagger", hitbox.HurtAnimation);
             animator.SetBool("STATE_KO", true);
         };
         stateMachine.KOState.OnExit += () => animator.SetBool("STATE_KO", false);

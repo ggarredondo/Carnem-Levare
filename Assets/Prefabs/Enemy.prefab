@@ -419,10 +419,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   characterStats:
+    health: 0
+    maxHealth: 300
     stamina: 0
-    maxStamina: 300
-    characterDamage: 10
-    blockingMultiplier: 0.1
+    maxStamina: 100
+    damageToHealth: 10
+    damageToStamina: 5
     comboDecay: 300
     minStun: 200
     height: 1.1
