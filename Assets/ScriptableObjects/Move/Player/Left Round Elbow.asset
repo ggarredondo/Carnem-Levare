@@ -25,8 +25,11 @@ MonoBehaviour:
   trackingLength: 350
   hitSound: Hit_Overhand
   blockedSound: Blocked_Default
-  hitShakeTime: 100
-  hitShakeIntensity: 2
+  targetShakeTime: 100
+  targetShakeIntensity: 2
+  screenShakeTime: 0
+  screenShakeFrequency: 0
+  screenShakeAmplitude: 0
   blockStun: 600
   hitStun: 1100
   knockbackOnHit: {x: 0, y: 0, z: 10}

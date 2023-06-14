@@ -7,12 +7,12 @@ public class CameraEffects : MonoBehaviour
     [Header("Effects")]
     [SerializeField] private List<CameraMovement> cameraEffects;
 
-    public void Initialize(ref CinemachineVirtualCamera vcam, ref Player player)
+    public void Initialize(ref CinemachineVirtualCamera vcam, ref Player player, ref Enemy enemy)
     {
         foreach(CameraMovement movement in cameraEffects)
         {
             movement.Initialize(ref vcam);
-            movement.UpdateCondition(ref player);
+            movement.UpdateCondition(ref player, ref enemy);
         }
     }
 }

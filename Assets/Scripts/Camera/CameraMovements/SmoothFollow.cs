@@ -15,7 +15,7 @@ public class SmoothFollow : CameraMovement
         transposer = vcam.GetCinemachineComponent<CinemachineOrbitalTransposer>();
     }
 
-    public override void UpdateCondition(ref Player player)
+    public override void UpdateCondition(ref Player player, ref Enemy enemy)
     {
         player.StateMachine.WalkingState.OnEnter += Negative;
         player.StateMachine.WalkingState.OnExit += Positive;

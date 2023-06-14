@@ -8,8 +8,11 @@ public class AttackMove : Move
     [SerializeField] private string blockedSound;
 
     [Header("Attack-specific Camera Movement")]
-    [SerializeField] private double hitShakeTime;
-    [SerializeField] private float hitShakeIntensity;
+    [SerializeField] private double targetShakeTime;
+    [SerializeField] private float targetShakeIntensity;
+    [SerializeField] private double screenShakeTime;
+    [SerializeField] private float screenShakeFrequency;
+    [SerializeField] private float screenShakeAmplitude;
 
     [Header("Attack-specific Time Data (ms)")]
     [SerializeField] private double blockStun;
@@ -48,8 +51,11 @@ public class AttackMove : Move
 
         currentHitbox.Set(hitSound,
             blockedSound,
-            hitShakeTime,
-            hitShakeIntensity,
+            targetShakeTime,
+            targetShakeIntensity,
+            screenShakeTime,
+            screenShakeFrequency,
+            screenShakeAmplitude,
             (float)animationStagger,
             stats.CalculateAttackDamage(baseDamage),
             blockStun,

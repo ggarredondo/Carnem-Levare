@@ -23,7 +23,7 @@ public class LinealMovement : CameraMovement
         initialPosition = positions.Item1;
     }
 
-    public override void UpdateCondition(ref Player player)
+    public override void UpdateCondition(ref Player player, ref Enemy enemy)
     {
         Player playerLocal = player;
         player.Controller.OnDoBlock += () => 

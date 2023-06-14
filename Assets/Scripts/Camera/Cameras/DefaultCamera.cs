@@ -104,8 +104,8 @@ public class DefaultCamera : MonoBehaviour, ICameraInitialize
     private void CameraShake(in Hitbox hitbox, float intensityMultiplier = 1)
     {
         hurt = true;
-        targetingSpeed = hitbox.HitShakeIntensity * intensityMultiplier;
-        HurtTime(hitbox.HitShakeTime);
+        targetingSpeed = hitbox.TargetShakeIntensity * intensityMultiplier;
+        HurtTime(hitbox.TargetShakeTime);
     }
 
     private async void HurtTime(double time)

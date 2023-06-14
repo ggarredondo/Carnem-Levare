@@ -13,7 +13,7 @@ public abstract class CameraMovement : ScriptableObject
 
     public abstract void Initialize(ref CinemachineVirtualCamera vcam);
 
-    public abstract void UpdateCondition(ref Player player);
+    public abstract void UpdateCondition(ref Player player, ref Enemy enemy);
 
     protected virtual void UpdateParameters(){ }
 

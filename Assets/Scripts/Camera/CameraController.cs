@@ -63,7 +63,7 @@ public class CameraController : MonoBehaviour
 
             if (camera.TryGetComponent(out CameraEffects effects)) 
             {
-                effects.Initialize(ref tmp, ref player);
+                effects.Initialize(ref tmp, ref player, ref enemy);
             }
 
             if(camera.TryGetComponent(out ICameraInitialize targeting))

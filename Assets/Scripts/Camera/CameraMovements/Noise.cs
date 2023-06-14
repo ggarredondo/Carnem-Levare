@@ -17,10 +17,10 @@ public class Noise : CameraMovement
         noiseTransposer = vcam.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>();
     }
 
-    public override void UpdateCondition(ref Player player)
+    public override void UpdateCondition(ref Player player, ref Enemy enemy)
     {
         player.StateMachine.WalkingState.OnEnter += Positive;
-        player.StateMachine.WalkingState.OnExit += Negative;
+        player.StateMachine.BlockingState.OnEnter += Negative;
     }
 
     private async void Positive()
