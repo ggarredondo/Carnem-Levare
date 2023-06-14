@@ -15,12 +15,4 @@ public class CameraEffects : MonoBehaviour
             movement.UpdateCondition(ref player);
         }
     }
-
-    private void LateUpdate()
-    {
-        if (Time.timeScale > 0f)
-        {
-            cameraEffects.ForEach(movement => movement.ApplyMove());
-        }
-    }
 }

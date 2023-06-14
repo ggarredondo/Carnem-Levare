@@ -1,4 +1,5 @@
 using Cinemachine;
+using LerpUtilities;
 using UnityEngine;
 
 [CreateAssetMenu(menuName = "Scriptable Objects/CameraEffects/SmoothFollow")]
@@ -6,7 +7,6 @@ public class SmoothFollow : CameraMovement
 {
     public Tuple<float> variation;
 
-    private float reduce;
     private CinemachineOrbitalTransposer transposer;
 
     public override void Initialize(ref CinemachineVirtualCamera vcam)
@@ -17,12 +17,16 @@ public class SmoothFollow : CameraMovement
 
     public override void UpdateCondition(ref Player player)
     {
-        player.StateMachine.WalkingState.OnEnter += () => applyCondition = true;
-        player.StateMachine.WalkingState.OnExit += () => applyCondition = false;
+        player.StateMachine.WalkingState.OnEnter += Negative;
+        player.StateMachine.WalkingState.OnExit += Positive;
     }
 
-    public override void ApplyMove()
+    private async void Positive()
     {
-        transposer.m_YawDamping = CameraUtilities.OscillateParameter(applyCondition, aceleration, ref reduce, variation, CameraUtilities.Exponential);
+        await Lerp.Value_Math(transposer.m_YawDamping, variation.Item1, f => transposer.m_YawDamping = f, duration.Item1, CameraUtilities.Exponential);
+    }
+    private async void Negative()
+    {
+        await Lerp.Value_Math(transposer.m_YawDamping, variation.Item2, f => transposer.m_YawDamping = f, duration.Item2, CameraUtilities.Exponential);
     }
 }

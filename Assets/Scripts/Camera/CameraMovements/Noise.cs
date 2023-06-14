@@ -1,5 +1,7 @@
 using Cinemachine;
 using UnityEngine;
+using LerpUtilities;
+using System.Threading.Tasks;
 
 [CreateAssetMenu(menuName = "Scriptable Objects/CameraEffects/Noise")]
 public class Noise : CameraMovement
@@ -7,7 +9,6 @@ public class Noise : CameraMovement
     public Tuple<float> frequency;
     public Tuple<float> amplitude;
 
-    private float reduceAmplitude, reduceFrequency;
     private CinemachineBasicMultiChannelPerlin noiseTransposer;
 
     public override void Initialize(ref CinemachineVirtualCamera vcam)
@@ -18,13 +19,18 @@ public class Noise : CameraMovement
 
     public override void UpdateCondition(ref Player player)
     {
-        player.StateMachine.WalkingState.OnEnter += () => applyCondition = true;
-        player.StateMachine.WalkingState.OnExit += () => applyCondition = false;
+        player.StateMachine.WalkingState.OnEnter += Positive;
+        player.StateMachine.WalkingState.OnExit += Negative;
     }
 
-    public override void ApplyMove()
+    private async void Positive()
     {
-        noiseTransposer.m_FrequencyGain = CameraUtilities.OscillateParameter(applyCondition, aceleration, ref reduceFrequency, frequency, CameraUtilities.Exponential);
-        noiseTransposer.m_AmplitudeGain = CameraUtilities.OscillateParameter(applyCondition, aceleration, ref reduceAmplitude, amplitude, CameraUtilities.Exponential);
+        await Task.WhenAll(Lerp.Value(noiseTransposer.m_FrequencyGain, frequency.Item1, f => noiseTransposer.m_FrequencyGain = f, duration.Item1),
+                           Lerp.Value(noiseTransposer.m_AmplitudeGain, amplitude.Item1, f => noiseTransposer.m_AmplitudeGain = f, duration.Item1));
+    }
+    private async void Negative()
+    {
+        await Task.WhenAll(Lerp.Value(noiseTransposer.m_FrequencyGain, frequency.Item2, f => noiseTransposer.m_FrequencyGain = f, duration.Item2),
+                           Lerp.Value(noiseTransposer.m_AmplitudeGain, amplitude.Item2, f => noiseTransposer.m_AmplitudeGain = f, duration.Item2));
     }
 }

@@ -9,7 +9,7 @@ public abstract class CameraMovement : ScriptableObject
 
     [Header("Parameters")]
 
-    public Tuple<float> aceleration;
+    public Tuple<float> duration;
 
     public abstract void Initialize(ref CinemachineVirtualCamera vcam);
 
@@ -20,8 +20,6 @@ public abstract class CameraMovement : ScriptableObject
     public virtual void ReturnInitialPosition() { }
 
     public virtual void UpdateInitialPosition() { }
-
-    public abstract void ApplyMove();
 
     public bool ApplyCondition { get { return applyCondition; } }
 }

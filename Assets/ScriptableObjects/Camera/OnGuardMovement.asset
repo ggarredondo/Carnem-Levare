@@ -12,9 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1a5a034724bbc0e40b46cac15babf2f7, type: 3}
   m_Name: OnGuardMovement
   m_EditorClassIdentifier: 
-  id: 1
-  stackable: 1
-  aceleration:
-    Item1: 2
-    Item2: 2
+  duration:
+    Item1: 0.5
+    Item2: 0.5
   offsetVariation: {x: 0, y: 0, z: 0.25}

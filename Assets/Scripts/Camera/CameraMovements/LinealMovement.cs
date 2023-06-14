@@ -1,4 +1,5 @@
 using Cinemachine;
+using LerpUtilities;
 using UnityEngine;
 
 [CreateAssetMenu(menuName = "Scriptable Objects/CameraEffects/LinealMovement")]
@@ -6,7 +7,6 @@ public class LinealMovement : CameraMovement
 {
     public Vector3 offsetVariation;
 
-    private float reduce;
     private Tuple<Vector3> positions;
     private CinemachineTransposer transposer;
 
@@ -26,7 +26,11 @@ public class LinealMovement : CameraMovement
     public override void UpdateCondition(ref Player player)
     {
         Player playerLocal = player;
-        player.Controller.OnDoBlock += () => applyCondition = playerLocal.Controller.isBlocking;
+        player.Controller.OnDoBlock += () => 
+        { 
+            applyCondition = playerLocal.Controller.isBlocking;
+            Movement();
+        };
     }
 
     protected override void UpdateParameters()
@@ -45,8 +49,11 @@ public class LinealMovement : CameraMovement
         positions.Item1 = initialPosition;
     }
 
-    public override void ApplyMove()
+    private async void Movement()
     {
-        transposer.m_FollowOffset = CameraUtilities.Movement(applyCondition, aceleration, ref reduce, new Vector3[] { positions.Item1, positions.Item2 }, CameraUtilities.LinearBezierCurve);
+        if(applyCondition)
+            await Lerp.Value_Bezier(new Vector3[] { positions.Item1, positions.Item2 }, v => transposer.m_FollowOffset = v, duration.Item1, CameraUtilities.LinearBezierCurve);
+        else
+            await Lerp.Value_Bezier(new Vector3[] { positions.Item2, positions.Item1 }, v => transposer.m_FollowOffset = v, duration.Item2, CameraUtilities.LinearBezierCurve);
     }
 }

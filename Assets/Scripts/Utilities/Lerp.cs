@@ -7,6 +7,41 @@ namespace LerpUtilities
 {
     public class Lerp
     {
+        public static async Task Value_Math<T>(T startValue, T targetValue, Action<T> setValue, float duration, Func<float, float> function)
+        {
+            float elapsedTime = 0f;
+
+            while (elapsedTime < duration)
+            {
+                elapsedTime += Time.deltaTime;
+                float value = function(Mathf.Clamp01(elapsedTime / duration));
+
+                T interpolatedValue = LocalLerp(startValue, targetValue, value);
+                setValue(interpolatedValue);
+
+                await Task.Yield();
+            }
+
+            setValue(targetValue);
+        }
+
+        public static async Task Value_Bezier(Vector3[] values, Action<Vector3> setValue, float duration, Func<float, Vector3[], Vector3> BezierCurve)
+        {
+            float elapsedTime = 0f;
+
+            while (elapsedTime < duration)
+            {
+                elapsedTime += Time.deltaTime;
+                Vector3 interpolatedValue = BezierCurve(Mathf.Clamp01(elapsedTime / duration), values);
+
+                setValue(interpolatedValue);
+
+                await Task.Yield();
+            }
+
+            setValue(values[1]);
+        }
+
         public static async Task Value<T>(T startValue, T targetValue, Action<T> setValue, float duration)
         {
             float elapsedTime = 0f;
