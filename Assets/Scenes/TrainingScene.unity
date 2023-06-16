@@ -958,6 +958,11 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: f93543a752193d243a102bfbba956363, type: 2}
+    - target: {fileID: 5975427957589119885, guid: 597ff9b00a9e7804681f9e3db89066c3,
+        type: 3}
+      propertyPath: m_Constraints
+      value: 126
+      objectReference: {fileID: 0}
     - target: {fileID: 7115871151908366452, guid: 597ff9b00a9e7804681f9e3db89066c3,
         type: 3}
       propertyPath: characterStats.noDeath

@@ -26,11 +26,18 @@ MonoBehaviour:
   trackingLength: 350
   hitSound: Hit_Mid_Hook
   blockedSound: Blocked_Default
-  targetShakeTime: 100
-  targetShakeIntensity: 3
-  screenShakeTime: 0
-  screenShakeFrequency: 0
-  screenShakeAmplitude: 0
+  cameraShake:
+    targetShakeTime: 100
+    targetShakeIntensity: 3
+    screenShakeTime: 0
+    screenShakeFrequency: 0
+    screenShakeAmplitude: 0
+  blockingCameraShake:
+    targetShakeTime: 0
+    targetShakeIntensity: 0
+    screenShakeTime: 0
+    screenShakeFrequency: 0
+    screenShakeAmplitude: 0
   blockStun: 400
   hitStun: 1100
   knockbackOnHit: {x: 0, y: 0, z: 2}

@@ -14,6 +14,7 @@ public class CameraShake : CameraMovement
     [SerializeField] private float finishDuration;
 
     private float defaultFrequency, defaultAmplitude;
+    private NoiseSettings defaultNoiseSettings;
 
     public override void Initialize(ref CinemachineVirtualCamera vcam)
     {
@@ -27,18 +28,30 @@ public class CameraShake : CameraMovement
         this.enemy = enemy;
 
         player.StateMachine.HurtState.OnEnter += () => Shake(this.player.StateMachine.HurtState.Hitbox);
-        player.StateMachine.BlockedState.OnEnter += () => Shake(this.player.StateMachine.BlockedState.Hitbox);
+        player.StateMachine.BlockedState.OnEnter += () => BlockingShake(this.player.StateMachine.BlockedState.Hitbox);
 
         enemy.StateMachine.HurtState.OnEnter += () => Shake(this.enemy.StateMachine.HurtState.Hitbox);
-        enemy.StateMachine.BlockedState.OnEnter += () => Shake(this.enemy.StateMachine.BlockedState.Hitbox);
+        enemy.StateMachine.BlockedState.OnEnter += () => BlockingShake(this.enemy.StateMachine.BlockedState.Hitbox);
     }
 
     private void Shake(in Hitbox hitbox)
     {
         defaultFrequency = noiseTransposer.m_FrequencyGain;
         defaultAmplitude = noiseTransposer.m_AmplitudeGain;
+        defaultNoiseSettings = noiseTransposer.m_NoiseProfile;
 
-        HurtTime(hitbox.ScreenShakeFrequency, hitbox.ScreenShakeAmplitude, (float) hitbox.ScreenShakeTime);
+        noiseTransposer.m_NoiseProfile = hitbox.BlockingCameraShake.shakeType;
+        HurtTime(hitbox.CameraShake.screenShakeFrequency, hitbox.CameraShake.screenShakeAmplitude, (float) hitbox.CameraShake.screenShakeTime);
+    }
+
+    private void BlockingShake(in Hitbox hitbox)
+    {
+        defaultFrequency = noiseTransposer.m_FrequencyGain;
+        defaultAmplitude = noiseTransposer.m_AmplitudeGain;
+        defaultNoiseSettings = noiseTransposer.m_NoiseProfile;
+
+        noiseTransposer.m_NoiseProfile = hitbox.BlockingCameraShake.shakeType;
+        HurtTime(hitbox.BlockingCameraShake.screenShakeFrequency, hitbox.BlockingCameraShake.screenShakeAmplitude, (float)hitbox.BlockingCameraShake.screenShakeTime);
     }
 
     private async void HurtTime(float frequency, float amplitude, float time)
@@ -50,5 +63,7 @@ public class CameraShake : CameraMovement
 
         await Task.WhenAll(Lerp.Value(noiseTransposer.m_FrequencyGain, defaultFrequency, f => noiseTransposer.m_FrequencyGain = f, finishDuration),
                            Lerp.Value(noiseTransposer.m_AmplitudeGain, defaultAmplitude, f => noiseTransposer.m_AmplitudeGain = f, finishDuration));
+
+        noiseTransposer.m_NoiseProfile = defaultNoiseSettings;
     }
 }

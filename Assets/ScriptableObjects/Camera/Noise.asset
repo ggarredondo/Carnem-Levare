@@ -15,6 +15,7 @@ MonoBehaviour:
   speed:
     Item1: 2
     Item2: 2
+  responseTime: 0
   frequency:
     Item1: 0
     Item2: 3

@@ -48,9 +48,9 @@ public class DefaultCamera : MonoBehaviour, ICameraInitialize
         player.StateMachine.MoveState.OnExit += () => isDoingMove = false;
 
         enemy.StateMachine.HurtState.OnEnter += () => CameraShake(enemy.StateMachine.HurtState.Hitbox);
-        enemy.StateMachine.BlockedState.OnEnter += () => CameraShake(enemy.StateMachine.BlockedState.Hitbox, 0.5f);
+        enemy.StateMachine.BlockedState.OnEnter += () => BlockingCameraShake(enemy.StateMachine.BlockedState.Hitbox);
         player.StateMachine.HurtState.OnEnter += () => CameraShake(player.StateMachine.HurtState.Hitbox);
-        player.StateMachine.BlockedState.OnEnter += () => CameraShake(player.StateMachine.BlockedState.Hitbox, 0.5f);
+        player.StateMachine.BlockedState.OnEnter += () => BlockingCameraShake(player.StateMachine.BlockedState.Hitbox);
 
         enemy.StateMachine.HurtState.OnExit += () => hurt = false;
         enemy.StateMachine.BlockedState.OnExit += () => hurt = false;
@@ -112,11 +112,18 @@ public class DefaultCamera : MonoBehaviour, ICameraInitialize
         }
     }
 
-    private void CameraShake(in Hitbox hitbox, float intensityMultiplier = 1)
+    private void CameraShake(in Hitbox hitbox)
     {
         hurt = true;
-        targetingSpeed = hitbox.TargetShakeIntensity * intensityMultiplier;
-        HurtTime(hitbox.TargetShakeTime);
+        targetingSpeed = hitbox.CameraShake.targetShakeIntensity;
+        HurtTime(hitbox.CameraShake.targetShakeTime);
+    }
+
+    private void BlockingCameraShake(in Hitbox hitbox)
+    {
+        hurt = true;
+        targetingSpeed = hitbox.BlockingCameraShake.targetShakeIntensity;
+        HurtTime(hitbox.BlockingCameraShake.targetShakeTime);
     }
 
     private async void HurtTime(double time)

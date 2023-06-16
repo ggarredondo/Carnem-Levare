@@ -4,8 +4,9 @@ public class Hitbox : MonoBehaviour
 {
     private string hitSound, blockedSound;
     private int damageToHealth, damageToStamina;
-    private float animationBodyTarget, hurtAnimation, targetShakeIntensity, screenShakeFrequency, screenShakeAmplitude;
-    private double blockStun, hitStun, targetShakeTime, screenShakeTime;
+    private float animationBodyTarget, hurtAnimation;
+    private double blockStun, hitStun;
+    private CameraEffectsData cameraShake, blockingCameraShake;
     private Vector3 knockbackOnHit, knockbackOnBlock;
 
     private void Start()
@@ -13,17 +14,13 @@ public class Hitbox : MonoBehaviour
         SetActive(false);
     }
 
-    public void Set(string hitSound, string blockedSound, double targetShakeTime, float targetShakeIntensity, double screenShakeTime, 
-        float screenShakeFrequency, float screenShakeAmplitude, float hurtAnimation, int damageToHealth, int damageToStamina,
+    public void Set(string hitSound, string blockedSound, CameraEffectsData cameraShake, CameraEffectsData blockingCameraShake, float hurtAnimation, int damageToHealth, int damageToStamina,
         double blockStun, double hitStun, in Vector3 knockbackOnHit, in Vector3 knockbackOnBlock)
     {
         this.hitSound = hitSound;
         this.blockedSound = blockedSound;
-        this.targetShakeTime = targetShakeTime;
-        this.targetShakeIntensity = targetShakeIntensity;
-        this.screenShakeTime = screenShakeTime;
-        this.screenShakeFrequency = screenShakeFrequency;
-        this.screenShakeAmplitude = screenShakeAmplitude;
+        this.cameraShake = cameraShake;
+        this.blockingCameraShake = blockingCameraShake;
         this.hurtAnimation = hurtAnimation;
         this.damageToHealth = damageToHealth;
         this.damageToStamina = damageToStamina;
@@ -41,11 +38,8 @@ public class Hitbox : MonoBehaviour
     public string HitSound { get => hitSound; }
     public string BlockedSound { get => blockedSound; }
 
-    public double TargetShakeTime { get => targetShakeTime; }
-    public float TargetShakeIntensity { get => targetShakeIntensity; }
-    public double ScreenShakeTime { get => screenShakeTime; }
-    public float ScreenShakeFrequency { get => screenShakeFrequency; }
-    public float ScreenShakeAmplitude { get => screenShakeAmplitude; }
+    public CameraEffectsData CameraShake { get => cameraShake; }
+    public CameraEffectsData BlockingCameraShake { get => blockingCameraShake; }
     public void SetAnimationBodyTarget(float animationBodyTarget) => this.animationBodyTarget = animationBodyTarget;
     public float AnimationBodyTarget { get => animationBodyTarget; }
     public float HurtAnimation { get => hurtAnimation; }
