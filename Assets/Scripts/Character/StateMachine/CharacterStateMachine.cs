@@ -10,9 +10,11 @@ public class CharacterStateMachine : MonoBehaviour
     private CharacterState currentState;
     private WalkingState walkingState;
     private BlockingState blockingState;
+    private DashState dashState;
     private MoveState moveState;
     private HurtState hurtState;
     private BlockedState blockedState;
+    private StaggerState staggerState;
     private KOState koState;
 
     [NonSerialized] public int hitNumber = -1;
@@ -21,9 +23,11 @@ public class CharacterStateMachine : MonoBehaviour
     {
         walkingState = new WalkingState();
         blockingState = new BlockingState();
+        dashState = new DashState();
         moveState = new MoveState();
         hurtState = new HurtState();
         blockedState = new BlockedState();
+        staggerState = new StaggerState();
         koState = new KOState();
     }
 
@@ -66,9 +70,11 @@ public class CharacterStateMachine : MonoBehaviour
     public ref readonly CharacterState CurrentState { get => ref currentState; }
     public ref readonly WalkingState WalkingState { get => ref walkingState; }
     public ref readonly BlockingState BlockingState { get => ref blockingState; }
+    public ref readonly DashState DashState { get => ref dashState; }
     public ref readonly MoveState MoveState { get => ref moveState; }
     public ref readonly HurtState HurtState { get => ref hurtState; }
     public ref readonly BlockedState BlockedState { get => ref blockedState; }
+    public ref readonly StaggerState StaggerState { get => ref staggerState; }
     public ref readonly KOState KOState { get => ref koState; }
 
     public void TransitionToWalking() => ChangeState(walkingState);

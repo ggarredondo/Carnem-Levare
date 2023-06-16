@@ -76,7 +76,7 @@ public class CharacterStats
         {
             OnBlockedDamage?.Invoke(hitbox);
             AddToStamina(-hitbox.DamageToStamina);
-            //if (stamina <= 0) stateMachine.TransitionToStaggered(hitbox);
+            //if (stamina <= 0) stateMachine.TransitionToStagger(hitbox);
             //else stateMachine.TransitionToBlocked(hitbox);
             stateMachine.TransitionToBlocked(hitbox);
         }
