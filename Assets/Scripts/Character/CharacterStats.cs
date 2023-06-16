@@ -31,21 +31,21 @@ public class CharacterStats
 
     public event ActionIn<Hitbox> OnHurtDamage, OnBlockedDamage;
 
-    public void Initialize(in Character character, in Rigidbody rb)
+    public void Initialize(in Transform characterTransform, in Rigidbody rb)
     {
         health = maxHealth;
         stamina = maxStamina;
-        character.transform.localScale = Vector3.one;
-        character.transform.localScale *= height;
+        characterTransform.localScale = Vector3.one;
+        characterTransform.localScale *= height;
         rb.mass = mass;
         rb.drag = drag;
     }
     public void Reference(in CharacterStateMachine stateMachine) => this.stateMachine = stateMachine;
 
-    public void OnValidate(in Character character, in Rigidbody rb)
+    public void OnValidate(in Transform characterTransform, in Rigidbody rb)
     {
-        character.transform.localScale = Vector3.one;
-        character.transform.localScale *= height;
+        characterTransform.localScale = Vector3.one;
+        characterTransform.localScale *= height;
         rb.mass = mass;
         rb.drag = drag;
     }

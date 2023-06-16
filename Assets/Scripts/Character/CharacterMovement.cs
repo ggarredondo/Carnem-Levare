@@ -6,8 +6,8 @@ using System.Linq;
 public class CharacterMovement
 {
     private Rigidbody rb;
-    private Transform character, target;
-    public void SetTarget(in Transform target) => this.target = target;
+    private Transform characterTransform, targetTransform;
+    public void SetTarget(in Transform target) => this.targetTransform = target;
     
     [Header("Tracking")]
     [Tooltip("How quickly character rotates towards their opponent")]
@@ -23,10 +23,10 @@ public class CharacterMovement
     private Vector2 direction;
     public event ActionIn<Vector2> OnMoveCharacter;
 
-    public void Initialize(in Transform character, in Transform target, in Rigidbody rb)
+    public void Initialize(in Transform characterTransform, in Transform targetTransform, in Rigidbody rb)
     { 
-        this.character = character;
-        this.target = target;
+        this.characterTransform = characterTransform;
+        this.targetTransform = targetTransform;
         this.rb = rb;
         direction = Vector2.zero;
     }
@@ -48,7 +48,7 @@ public class CharacterMovement
     /// </summary>
     public void PushCharacter(in Vector3 knockback)
     {
-        Vector3 knockbackDirection = target.right * knockback.x + target.up * knockback.y + target.forward * knockback.z;
+        Vector3 knockbackDirection = targetTransform.right * knockback.x + targetTransform.up * knockback.y + targetTransform.forward * knockback.z;
         rb.AddForce(knockbackDirection, ForceMode.Impulse);
     }
 
@@ -58,9 +58,9 @@ public class CharacterMovement
     public void LookAtTarget(params bool[] conditions)
     {
         Quaternion targetRotation;
-        if (target != null && doTracking && conditions.All(b => b))
+        if (targetTransform != null && doTracking && conditions.All(b => b))
         {
-            targetRotation = Quaternion.Euler(0f, Quaternion.LookRotation(target.position - character.position).normalized.eulerAngles.y, 0f);
+            targetRotation = Quaternion.Euler(0f, Quaternion.LookRotation(targetTransform.position - characterTransform.position).normalized.eulerAngles.y, 0f);
             rb.rotation = Quaternion.Lerp(rb.rotation, targetRotation, trackingRate * Time.fixedDeltaTime);
         }
     }

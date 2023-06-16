@@ -16,7 +16,7 @@ public abstract class Character : MonoBehaviour
         controller.Initialize();
         stateMachine = GetComponent<CharacterStateMachine>();
         stateMachine.Initialize();
-        characterStats.Initialize(this, GetComponent<Rigidbody>());
+        characterStats.Initialize(transform, GetComponent<Rigidbody>());
         characterMovement.Initialize(transform, target, GetComponent<Rigidbody>());
         characterAnimation.Initialize(GetComponent<Animator>());
     }
@@ -31,7 +31,7 @@ public abstract class Character : MonoBehaviour
     protected void OnValidate()
     {
         characterAnimation.OnValidate();
-        CharacterStats.OnValidate(this, GetComponent<Rigidbody>());
+        CharacterStats.OnValidate(transform, GetComponent<Rigidbody>());
     }
 
     public ref readonly CharacterStateMachine StateMachine { get => ref stateMachine; }
