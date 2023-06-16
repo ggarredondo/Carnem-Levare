@@ -459,7 +459,7 @@
                 {
                     "name": "",
                     "id": "2d7ed92e-63bb-4262-a69e-344090ebf0bc",
-                    "path": "<Gamepad>/buttonWest",
+                    "path": "<Gamepad>/rightStickPress",
                     "interactions": "",
                     "processors": "",
                     "groups": "Gamepad",
