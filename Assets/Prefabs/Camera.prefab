@@ -841,6 +841,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   orbitalValue: 10
   orbitalRecovery: 3
+  orbitalResponseTime: 200
 --- !u!114 &2835685396104087955
 MonoBehaviour:
   m_ObjectHideFlags: 0

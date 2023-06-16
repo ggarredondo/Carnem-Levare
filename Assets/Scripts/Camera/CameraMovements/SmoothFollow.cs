@@ -23,10 +23,10 @@ public class SmoothFollow : CameraMovement
 
     private async void Positive()
     {
-        await Lerp.Value_Math(transposer.m_YawDamping, variation.Item1, f => transposer.m_YawDamping = f, duration.Item1, CameraUtilities.Exponential);
+        await Lerp.Value_Math(transposer.m_YawDamping, variation.Item1, f => transposer.m_YawDamping = f, speed.Item1, CameraUtilities.Exponential);
     }
     private async void Negative()
     {
-        await Lerp.Value_Math(transposer.m_YawDamping, variation.Item2, f => transposer.m_YawDamping = f, duration.Item2, CameraUtilities.Exponential);
+        await Lerp.Value_Math(transposer.m_YawDamping, variation.Item2, f => transposer.m_YawDamping = f, speed.Item2, CameraUtilities.Exponential);
     }
 }

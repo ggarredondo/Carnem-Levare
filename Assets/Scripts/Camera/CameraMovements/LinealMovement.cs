@@ -1,5 +1,6 @@
 using Cinemachine;
 using LerpUtilities;
+using System.Threading.Tasks;
 using UnityEngine;
 
 [CreateAssetMenu(menuName = "Scriptable Objects/CameraEffects/LinealMovement")]
@@ -25,11 +26,16 @@ public class LinealMovement : CameraMovement
 
     public override void UpdateCondition(ref Player player, ref Enemy enemy)
     {
-        Player playerLocal = player;
-        player.Controller.OnDoBlock += () => 
-        { 
-            applyCondition = playerLocal.Controller.isBlocking;
-            Movement();
+        player.StateMachine.WalkingState.OnEnter += () => 
+        {
+            applyCondition = false;
+            NegativeMovement();
+        };
+
+        player.StateMachine.BlockingState.OnEnter += () =>
+        {
+            applyCondition = true;
+            PositiveMovement();
         };
     }
 
@@ -49,11 +55,33 @@ public class LinealMovement : CameraMovement
         positions.Item1 = initialPosition;
     }
 
-    private async void Movement()
+    private async void PositiveMovement()
     {
-        if(applyCondition)
-            await Lerp.Value_Bezier(new Vector3[] { positions.Item1, positions.Item2 }, v => transposer.m_FollowOffset = v, duration.Item1, CameraUtilities.LinearBezierCurve);
-        else
-            await Lerp.Value_Bezier(new Vector3[] { positions.Item2, positions.Item1 }, v => transposer.m_FollowOffset = v, duration.Item2, CameraUtilities.LinearBezierCurve);
+        float elapsedTime = 0f;
+
+        while (elapsedTime < responseTime && applyCondition)
+        {
+            elapsedTime += Time.deltaTime * 1000;
+            await Task.Yield();
+        }
+
+        if (!applyCondition) return;
+
+        await Lerp.Value_Bezier(new Vector3[] { transposer.m_FollowOffset, positions.Item2 }, v => transposer.m_FollowOffset = v, speed.Item1, CameraUtilities.LinearBezierCurve);
+    }
+
+    private async void NegativeMovement()
+    {
+        float elapsedTime = 0f;
+
+        while (elapsedTime < responseTime && !applyCondition)
+        {
+            elapsedTime += Time.deltaTime * 1000;
+            await Task.Yield();
+        }
+
+        if (applyCondition) return;
+
+        await Lerp.Value_Bezier(new Vector3[] { transposer.m_FollowOffset, positions.Item1 }, v => transposer.m_FollowOffset = v, speed.Item2, CameraUtilities.LinearBezierCurve);
     }
 }

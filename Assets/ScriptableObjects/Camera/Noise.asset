@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b48949f1a28583e4b8ca075f942b4aa5, type: 3}
   m_Name: Noise
   m_EditorClassIdentifier: 
-  duration:
-    Item1: 0.2
-    Item2: 0.2
+  speed:
+    Item1: 2
+    Item2: 2
   frequency:
     Item1: 0
     Item2: 3

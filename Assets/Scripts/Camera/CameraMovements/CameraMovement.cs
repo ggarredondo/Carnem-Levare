@@ -9,7 +9,8 @@ public abstract class CameraMovement : ScriptableObject
 
     [Header("Parameters")]
 
-    public Tuple<float> duration;
+    public Tuple<float> speed;
+    public float responseTime;
 
     public abstract void Initialize(ref CinemachineVirtualCamera vcam);
 

@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dae92714987ac8743a60e9400c5e2d98, type: 3}
   m_Name: SmoothFollow
   m_EditorClassIdentifier: 
-  duration:
-    Item1: 0.5
-    Item2: 0.5
+  speed:
+    Item1: 2
+    Item2: 2
   variation:
     Item1: 1
     Item2: 2

@@ -7,14 +7,15 @@ public class DefaultCamera : MonoBehaviour, ICameraInitialize
     [Header("Orbital Movement")]
     [Range(0, 20)] [SerializeField] private float orbitalValue;
     [Range(0, 10)] [SerializeField] private float orbitalRecovery;
+    [SerializeField] private float orbitalResponseTime;
 
     private Player player;
     private Enemy enemy;
 
     private Transform[] alternativeTargets;
     private Vector3[] defaultTargets;
-    private bool hurt, isDoingMove;
-    private float targetingSpeed;
+    private bool hurt, isDoingMove, isBlocking;
+    private float targetingSpeed, blockingCounter;
 
     private CinemachineOrbitalTransposer orbitalTransposer;
     private CinemachineTargetGroup targetGroup;
@@ -55,6 +56,9 @@ public class DefaultCamera : MonoBehaviour, ICameraInitialize
         enemy.StateMachine.BlockedState.OnExit += () => hurt = false;
         player.StateMachine.HurtState.OnExit += () => hurt = false;
         player.StateMachine.BlockedState.OnExit += () => hurt = false;
+
+        player.StateMachine.WalkingState.OnEnter += () => isBlocking = false;
+        player.StateMachine.BlockingState.OnEnter += () => isBlocking = true;
     }
 
     private void LateUpdate()
@@ -68,11 +72,18 @@ public class DefaultCamera : MonoBehaviour, ICameraInitialize
 
     private void OrbitalMovement()
     {
-        if (player.Controller.MovementVector != new Vector2(0, 0) && !player.Controller.isBlocking && !isDoingMove)
+        if (player.Controller.MovementVector != new Vector2(0, 0) && !isBlocking && !isDoingMove)
             orbitalTransposer.m_XAxis.Value += player.Controller.MovementVector.x * orbitalValue * Time.deltaTime;
 
-        if (player.Controller.isBlocking)
-            orbitalTransposer.m_XAxis.Value = Mathf.Lerp(orbitalTransposer.m_XAxis.Value, 0.5f, orbitalRecovery * Time.deltaTime);
+        if (isBlocking)
+        {
+            blockingCounter += Time.deltaTime * 1000;
+
+            if (blockingCounter >= orbitalResponseTime)
+                orbitalTransposer.m_XAxis.Value = Mathf.Lerp(orbitalTransposer.m_XAxis.Value, 0.5f, orbitalRecovery * Time.deltaTime);
+        }
+        else
+            blockingCounter = 0;
 
         orbitalTransposer.m_RecenterToTargetHeading.m_enabled = player.Controller.MovementVector != new Vector2(0, 0) && !player.Controller.isBlocking && !isDoingMove;
     }

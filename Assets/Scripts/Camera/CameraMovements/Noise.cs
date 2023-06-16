@@ -25,12 +25,12 @@ public class Noise : CameraMovement
 
     private async void Positive()
     {
-        await Task.WhenAll(Lerp.Value(noiseTransposer.m_FrequencyGain, frequency.Item1, f => noiseTransposer.m_FrequencyGain = f, duration.Item1),
-                           Lerp.Value(noiseTransposer.m_AmplitudeGain, amplitude.Item1, f => noiseTransposer.m_AmplitudeGain = f, duration.Item1));
+        await Task.WhenAll(Lerp.Value_Math(noiseTransposer.m_FrequencyGain, frequency.Item1, f => noiseTransposer.m_FrequencyGain = f, speed.Item1, CameraUtilities.Exponential),
+                           Lerp.Value_Math(noiseTransposer.m_AmplitudeGain, amplitude.Item1, f => noiseTransposer.m_AmplitudeGain = f, speed.Item1, CameraUtilities.Exponential));
     }
     private async void Negative()
     {
-        await Task.WhenAll(Lerp.Value(noiseTransposer.m_FrequencyGain, frequency.Item2, f => noiseTransposer.m_FrequencyGain = f, duration.Item2),
-                           Lerp.Value(noiseTransposer.m_AmplitudeGain, amplitude.Item2, f => noiseTransposer.m_AmplitudeGain = f, duration.Item2));
+        await Task.WhenAll(Lerp.Value_Math(noiseTransposer.m_FrequencyGain, frequency.Item2, f => noiseTransposer.m_FrequencyGain = f, speed.Item2, CameraUtilities.Exponential),
+                           Lerp.Value_Math(noiseTransposer.m_AmplitudeGain, amplitude.Item2, f => noiseTransposer.m_AmplitudeGain = f, speed.Item2, CameraUtilities.Exponential));
     }
 }

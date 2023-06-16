@@ -28,9 +28,9 @@ MonoBehaviour:
   blockedSound: Blocked_Default
   targetShakeTime: 250
   targetShakeIntensity: 5
-  screenShakeTime: 0
-  screenShakeFrequency: 0
-  screenShakeAmplitude: 0
+  screenShakeTime: 70
+  screenShakeFrequency: 50
+  screenShakeAmplitude: 0.25
   blockStun: 400
   hitStun: 1100
   knockbackOnHit: {x: 0, y: 0, z: 20}
