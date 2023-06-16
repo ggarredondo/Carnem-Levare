@@ -8,16 +8,16 @@ public class AttackMove : Move
     [SerializeField] private string blockedSound;
 
     [Header("Attack-specific Camera Movement")]
-    [SerializeField] private CameraEffectsData cameraShake;
-    [SerializeField] private CameraEffectsData blockingCameraShake;
+    [SerializeField] private CameraEffectsData blockCameraShake;
+    [SerializeField] private CameraEffectsData hitCameraShake;
 
     [Header("Attack-specific Time Data (ms)")]
     [SerializeField] private double blockStun;
     [SerializeField] private double hitStun;
 
     [Header("Attack Knockback")]
-    [SerializeField] private Vector3 knockbackOnHit;
     [SerializeField] private Vector3 knockbackOnBlock;
+    [SerializeField] private Vector3 knockbackOnHit;
 
     private enum HurtAnimation : int { LightHit, MediumHit, HardHit }
     private enum HitboxType : int { LeftFist, RightFist, LeftElbow, RightElbow }
@@ -48,8 +48,8 @@ public class AttackMove : Move
 
         currentHitbox.Set(hitSound,
             blockedSound,
-            cameraShake,
-            blockingCameraShake,
+            hitCameraShake,
+            blockCameraShake,
             (float)hurtAnimation,
             stats.CalculateDamageToHealth(damageToHealth),
             stats.CalculateDamageToStamina(damageToStamina),

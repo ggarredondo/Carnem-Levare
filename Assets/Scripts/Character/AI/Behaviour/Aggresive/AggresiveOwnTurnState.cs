@@ -50,7 +50,7 @@ public class AggresiveOwnTurnState : AIState
     }
     private void NextMove()
     {
-        controller.PerformMove(sequences[selectedSequence][selectedMove].MoveIndex);
+        controller.PerformMove(sequences[selectedSequence][selectedMove]);
         selectedMove++;
         if (selectedMove >= sequences[selectedSequence].Count)
             InitializeMove();

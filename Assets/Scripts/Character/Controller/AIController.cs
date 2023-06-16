@@ -3,6 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 
+[Serializable]
+public class MoveSequence
+{
+    [SerializeField] private List<int> sequence;
+    public int this[int index] => sequence[index];
+    public int Count => sequence.Count;
+}
+
 public class AIController : Controller
 {
     private RNG reactionRNG;

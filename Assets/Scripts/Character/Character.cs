@@ -28,7 +28,11 @@ public abstract class Character : MonoBehaviour
         characterAnimation.Reference(stateMachine, characterStats, characterMovement);
         stateMachine.TransitionToWalking(); // Must be done last
     }
-    protected void OnValidate() => characterAnimation.OnValidate();
+    protected void OnValidate()
+    {
+        characterAnimation.OnValidate();
+        CharacterStats.OnValidate(this, GetComponent<Rigidbody>());
+    }
 
     public ref readonly CharacterStateMachine StateMachine { get => ref stateMachine; }
     public ref readonly Controller Controller { get => ref controller; }

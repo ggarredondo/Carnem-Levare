@@ -6,7 +6,7 @@ public class Hitbox : MonoBehaviour
     private int damageToHealth, damageToStamina;
     private float animationBodyTarget, hurtAnimation;
     private double blockStun, hitStun;
-    private CameraEffectsData cameraShake, blockingCameraShake;
+    private CameraEffectsData hitCameraShake, blockCameraShake;
     private Vector3 knockbackOnHit, knockbackOnBlock;
 
     private void Start()
@@ -19,8 +19,8 @@ public class Hitbox : MonoBehaviour
     {
         this.hitSound = hitSound;
         this.blockedSound = blockedSound;
-        this.cameraShake = cameraShake;
-        this.blockingCameraShake = blockingCameraShake;
+        this.hitCameraShake = cameraShake;
+        this.blockCameraShake = blockingCameraShake;
         this.hurtAnimation = hurtAnimation;
         this.damageToHealth = damageToHealth;
         this.damageToStamina = damageToStamina;
@@ -38,8 +38,8 @@ public class Hitbox : MonoBehaviour
     public string HitSound { get => hitSound; }
     public string BlockedSound { get => blockedSound; }
 
-    public CameraEffectsData CameraShake { get => cameraShake; }
-    public CameraEffectsData BlockingCameraShake { get => blockingCameraShake; }
+    public CameraEffectsData HitCameraShake { get => hitCameraShake; }
+    public CameraEffectsData BlockCameraShake { get => blockCameraShake; }
     public void SetAnimationBodyTarget(float animationBodyTarget) => this.animationBodyTarget = animationBodyTarget;
     public float AnimationBodyTarget { get => animationBodyTarget; }
     public float HurtAnimation { get => hurtAnimation; }
