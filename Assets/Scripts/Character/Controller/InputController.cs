@@ -65,7 +65,7 @@ public class InputController : Controller
     }
     public void HoldBlock(InputAction.CallbackContext context)
     {
-        DoBlock(context.performed);
+        if (!context.started) DoBlock(context.performed);
     }
     public void Action0(InputAction.CallbackContext context)
     {
