@@ -17,7 +17,6 @@ public class SceneLoader
     public SceneLoader()
     {
         SceneManager.sceneLoaded += OnSceneLoaded;
-        OnSceneLoaded(SceneManager.GetActiveScene(), LoadSceneMode.Single);
     }
 
     void OnSceneLoaded(Scene scene, LoadSceneMode mode)
@@ -33,7 +32,7 @@ public class SceneLoader
 
     private async void EndLoad()
     {
-        await EndTransition.Invoke();
+        await EndTransition?.Invoke();
     }
 
     public async void LoadScene(SceneNumber sceneIndex)

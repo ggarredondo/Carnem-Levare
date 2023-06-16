@@ -2225,6 +2225,18 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 1159930455}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1159930457 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7544954924664704237, guid: a526d3cbc3f0aad47b0eff1d8297b4f4,
+    type: 3}
+  m_PrefabInstance: {fileID: 1159930455}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b62745fb04225b64490eb9210aecd356, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1222756936
 GameObject:
   m_ObjectHideFlags: 0
@@ -2636,6 +2648,35 @@ PrefabInstance:
       propertyPath: m_DefaultControlScheme
       value: Gamepad
       objectReference: {fileID: 0}
+    - target: {fileID: 1216391172, guid: 730b6f15cbfa96c4db1930def4556da9, type: 3}
+      propertyPath: m_ActionEvents.Array.data[27].m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1216391172, guid: 730b6f15cbfa96c4db1930def4556da9, type: 3}
+      propertyPath: m_ActionEvents.Array.data[27].m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1216391172, guid: 730b6f15cbfa96c4db1930def4556da9, type: 3}
+      propertyPath: m_ActionEvents.Array.data[27].m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 11400000, guid: cb514f7bc969f1e4da23444266f585b7,
+        type: 2}
+    - target: {fileID: 1216391172, guid: 730b6f15cbfa96c4db1930def4556da9, type: 3}
+      propertyPath: m_ActionEvents.Array.data[27].m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1216391172, guid: 730b6f15cbfa96c4db1930def4556da9, type: 3}
+      propertyPath: m_ActionEvents.Array.data[27].m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: OnChangeCamera
+      objectReference: {fileID: 0}
+    - target: {fileID: 1216391172, guid: 730b6f15cbfa96c4db1930def4556da9, type: 3}
+      propertyPath: m_ActionEvents.Array.data[27].m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: InputReader, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 1216391172, guid: 730b6f15cbfa96c4db1930def4556da9, type: 3}
+      propertyPath: m_ActionEvents.Array.data[27].m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 252810768578259016, guid: 730b6f15cbfa96c4db1930def4556da9,
         type: 3}
       propertyPath: characterStats.noDeath
@@ -2935,6 +2976,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   audioMixer: {fileID: 24100000, guid: 6634d3955dedfbd41a411112534c1a55, type: 2}
   inputReader: {fileID: 11400000, guid: cb514f7bc969f1e4da23444266f585b7, type: 2}
+  transitionPlayer: {fileID: 1159930457}
   saveConfig: {fileID: 11400000, guid: e5424954070e84b4cb2c2ec2ae6b05af, type: 2}
   scenes:
   - {fileID: 11400000, guid: 27a1c6ac1997d054981ceef7d9c29c8a, type: 2}

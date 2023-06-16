@@ -10,6 +10,7 @@ public class GameManager : MonoBehaviour
     [Header("Settings")]
     [SerializeField] private AudioMixer audioMixer;
     [SerializeField] private InputReader inputReader;
+    [SerializeField] private TransitionPlayer transitionPlayer;
     [SerializeField] private SaveConfiguration saveConfig;
     [SerializeField] private List<SceneLogic> scenes;
 
@@ -58,6 +59,7 @@ public class GameManager : MonoBehaviour
         inputMapping = new();
         inputDetection = new();
         sceneController = new(SceneManager.GetActiveScene().buildIndex, scenes);
+        transitionPlayer.Initialize();
     }
 
     private void Start()

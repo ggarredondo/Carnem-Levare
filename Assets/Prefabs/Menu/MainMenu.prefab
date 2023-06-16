@@ -1306,6 +1306,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 518473307480035992}
     m_Modifications:
+    - target: {fileID: 6168840119046268661, guid: 461c747dd63652c4d854e62bce7b2aa9,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 2009558922346199477}
+    - target: {fileID: 6168840119690546696, guid: 461c747dd63652c4d854e62bce7b2aa9,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 2009558922346199477}
     - target: {fileID: 6168840119805778698, guid: 461c747dd63652c4d854e62bce7b2aa9,
         type: 3}
       propertyPath: menuController
@@ -1421,6 +1431,16 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6168840120310281936, guid: 461c747dd63652c4d854e62bce7b2aa9,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 2009558922346199477}
+    - target: {fileID: 6168840120573828623, guid: 461c747dd63652c4d854e62bce7b2aa9,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 2009558922346199477}
     - target: {fileID: 6168840120814486427, guid: 461c747dd63652c4d854e62bce7b2aa9,
         type: 3}
       propertyPath: popUpMenu

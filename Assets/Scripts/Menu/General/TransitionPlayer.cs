@@ -16,18 +16,18 @@ public class TransitionPlayer : MonoBehaviour
     public static TMP_Text text;
     public static float extraTime;
 
-    private void Awake()
-    {
-        text = GetComponentInChildren<TMP_Text>();
-    }
-
-    private void OnEnable()
+    public void Initialize()
     {
         SceneLoader.StartTransition += StartTransition;
         SceneLoader.EndTransition += EndTransition;
     }
 
-    private void OnDisable()
+    private void Awake()
+    {
+        text = GetComponentInChildren<TMP_Text>();
+    }
+
+    private void OnDestroy()
     {
         SceneLoader.StartTransition -= StartTransition;
         SceneLoader.EndTransition -= EndTransition;
