@@ -29,7 +29,7 @@ public class BlockedState : CharacterState
         OnEnter?.Invoke();
 
         stateMachine.hitNumber++;
-        coroutine = StateFunctions.Recover(stats, stateMachine, hitbox.BlockStun);
+        coroutine = StateFunctions.Recover(stateMachine, stats.CalculateStun(hitbox.BlockStun, stateMachine.hitNumber));
         stateMachine.StartCoroutine(coroutine);
         movement.PushCharacter(hitbox.KnockbackOnBlock);
     }

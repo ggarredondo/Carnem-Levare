@@ -40,6 +40,7 @@ public class CharacterStateMachine : MonoBehaviour
         blockingState.Reference(this, controller, stats, movement);
         moveState.Reference(this, stats, movement);
         hurtState.Reference(this, stats, movement);
+        staggerState.Reference(this, stats, movement);
         blockedState.Reference (this, controller, stats, movement);
         koState.Reference(this);
     }
@@ -100,6 +101,11 @@ public class CharacterStateMachine : MonoBehaviour
     {
         blockedState.Set(hitbox);
         ChangeState(blockedState);
+    }
+    public void TransitionToStagger(in Hitbox hitbox)
+    {
+        staggerState.Set(hitbox);
+        ChangeState(staggerState);
     }
     public void TransitionToKO(in Hitbox hitbox)
     {

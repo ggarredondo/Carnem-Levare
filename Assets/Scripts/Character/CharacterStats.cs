@@ -12,11 +12,13 @@ public class CharacterStats
     [SerializeField] private int maxHealth;
     [SerializeField] private int stamina, maxStamina;
     [SerializeField] private int damageToHealth, damageToStamina;
-    public bool HYPERARMOR_FLAG = false;
 
+    [Header("Stun Values")]
+    public bool HYPERARMOR_FLAG = false;
     [Tooltip("How quickly time stun decreases through consecutive hits given by decayFunction(comboDecay, number of hits)")]
     [SerializeField] private double comboDecay;
     [SerializeField] private double minStun;
+    [SerializeField] private double staggerStun;
 
     [Header("Physical Attributes")]
     [SerializeField] private float height = 1f;
@@ -66,7 +68,9 @@ public class CharacterStats
         {
             OnHurtDamage?.Invoke(hitbox);
             AddToHealth(-hitbox.DamageToHealth);
+            AddToStamina(-hitbox.DamageToStamina);
             if (health <= 0) stateMachine.TransitionToKO(hitbox);
+            else if (stamina <= 0) stateMachine.TransitionToStagger(hitbox);
             else if (!HYPERARMOR_FLAG) stateMachine.TransitionToHurt(hitbox);
         }
     }
@@ -76,16 +80,17 @@ public class CharacterStats
         {
             OnBlockedDamage?.Invoke(hitbox);
             AddToStamina(-hitbox.DamageToStamina);
-            //if (stamina <= 0) stateMachine.TransitionToStagger(hitbox);
-            //else stateMachine.TransitionToBlocked(hitbox);
-            stateMachine.TransitionToBlocked(hitbox);
+            if (stamina <= 0) stateMachine.TransitionToStagger(hitbox);
+            else stateMachine.TransitionToBlocked(hitbox);
         }
     }
 
     public ref readonly int Health => ref health;
     public ref readonly int MaxHealth => ref maxHealth;
     public ref readonly int Stamina => ref stamina;
+    public void ResetStamina() => stamina = maxStamina;
     public ref readonly int MaxStamina => ref maxStamina;
+    public ref readonly double StaggerStun => ref staggerStun;
     public List<Move> MoveList { get => moveList;  set => moveList = value; }
     public ref readonly List<Hitbox> HitboxList => ref hitboxList;
 }

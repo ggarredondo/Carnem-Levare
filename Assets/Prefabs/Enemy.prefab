@@ -428,15 +428,16 @@ MonoBehaviour:
     HYPERARMOR_FLAG: 0
     comboDecay: 300
     minStun: 200
+    staggerStun: 2600
     height: 1.1
     mass: 1
     drag: 0
     moveList:
-    - {fileID: 11400000, guid: 497bfd8be14091647b8de46645cacc29, type: 2}
-    - {fileID: 11400000, guid: e6c23cc1427dc4c41890f4e508655766, type: 2}
-    - {fileID: 11400000, guid: e03363bce22c0774c92d7ce5d94d02ca, type: 2}
-    - {fileID: 11400000, guid: bd4a4ef12ca73594b8b0920eceee264d, type: 2}
-    - {fileID: 11400000, guid: 50f2442faa6a5434e88ea3d0016597e8, type: 2}
+    - {fileID: 11400000, guid: 63de1329c6bed5f46a464b52ffd47e04, type: 2}
+    - {fileID: 11400000, guid: 93850295f9bfa804fb2bd8c37a5f4340, type: 2}
+    - {fileID: 11400000, guid: 0d0aeb69cb9f58d43b9e3e9a5d9f3c9a, type: 2}
+    - {fileID: 11400000, guid: 7c0e67adcf6ffa64ca2bee4ca2c92729, type: 2}
+    - {fileID: 11400000, guid: 7d0982910bae20948950ad55596d6494, type: 2}
     hitboxList:
     - {fileID: 3544833091616213104}
     - {fileID: 7922484474212002442}

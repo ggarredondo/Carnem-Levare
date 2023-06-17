@@ -16,7 +16,7 @@ MonoBehaviour:
   moveName: Right Low Hook
   hyperarmor: 1
   animation: {fileID: 7400000, guid: 75b8e477760a6904aa34988cc45c114a, type: 2}
-  animationSpeed: 1
+  animationSpeed: 1.4
   applyAnimationEvents: 0
   initSound: Whiff_Mid_Hook
   startUp: 350
@@ -26,16 +26,26 @@ MonoBehaviour:
   trackingLength: 350
   hitSound: Hit_Mid_Hook
   blockedSound: Blocked_Default
-  targetShakeTime: 0
-  targetShakeIntensity: 0
-  screenShakeTime: 0
-  screenShakeFrequency: 0
-  screenShakeAmplitude: 0
-  blockStun: 250
+  staggerSound: Guard_Break
+  hitCameraShake:
+    targetShakeTime: 0
+    targetShakeIntensity: 0
+    shakeType: {fileID: 0}
+    screenShakeTime: 0
+    screenShakeFrequency: 0
+    screenShakeAmplitude: 0
+  blockCameraShake:
+    targetShakeTime: 0
+    targetShakeIntensity: 0
+    shakeType: {fileID: 0}
+    screenShakeTime: 0
+    screenShakeFrequency: 0
+    screenShakeAmplitude: 0
   hitStun: 800
+  blockStun: 250
   knockbackOnHit: {x: -3, y: 0, z: 0}
   knockbackOnBlock: {x: 0, y: 0, z: 0}
   hitbox: 1
-  hurtAnimation: 0
-  damageToHealth: 0
-  damageToStamina: 0
+  hurtLevel: 1
+  damageToHealth: 14
+  damageToStamina: 9

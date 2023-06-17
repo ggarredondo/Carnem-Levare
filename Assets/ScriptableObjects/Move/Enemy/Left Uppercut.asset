@@ -16,7 +16,7 @@ MonoBehaviour:
   moveName: Left Uppercut
   hyperarmor: 1
   animation: {fileID: 7400000, guid: c8ea972d3fdf705449eeced1a0d40d6c, type: 2}
-  animationSpeed: 1
+  animationSpeed: 1.3
   applyAnimationEvents: 0
   initSound: Whiff_Hook
   startUp: 200
@@ -26,16 +26,26 @@ MonoBehaviour:
   trackingLength: 200
   hitSound: Hit_Hook
   blockedSound: Blocked_Default
-  targetShakeTime: 0
-  targetShakeIntensity: 0
-  screenShakeTime: 0
-  screenShakeFrequency: 0
-  screenShakeAmplitude: 0
-  blockStun: 200
+  staggerSound: Guard_Break
+  hitCameraShake:
+    targetShakeTime: 0
+    targetShakeIntensity: 0
+    shakeType: {fileID: 0}
+    screenShakeTime: 0
+    screenShakeFrequency: 0
+    screenShakeAmplitude: 0
+  blockCameraShake:
+    targetShakeTime: 0
+    targetShakeIntensity: 0
+    shakeType: {fileID: 0}
+    screenShakeTime: 0
+    screenShakeFrequency: 0
+    screenShakeAmplitude: 0
   hitStun: 700
+  blockStun: 200
   knockbackOnHit: {x: 0, y: 2, z: 2}
   knockbackOnBlock: {x: 0, y: 0, z: 0}
   hitbox: 0
-  hurtAnimation: 0
-  damageToHealth: 0
-  damageToStamina: 0
+  hurtLevel: 1
+  damageToHealth: 12
+  damageToStamina: 7

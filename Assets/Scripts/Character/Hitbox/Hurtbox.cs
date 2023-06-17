@@ -11,9 +11,6 @@ public class Hurtbox : MonoBehaviour
         LeftBody = 3,
         MidBody = 4,
         RightBody = 5,
-
-        BackHead = 6,
-        BackBody = 7
     }
     [SerializeField] private BodyTarget target;
     [SerializeField] private Character character;

@@ -21,21 +21,31 @@ MonoBehaviour:
   initSound: Whiff_Overhand
   startUp: 350
   active: 100
-  recovery: 700
+  recovery: 350
   startTracking: 0
   trackingLength: 350
   hitSound: Hit_Overhand
   blockedSound: Blocked_Default
-  targetShakeTime: 0
-  targetShakeIntensity: 0
-  screenShakeTime: 0
-  screenShakeFrequency: 0
-  screenShakeAmplitude: 0
-  blockStun: 600
+  staggerSound: Guard_Break
+  hitCameraShake:
+    targetShakeTime: 0
+    targetShakeIntensity: 0
+    shakeType: {fileID: 0}
+    screenShakeTime: 0
+    screenShakeFrequency: 0
+    screenShakeAmplitude: 0
+  blockCameraShake:
+    targetShakeTime: 0
+    targetShakeIntensity: 0
+    shakeType: {fileID: 0}
+    screenShakeTime: 0
+    screenShakeFrequency: 0
+    screenShakeAmplitude: 0
   hitStun: 1100
+  blockStun: 600
   knockbackOnHit: {x: 0, y: 0, z: 10}
   knockbackOnBlock: {x: 0, y: 0, z: 0}
   hitbox: 2
-  hurtAnimation: 0
-  damageToHealth: 0
-  damageToStamina: 0
+  hurtLevel: 2
+  damageToHealth: 15
+  damageToStamina: 10

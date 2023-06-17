@@ -894,8 +894,10 @@ MonoBehaviour:
     maxStamina: 100
     damageToHealth: 10
     damageToStamina: 5
+    HYPERARMOR_FLAG: 0
     comboDecay: 300
     minStun: 200
+    staggerStun: 2600
     height: 1
     mass: 1
     drag: 0

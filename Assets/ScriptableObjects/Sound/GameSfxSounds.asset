@@ -104,3 +104,8 @@ MonoBehaviour:
       volume: 0.5
       pitch: 1
       loop: 0
+    - name: Guard_Break
+      clip: {fileID: 8300000, guid: 8a387c2a207e2b34a8db4f551ca020a5, type: 3}
+      volume: 0.5
+      pitch: 1
+      loop: 0

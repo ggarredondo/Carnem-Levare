@@ -6,24 +6,26 @@ public class AttackMove : Move
     [Header("Attack-specific Sound")]
     [SerializeField] private string hitSound;
     [SerializeField] private string blockedSound;
+    [SerializeField] private string staggerSound;
 
     [Header("Attack-specific Camera Movement")]
-    [SerializeField] private CameraEffectsData blockCameraShake;
     [SerializeField] private CameraEffectsData hitCameraShake;
+    [SerializeField] private CameraEffectsData blockCameraShake;
 
     [Header("Attack-specific Time Data (ms)")]
-    [SerializeField] private double blockStun;
     [SerializeField] private double hitStun;
+    [SerializeField] private double blockStun;
+
 
     [Header("Attack Knockback")]
-    [SerializeField] private Vector3 knockbackOnBlock;
     [SerializeField] private Vector3 knockbackOnHit;
+    [SerializeField] private Vector3 knockbackOnBlock;
 
-    private enum HurtAnimation : int { LightHit, MediumHit, HardHit }
+    private enum HurtLevel : int { LightHit, MediumHit, HardHit }
     private enum HitboxType : int { LeftFist, RightFist, LeftElbow, RightElbow }
     [Header("Attack Values")]
     [SerializeField] private HitboxType hitbox;
-    [SerializeField] private HurtAnimation hurtAnimation;
+    [SerializeField] private HurtLevel hurtLevel;
     private Hitbox currentHitbox;
     [SerializeField] private int damageToHealth, damageToStamina;
 
@@ -48,9 +50,10 @@ public class AttackMove : Move
 
         currentHitbox.Set(hitSound,
             blockedSound,
+            staggerSound,
             hitCameraShake,
             blockCameraShake,
-            (float)hurtAnimation,
+            (float)hurtLevel,
             stats.CalculateDamageToHealth(damageToHealth),
             stats.CalculateDamageToStamina(damageToStamina),
             blockStun,

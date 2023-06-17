@@ -26,23 +26,26 @@ MonoBehaviour:
   trackingLength: 100
   hitSound: Hit_Jab
   blockedSound: Blocked_Default
-  cameraShake:
-    targetShakeTime: 100
-    targetShakeIntensity: 7
-    screenShakeTime: 0
-    screenShakeFrequency: 0
-    screenShakeAmplitude: 0
-  blockingCameraShake:
+  staggerSound: Guard_Break
+  hitCameraShake:
     targetShakeTime: 0
     targetShakeIntensity: 0
+    shakeType: {fileID: 0}
     screenShakeTime: 0
     screenShakeFrequency: 0
     screenShakeAmplitude: 0
-  blockStun: 200
+  blockCameraShake:
+    targetShakeTime: 0
+    targetShakeIntensity: 0
+    shakeType: {fileID: 0}
+    screenShakeTime: 0
+    screenShakeFrequency: 0
+    screenShakeAmplitude: 0
   hitStun: 500
+  blockStun: 200
   knockbackOnHit: {x: -2, y: 0, z: 0}
   knockbackOnBlock: {x: 0, y: 0, z: 0}
   hitbox: 3
-  hurtAnimation: 0
+  hurtLevel: 0
   damageToHealth: 10
   damageToStamina: 5
