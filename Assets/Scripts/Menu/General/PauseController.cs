@@ -47,7 +47,7 @@ public class PauseController : MonoBehaviour
         menuController.tree.Initialize();
         pauseMenuActivated = true;
         volume.SetActive(true);
-        EnterPause.Invoke();
+        EnterPause?.Invoke();
         GameManager.PlayerInput.SwitchCurrentActionMap("UI");
         AudioController.Instance.PauseGame(true);
         await Lerp.Value_Unscaled(canvasGroup.alpha, 1,(a) => canvasGroup.alpha = a, 0.1f);
@@ -62,6 +62,6 @@ public class PauseController : MonoBehaviour
         menuController.DisableMenus();
         pauseMenuActivated = false;
         volume.SetActive(false);
-        ExitPause.Invoke();
+        ExitPause?.Invoke();
     }
 }

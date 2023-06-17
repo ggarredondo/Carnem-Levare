@@ -14,9 +14,7 @@ public class MoveMenu : MonoBehaviour
     private void Start()
     {
         moves = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>().CharacterStats.MoveList;
-        moves = DataSaver.games[DataSaver.currentGameSlot].moves;
         inputController = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>().Controller as InputController;
-        inputController.moveIndexes = DataSaver.games[DataSaver.currentGameSlot].selectedMoves;
 
         moveSelector.Initialize(ref moves, ref inputController);
         infoBox.Initialize(in moves[moveSelector.GetActualIndex()].StringData);

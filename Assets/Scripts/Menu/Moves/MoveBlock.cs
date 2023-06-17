@@ -35,7 +35,11 @@ public class MoveBlock : MonoBehaviour
     public void SetNewMove(int ID)
     {
         this.ID = ID;
-        isNewMove.SetActive(DataSaver.games[DataSaver.currentGameSlot].newMoves[ID]);
+
+        if(DataSaver.games != null)
+            isNewMove.SetActive(DataSaver.CurrentGameSlot.newMoves[ID]);
+        else
+            isNewMove.SetActive(false);
     }
 
     public void Disable()

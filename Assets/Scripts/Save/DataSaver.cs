@@ -7,19 +7,25 @@ public class DataSaver : ISave
     public static List<GameSlot> games;
     public static int currentGameSlot;
 
-    public DataSaver(in SaveConfiguration config)
+    public DataSaver(in SaveOptions configOptions, in SaveGame configGame)
     {
         serializer = new();
 
-        options = (OptionsSlot) config.defaultOptions.Clone();
-        games = new List<GameSlot>(config.numGameSlots);
+        if(configOptions != null)
+            options = (OptionsSlot) configOptions.defaultOptions.Clone();
 
-        for (int i = 0; i < config.numGameSlots; i++)
+        if (configGame != null)
         {
-            games.Add((GameSlot) config.defaultGame.Clone());
-            games[i].name += i + 1;
+            games = new List<GameSlot>(configGame.numGameSlots);
+            for (int i = 0; i < configGame.numGameSlots; i++)
+            {
+                games.Add((GameSlot)configGame.defaultGame.Clone());
+                games[i].name += i + 1;
+            }
         }
     }
+
+    public static GameSlot CurrentGameSlot { get => games[currentGameSlot]; }
 
     public void Load()
     {

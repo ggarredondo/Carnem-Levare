@@ -11,7 +11,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] private AudioMixer audioMixer;
     [SerializeField] private InputReader inputReader;
     [SerializeField] private TransitionPlayer transitionPlayer;
-    [SerializeField] private SaveConfiguration saveConfig;
+    [SerializeField] private SaveOptions defaultOptions;
+    [SerializeField] private SaveGame defaultGame;
     [SerializeField] private List<SceneLogic> scenes;
 
     [Header("Debug")]
@@ -51,7 +52,7 @@ public class GameManager : MonoBehaviour
 
         SceneManager.sceneLoaded += OnSceneLoaded;
 
-        saver = new DataSaver(saveConfig);
+        saver = new DataSaver(defaultOptions, defaultGame);
         applier = new OptionsApplier(audioMixer);
 
         saver.Load();
