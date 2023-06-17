@@ -22,11 +22,12 @@ public class StaggerState : CharacterState
     {
         stateMachine.enabled = true;
         stateMachine.OnHurt += stats.HurtDamage;
+        OnEnter?.Invoke();
 
         stats.ResetStamina();
         coroutine = StateFunctions.Recover(stateMachine, stats.StaggerStun);
         stateMachine.StartCoroutine(coroutine);
-        OnEnter?.Invoke();
+        movement.PushCharacter(hitbox.KnockbackOnHit);
     }
     public void Update() {}
     public void FixedUpdate() 
