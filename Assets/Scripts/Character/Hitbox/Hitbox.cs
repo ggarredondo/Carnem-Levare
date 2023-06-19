@@ -14,7 +14,8 @@ public class Hitbox : MonoBehaviour
         SetActive(false);
     }
 
-    public void Set(string hitSound, string blockedSound, string staggerSound, CameraEffectsData hitCameraShake, CameraEffectsData blockCameraShake, 
+    public void Set(string hitSound, string blockedSound, string staggerSound, 
+        in CameraEffectsData hitCameraShake, in CameraEffectsData blockCameraShake, 
         float hurtLevel, int damageToHealth, int damageToStamina,
         double blockStun, double hitStun, in Vector3 knockbackOnHit, in Vector3 knockbackOnBlock)
     {
@@ -41,8 +42,8 @@ public class Hitbox : MonoBehaviour
     public string BlockedSound { get => blockedSound; }
     public string StaggerSound { get => staggerSound; }
 
-    public CameraEffectsData HitCameraShake { get => hitCameraShake; }
-    public CameraEffectsData BlockCameraShake { get => blockCameraShake; }
+    public ref readonly CameraEffectsData HitCameraShake => ref hitCameraShake;
+    public ref readonly CameraEffectsData BlockCameraShake => ref blockCameraShake;
     public void SetAnimationBodyTarget(float animationBodyTarget) => this.animationBodyTarget = animationBodyTarget;
     public float AnimationBodyTarget { get => animationBodyTarget; }
     public float HurtLevel { get => hurtLevel; }
