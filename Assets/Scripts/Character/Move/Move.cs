@@ -10,17 +10,20 @@ public abstract class Move : ScriptableObject
 
     [SerializeField] protected Sprite icon;
     [SerializeField] protected string moveName;
-    [SerializeField] protected bool hyperarmor;
 
     [Header("Move Animation")]
     [SerializeField] protected AnimationClip animation;
     [SerializeField] protected float animationSpeed = 1f;
+    [SerializeField] protected float directionSpeed = 1f;
 
     [Tooltip("Will reset animators if in play mode")]
     [SerializeField] protected bool applyAnimationEvents = false;
 
     [Header("Move Sound")]
     [SerializeField] protected string initSound;
+
+    [Header("Flags")]
+    [SerializeField] protected bool hyperarmor;
 
     [Header("Time Data (ms) (animation events)")]
 
@@ -90,6 +93,7 @@ public abstract class Move : ScriptableObject
     public ref readonly Sprite Icon => ref icon;
     public ref readonly AnimationClip Animation { get => ref animation; }
     public ref readonly float AnimationSpeed { get => ref animationSpeed; }
+    public ref readonly float DirectionSpeed => ref directionSpeed;
     public ref readonly string InitSound { get => ref initSound; }
 
     public double StartUp => startUp;

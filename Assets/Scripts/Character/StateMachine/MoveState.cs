@@ -4,6 +4,7 @@ using System.Collections.Generic;
 public class MoveState : CharacterState
 {
     private CharacterStateMachine stateMachine;
+    private Controller controller;
     private CharacterStats stats;
     private CharacterMovement movement;
     public event Action<int> OnEnterInteger;
@@ -14,9 +15,10 @@ public class MoveState : CharacterState
     private List<Move> moveList;
     private bool TRACKING_FLAG = false;
 
-    public void Reference(in CharacterStateMachine stateMachine, in CharacterStats stats, in CharacterMovement movement)
+    public void Reference(in CharacterStateMachine stateMachine, in Controller controller, in CharacterStats stats, in CharacterMovement movement)
     {
         this.stateMachine = stateMachine;
+        this.controller = controller;
         this.stats = stats;
         moveList = stats.MoveList;
         this.movement = movement;
@@ -41,7 +43,10 @@ public class MoveState : CharacterState
         OnEnterInteger?.Invoke(moveIndex);
         OnEnter?.Invoke();
     }
-    public void Update() {}
+    public void Update() 
+    {
+        movement.MoveCharacter(controller.MovementVector, currentMove.DirectionSpeed);
+    }
     public void FixedUpdate()
     {
         movement.LookAtTarget(TRACKING_FLAG);

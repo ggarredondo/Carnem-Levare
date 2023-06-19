@@ -456,8 +456,6 @@ MonoBehaviour:
   characterAnimation:
     animatorSpeed: 1
     updateMovesetAnimations: 0
-  characterAudio:
-    DashSound: Dash
   enemyDrops:
   - {fileID: 11400000, guid: fed6e55389eb6344083a2e7797c2d516, type: 2}
   - {fileID: 11400000, guid: 7e2bf30cc617dce4e8409007dd2808fe, type: 2}

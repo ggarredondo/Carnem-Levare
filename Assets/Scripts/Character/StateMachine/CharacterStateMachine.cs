@@ -36,7 +36,7 @@ public class CharacterStateMachine : MonoBehaviour
 
         walkingState.Reference(this, controller, stats, movement);
         blockingState.Reference(this, controller, stats, movement);
-        moveState.Reference(this, stats, movement);
+        moveState.Reference(this, controller, stats, movement);
         hurtState.Reference(this, stats, movement);
         staggerState.Reference(this, stats, movement);
         blockedState.Reference (this, controller, stats, movement);
