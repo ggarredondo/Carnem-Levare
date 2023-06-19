@@ -894,10 +894,12 @@ MonoBehaviour:
     maxStamina: 100
     damageToHealth: 10
     damageToStamina: 5
-    HYPERARMOR_FLAG: 0
     comboDecay: 300
     minStun: 200
     staggerStun: 2600
+    HYPERARMOR_FLAG: 0
+    NOHURT_FLAG: 0
+    NODEATH_FLAG: 0
     height: 1
     mass: 1
     drag: 0
@@ -915,8 +917,6 @@ MonoBehaviour:
     - {fileID: 4959984437175193577}
     - {fileID: 8886858689977247297}
     - {fileID: 4959984437175193577}
-    noHurt: 0
-    noDeath: 0
   characterMovement:
     trackingRate: 10
     trackingMinimumMagnitude: 0.1
@@ -928,6 +928,8 @@ MonoBehaviour:
   characterAnimation:
     animatorSpeed: 1
     updateMovesetAnimations: 0
+  characterAudio:
+    DashSound: Dash
 --- !u!114 &1658105093767166710
 MonoBehaviour:
   m_ObjectHideFlags: 0

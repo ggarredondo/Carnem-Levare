@@ -14,11 +14,15 @@ public class CharacterStats
     [SerializeField] private int damageToHealth, damageToStamina;
 
     [Header("Stun Values")]
-    public bool HYPERARMOR_FLAG = false;
     [Tooltip("How quickly time stun decreases through consecutive hits given by decayFunction(comboDecay, number of hits)")]
     [SerializeField] private double comboDecay;
     [SerializeField] private double minStun;
     [SerializeField] private double staggerStun;
+
+    [Header("Flags")]
+    public bool HYPERARMOR_FLAG = false;
+    public bool NOHURT_FLAG = false;
+    public bool NODEATH_FLAG = false;
 
     [Header("Physical Attributes")]
     [SerializeField] private float height = 1f;
@@ -27,9 +31,6 @@ public class CharacterStats
     [Header("Lists")]
     [SerializeField] private List<Move> moveList;
     [SerializeField] private List<Hitbox> hitboxList;
- 
-    [SerializeField] private bool noHurt;
-    [SerializeField] private bool noDeath;
 
     public event ActionIn<Hitbox> OnHurtDamage, OnBlockedDamage;
 
@@ -59,12 +60,12 @@ public class CharacterStats
     public double StepDecay(double stun, int hitNumber) => System.Math.Max(minStun, stun - (hitNumber-1) * comboDecay);
     public double HitCounterDecay(double stun, int hitNumber) => hitNumber < comboDecay ? stun : minStun;
 
-    private void AddToHealth(float addend) => health = (int) Mathf.Clamp(health + addend, 0f + System.Convert.ToSingle(noDeath), maxHealth);
+    private void AddToHealth(float addend) => health = (int) Mathf.Clamp(health + addend, 0f + System.Convert.ToSingle(NODEATH_FLAG), maxHealth);
     private void AddToStamina(float addend) => stamina = (int) Mathf.Clamp(stamina + addend, 0f, maxStamina);
 
     public void HurtDamage(in Hitbox hitbox)
     {
-        if (!noHurt)
+        if (!NOHURT_FLAG)
         {
             OnHurtDamage?.Invoke(hitbox);
             AddToHealth(-hitbox.DamageToHealth);
@@ -76,7 +77,7 @@ public class CharacterStats
     }
     public void BlockedDamage(in Hitbox hitbox)
     {
-        if (!noHurt)
+        if (!NOHURT_FLAG)
         {
             OnBlockedDamage?.Invoke(hitbox);
             AddToStamina(-hitbox.DamageToStamina);
