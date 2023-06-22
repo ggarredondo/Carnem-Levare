@@ -84,10 +84,7 @@ public class AnimatorScriptController
         AnimatorState destinationState = animatorController.layers[workingLayer].stateMachine.states
             .Where(state => state.state.name == destinationStateName).Single().state;
 
-        animatorController.layers[workingLayer].stateMachine.AddAnyStateTransition(destinationState);
-
-        AnimatorStateTransition transition = animatorController.layers[workingLayer].stateMachine.anyStateTransitions
-            .Where(transition => transition.destinationState == destinationState).Single();
+        AnimatorStateTransition transition = animatorController.layers[workingLayer].stateMachine.AddAnyStateTransition(destinationState);
 
         foreach (AnimatorCondition condition in conditions)
             transition.AddCondition(condition.mode, condition.threshold, condition.parameter);
