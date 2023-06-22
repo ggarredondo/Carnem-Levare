@@ -94,28 +94,22 @@ public class AnimatorScriptController
         #endif
     }
 
-    public void AddAnyStateTransitionTopPriority(string destinationStateName,
+    /// <summary>
+    /// Priority is position in AnyStateTransitions array. 0 is highest.
+    /// </summary>
+    public void AddAnyStateTransition(int priority,
+        string destinationStateName,
         AnimatorCondition[] conditions,
         bool canTransitionToSelf, float duration,
         TransitionInterruptionSource interruptionSource)
     {
         #if UNITY_EDITOR
-        // Get current anyStateTransitions and remove them from state machine
-        AnimatorStateTransition[] anyStateTransitions = animatorController.layers[workingLayer].stateMachine.anyStateTransitions;
-
-        foreach (AnimatorStateTransition anyStateTransition in animatorController.layers[workingLayer].stateMachine.anyStateTransitions)
-            animatorController.layers[workingLayer].stateMachine.RemoveAnyStateTransition(anyStateTransition);
-
-        // Add new transition to AnyState transitions (there are no other transitions, so it goes to the top of the list)
+        List<AnimatorStateTransition> anyStateTransitions = new(animatorController.layers[workingLayer].stateMachine.anyStateTransitions);
         AddAnyStateTransition(destinationStateName, conditions, canTransitionToSelf, duration, interruptionSource);
-
-        // Re-add previously removed AnyState transitions
-        foreach (AnimatorStateTransition anyStateTransition in anyStateTransitions)
-            AddAnyStateTransition(anyStateTransition.destinationState.name,
-                anyStateTransition.conditions,
-                anyStateTransition.canTransitionToSelf,
-                anyStateTransition.duration,
-                anyStateTransition.interruptionSource);
+        anyStateTransitions.Insert(priority,
+            animatorController.layers[workingLayer].stateMachine.anyStateTransitions
+            [animatorController.layers[workingLayer].stateMachine.anyStateTransitions.Length - 1]);
+        animatorController.layers[workingLayer].stateMachine.anyStateTransitions = anyStateTransitions.ToArray();
         #endif
     }
 }
