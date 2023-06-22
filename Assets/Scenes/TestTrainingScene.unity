@@ -511,11 +511,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   inputReader: {fileID: 11400000, guid: cb514f7bc969f1e4da23444266f585b7, type: 2}
-  StaticHUDMenus:
-  - {fileID: 323157234}
-  HUDMenus:
-  - {fileID: 1298934784}
-  - {fileID: 725119522}
+  StaticHUDMenus: []
+  HUDMenus: []
   lerpDuration: 0.2
 --- !u!1 &216464473
 GameObject:
@@ -2692,6 +2689,17 @@ PrefabInstance:
       propertyPath: characterStats.NODEATH_FLAG
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 252810768578259016, guid: 730b6f15cbfa96c4db1930def4556da9,
+        type: 3}
+      propertyPath: characterStats.moveList.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 252810768578259016, guid: 730b6f15cbfa96c4db1930def4556da9,
+        type: 3}
+      propertyPath: characterStats.moveList.Array.data[0]
+      value: 
+      objectReference: {fileID: 11400000, guid: cb8a3bef13b8ff948b45889b9d0268de,
+        type: 2}
     - target: {fileID: 1269643871391488199, guid: 730b6f15cbfa96c4db1930def4556da9,
         type: 3}
       propertyPath: m_Materials.Array.data[0]

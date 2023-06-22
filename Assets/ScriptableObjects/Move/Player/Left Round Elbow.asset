@@ -14,11 +14,30 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   icon: {fileID: 21300000, guid: ae7731aa6cf2cf44d83e85a9b63cb8db, type: 3}
   moveName: Left Round Elbow
-  hyperarmor: 0
-  animation: {fileID: 7400000, guid: 088168ba900c122458581df0d340e87f, type: 2}
-  animationSpeed: 1.2
+  animationTrigger: leftRoundElbow
+  neutral:
+    animation: {fileID: 0}
+    animationSpeed: 1
+  left:
+    animation: {fileID: 0}
+    animationSpeed: 1
+  forward:
+    animation: {fileID: 0}
+    animationSpeed: 1
+  right:
+    animation: {fileID: 0}
+    animationSpeed: 1
+  backwards:
+    animation: {fileID: 0}
+    animationSpeed: 1
+  animationSpeedMultiplier: 1
+  directionSpeed: 1
   applyAnimationEvents: 0
+  animatorController: {fileID: 0}
+  transitionDuration: 0.1
+  applyAnimationState: 0
   initSound: Whiff_Overhand
+  hyperarmor: 0
   startUp: 350
   active: 100
   recovery: 350

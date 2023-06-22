@@ -14,11 +14,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   icon: {fileID: 21300000, guid: da70e168698b8754a973735371703ce7, type: 3}
   moveName: Right Elbow
-  hyperarmor: 0
   animation: {fileID: 7400000, guid: b0b1f1fa4e9c56c43ba528b7b9a03ec2, type: 2}
   animationSpeed: 1
+  animationTrigger: rightElbow
+  directionSpeed: 1
   applyAnimationEvents: 0
   initSound: Whiff_Jab
+  hyperarmor: 0
   startUp: 100
   active: 50
   recovery: 250

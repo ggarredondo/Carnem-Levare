@@ -6,24 +6,16 @@ using System.Linq;
 public class CharacterAnimation
 {
     private List<Move> moveList;
-
     private Animator animator;
-    private AnimatorOverrideController animatorOverride;
-    private AnimationClip[] animatorDefaults;
-
     [SerializeField] private float animatorSpeed = 1f;
-    [SerializeField] private bool updateMovesetAnimations = false;
 
     public void Initialize(in Animator animator)
     {
         this.animator = animator;
-        animatorDefaults = animator.runtimeAnimatorController.animationClips;
-        animatorOverride = new AnimatorOverrideController(animator.runtimeAnimatorController);
     }
     public void Reference(in CharacterStateMachine stateMachine, in CharacterStats stats, in CharacterMovement movement)
     {
         moveList = stats.MoveList;
-        UpdateMovesetAnimations();
 
         HurtState hurtState = stateMachine.HurtState;
         BlockedState blockedState = stateMachine.BlockedState;
@@ -38,7 +30,7 @@ public class CharacterAnimation
         stateMachine.BlockingState.OnEnter += () => animator.SetBool("STATE_BLOCKING", true);
         stateMachine.BlockingState.OnExit += () => animator.SetBool("STATE_BLOCKING", false);
 
-        stateMachine.MoveState.OnEnterInteger += (int moveIndex) => animator.SetTrigger("move" + moveIndex);
+        stateMachine.MoveState.OnEnterInteger += (int moveIndex) => animator.SetTrigger(moveList[moveIndex].AnimatorTrigger);
 
         stateMachine.HurtState.OnEnter += () => {
             Hitbox hitbox = hurtState.Hitbox;
@@ -73,24 +65,6 @@ public class CharacterAnimation
     public void OnValidate()
     {
         if (animator != null) animator.speed = animatorSpeed;
-        if (updateMovesetAnimations) { UpdateMovesetAnimations(); updateMovesetAnimations = false; }
-    }
-
-    private void UpdateAnimation(string originalClip, AnimationClip newClip)
-    {
-        List<KeyValuePair<AnimationClip, AnimationClip>> overrides = new List<KeyValuePair<AnimationClip, AnimationClip>>();
-        overrides.Add(new KeyValuePair<AnimationClip, AnimationClip>(animatorDefaults.Where(clip => clip.name == originalClip).SingleOrDefault(), newClip));
-        animatorOverride.ApplyOverrides(overrides);
-        animator.runtimeAnimatorController = animatorOverride;
-    }
-
-    private void UpdateMovesetAnimations()
-    {
-        for (int i = 0; i < moveList.Count; ++i)
-        {
-            UpdateAnimation("MoveClip" + i, moveList[i].Animation);
-            animator.SetFloat("move" + i + "_speed", moveList[i].AnimationSpeed);
-        }
     }
 
     private void MovementAnimation(in Vector2 direction)

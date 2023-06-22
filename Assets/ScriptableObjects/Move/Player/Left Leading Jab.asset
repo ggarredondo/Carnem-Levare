@@ -14,11 +14,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   icon: {fileID: 21300000, guid: 73f2e0e785a93fd4982fae306299f5e2, type: 3}
   moveName: Left Leading Jab
-  hyperarmor: 0
-  animation: {fileID: 7400000, guid: e652c0869035b6b418eef0c72bbb19c0, type: 2}
-  animationSpeed: 1.4
+  animatorTrigger: leftLeadingJab
+  animations:
+  - animation: {fileID: 7400000, guid: e652c0869035b6b418eef0c72bbb19c0, type: 2}
+    motionSpeed: 1
+    position: {x: 0, y: 0}
+  - animation: {fileID: 7400000, guid: 201556e9b14941544b6b6553b97fe31b, type: 2}
+    motionSpeed: 1
+    position: {x: 0, y: -1}
+  stateSpeed: 1.4
+  directionSpeed: 1
   applyAnimationEvents: 0
+  animatorController: {fileID: 9100000, guid: e4d63117c9d67f84a9bcc7c77421586f, type: 2}
+  transitionDuration: 0.1
+  applyAnimationState: 0
   initSound: Whiff_Jab
+  hyperarmor: 0
   startUp: 200
   active: 50
   recovery: 300

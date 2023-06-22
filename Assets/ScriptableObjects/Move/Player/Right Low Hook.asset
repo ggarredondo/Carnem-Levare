@@ -14,11 +14,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   icon: {fileID: 21300000, guid: 36957d3f72e7301458613eed393de2f4, type: 3}
   moveName: Right Low Hook
-  hyperarmor: 0
   animation: {fileID: 7400000, guid: 75b8e477760a6904aa34988cc45c114a, type: 2}
   animationSpeed: 1.4
+  animationTrigger: rightLowHook
+  directionSpeed: 1
   applyAnimationEvents: 0
   initSound: Whiff_Mid_Hook
+  hyperarmor: 0
   startUp: 350
   active: 120
   recovery: 300

@@ -1,6 +1,9 @@
 using UnityEngine;
 using System;
 using System.Collections.Generic;
+#if UNITY_EDITOR
+using UnityEditor.Animations;
+#endif
 
 public abstract class Move : ScriptableObject
 {
@@ -11,13 +14,21 @@ public abstract class Move : ScriptableObject
     [SerializeField] protected Sprite icon;
     [SerializeField] protected string moveName;
 
-    [Header("Move Animation")]
-    [SerializeField] protected AnimationClip animation;
-    [SerializeField] protected float animationSpeed = 1f;
+    [Header("Animation")]
+    [SerializeField] protected string animatorTrigger;
+    [SerializeField] protected List<BlendTree2DMotion> animations;
+    [SerializeField] protected float stateSpeed = 1f;
     [SerializeField] protected float directionSpeed = 1f;
 
     [Tooltip("Will reset animators if in play mode")]
     [SerializeField] protected bool applyAnimationEvents = false;
+
+    [Header("Animator")]
+    [SerializeField] protected AnimatorController animatorController;
+    [SerializeField] protected float transitionDuration = 0.1f;
+
+    [Tooltip("Will reset animators if in play mode")]
+    [SerializeField] protected bool applyAnimationState = false;
 
     [Header("Move Sound")]
     [SerializeField] protected string initSound;
@@ -55,9 +66,16 @@ public abstract class Move : ScriptableObject
     {
         if (applyAnimationEvents)
         {
-            AssignEvents();
             applyAnimationEvents = false;
+            AssignEvents();
         }
+
+        if (applyAnimationState)
+        {
+            applyAnimationState = false;
+            AddState();
+        }
+
         UpdateStringData();
     }
 
@@ -81,8 +99,21 @@ public abstract class Move : ScriptableObject
         AnimationEvent stopTrackingEvent = CreateAnimationEvent("StopTracking", startTracking + trackingLength);
 
         AnimationEvent[] events = { initMoveEvent, activateMoveEvent, deactiveMoveEvent, endMoveEvent, startTrackingEvent, stopTrackingEvent };
-        UnityEditor.AnimationUtility.SetAnimationEvents(animation, events);
+        UnityEditor.AnimationUtility.SetAnimationEvents(animations[0].animation, events);
         #endif
+    }
+
+    public void AddState()
+    {
+        AnimatorScriptController animatorScriptController = new AnimatorScriptController(animatorController);
+        animatorScriptController.AddBlendTreeState(moveName, stateSpeed, animations, "horizontal", "vertical", BlendTreeType.FreeformDirectional2D);
+        animatorScriptController.AddParameter(animatorTrigger, AnimatorControllerParameterType.Trigger);
+
+        AnimatorCondition[] conditions = new AnimatorCondition[1];
+        conditions[0].mode = AnimatorConditionMode.If;
+        conditions[0].parameter = animatorTrigger;
+        conditions[0].threshold = 1f;
+        animatorScriptController.AddAnyStateTransition(moveName, conditions, true, transitionDuration, TransitionInterruptionSource.Source);
     }
 
     public abstract void InitMove(in CharacterStats stats);
@@ -91,8 +122,7 @@ public abstract class Move : ScriptableObject
     public abstract void EndMove();
 
     public ref readonly Sprite Icon => ref icon;
-    public ref readonly AnimationClip Animation { get => ref animation; }
-    public ref readonly float AnimationSpeed { get => ref animationSpeed; }
+    public ref readonly string AnimatorTrigger => ref animatorTrigger;
     public ref readonly float DirectionSpeed => ref directionSpeed;
     public ref readonly string InitSound { get => ref initSound; }
 
@@ -100,9 +130,9 @@ public abstract class Move : ScriptableObject
     public double Active => active;
     public double Recovery => recovery;
 
-    public double RelativeStartUp => startUp / animationSpeed;
-    public double RelativeActive => active / animationSpeed;
-    public double RelativeRecovery => recovery / animationSpeed;
+    public double RelativeStartUp => startUp / stateSpeed;
+    public double RelativeActive => active / stateSpeed;
+    public double RelativeRecovery => recovery / stateSpeed;
 
     public ref readonly List<string> StringData => ref stringData;
 

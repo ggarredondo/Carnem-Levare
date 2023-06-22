@@ -434,12 +434,7 @@ MonoBehaviour:
     height: 1.1
     mass: 1
     drag: 0
-    moveList:
-    - {fileID: 11400000, guid: 63de1329c6bed5f46a464b52ffd47e04, type: 2}
-    - {fileID: 11400000, guid: 93850295f9bfa804fb2bd8c37a5f4340, type: 2}
-    - {fileID: 11400000, guid: 0d0aeb69cb9f58d43b9e3e9a5d9f3c9a, type: 2}
-    - {fileID: 11400000, guid: 7c0e67adcf6ffa64ca2bee4ca2c92729, type: 2}
-    - {fileID: 11400000, guid: 7d0982910bae20948950ad55596d6494, type: 2}
+    moveList: []
     hitboxList:
     - {fileID: 3544833091616213104}
     - {fileID: 7922484474212002442}
@@ -455,7 +450,6 @@ MonoBehaviour:
     idleDirectionSpeed: 3
   characterAnimation:
     animatorSpeed: 1
-    updateMovesetAnimations: 0
   enemyDrops:
   - {fileID: 11400000, guid: fed6e55389eb6344083a2e7797c2d516, type: 2}
   - {fileID: 11400000, guid: 7e2bf30cc617dce4e8409007dd2808fe, type: 2}
