@@ -112,7 +112,7 @@ public abstract class Move : ScriptableObject
         AnimatorCondition[] conditions = new AnimatorCondition[1];
         conditions[0].mode = AnimatorConditionMode.If;
         conditions[0].parameter = animatorTrigger;
-        conditions[0].threshold = 1f;
+        conditions[0].threshold = 0f;
         animatorScriptController.AddAnyStateTransition(moveName, conditions, true, transitionDuration, TransitionInterruptionSource.Source);
     }
 
