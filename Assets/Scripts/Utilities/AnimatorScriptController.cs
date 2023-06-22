@@ -104,7 +104,7 @@ public class AnimatorScriptController
     {
         #if UNITY_EDITOR
         // Get current anyStateTransitions and remove them from state machine
-        List<AnimatorStateTransition> anyStateTransitions = new List<AnimatorStateTransition>(animatorController.layers[workingLayer].stateMachine.anyStateTransitions);
+        AnimatorStateTransition[] anyStateTransitions = animatorController.layers[workingLayer].stateMachine.anyStateTransitions;
 
         foreach (AnimatorStateTransition anyStateTransition in animatorController.layers[workingLayer].stateMachine.anyStateTransitions)
             animatorController.layers[workingLayer].stateMachine.RemoveAnyStateTransition(anyStateTransition);

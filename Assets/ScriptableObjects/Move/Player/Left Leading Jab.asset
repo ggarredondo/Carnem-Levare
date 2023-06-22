@@ -25,7 +25,7 @@ MonoBehaviour:
   stateSpeed: 1.4
   directionSpeed: 1
   applyAnimationEvents: 0
-  animatorController: {fileID: 9100000, guid: e4d63117c9d67f84a9bcc7c77421586f, type: 2}
+  animatorController: {fileID: 9100000, guid: e70a87fc3a4fdb34cbeea71a01686f03, type: 2}
   transitionDuration: 0.1
   applyAnimationState: 0
   initSound: Whiff_Jab
