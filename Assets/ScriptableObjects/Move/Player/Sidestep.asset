@@ -1,0 +1,44 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e78fb4b1baafff9429e0b1ad7c553b05, type: 3}
+  m_Name: Sidestep
+  m_EditorClassIdentifier: 
+  icon: {fileID: 21300000, guid: 957849a5069651049bed529b828ba5f5, type: 3}
+  moveName: Sidestep
+  animatorTrigger: sidestep
+  animations:
+  - animation: {fileID: 7400000, guid: 198215d809345eb4f9f2701962851377, type: 2}
+    motionSpeed: 1
+    position: {x: 0, y: 0}
+  - animation: {fileID: 7400000, guid: 198215d809345eb4f9f2701962851377, type: 2}
+    motionSpeed: 1
+    position: {x: 0, y: -1}
+  - animation: {fileID: 7400000, guid: 4667168ddf5cbf2449000cfede1f2f25, type: 2}
+    motionSpeed: 1
+    position: {x: 0, y: 1}
+  - animation: {fileID: 7400000, guid: 19966cef69fc85f418ce40167a964f34, type: 2}
+    motionSpeed: 1
+    position: {x: -1, y: 0}
+  - animation: {fileID: 7400000, guid: ae5719750bedab441bbfba3f4c7f242a, type: 2}
+    motionSpeed: 1
+    position: {x: 1, y: 0}
+  stateSpeed: 1
+  directionSpeed: 10
+  applyAnimationEvents: 0
+  animatorController: {fileID: 9100000, guid: e70a87fc3a4fdb34cbeea71a01686f03, type: 2}
+  transitionDuration: 0.1
+  applyAnimationState: 0
+  initSound: Dash
+  startUp: 100
+  active: 100
+  recovery: 400
+  invulnerability: 0
