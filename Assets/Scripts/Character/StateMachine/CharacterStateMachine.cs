@@ -54,11 +54,11 @@ public class CharacterStateMachine : MonoBehaviour
 
     #region Animation Events
 
-    public event Action OnInitMove, OnActivateMove, OnDeactiveMove, OnEndMove,
+    public event Action OnInitMove, OnActivateMove, OnDeactivateMove, OnEndMove,
         OnStartTracking, OnStopTracking;
     private void InitMove() => OnInitMove?.Invoke();
     private void ActivateMove() => OnActivateMove?.Invoke();
-    private void DeactivateMove() => OnDeactiveMove?.Invoke();
+    private void DeactivateMove() => OnDeactivateMove?.Invoke();
     private void EndMove() => OnEndMove?.Invoke();
 
     private void StartTracking() => OnStartTracking?.Invoke();

@@ -1,5 +1,4 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -9,11 +8,7 @@ public class InputController : Controller
     private CharacterStateMachine stateMachine;
     private Action<int> inputAction;
     private Action bufferedAction;
-
-    private WaitForSeconds waitForSeconds;
-    private IEnumerator couscous;
-    [SerializeField] private double msBeforeBuffering = 300.0;
-    private bool BUFFER_FLAG = false;
+    private bool BUFFER_FLAG;
 
     public List<int> moveIndexes = new(4) { 0, 1, 2, 3 };
     [NonSerialized] public bool assigning;
@@ -22,22 +17,11 @@ public class InputController : Controller
     {
         this.stateMachine = stateMachine;
         inputAction = DoMove;
-        waitForSeconds = new WaitForSeconds((float)TimeSpan.FromMilliseconds(msBeforeBuffering).TotalSeconds);
-        
-        stateMachine.MoveState.OnEnter += ClearBuffer;
-        stateMachine.MoveState.OnEnter += () => { 
-            inputAction = BufferMove;
-            couscous = AllowBuffer();
-            StartCoroutine(couscous); 
-        };
-        stateMachine.MoveState.OnExit += () => { 
-            inputAction = DoMove; 
-            StopCoroutine(couscous);
-            BUFFER_FLAG = false;
-        };
-    }
 
-    private void OnValidate() => waitForSeconds = new WaitForSeconds((float)TimeSpan.FromMilliseconds(msBeforeBuffering).TotalSeconds);
+        stateMachine.MoveState.OnEnter += ClearBuffer;
+        stateMachine.OnDeactivateMove += () => inputAction = BufferMove;
+        stateMachine.MoveState.OnExit += () => inputAction = DoMove;
+    }
 
     private void BufferMove(int moveIndex)
     {
@@ -52,10 +36,6 @@ public class InputController : Controller
     {
         stateMachine.WalkingState.OnEnter -= bufferedAction;
         stateMachine.BlockingState.OnEnter -= bufferedAction;
-    }
-    private IEnumerator AllowBuffer() 
-    {
-        yield return waitForSeconds;
         BUFFER_FLAG = true;
     }
 

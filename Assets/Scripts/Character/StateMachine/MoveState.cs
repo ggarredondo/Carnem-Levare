@@ -35,7 +35,7 @@ public class MoveState : CharacterState
 
         stateMachine.OnInitMove += InitMove;
         stateMachine.OnActivateMove += ActivateMove;
-        stateMachine.OnDeactiveMove += DeactivateMove;
+        stateMachine.OnDeactivateMove += DeactivateMove;
         stateMachine.OnEndMove += EndMove;
         stateMachine.OnStartTracking += StartTracking;
         stateMachine.OnStopTracking += StopTracking;
@@ -59,7 +59,7 @@ public class MoveState : CharacterState
 
         stateMachine.OnInitMove -= InitMove;
         stateMachine.OnActivateMove -= ActivateMove;
-        stateMachine.OnDeactiveMove -= DeactivateMove;
+        stateMachine.OnDeactivateMove -= DeactivateMove;
         stateMachine.OnEndMove -= EndMove;
         stateMachine.OnStartTracking -= StartTracking;
         stateMachine.OnStopTracking -= StopTracking;
