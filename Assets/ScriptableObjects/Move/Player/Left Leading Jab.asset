@@ -26,12 +26,9 @@ MonoBehaviour:
   transitionDuration: 0.1
   applyAnimationState: 0
   initSound: Whiff_Jab
-  hyperarmor: 0
   startUp: 200
   active: 50
   recovery: 300
-  startTracking: 0
-  trackingLength: 200
   hitSound: Hit_Jab
   blockedSound: Blocked_Default
   staggerSound: Guard_Break
@@ -57,3 +54,4 @@ MonoBehaviour:
   hurtLevel: 0
   damageToHealth: 10
   damageToStamina: 5
+  hyperarmor: 0

@@ -13,7 +13,6 @@ public class MoveState : CharacterState
     public int moveIndex;
     private Move currentMove;
     private List<Move> moveList;
-    private bool TRACKING_FLAG = false;
 
     public void Reference(in CharacterStateMachine stateMachine, in Controller controller, in CharacterStats stats, in CharacterMovement movement)
     {
@@ -28,7 +27,6 @@ public class MoveState : CharacterState
     {
         stateMachine.enabled = true;
         stateMachine.hitNumber = 0;
-        stats.HYPERARMOR_FLAG = moveList[moveIndex].Hyperarmor;
 
         stateMachine.OnHurt += stats.HurtDamage;
         currentMove = moveList[moveIndex];
@@ -37,8 +35,6 @@ public class MoveState : CharacterState
         stateMachine.OnActivateMove += ActivateMove;
         stateMachine.OnDeactivateMove += DeactivateMove;
         stateMachine.OnEndMove += EndMove;
-        stateMachine.OnStartTracking += StartTracking;
-        stateMachine.OnStopTracking += StopTracking;
 
         OnEnterInteger?.Invoke(moveIndex);
         OnEnter?.Invoke();
@@ -49,36 +45,30 @@ public class MoveState : CharacterState
     }
     public void FixedUpdate()
     {
-        movement.LookAtTarget(TRACKING_FLAG);
+        movement.LookAtTarget(currentMove.TRACKING_FLAG);
     }
     public void Exit()
     {
-        stats.HYPERARMOR_FLAG = false;
-
         stateMachine.OnHurt -= stats.HurtDamage;
 
         stateMachine.OnInitMove -= InitMove;
         stateMachine.OnActivateMove -= ActivateMove;
         stateMachine.OnDeactivateMove -= DeactivateMove;
         stateMachine.OnEndMove -= EndMove;
-        stateMachine.OnStartTracking -= StartTracking;
-        stateMachine.OnStopTracking -= StopTracking;
 
-        // Disable Move and stop tracking in case
-        // the animation event didn't trigger.
-        DeactivateMove();
-        StopTracking();
+        // In case the state exits before the
+        // animation events are triggered.
+        currentMove.DeactivateMove(stats);
+        currentMove.EndMove(stats);
 
         OnExit?.Invoke();
     }
 
     private void InitMove() => currentMove.InitMove(stats);
-    private void ActivateMove() => currentMove.ActivateMove();
-    private void DeactivateMove() => currentMove.DeactivateMove();
+    private void ActivateMove() => currentMove.ActivateMove(stats);
+    private void DeactivateMove() => currentMove.DeactivateMove(stats);
     private void EndMove() {
-        currentMove.EndMove();
+        currentMove.EndMove(stats);
         stateMachine.TransitionToWalkingOrBlocking();
     }
-    private void StartTracking() => TRACKING_FLAG = true;
-    private void StopTracking() => TRACKING_FLAG = false;
 }

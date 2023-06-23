@@ -33,9 +33,6 @@ public abstract class Move : ScriptableObject
     [Header("Move Sound")]
     [SerializeField] protected string initSound;
 
-    [Header("Flags")]
-    [SerializeField] protected bool hyperarmor;
-
     [Header("Time Data (ms) (animation events)")]
 
     [Tooltip("[0, startUp): move is starting.")]
@@ -47,19 +44,14 @@ public abstract class Move : ScriptableObject
     [Tooltip("[startUp+active, startUp+active+recovery): move is recovering.")]
     [SerializeField] protected double recovery;
 
-    [Header("Other Time Data (ms) (animation events)")]
-
-    [Tooltip("Move starts tracking at *startTracking* ms from being performed")]
-    [SerializeField] protected double startTracking;
-
-    [Tooltip("Move will track for *trackingLength* ms after enabling tracking")]
-    [SerializeField] protected double trackingLength;
+    public bool TRACKING_FLAG { get; protected set; }
 
     protected abstract void UpdateStringData();
     private void OnEnable()
     {
         stringData = new List<string>();
         UpdateStringData();
+        TRACKING_FLAG = false;
     }
 
     private void OnValidate()
@@ -95,11 +87,15 @@ public abstract class Move : ScriptableObject
         AnimationEvent deactiveMoveEvent = CreateAnimationEvent("DeactivateMove", startUp + active);
         AnimationEvent endMoveEvent = CreateAnimationEvent("EndMove", startUp + active + recovery);
 
-        AnimationEvent startTrackingEvent = CreateAnimationEvent("StartTracking", startTracking);
-        AnimationEvent stopTrackingEvent = CreateAnimationEvent("StopTracking", startTracking + trackingLength);
-
-        AnimationEvent[] events = { initMoveEvent, activateMoveEvent, deactiveMoveEvent, endMoveEvent, startTrackingEvent, stopTrackingEvent };
+        AnimationEvent[] events = { initMoveEvent, activateMoveEvent, deactiveMoveEvent, endMoveEvent };
         UnityEditor.AnimationUtility.SetAnimationEvents(animations[0].animation, events);
+
+        // Make sure the remaining animations have no events
+        AnimationEvent[] empty = {};
+        for (int i = 1; i < animations.Count; ++i) {
+            if (animations[i].animation != animations[0].animation)
+                UnityEditor.AnimationUtility.SetAnimationEvents(animations[i].animation, empty);
+        }
         #endif
     }
 
@@ -117,9 +113,9 @@ public abstract class Move : ScriptableObject
     }
 
     public abstract void InitMove(in CharacterStats stats);
-    public abstract void ActivateMove();
-    public abstract void DeactivateMove();
-    public abstract void EndMove();
+    public abstract void ActivateMove(in CharacterStats stats);
+    public abstract void DeactivateMove(in CharacterStats stats);
+    public abstract void EndMove(in CharacterStats stats);
 
     public ref readonly Sprite Icon => ref icon;
     public ref readonly string AnimatorTrigger => ref animatorTrigger;
@@ -135,6 +131,4 @@ public abstract class Move : ScriptableObject
     public double RelativeRecovery => recovery / stateSpeed;
 
     public ref readonly List<string> StringData => ref stringData;
-
-    public ref readonly bool Hyperarmor => ref hyperarmor;
 }

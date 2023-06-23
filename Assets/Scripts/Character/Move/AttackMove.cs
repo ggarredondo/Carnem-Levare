@@ -16,7 +16,6 @@ public class AttackMove : Move
     [SerializeField] private double hitStun;
     [SerializeField] private double blockStun;
 
-
     [Header("Attack Knockback")]
     [SerializeField] private Vector3 knockbackOnHit;
     [SerializeField] private Vector3 knockbackOnBlock;
@@ -28,6 +27,7 @@ public class AttackMove : Move
     [SerializeField] private HurtLevel hurtLevel;
     private Hitbox currentHitbox;
     [SerializeField] private int damageToHealth, damageToStamina;
+    [SerializeField] private bool hyperarmor;
 
     protected override void UpdateStringData()
     {
@@ -46,8 +46,10 @@ public class AttackMove : Move
 
     public override void InitMove(in CharacterStats stats)
     {
-        currentHitbox = stats.HitboxList[(int) hitbox];
+        TRACKING_FLAG = true;
+        stats.HYPERARMOR_FLAG = hyperarmor;
 
+        currentHitbox = stats.HitboxList[(int) hitbox];
         currentHitbox.Set(hitSound,
             blockedSound,
             staggerSound,
@@ -61,15 +63,13 @@ public class AttackMove : Move
             knockbackOnHit,
             knockbackOnBlock);
     }
-    public override void ActivateMove()
+    public override void ActivateMove(in CharacterStats stats)
     {
+        TRACKING_FLAG = false;
         currentHitbox.SetActive(true);
     }
-    public override void DeactivateMove()
-    {
-        currentHitbox.SetActive(false);
-    }
-    public override void EndMove() {}
+    public override void DeactivateMove(in CharacterStats stats) => currentHitbox.SetActive(false);
+    public override void EndMove(in CharacterStats stats) => stats.HYPERARMOR_FLAG = false;
 
     public float DamageToHealth => damageToHealth;
     public float DamageToStamina => damageToStamina;
