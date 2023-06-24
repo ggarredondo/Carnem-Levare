@@ -34,11 +34,9 @@ public class AnimatorScriptController
 
     public void AddState(string stateName, float stateSpeed, in Motion motion) 
     {
-        AnimatorState state = new AnimatorState();
-        state.name = stateName;
+        AnimatorState state = animatorController.layers[workingLayer].stateMachine.AddState(stateName);
         state.speed = stateSpeed;
         state.motion = motion;
-        animatorController.layers[workingLayer].stateMachine.AddState(state, Vector2.zero);
     }
 
     public void AddBlendTreeState(string stateName, float stateSpeed, in List<BlendTree2DMotion> motions, 
@@ -61,6 +59,9 @@ public class AnimatorScriptController
             blendTreeChildren[i].timeScale = motions[i].motionSpeed;
         }
         blendTree.children = blendTreeChildren;
+
+        // Save blend tree so that it stays serialized
+        AssetDatabase.AddObjectToAsset(blendTree, AssetDatabase.GetAssetPath(animatorController.layers[workingLayer].stateMachine));
 
         // Add State to state machine
         AddState(stateName, stateSpeed, blendTree);
