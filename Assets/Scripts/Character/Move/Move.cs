@@ -16,7 +16,9 @@ public abstract class Move : ScriptableObject
 
     [Header("Animation")]
     [SerializeField] protected string animatorTrigger;
+    #if UNITY_EDITOR
     [SerializeField] protected List<BlendTree2DMotion> animations;
+    #endif
     [SerializeField] protected float stateSpeed = 1f;
     [SerializeField] protected float directionSpeed = 1f;
 
@@ -24,7 +26,9 @@ public abstract class Move : ScriptableObject
     [SerializeField] protected bool applyAnimationEvents = false;
 
     [Header("Animator")]
+    #if UNITY_EDITOR
     [SerializeField] protected AnimatorController animatorController;
+    #endif
     [SerializeField] protected float transitionDuration = 0.1f;
 
     [Tooltip("Will reset animators if in play mode")]
@@ -101,6 +105,7 @@ public abstract class Move : ScriptableObject
 
     public void AddState()
     {
+        #if UNITY_EDITOR
         AnimatorScriptController animatorScriptController = new AnimatorScriptController(animatorController);
         animatorScriptController.AddBlendTreeState(moveName, stateSpeed, animations, "horizontal", "vertical", BlendTreeType.FreeformDirectional2D);
         animatorScriptController.AddParameter(animatorTrigger, AnimatorControllerParameterType.Trigger);
@@ -110,6 +115,7 @@ public abstract class Move : ScriptableObject
         conditions[0].parameter = animatorTrigger;
         conditions[0].threshold = 0f;
         animatorScriptController.AddAnyStateTransition(0, moveName, conditions, true, transitionDuration, TransitionInterruptionSource.Source);
+        #endif
     }
 
     public abstract void InitMove(in CharacterStats stats);

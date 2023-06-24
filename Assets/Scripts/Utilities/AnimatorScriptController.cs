@@ -2,9 +2,11 @@ using UnityEngine;
 using System.Collections.Generic;
 using System.Linq;
 #if UNITY_EDITOR
+using UnityEditor;
 using UnityEditor.Animations;
 #endif
 
+#if UNITY_EDITOR
 [System.Serializable]
 public abstract class BlendTreeMotion
 {
@@ -32,19 +34,16 @@ public class AnimatorScriptController
 
     public void AddState(string stateName, float stateSpeed, in Motion motion) 
     {
-        #if UNITY_EDITOR
         AnimatorState state = new AnimatorState();
         state.name = stateName;
         state.speed = stateSpeed;
         state.motion = motion;
         animatorController.layers[workingLayer].stateMachine.AddState(state, Vector2.zero);
-        #endif
     }
 
     public void AddBlendTreeState(string stateName, float stateSpeed, in List<BlendTree2DMotion> motions, 
         string blendParameterX, string blendParameterY, BlendTreeType blendTreeType)
     {
-        #if UNITY_EDITOR
         // Initialize Blend Tree
         BlendTree blendTree = new BlendTree();
         blendTree.name = "BlendTree";
@@ -65,7 +64,6 @@ public class AnimatorScriptController
 
         // Add State to state machine
         AddState(stateName, stateSpeed, blendTree);
-        #endif
     }
     public void AddBlendTreeState(string stateName, float stateSpeed, in List<BlendTree1DMotion> blendTree, 
         string blendParameter, BlendTreeType blendTreeType)
@@ -80,7 +78,6 @@ public class AnimatorScriptController
         bool canTransitionToSelf, float duration,
         TransitionInterruptionSource interruptionSource)
     {
-        #if UNITY_EDITOR
         AnimatorState destinationState = animatorController.layers[workingLayer].stateMachine.states
             .Where(state => state.state.name == destinationStateName).Single().state;
 
@@ -91,7 +88,6 @@ public class AnimatorScriptController
         transition.canTransitionToSelf = canTransitionToSelf;
         transition.duration = duration;
         transition.interruptionSource = interruptionSource;
-        #endif
     }
 
     /// <summary>
@@ -103,13 +99,12 @@ public class AnimatorScriptController
         bool canTransitionToSelf, float duration,
         TransitionInterruptionSource interruptionSource)
     {
-        #if UNITY_EDITOR
         List<AnimatorStateTransition> anyStateTransitions = new(animatorController.layers[workingLayer].stateMachine.anyStateTransitions);
         AddAnyStateTransition(destinationStateName, conditions, canTransitionToSelf, duration, interruptionSource);
         anyStateTransitions.Insert(priority,
             animatorController.layers[workingLayer].stateMachine.anyStateTransitions
             [animatorController.layers[workingLayer].stateMachine.anyStateTransitions.Length - 1]);
         animatorController.layers[workingLayer].stateMachine.anyStateTransitions = anyStateTransitions.ToArray();
-        #endif
     }
 }
+#endif
