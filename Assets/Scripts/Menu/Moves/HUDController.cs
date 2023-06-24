@@ -17,7 +17,7 @@ public class HUDController : MonoBehaviour
     private CameraController cameraController;
     private bool cameraChanged;
 
-    private int actualHUDMenu = 0;
+    private int currentHUDmenu = 0;
 
     private void Awake()
     {
@@ -54,7 +54,7 @@ public class HUDController : MonoBehaviour
     private void EnableHUD()
     {
         if (HUDMenus.Count > 1)
-            HUDMenus[actualHUDMenu].SetActive(true);
+            HUDMenus[currentHUDmenu].SetActive(true);
         StaticHUDMenus.ForEach(m => m.SetActive(true));
     }
 
@@ -80,7 +80,7 @@ public class HUDController : MonoBehaviour
 
     public async void ChangeHUDMenu()
     {
-        CanvasGroup actualCanvas = HUDMenus[actualHUDMenu].GetComponent<CanvasGroup>();
+        CanvasGroup actualCanvas = HUDMenus[currentHUDmenu].GetComponent<CanvasGroup>();
 
         if (actualCanvas != null)
         {
@@ -89,10 +89,10 @@ public class HUDController : MonoBehaviour
         }
 
         DisableHUD();
-        actualHUDMenu = (actualHUDMenu + 1) % HUDMenus.Count;
+        currentHUDmenu = (currentHUDmenu + 1) % HUDMenus.Count;
         EnableHUD();
 
-        actualCanvas = HUDMenus[actualHUDMenu].GetComponent<CanvasGroup>();
+        actualCanvas = HUDMenus[currentHUDmenu].GetComponent<CanvasGroup>();
 
         if (actualCanvas != null)
         {
