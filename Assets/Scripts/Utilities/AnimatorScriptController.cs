@@ -60,7 +60,7 @@ public class AnimatorScriptController
         }
         blendTree.children = blendTreeChildren;
 
-        // Save blend tree so that it stays serialized
+        // Serialize Blend Tree
         AssetDatabase.AddObjectToAsset(blendTree, AssetDatabase.GetAssetPath(animatorController.layers[workingLayer].stateMachine));
 
         // Add State to state machine
