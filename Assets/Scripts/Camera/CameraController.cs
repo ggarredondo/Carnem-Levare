@@ -5,7 +5,7 @@ using UnityEngine.Rendering;
 public class CameraController : MonoBehaviour
 {
     public CameraType changeVirtualCamera;
-    public static CameraType actualVirtualCamera;
+    public static CameraType currentVirtualCamera;
 
     private CameraTargets playerTargets, enemyTargets;
     [SerializeField] private Transform actualTransform;
@@ -34,12 +34,12 @@ public class CameraController : MonoBehaviour
 
     private void LateUpdate()
     {
-        if (actualVirtualCamera != changeVirtualCamera) ChangeVirtualCamera();
+        if (currentVirtualCamera != changeVirtualCamera) ChangeVirtualCamera();
 
-        actualTransform.position = playerTargets.GetDefaultTarget(actualVirtualCamera).position;
+        actualTransform.position = playerTargets.GetDefaultTarget(currentVirtualCamera).position;
         SetFollowObject();
 
-        if (actualVirtualCamera == 0) actualTransform.LookAt(enemyTargets.GetDefaultTarget(actualVirtualCamera).position);
+        if (currentVirtualCamera == 0) actualTransform.LookAt(enemyTargets.GetDefaultTarget(currentVirtualCamera).position);
     }
 
     private void SetFollowObject()
@@ -85,12 +85,12 @@ public class CameraController : MonoBehaviour
 
     private void ChangeVirtualCamera()
     {
-        actualVirtualCamera = changeVirtualCamera;
+        currentVirtualCamera = changeVirtualCamera;
 
         int cont = 0;
         foreach (CinemachineVirtualCamera camera in GetComponentsInChildren<CinemachineVirtualCamera>())
         {
-            if (actualVirtualCamera == CameraType.GOPRO)
+            if (currentVirtualCamera == CameraType.GOPRO)
             {
                 SetLayerAllChildren(followObject.transform, LayerMask.NameToLayer("NoCamera"));
             }
@@ -99,7 +99,7 @@ public class CameraController : MonoBehaviour
                 SetLayerAllChildren(followObject.transform, LayerMask.NameToLayer("Default"));
             }
 
-            if (cont == (int) actualVirtualCamera)
+            if (cont == (int) currentVirtualCamera)
             {
                 camera.enabled = true;
                 actualCinemachineCamera = camera;
