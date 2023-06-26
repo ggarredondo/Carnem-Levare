@@ -53,8 +53,7 @@ public class CharacterAnimation
         };
         stateMachine.KOState.OnExit += () => animator.SetBool("STATE_KO", false);
 
-        stateMachine.StaggerState.OnEnter += () =>
-        {
+        stateMachine.StaggerState.OnEnter += () => {
             Hitbox hitbox = staggerState.Hitbox;
             animator.SetBool("STATE_STAGGER", true);
             TriggerHurtAnimation(hitbox.AnimationBodyTarget, hitbox.HurtLevel);

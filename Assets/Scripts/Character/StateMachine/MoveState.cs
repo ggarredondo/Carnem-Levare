@@ -31,7 +31,7 @@ public class MoveState : CharacterState
         stateMachine.OnHurt += stats.HurtDamage;
         currentMove = moveList[moveIndex];
 
-        stateMachine.OnInitMove += InitMove;
+        currentMove.InitMove(stats);
         stateMachine.OnActivateMove += ActivateMove;
         stateMachine.OnDeactivateMove += DeactivateMove;
         stateMachine.OnEndMove += EndMove;
@@ -51,7 +51,6 @@ public class MoveState : CharacterState
     {
         stateMachine.OnHurt -= stats.HurtDamage;
 
-        stateMachine.OnInitMove -= InitMove;
         stateMachine.OnActivateMove -= ActivateMove;
         stateMachine.OnDeactivateMove -= DeactivateMove;
         stateMachine.OnEndMove -= EndMove;
@@ -64,7 +63,6 @@ public class MoveState : CharacterState
         OnExit?.Invoke();
     }
 
-    private void InitMove() => currentMove.InitMove(stats);
     private void ActivateMove() => currentMove.ActivateMove(stats);
     private void DeactivateMove() => currentMove.DeactivateMove(stats);
     private void EndMove() {

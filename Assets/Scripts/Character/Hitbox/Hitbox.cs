@@ -33,10 +33,7 @@ public class Hitbox : MonoBehaviour
         this.knockbackOnBlock = knockbackOnBlock;
     }
 
-    public void SetActive(bool active)
-    {
-        transform.gameObject.SetActive(active);
-    }
+    public void SetActive(bool active) => transform.gameObject.SetActive(active);
 
     public string HitSound { get => hitSound; }
     public string BlockedSound { get => blockedSound; }

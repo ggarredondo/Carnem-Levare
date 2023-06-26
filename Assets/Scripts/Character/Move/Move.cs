@@ -86,12 +86,11 @@ public abstract class Move : ScriptableObject
     public void AssignEvents()
     {
         #if UNITY_EDITOR
-        AnimationEvent initMoveEvent = CreateAnimationEvent("InitMove", 0.0);
         AnimationEvent activateMoveEvent = CreateAnimationEvent("ActivateMove", startUp);
         AnimationEvent deactiveMoveEvent = CreateAnimationEvent("DeactivateMove", startUp + active);
         AnimationEvent endMoveEvent = CreateAnimationEvent("EndMove", startUp + active + recovery);
 
-        AnimationEvent[] events = { initMoveEvent, activateMoveEvent, deactiveMoveEvent, endMoveEvent };
+        AnimationEvent[] events = { activateMoveEvent, deactiveMoveEvent, endMoveEvent };
         UnityEditor.AnimationUtility.SetAnimationEvents(animations[0].animation, events);
 
         // Make sure the remaining animations have no events
