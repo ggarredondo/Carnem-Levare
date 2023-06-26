@@ -65,8 +65,5 @@ public class MoveState : CharacterState
 
     private void ActivateMove() => currentMove.ActivateMove(stats);
     private void DeactivateMove() => currentMove.DeactivateMove(stats);
-    private void EndMove() {
-        currentMove.EndMove(stats);
-        stateMachine.TransitionToWalkingOrBlocking();
-    }
+    private void EndMove() => stateMachine.TransitionToWalkingOrBlocking();
 }
