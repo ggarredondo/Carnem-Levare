@@ -95,9 +95,10 @@ public abstract class Move : ScriptableObject
 
         // Make sure the remaining animations have no events
         AnimationEvent[] empty = {};
-        for (int i = 1; i < animations.Count; ++i) {
-            if (animations[i].animation != animations[0].animation)
-                UnityEditor.AnimationUtility.SetAnimationEvents(animations[i].animation, empty);
+        for (int i = 1; i < animations.Count; ++i)
+        {
+            Debug.Assert(animations[i].animation != animations[0].animation, "Element 0 in animations list must not be duplicated");
+            UnityEditor.AnimationUtility.SetAnimationEvents(animations[i].animation, empty);
         }
         #endif
     }
