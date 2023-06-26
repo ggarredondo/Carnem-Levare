@@ -14,6 +14,8 @@ public class MoveState : CharacterState
     private Move currentMove;
     private List<Move> moveList;
 
+    private UnityEngine.Vector2 fixedVector;
+
     public void Reference(in CharacterStateMachine stateMachine, in Controller controller, in CharacterStats stats, in CharacterMovement movement)
     {
         this.stateMachine = stateMachine;
@@ -36,12 +38,14 @@ public class MoveState : CharacterState
         stateMachine.OnDeactivateMove += DeactivateMove;
         stateMachine.OnEndMove += EndMove;
 
+        fixedVector = controller.MovementVector.normalized;
+
         OnEnterInteger?.Invoke(moveIndex);
         OnEnter?.Invoke();
     }
-    public void Update() 
+    public void Update()
     {
-        movement.MoveCharacter(controller.MovementVector, currentMove.DirectionSpeed);
+        movement.MoveCharacter(currentMove.FixedDirection ? fixedVector : controller.MovementVector, currentMove.DirectionSpeed);
     }
     public void FixedUpdate()
     {

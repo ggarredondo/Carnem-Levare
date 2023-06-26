@@ -4,6 +4,8 @@ using UnityEngine;
 public class DashMove : Move
 {
     [Header("Dash Values")]
+
+    [Tooltip("Character will be invulnerable during [startup, startup+active) interval")]
     [SerializeField] private bool invulnerability = false;
 
     protected override void UpdateStringData()

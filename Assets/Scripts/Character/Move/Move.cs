@@ -14,21 +14,19 @@ public abstract class Move : ScriptableObject
     [SerializeField] protected Sprite icon;
     [SerializeField] protected string moveName;
 
-    [Header("Animation")]
-    [SerializeField] protected string animatorTrigger;
+    [Header("Motion")]
     #if UNITY_EDITOR
     [SerializeField] protected List<BlendTree2DMotion> animations;
     #endif
-    [SerializeField] protected float stateSpeed = 1f;
+    [SerializeField] protected bool fixedDirection;
     [SerializeField] protected float directionSpeed = 1f;
 
-    [Tooltip("Will reset animators if in play mode")]
-    [SerializeField] protected bool applyAnimationEvents = false;
-
     [Header("Animator")]
+    [SerializeField] protected string animatorTrigger;
     #if UNITY_EDITOR
     [SerializeField] protected AnimatorController animatorController;
-    #endif
+#endif
+    [SerializeField] protected float stateSpeed = 1f;
     [SerializeField] protected float transitionDuration = 0.1f;
 
     [Tooltip("Will reset animators if in play mode")]
@@ -37,7 +35,7 @@ public abstract class Move : ScriptableObject
     [Header("Move Sound")]
     [SerializeField] protected string initSound;
 
-    [Header("Time Data (ms) (animation events)")]
+    [Header("Time Data (ms)")]
 
     [Tooltip("[0, startUp): move is starting.")]
     [SerializeField] protected double startUp;
@@ -47,6 +45,9 @@ public abstract class Move : ScriptableObject
 
     [Tooltip("[startUp+active, startUp+active+recovery): move is recovering.")]
     [SerializeField] protected double recovery;
+
+    [Tooltip("Will reset animators if in play mode")]
+    [SerializeField] protected bool applyAnimationEvents = false;
 
     public bool TRACKING_FLAG { get; protected set; }
 
@@ -125,6 +126,7 @@ public abstract class Move : ScriptableObject
 
     public ref readonly Sprite Icon => ref icon;
     public ref readonly string AnimatorTrigger => ref animatorTrigger;
+    public ref readonly bool FixedDirection => ref fixedDirection;
     public ref readonly float DirectionSpeed => ref directionSpeed;
     public ref readonly string InitSound { get => ref initSound; }
 

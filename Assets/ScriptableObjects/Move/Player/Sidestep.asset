@@ -32,15 +32,14 @@ MonoBehaviour:
     motionSpeed: 1
     position: {x: 1, y: 0}
   stateSpeed: 1
-  fixedDirection: 0
-  normalizedDirection: 0
-  directionSpeed: 0
-  applyAnimationEvents: 0
+  fixedDirection: 1
+  directionSpeed: 10
   animatorController: {fileID: 9100000, guid: e70a87fc3a4fdb34cbeea71a01686f03, type: 2}
   transitionDuration: 0.1
   applyAnimationState: 0
   initSound: Dash
   startUp: 100
   active: 100
-  recovery: 400
+  recovery: 500
+  applyAnimationEvents: 0
   invulnerability: 0
