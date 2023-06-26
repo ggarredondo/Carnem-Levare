@@ -15,8 +15,12 @@ public class DashMove : Move
         stringData?.Add("Recovery"); stringData?.Add((int)RelativeRecovery + " ms");
     }
 
-    public override void InitMove(in CharacterStats stats) {}
+    public override void InitMove(in CharacterStats stats) => TRACKING_FLAG = false;
     public override void ActivateMove(in CharacterStats stats) => stats.NOHURT_FLAG = invulnerability;
-    public override void DeactivateMove(in CharacterStats stats) => stats.NOHURT_FLAG = false;
+    public override void DeactivateMove(in CharacterStats stats)
+    {
+        stats.NOHURT_FLAG = false;
+        TRACKING_FLAG = true;
+    }
     public override void EndMove(in CharacterStats stats) {}
 }

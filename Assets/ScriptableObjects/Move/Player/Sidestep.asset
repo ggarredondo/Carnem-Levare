@@ -16,7 +16,7 @@ MonoBehaviour:
   moveName: Sidestep
   animatorTrigger: sidestep
   animations:
-  - animation: {fileID: 7400000, guid: 639a04dec9ce3974fbab46f8b2837ae3, type: 2}
+  - animation: {fileID: 7400000, guid: 41f93e43e648d104ba8712f606de5f91, type: 2}
     motionSpeed: 1
     position: {x: 0, y: 0}
   - animation: {fileID: 7400000, guid: 198215d809345eb4f9f2701962851377, type: 2}
@@ -32,7 +32,9 @@ MonoBehaviour:
     motionSpeed: 1
     position: {x: 1, y: 0}
   stateSpeed: 1
-  directionSpeed: 10
+  fixedDirection: 0
+  normalizedDirection: 0
+  directionSpeed: 0
   applyAnimationEvents: 0
   animatorController: {fileID: 9100000, guid: e70a87fc3a4fdb34cbeea71a01686f03, type: 2}
   transitionDuration: 0.1
