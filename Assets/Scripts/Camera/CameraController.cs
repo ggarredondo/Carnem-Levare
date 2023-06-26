@@ -15,7 +15,7 @@ public class CameraController : MonoBehaviour
     private Enemy enemy;
 
     private CinemachineTargetGroup targetGroup;
-    private CinemachineVirtualCamera actualCinemachineCamera;
+    private CinemachineVirtualCamera currentCinemachineCamera;
 
     private void Start()
     {
@@ -27,7 +27,7 @@ public class CameraController : MonoBehaviour
 
         targetGroup = GameObject.FindGameObjectWithTag("TARGET_GROUP").GetComponent<CinemachineTargetGroup>();
 
-        actualCinemachineCamera = GetComponentsInChildren<CinemachineVirtualCamera>()[0];
+        currentCinemachineCamera = GetComponentsInChildren<CinemachineVirtualCamera>()[0];
 
         InitializeTargets();
     }
@@ -44,10 +44,10 @@ public class CameraController : MonoBehaviour
 
     private void SetFollowObject()
     {
-        followObject.transform.position = actualCinemachineCamera.transform.position;
-        followObject.transform.rotation = actualCinemachineCamera.transform.rotation;
-        followObject.transform.localPosition = actualCinemachineCamera.transform.localPosition;
-        followObject.transform.localEulerAngles = actualCinemachineCamera.transform.localEulerAngles;
+        followObject.transform.position = currentCinemachineCamera.transform.position;
+        followObject.transform.rotation = currentCinemachineCamera.transform.rotation;
+        followObject.transform.localPosition = currentCinemachineCamera.transform.localPosition;
+        followObject.transform.localEulerAngles = currentCinemachineCamera.transform.localEulerAngles;
     }
 
     private void InitializeTargets()
@@ -102,7 +102,7 @@ public class CameraController : MonoBehaviour
             if (cont == (int) currentVirtualCamera)
             {
                 camera.enabled = true;
-                actualCinemachineCamera = camera;
+                currentCinemachineCamera = camera;
 
                 if (camera.TryGetComponent(out CameraEffects effects))
                 {
