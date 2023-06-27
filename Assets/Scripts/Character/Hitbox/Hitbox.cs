@@ -4,7 +4,7 @@ public class Hitbox : MonoBehaviour
 {
     private string hitSound, blockedSound, staggerSound;
     private int damageToHealth, damageToStamina;
-    private float animationBodyTarget, hurtLevel;
+    private float hurtSide, hurtHeight, hurtPower;
     private double blockStun, hitStun;
     private CameraEffectsData hitCameraShake, blockCameraShake;
     private Vector3 knockbackOnHit, knockbackOnBlock;
@@ -16,7 +16,7 @@ public class Hitbox : MonoBehaviour
 
     public void Set(string hitSound, string blockedSound, string staggerSound, 
         in CameraEffectsData hitCameraShake, in CameraEffectsData blockCameraShake, 
-        float hurtLevel, int damageToHealth, int damageToStamina,
+        float hurtSide, float hurtPower, int damageToHealth, int damageToStamina,
         double blockStun, double hitStun, in Vector3 knockbackOnHit, in Vector3 knockbackOnBlock)
     {
         this.hitSound = hitSound;
@@ -24,7 +24,8 @@ public class Hitbox : MonoBehaviour
         this.staggerSound = staggerSound;
         this.hitCameraShake = hitCameraShake;
         this.blockCameraShake = blockCameraShake;
-        this.hurtLevel = hurtLevel;
+        this.hurtSide = hurtSide;
+        this.hurtPower = hurtPower;
         this.damageToHealth = damageToHealth;
         this.damageToStamina = damageToStamina;
         this.blockStun = blockStun;
@@ -41,9 +42,10 @@ public class Hitbox : MonoBehaviour
 
     public ref readonly CameraEffectsData HitCameraShake => ref hitCameraShake;
     public ref readonly CameraEffectsData BlockCameraShake => ref blockCameraShake;
-    public void SetAnimationBodyTarget(float animationBodyTarget) => this.animationBodyTarget = animationBodyTarget;
-    public float AnimationBodyTarget { get => animationBodyTarget; }
-    public float HurtLevel { get => hurtLevel; }
+    public float HurtSide { get => hurtSide; }
+    public float HurtHeight { get => hurtHeight; }
+    public float HurtPower { get => hurtPower; }
+    public void SetHeight(float height) => hurtHeight = height;
     public float DamageToHealth { get => damageToHealth; }
     public float DamageToStamina { get => damageToStamina; }
     public double BlockStun { get => blockStun; }

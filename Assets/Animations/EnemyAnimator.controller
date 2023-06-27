@@ -1702,13 +1702,13 @@ BlendTree:
     m_CycleOffset: 0
     m_DirectBlendParameter: horizontal
     m_Mirror: 0
-  m_BlendParameter: hurt_target
-  m_BlendParameterY: hurt_target
+  m_BlendParameter: hurt_side
+  m_BlendParameterY: hurt_height
   m_MinThreshold: 0
   m_MaxThreshold: 5
   m_UseAutomaticThresholds: 0
   m_NormalizedBlendValues: 0
-  m_BlendType: 0
+  m_BlendType: 2
 --- !u!114 &-2296713800719582783
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2232,7 +2232,13 @@ AnimatorController:
     m_DefaultInt: 0
     m_DefaultBool: 0
     m_Controller: {fileID: 0}
-  - m_Name: hurt_target
+  - m_Name: hurt_side
+    m_Type: 1
+    m_DefaultFloat: 0
+    m_DefaultInt: 0
+    m_DefaultBool: 0
+    m_Controller: {fileID: 0}
+  - m_Name: hurt_height
     m_Type: 1
     m_DefaultFloat: 0
     m_DefaultInt: 0
@@ -2956,7 +2962,7 @@ BlendTree:
     m_CycleOffset: 0
     m_DirectBlendParameter: horizontal
     m_Mirror: 0
-  m_BlendParameter: hurt_target
+  m_BlendParameter: hurt_height
   m_BlendParameterY: hurt_target
   m_MinThreshold: 0
   m_MaxThreshold: 5
@@ -3470,7 +3476,7 @@ BlendTree:
     m_CycleOffset: 0
     m_DirectBlendParameter: horizontal
     m_Mirror: 0
-  m_BlendParameter: hurt_target
+  m_BlendParameter: hurt_height
   m_BlendParameterY: hurt_target
   m_MinThreshold: 0
   m_MaxThreshold: 5

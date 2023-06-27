@@ -617,8 +617,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c7812153de0a68f4aad4dc6d0ff39d3d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  target: 4
   character: {fileID: 252810768578259016}
+  hurtHeight: 0
 --- !u!1 &2078215560458374121
 GameObject:
   m_ObjectHideFlags: 0
@@ -931,7 +931,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 072400a3141bc664485729ff590b307c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  msBeforeBuffering: 150
   moveIndexes: 00000000010000000200000003000000
 --- !u!54 &2794588595183348619
 Rigidbody:
@@ -1165,8 +1164,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c7812153de0a68f4aad4dc6d0ff39d3d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  target: 1
   character: {fileID: 252810768578259016}
+  hurtHeight: 0
 --- !u!1 &9022481645909606631
 GameObject:
   m_ObjectHideFlags: 0
@@ -1225,8 +1224,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c7812153de0a68f4aad4dc6d0ff39d3d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  target: 1
   character: {fileID: 252810768578259016}
+  hurtHeight: 1
 --- !u!1001 &4706402254103989476
 PrefabInstance:
   m_ObjectHideFlags: 0

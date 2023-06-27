@@ -2,18 +2,9 @@ using UnityEngine;
 
 public class Hurtbox : MonoBehaviour
 {
-    private enum BodyTarget : int
-    {
-        LeftHead = 0,
-        MidHead = 1,
-        RightHead = 2,
-
-        LeftBody = 3,
-        MidBody = 4,
-        RightBody = 5,
-    }
-    [SerializeField] private BodyTarget target;
     [SerializeField] private Character character;
+    private enum HurtHeight : int { Low, High }
+    [SerializeField] private HurtHeight hurtHeight;
     private CharacterStateMachine stateMachine;
 
     private void Start()
@@ -25,7 +16,7 @@ public class Hurtbox : MonoBehaviour
     {
         Hitbox hitbox = other.GetComponent<Hitbox>();
         hitbox.SetActive(false);
-        hitbox.SetAnimationBodyTarget((float)target);
+        hitbox.SetHeight((float)hurtHeight);
         stateMachine.OnHurt?.Invoke(hitbox);
     }
 }

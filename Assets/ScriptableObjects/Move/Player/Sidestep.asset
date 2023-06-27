@@ -14,7 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   icon: {fileID: 21300000, guid: 957849a5069651049bed529b828ba5f5, type: 3}
   moveName: Sidestep
-  animatorTrigger: sidestep
   animations:
   - animation: {fileID: 7400000, guid: 41f93e43e648d104ba8712f606de5f91, type: 2}
     motionSpeed: 1
@@ -31,10 +30,11 @@ MonoBehaviour:
   - animation: {fileID: 7400000, guid: ae5719750bedab441bbfba3f4c7f242a, type: 2}
     motionSpeed: 1
     position: {x: 1, y: 0}
-  stateSpeed: 1
   fixedDirection: 1
   directionSpeed: 10
+  animatorTrigger: sidestep
   animatorController: {fileID: 9100000, guid: e70a87fc3a4fdb34cbeea71a01686f03, type: 2}
+  stateSpeed: 1
   transitionDuration: 0.1
   applyAnimationState: 0
   initSound: Dash

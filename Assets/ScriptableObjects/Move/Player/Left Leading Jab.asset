@@ -14,21 +14,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   icon: {fileID: 21300000, guid: 73f2e0e785a93fd4982fae306299f5e2, type: 3}
   moveName: Left Leading Jab
-  animatorTrigger: leftLeadingJab
   animations:
   - animation: {fileID: 7400000, guid: e652c0869035b6b418eef0c72bbb19c0, type: 2}
     motionSpeed: 1
     position: {x: 0, y: 0}
-  stateSpeed: 1.4
+  fixedDirection: 0
   directionSpeed: 1
-  applyAnimationEvents: 0
+  animatorTrigger: leftLeadingJab
   animatorController: {fileID: 9100000, guid: e70a87fc3a4fdb34cbeea71a01686f03, type: 2}
+  stateSpeed: 1.4
   transitionDuration: 0.1
   applyAnimationState: 0
   initSound: Whiff_Jab
   startUp: 200
   active: 50
   recovery: 300
+  applyAnimationEvents: 0
   hitSound: Hit_Jab
   blockedSound: Blocked_Default
   staggerSound: Guard_Break
@@ -51,6 +52,7 @@ MonoBehaviour:
   knockbackOnHit: {x: 0, y: 0, z: 5}
   knockbackOnBlock: {x: 0, y: 0, z: 0}
   hitbox: 0
+  hurtSide: 0
   hurtLevel: 0
   damageToHealth: 10
   damageToStamina: 5

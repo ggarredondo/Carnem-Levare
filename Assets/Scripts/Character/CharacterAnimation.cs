@@ -34,21 +34,22 @@ public class CharacterAnimation
         stateMachine.HurtState.OnEnter += () => {
             Hitbox hitbox = hurtState.Hitbox;
             animator.SetBool("STATE_HURT", true);
-            TriggerHurtAnimation(hitbox.AnimationBodyTarget, hitbox.HurtLevel);
+            TriggerHurtAnimation(hitbox.HurtSide, hitbox.HurtHeight, hitbox.HurtPower);
         };
         stateMachine.HurtState.OnExit += () => animator.SetBool("STATE_HURT", false);
 
         stateMachine.BlockedState.OnEnter += () => {
             Hitbox hitbox = blockedState.Hitbox;
             animator.SetBool("STATE_BLOCKED", true);
-            TriggerHurtAnimation(hitbox.AnimationBodyTarget, hitbox.HurtLevel);
+            TriggerHurtAnimation(hitbox.HurtSide, hitbox.HurtHeight, hitbox.HurtPower);
         };
         stateMachine.BlockedState.OnExit += () => animator.SetBool("STATE_BLOCKED", false);
 
         stateMachine.KOState.OnEnter += () => {
             Hitbox hitbox = koState.Hitbox;
-            animator.SetFloat("hurt_target", hitbox.AnimationBodyTarget);
-            animator.SetFloat("hurt_power", hitbox.HurtLevel);
+            animator.SetFloat("hurt_side", hitbox.HurtSide);
+            animator.SetFloat("hurt_height", hitbox.HurtHeight);
+            animator.SetFloat("hurt_power", hitbox.HurtPower);
             animator.SetBool("STATE_KO", true);
         };
         stateMachine.KOState.OnExit += () => animator.SetBool("STATE_KO", false);
@@ -56,7 +57,7 @@ public class CharacterAnimation
         stateMachine.StaggerState.OnEnter += () => {
             Hitbox hitbox = staggerState.Hitbox;
             animator.SetBool("STATE_STAGGER", true);
-            TriggerHurtAnimation(hitbox.AnimationBodyTarget, hitbox.HurtLevel);
+            TriggerHurtAnimation(hitbox.HurtSide, hitbox.HurtHeight, hitbox.HurtPower);
         };
         stateMachine.StaggerState.OnExit += () => animator.SetBool("STATE_STAGGER", false);
     }
@@ -71,10 +72,11 @@ public class CharacterAnimation
         animator.SetFloat("vertical", direction.y);
     }
 
-    private void TriggerHurtAnimation(float target, float hurtLevel)
+    private void TriggerHurtAnimation(float side, float height, float power)
     {
-        animator.SetFloat("hurt_target", target);
-        animator.SetFloat("hurt_power", hurtLevel);
+        animator.SetFloat("hurt_side", side);
+        animator.SetFloat("hurt_height", height);
+        animator.SetFloat("hurt_power", power);
         animator.SetTrigger("hurt");
     }
 }

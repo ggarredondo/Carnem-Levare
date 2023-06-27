@@ -20,11 +20,13 @@ public class AttackMove : Move
     [SerializeField] private Vector3 knockbackOnHit;
     [SerializeField] private Vector3 knockbackOnBlock;
 
-    private enum HurtLevel : int { LightHit, MediumHit, HardHit }
+    private enum HurtSide : int { Left = -1, Mid = 0, Right = 1 }
+    private enum HurtPower : int { LightHit, MediumHit, HardHit }
     private enum HitboxType : int { LeftFist, RightFist, LeftElbow, RightElbow }
     [Header("Attack Values")]
     [SerializeField] private HitboxType hitbox;
-    [SerializeField] private HurtLevel hurtLevel;
+    [SerializeField] private HurtSide hurtSide;
+    [SerializeField] private HurtPower hurtLevel;
     private Hitbox currentHitbox;
     [SerializeField] private int damageToHealth, damageToStamina;
     [SerializeField] private bool hyperarmor;
@@ -55,6 +57,7 @@ public class AttackMove : Move
             staggerSound,
             hitCameraShake,
             blockCameraShake,
+            (float)hurtSide,
             (float)hurtLevel,
             stats.CalculateDamageToHealth(damageToHealth),
             stats.CalculateDamageToStamina(damageToStamina),
