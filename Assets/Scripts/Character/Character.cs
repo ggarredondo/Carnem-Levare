@@ -8,7 +8,7 @@ public abstract class Character : MonoBehaviour
     [SerializeField] protected CharacterMovement characterMovement;
     [SerializeField] protected CharacterAnimation characterAnimation;
     [SerializeField] protected CharacterAudio characterAudio;
-    protected Transform target;
+    protected Character opponent;
 
     protected virtual void Awake()
     {
@@ -17,13 +17,14 @@ public abstract class Character : MonoBehaviour
         stateMachine = GetComponent<CharacterStateMachine>();
         stateMachine.Initialize();
         characterStats.Initialize(transform, GetComponent<Rigidbody>());
-        characterMovement.Initialize(transform, target, GetComponent<Rigidbody>());
+        characterMovement.Initialize(transform, GetComponent<Rigidbody>());
         characterAnimation.Initialize(GetComponent<Animator>());
     }
     protected virtual void Start()
     {
         stateMachine.Reference(controller, characterStats, characterMovement);
         characterStats.Reference(stateMachine);
+        characterMovement.Reference(opponent.transform);
         characterAudio.Reference(stateMachine, characterStats);
         characterAnimation.Reference(stateMachine, characterStats, characterMovement);
         stateMachine.TransitionToWalking(); // Must be done last

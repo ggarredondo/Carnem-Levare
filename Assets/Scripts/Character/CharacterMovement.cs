@@ -23,13 +23,14 @@ public class CharacterMovement
     private Vector2 direction;
     public event ActionIn<Vector2> OnMoveCharacter;
 
-    public void Initialize(in Transform characterTransform, in Transform targetTransform, in Rigidbody rb)
+    public void Initialize(in Transform characterTransform, in Rigidbody rb)
     { 
         this.characterTransform = characterTransform;
-        this.targetTransform = targetTransform;
         this.rb = rb;
         direction = Vector2.zero;
     }
+
+    public void Reference(in Transform targetTransform) => this.targetTransform = targetTransform;
 
     /// <summary>
     /// Smooths move direction using Lerp and invokes OnMoveCharacter

@@ -2,14 +2,9 @@ using UnityEngine;
 
 public class Player : Character
 {
-    protected override void Awake()
-    {
-        target = GameObject.FindGameObjectWithTag("Enemy").transform;
-        base.Awake();
-    }
-
     protected override void Start()
     {
+        opponent = GameObject.FindGameObjectWithTag("Enemy").GetComponent<Character>();
         ((InputController)controller).Reference(stateMachine);
 
         if (DataSaver.games != null)
