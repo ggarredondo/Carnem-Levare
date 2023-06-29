@@ -414,7 +414,19 @@ MonoBehaviour:
     m_ActionId: 81ef5d60-0200-42ff-9d13-af67beaa6c37
     m_ActionName: LoadingScreen/Continue[/XInputControllerWindows/start,/Keyboard/space]
   - m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 3855076179960377308}
+        m_TargetAssemblyTypeName: LoadingScreen, Assembly-CSharp
+        m_MethodName: StopMask
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_ActionId: 8f006f83-0367-4932-80f0-42ce968fad13
     m_ActionName: LoadingScreen/Stop[/XInputControllerWindows/buttonSouth,/Keyboard/a]
   - m_PersistentCalls:
@@ -572,3 +584,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5885e7377946e014fb952b318795020d, type: 3}
+--- !u!114 &3855076179960377308 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4242559467631803007, guid: 5885e7377946e014fb952b318795020d,
+    type: 3}
+  m_PrefabInstance: {fileID: 3855076179960377307}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 18b55797ef8abea458ef1ad8e7f83d77, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

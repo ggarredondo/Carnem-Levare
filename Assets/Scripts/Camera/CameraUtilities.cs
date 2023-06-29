@@ -3,6 +3,11 @@ using UnityEngine;
 
 public class CameraUtilities
 {
+    public static float Lineal(float x)
+    {
+        return x;
+    }
+
     public static float Exponential(float x)
     {
         return Mathf.Pow(x, 4);

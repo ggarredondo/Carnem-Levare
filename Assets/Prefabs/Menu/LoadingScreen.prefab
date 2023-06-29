@@ -258,7 +258,6 @@ MonoBehaviour:
   progressBarSpeed: 2
   loadingTextAnim: {fileID: 3258220551657047584}
   maskAnim: {fileID: 7978422102833071705}
-  transAnim: {fileID: 0}
 --- !u!1 &7540153518886130518
 GameObject:
   m_ObjectHideFlags: 0

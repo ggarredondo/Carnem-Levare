@@ -1,3 +1,4 @@
+using LerpUtilities;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -13,12 +14,14 @@ public class LoadingScreen : MonoBehaviour
     [Header("Mask")]
     [SerializeField] private Animator maskAnim;
 
-    [Header("Transition")]
-    [SerializeField] private Animator transAnim;
-
     private string continueAction;
     private float actualProgress;
     private bool isStopped;
+
+    private void Start()
+    {
+        GameManager.InputDetection.controlsChangedEvent += ChangeText;
+    }
 
     private void OnEnable()
     {
@@ -32,13 +35,22 @@ public class LoadingScreen : MonoBehaviour
         SceneLoader.UpdateLoading -= UpdateProgess;
     }
 
-    private void Update()
+    private void OnDestroy()
     {
-        ChangeText();
-        float xScale = Mathf.Lerp(progressBar.transform.localScale.x, actualProgress, progressBarSpeed * Time.deltaTime);
-        progressBar.transform.localScale = new Vector3(xScale, progressBar.transform.localScale.y, progressBar.transform.localScale.z);
+        GameManager.InputDetection.controlsChangedEvent -= ChangeText;
+    }
 
-        if (GameManager.PlayerInput.actions.FindAction("Stop").IsPressed() && !isStopped)
+    private async void ProgressBar()
+    {
+        await Lerp.Value_Math(progressBar.transform.localScale.x, actualProgress, 
+                              (p) => progressBar.transform.localScale = new Vector3(p, progressBar.transform.localScale.y, progressBar.transform.localScale.z), 
+                              progressBarSpeed,
+                              CameraUtilities.Lineal);
+    }
+
+    public void StopMask()
+    {
+        if (!isStopped)
         {
             isStopped = true;
             AudioController.Instance.uiSfxSounds.Play("MaskAlert");
@@ -58,6 +70,7 @@ public class LoadingScreen : MonoBehaviour
     {
         actualProgress = Mathf.Clamp01(progress / 0.9f);
         percentage.text = (int)(Mathf.Clamp01(progress / 0.9f) * 100) + " %";
+        ProgressBar();
 
         bool result = false;
 
