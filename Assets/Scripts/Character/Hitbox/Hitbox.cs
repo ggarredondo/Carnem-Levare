@@ -6,6 +6,7 @@ public class Hitbox : MonoBehaviour
     private int damageToHealth, damageToStamina;
     private float hurtSide, hurtHeight, hurtPower;
     private double blockStun, hitStun;
+    private HitStopData hurtHitStop, blockHitStop;
     private CameraEffectsData hitCameraShake, blockCameraShake;
     private Vector3 knockbackOnHit, knockbackOnBlock;
 
@@ -14,8 +15,9 @@ public class Hitbox : MonoBehaviour
         SetActive(false);
     }
 
-    public void Set(string hitSound, string blockedSound, string staggerSound, 
-        in CameraEffectsData hitCameraShake, in CameraEffectsData blockCameraShake, 
+    public void Set(string hitSound, string blockedSound, string staggerSound,
+        in CameraEffectsData hitCameraShake, in CameraEffectsData blockCameraShake,
+        in HitStopData hurtHitStop, in HitStopData blockHitStop,
         float hurtSide, float hurtPower, int damageToHealth, int damageToStamina,
         double blockStun, double hitStun, in Vector3 knockbackOnHit, in Vector3 knockbackOnBlock)
     {
@@ -24,6 +26,8 @@ public class Hitbox : MonoBehaviour
         this.staggerSound = staggerSound;
         this.hitCameraShake = hitCameraShake;
         this.blockCameraShake = blockCameraShake;
+        this.hurtHitStop = hurtHitStop;
+        this.blockHitStop = blockHitStop;
         this.hurtSide = hurtSide;
         this.hurtPower = hurtPower;
         this.damageToHealth = damageToHealth;
@@ -42,6 +46,8 @@ public class Hitbox : MonoBehaviour
 
     public ref readonly CameraEffectsData HitCameraShake => ref hitCameraShake;
     public ref readonly CameraEffectsData BlockCameraShake => ref blockCameraShake;
+    public ref readonly HitStopData HurtHitStop => ref hurtHitStop;
+    public ref readonly HitStopData BlockHitStop => ref blockHitStop;
     public float HurtSide { get => hurtSide; }
     public float HurtHeight { get => hurtHeight; }
     public float HurtPower { get => hurtPower; }
