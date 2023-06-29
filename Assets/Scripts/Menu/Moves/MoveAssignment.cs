@@ -56,7 +56,9 @@ public class MoveAssignment : MonoBehaviour
         {
             if(DataSaver.games != null)
                 DataSaver.CurrentGameSlot.selectedMoves[i] = inputController.moveIndexes[i];
-            moves[inputController.moveIndexes[i]].GetComponent<MoveBlock>().AsignInput(inputAssignments[i]);
+
+            if(inputController.moveIndexes[i] < moves.Count)
+                moves[inputController.moveIndexes[i]].GetComponent<MoveBlock>().AsignInput(inputAssignments[i]);
         }
     }
 

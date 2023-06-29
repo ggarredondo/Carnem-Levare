@@ -511,8 +511,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   inputReader: {fileID: 11400000, guid: cb514f7bc969f1e4da23444266f585b7, type: 2}
-  StaticHUDMenus: []
-  HUDMenus: []
+  StaticHUDMenus:
+  - {fileID: 323157234}
+  HUDMenus:
+  - {fileID: 1298934784}
+  - {fileID: 725119522}
   lerpDuration: 0.2
 --- !u!1 &216464473
 GameObject:

@@ -15,8 +15,8 @@ MonoBehaviour:
   numGameSlots: 3
   defaultGame:
     name: GameSlot
-    selectedMoves: 0000000001000000
-    newMoves: 00
+    selectedMoves: 00000000010000000200000003000000
+    newMoves: 0101
     moves:
     - {fileID: 11400000, guid: cb8a3bef13b8ff948b45889b9d0268de, type: 2}
     - {fileID: 11400000, guid: 0f8300254c934574db6ce8c90565371a, type: 2}
