@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using RefDelegates;
 
 public class BlockedState : CharacterState
 {
@@ -9,6 +10,7 @@ public class BlockedState : CharacterState
     private CharacterMovement movement;
 
     public event Action OnEnter, OnExit;
+    public event ActionIn<Hitbox> OnEnterHitbox;
 
     private Hitbox hitbox;
     public void Set(in Hitbox hitbox) => this.hitbox = hitbox;
@@ -27,6 +29,7 @@ public class BlockedState : CharacterState
         stateMachine.enabled = true;
         stateMachine.OnHurt += stats.BlockedDamage;
         OnEnter?.Invoke();
+        OnEnterHitbox?.Invoke(hitbox);
 
         stateMachine.hitNumber++;
         coroutine = StateFunctions.Recover(stateMachine, stats.CalculateStun(hitbox.BlockStun, stateMachine.hitNumber));

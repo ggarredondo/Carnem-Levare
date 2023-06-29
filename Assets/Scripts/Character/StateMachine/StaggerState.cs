@@ -1,12 +1,15 @@
 using System;
 using System.Collections;
+using RefDelegates;
 
 public class StaggerState : CharacterState
 {
     private CharacterStateMachine stateMachine;
     private CharacterStats stats;
     private CharacterMovement movement;
+
     public event Action OnEnter, OnExit;
+    public event ActionIn<Hitbox> OnEnterHitbox;
 
     private Hitbox hitbox;
     public void Set(in Hitbox hitbox) => this.hitbox = hitbox;
@@ -23,6 +26,7 @@ public class StaggerState : CharacterState
         stateMachine.enabled = true;
         stateMachine.OnHurt += stats.HurtDamage;
         OnEnter?.Invoke();
+        OnEnterHitbox?.Invoke(hitbox);
 
         stats.ResetStamina();
         coroutine = StateFunctions.Recover(stateMachine, stats.StaggerStun);

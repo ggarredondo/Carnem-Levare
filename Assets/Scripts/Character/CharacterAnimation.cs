@@ -16,11 +16,6 @@ public class CharacterAnimation
     {
         moveList = stats.MoveList;
 
-        HurtState hurtState = stateMachine.HurtState;
-        BlockedState blockedState = stateMachine.BlockedState;
-        KOState koState = stateMachine.KOState;
-        StaggerState staggerState = stateMachine.StaggerState;
-
         movement.OnMoveCharacter += MovementAnimation;
 
         stateMachine.WalkingState.OnEnter += () => animator.SetBool("STATE_WALKING", true);
@@ -31,35 +26,31 @@ public class CharacterAnimation
 
         stateMachine.MoveState.OnEnterInteger += (int moveIndex) => animator.SetTrigger(moveList[moveIndex].AnimatorTrigger);
 
-        stateMachine.HurtState.OnEnter += () => {
-            Hitbox hitbox = hurtState.Hitbox;
+        stateMachine.HurtState.OnEnterHitbox += (in Hitbox hitbox) => {
             animator.SetBool("STATE_HURT", true);
             TriggerHurtAnimation(hitbox.HurtSide, hitbox.HurtHeight, hitbox.HurtPower);
         };
         stateMachine.HurtState.OnExit += () => animator.SetBool("STATE_HURT", false);
 
-        stateMachine.BlockedState.OnEnter += () => {
-            Hitbox hitbox = blockedState.Hitbox;
+        stateMachine.BlockedState.OnEnterHitbox += (in Hitbox hitbox) => {
             animator.SetBool("STATE_BLOCKED", true);
             TriggerHurtAnimation(hitbox.HurtSide, hitbox.HurtHeight, hitbox.HurtPower);
         };
         stateMachine.BlockedState.OnExit += () => animator.SetBool("STATE_BLOCKED", false);
 
-        stateMachine.KOState.OnEnter += () => {
-            Hitbox hitbox = koState.Hitbox;
+        stateMachine.StaggerState.OnEnterHitbox += (in Hitbox hitbox) => {
+            animator.SetBool("STATE_STAGGER", true);
+            TriggerHurtAnimation(hitbox.HurtSide, hitbox.HurtHeight, hitbox.HurtPower);
+        };
+        stateMachine.StaggerState.OnExit += () => animator.SetBool("STATE_STAGGER", false);
+
+        stateMachine.KOState.OnEnterHitbox += (in Hitbox hitbox) => {
             animator.SetFloat("hurt_side", hitbox.HurtSide);
             animator.SetFloat("hurt_height", hitbox.HurtHeight);
             animator.SetFloat("hurt_power", hitbox.HurtPower);
             animator.SetBool("STATE_KO", true);
         };
         stateMachine.KOState.OnExit += () => animator.SetBool("STATE_KO", false);
-
-        stateMachine.StaggerState.OnEnter += () => {
-            Hitbox hitbox = staggerState.Hitbox;
-            animator.SetBool("STATE_STAGGER", true);
-            TriggerHurtAnimation(hitbox.HurtSide, hitbox.HurtHeight, hitbox.HurtPower);
-        };
-        stateMachine.StaggerState.OnExit += () => animator.SetBool("STATE_STAGGER", false);
     }
     public void OnValidate()
     {

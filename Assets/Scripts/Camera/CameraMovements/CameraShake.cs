@@ -7,8 +7,6 @@ using System.Threading.Tasks;
 public class CameraShake : CameraMovement
 {
     private CinemachineBasicMultiChannelPerlin noiseTransposer;
-    private Player player;
-    private Enemy enemy;
 
     [SerializeField] private float startDuration;
     [SerializeField] private float finishDuration;
@@ -24,14 +22,11 @@ public class CameraShake : CameraMovement
 
     public override void UpdateCondition(ref Player player, ref Enemy enemy)
     {
-        this.player = player;
-        this.enemy = enemy;
+        player.StateMachine.HurtState.OnEnterHitbox += (in Hitbox hitbox) => Shake(hitbox);
+        player.StateMachine.BlockedState.OnEnterHitbox += (in Hitbox hitbox) => BlockingShake(hitbox);
 
-        player.StateMachine.HurtState.OnEnter += () => Shake(this.player.StateMachine.HurtState.Hitbox);
-        player.StateMachine.BlockedState.OnEnter += () => BlockingShake(this.player.StateMachine.BlockedState.Hitbox);
-
-        enemy.StateMachine.HurtState.OnEnter += () => Shake(this.enemy.StateMachine.HurtState.Hitbox);
-        enemy.StateMachine.BlockedState.OnEnter += () => BlockingShake(this.enemy.StateMachine.BlockedState.Hitbox);
+        enemy.StateMachine.HurtState.OnEnterHitbox += (in Hitbox hitbox) => Shake(hitbox);
+        enemy.StateMachine.BlockedState.OnEnterHitbox += (in Hitbox hitbox) => BlockingShake(hitbox);
     }
 
     private void Shake(in Hitbox hitbox)

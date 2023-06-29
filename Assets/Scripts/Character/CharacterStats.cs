@@ -32,7 +32,7 @@ public class CharacterStats
     [SerializeField] private List<Move> moveList;
     [SerializeField] private List<Hitbox> hitboxList;
 
-    public event ActionIn<Hitbox> OnHurtDamage, OnBlockedDamage;
+    public event ActionIn<Hitbox> OnHyperarmorHurt;
 
     public void Initialize(in Transform characterTransform, in Rigidbody rb)
     {
@@ -67,19 +67,18 @@ public class CharacterStats
     {
         if (!NOHURT_FLAG)
         {
-            OnHurtDamage?.Invoke(hitbox);
             AddToHealth(-hitbox.DamageToHealth);
             AddToStamina(-hitbox.DamageToStamina);
             if (health <= 0) stateMachine.TransitionToKO(hitbox);
             else if (stamina <= 0) stateMachine.TransitionToStagger(hitbox);
             else if (!HYPERARMOR_FLAG) stateMachine.TransitionToHurt(hitbox);
+            else OnHyperarmorHurt?.Invoke(hitbox);
         }
     }
     public void BlockedDamage(in Hitbox hitbox)
     {
         if (!NOHURT_FLAG)
         {
-            OnBlockedDamage?.Invoke(hitbox);
             AddToStamina(-hitbox.DamageToStamina);
             if (stamina <= 0) stateMachine.TransitionToStagger(hitbox);
             else stateMachine.TransitionToBlocked(hitbox);

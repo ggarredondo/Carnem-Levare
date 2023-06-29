@@ -47,10 +47,10 @@ public class DefaultCamera : MonoBehaviour, ICameraInitialize
         player.StateMachine.MoveState.OnEnter += () => isDoingMove = true;
         player.StateMachine.MoveState.OnExit += () => isDoingMove = false;
 
-        enemy.StateMachine.HurtState.OnEnter += () => CameraShake(enemy.StateMachine.HurtState.Hitbox);
-        enemy.StateMachine.BlockedState.OnEnter += () => BlockingCameraShake(enemy.StateMachine.BlockedState.Hitbox);
-        player.StateMachine.HurtState.OnEnter += () => CameraShake(player.StateMachine.HurtState.Hitbox);
-        player.StateMachine.BlockedState.OnEnter += () => BlockingCameraShake(player.StateMachine.BlockedState.Hitbox);
+        enemy.StateMachine.HurtState.OnEnterHitbox += (in Hitbox hitbox) => CameraShake(hitbox);
+        enemy.StateMachine.BlockedState.OnEnterHitbox += (in Hitbox hitbox) => BlockingCameraShake(hitbox);
+        player.StateMachine.HurtState.OnEnterHitbox += (in Hitbox hitbox) => CameraShake(hitbox);
+        player.StateMachine.BlockedState.OnEnterHitbox += (in Hitbox hitbox) => BlockingCameraShake(hitbox);
 
         enemy.StateMachine.HurtState.OnExit += () => hurt = false;
         enemy.StateMachine.BlockedState.OnExit += () => hurt = false;

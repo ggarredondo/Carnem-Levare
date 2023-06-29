@@ -1,8 +1,10 @@
 using System;
+using RefDelegates;
 
 public class KOState : CharacterState
 {
     public event Action OnEnter, OnExit;
+    public event ActionIn<Hitbox> OnEnterHitbox;
 
     private Hitbox hitbox;
     public void Set(in Hitbox hitbox) => this.hitbox = hitbox;
@@ -15,6 +17,7 @@ public class KOState : CharacterState
     public void Enter()
     {
         OnEnter?.Invoke();
+        OnEnterHitbox?.Invoke(hitbox);
     }
     public void Update() {}
     public void FixedUpdate() {}
