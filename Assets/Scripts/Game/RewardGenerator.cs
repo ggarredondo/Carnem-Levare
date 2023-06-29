@@ -9,8 +9,10 @@ public class RewardGenerator : MonoBehaviour
     [Header("Requirements")]
     [SerializeField] private GameObject moveBlockPrefab;
     [SerializeField] private AddLayoutElements addLayoutElements;
+    [SerializeField] private CanvasGroup panelCanvas;
 
     [Header("Parameters")]
+    [SerializeField] private float panelCanvasDuration;
     [SerializeField] private float zoomLerpDuration;
     [SerializeField] private float moveLerpDuration;
     [SerializeField] private float waitBetweenMoves;
@@ -26,6 +28,8 @@ public class RewardGenerator : MonoBehaviour
 
     public async Task GenerateMove(List<Move> moves)
     {
+        Canvas();
+
         for (int i = 0; i < moves.Count; i++)
         {
             GameObject followAt = addLayoutElements.AddElement();
@@ -43,6 +47,11 @@ public class RewardGenerator : MonoBehaviour
             AudioController.Instance.uiSfxSounds.Play("NewMove1");
             await tmp.GetComponent<MoveBlock>().LerpScale(new Vector3(1, 1, 0), zoomLerpDuration);
         }
+    }
+
+    private async void Canvas()
+    {
+        await Lerp.Value(panelCanvas.alpha, 0.2f, (a) => panelCanvas.alpha = a, panelCanvasDuration);
     }
 
     private void Move()
