@@ -23,7 +23,7 @@ public abstract class AbstractMenu : MonoBehaviour
 
     public void Initialized()
     {
-        if (GameManager.InputDetection.controlSchemeIndex == 0)
+        if (GameManager.InputDetection.controlSchemeIndex == 0 || GameManager.InputDetection.previousCustomControlScheme == InputDevice.KEYBOARD)
             EventSystem.current.SetSelectedGameObject(firstSelected);
 
         GameManager.InputDetection.selected = firstSelected;

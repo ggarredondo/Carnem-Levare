@@ -95,4 +95,9 @@ public class GameManager : MonoBehaviour
             sceneController.PlayMusic();
         }
     }
+
+    private void Update()
+    {
+        inputDetection.CheckCustomControlScheme();
+    }
 }

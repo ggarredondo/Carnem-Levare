@@ -48,7 +48,7 @@ public class AutoSelect : MonoBehaviour, IPointerEnterHandler, ISelectHandler, I
 
     public void OnSelect(BaseEventData eventData)
     {
-        if (GameManager.InputDetection.controlSchemeIndex == 0)
+        if (GameManager.InputDetection.controlSchemeIndex == 0 || GameManager.InputDetection.previousCustomControlScheme == InputDevice.KEYBOARD)
         {
             GameManager.InputDetection.selected = EventSystem.current.currentSelectedGameObject;
             AudioController.Instance.uiSfxSounds.Play("SelectButton");
