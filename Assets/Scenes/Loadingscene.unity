@@ -445,8 +445,8 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: 72f2f0f8-5279-4a84-b3cd-fd13ab97abe9
     m_ActionName: Main Movement/ChangeCamera[/XInputControllerWindows/buttonWest,/Keyboard/2]
-  m_NeverAutoSwitchControlSchemes: 0
-  m_DefaultControlScheme: Gamepad
+  m_NeverAutoSwitchControlSchemes: 1
+  m_DefaultControlScheme: 
   m_DefaultActionMap: LoadingScreen
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 1418685037}

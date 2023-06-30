@@ -21,6 +21,7 @@ public class LoadingScreen : MonoBehaviour
     private void Start()
     {
         GameManager.InputDetection.controlsChangedEvent += ChangeText;
+        ChangeText();
     }
 
     private void OnEnable()
@@ -76,7 +77,6 @@ public class LoadingScreen : MonoBehaviour
 
         if (progress >= 0.9f)
         {
-            ChangeText();
             percentage.text = "Press " + continueAction + " to continue";
             loadingTextAnim.enabled = true;
 
