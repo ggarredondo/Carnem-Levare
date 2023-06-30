@@ -22,6 +22,7 @@ public class AttackMove : Move
     [SerializeField] private string hitSound;
     [SerializeField] private string blockedSound;
     [SerializeField] private string staggerSound;
+    [SerializeField] private string koSound;
 
     [Header("Attack-specific Time Data (ms)")]
     [SerializeField] private double hitStun;
@@ -78,6 +79,7 @@ public class AttackMove : Move
         currentHitbox.Set(hitSound,
             blockedSound,
             staggerSound,
+            koSound,
             hitCameraShake,
             blockCameraShake,
             staggerCameraShake,

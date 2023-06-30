@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class Hitbox : MonoBehaviour
 {
-    private string hitSound, blockedSound, staggerSound;
+    private string hitSound, blockedSound, staggerSound, koSound;
     private int damageToHealth, damageToStamina;
     private float hurtSide, hurtHeight, hurtPower;
     private double blockStun, hitStun;
@@ -15,7 +15,7 @@ public class Hitbox : MonoBehaviour
         SetActive(false);
     }
 
-    public void Set(string hitSound, string blockedSound, string staggerSound,
+    public void Set(string hitSound, string blockedSound, string staggerSound, string koSound,
         in CameraEffectsData hitCameraShake, in CameraEffectsData blockCameraShake, 
         in CameraEffectsData staggerCameraShake, in CameraEffectsData koCameraShake,
         in HitStopData hurtHitStop, in HitStopData blockHitStop, 
@@ -26,6 +26,7 @@ public class Hitbox : MonoBehaviour
         this.hitSound = hitSound;
         this.blockedSound = blockedSound;
         this.staggerSound = staggerSound;
+        this.koSound = koSound;
         this.hitCameraShake = hitCameraShake;
         this.blockCameraShake = blockCameraShake;
         this.staggerCameraShake = staggerCameraShake;
@@ -49,6 +50,7 @@ public class Hitbox : MonoBehaviour
     public string HitSound { get => hitSound; }
     public string BlockedSound { get => blockedSound; }
     public string StaggerSound { get => staggerSound; }
+    public string KoSound { get => koSound; }
 
     public ref readonly CameraEffectsData HitCameraShake => ref hitCameraShake;
     public ref readonly CameraEffectsData BlockCameraShake => ref blockCameraShake;

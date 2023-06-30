@@ -33,6 +33,7 @@ MonoBehaviour:
   hitSound: Hit_Jab
   blockedSound: Blocked_Default
   staggerSound: Guard_Break
+  koSound: Knockout_Default
   hitStun: 500
   blockStun: 200
   hitCameraShake:
