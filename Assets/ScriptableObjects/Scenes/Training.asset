@@ -12,13 +12,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d66219019227eb34c927cb1bf1fd9889, type: 3}
   m_Name: Training
   m_EditorClassIdentifier: 
-  ID: 4
+  sceneObject: {fileID: 102900000, guid: 71d302a04e8093b4d9f2a74bc98b053c, type: 3}
   nextScene:
+    sceneObject: {fileID: 102900000, guid: 91bc4d5572ccf0549abe3a0a5a381852, type: 3}
     withLoadScreen: 0
-    ID: 3
+    loadSceneObject: {fileID: 0}
   previousScene:
+    sceneObject: {fileID: 102900000, guid: 4eeb1788d118dab4fad3cbe78c7f7bb7, type: 3}
     withLoadScreen: 0
-    ID: 2
+    loadSceneObject: {fileID: 0}
   playMusic: 1
   music: Fight
   sounds:

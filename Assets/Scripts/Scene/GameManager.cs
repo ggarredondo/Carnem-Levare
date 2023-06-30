@@ -13,7 +13,10 @@ public class GameManager : MonoBehaviour
     [SerializeField] private TransitionPlayer transitionPlayer;
     [SerializeField] private SaveOptions defaultOptions;
     [SerializeField] private SaveGame defaultGame;
+
+    [Header("SceneSettings")]
     [SerializeField] private List<SceneLogic> scenes;
+    [SerializeField] private Object firstSceneObject;
 
     [Header("Debug")]
     [SerializeField] [Range(0f, 1f)] private float timeScale = 1f;
@@ -44,11 +47,12 @@ public class GameManager : MonoBehaviour
         playerInput = GameObject.FindGameObjectWithTag("INPUT").GetComponent<PlayerInput>();
         uiInput = GetComponent<InputSystemUIInputModule>();
 
-        if (SceneManager.GetActiveScene().buildIndex == (int)SceneNumber.MAIN_MENU)
-        {
-            DontDestroyOnLoad(GameObject.FindGameObjectWithTag("MUSIC").transform.parent.gameObject);
-            DontDestroyOnLoad(gameObject);
-        }
+        if(firstSceneObject != null)
+            if (SceneManager.GetActiveScene().name == firstSceneObject.name)
+            {
+                DontDestroyOnLoad(GameObject.FindGameObjectWithTag("MUSIC").transform.parent.gameObject);
+                DontDestroyOnLoad(gameObject);
+            }
 
         SceneManager.sceneLoaded += OnSceneLoaded;
 
@@ -59,7 +63,7 @@ public class GameManager : MonoBehaviour
 
         inputMapping = new();
         inputDetection = new();
-        sceneController = new(SceneManager.GetActiveScene().buildIndex, scenes);
+        sceneController = new(SceneManager.GetActiveScene().name, scenes);
         transitionPlayer.Initialize();
     }
 
@@ -84,16 +88,11 @@ public class GameManager : MonoBehaviour
         if(Time.timeScale < 1)
             Time.timeScale = 1;
 
-        if (SceneManager.GetActiveScene().buildIndex != (int)SceneNumber.MAIN_MENU)
-            playerInput = GameObject.FindGameObjectWithTag("INPUT").GetComponent<PlayerInput>();
+        if (firstSceneObject != null)
+            if (SceneManager.GetActiveScene().name != firstSceneObject.name)
+                playerInput = GameObject.FindGameObjectWithTag("INPUT").GetComponent<PlayerInput>();
 
         InputDetection.Configure();
-
-        if (SceneManager.GetActiveScene().buildIndex != (int)SceneNumber.LOADING)
-        {
-            AudioController.Instance.InitializeSoundSources(sceneController.GetCurrentSounds());
-            sceneController.PlayMusic();
-        }
     }
 
     private void Update()

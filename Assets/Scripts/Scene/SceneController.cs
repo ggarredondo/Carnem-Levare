@@ -1,14 +1,19 @@
 using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class SceneController
 {
-    private Dictionary<int, SceneLogic> scenesTable;
+    private Dictionary<string, SceneLogic> scenesTable;
     private List<SceneLogic> scenes;
     private SceneLoader sceneLoader;
-    private int currentScene;
 
-    public SceneController(int initialScene, List<SceneLogic> scenes)
+    private string currentScene;
+    private string currentLoadScene;
+
+    public SceneController(string initialScene, List<SceneLogic> scenes)
     {
+        SceneManager.sceneLoaded += OnSceneLoaded;
         sceneLoader = new();
         scenesTable = new();
 
@@ -18,12 +23,21 @@ public class SceneController
         Initialize();
     }
 
-    private void Initialize()
+    void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        scenes.ForEach(s => scenesTable.Add((int)s.ID, s));
+        if (SceneManager.GetActiveScene().name != currentLoadScene)
+        {
+            AudioController.Instance.InitializeSoundSources(GetCurrentSounds());
+            PlayMusic();
+        }
     }
 
-    private void UpdateScene(int nextScene)
+    private void Initialize()
+    {
+        scenes.ForEach(s => scenesTable.Add(s.sceneObject.name, s));
+    }
+
+    private void UpdateScene(string nextScene)
     {
         currentScene = nextScene;
     }
@@ -41,36 +55,31 @@ public class SceneController
 
     public void NextScene()
     {
-        SceneNumber nextScene = scenesTable[currentScene].nextScene.ID;
+        string nextScene = scenesTable[currentScene].nextScene.sceneObject.name;
 
         if (scenesTable[currentScene].nextScene.withLoadScreen)
-            sceneLoader.LoadWithLoadingScreen(nextScene);
+        {
+            currentLoadScene = scenesTable[currentScene].nextScene.loadSceneObject.name;
+            sceneLoader.LoadWithLoadingScreen(nextScene, currentLoadScene);
+        }
         else
             sceneLoader.LoadScene(nextScene);
 
-        UpdateScene((int)nextScene);
+        UpdateScene(nextScene);
     }
 
     public void PreviousScene()
     {
-        SceneNumber nextScene = scenesTable[currentScene].previousScene.ID;
+        string nextScene = scenesTable[currentScene].previousScene.sceneObject.name;
 
         if (scenesTable[currentScene].previousScene.withLoadScreen)
-            sceneLoader.LoadWithLoadingScreen(nextScene);
+        {
+            currentLoadScene = scenesTable[currentScene].previousScene.loadSceneObject.name;
+            sceneLoader.LoadWithLoadingScreen(nextScene, currentLoadScene);
+        }
         else
             sceneLoader.LoadScene(nextScene);
 
-        UpdateScene((int)nextScene);
+        UpdateScene(nextScene);
     }
-}
-
-public enum SceneNumber
-{
-    MAIN_MENU = 0,
-    LOADING = 1,
-    NON_DESTROY_MAIN_MENU = 2,
-    COMBAT = 3,
-    TRAINING = 4,
-    PHOTOSHOP = 5,
-    TEST_TRAINING = 6
 }

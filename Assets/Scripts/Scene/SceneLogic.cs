@@ -5,16 +5,17 @@ using UnityEngine;
 public class SceneLogic : ScriptableObject
 {
     [System.Serializable]
-    public struct Scene
+    public struct SceneData
     {
+        public Object sceneObject;
         public bool withLoadScreen;
-        public SceneNumber ID;
+        public Object loadSceneObject;
     }
 
     [Header ("Scene")]
-    public SceneNumber ID;
-    public Scene nextScene;
-    public Scene previousScene;
+    public Object sceneObject;
+    public SceneData nextScene;
+    public SceneData previousScene;
 
     [Header("Sound")]
     public bool playMusic;

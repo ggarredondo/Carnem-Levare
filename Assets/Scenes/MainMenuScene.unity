@@ -181,6 +181,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 0e453fa89c1bf344faf4f03d90465f6a, type: 2}
   - {fileID: 11400000, guid: aa8c16f7b0d7d604d9d2cb06e5311095, type: 2}
   - {fileID: 11400000, guid: 55607cf643206fe41bb7ca5a6d3f1862, type: 2}
+  firstSceneObject: {fileID: 102900000, guid: cc36de46ab694694e9fd03015604d18a, type: 3}
   timeScale: 1
 --- !u!114 &734591667
 MonoBehaviour:

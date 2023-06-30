@@ -12,7 +12,8 @@ public class SceneLoader
     public static event System.Action ActivateLoading;
     public static event System.Func<float,bool> UpdateLoading;
 
-    private static int nextSceneIndex;
+    private static string nextSceneIndex;
+    private string loadingScene;
 
     public SceneLoader()
     {
@@ -23,7 +24,7 @@ public class SceneLoader
     {
         EndLoad();
 
-        if (SceneManager.GetActiveScene().buildIndex == (int) SceneNumber.LOADING)
+        if (SceneManager.GetActiveScene().name == loadingScene)
         {
             ActivateLoading.Invoke();
             LoadSceneAsync();
@@ -35,19 +36,20 @@ public class SceneLoader
         await EndTransition?.Invoke();
     }
 
-    public async void LoadScene(SceneNumber sceneIndex)
+    public async void LoadScene(string sceneName)
     {
         await StartTransition.Invoke();
         GameManager.PlayerInput.controlsChangedEvent.RemoveAllListeners();
-        SceneManager.LoadScene((int) sceneIndex);
+        SceneManager.LoadScene(sceneName);
     }
 
-    public async void LoadWithLoadingScreen(SceneNumber nextScene)
+    public async void LoadWithLoadingScreen(string nextScene, string loadingScene)
     {
         await StartTransition.Invoke();
-        nextSceneIndex = (int) nextScene;
+        nextSceneIndex = nextScene;
+        this.loadingScene = loadingScene;
         GameManager.PlayerInput.controlsChangedEvent.RemoveAllListeners();
-        SceneManager.LoadScene((int) SceneNumber.LOADING);
+        SceneManager.LoadScene(loadingScene);
     }
 
     private async void LoadSceneAsync()

@@ -3017,6 +3017,7 @@ MonoBehaviour:
   defaultGame: {fileID: 0}
   scenes:
   - {fileID: 11400000, guid: 27a1c6ac1997d054981ceef7d9c29c8a, type: 2}
+  firstSceneObject: {fileID: 0}
   timeScale: 1
 --- !u!114 &1938814320
 MonoBehaviour:

@@ -240,8 +240,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c7812153de0a68f4aad4dc6d0ff39d3d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  target: 1
   character: {fileID: 7115871151908366452}
+  hurtHeight: 0
 --- !u!1 &5838331529888928801
 GameObject:
   m_ObjectHideFlags: 0
@@ -421,7 +421,7 @@ Transform:
   m_GameObject: {fileID: 7481606168508649711}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.1, y: 1.1, z: 1.1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6944190358229410020}
@@ -475,12 +475,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   characterStats:
+    health: 0
+    maxHealth: 0
     stamina: 0
     maxStamina: 300
-    characterDamage: 10
-    blockingMultiplier: 0.1
+    damageToHealth: 0
+    damageToStamina: 0
     comboDecay: 200
-    minDisadvantage: 100
+    minStun: 0
+    staggerStun: 0
+    HYPERARMOR_FLAG: 0
+    NOHURT_FLAG: 0
+    NODEATH_FLAG: 0
     height: 1.1
     mass: 1
     drag: 0
@@ -494,19 +500,17 @@ MonoBehaviour:
     - {fileID: 1603956594911505768}
     - {fileID: 6476973125119121845}
     - {fileID: 903136000488697184}
-    noHurt: 0
-    noDeath: 1
   characterMovement:
     trackingRate: 5
+    trackingMinimumMagnitude: 0.1
     doTracking: 1
     walkingDirectionSpeed: 5
     blockingDirectionSpeed: 5
     blockedDirectionSpeed: 1
     idleDirectionSpeed: 3
-    targetingMinimumMagnitude: 0.1
   characterAnimation:
     animatorSpeed: 1
-    updateMovesetAnimations: 0
+  enemyDrops: []
 --- !u!114 &1878726773391280501
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -530,15 +534,7 @@ MonoBehaviour:
   move3: 0
   AIBehaviour: {fileID: 11400000, guid: d685f91f6ec7ecb44bc435195bb44e1f, type: 2}
   moveSequences:
-  - sequence:
-    - moveIndex: 0
-      msUntilNextMove: 0
-    - moveIndex: 3
-      msUntilNextMove: 0
-    - moveIndex: 2
-      msUntilNextMove: 0
-    - moveIndex: 1
-      msUntilNextMove: 0
+  - sequence: 00000000000000000000000000000000
   minReactionTimeMs: 220
   maxReactionTimeMs: 320
 --- !u!54 &5975427957589119885
@@ -709,8 +705,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c7812153de0a68f4aad4dc6d0ff39d3d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  target: 4
   character: {fileID: 7115871151908366452}
+  hurtHeight: 0
 --- !u!1 &7861743490557194619
 GameObject:
   m_ObjectHideFlags: 0
@@ -861,8 +857,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c7812153de0a68f4aad4dc6d0ff39d3d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  target: 1
   character: {fileID: 7115871151908366452}
+  hurtHeight: 0
 --- !u!1 &8581622639913374783
 GameObject:
   m_ObjectHideFlags: 0
