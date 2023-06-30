@@ -6,8 +6,8 @@ public class Hitbox : MonoBehaviour
     private int damageToHealth, damageToStamina;
     private float hurtSide, hurtHeight, hurtPower;
     private double blockStun, hitStun;
-    private HitStopData hurtHitStop, blockHitStop, staggerHitStop;
-    private CameraEffectsData hitCameraShake, blockCameraShake, staggerCameraShake;
+    private HitStopData hurtHitStop, blockHitStop, staggerHitStop, koHitStop;
+    private CameraEffectsData hitCameraShake, blockCameraShake, staggerCameraShake, koCameraShake;
     private Vector3 knockbackOnHit, knockbackOnBlock;
 
     private void Start()
@@ -16,8 +16,10 @@ public class Hitbox : MonoBehaviour
     }
 
     public void Set(string hitSound, string blockedSound, string staggerSound,
-        in CameraEffectsData hitCameraShake, in CameraEffectsData blockCameraShake, in CameraEffectsData staggerCameraShake,
-        in HitStopData hurtHitStop, in HitStopData blockHitStop, in HitStopData staggerHitStop,
+        in CameraEffectsData hitCameraShake, in CameraEffectsData blockCameraShake, 
+        in CameraEffectsData staggerCameraShake, in CameraEffectsData koCameraShake,
+        in HitStopData hurtHitStop, in HitStopData blockHitStop, 
+        in HitStopData staggerHitStop, in HitStopData koHitStop,
         float hurtSide, float hurtPower, int damageToHealth, int damageToStamina,
         double blockStun, double hitStun, in Vector3 knockbackOnHit, in Vector3 knockbackOnBlock)
     {
@@ -27,9 +29,11 @@ public class Hitbox : MonoBehaviour
         this.hitCameraShake = hitCameraShake;
         this.blockCameraShake = blockCameraShake;
         this.staggerCameraShake = staggerCameraShake;
+        this.koCameraShake = koCameraShake;
         this.hurtHitStop = hurtHitStop;
         this.blockHitStop = blockHitStop;
         this.staggerHitStop = staggerHitStop;
+        this.koHitStop = koHitStop;
         this.hurtSide = hurtSide;
         this.hurtPower = hurtPower;
         this.damageToHealth = damageToHealth;
@@ -49,9 +53,11 @@ public class Hitbox : MonoBehaviour
     public ref readonly CameraEffectsData HitCameraShake => ref hitCameraShake;
     public ref readonly CameraEffectsData BlockCameraShake => ref blockCameraShake;
     public ref readonly CameraEffectsData StaggerCameraShake => ref staggerCameraShake;
+    public ref readonly CameraEffectsData KOCameraShake => ref koCameraShake;
     public ref readonly HitStopData HurtHitStop => ref hurtHitStop;
     public ref readonly HitStopData BlockHitStop => ref blockHitStop;
     public ref readonly HitStopData StaggerHitStop => ref staggerHitStop;
+    public ref readonly HitStopData KOHitStop => ref koHitStop;
     public float HurtSide { get => hurtSide; }
     public float HurtHeight { get => hurtHeight; }
     public float HurtPower { get => hurtPower; }

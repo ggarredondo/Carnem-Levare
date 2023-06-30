@@ -15,7 +15,7 @@ public class HitStop : MonoBehaviour
 
     private void Awake() => enabled = false;
 
-    public event Action OnTriggered;
+    public event Action OnTriggered, OnFinish;
 
     public void Reference(in Animator attackerAnimator, in Transform attackerTransform,
         in Animator defenderAnimator, in Rigidbody defenderRb, 
@@ -68,5 +68,7 @@ public class HitStop : MonoBehaviour
         defenderRb.isKinematic = false;
         defenderCol.enabled = true;
         this.enabled = false;
+
+        OnFinish?.Invoke();
     }
 }

@@ -56,6 +56,13 @@ MonoBehaviour:
     screenShakeTime: 0
     screenShakeFrequency: 0
     screenShakeAmplitude: 0
+  koCameraShake:
+    targetShakeTime: 0
+    targetShakeIntensity: 0
+    shakeType: {fileID: 0}
+    screenShakeTime: 0
+    screenShakeFrequency: 0
+    screenShakeAmplitude: 0
   hurtHitStop:
     attackerAnimSpeed: 0.1
     defenderAnimSpeed: 0.1
@@ -77,6 +84,13 @@ MonoBehaviour:
     lengthMS: 500
     amplitude: 0.1
     frequency: 100
+  koHitStop:
+    attackerAnimSpeed: 0.1
+    defenderAnimSpeed: 0.1
+    startTimeMS: 100
+    lengthMS: 700
+    amplitude: 0.1
+    frequency: 200
   knockbackOnHit: {x: 0, y: 0, z: 20}
   knockbackOnBlock: {x: 0, y: 0, z: 0}
   hitbox: 0

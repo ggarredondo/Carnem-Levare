@@ -31,11 +31,13 @@ public class AttackMove : Move
     [SerializeField] private CameraEffectsData hitCameraShake;
     [SerializeField] private CameraEffectsData blockCameraShake;
     [SerializeField] private CameraEffectsData staggerCameraShake;
+    [SerializeField] private CameraEffectsData koCameraShake;
 
     [Header("Attack HitStop")]
     [SerializeField] private HitStopData hurtHitStop;
     [SerializeField] private HitStopData blockHitStop;
     [SerializeField] private HitStopData staggerHitStop;
+    [SerializeField] private HitStopData koHitStop;
 
     [Header("Attack Knockback")]
     [SerializeField] private Vector3 knockbackOnHit;
@@ -79,9 +81,11 @@ public class AttackMove : Move
             hitCameraShake,
             blockCameraShake,
             staggerCameraShake,
+            koCameraShake,
             hurtHitStop,
             blockHitStop,
             staggerHitStop,
+            koHitStop,
             (float)hurtSide,
             (float)hurtLevel,
             stats.CalculateDamageToHealth(damageToHealth),

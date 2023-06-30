@@ -58,7 +58,7 @@ public class CharacterAnimation
             animator.SetFloat("hurt_height", hitbox.HurtHeight);
             animator.SetFloat("hurt_power", hitbox.HurtPower);
             animator.SetBool("STATE_KO", true);
-            hitstop.Trigger(hitbox.HurtHitStop);
+            hitstop.Trigger(hitbox.KOHitStop);
         };
         stateMachine.KOState.OnExit += () => animator.SetBool("STATE_KO", false);
     }
