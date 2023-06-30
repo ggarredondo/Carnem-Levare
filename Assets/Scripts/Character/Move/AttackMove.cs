@@ -3,8 +3,16 @@ using UnityEngine;
 [System.Serializable]
 public class HitStopData
 {
-    public double lengthMS;
-    public float intensity;
+    [SerializeField] private float attackerAnimSpeed, defenderAnimSpeed;
+    [SerializeField] private double startTimeMS, lengthMS;
+    [SerializeField] private float amplitude, frequency;
+
+    public ref readonly float AttackerAnimSpeed => ref attackerAnimSpeed;
+    public ref readonly float DefenderAnimSpeed => ref defenderAnimSpeed;
+    public ref readonly double StartTimeMS => ref startTimeMS;
+    public ref readonly double LengthMS => ref lengthMS;
+    public ref readonly float Amplitude => ref amplitude;
+    public ref readonly float Frequency => ref frequency;
 }
 
 [CreateAssetMenu(menuName = "Scriptable Objects/Move/AttackMove")]
@@ -22,10 +30,12 @@ public class AttackMove : Move
     [Header("Attack-specific Camera Movement")]
     [SerializeField] private CameraEffectsData hitCameraShake;
     [SerializeField] private CameraEffectsData blockCameraShake;
+    [SerializeField] private CameraEffectsData staggerCameraShake;
 
     [Header("Attack HitStop")]
     [SerializeField] private HitStopData hurtHitStop;
     [SerializeField] private HitStopData blockHitStop;
+    [SerializeField] private HitStopData staggerHitStop;
 
     [Header("Attack Knockback")]
     [SerializeField] private Vector3 knockbackOnHit;
@@ -68,8 +78,10 @@ public class AttackMove : Move
             staggerSound,
             hitCameraShake,
             blockCameraShake,
+            staggerCameraShake,
             hurtHitStop,
             blockHitStop,
+            staggerHitStop,
             (float)hurtSide,
             (float)hurtLevel,
             stats.CalculateDamageToHealth(damageToHealth),

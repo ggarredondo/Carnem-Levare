@@ -1,47 +1,72 @@
 using UnityEngine;
-using System.Collections;
 using System;
+using System.Threading.Tasks;
 
-public class HitStop
+public class HitStop : MonoBehaviour
 {
-    private RNG shakeRNG;
     private Animator attackerAnimator, defenderAnimator;
-    private Rigidbody defenderRB;
+    private Transform attackerTransform;
+    private Rigidbody defenderRb;
     private Collider defenderCol;
 
-    public HitStop(in Animator attackerAnimator, in Animator defenderAnimator, in Rigidbody defenderRB, in Collider defenderCol)
+    private float amplitude, frequency;
+    private Vector3 originalPosition;
+    private float timer, maxTime;
+
+    private void Awake() => enabled = false;
+
+    public event Action OnTriggered;
+
+    public void Reference(in Animator attackerAnimator, in Transform attackerTransform,
+        in Animator defenderAnimator, in Rigidbody defenderRb, 
+        in Collider defenderCol)
     {
         this.attackerAnimator = attackerAnimator;
+        this.attackerTransform = attackerTransform;
         this.defenderAnimator = defenderAnimator;
-        this.defenderRB = defenderRB;
+        this.defenderRb = defenderRb;
         this.defenderCol = defenderCol;
-        shakeRNG = new RNG(GameManager.RANDOM_SEED);
     }
 
-    // This should be done in FixedUpdate
-    public IEnumerator Start(double ms, float intensity)
+    public async void Trigger(HitStopData hitStopData)
     {
-        attackerAnimator.speed = 0;
-        defenderAnimator.speed = 0;
-        defenderRB.isKinematic = false;
+        await Task.Delay(TimeSpan.FromMilliseconds(hitStopData.StartTimeMS));
+
+        OnTriggered?.Invoke();
+
+        attackerAnimator.speed = hitStopData.AttackerAnimSpeed;
+        defenderAnimator.speed = hitStopData.DefenderAnimSpeed;
+        defenderRb.isKinematic = true;
         defenderCol.enabled = false;
+        originalPosition = defenderRb.position;
 
-        Vector3 originalDefenderPosition = defenderRB.position;
-        float maxTime = (float)TimeSpan.FromMilliseconds(ms).TotalSeconds;
-        float resolveRate = intensity / maxTime;
+        timer = 0;
+        maxTime = (float)TimeSpan.FromMilliseconds(hitStopData.LengthMS).TotalSeconds;
+        amplitude = hitStopData.Amplitude;
+        frequency = hitStopData.Frequency;
 
-        for (float t = 0; t < maxTime; t += Time.deltaTime)
+        enabled = true;
+    }
+
+    public void FixedUpdate()
+    {
+        if (timer < maxTime)
         {
-            intensity -= resolveRate * t;
-            defenderRB.position = originalDefenderPosition;
-            defenderRB.position += new Vector3(shakeRNG.RangeFloat(-intensity, intensity), 
-                0f, shakeRNG.RangeFloat(-intensity, intensity));
-            yield return null;
+            defenderRb.position = originalPosition + attackerTransform.right * (amplitude * Mathf.Sin(frequency * timer));
+            amplitude = Mathf.Lerp(amplitude, 0f, timer / maxTime);
+            timer += Time.deltaTime;
         }
+        else
+            Finish();
+    }
 
+    public void Finish()
+    {
         attackerAnimator.speed = 1;
         defenderAnimator.speed = 1;
-        defenderRB.isKinematic = true;
+        defenderRb.position = originalPosition;
+        defenderRb.isKinematic = false;
         defenderCol.enabled = true;
+        this.enabled = false;
     }
 }

@@ -18,7 +18,7 @@ public abstract class Character : MonoBehaviour
         stateMachine.Initialize();
         characterStats.Initialize(transform, GetComponent<Rigidbody>());
         characterMovement.Initialize(transform, GetComponent<Rigidbody>());
-        characterAnimation.Initialize(GetComponent<Animator>());
+        characterAnimation.Initialize(GetComponent<Animator>(), GetComponent<HitStop>());
     }
     protected virtual void Start()
     {
@@ -26,7 +26,9 @@ public abstract class Character : MonoBehaviour
         characterStats.Reference(stateMachine);
         characterMovement.Reference(opponent.transform);
         characterAudio.Reference(stateMachine, characterStats);
-        characterAnimation.Reference(stateMachine, characterStats, characterMovement);
+        characterAnimation.Reference(stateMachine, characterStats, characterMovement, 
+            opponent.GetComponent<Animator>(), opponent.transform,
+            GetComponent<Rigidbody>(), GetComponent<Collider>());
         stateMachine.TransitionToWalking(); // Must be done last
     }
     protected void OnValidate()
