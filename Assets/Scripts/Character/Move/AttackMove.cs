@@ -1,5 +1,9 @@
 using UnityEngine;
 
+public enum HurtSide : int { Left = -1, Mid = 0, Right = 1 }
+public enum HurtPower : int { LightHit, MediumHit, HardHit }
+public enum HitboxType : int { LeftFist, RightFist, LeftElbow, RightElbow }
+
 [System.Serializable]
 public class HitStopData
 {
@@ -19,38 +23,35 @@ public class HitStopData
 public class AttackMove : Move
 {
     [Header("Attack-specific Sound")]
-    [SerializeField] private string hitSound;
+    [SerializeField] private string hurtSound;
     [SerializeField] private string blockedSound;
     [SerializeField] private string staggerSound;
     [SerializeField] private string koSound;
 
     [Header("Attack-specific Time Data (ms)")]
-    [SerializeField] private double hitStun;
-    [SerializeField] private double blockStun;
+    [SerializeField] private double hurtStun;
+    [SerializeField] private double blockedStun;
 
     [Header("Attack-specific Camera Movement")]
-    [SerializeField] private CameraEffectsData hitCameraShake;
-    [SerializeField] private CameraEffectsData blockCameraShake;
+    [SerializeField] private CameraEffectsData hurtCameraShake;
+    [SerializeField] private CameraEffectsData blockedCameraShake;
     [SerializeField] private CameraEffectsData staggerCameraShake;
     [SerializeField] private CameraEffectsData koCameraShake;
 
     [Header("Attack HitStop")]
     [SerializeField] private HitStopData hurtHitStop;
-    [SerializeField] private HitStopData blockHitStop;
+    [SerializeField] private HitStopData blockedHitStop;
     [SerializeField] private HitStopData staggerHitStop;
     [SerializeField] private HitStopData koHitStop;
 
     [Header("Attack Knockback")]
-    [SerializeField] private Vector3 knockbackOnHit;
-    [SerializeField] private Vector3 knockbackOnBlock;
+    [SerializeField] private Vector3 hurtKnockback;
+    [SerializeField] private Vector3 blockedKnockback;
 
-    private enum HurtSide : int { Left = -1, Mid = 0, Right = 1 }
-    private enum HurtPower : int { LightHit, MediumHit, HardHit }
-    private enum HitboxType : int { LeftFist, RightFist, LeftElbow, RightElbow }
     [Header("Attack Values")]
     [SerializeField] private HitboxType hitbox;
     [SerializeField] private HurtSide hurtSide;
-    [SerializeField] private HurtPower hurtLevel;
+    [SerializeField] private HurtPower hurtPower;
     private Hitbox currentHitbox;
     [SerializeField] private int damageToHealth, damageToStamina;
     [SerializeField] private bool hyperarmor;
@@ -76,26 +77,9 @@ public class AttackMove : Move
         stats.HYPERARMOR_FLAG = hyperarmor;
 
         currentHitbox = stats.HitboxList[(int) hitbox];
-        currentHitbox.Set(hitSound,
-            blockedSound,
-            staggerSound,
-            koSound,
-            hitCameraShake,
-            blockCameraShake,
-            staggerCameraShake,
-            koCameraShake,
-            hurtHitStop,
-            blockHitStop,
-            staggerHitStop,
-            koHitStop,
-            (float)hurtSide,
-            (float)hurtLevel,
+        currentHitbox.Set(this,
             stats.CalculateDamageToHealth(damageToHealth),
-            stats.CalculateDamageToStamina(damageToStamina),
-            blockStun,
-            hitStun,
-            knockbackOnHit,
-            knockbackOnBlock);
+            stats.CalculateDamageToStamina(damageToStamina));
     }
     public override void ActivateMove(in CharacterStats stats)
     {
@@ -105,12 +89,30 @@ public class AttackMove : Move
     public override void DeactivateMove(in CharacterStats stats) => currentHitbox.SetActive(false);
     public override void EndMove(in CharacterStats stats) => stats.HYPERARMOR_FLAG = false;
 
-    public float DamageToHealth => damageToHealth;
-    public float DamageToStamina => damageToStamina;
+    public ref readonly string HurtSound => ref hurtSound;
+    public ref readonly string BlockedSound => ref blockedSound;
+    public ref readonly string StaggerSound => ref staggerSound;
+    public ref readonly string KOSound => ref koSound;
 
-    public double BlockStun => blockStun;
-    public double HitStun => hitStun;
+    public double HurtStun => hurtStun;
+    public double BlockedStun => blockedStun;
 
-    public double AdvantageOnBlock => blockStun - (RelativeActive + RelativeRecovery);
-    public double AdvantageOnHit => hitStun - (RelativeActive + RelativeRecovery);
+    public double AdvantageOnHit => hurtStun - (RelativeActive + RelativeRecovery);
+    public double AdvantageOnBlock => blockedStun - (RelativeActive + RelativeRecovery);
+
+    public ref readonly CameraEffectsData HurtCameraShake => ref hurtCameraShake;
+    public ref readonly CameraEffectsData BlockedCameraShake => ref blockedCameraShake;
+    public ref readonly CameraEffectsData StaggerCameraShake => ref staggerCameraShake;
+    public ref readonly CameraEffectsData KOCameraShake => ref koCameraShake;
+
+    public ref readonly HitStopData HurtHitStop => ref hurtHitStop;
+    public ref readonly HitStopData BlockedHitStop => ref blockedHitStop;
+    public ref readonly HitStopData StaggerHitStop => ref staggerHitStop;
+    public ref readonly HitStopData KOHitStop => ref koHitStop;
+
+    public ref readonly Vector3 HurtKnockback => ref hurtKnockback;
+    public ref readonly Vector3 BlockedKnockback => ref blockedKnockback;
+
+    public HurtSide HurtSide => hurtSide;
+    public HurtPower HurtPower => hurtPower;
 }

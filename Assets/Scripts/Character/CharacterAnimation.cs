@@ -42,7 +42,7 @@ public class CharacterAnimation
         stateMachine.BlockedState.OnEnterHitbox += (in Hitbox hitbox) => {
             animator.SetBool("STATE_BLOCKED", true);
             TriggerHurtAnimation(hitbox.HurtSide, hitbox.HurtHeight, hitbox.HurtPower);
-            hitstop.Trigger(hitbox.BlockHitStop);
+            hitstop.Trigger(hitbox.BlockedHitStop);
         };
         stateMachine.BlockedState.OnExit += () => animator.SetBool("STATE_BLOCKED", false);
 

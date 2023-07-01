@@ -1,9 +1,8 @@
 using UnityEngine;
-
+public enum HurtHeight : int { Low, High }
 public class Hurtbox : MonoBehaviour
 {
     [SerializeField] private Character character;
-    private enum HurtHeight : int { Low, High }
     [SerializeField] private HurtHeight hurtHeight;
     private CharacterStateMachine stateMachine;
 
@@ -16,7 +15,7 @@ public class Hurtbox : MonoBehaviour
     {
         Hitbox hitbox = other.GetComponent<Hitbox>();
         hitbox.SetActive(false);
-        hitbox.SetHeight((float)hurtHeight);
+        hitbox.SetHeight(hurtHeight);
         stateMachine.OnHurt?.Invoke(hitbox);
     }
 }

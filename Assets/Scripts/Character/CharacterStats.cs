@@ -85,12 +85,12 @@ public class CharacterStats
         }
     }
 
-    public ref readonly int Health => ref health;
-    public ref readonly int MaxHealth => ref maxHealth;
-    public ref readonly int Stamina => ref stamina;
+    public int Health => health;
+    public int MaxHealth => maxHealth;
+    public int Stamina => stamina;
     public void ResetStamina() => stamina = maxStamina;
-    public ref readonly int MaxStamina => ref maxStamina;
-    public ref readonly double StaggerStun => ref staggerStun;
+    public int MaxStamina => maxStamina;
+    public double StaggerStun => staggerStun;
     public List<Move> MoveList { get => moveList;  set => moveList = value; }
     public ref readonly List<Hitbox> HitboxList => ref hitboxList;
 }

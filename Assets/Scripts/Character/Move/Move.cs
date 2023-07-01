@@ -25,7 +25,7 @@ public abstract class Move : ScriptableObject
     [SerializeField] protected string animatorTrigger;
     #if UNITY_EDITOR
     [SerializeField] protected AnimatorController animatorController;
-#endif
+    #endif
     [SerializeField] protected float stateSpeed = 1f;
     [SerializeField] protected float transitionDuration = 0.1f;
 
@@ -126,9 +126,9 @@ public abstract class Move : ScriptableObject
 
     public ref readonly Sprite Icon => ref icon;
     public ref readonly string AnimatorTrigger => ref animatorTrigger;
-    public ref readonly bool FixedDirection => ref fixedDirection;
-    public ref readonly float DirectionSpeed => ref directionSpeed;
-    public ref readonly string InitSound { get => ref initSound; }
+    public bool FixedDirection => fixedDirection;
+    public float DirectionSpeed => directionSpeed;
+    public ref readonly string InitSound => ref initSound;
 
     public double StartUp => startUp;
     public double Active => active;

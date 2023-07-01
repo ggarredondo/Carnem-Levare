@@ -35,8 +35,8 @@ public class CameraShake : CameraMovement
         defaultAmplitude = noiseTransposer.m_AmplitudeGain;
         defaultNoiseSettings = noiseTransposer.m_NoiseProfile;
 
-        noiseTransposer.m_NoiseProfile = hitbox.BlockCameraShake.shakeType;
-        HurtTime(hitbox.HitCameraShake.screenShakeFrequency, hitbox.HitCameraShake.screenShakeAmplitude, (float) hitbox.HitCameraShake.screenShakeTime);
+        noiseTransposer.m_NoiseProfile = hitbox.BlockedCameraShake.shakeType;
+        HurtTime(hitbox.HurtCameraShake.screenShakeFrequency, hitbox.HurtCameraShake.screenShakeAmplitude, (float) hitbox.HurtCameraShake.screenShakeTime);
     }
 
     private void BlockingShake(in Hitbox hitbox)
@@ -45,8 +45,8 @@ public class CameraShake : CameraMovement
         defaultAmplitude = noiseTransposer.m_AmplitudeGain;
         defaultNoiseSettings = noiseTransposer.m_NoiseProfile;
 
-        noiseTransposer.m_NoiseProfile = hitbox.BlockCameraShake.shakeType;
-        HurtTime(hitbox.BlockCameraShake.screenShakeFrequency, hitbox.BlockCameraShake.screenShakeAmplitude, (float)hitbox.BlockCameraShake.screenShakeTime);
+        noiseTransposer.m_NoiseProfile = hitbox.BlockedCameraShake.shakeType;
+        HurtTime(hitbox.BlockedCameraShake.screenShakeFrequency, hitbox.BlockedCameraShake.screenShakeAmplitude, (float)hitbox.BlockedCameraShake.screenShakeTime);
     }
 
     private async void HurtTime(float frequency, float amplitude, float time)

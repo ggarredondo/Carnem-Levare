@@ -30,20 +30,20 @@ MonoBehaviour:
   active: 50
   recovery: 300
   applyAnimationEvents: 0
-  hitSound: Hit_Jab
+  hurtSound: Hit_Jab
   blockedSound: Blocked_Default
   staggerSound: Guard_Break
   koSound: Knockout_Default
-  hitStun: 500
-  blockStun: 200
-  hitCameraShake:
+  hurtStun: 500
+  blockedStun: 200
+  hurtCameraShake:
     targetShakeTime: 0
     targetShakeIntensity: 0
     shakeType: {fileID: 0}
     screenShakeTime: 0
     screenShakeFrequency: 0
     screenShakeAmplitude: 0
-  blockCameraShake:
+  blockedCameraShake:
     targetShakeTime: 0
     targetShakeIntensity: 0
     shakeType: {fileID: 0}
@@ -71,7 +71,7 @@ MonoBehaviour:
     lengthMS: 30
     amplitude: 0.1
     frequency: 100
-  blockHitStop:
+  blockedHitStop:
     attackerAnimSpeed: 0
     defenderAnimSpeed: 0
     startTimeMS: 0
@@ -92,11 +92,11 @@ MonoBehaviour:
     lengthMS: 700
     amplitude: 0.1
     frequency: 200
-  knockbackOnHit: {x: 0, y: 0, z: 20}
-  knockbackOnBlock: {x: 0, y: 0, z: 0}
+  hurtKnockback: {x: 0, y: 0, z: 0}
+  blockedKnockback: {x: 0, y: 0, z: 0}
   hitbox: 0
   hurtSide: 0
-  hurtLevel: 0
+  hurtPower: 0
   damageToHealth: 10
   damageToStamina: 5
   hyperarmor: 0

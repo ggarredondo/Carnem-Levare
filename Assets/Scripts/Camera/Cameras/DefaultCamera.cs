@@ -115,15 +115,15 @@ public class DefaultCamera : MonoBehaviour, ICameraInitialize
     private void CameraShake(in Hitbox hitbox)
     {
         hurt = true;
-        targetingSpeed = hitbox.HitCameraShake.targetShakeIntensity;
-        HurtTime(hitbox.HitCameraShake.targetShakeTime);
+        targetingSpeed = hitbox.HurtCameraShake.targetShakeIntensity;
+        HurtTime(hitbox.HurtCameraShake.targetShakeTime);
     }
 
     private void BlockingCameraShake(in Hitbox hitbox)
     {
         hurt = true;
-        targetingSpeed = hitbox.BlockCameraShake.targetShakeIntensity;
-        HurtTime(hitbox.BlockCameraShake.targetShakeTime);
+        targetingSpeed = hitbox.BlockedCameraShake.targetShakeIntensity;
+        HurtTime(hitbox.BlockedCameraShake.targetShakeTime);
     }
 
     private async void HurtTime(double time)

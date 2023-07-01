@@ -30,9 +30,9 @@ public class HurtState : CharacterState
         OnEnterHitbox?.Invoke(hitbox);
 
         stateMachine.hitNumber++;
-        coroutine = StateFunctions.Recover(stateMachine, stats.CalculateStun(hitbox.HitStun, stateMachine.hitNumber));
+        coroutine = StateFunctions.Recover(stateMachine, stats.CalculateStun(hitbox.HurtStun, stateMachine.hitNumber));
         stateMachine.StartCoroutine(coroutine);
-        movement.PushCharacter(hitbox.KnockbackOnHit);
+        movement.PushCharacter(hitbox.HurtKnockback);
     }
     public void Update() {}
     public void FixedUpdate() 

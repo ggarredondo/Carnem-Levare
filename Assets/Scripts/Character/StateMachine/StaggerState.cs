@@ -31,7 +31,7 @@ public class StaggerState : CharacterState
         stats.ResetStamina();
         coroutine = StateFunctions.Recover(stateMachine, stats.StaggerStun);
         stateMachine.StartCoroutine(coroutine);
-        movement.PushCharacter(hitbox.KnockbackOnHit);
+        movement.PushCharacter(hitbox.HurtKnockback);
     }
     public void Update() {}
     public void FixedUpdate() 
