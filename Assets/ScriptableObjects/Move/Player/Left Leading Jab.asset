@@ -39,10 +39,10 @@ MonoBehaviour:
   hurtCameraShake:
     targetShakeTime: 0
     targetShakeIntensity: 0
-    shakeType: {fileID: 0}
-    screenShakeTime: 0
-    screenShakeFrequency: 0
-    screenShakeAmplitude: 0
+    shakeType: {fileID: 11400000, guid: 69ce8388f6785dd4c8c39915efece2f4, type: 2}
+    screenShakeTime: 5
+    screenShakeFrequency: 5
+    screenShakeAmplitude: 1
   blockedCameraShake:
     targetShakeTime: 0
     targetShakeIntensity: 0
@@ -53,10 +53,10 @@ MonoBehaviour:
   staggerCameraShake:
     targetShakeTime: 0
     targetShakeIntensity: 0
-    shakeType: {fileID: 0}
-    screenShakeTime: 0
-    screenShakeFrequency: 0
-    screenShakeAmplitude: 0
+    shakeType: {fileID: 11400000, guid: 69ce8388f6785dd4c8c39915efece2f4, type: 2}
+    screenShakeTime: 10
+    screenShakeFrequency: 5
+    screenShakeAmplitude: 2
   koCameraShake:
     targetShakeTime: 0
     targetShakeIntensity: 0
