@@ -15,7 +15,7 @@ public class DefaultCamera : MonoBehaviour, ICameraInitialize
     private Transform[] alternativeTargets;
     private Vector3[] defaultTargets;
     private Vector3[] hitStopTargets;
-    private bool hurt, isDoingMove, isBlocking, isHitStopping;
+    private bool hurt, isDoingMove, isBlocking;
     private float targetingSpeed, blockingCounter;
 
     private CinemachineOrbitalTransposer orbitalTransposer;
@@ -66,7 +66,6 @@ public class DefaultCamera : MonoBehaviour, ICameraInitialize
             hitStopTargets[1] = enemy.transform.position;
             cam.m_Follow = null;
             cam.m_LookAt = null;
-            isHitStopping = true;
         };
 
         player.CharacterAnimation.HitStop.OnTriggered += () => 
@@ -75,21 +74,18 @@ public class DefaultCamera : MonoBehaviour, ICameraInitialize
             hitStopTargets[1] = enemy.transform.position;
             cam.m_Follow = null;
             cam.m_LookAt = null;
-            isHitStopping = true; 
         };
 
         enemy.CharacterAnimation.HitStop.OnFinish += () => 
         {
             cam.m_Follow = followTransform;
             cam.m_LookAt = targetGroup.transform;
-            isHitStopping = false; 
         };
 
         player.CharacterAnimation.HitStop.OnFinish += () => 
         {
             cam.m_Follow = followTransform;
             cam.m_LookAt = targetGroup.transform;
-            isHitStopping = false; 
         };
 
         enemy.StateMachine.HurtState.OnExit += () => hurt = false;
@@ -150,15 +146,6 @@ public class DefaultCamera : MonoBehaviour, ICameraInitialize
     {
         if (hurt) AsignAlternativeTarget();
         else AsignDefaultTarget();
-
-        /*
-        if (isHitStopping)
-        {
-            Debug.Log("Objetivo: " + hitStopTargets[0]);
-            Debug.Log(targetGroup.m_Targets[0].target.localPosition);
-            AsignHitstopTarget();
-        }
-        */
     }
 
     private void CameraShake(in Hitbox hitbox)

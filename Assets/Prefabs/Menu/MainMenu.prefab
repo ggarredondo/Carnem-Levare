@@ -1199,7 +1199,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 1, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 50}
-  m_SizeDelta: {x: 0, y: 50}
+  m_SizeDelta: {x: 0, y: 160}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &8893225729827383594
 CanvasRenderer:
@@ -1229,10 +1229,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: CARNEM-LEVARE
+  m_text: cArNeM-lEvArE
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8d6926f7581541e4388429a8958d236c, type: 2}
-  m_sharedMaterial: {fileID: 6886390573403985044, guid: 8d6926f7581541e4388429a8958d236c,
+  m_fontAsset: {fileID: 11400000, guid: 5e7bc7753d2425d47b953ea6ffa38df4, type: 2}
+  m_sharedMaterial: {fileID: 3966494599963609428, guid: 5e7bc7753d2425d47b953ea6ffa38df4,
     type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
@@ -1257,8 +1257,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 130
-  m_fontSizeBase: 130
+  m_fontSize: 180
+  m_fontSizeBase: 180
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
