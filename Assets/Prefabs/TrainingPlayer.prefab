@@ -612,8 +612,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c7812153de0a68f4aad4dc6d0ff39d3d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  target: 4
   character: {fileID: 252810768578259016}
+  hurtHeight: 0
 --- !u!1 &2174714693114535593
 GameObject:
   m_ObjectHideFlags: 0
@@ -863,6 +863,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4706402254706946823}
   - component: {fileID: 4706402254706946822}
+  - component: {fileID: 7983605634018480251}
   - component: {fileID: 4201222371868107345}
   - component: {fileID: 252810768578259016}
   - component: {fileID: 1658105093767166710}
@@ -915,6 +916,18 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &7983605634018480251
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4706402254706946816}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 918ef773a4e300e4b8a2dd7e08843cee, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &4201222371868107345
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -940,12 +953,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   characterStats:
+    health: 0
+    maxHealth: 0
     stamina: 0
     maxStamina: 300
-    characterDamage: 10
-    blockingMultiplier: 0.1
+    damageToHealth: 0
+    damageToStamina: 0
     comboDecay: 200
     minStun: 0
+    staggerStun: 0
+    HYPERARMOR_FLAG: 0
+    NOHURT_FLAG: 0
+    NODEATH_FLAG: 0
     height: 1
     mass: 1
     drag: 0
@@ -963,19 +982,16 @@ MonoBehaviour:
     - {fileID: 2801868370514863915}
     - {fileID: 8242183509850069517}
     - {fileID: 3709333065122743593}
-    noHurt: 0
-    noDeath: 1
   characterMovement:
     trackingRate: 10
+    trackingMinimumMagnitude: 0.1
     doTracking: 1
     walkingDirectionSpeed: 10
     blockingDirectionSpeed: 10
     blockedDirectionSpeed: 2
     idleDirectionSpeed: 5
-    targetingMinimumMagnitude: 0.1
   characterAnimation:
     animatorSpeed: 1
-    updateMovesetAnimations: 0
 --- !u!114 &1658105093767166710
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -988,7 +1004,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 072400a3141bc664485729ff590b307c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  msBeforeBuffering: 300
   moveIndexes: 00000000010000000200000003000000
 --- !u!54 &2794588595183348619
 Rigidbody:
@@ -1284,8 +1299,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c7812153de0a68f4aad4dc6d0ff39d3d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  target: 1
   character: {fileID: 252810768578259016}
+  hurtHeight: 0
 --- !u!1 &9022481645909606631
 GameObject:
   m_ObjectHideFlags: 0
@@ -1344,8 +1359,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c7812153de0a68f4aad4dc6d0ff39d3d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  target: 1
   character: {fileID: 252810768578259016}
+  hurtHeight: 0
 --- !u!1001 &4706402254103989476
 PrefabInstance:
   m_ObjectHideFlags: 0
