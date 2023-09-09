@@ -10,36 +10,36 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3b1f0431d7ca2da48a12ff07183273eb, type: 3}
-  m_Name: Left Leading Jab
+  m_Name: Right Overhand
   m_EditorClassIdentifier: 
-  icon: {fileID: 21300000, guid: 73f2e0e785a93fd4982fae306299f5e2, type: 3}
-  moveName: Left Leading Jab
+  icon: {fileID: 21300000, guid: 91ce620d9fd37364ab39aeacea7a460b, type: 3}
+  moveName: Right Overhand
   animations:
-  - animation: {fileID: 7400000, guid: e652c0869035b6b418eef0c72bbb19c0, type: 2}
+  - animation: {fileID: 7400000, guid: 6232cd1526a6c3d40a5382e8b5611702, type: 2}
     motionSpeed: 1
     position: {x: 0, y: 0}
   fixedDirection: 0
   directionSpeed: 1
-  animatorTrigger: leftLeadingJab
+  animatorTrigger: rightOverhand
   animatorController: {fileID: 9100000, guid: e70a87fc3a4fdb34cbeea71a01686f03, type: 2}
-  stateSpeed: 1.4
+  stateSpeed: 1.2
   transitionDuration: 0.1
   applyAnimationState: 0
-  initSound: Whiff_Jab
-  startUp: 200
-  active: 50
-  recovery: 300
+  initSound: Whiff_Overhand
+  startUp: 350
+  active: 150
+  recovery: 400
   applyAnimationEvents: 0
-  hurtSound: Hit_Jab
+  hurtSound: Hit_Overhand
   blockedSound: Blocked_Default
   staggerSound: Guard_Break
   koSound: Knockout_Default
-  hurtStun: 500
-  blockedStun: 200
+  hurtStun: 900
+  blockedStun: 400
   hurtCameraShake:
     targetShakeTime: 0
     targetShakeIntensity: 0
-    shakeType: {fileID: 11400000, guid: 69ce8388f6785dd4c8c39915efece2f4, type: 2}
+    shakeType: {fileID: 0}
     screenShakeTime: 0
     screenShakeFrequency: 0
     screenShakeAmplitude: 0
@@ -53,10 +53,10 @@ MonoBehaviour:
   staggerCameraShake:
     targetShakeTime: 0
     targetShakeIntensity: 0
-    shakeType: {fileID: 11400000, guid: 69ce8388f6785dd4c8c39915efece2f4, type: 2}
-    screenShakeTime: 10
-    screenShakeFrequency: 5
-    screenShakeAmplitude: 2
+    shakeType: {fileID: 0}
+    screenShakeTime: 0
+    screenShakeFrequency: 0
+    screenShakeAmplitude: 0
   koCameraShake:
     targetShakeTime: 0
     targetShakeIntensity: 0
@@ -67,10 +67,10 @@ MonoBehaviour:
   hurtHitStop:
     attackerAnimSpeed: 0.1
     defenderAnimSpeed: 0.1
-    startTimeMS: 50
-    lengthMS: 30
-    amplitude: 0.1
-    frequency: 100
+    startTimeMS: 100
+    lengthMS: 100
+    amplitude: 0.3
+    frequency: 150
   blockedHitStop:
     attackerAnimSpeed: 0
     defenderAnimSpeed: 0
@@ -81,22 +81,22 @@ MonoBehaviour:
   staggerHitStop:
     attackerAnimSpeed: 0.1
     defenderAnimSpeed: 0.1
-    startTimeMS: 50
-    lengthMS: 500
-    amplitude: 0.1
-    frequency: 100
-  koHitStop:
-    attackerAnimSpeed: 0.1
-    defenderAnimSpeed: 0.1
     startTimeMS: 100
-    lengthMS: 700
-    amplitude: 0.1
-    frequency: 200
-  hurtKnockback: {x: 0, y: 0, z: 2}
+    lengthMS: 500
+    amplitude: 0.3
+    frequency: 150
+  koHitStop:
+    attackerAnimSpeed: 0
+    defenderAnimSpeed: 0
+    startTimeMS: 0
+    lengthMS: 0
+    amplitude: 0
+    frequency: 0
+  hurtKnockback: {x: 0, y: 0, z: 5}
   blockedKnockback: {x: 0, y: 0, z: 0}
-  hitbox: 0
-  hurtSide: 0
-  hurtPower: 0
-  damageToHealth: 10
-  damageToStamina: 5
+  hitbox: 1
+  hurtSide: 1
+  hurtPower: 2
+  damageToHealth: 20
+  damageToStamina: 15
   hyperarmor: 0

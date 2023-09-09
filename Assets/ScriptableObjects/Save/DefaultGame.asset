@@ -16,7 +16,13 @@ MonoBehaviour:
   defaultGame:
     name: GameSlot
     selectedMoves: 00000000010000000200000003000000
-    newMoves: 0101
+    newMoves: 0000000000010101
     moves:
     - {fileID: 11400000, guid: cb8a3bef13b8ff948b45889b9d0268de, type: 2}
+    - {fileID: 11400000, guid: 2103a4a2be2dc7d4e9eed0bd787bfa43, type: 2}
+    - {fileID: 11400000, guid: 68538589caf8b3c46bb3c3b636939480, type: 2}
+    - {fileID: 11400000, guid: 83f2956d9afa6f24bb483f1182019ac8, type: 2}
+    - {fileID: 11400000, guid: 04f296a56c3f5a141ac9e88071fd56f3, type: 2}
+    - {fileID: 11400000, guid: b7b1f886209da504797687ffcf73dbca, type: 2}
+    - {fileID: 11400000, guid: 98f8f83583ee5b4408d964c221c5feb5, type: 2}
     - {fileID: 11400000, guid: 0f8300254c934574db6ce8c90565371a, type: 2}

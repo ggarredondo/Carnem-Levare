@@ -10,27 +10,27 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3b1f0431d7ca2da48a12ff07183273eb, type: 3}
-  m_Name: Left Leading Jab
+  m_Name: Left Uppercut
   m_EditorClassIdentifier: 
-  icon: {fileID: 21300000, guid: 73f2e0e785a93fd4982fae306299f5e2, type: 3}
-  moveName: Left Leading Jab
+  icon: {fileID: 21300000, guid: bf9640e443f95eb4cb9c506ac3b3c833, type: 3}
+  moveName: Left Uppercut
   animations:
-  - animation: {fileID: 7400000, guid: e652c0869035b6b418eef0c72bbb19c0, type: 2}
+  - animation: {fileID: 7400000, guid: c8ea972d3fdf705449eeced1a0d40d6c, type: 2}
     motionSpeed: 1
     position: {x: 0, y: 0}
   fixedDirection: 0
   directionSpeed: 1
-  animatorTrigger: leftLeadingJab
+  animatorTrigger: leftUppercut
   animatorController: {fileID: 9100000, guid: e70a87fc3a4fdb34cbeea71a01686f03, type: 2}
-  stateSpeed: 1.4
+  stateSpeed: 1.2
   transitionDuration: 0.1
   applyAnimationState: 0
-  initSound: Whiff_Jab
+  initSound: Whiff_Hook
   startUp: 200
-  active: 50
+  active: 70
   recovery: 300
   applyAnimationEvents: 0
-  hurtSound: Hit_Jab
+  hurtSound: Hit_Hook
   blockedSound: Blocked_Default
   staggerSound: Guard_Break
   koSound: Knockout_Default
@@ -39,7 +39,7 @@ MonoBehaviour:
   hurtCameraShake:
     targetShakeTime: 0
     targetShakeIntensity: 0
-    shakeType: {fileID: 11400000, guid: 69ce8388f6785dd4c8c39915efece2f4, type: 2}
+    shakeType: {fileID: 0}
     screenShakeTime: 0
     screenShakeFrequency: 0
     screenShakeAmplitude: 0
@@ -53,10 +53,10 @@ MonoBehaviour:
   staggerCameraShake:
     targetShakeTime: 0
     targetShakeIntensity: 0
-    shakeType: {fileID: 11400000, guid: 69ce8388f6785dd4c8c39915efece2f4, type: 2}
-    screenShakeTime: 10
-    screenShakeFrequency: 5
-    screenShakeAmplitude: 2
+    shakeType: {fileID: 0}
+    screenShakeTime: 0
+    screenShakeFrequency: 0
+    screenShakeAmplitude: 0
   koCameraShake:
     targetShakeTime: 0
     targetShakeIntensity: 0
@@ -68,7 +68,7 @@ MonoBehaviour:
     attackerAnimSpeed: 0.1
     defenderAnimSpeed: 0.1
     startTimeMS: 50
-    lengthMS: 30
+    lengthMS: 50
     amplitude: 0.1
     frequency: 100
   blockedHitStop:
@@ -86,17 +86,17 @@ MonoBehaviour:
     amplitude: 0.1
     frequency: 100
   koHitStop:
-    attackerAnimSpeed: 0.1
-    defenderAnimSpeed: 0.1
-    startTimeMS: 100
-    lengthMS: 700
-    amplitude: 0.1
-    frequency: 200
-  hurtKnockback: {x: 0, y: 0, z: 2}
+    attackerAnimSpeed: 0
+    defenderAnimSpeed: 0
+    startTimeMS: 0
+    lengthMS: 0
+    amplitude: 0
+    frequency: 0
+  hurtKnockback: {x: 0, y: 3, z: 10}
   blockedKnockback: {x: 0, y: 0, z: 0}
   hitbox: 0
   hurtSide: 0
   hurtPower: 0
-  damageToHealth: 10
-  damageToStamina: 5
+  damageToHealth: 12
+  damageToStamina: 7
   hyperarmor: 0
