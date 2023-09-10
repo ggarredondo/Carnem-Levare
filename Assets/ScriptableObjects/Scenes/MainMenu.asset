@@ -12,15 +12,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d66219019227eb34c927cb1bf1fd9889, type: 3}
   m_Name: MainMenu
   m_EditorClassIdentifier: 
-  sceneObject: {fileID: 102900000, guid: cc36de46ab694694e9fd03015604d18a, type: 3}
+  sceneName: MainMenuScene
   nextScene:
-    sceneObject: {fileID: 102900000, guid: 71d302a04e8093b4d9f2a74bc98b053c, type: 3}
+    sceneName: TrainingScene
     withLoadScreen: 1
-    loadSceneObject: {fileID: 102900000, guid: 5715383984288ea46b1a13af60d92673, type: 3}
+    loadSceneName: Loadingscene
   previousScene:
-    sceneObject: {fileID: 0}
+    sceneName: 
     withLoadScreen: 0
-    loadSceneObject: {fileID: 0}
+    loadSceneName: 
   playMusic: 1
   music: Intro
   sounds:

@@ -7,13 +7,13 @@ public class SceneLogic : ScriptableObject
     [System.Serializable]
     public struct SceneData
     {
-        public Object sceneObject;
+        public string sceneName;
         public bool withLoadScreen;
-        public Object loadSceneObject;
+        public string loadSceneName;
     }
 
     [Header ("Scene")]
-    public Object sceneObject;
+    public string sceneName;
     public SceneData nextScene;
     public SceneData previousScene;
 

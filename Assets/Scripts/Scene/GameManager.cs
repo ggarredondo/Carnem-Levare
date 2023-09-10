@@ -16,7 +16,7 @@ public class GameManager : MonoBehaviour
 
     [Header("SceneSettings")]
     [SerializeField] private List<SceneLogic> scenes;
-    [SerializeField] private Object firstSceneObject;
+    [SerializeField] private string firstSceneName;
 
     [Header("Debug")]
     [SerializeField] [Range(0f, 1f)] private float timeScale = 1f;
@@ -47,8 +47,8 @@ public class GameManager : MonoBehaviour
         playerInput = GameObject.FindGameObjectWithTag("INPUT").GetComponent<PlayerInput>();
         uiInput = GetComponent<InputSystemUIInputModule>();
 
-        if(firstSceneObject != null)
-            if (SceneManager.GetActiveScene().name == firstSceneObject.name)
+        if(firstSceneName != null)
+            if (SceneManager.GetActiveScene().name == firstSceneName)
             {
                 DontDestroyOnLoad(GameObject.FindGameObjectWithTag("MUSIC").transform.parent.gameObject);
                 DontDestroyOnLoad(gameObject);
@@ -88,8 +88,8 @@ public class GameManager : MonoBehaviour
         if(Time.timeScale < 1)
             Time.timeScale = 1;
 
-        if (firstSceneObject != null)
-            if (SceneManager.GetActiveScene().name != firstSceneObject.name)
+        if (firstSceneName != null)
+            if (SceneManager.GetActiveScene().name != firstSceneName)
                 playerInput = GameObject.FindGameObjectWithTag("INPUT").GetComponent<PlayerInput>();
 
         inputDetection.Configure();

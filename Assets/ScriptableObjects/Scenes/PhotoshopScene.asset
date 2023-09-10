@@ -12,15 +12,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d66219019227eb34c927cb1bf1fd9889, type: 3}
   m_Name: PhotoshopScene
   m_EditorClassIdentifier: 
-  sceneObject: {fileID: 102900000, guid: b8abac98fa3ef9d4fafebb7d6bc0254d, type: 3}
+  sceneName: PhotoshopScene
   nextScene:
-    sceneObject: {fileID: 0}
+    sceneName: 
     withLoadScreen: 0
-    loadSceneObject: {fileID: 0}
+    loadSceneName: 
   previousScene:
-    sceneObject: {fileID: 0}
+    sceneName: 
     withLoadScreen: 0
-    loadSceneObject: {fileID: 0}
+    loadSceneName: 
   playMusic: 1
   music: Fight
   sounds:

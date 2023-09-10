@@ -34,7 +34,7 @@ public class SceneController
 
     private void Initialize()
     {
-        scenes.ForEach(s => scenesTable.Add(s.sceneObject.name, s));
+        scenes.ForEach(s => scenesTable.Add(s.sceneName, s));
     }
 
     private void UpdateScene(string nextScene)
@@ -55,11 +55,11 @@ public class SceneController
 
     public void NextScene()
     {
-        string nextScene = scenesTable[currentScene].nextScene.sceneObject.name;
+        string nextScene = scenesTable[currentScene].nextScene.sceneName;
 
         if (scenesTable[currentScene].nextScene.withLoadScreen)
         {
-            currentLoadScene = scenesTable[currentScene].nextScene.loadSceneObject.name;
+            currentLoadScene = scenesTable[currentScene].nextScene.loadSceneName;
             sceneLoader.LoadWithLoadingScreen(nextScene, currentLoadScene);
         }
         else
@@ -70,11 +70,11 @@ public class SceneController
 
     public void PreviousScene()
     {
-        string nextScene = scenesTable[currentScene].previousScene.sceneObject.name;
+        string nextScene = scenesTable[currentScene].previousScene.sceneName;
 
         if (scenesTable[currentScene].previousScene.withLoadScreen)
         {
-            currentLoadScene = scenesTable[currentScene].previousScene.loadSceneObject.name;
+            currentLoadScene = scenesTable[currentScene].previousScene.loadSceneName;
             sceneLoader.LoadWithLoadingScreen(nextScene, currentLoadScene);
         }
         else
