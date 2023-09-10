@@ -665,7 +665,7 @@ MonoBehaviour:
     m_ActionId: 72f2f0f8-5279-4a84-b3cd-fd13ab97abe9
     m_ActionName: Main Movement/ChangeCamera[/XInputControllerWindows/buttonWest,/Keyboard/2]
   m_NeverAutoSwitchControlSchemes: 1
-  m_DefaultControlScheme: Gamepad
+  m_DefaultControlScheme: 
   m_DefaultActionMap: UI
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 1418685037}
@@ -810,6 +810,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 734591664}
     m_Modifications:
+    - target: {fileID: 6159645281631079406, guid: a526d3cbc3f0aad47b0eff1d8297b4f4,
+        type: 3}
+      propertyPath: m_Color.a
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6159645281631079410, guid: a526d3cbc3f0aad47b0eff1d8297b4f4,
         type: 3}
       propertyPath: m_Pivot.x

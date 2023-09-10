@@ -92,7 +92,7 @@ public class GameManager : MonoBehaviour
             if (SceneManager.GetActiveScene().name != firstSceneObject.name)
                 playerInput = GameObject.FindGameObjectWithTag("INPUT").GetComponent<PlayerInput>();
 
-        InputDetection.Configure();
+        inputDetection.Configure();
     }
 
     private void Update()

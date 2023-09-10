@@ -23,6 +23,7 @@ public class InputDetection
         {
             previousCustomControlScheme = currentControlScheme;
             SetCustomControlScheme();
+            OnControlSchemeChanged(PlayerInput.all[0]);
         }
     }
 
@@ -69,6 +70,7 @@ public class InputDetection
                 if (Cursor.visible == true)
                 {
                     EventSystem.current.SetSelectedGameObject(selected);
+                    AudioController.Instance.uiSfxSounds.Play("SelectButton");
                     WaitGamepadDetection(GAMEPAD_DETECTION_TIME);
                     Cursor.visible = false;
                 }  
@@ -93,8 +95,7 @@ public class InputDetection
 
     public void Configure()
     {
-        GameManager.PlayerInput.controlsChangedEvent.AddListener(OnControlSchemeChanged);
-        SetCustomControlScheme();
+        previousCustomControlScheme = InputDevice.UNKNOW;
     }
 
     private async void WaitGamepadDetection(float time)

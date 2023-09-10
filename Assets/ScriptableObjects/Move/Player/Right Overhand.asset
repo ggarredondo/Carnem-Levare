@@ -37,12 +37,12 @@ MonoBehaviour:
   hurtStun: 900
   blockedStun: 400
   hurtCameraShake:
-    targetShakeTime: 0
-    targetShakeIntensity: 0
-    shakeType: {fileID: 0}
-    screenShakeTime: 0
-    screenShakeFrequency: 0
-    screenShakeAmplitude: 0
+    targetShakeTime: 50
+    targetShakeIntensity: 10
+    shakeType: {fileID: 11400000, guid: 69ce8388f6785dd4c8c39915efece2f4, type: 2}
+    screenShakeTime: 5
+    screenShakeFrequency: 200
+    screenShakeAmplitude: 1
   blockedCameraShake:
     targetShakeTime: 0
     targetShakeIntensity: 0

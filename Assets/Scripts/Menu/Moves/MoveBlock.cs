@@ -65,11 +65,11 @@ public class MoveBlock : MonoBehaviour
     public async void LerpRectTransform(Vector3 targetPosition, Vector3 targetScale, float duration)
     {
         await Task.WhenAll(Lerp.Value(rectTransform.localPosition, targetPosition, (p) => rectTransform.localPosition = p, duration),
-                           Lerp.Value(rectTransform.localScale, targetScale, (v) => rectTransform.localScale = v, duration));
+                               Lerp.Value(rectTransform.localScale, targetScale, (v) => rectTransform.localScale = v, duration));
     }
 
     public async void LerpColor(float targetAlpha, float duration)
     {
-        await Lerp.Value(canvasGroup.alpha, targetAlpha, (a) => canvasGroup.alpha = a , duration);
+        await Lerp.Value(canvasGroup.alpha, targetAlpha, (a) => canvasGroup.alpha = a, duration);
     }
 }

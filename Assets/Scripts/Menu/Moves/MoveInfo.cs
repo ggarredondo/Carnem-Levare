@@ -51,21 +51,24 @@ public class MoveInfo : MonoBehaviour
 
     public async void Movement(Color color)
     {
-        isMoving = true;
-        Vector3 newPosition = new(rectTransform.localPosition.x, rectTransform.localPosition.y + yPositionDifference, rectTransform.localPosition.z);
+        if (!isMoving)
+        {
+            isMoving = true;
+            Vector3 newPosition = new(rectTransform.localPosition.x, rectTransform.localPosition.y + yPositionDifference, rectTransform.localPosition.z);
 
-        Color newColor = new(color.r, color.g, color.b, initialAlpha / 2);
+            Color newColor = new(color.r, color.g, color.b, initialAlpha / 2);
 
-        await Task.WhenAll(Lerp.Value(rectTransform.localPosition, newPosition, (v) => rectTransform.localPosition = v, lerpDuration),
-                           Lerp.Value(image.color, newColor, (c) => image.color = c, lerpDuration));
+            await Task.WhenAll(Lerp.Value(rectTransform.localPosition, newPosition, (v) => rectTransform.localPosition = v, lerpDuration),
+                               Lerp.Value(image.color, newColor, (c) => image.color = c, lerpDuration));
 
-        newPosition = new Vector3(rectTransform.localPosition.x, rectTransform.localPosition.y - yPositionDifference, rectTransform.localPosition.z);
+            newPosition = new Vector3(rectTransform.localPosition.x, rectTransform.localPosition.y - yPositionDifference, rectTransform.localPosition.z);
 
-        newColor = new Color(1, 1, 1, initialAlpha);
+            newColor = new Color(1, 1, 1, initialAlpha);
 
-        await Task.WhenAll(Lerp.Value(rectTransform.localPosition, newPosition, (v) => rectTransform.localPosition = v, lerpDuration),
-                           Lerp.Value(image.color, newColor, (c) => image.color = c, lerpDuration));
+            await Task.WhenAll(Lerp.Value(rectTransform.localPosition, newPosition, (v) => rectTransform.localPosition = v, lerpDuration),
+                               Lerp.Value(image.color, newColor, (c) => image.color = c, lerpDuration));
 
-        isMoving = false;
+            isMoving = false;
+        }
     }
 }
