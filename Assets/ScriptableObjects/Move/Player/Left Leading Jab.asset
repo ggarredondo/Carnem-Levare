@@ -18,6 +18,9 @@ MonoBehaviour:
   - animation: {fileID: 7400000, guid: e652c0869035b6b418eef0c72bbb19c0, type: 2}
     motionSpeed: 1
     position: {x: 0, y: 0}
+  - animation: {fileID: 7400000, guid: 201556e9b14941544b6b6553b97fe31b, type: 2}
+    motionSpeed: 1
+    position: {x: 0, y: -1}
   fixedDirection: 0
   directionSpeed: 1
   animatorTrigger: leftLeadingJab
