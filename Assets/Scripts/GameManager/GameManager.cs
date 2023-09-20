@@ -7,16 +7,18 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
-    [Header("Settings")]
-    [SerializeField] private AudioMixer audioMixer;
+    [Header("InputSettings")]
     [SerializeField] private InputReader inputReader;
-    [SerializeField] private TransitionPlayer transitionPlayer;
+
+    [Header("SaveSettings")]
+    [SerializeField] private AudioMixer audioMixer;
     [SerializeField] private SaveOptions defaultOptions;
     [SerializeField] private SaveGame defaultGame;
 
     [Header("SceneSettings")]
-    [SerializeField] private List<SceneLogic> scenes;
     [SerializeField] private string firstSceneName;
+    [SerializeField] private List<SceneLogic> scenes;
+    [SerializeField] private TransitionPlayer transitionPlayer;
 
     [Header("Debug")]
     [SerializeField] [Range(0f, 1f)] private float timeScale = 1f;
@@ -44,30 +46,27 @@ public class GameManager : MonoBehaviour
 
     private void Awake()
     {
-        inputReader.Initialize();
-        Application.backgroundLoadingPriority = ThreadPriority.Low;
-        playerInput = GameObject.FindGameObjectWithTag("INPUT").GetComponent<PlayerInput>();
-        uiInput = GetComponent<InputSystemUIInputModule>();
-
-        if(firstSceneName != null)
-            if (SceneManager.GetActiveScene().name == firstSceneName)
-            {
-                DontDestroyOnLoad(GameObject.FindGameObjectWithTag("MUSIC").transform.parent.gameObject);
-                DontDestroyOnLoad(gameObject);
-            }
-
-        SceneManager.sceneLoaded += OnSceneLoaded;
-
-        saver = new DataSaver(defaultOptions, defaultGame);
-        applier = new OptionsApplier(audioMixer);
-
-        saver.Load();
-
+        //Audio Initialize
         audioController = new();
-        inputMapping = new();
-        inputDetection = new();
+
+        //Scene Initialize
+        DontDestroyOnLoad(gameObject);
+        SceneManager.sceneLoaded += OnSceneLoaded;
         sceneController = new(SceneManager.GetActiveScene().name, scenes);
         transitionPlayer.Initialize();
+
+        //Save Initialize
+        saver = new DataSaver(defaultOptions, defaultGame);
+        applier = new OptionsApplier(audioMixer);
+        saver.Load();
+
+        //Input Initialize
+        inputReader.Initialize();
+        uiInput = GetComponent<InputSystemUIInputModule>();
+        playerInput = PlayerInput.all[0];
+        inputMapping = new();
+        inputDetection = new();
+        controllerRumble = new();
     }
 
     private void Start()
@@ -88,12 +87,9 @@ public class GameManager : MonoBehaviour
 
     void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        if(Time.timeScale < 1)
-            Time.timeScale = 1;
+        Time.timeScale = 1;
 
-        if (firstSceneName != null)
-            if (SceneManager.GetActiveScene().name != firstSceneName)
-                playerInput = GameObject.FindGameObjectWithTag("INPUT").GetComponent<PlayerInput>();
+        playerInput = PlayerInput.all[0];
 
         inputDetection.Configure();
     }

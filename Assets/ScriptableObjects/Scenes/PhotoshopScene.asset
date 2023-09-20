@@ -23,7 +23,8 @@ MonoBehaviour:
     loadSceneName: 
   playMusic: 1
   music: Fight
-  sounds:
+  initSoundStructures:
   - {fileID: 11400000, guid: 7bb960d4926ae204ca58b6e854dceac3, type: 2}
   - {fileID: 11400000, guid: c92730399fa649c4f84f69f30d845b4b, type: 2}
   - {fileID: 11400000, guid: 5579dd4c23fd5554397d995ec5221c28, type: 2}
+  endSoundStructures: []

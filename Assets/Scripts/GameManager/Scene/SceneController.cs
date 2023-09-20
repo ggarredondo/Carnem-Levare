@@ -13,7 +13,11 @@ public class SceneController
 
     public SceneController(string initialScene, List<SceneLogic> scenes)
     {
+        Application.backgroundLoadingPriority = ThreadPriority.Low;
+
         SceneManager.sceneLoaded += OnSceneLoaded;
+        SceneManager.sceneUnloaded += OnSceneUnloaded;
+
         sceneLoader = new();
         scenesTable = new();
 
@@ -25,11 +29,17 @@ public class SceneController
 
     void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        if (SceneManager.GetActiveScene().name != currentLoadScene)
+        if (scene.name != currentLoadScene)
         {
-            GameManager.AudioController.InitializeSoundSources(GetCurrentSounds());
+            GameManager.AudioController.InitializeSoundSources(scenesTable[scene.name].initSoundStructures);
             PlayMusic();
         }
+    }
+
+    void OnSceneUnloaded(Scene scene)
+    {
+        if (scene.name != currentLoadScene && scenesTable[scene.name].endSoundStructures.Count > 0)
+            GameManager.AudioController.DeleteSoundSources(scenesTable[scene.name].endSoundStructures);
     }
 
     private void Initialize()
@@ -48,9 +58,9 @@ public class SceneController
             GameManager.AudioController.PlayMusic(scenesTable[currentScene].music);
     }
 
-    public List<SoundStructure> GetCurrentSounds()
+    public List<SoundStructure> GetInitSounds()
     {
-        return scenesTable[currentScene].sounds;
+        return scenesTable[currentScene].initSoundStructures;
     }
 
     public void NextScene()

@@ -11,12 +11,15 @@ public class AudioController
     private Hashtable globalTable;
     private Dictionary<string, Hashtable> groupConnection;
 
-    public void InitializeSoundSources(List<SoundStructure> soundStructure)
+    public AudioController()
     {
         globalTable = new();
         groupConnection = new();
         groupConnection.Add(MAIN_GROUP_NAME, globalTable);
+    }
 
+    public void InitializeSoundSources(List<SoundStructure> soundStructure)
+    {
         for (int i = 0; i < soundStructure.Count; i++)
         {
             for (int j = 0; j < soundStructure[i].SoundGroups.GetLength(0); j++)
@@ -30,16 +33,29 @@ public class AudioController
                 }
             }
 
-            soundStructure[i].Initialize();
+            if (!groupConnection.ContainsKey(soundStructure[i].GetGroupName()))
+            {
+                soundStructure[i].Initialize();
 
+                Hashtable soundsTable = soundStructure[i].GetSoundsTable();
+
+                groupConnection.Add(soundStructure[i].GetGroupName(), soundsTable);
+
+                foreach (DictionaryEntry entry in soundsTable)
+                    globalTable.Add(entry.Key, entry.Value);
+            }
+        }
+    }
+
+    public void DeleteSoundSources(List<SoundStructure> soundStructure)
+    {
+        for (int i = 0; i < soundStructure.Count; i++)
+        {
             Hashtable soundsTable = soundStructure[i].GetSoundsTable();
-
-            groupConnection.Add(soundStructure[i].GetGroupName(), soundsTable);
+            groupConnection.Remove(soundStructure[i].GetGroupName());
 
             foreach (DictionaryEntry entry in soundsTable)
-            {
-                globalTable.Add(entry.Key, entry.Value);
-            }
+                globalTable.Remove(entry.Key);
         }
     }
 
@@ -124,37 +140,25 @@ public class AudioController
     public void ResumeAllSounds(string mixerGroup = MAIN_GROUP_NAME)
     {
         foreach (DictionaryEntry entry in groupConnection[mixerGroup])
-        {
-            AudioSource s = (AudioSource)entry.Value;
-            s.UnPause();
-        }
+            ((AudioSource)entry.Value).UnPause();
     }
 
     public void MuteAllSounds(string mixerGroup = MAIN_GROUP_NAME)
     {
         foreach (DictionaryEntry entry in groupConnection[mixerGroup])
-        {
-            AudioSource s = (AudioSource)entry.Value;
-            s.mute = true;
-        }
+            ((AudioSource)entry.Value).mute = true;
     }
 
     public void UnMuteAllSounds(string mixerGroup = MAIN_GROUP_NAME)
     {
         foreach (DictionaryEntry entry in groupConnection[mixerGroup])
-        {
-            AudioSource s = (AudioSource)entry.Value;
-            s.mute = false;
-        }
+            ((AudioSource)entry.Value).mute = false;
     }
 
     public void StopAllSounds(string mixerGroup = MAIN_GROUP_NAME)
     {
         foreach (DictionaryEntry entry in groupConnection[mixerGroup])
-        {
-            AudioSource s = (AudioSource)entry.Value;
-            s.Stop();
-        }
+            ((AudioSource)entry.Value).Stop();
     }
 
     private AudioSource FindSound(string name)
@@ -165,8 +169,6 @@ public class AudioController
             return null;
         }
         else
-        {
             return (AudioSource)globalTable[name];
-        }
     }
 }

@@ -95,7 +95,8 @@ public class InputDetection
 
     public void Configure()
     {
-        previousCustomControlScheme = InputDevice.UNKNOW;
+        SetCustomControlScheme();
+        OnControlSchemeChanged(PlayerInput.all[0]);
     }
 
     private async void WaitGamepadDetection(float time)
