@@ -27,7 +27,9 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   soundGroups:
-  - speakersTag:
+  - ID:
+    - Sfx
+    speakersTag:
     - SFX
     sounds:
     - name: Slider
@@ -75,7 +77,8 @@ MonoBehaviour:
       volume: 1
       pitch: 1
       loop: 0
-  - speakersTag:
+  - ID: []
+    speakersTag:
     - SFX
     sounds:
     - name: InteractMoveMenu

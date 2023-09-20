@@ -497,8 +497,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c47d87d34c9455040a967717de70ae56, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  foot: 0
-  entity: 0
+  sound: Player_Left_Foot
 --- !u!1 &1493096808369930667
 GameObject:
   m_ObjectHideFlags: 0
@@ -737,8 +736,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c47d87d34c9455040a967717de70ae56, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  foot: 1
-  entity: 0
+  sound: Player_Right_Foot
 --- !u!1 &2717030910235825013
 GameObject:
   m_ObjectHideFlags: 0

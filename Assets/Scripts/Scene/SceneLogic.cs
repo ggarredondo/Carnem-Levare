@@ -20,5 +20,5 @@ public class SceneLogic : ScriptableObject
     [Header("Sound")]
     public bool playMusic;
     [ConditionalField("playMusic")] public string music;
-    public List<Sounds> sounds;
+    public List<SoundStructure> sounds;
 }

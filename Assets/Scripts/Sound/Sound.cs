@@ -22,6 +22,7 @@ public class Sound
 [System.Serializable]
 public struct SoundGroup
 {
+    public string[] ID;
     public string[] speakersTag;
     public Sound[] sounds;
     [System.NonSerialized] public GameObject[] speakers;

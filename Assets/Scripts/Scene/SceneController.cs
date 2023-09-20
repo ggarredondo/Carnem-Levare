@@ -48,7 +48,7 @@ public class SceneController
             AudioController.Instance.PlayMusic(scenesTable[currentScene].music);
     }
 
-    public List<Sounds> GetCurrentSounds()
+    public List<SoundStructure> GetCurrentSounds()
     {
         return scenesTable[currentScene].sounds;
     }

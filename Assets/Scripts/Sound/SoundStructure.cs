@@ -3,8 +3,8 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.Audio;
 
-[CreateAssetMenu(menuName = "Scriptable Objects/Sounds")]
-public class Sounds : ScriptableObject
+[CreateAssetMenu(menuName = "Scriptable Objects/SoundStructure")]
+public class SoundStructure : ScriptableObject
 {
     [Header("AudioMixer")]
     [SerializeField] private AudioMixerGroup audioMixerGroup;
@@ -58,16 +58,19 @@ public class Sounds : ScriptableObject
                     }
 
                     s.source[i].outputAudioMixerGroup = audioMixerGroup;
-                }
 
-                SoundsTable.Add(s.name, s);
+                    if(group.speakers.GetLength(0) > 1)
+                        SoundsTable.Add(group.ID[i] + "_" + s.name, s.source[i]);
+                    else
+                        SoundsTable.Add(s.name, s.source[i]);
+                }
             }
         }
     }
 
-    public void ChangePitch(string name, float pitch, int actualSource = 0)
+    public void ChangePitch(string name, float pitch)
     {
-        FindSound(name).source[actualSource].pitch = pitch;
+        FindSound(name).pitch = pitch;
     }
 
     public float Length(string name)
@@ -75,9 +78,9 @@ public class Sounds : ScriptableObject
         return FindSound(name).clip.length;
     }
 
-    public void Play(string name, int actualSource = 0)
+    public void Play(string name)
     {
-        FindSound(name)?.source[actualSource].Play();
+        FindSound(name)?.Play();
     }
 
     public void PlayAtPoint(string name, Vector3 point)
@@ -85,32 +88,30 @@ public class Sounds : ScriptableObject
         AudioSource.PlayClipAtPoint(FindSound(name).clip, point);
     }
 
-    public bool IsPlaying(string name, int actualSource = 0)
+    public bool IsPlaying(string name)
     {
-        return FindSound(name).source[actualSource].isPlaying;
+        return FindSound(name).isPlaying;
     }
 
-    public void Stop(string name, int actualSource = 0)
+    public void Stop(string name)
     {
-        FindSound(name)?.source[actualSource].Stop();
+        FindSound(name)?.Stop();
     }
 
-    public void Pause(string name, int actualSource = 0)
+    public void Pause(string name)
     {
-        FindSound(name)?.source[actualSource].Pause();
+        FindSound(name)?.Pause();
     }
 
     public void PauseAllSounds()
     {
         foreach (DictionaryEntry entry in SoundsTable)
         {
-            Sound s = (Sound)entry.Value;
-            for (int i = 0; i < s.source.GetLength(0); i++)
+            AudioSource s = (AudioSource)entry.Value;
+
+            if (s.isPlaying)
             {
-                if (s.source[i].isPlaying)
-                {
-                    s.source[i].Pause();
-                }
+                s.Pause();
             }
         }
     }
@@ -119,11 +120,8 @@ public class Sounds : ScriptableObject
     {
         foreach (DictionaryEntry entry in SoundsTable)
         {
-            Sound s = (Sound)entry.Value;
-            for (int i = 0; i < s.source.GetLength(0); i++)
-            {
-                s.source[i].UnPause();
-            }
+            AudioSource s = (AudioSource)entry.Value;
+            s.UnPause();
         }
     }
 
@@ -131,9 +129,8 @@ public class Sounds : ScriptableObject
     {
         foreach (DictionaryEntry entry in SoundsTable)
         {
-            Sound s = (Sound)entry.Value;
-            for (int i = 0; i < s.source.GetLength(0); i++)
-                s.source[i].mute = true;
+            AudioSource s = (AudioSource)entry.Value;
+            s.mute = true;
         }
     }
 
@@ -141,9 +138,8 @@ public class Sounds : ScriptableObject
     {
         foreach (DictionaryEntry entry in SoundsTable)
         {
-            Sound s = (Sound)entry.Value;
-            for (int i = 0; i < s.source.GetLength(0); i++)
-                s.source[i].mute = false;
+            AudioSource s = (AudioSource)entry.Value;
+            s.mute = false;
         }
     }
 
@@ -151,9 +147,8 @@ public class Sounds : ScriptableObject
     {
         foreach (DictionaryEntry entry in SoundsTable)
         {
-            Sound s = (Sound)entry.Value;
-            for (int i = 0; i < s.source.GetLength(0); i++)
-                s.source[i].Stop();
+            AudioSource s = (AudioSource)entry.Value;
+            s.Stop();
         }
     }
 
@@ -161,13 +156,12 @@ public class Sounds : ScriptableObject
     {
         foreach (DictionaryEntry entry in SoundsTable)
         {
-            Sound s = (Sound)entry.Value;
-            for (int i = 0; i < s.source.GetLength(0); i++)
-                s.source[i].volume = s.volume * volume;
+            AudioSource s = (AudioSource)entry.Value;
+            s.volume *= volume;
         }
     }
 
-    private Sound FindSound(string name)
+    private AudioSource FindSound(string name)
     {
         if (!SoundsTable.ContainsKey(name))
         {
@@ -176,7 +170,7 @@ public class Sounds : ScriptableObject
         }
         else
         {
-            return (Sound) SoundsTable[name];
+            return (AudioSource) SoundsTable[name];
         }
     }
 }

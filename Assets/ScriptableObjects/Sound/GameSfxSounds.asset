@@ -45,7 +45,10 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   soundGroups:
-  - speakersTag:
+  - ID:
+    - Player
+    - Enemy
+    speakersTag:
     - AUDIO/PLAYER_SOURCES
     - AUDIO/ENEMY_SOURCES
     sounds:

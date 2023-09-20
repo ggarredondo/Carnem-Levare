@@ -5,13 +5,13 @@ using UnityEngine;
 public enum Entity { Player, Enemy }
 public class AudioController : Singleton<AudioController>
 {
-    public Sounds uiSfxSounds;
-    public Sounds gameSfxSounds;
-    public Sounds musicSounds;
+    public SoundStructure uiSfxSounds;
+    public SoundStructure gameSfxSounds;
+    public SoundStructure musicSounds;
 
     private bool isPlayingSlider;
 
-    public void InitializeSoundSources(List<Sounds> sounds)
+    public void InitializeSoundSources(List<SoundStructure> sounds)
     {
         for (int i = 0; i < sounds.Count; i++)
         {
@@ -57,10 +57,9 @@ public class AudioController : Singleton<AudioController>
         if (!enter) gameSfxSounds.ResumeAllSounds();
     }
 
-    public void Walking(int foot, Entity currentSource)
+    public void Walking(string sound)
     {
-        if (foot == 0) gameSfxSounds.Play("Left_Foot", (int)currentSource);
-        else gameSfxSounds.Play("Right_Foot", (int)currentSource);
+        gameSfxSounds.Play(sound);
     }
 
     private IEnumerator PlaySlider()
