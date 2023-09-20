@@ -8,7 +8,7 @@ public class InputRemapping
 
     public void Remapping(float rebindTimeDelay, PopUpMenu popUp, string name)
     {
-        AudioController.Instance.uiSfxSounds.Play("PressButton");
+        GameManager.AudioController.Play("PressButton");
 
         action = GameManager.PlayerInput.actions.FindAction(name);
 
@@ -40,7 +40,7 @@ public class InputRemapping
 
         if (GameManager.InputMapping.AllowedMap.ContainsKey(callback.action.bindings[GameManager.InputDetection.controlSchemeIndex].effectivePath))
         {
-            AudioController.Instance.uiSfxSounds.Play("ApplyRebind");
+            GameManager.AudioController.Play("ApplyRebind");
 
             InputAction result = CheckIfAsigned(callback.action);
             if (result != null && !result.bindings[GameManager.InputDetection.controlSchemeIndex].isComposite)

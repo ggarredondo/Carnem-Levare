@@ -85,7 +85,7 @@ public class MoveAssignment : MonoBehaviour
 
         if (inputController.assigning)
         {
-            AudioController.Instance.uiSfxSounds.Play("ApplyMoveMenu");
+            GameManager.AudioController.Play("ApplyMoveMenu");
             inputController.moveIndexes[newMove] = moveSelected;
         }
     }

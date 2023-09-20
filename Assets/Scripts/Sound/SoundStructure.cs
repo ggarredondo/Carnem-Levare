@@ -68,109 +68,13 @@ public class SoundStructure : ScriptableObject
         }
     }
 
-    public void ChangePitch(string name, float pitch)
+    public Hashtable GetSoundsTable()
     {
-        FindSound(name).pitch = pitch;
+        return SoundsTable;
     }
 
-    public float Length(string name)
+    public string GetGroupName()
     {
-        return FindSound(name).clip.length;
-    }
-
-    public void Play(string name)
-    {
-        FindSound(name)?.Play();
-    }
-
-    public void PlayAtPoint(string name, Vector3 point)
-    {
-        AudioSource.PlayClipAtPoint(FindSound(name).clip, point);
-    }
-
-    public bool IsPlaying(string name)
-    {
-        return FindSound(name).isPlaying;
-    }
-
-    public void Stop(string name)
-    {
-        FindSound(name)?.Stop();
-    }
-
-    public void Pause(string name)
-    {
-        FindSound(name)?.Pause();
-    }
-
-    public void PauseAllSounds()
-    {
-        foreach (DictionaryEntry entry in SoundsTable)
-        {
-            AudioSource s = (AudioSource)entry.Value;
-
-            if (s.isPlaying)
-            {
-                s.Pause();
-            }
-        }
-    }
-
-    public void ResumeAllSounds()
-    {
-        foreach (DictionaryEntry entry in SoundsTable)
-        {
-            AudioSource s = (AudioSource)entry.Value;
-            s.UnPause();
-        }
-    }
-
-    public void MuteAllSounds()
-    {
-        foreach (DictionaryEntry entry in SoundsTable)
-        {
-            AudioSource s = (AudioSource)entry.Value;
-            s.mute = true;
-        }
-    }
-
-    public void UnMuteAllSounds()
-    {
-        foreach (DictionaryEntry entry in SoundsTable)
-        {
-            AudioSource s = (AudioSource)entry.Value;
-            s.mute = false;
-        }
-    }
-
-    public void StopAllSounds()
-    {
-        foreach (DictionaryEntry entry in SoundsTable)
-        {
-            AudioSource s = (AudioSource)entry.Value;
-            s.Stop();
-        }
-    }
-
-    public void ChangeVolume(float volume)
-    {
-        foreach (DictionaryEntry entry in SoundsTable)
-        {
-            AudioSource s = (AudioSource)entry.Value;
-            s.volume *= volume;
-        }
-    }
-
-    private AudioSource FindSound(string name)
-    {
-        if (!SoundsTable.ContainsKey(name))
-        {
-            Debug.LogWarning("Sound: " + name + " doesn't exist");
-            return null;
-        }
-        else
-        {
-            return (AudioSource) SoundsTable[name];
-        }
+        return audioMixerGroup.name;
     }
 }

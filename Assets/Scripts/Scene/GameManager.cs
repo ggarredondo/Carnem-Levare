@@ -30,6 +30,7 @@ public class GameManager : MonoBehaviour
     private static SceneController sceneController;
     private static InputMapping inputMapping;
     private static InputDetection inputDetection;
+    private static AudioController audioController;
 
     public static ref readonly PlayerInput PlayerInput { get => ref playerInput; }
     public static ref readonly InputSystemUIInputModule UiInput { get => ref uiInput; }
@@ -37,6 +38,7 @@ public class GameManager : MonoBehaviour
     public static ref readonly SceneController SceneController { get => ref sceneController; }
     public static ref readonly InputMapping InputMapping { get => ref inputMapping; }
     public static ref readonly InputDetection InputDetection { get => ref inputDetection; }
+    public static ref readonly AudioController AudioController { get => ref audioController; }
 
     public static int RANDOM_SEED => System.Guid.NewGuid().GetHashCode();
 
@@ -61,6 +63,7 @@ public class GameManager : MonoBehaviour
 
         saver.Load();
 
+        audioController = new();
         inputMapping = new();
         inputDetection = new();
         sceneController = new(SceneManager.GetActiveScene().name, scenes);

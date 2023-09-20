@@ -48,7 +48,7 @@ public class CombatEnd : MonoBehaviour
         TransitionPlayer.extraTime = 1;
         TransitionPlayer.text.text = "YOU LIVE";
 
-        AudioController.Instance.uiSfxSounds.Play("PlayGame");
+        GameManager.AudioController.Play("PlayGame");
         GameManager.SceneController.NextScene();
     }
 
@@ -59,7 +59,7 @@ public class CombatEnd : MonoBehaviour
         TransitionPlayer.extraTime = 2;
         TransitionPlayer.text.text = "YOU DIED";
 
-        AudioController.Instance.uiSfxSounds.Play("BackMenu");
+        GameManager.AudioController.Play("BackMenu");
         GameManager.SceneController.PreviousScene();
     }
 }

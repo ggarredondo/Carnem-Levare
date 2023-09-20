@@ -40,7 +40,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 9168311950741595995}
-  - component: {fileID: 3541263833111204404}
   m_Layer: 0
   m_Name: Sound
   m_TagString: Untagged
@@ -65,21 +64,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &3541263833111204404
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9168311950741595994}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3e1b9904a9c83644992d6ff7dbd5ca1f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  uiSfxSounds: {fileID: 11400000, guid: 5579dd4c23fd5554397d995ec5221c28, type: 2}
-  gameSfxSounds: {fileID: 11400000, guid: 7bb960d4926ae204ca58b6e854dceac3, type: 2}
-  musicSounds: {fileID: 11400000, guid: c92730399fa649c4f84f69f30d845b4b, type: 2}
 --- !u!1 &9168311950817181048
 GameObject:
   m_ObjectHideFlags: 0

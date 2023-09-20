@@ -6,6 +6,6 @@ public class FootstepSound : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        AudioController.Instance.Walking(sound);
+        GameManager.AudioController.Play(sound);
     }
 }

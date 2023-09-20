@@ -22,7 +22,7 @@ public class MainPauseMenu : AbstractMenu
 
     private void BackToMenu()
     {
-        AudioController.Instance.BackMenu();
+        GameManager.AudioController.BackMenu();
         GameManager.SceneController.PreviousScene();
     }
 }

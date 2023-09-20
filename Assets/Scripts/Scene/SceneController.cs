@@ -27,7 +27,7 @@ public class SceneController
     {
         if (SceneManager.GetActiveScene().name != currentLoadScene)
         {
-            AudioController.Instance.InitializeSoundSources(GetCurrentSounds());
+            GameManager.AudioController.InitializeSoundSources(GetCurrentSounds());
             PlayMusic();
         }
     }
@@ -45,7 +45,7 @@ public class SceneController
     public void PlayMusic()
     {
         if(scenesTable[currentScene].playMusic)
-            AudioController.Instance.PlayMusic(scenesTable[currentScene].music);
+            GameManager.AudioController.PlayMusic(scenesTable[currentScene].music);
     }
 
     public List<SoundStructure> GetCurrentSounds()

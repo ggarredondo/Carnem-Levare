@@ -54,7 +54,7 @@ public class LoadingScreen : MonoBehaviour
         if (!isStopped)
         {
             isStopped = true;
-            AudioController.Instance.uiSfxSounds.Play("MaskAlert");
+            GameManager.AudioController.Play("MaskAlert");
             GameManager.ControllerRumble.Rumble(0.2f, 1f, 1f);
             maskAnim.speed = 6;
             maskAnim.SetBool("Stop", true);
@@ -82,7 +82,7 @@ public class LoadingScreen : MonoBehaviour
 
             if (GameManager.PlayerInput.actions.FindAction("Continue").IsPressed())
             {
-                AudioController.Instance.uiSfxSounds.Play("ExitLoading");
+                GameManager.AudioController.Play("ExitLoading");
                 result = true;
             }
         }

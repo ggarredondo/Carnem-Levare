@@ -1,72 +1,172 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using UnityEngine;
 
-public enum Entity { Player, Enemy }
-public class AudioController : Singleton<AudioController>
+public class AudioController
 {
-    public SoundStructure uiSfxSounds;
-    public SoundStructure gameSfxSounds;
-    public SoundStructure musicSounds;
+    private const string MAIN_GROUP_NAME = "main";
 
     private bool isPlayingSlider;
+    private Hashtable globalTable;
+    private Dictionary<string, Hashtable> groupConnection;
 
-    public void InitializeSoundSources(List<SoundStructure> sounds)
+    public void InitializeSoundSources(List<SoundStructure> soundStructure)
     {
-        for (int i = 0; i < sounds.Count; i++)
-        {
-            for (int j = 0; j < sounds[i].SoundGroups.GetLength(0); j++)
-            {
-                sounds[i].SoundGroups[j].speakers = new GameObject[sounds[i].SoundGroups[j].speakersTag.GetLength(0)];
+        globalTable = new();
+        groupConnection = new();
+        groupConnection.Add(MAIN_GROUP_NAME, globalTable);
 
-                for (int k = 0; k < sounds[i].SoundGroups[j].speakersTag.GetLength(0); k++)
+        for (int i = 0; i < soundStructure.Count; i++)
+        {
+            for (int j = 0; j < soundStructure[i].SoundGroups.GetLength(0); j++)
+            {
+                soundStructure[i].SoundGroups[j].speakers = new GameObject[soundStructure[i].SoundGroups[j].speakersTag.GetLength(0)];
+
+                for (int k = 0; k < soundStructure[i].SoundGroups[j].speakersTag.GetLength(0); k++)
                 {
-                    GameObject speaker = GameObject.FindGameObjectWithTag(sounds[i].SoundGroups[j].speakersTag[k]);
-                    sounds[i].SoundGroups[j].speakers[k] = speaker;
+                    GameObject speaker = GameObject.FindGameObjectWithTag(soundStructure[i].SoundGroups[j].speakersTag[k]);
+                    soundStructure[i].SoundGroups[j].speakers[k] = speaker;
                 }
             }
 
-            sounds[i].Initialize();
+            soundStructure[i].Initialize();
+
+            Hashtable soundsTable = soundStructure[i].GetSoundsTable();
+
+            groupConnection.Add(soundStructure[i].GetGroupName(), soundsTable);
+
+            foreach (DictionaryEntry entry in soundsTable)
+            {
+                globalTable.Add(entry.Key, entry.Value);
+            }
         }
     }
 
     public void PlayMusic(string name)
     {
-        musicSounds.StopAllSounds();
-        musicSounds.Play(name);
+        StopAllSounds("Music");
+        Play(name);
     }
 
     public void BackMenu()
     {
-        uiSfxSounds.StopAllSounds(); 
-        uiSfxSounds.Play("BackMenu");
+        StopAllSounds("Ui_Sfx"); 
+        Play("BackMenu");
     }
 
     public void Slider()
     {
-        if (!isPlayingSlider) StartCoroutine(PlaySlider());
+        if (!isPlayingSlider) PlaySlider();
     }
 
     public void PauseGame(bool enter)
     {
-        if (enter) gameSfxSounds.PauseAllSounds();
+        if (enter) PauseAllSounds("Game_Sfx");
 
-        uiSfxSounds.Stop("PauseGame"); 
-        uiSfxSounds.Play("PauseGame");
+        Stop("PauseGame"); 
+        Play("PauseGame");
 
-        if (!enter) gameSfxSounds.ResumeAllSounds();
+        if (!enter) ResumeAllSounds("Game_Sfx");
     }
 
-    public void Walking(string sound)
+    private async void PlaySlider()
     {
-        gameSfxSounds.Play(sound);
-    }
-
-    private IEnumerator PlaySlider()
-    {
-        uiSfxSounds.Play("Slider");
+        Play("Slider");
         isPlayingSlider = true;
-        yield return new WaitForSecondsRealtime(uiSfxSounds.Length("Slider") / 6);
+        await Task.Delay(System.TimeSpan.FromSeconds(Length("Slider") / 6));
         isPlayingSlider = false;
+    }
+
+    public void ChangePitch(string name, float pitch)
+    {
+        FindSound(name).pitch = pitch;
+    }
+
+    public float Length(string name)
+    {
+        return FindSound(name).clip.length;
+    }
+
+    public void Play(string name)
+    {
+        FindSound(name)?.Play();
+    }
+
+    public bool IsPlaying(string name)
+    {
+        return FindSound(name).isPlaying;
+    }
+
+    public void Stop(string name)
+    {
+        FindSound(name)?.Stop();
+    }
+
+    public void Pause(string name)
+    {
+        FindSound(name)?.Pause();
+    }
+
+    public void PauseAllSounds(string mixerGroup = MAIN_GROUP_NAME)
+    {
+        foreach (DictionaryEntry entry in groupConnection[mixerGroup])
+        {
+            AudioSource s = (AudioSource)entry.Value;
+
+            if (s.isPlaying)
+            {
+                s.Pause();
+            }
+        }
+    }
+
+    public void ResumeAllSounds(string mixerGroup = MAIN_GROUP_NAME)
+    {
+        foreach (DictionaryEntry entry in groupConnection[mixerGroup])
+        {
+            AudioSource s = (AudioSource)entry.Value;
+            s.UnPause();
+        }
+    }
+
+    public void MuteAllSounds(string mixerGroup = MAIN_GROUP_NAME)
+    {
+        foreach (DictionaryEntry entry in groupConnection[mixerGroup])
+        {
+            AudioSource s = (AudioSource)entry.Value;
+            s.mute = true;
+        }
+    }
+
+    public void UnMuteAllSounds(string mixerGroup = MAIN_GROUP_NAME)
+    {
+        foreach (DictionaryEntry entry in groupConnection[mixerGroup])
+        {
+            AudioSource s = (AudioSource)entry.Value;
+            s.mute = false;
+        }
+    }
+
+    public void StopAllSounds(string mixerGroup = MAIN_GROUP_NAME)
+    {
+        foreach (DictionaryEntry entry in groupConnection[mixerGroup])
+        {
+            AudioSource s = (AudioSource)entry.Value;
+            s.Stop();
+        }
+    }
+
+    private AudioSource FindSound(string name)
+    {
+        if (!globalTable.ContainsKey(name))
+        {
+            Debug.LogWarning("Sound: " + name + " doesn't exist");
+            return null;
+        }
+        else
+        {
+            return (AudioSource)globalTable[name];
+        }
     }
 }

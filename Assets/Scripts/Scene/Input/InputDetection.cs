@@ -70,7 +70,7 @@ public class InputDetection
                 if (Cursor.visible == true)
                 {
                     EventSystem.current.SetSelectedGameObject(selected);
-                    AudioController.Instance.uiSfxSounds.Play("SelectButton");
+                    GameManager.AudioController.Play("SelectButton");
                     WaitGamepadDetection(GAMEPAD_DETECTION_TIME);
                     Cursor.visible = false;
                 }  

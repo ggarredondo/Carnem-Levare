@@ -44,12 +44,12 @@ public class MoveMenu : MonoBehaviour
             if (moveSelector.LeftMoveBlock())
             {
                 infoBox.UpdateInfoBox(in moves[moveSelector.GetActualIndex()].StringData);
-                AudioController.Instance.uiSfxSounds.Play("InteractMoveMenu");
+                GameManager.AudioController.Play("InteractMoveMenu");
             }
             else
             {
                 infoBox.Movement(new Color(0.5f, 0.5f, 0.5f));
-                AudioController.Instance.uiSfxSounds.Play("NotInteractMoveMenu");
+                GameManager.AudioController.Play("NotInteractMoveMenu");
             }
         }
         if (value == new Vector2(1, 0))
@@ -57,25 +57,25 @@ public class MoveMenu : MonoBehaviour
             if (moveSelector.RightMoveBlock())
             {
                 infoBox.UpdateInfoBox(in moves[moveSelector.GetActualIndex()].StringData);
-                AudioController.Instance.uiSfxSounds.Play("InteractMoveMenu");
+                GameManager.AudioController.Play("InteractMoveMenu");
             }
             else
             {
                 infoBox.Movement(new Color(0.5f, 0.5f, 0.5f));
-                AudioController.Instance.uiSfxSounds.Play("NotInteractMoveMenu");
+                GameManager.AudioController.Play("NotInteractMoveMenu");
             }
         }
 
         if (value == new Vector2(0, 1))
         {
             moveSelector.SelectBlock();
-            AudioController.Instance.uiSfxSounds.Play("SelectMoveMenu");
+            GameManager.AudioController.Play("SelectMoveMenu");
         }
 
         if (value == new Vector2(0, -1))
         {
             moveSelector.DeselectBlock();
-            AudioController.Instance.uiSfxSounds.Play("InteractMoveMenu");
+            GameManager.AudioController.Play("InteractMoveMenu");
         }
     }
 }

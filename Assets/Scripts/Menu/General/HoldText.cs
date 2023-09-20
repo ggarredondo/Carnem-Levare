@@ -62,7 +62,7 @@ public class HoldText : MonoBehaviour
     private void TriggerHold()
     {
         hasTrigger = true;
-        AudioController.Instance.uiSfxSounds.Play("PlayGame");
+        GameManager.AudioController.Play("PlayGame");
         GameManager.SceneController.NextScene();
     }
 }
