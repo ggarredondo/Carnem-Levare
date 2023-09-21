@@ -19,7 +19,7 @@ public class MoveMenu : MonoBehaviour
         moveSelector.Initialize(ref moves, ref inputController);
         infoBox.Initialize(in moves[moveSelector.GetActualIndex()].StringData);
 
-        GameManager.InputDetection.controlsChangedEvent += moveSelector.ChangeInputMap;
+        GameManager.InputUtilities.ControlsChangedEvent += moveSelector.ChangeInputMap;
     }
 
     private void OnEnable()
@@ -34,7 +34,7 @@ public class MoveMenu : MonoBehaviour
 
     private void OnDestroy()
     {
-        GameManager.InputDetection.controlsChangedEvent -= moveSelector.ChangeInputMap;
+        GameManager.InputUtilities.ControlsChangedEvent -= moveSelector.ChangeInputMap;
     }
 
     private void DPad(Vector2 value)

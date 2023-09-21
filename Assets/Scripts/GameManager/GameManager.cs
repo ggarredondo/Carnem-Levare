@@ -26,20 +26,12 @@ public class GameManager : MonoBehaviour
     private ISave saver;
     private IApplier applier;
 
-    private static PlayerInput playerInput;
-    private static InputSystemUIInputModule uiInput;
-    private static ControllerRumble controllerRumble;
     private static SceneController sceneController;
-    private static InputMapping inputMapping;
-    private static InputDetection inputDetection;
     private static AudioController audioController;
+    private static InputUtilities inputUtilities;
 
-    public static ref readonly PlayerInput PlayerInput { get => ref playerInput; }
-    public static ref readonly InputSystemUIInputModule UiInput { get => ref uiInput; }
-    public static ref readonly ControllerRumble ControllerRumble { get => ref controllerRumble; }
     public static ref readonly SceneController SceneController { get => ref sceneController; }
-    public static ref readonly InputMapping InputMapping { get => ref inputMapping; }
-    public static ref readonly InputDetection InputDetection { get => ref inputDetection; }
+    public static ref readonly InputUtilities InputUtilities { get => ref inputUtilities; }
     public static ref readonly AudioController AudioController { get => ref audioController; }
 
     public static int RANDOM_SEED => System.Guid.NewGuid().GetHashCode();
@@ -61,17 +53,11 @@ public class GameManager : MonoBehaviour
         saver.Load();
 
         //Input Initialize
-        inputReader.Initialize();
-        uiInput = GetComponent<InputSystemUIInputModule>();
-        playerInput = PlayerInput.all[0];
-        inputMapping = new();
-        inputDetection = new();
-        controllerRumble = new();
+        inputUtilities = new(GetComponent<InputSystemUIInputModule>(), inputReader);
     }
 
     private void Start()
     {
-        controllerRumble = new();
         applier.ApplyChanges();
     }
 
@@ -89,13 +75,11 @@ public class GameManager : MonoBehaviour
     {
         Time.timeScale = 1;
 
-        playerInput = PlayerInput.all[0];
-
-        inputDetection.Configure();
+        inputUtilities.Configure();
     }
 
     private void Update()
     {
-        inputDetection.CheckCustomControlScheme();
+        inputUtilities.Update();
     }
 }

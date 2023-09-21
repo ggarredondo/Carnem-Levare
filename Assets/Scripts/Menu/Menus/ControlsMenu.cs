@@ -18,9 +18,6 @@ public class ControlsMenu : AbstractMenu
     protected override void Configure()
     {
         rumbleToggle.isOn = DataSaver.options.rumble;
-
-        GameManager.InputDetection.controlsChangedEvent.Invoke();
-
         inputRemapping = new();
         remapButtons.ForEach(button => button.onClick.AddListener(delegate { Remapping(button.name); } ));
         rumbleToggle.onValueChanged.AddListener(Rumble);

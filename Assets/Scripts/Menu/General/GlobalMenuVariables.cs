@@ -29,4 +29,9 @@ public class GlobalMenuVariables : MonoBehaviour
             Instance = this;
         }
     }
+
+    public TMP_FontAsset ActualInputFont()
+    {
+        return inputFonts[GameManager.InputUtilities.ControlSchemeIndex];
+    }
 }

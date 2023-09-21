@@ -17,16 +17,16 @@ public abstract class AbstractMenu : MonoBehaviour
 
     protected virtual void OnDisable()
     {
-        if(EventSystem.current != null && GameManager.InputDetection.controlSchemeIndex == 0)
+        if(EventSystem.current != null && GameManager.InputUtilities.ControlSchemeIndex == 0)
             firstSelected = EventSystem.current.currentSelectedGameObject;
     }
 
     public void Initialized()
     {
-        if (GameManager.InputDetection.controlSchemeIndex == 0 || GameManager.InputDetection.previousCustomControlScheme == InputDevice.KEYBOARD)
+        if (GameManager.InputUtilities.ControlSchemeIndex == 0 || GameManager.InputUtilities.PreviousCustomControlScheme == InputDevice.KEYBOARD)
             EventSystem.current.SetSelectedGameObject(firstSelected);
 
-        GameManager.InputDetection.selected = firstSelected;
+        GameManager.InputUtilities.SetSelectedGameObject(firstSelected);
     }
 
     private void Start()

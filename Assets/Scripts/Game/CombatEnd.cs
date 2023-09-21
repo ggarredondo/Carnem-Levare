@@ -34,7 +34,7 @@ public class CombatEnd : MonoBehaviour
     private async void Victory()
     {
         await Task.Delay(System.TimeSpan.FromSeconds(waitAfterDeath));
-        GameManager.PlayerInput.enabled = false;
+        GameManager.InputUtilities.EnablePlayerInput(false);
 
         enemy.EnemyDrops.ForEach(m =>
         {

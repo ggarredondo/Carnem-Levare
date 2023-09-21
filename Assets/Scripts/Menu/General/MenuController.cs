@@ -63,7 +63,7 @@ public class MenuController : MonoBehaviour
     {
         if (tree.MoveToRightSibling())
         {
-            GameManager.ControllerRumble.Rumble(0.1f, 0f, 1f);
+            GameManager.InputUtilities.Rumble(0.1f, 0f, 1f);
             GameManager.AudioController.Play("PressButton");
             OnSiblingChange.Invoke(tree.ActualSelectableID());
         }
@@ -73,7 +73,7 @@ public class MenuController : MonoBehaviour
     {
         if (tree.MoveToLeftSibling())
         {
-            GameManager.ControllerRumble.Rumble(0.1f, 1f, 0f);
+            GameManager.InputUtilities.Rumble(0.1f, 1f, 0f);
             GameManager.AudioController.Play("PressButton");
             OnSiblingChange.Invoke(tree.ActualSelectableID());
         }

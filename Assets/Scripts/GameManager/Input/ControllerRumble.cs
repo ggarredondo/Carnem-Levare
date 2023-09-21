@@ -1,5 +1,6 @@
 ﻿using UnityEngine.InputSystem;
 using System.Threading.Tasks;
+using UnityEngine;
 
 public class ControllerRumble
 {
@@ -13,7 +14,7 @@ public class ControllerRumble
 
     public void Rumble(float duration, float leftAmplitude, float rightAmplitude)
     {
-        if (gamepad != null && GameManager.PlayerInput.currentControlScheme == "Gamepad" && !isRumbling && DataSaver.options.rumble)
+        if (gamepad != null && GameManager.InputUtilities.CurrentControlScheme() == "Gamepad" && !isRumbling && DataSaver.options.rumble)
         {
             gamepad.SetMotorSpeeds(leftAmplitude, rightAmplitude);
             isRumbling = true;

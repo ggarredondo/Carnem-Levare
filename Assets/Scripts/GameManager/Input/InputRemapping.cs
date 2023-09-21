@@ -10,7 +10,7 @@ public class InputRemapping
     {
         GameManager.AudioController.Play("PressButton");
 
-        action = GameManager.PlayerInput.actions.FindAction(name);
+        action = GameManager.InputUtilities.FindAction(name);
 
         if (action == null)
             Debug.Log("This action not exists");
@@ -18,47 +18,49 @@ public class InputRemapping
         {
             popUp.PopUpMessage("Waiting for input");
 
+            int controlSchemeIndex = GameManager.InputUtilities.ControlSchemeIndex;
+
             originalAction = action.Clone();
 
-            action.PerformInteractiveRebinding(GameManager.InputDetection.controlSchemeIndex)
+            action.PerformInteractiveRebinding(controlSchemeIndex)
                 .WithControlsExcluding("Mouse")
                 .OnMatchWaitForAnother(rebindTimeDelay)
-                .OnCancel(callback => CancelRebind(callback))
-                .OnComplete(callback => FinishRebind(callback, popUp))
+                .OnCancel(callback => CancelRebind(callback, controlSchemeIndex))
+                .OnComplete(callback => FinishRebind(callback, popUp, controlSchemeIndex))
                 .Start();
         }
     }
 
-    private void CancelRebind(RebindingOperation callback)
+    private void CancelRebind(RebindingOperation callback, int controlSchemeIndex)
     {
-        callback.action.ApplyBindingOverride(GameManager.InputDetection.controlSchemeIndex, originalAction.bindings[GameManager.InputDetection.controlSchemeIndex]);
+        callback.action.ApplyBindingOverride(controlSchemeIndex, originalAction.bindings[controlSchemeIndex]);
     }
 
-    private void FinishRebind(RebindingOperation callback, PopUpMenu popUp)
+    private void FinishRebind(RebindingOperation callback, PopUpMenu popUp, int controlSchemeIndex)
     {
         popUp.DisablePopUpMenu();
 
-        if (GameManager.InputMapping.AllowedMap.ContainsKey(callback.action.bindings[GameManager.InputDetection.controlSchemeIndex].effectivePath))
+        if (GameManager.InputUtilities.ObtainAllowedMapping(callback.action) != "")
         {
             GameManager.AudioController.Play("ApplyRebind");
 
-            InputAction result = CheckIfAsigned(callback.action);
-            if (result != null && !result.bindings[GameManager.InputDetection.controlSchemeIndex].isComposite)
+            InputAction result = CheckIfAsigned(callback.action, controlSchemeIndex);
+            if (result != null && !result.bindings[controlSchemeIndex].isComposite)
             {
-                result.ApplyBindingOverride(GameManager.InputDetection.controlSchemeIndex, "");
+                result.ApplyBindingOverride(controlSchemeIndex, "");
             }
         }
         else callback.Cancel();
 
-        GameManager.InputMapping.SaveUserRebinds(GameManager.PlayerInput);
+        GameManager.InputUtilities.SaveUserRebinds();
         callback.Dispose();
-        GameManager.InputDetection.controlsChangedEvent.Invoke();
+        GameManager.InputUtilities.Configure();
     }
 
-    private InputAction CheckIfAsigned(InputAction action)
+    private InputAction CheckIfAsigned(InputAction action, int controlSchemeIndex)
     {
         InputAction result = null;
-        InputBinding actualBinding = action.bindings[GameManager.InputDetection.controlSchemeIndex];
+        InputBinding actualBinding = action.bindings[controlSchemeIndex];
 
         foreach (InputBinding binding in action.actionMap.bindings)
         {
@@ -70,7 +72,7 @@ public class InputRemapping
 
             if (binding.effectivePath == actualBinding.effectivePath)
             {
-                result = GameManager.PlayerInput.actions.FindAction(binding.action);
+                result = GameManager.InputUtilities.FindAction(binding.action);
                 break;
             }
         }

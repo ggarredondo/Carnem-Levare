@@ -35,8 +35,8 @@ public class TransitionPlayer : MonoBehaviour
 
     private async Task StartTransition()
     {
-        GameManager.PlayerInput.DeactivateInput();
-        GameManager.UiInput.enabled = false;
+        GameManager.InputUtilities.ActivatePlayerInput(false);
+        GameManager.InputUtilities.EnableUIModule(false);
         await Lerp.Value_Unscaled(canvasGroup.alpha, 1, (a) => canvasGroup.alpha = a, lerpDuration);
         await Lerp.Value_Unscaled(childCanvasGroup.alpha, 1, (a) => childCanvasGroup.alpha = a, childLerpDuration);
         await Task.Delay(System.TimeSpan.FromSeconds(extraTime));
@@ -44,12 +44,12 @@ public class TransitionPlayer : MonoBehaviour
 
     private async Task EndTransition()
     {
-        GameManager.PlayerInput.DeactivateInput();
-        GameManager.UiInput.enabled = false;
+        GameManager.InputUtilities.ActivatePlayerInput(false);
+        GameManager.InputUtilities.EnableUIModule(false);
         await Lerp.Value(childCanvasGroup.alpha, 0, (a) => childCanvasGroup.alpha = a, childLerpDuration);
         await Lerp.Value(canvasGroup.alpha, 0, (a) => canvasGroup.alpha = a, lerpDuration);
-        GameManager.UiInput.enabled = true;
-        GameManager.PlayerInput.ActivateInput();
+        GameManager.InputUtilities.EnableUIModule(true);
+        GameManager.InputUtilities.ActivatePlayerInput(true);
 
         text.text = "";
         extraTime = 0;

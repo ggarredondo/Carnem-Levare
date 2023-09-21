@@ -36,21 +36,21 @@ public class AutoSelect : MonoBehaviour, IPointerEnterHandler, ISelectHandler, I
     {
         if (inputButton)
         {
-            GameManager.InputDetection.controlsChangedEvent += ChangeInputFont;
+            GameManager.InputUtilities.ControlsChangedEvent += ChangeInputFont;
             ChangeInputFont();
         }
     }
 
     private void OnDestroy()
     {
-        if (inputButton) GameManager.InputDetection.controlsChangedEvent -= ChangeInputFont;
+        if (inputButton) GameManager.InputUtilities.ControlsChangedEvent -= ChangeInputFont;
     }
 
     public void OnSelect(BaseEventData eventData)
     {
-        if (GameManager.InputDetection.controlSchemeIndex == 0 || GameManager.InputDetection.previousCustomControlScheme == InputDevice.KEYBOARD)
+        if (GameManager.InputUtilities.ControlSchemeIndex == 0 || GameManager.InputUtilities.PreviousCustomControlScheme == InputDevice.KEYBOARD)
         {
-            GameManager.InputDetection.selected = EventSystem.current.currentSelectedGameObject;
+            GameManager.InputUtilities.SetSelectedGameObject(EventSystem.current.currentSelectedGameObject);
             GameManager.AudioController.Play("SelectButton");
         }
     }
@@ -70,10 +70,10 @@ public class AutoSelect : MonoBehaviour, IPointerEnterHandler, ISelectHandler, I
     private void ChangeInputFont()
     {
         //Change Font
-        transform.GetChild(0).GetComponent<TMP_Text>().font = GlobalMenuVariables.Instance.inputFonts[GameManager.InputDetection.controlSchemeIndex];
+        transform.GetChild(0).GetComponent<TMP_Text>().font = GlobalMenuVariables.Instance.inputFonts[GameManager.InputUtilities.ControlSchemeIndex];
 
         //Asign the correct word
-        string mappingKey = GameManager.InputMapping.ObtainAllowedMapping(gameObject.name);
+        string mappingKey = GameManager.InputUtilities.ObtainAllowedMapping(gameObject.name);
 
         if (mappingKey != "-" && mappingKey != "") transform.GetChild(0).GetComponent<TMP_Text>().text = mappingKey;
         else

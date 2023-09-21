@@ -22,7 +22,7 @@ public class MoveBlock : MonoBehaviour
     public void AsignInput(string input)
     {
         inputGameobject.SetActive(true);
-        text.font = GlobalMenuVariables.Instance.inputFonts[GameManager.InputDetection.controlSchemeIndex];
+        text.font = GlobalMenuVariables.Instance.ActualInputFont();
 
         if (input != "-" && input != "") text.text += input;
         else

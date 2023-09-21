@@ -12,14 +12,10 @@ public class InputMapping
     {
         Map = ReadMappingFile("/Mapping/InputFonts.txt");
         AllowedMap = ReadMappingFile("/Mapping/AllowedInputs.txt");
-
-        if (DataSaver.options.rebinds != "")
-            LoadUserRebinds(GameManager.PlayerInput);
     }
 
-    public string ObtainAllowedMapping(in string buttonName)
+    public string ObtainAllowedMapping(string path)
     {
-        string path = GameManager.PlayerInput.actions.FindAction(buttonName).bindings[GameManager.InputDetection.controlSchemeIndex].effectivePath;
         if (AllowedMap.ContainsKey(path))
             return AllowedMap[path];
         else
@@ -29,9 +25,8 @@ public class InputMapping
         }
     }
 
-    public string ObtainMapping(in string buttonName)
+    public string ObtainMapping(string path)
     {
-        string path = GameManager.PlayerInput.actions.FindAction(buttonName).bindings[GameManager.InputDetection.controlSchemeIndex].effectivePath;
         if (Map.ContainsKey(path))
             return Map[path];
         else
@@ -39,16 +34,6 @@ public class InputMapping
             Debug.LogWarning(path + ": key was not found in the dictionary");
             return "";
         }
-    }
-
-    public void SaveUserRebinds(in PlayerInput player)
-    {
-        DataSaver.options.rebinds = player.actions.SaveBindingOverridesAsJson();
-    }
-
-    private void LoadUserRebinds(in PlayerInput player)
-    {
-        player.actions.LoadBindingOverridesFromJson(DataSaver.options.rebinds);
     }
 
     private Dictionary<string, string> ReadMappingFile(string file)

@@ -101,9 +101,9 @@ public class InputDetection
 
     private async void WaitGamepadDetection(float time)
     {
-        GameManager.UiInput.enabled = false;
+        GameManager.InputUtilities.EnableUIModule(false);
         await Task.Delay(System.TimeSpan.FromSeconds(time));
-        GameManager.UiInput.enabled = true;
+        GameManager.InputUtilities.EnableUIModule(true);
     }
 }
 
