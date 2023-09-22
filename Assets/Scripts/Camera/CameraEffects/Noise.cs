@@ -4,7 +4,7 @@ using LerpUtilities;
 using System.Threading.Tasks;
 
 [CreateAssetMenu(menuName = "Scriptable Objects/CameraEffects/Noise")]
-public class Noise : CameraMovement
+public class Noise : CameraEffect
 {
     public Tuple<float> frequency;
     public Tuple<float> amplitude;

@@ -1,7 +1,7 @@
 using Cinemachine;
 using UnityEngine;
 
-public abstract class CameraMovement : ScriptableObject
+public abstract class CameraEffect : ScriptableObject
 {
     protected CinemachineVirtualCamera vcam;
 

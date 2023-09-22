@@ -3,7 +3,7 @@ using LerpUtilities;
 using UnityEngine;
 
 [CreateAssetMenu(menuName = "Scriptable Objects/CameraEffects/SmoothFollow")]
-public class SmoothFollow : CameraMovement
+public class SmoothFollow : CameraEffect
 {
     public Tuple<float> variation;
 

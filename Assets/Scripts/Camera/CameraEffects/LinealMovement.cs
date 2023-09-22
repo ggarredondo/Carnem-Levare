@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 using UnityEngine;
 
 [CreateAssetMenu(menuName = "Scriptable Objects/CameraEffects/LinealMovement")]
-public class LinealMovement : CameraMovement
+public class LinealMovement : CameraEffect
 {
     public Vector3 offsetVariation;
 

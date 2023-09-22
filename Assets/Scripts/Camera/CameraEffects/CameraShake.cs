@@ -4,7 +4,7 @@ using LerpUtilities;
 using System.Threading.Tasks;
 
 [CreateAssetMenu(menuName = "Scriptable Objects/CameraEffects/CameraShake")]
-public class CameraShake : CameraMovement
+public class CameraShake : CameraEffect
 {
     private CinemachineBasicMultiChannelPerlin noiseTransposer;
 
