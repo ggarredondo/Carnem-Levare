@@ -81,27 +81,27 @@ public abstract class AbstractMenu : MonoBehaviour
     {
         save = value;
         if(hasSound) GameManager.AudioController.Slider();
-        GameManager.Saver.ApplyChanges();
+        GameManager.Save.ApplyChanges();
     }
 
     protected void Toggle(ref bool save, bool value)
     {
         save = value;
         GameManager.AudioController.Play("PressButton");
-        GameManager.Saver.ApplyChanges();
+        GameManager.Save.ApplyChanges();
     }
 
     protected void Dropdown(ref string save, string value)
     {
         save = value;
         GameManager.AudioController.Play("PressButton");
-        GameManager.Saver.ApplyChanges();
+        GameManager.Save.ApplyChanges();
     }
 
     protected void Dropdown(ref int save, int value)
     {
         save = value;
         GameManager.AudioController.Play("PressButton");
-        GameManager.Saver.ApplyChanges();
+        GameManager.Save.ApplyChanges();
     }
 }

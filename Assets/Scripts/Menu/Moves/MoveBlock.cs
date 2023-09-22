@@ -36,8 +36,8 @@ public class MoveBlock : MonoBehaviour
     {
         this.ID = ID;
 
-        if(DataSaver.games != null)
-            isNewMove.SetActive(DataSaver.CurrentGameSlot.newMoves[ID]);
+        if(GameManager.Save.IsLoaded())
+            isNewMove.SetActive(DataSaver.Game.newMoves[ID]);
         else
             isNewMove.SetActive(false);
     }
@@ -52,7 +52,7 @@ public class MoveBlock : MonoBehaviour
     {
         if (isNewMove.activeSelf)
         {
-            DataSaver.games[DataSaver.currentGameSlot].newMoves[ID] = false;
+            DataSaver.Game.newMoves[ID] = false;
             isNewMove.SetActive(false);
         }
     }

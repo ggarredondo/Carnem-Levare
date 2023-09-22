@@ -4,4 +4,9 @@ using UnityEngine;
 public class SaveOptions : ScriptableObject
 {
     public OptionsSlot defaultOptions;
+
+    public void Configure()
+    {
+        defaultOptions.resolution = Display.main.systemWidth + "x" + Display.main.systemHeight;
+    }
 }

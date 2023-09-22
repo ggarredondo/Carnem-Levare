@@ -63,6 +63,6 @@ public class HoldText : MonoBehaviour
     {
         hasTrigger = true;
         GameManager.AudioController.Play("PlayGame");
-        GameManager.SceneController.NextScene();
+        GameManager.Scene.NextScene();
     }
 }

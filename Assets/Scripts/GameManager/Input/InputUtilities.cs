@@ -20,7 +20,7 @@ public class InputUtilities
         inputDetection = new();
         controllerRumble = new();
 
-        if (DataSaver.options.rebinds != "")
+        if (DataSaver.Options.rebinds != "")
             LoadUserRebinds();
     }
 
@@ -92,12 +92,12 @@ public class InputUtilities
 
     private void LoadUserRebinds()
     {
-        playerInput.actions.LoadBindingOverridesFromJson(DataSaver.options.rebinds);
+        playerInput.actions.LoadBindingOverridesFromJson(DataSaver.Options.rebinds);
     }
 
     public void SaveUserRebinds()
     {
-        DataSaver.options.rebinds = playerInput.actions.SaveBindingOverridesAsJson();
+        DataSaver.Options.rebinds = playerInput.actions.SaveBindingOverridesAsJson();
     }
 
     public string ObtainAllowedMapping(in string buttonName)

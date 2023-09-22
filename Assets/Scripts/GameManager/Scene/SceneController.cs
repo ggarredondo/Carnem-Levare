@@ -2,11 +2,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class SceneController
+public class SceneController : IChangeScene
 {
     private Dictionary<string, SceneLogic> scenesTable;
     private List<SceneLogic> scenes;
-    private SceneLoader sceneLoader;
+    private readonly SceneLoader sceneLoader;
 
     private string currentScene;
     private string currentLoadScene;
@@ -52,15 +52,10 @@ public class SceneController
         currentScene = nextScene;
     }
 
-    public void PlayMusic()
+    private void PlayMusic()
     {
         if(scenesTable[currentScene].playMusic)
             GameManager.AudioController.PlayMusic(scenesTable[currentScene].music);
-    }
-
-    public List<SoundStructure> GetInitSounds()
-    {
-        return scenesTable[currentScene].initSoundStructures;
     }
 
     public void NextScene()

@@ -23,12 +23,12 @@ public class GameManager : MonoBehaviour
     [SerializeField] [Range(0f, 1f)] private float timeScale = 1f;
 
     private static ISave saver;
-    private static SceneController sceneController;
+    private static IChangeScene sceneController;
     private static InputUtilities inputUtilities;
     private static AudioController audioController;
 
-    public static ref readonly ISave Saver { get => ref saver; }
-    public static ref readonly SceneController SceneController { get => ref sceneController; }
+    public static ref readonly ISave Save { get => ref saver; }
+    public static ref readonly IChangeScene Scene { get => ref sceneController; }
     public static ref readonly InputUtilities InputUtilities { get => ref inputUtilities; }
     public static ref readonly AudioController AudioController { get => ref audioController; }
 
@@ -36,13 +36,14 @@ public class GameManager : MonoBehaviour
 
     private void Awake()
     {
+        DontDestroyOnLoad(gameObject);
+
         //Audio Initialize
         audioController = new();
 
         //Scene Initialize
-        DontDestroyOnLoad(gameObject);
         SceneManager.sceneLoaded += OnSceneLoaded;
-        sceneController = new(SceneManager.GetActiveScene().name, scenes);
+        sceneController = new SceneController(SceneManager.GetActiveScene().name, scenes);
         transitionPlayer.Initialize();
 
         //Save Initialize

@@ -1,24 +1,33 @@
 using System.Collections.Generic;
+using UnityEngine;
 using UnityEngine.Audio;
 
 public class DataSaver : ISave
 {
     private readonly XmlSerialize serializer;
     private IApplier optionsApplier;
+    private readonly int maxGameSlot;
 
-    public static OptionsSlot options;
-    public static List<GameSlot> games;
-    public static int currentGameSlot;
+    private static OptionsSlot options;
+    private static List<GameSlot> games;
+    private static int currentGameSlot;
+
+    public static GameSlot Game { get => games[currentGameSlot]; }
+    public static OptionsSlot Options { get => options; }
 
     public DataSaver(in SaveOptions configOptions, in SaveGame configGame, in AudioMixer audioMixer)
     {
         serializer = new();
 
-        if(configOptions != null)
-            options = (OptionsSlot) configOptions.defaultOptions.Clone();
+        if (configOptions != null)
+        {
+            configOptions.Configure();
+            options = (OptionsSlot)configOptions.defaultOptions.Clone();
+        }
 
         if (configGame != null)
         {
+            maxGameSlot = configGame.numGameSlots - 1;
             games = new List<GameSlot>(configGame.numGameSlots);
             for (int i = 0; i < configGame.numGameSlots; i++)
             {
@@ -29,8 +38,6 @@ public class DataSaver : ISave
 
         optionsApplier = new OptionsApplier(audioMixer);
     }
-
-    public static GameSlot CurrentGameSlot { get => games[currentGameSlot]; }
 
     public void Load()
     {
@@ -47,5 +54,16 @@ public class DataSaver : ISave
     public void ApplyChanges()
     {
         optionsApplier.ApplyChanges(options);
+    }
+
+    public void ChangeGameSlot(int slot)
+    {
+        if (slot >= 0 && slot <= maxGameSlot) currentGameSlot = slot;
+        else Debug.LogWarning("The Game Slot is not valid");
+    }
+
+    public bool IsLoaded()
+    {
+        return games != null;
     }
 }

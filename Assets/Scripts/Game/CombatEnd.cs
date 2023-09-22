@@ -38,8 +38,8 @@ public class CombatEnd : MonoBehaviour
 
         enemy.EnemyDrops.ForEach(m =>
         {
-            DataSaver.games[DataSaver.currentGameSlot].moves.Add(m);
-            DataSaver.games[DataSaver.currentGameSlot].newMoves.Add(true);
+            DataSaver.Game.moves.Add(m);
+            DataSaver.Game.newMoves.Add(true);
         });
 
         await rewardGenerator.GenerateMove(enemy.EnemyDrops);
@@ -49,7 +49,7 @@ public class CombatEnd : MonoBehaviour
         TransitionPlayer.text.text = "YOU LIVE";
 
         GameManager.AudioController.Play("PlayGame");
-        GameManager.SceneController.NextScene();
+        GameManager.Scene.NextScene();
     }
 
     private async void Defeat()
@@ -60,6 +60,6 @@ public class CombatEnd : MonoBehaviour
         TransitionPlayer.text.text = "YOU DIED";
 
         GameManager.AudioController.Play("BackMenu");
-        GameManager.SceneController.PreviousScene();
+        GameManager.Scene.PreviousScene();
     }
 }

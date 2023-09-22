@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class FootstepSound : MonoBehaviour
+public class TriggerSound : MonoBehaviour
 {
     [SerializeField] private string sound;
 
