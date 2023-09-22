@@ -1,7 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Audio;
-using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.UI;
 using UnityEngine.SceneManagement;
 
@@ -23,13 +22,12 @@ public class GameManager : MonoBehaviour
     [Header("Debug")]
     [SerializeField] [Range(0f, 1f)] private float timeScale = 1f;
 
-    private ISave saver;
-    private IApplier applier;
-
+    private static ISave saver;
     private static SceneController sceneController;
-    private static AudioController audioController;
     private static InputUtilities inputUtilities;
+    private static AudioController audioController;
 
+    public static ref readonly ISave Saver { get => ref saver; }
     public static ref readonly SceneController SceneController { get => ref sceneController; }
     public static ref readonly InputUtilities InputUtilities { get => ref inputUtilities; }
     public static ref readonly AudioController AudioController { get => ref audioController; }
@@ -48,8 +46,7 @@ public class GameManager : MonoBehaviour
         transitionPlayer.Initialize();
 
         //Save Initialize
-        saver = new DataSaver(defaultOptions, defaultGame);
-        applier = new OptionsApplier(audioMixer);
+        saver = new DataSaver(defaultOptions, defaultGame, audioMixer);
         saver.Load();
 
         //Input Initialize
@@ -58,12 +55,7 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
-        applier.ApplyChanges();
-    }
-
-    private void OnValidate()
-    {
-        Time.timeScale = timeScale;
+        saver.ApplyChanges();
     }
 
     private void OnDestroy()
@@ -71,15 +63,20 @@ public class GameManager : MonoBehaviour
         saver.Save();
     }
 
+    private void Update()
+    {
+        inputUtilities.Update();
+    }
+
+    private void OnValidate()
+    {
+        Time.timeScale = timeScale;
+    }
+
     void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
         Time.timeScale = 1;
 
         inputUtilities.Configure();
-    }
-
-    private void Update()
-    {
-        inputUtilities.Update();
     }
 }

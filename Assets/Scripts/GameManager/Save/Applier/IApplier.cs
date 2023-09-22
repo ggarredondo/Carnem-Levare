@@ -1,4 +1,4 @@
 public interface IApplier
 {
-    public void ApplyChanges();
+    public void ApplyChanges(OptionsSlot options);
 }
