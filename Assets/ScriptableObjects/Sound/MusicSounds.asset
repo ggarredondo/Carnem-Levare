@@ -27,7 +27,9 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   soundGroups:
-  - speakersTag:
+  - ID:
+    - Music
+    speakersTag:
     - MUSIC
     sounds:
     - name: Intro

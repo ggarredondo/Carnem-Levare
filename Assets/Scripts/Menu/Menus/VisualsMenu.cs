@@ -17,25 +17,25 @@ public class VisualsMenu : AbstractMenu
     protected override void Configure()
     {
         //Initilize Toggles
-        fullscreenToggle.isOn = DataSaver.options.fullscreen;
-        vsyncToggle.isOn = DataSaver.options.vSync;
+        fullscreenToggle.isOn = DataSaver.Options.fullscreen;
+        vsyncToggle.isOn = DataSaver.Options.vSync;
+
+        //Display.main.systemWidth + "x" + Display.main.systemHeight
 
         //Initialize resolution Dropdown
         List<string> options = new()
         {
-            Display.main.systemWidth + "x" + Display.main.systemHeight,
-            "1600x900",
-            "1536x864",
-            "1440x900",
-            "1366x768",
+            "3840x2160",
+            "2560x1440",
+            "1920x1080",
             "1280x720",
-            "1280x1024",
-            "768x1024"
+            "960x540",
+            "640x480"
         };
 
         resolutionDropdown.ClearOptions();
         resolutionDropdown.AddOptions(options);
-        resolutionDropdown.value = resolutionDropdown.options.FindIndex(option => option.text == DataSaver.options.resolution);
+        resolutionDropdown.value = resolutionDropdown.options.FindIndex(option => option.text == DataSaver.Options.resolution);
 
         //Initialize quality Dropdown
         List<string> quality = new()
@@ -47,7 +47,7 @@ public class VisualsMenu : AbstractMenu
 
         qualityDropdown.ClearOptions();
         qualityDropdown.AddOptions(quality);
-        qualityDropdown.value = qualityDropdown.options.FindIndex(option => option.text == quality[DataSaver.options.quality]);
+        qualityDropdown.value = qualityDropdown.options.FindIndex(option => option.text == quality[DataSaver.Options.quality]);
 
         vsyncToggle.onValueChanged.AddListener(Vsync);
         fullscreenToggle.onValueChanged.AddListener(FullScreen);
@@ -60,21 +60,21 @@ public class VisualsMenu : AbstractMenu
 
     public void Vsync(bool value)
     {
-        Toggle(ref DataSaver.options.vSync, value);
+        Toggle(ref DataSaver.Options.vSync, value);
     }
 
     public void FullScreen(bool value)
     {
-        Toggle(ref DataSaver.options.fullscreen, value);
+        Toggle(ref DataSaver.Options.fullscreen, value);
     }
 
     public void ChangeResolution(int value)
     {
-        Dropdown(ref DataSaver.options.resolution, resolutionDropdown.options[value].text);
+        Dropdown(ref DataSaver.Options.resolution, resolutionDropdown.options[value].text);
     }
 
     public void ChangeQuality(int value)
     {
-        Dropdown(ref DataSaver.options.quality, value);
+        Dropdown(ref DataSaver.Options.quality, value);
     }
 }

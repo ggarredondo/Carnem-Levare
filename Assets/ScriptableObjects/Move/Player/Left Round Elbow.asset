@@ -25,15 +25,15 @@ MonoBehaviour:
   stateSpeed: 1.2
   transitionDuration: 0.1
   applyAnimationState: 0
-  initSound: Whiff_Overhand
+  initSound: Player_Whiff_Overhand
   startUp: 350
   active: 100
   recovery: 500
   applyAnimationEvents: 0
-  hurtSound: Hit_Overhand
-  blockedSound: Blocked_Default
-  staggerSound: Guard_Break
-  koSound: Knockout_Default
+  hurtSound: Enemy_Hit_Overhand
+  blockedSound: Enemy_Blocked_Default
+  staggerSound: Enemy_Guard_Break
+  koSound: Enemy_Knockout_Default
   hurtStun: 800
   blockedStun: 300
   hurtCameraShake:

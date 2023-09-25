@@ -25,15 +25,15 @@ MonoBehaviour:
   stateSpeed: 1.2
   transitionDuration: 0.1
   applyAnimationState: 0
-  initSound: Whiff_Hook
+  initSound: Player_Whiff_Hook
   startUp: 200
   active: 70
   recovery: 300
   applyAnimationEvents: 0
-  hurtSound: Hit_Hook
-  blockedSound: Blocked_Default
-  staggerSound: Guard_Break
-  koSound: Knockout_Default
+  hurtSound: Enemy_Hit_Hook
+  blockedSound: Enemy_Blocked_Default
+  staggerSound: Enemy_Guard_Break
+  koSound: Enemy_Knockout_Default
   hurtStun: 500
   blockedStun: 200
   hurtCameraShake:

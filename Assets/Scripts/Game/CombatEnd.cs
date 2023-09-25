@@ -34,12 +34,12 @@ public class CombatEnd : MonoBehaviour
     private async void Victory()
     {
         await Task.Delay(System.TimeSpan.FromSeconds(waitAfterDeath));
-        GameManager.PlayerInput.enabled = false;
+        GameManager.InputUtilities.EnablePlayerInput(false);
 
         enemy.EnemyDrops.ForEach(m =>
         {
-            DataSaver.games[DataSaver.currentGameSlot].moves.Add(m);
-            DataSaver.games[DataSaver.currentGameSlot].newMoves.Add(true);
+            DataSaver.Game.moves.Add(m);
+            DataSaver.Game.newMoves.Add(true);
         });
 
         await rewardGenerator.GenerateMove(enemy.EnemyDrops);
@@ -48,8 +48,8 @@ public class CombatEnd : MonoBehaviour
         TransitionPlayer.extraTime = 1;
         TransitionPlayer.text.text = "YOU LIVE";
 
-        AudioController.Instance.uiSfxSounds.Play("PlayGame");
-        GameManager.SceneController.NextScene();
+        GameManager.AudioController.Play("PlayGame");
+        GameManager.Scene.NextScene();
     }
 
     private async void Defeat()
@@ -59,7 +59,7 @@ public class CombatEnd : MonoBehaviour
         TransitionPlayer.extraTime = 2;
         TransitionPlayer.text.text = "YOU DIED";
 
-        AudioController.Instance.uiSfxSounds.Play("BackMenu");
-        GameManager.SceneController.PreviousScene();
+        GameManager.AudioController.Play("BackMenu");
+        GameManager.Scene.PreviousScene();
     }
 }

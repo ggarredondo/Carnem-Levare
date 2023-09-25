@@ -24,9 +24,9 @@ public class MainMenu : AbstractMenu
     {
         if (!isLoading)
         {
-            AudioController.Instance.uiSfxSounds.Play("PlayGame");
+            GameManager.AudioController.Play("PlayGame");
             isLoading = true;
-            GameManager.SceneController.NextScene();
+            GameManager.Scene.NextScene();
         }
     }
 }

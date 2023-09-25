@@ -19,29 +19,29 @@ public class SoundMenu : AbstractMenu
 
         muteButton.onClick.AddListener(() => muteToggle.isOn = !muteToggle.isOn);
 
-        masterSlider.value = DataSaver.options.masterVolume;
-        musicSlider.value = DataSaver.options.musicVolume;
-        sfxSlider.value = DataSaver.options.sfxVolume;
-        muteToggle.isOn = DataSaver.options.mute;
+        masterSlider.value = DataSaver.Options.masterVolume;
+        musicSlider.value = DataSaver.Options.musicVolume;
+        sfxSlider.value = DataSaver.Options.sfxVolume;
+        muteToggle.isOn = DataSaver.Options.mute;
     }
 
     public void ChangeMasterVolume(float value)
     {
-        Slider(ref DataSaver.options.masterVolume, value, DataSaver.options.musicVolume < 0.1);
+        Slider(ref DataSaver.Options.masterVolume, value, DataSaver.Options.musicVolume < 0.1);
     }
 
     public void ChangeMusicVolume(float value)
     {
-        Slider(ref DataSaver.options.musicVolume, value, false);
+        Slider(ref DataSaver.Options.musicVolume, value, false);
     }
 
     public void ChangeSfxVolume(float value)
     {
-        Slider(ref DataSaver.options.sfxVolume, value, true);
+        Slider(ref DataSaver.Options.sfxVolume, value, true);
     }
 
     public void Mute(bool value)
     {
-        Toggle(ref DataSaver.options.mute, value);
+        Toggle(ref DataSaver.Options.mute, value);
     }
 }

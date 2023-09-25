@@ -23,4 +23,5 @@ MonoBehaviour:
     loadSceneName: 
   playMusic: 1
   music: Intro
-  sounds: []
+  initSoundStructures: []
+  endSoundStructures: []

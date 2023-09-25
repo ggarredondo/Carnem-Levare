@@ -37,7 +37,7 @@ MonoBehaviour:
   stateSpeed: 1
   transitionDuration: 0.1
   applyAnimationState: 0
-  initSound: Dash
+  initSound: Player_Dash
   startUp: 100
   active: 100
   recovery: 500
