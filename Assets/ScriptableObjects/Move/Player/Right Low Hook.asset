@@ -38,9 +38,13 @@ MonoBehaviour:
   blockedSound: Enemy_Blocked_Default
   staggerSound: Enemy_Guard_Break
   koSound: Enemy_Knockout_Default
-  hurtParticlesPrefab: {fileID: 6041449915859805219, guid: 39d3fbe12a8f682438be0a5a4249bf1b,
+  hurtParticlesPrefab: {fileID: 6041449915859805219, guid: f07ea74f81b2ebc4d806348219bdb9f5,
     type: 3}
-  blockedParticlesPrefab: {fileID: 6041449915859805219, guid: 39d3fbe12a8f682438be0a5a4249bf1b,
+  blockedParticlesPrefab: {fileID: 6041449915859805219, guid: 266b0cab99ba20240ba01950da8efdb7,
+    type: 3}
+  staggerParticlesPrefab: {fileID: 6041449915859805219, guid: c85934e6b4723ab4986778bcb29ba6b6,
+    type: 3}
+  koParticlesPrefab: {fileID: 6041449915859805219, guid: 4df20e43bf505104f8673c3be3ddc55a,
     type: 3}
   hurtStun: 600
   blockedStun: 300

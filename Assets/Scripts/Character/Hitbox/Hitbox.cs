@@ -50,6 +50,8 @@ public class Hitbox : MonoBehaviour
 
     public void SetHurtParticles() => hitParticlesPrefab = attackMove.HurtParticlesPrefab;
     public void SetBlockedParticles() => hitParticlesPrefab = attackMove.BlockedParticlesPrefab;
+    public void SetStaggerParticles() => hitParticlesPrefab = attackMove.StaggerParticlesPrefab;
+    public void SetKoParticles() => hitParticlesPrefab = attackMove.KoParticlesPrefab;
 
     public ref readonly GameObject Particles => ref hitParticlesPrefab;
 

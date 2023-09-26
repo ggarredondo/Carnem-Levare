@@ -950,6 +950,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1878726773391280501, guid: 597ff9b00a9e7804681f9e3db89066c3,
         type: 3}
+      propertyPath: block
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1878726773391280501, guid: 597ff9b00a9e7804681f9e3db89066c3,
+        type: 3}
       propertyPath: enableDebug
       value: 1
       objectReference: {fileID: 0}

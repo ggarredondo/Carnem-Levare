@@ -31,6 +31,8 @@ public class AttackMove : Move
     [Header("Attack-specific Particles")]
     [SerializeField] private GameObject hurtParticlesPrefab;
     [SerializeField] private GameObject blockedParticlesPrefab;
+    [SerializeField] private GameObject staggerParticlesPrefab;
+    [SerializeField] private GameObject koParticlesPrefab;
 
     [Header("Attack-specific Time Data (ms)")]
     [SerializeField] private double hurtStun;
@@ -100,6 +102,8 @@ public class AttackMove : Move
 
     public ref readonly GameObject HurtParticlesPrefab => ref hurtParticlesPrefab;
     public ref readonly GameObject BlockedParticlesPrefab => ref blockedParticlesPrefab;
+    public ref readonly GameObject StaggerParticlesPrefab => ref staggerParticlesPrefab;
+    public ref readonly GameObject KoParticlesPrefab => ref koParticlesPrefab;
 
     public double HurtStun => hurtStun;
     public double BlockedStun => blockedStun;

@@ -11,5 +11,7 @@ public class CharacterVisualEffects
 
         stateMachine.HurtState.OnEnterHitbox += (in Hitbox hitbox) => hitbox.SetHurtParticles();
         stateMachine.BlockedState.OnEnterHitbox += (in Hitbox hitbox) => hitbox.SetBlockedParticles();
+        stateMachine.StaggerState.OnEnterHitbox += (in Hitbox hitbox) => hitbox.SetStaggerParticles();
+        stateMachine.KOState.OnEnterHitbox += (in Hitbox hitbox) => hitbox.SetKoParticles();
     }
 }
