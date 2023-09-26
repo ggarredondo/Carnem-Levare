@@ -980,6 +980,8 @@ MonoBehaviour:
     idleDirectionSpeed: 5
   characterAnimation:
     animatorSpeed: 1
+  characterVisualEffects:
+    particlesController: {fileID: 4782287541252050146}
 --- !u!114 &1658105093767166710
 MonoBehaviour:
   m_ObjectHideFlags: 0

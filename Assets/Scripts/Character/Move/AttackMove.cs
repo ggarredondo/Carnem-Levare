@@ -28,6 +28,10 @@ public class AttackMove : Move
     [SerializeField] private string staggerSound;
     [SerializeField] private string koSound;
 
+    [Header("Attack-specific Particles")]
+    [SerializeField] private GameObject hurtParticlesPrefab;
+    [SerializeField] private GameObject blockedParticlesPrefab;
+
     [Header("Attack-specific Time Data (ms)")]
     [SerializeField] private double hurtStun;
     [SerializeField] private double blockedStun;
@@ -93,6 +97,9 @@ public class AttackMove : Move
     public ref readonly string BlockedSound => ref blockedSound;
     public ref readonly string StaggerSound => ref staggerSound;
     public ref readonly string KOSound => ref koSound;
+
+    public ref readonly GameObject HurtParticlesPrefab => ref hurtParticlesPrefab;
+    public ref readonly GameObject BlockedParticlesPrefab => ref blockedParticlesPrefab;
 
     public double HurtStun => hurtStun;
     public double BlockedStun => blockedStun;

@@ -35,6 +35,9 @@ public abstract class Move : ScriptableObject
     [Header("Move Sound")]
     [SerializeField] protected string initSound;
 
+    [Header("Particles")]
+    [SerializeField] protected Particles initParticles;
+
     [Header("Time Data (ms)")]
 
     [Tooltip("[0, startUp): move is starting.")]
@@ -129,6 +132,8 @@ public abstract class Move : ScriptableObject
     public bool FixedDirection => fixedDirection;
     public float DirectionSpeed => directionSpeed;
     public ref readonly string InitSound => ref initSound;
+
+    public ref readonly Particles InitParticles => ref initParticles;
 
     public double StartUp => startUp;
     public double Active => active;

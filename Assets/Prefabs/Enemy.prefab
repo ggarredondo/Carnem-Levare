@@ -182,6 +182,55 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a82aa67ada2d32b4482db86d74ee99d3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &4755013060795791206
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3669617491132979425}
+  - component: {fileID: 5880750606847799429}
+  m_Layer: 0
+  m_Name: ParticleManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3669617491132979425
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4755013060795791206}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 7481606168508649710}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5880750606847799429
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4755013060795791206}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 47d43b59de14a5c409a59242ed74720a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  producers:
+  - ID: High
+    producerObject: {fileID: 41474367162860651}
+  - ID: Low
+    producerObject: {fileID: 1945484951096879880}
 --- !u!1 &4830288424506690251
 GameObject:
   m_ObjectHideFlags: 0
@@ -371,6 +420,7 @@ Transform:
   - {fileID: 6944190358229410020}
   - {fileID: 8035992032587979040}
   - {fileID: 9053374612500937825}
+  - {fileID: 3669617491132979425}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -462,6 +512,8 @@ MonoBehaviour:
     idleDirectionSpeed: 3
   characterAnimation:
     animatorSpeed: 1
+  characterVisualEffects:
+    particlesController: {fileID: 5880750606847799429}
   enemyDrops:
   - {fileID: 11400000, guid: 04f296a56c3f5a141ac9e88071fd56f3, type: 2}
   - {fileID: 11400000, guid: b7b1f886209da504797687ffcf73dbca, type: 2}
@@ -891,9 +943,21 @@ PrefabInstance:
     m_RemovedComponents:
     - {fileID: 5866666021909216657, guid: df8e8b4e49896f543828b277b6764350, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: df8e8b4e49896f543828b277b6764350, type: 3}
+--- !u!1 &41474367162860651 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: -1781356600409242780, guid: df8e8b4e49896f543828b277b6764350,
+    type: 3}
+  m_PrefabInstance: {fileID: 7481606168323393295}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &72973766600931830 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -1812909498023395591, guid: df8e8b4e49896f543828b277b6764350,
+    type: 3}
+  m_PrefabInstance: {fileID: 7481606168323393295}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1945484951096879880 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: -203856693384778745, guid: df8e8b4e49896f543828b277b6764350,
     type: 3}
   m_PrefabInstance: {fileID: 7481606168323393295}
   m_PrefabAsset: {fileID: 0}

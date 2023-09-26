@@ -26,6 +26,10 @@ MonoBehaviour:
   transitionDuration: 0.1
   applyAnimationState: 0
   initSound: Player_Whiff_Overhand
+  initParticles:
+    ID: left_hand
+    prefab: {fileID: 6041449915859805219, guid: 24d8287278ffbba428cc17a2ee811e16,
+      type: 3}
   startUp: 350
   active: 100
   recovery: 500
@@ -34,6 +38,10 @@ MonoBehaviour:
   blockedSound: Enemy_Blocked_Default
   staggerSound: Enemy_Guard_Break
   koSound: Enemy_Knockout_Default
+  hurtParticlesPrefab: {fileID: 6041449915859805219, guid: 39d3fbe12a8f682438be0a5a4249bf1b,
+    type: 3}
+  blockedParticlesPrefab: {fileID: 6041449915859805219, guid: 39d3fbe12a8f682438be0a5a4249bf1b,
+    type: 3}
   hurtStun: 800
   blockedStun: 300
   hurtCameraShake:

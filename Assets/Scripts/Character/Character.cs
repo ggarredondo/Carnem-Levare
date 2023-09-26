@@ -8,6 +8,7 @@ public abstract class Character : MonoBehaviour
     [SerializeField] protected CharacterMovement characterMovement;
     [SerializeField] protected CharacterAnimation characterAnimation;
     [SerializeField] protected CharacterAudio characterAudio;
+    [SerializeField] protected CharacterVisualEffects characterVisualEffects;
     protected Character opponent;
 
     protected virtual void Awake()
@@ -26,6 +27,7 @@ public abstract class Character : MonoBehaviour
         characterStats.Reference(stateMachine);
         characterMovement.Reference(opponent.transform);
         characterAudio.Reference(stateMachine, characterStats);
+        characterVisualEffects.Reference(stateMachine, characterStats);
         characterAnimation.Reference(stateMachine, characterStats, characterMovement, 
             opponent.GetComponent<Animator>(), opponent.transform,
             GetComponent<Rigidbody>(), GetComponent<Collider>());
@@ -43,4 +45,6 @@ public abstract class Character : MonoBehaviour
     public ref readonly CharacterStats CharacterStats { get => ref characterStats; }
     public ref readonly CharacterAnimation CharacterAnimation { get => ref characterAnimation; }
     public ref readonly CharacterAudio CharacterAudio { get => ref characterAudio; }
+
+    public ref readonly ParticlesController ParticlesController { get => ref characterVisualEffects.particlesController; }
 }

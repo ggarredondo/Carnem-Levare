@@ -5,6 +5,7 @@ public class Hitbox : MonoBehaviour
     private AttackMove attackMove;
     private int damageToHealth, damageToStamina;
     private HurtHeight hurtHeight;
+    private GameObject hitParticlesPrefab;
 
     private void Start()
     {
@@ -44,7 +45,13 @@ public class Hitbox : MonoBehaviour
     public float HurtSide => (float) attackMove.HurtSide;
     public float HurtPower => (float) attackMove.HurtPower;
     public float HurtHeight => (float) hurtHeight;
+
     public void SetHeight(HurtHeight hurtHeight) => this.hurtHeight = hurtHeight;
+
+    public void SetHurtParticles() => hitParticlesPrefab = attackMove.HurtParticlesPrefab;
+    public void SetBlockedParticles() => hitParticlesPrefab = attackMove.BlockedParticlesPrefab;
+
+    public ref readonly GameObject Particles => ref hitParticlesPrefab;
 
     public int DamageToHealth => damageToHealth;
     public int DamageToStamina => damageToStamina;
