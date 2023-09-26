@@ -1,1 +1,1 @@
-![CARNEM LEVARE LOGO](https://i.imgur.com/J1FHKtV.png)
+![CARNEM LEVARE LOGO](https://i.imgur.com/NTR7X5F.png)
