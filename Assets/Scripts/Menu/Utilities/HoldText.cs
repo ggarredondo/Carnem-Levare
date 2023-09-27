@@ -14,7 +14,7 @@ public class HoldText : MonoBehaviour
 
     [Header("Parameters")]
     [SerializeField] private float minHoldTime;
-    [SerializeField] private float holdTIme;
+    [SerializeField] private float holdTime;
 
     private CancellationTokenSource cancellationTokenSource;
     private bool hasTrigger;
@@ -38,7 +38,8 @@ public class HoldText : MonoBehaviour
 
     private void ReleaseHold()
     {
-        cancellationTokenSource?.Cancel();
+        cancellationTokenSource.Cancel();
+        cancellationTokenSource.Dispose();
         tmpText.color = new Color(1, 1, 1);
     }
 
@@ -50,17 +51,14 @@ public class HoldText : MonoBehaviour
         try
         {
             await Task.Delay(System.TimeSpan.FromSeconds(minHoldTime));
-            await Lerp.Value_Cancel(tmpText.color, new Color(1, 0, 0),(c) => tmpText.color = c , holdTIme, cancellationToken);
+            await Lerp.Value_Cancel(tmpText.color, new Color(1, 0, 0),(c) => tmpText.color = c , holdTime, cancellationToken);
         }
         catch (TaskCanceledException) { }
-        finally
-        {
-            cancellationTokenSource.Dispose();
-        }
     }
 
     private void TriggerHold()
     {
+        cancellationTokenSource.Dispose();
         hasTrigger = true;
         GameManager.AudioController.Play("PlayGame");
         GameManager.Scene.NextScene();

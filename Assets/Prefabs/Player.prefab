@@ -498,6 +498,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sound: Player_Left_Foot
+  particleController: {fileID: 4782287541252050146}
+  particles:
+    ID: Left_Foot
+    prefab: {fileID: 6041449915859805219, guid: b549ebe59f8b86a4e9326b4163322369,
+      type: 3}
 --- !u!1 &1493096808369930667
 GameObject:
   m_ObjectHideFlags: 0
@@ -726,6 +731,10 @@ MonoBehaviour:
     producerObject: {fileID: 9165175847522256168}
   - ID: right_hand
     producerObject: {fileID: 7277780352389702117}
+  - ID: Left_Foot
+    producerObject: {fileID: 1133088415450659919}
+  - ID: Right_Foot
+    producerObject: {fileID: 2174714693114535593}
 --- !u!1 &2174714693114535593
 GameObject:
   m_ObjectHideFlags: 0
@@ -786,6 +795,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sound: Player_Right_Foot
+  particleController: {fileID: 4782287541252050146}
+  particles:
+    ID: Right_Foot
+    prefab: {fileID: 6041449915859805219, guid: b549ebe59f8b86a4e9326b4163322369,
+      type: 3}
 --- !u!1 &2717030910235825013
 GameObject:
   m_ObjectHideFlags: 0

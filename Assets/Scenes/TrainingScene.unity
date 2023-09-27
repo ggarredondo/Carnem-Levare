@@ -688,7 +688,7 @@ MonoBehaviour:
     type: 3}
   tmpText: {fileID: 216464475}
   minHoldTime: 0.2
-  holdTIme: 0.8
+  holdTime: 0.8
 --- !u!1 &309256730
 GameObject:
   m_ObjectHideFlags: 0
@@ -951,7 +951,7 @@ PrefabInstance:
     - target: {fileID: 1878726773391280501, guid: 597ff9b00a9e7804681f9e3db89066c3,
         type: 3}
       propertyPath: block
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1878726773391280501, guid: 597ff9b00a9e7804681f9e3db89066c3,
         type: 3}
