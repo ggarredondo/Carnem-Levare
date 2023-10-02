@@ -2,7 +2,7 @@ using UnityEngine;
 using Cinemachine;
 using UnityEngine.Rendering;
 
-public class CameraController : MonoBehaviour
+public class CameraController : MonoBehaviour, IObjectInitialize
 {
     public CameraType changeVirtualCamera;
     public static CameraType currentVirtualCamera;
@@ -17,13 +17,13 @@ public class CameraController : MonoBehaviour
     private CinemachineTargetGroup targetGroup;
     private CinemachineVirtualCamera currentCinemachineCamera;
 
-    private void Start()
+    public void Initialize(ref GameObject player, ref GameObject enemy)
     {
-        playerTargets = GameObject.FindGameObjectWithTag("Player").GetComponent<CameraTargets>();
-        enemyTargets = GameObject.FindGameObjectWithTag("Enemy").GetComponent<CameraTargets>();
+        playerTargets = player.GetComponent<CameraTargets>();
+        enemyTargets = enemy.GetComponent<CameraTargets>();
 
-        player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
-        enemy = GameObject.FindGameObjectWithTag("Enemy").GetComponent<Enemy>();
+        this.player = player.GetComponent<Player>();
+        this.enemy = enemy.GetComponent<Enemy>();
 
         targetGroup = GameObject.FindGameObjectWithTag("TARGET_GROUP").GetComponent<CinemachineTargetGroup>();
 

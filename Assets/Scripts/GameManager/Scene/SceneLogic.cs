@@ -22,4 +22,7 @@ public class SceneLogic : ScriptableObject
     [ConditionalField("playMusic")] public string music;
     public List<SoundStructure> initSoundStructures;
     public List<SoundStructure> endSoundStructures;
+
+    [Header("Objects Initialization")]
+    public List<string> gameObjectsTag;
 }

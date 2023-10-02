@@ -25,3 +25,15 @@ MonoBehaviour:
     - {fileID: 11400000, guid: 04f296a56c3f5a141ac9e88071fd56f3, type: 2}
     - {fileID: 11400000, guid: b7b1f886209da504797687ffcf73dbca, type: 2}
     - {fileID: 11400000, guid: 98f8f83583ee5b4408d964c221c5feb5, type: 2}
+    enemyResourcesFolder: Enemies/
+    enemyPrefabNames:
+    - Enemy 1
+    - Enemy 2
+    - Enemy 3
+    - Enemy 4
+    - Enemy 5
+    - Enemy 6
+    - Enemy 7
+    - Enemy 8
+    - Enemy 9
+    - Enemy 10

@@ -31,6 +31,15 @@ public class SceneController : IChangeScene
     {
         if (scene.name != currentLoadScene)
         {
+            if (scenesTable[scene.name].gameObjectsTag.Count > 0)
+            {
+                GameObject player = GameObject.FindGameObjectWithTag("Player");
+                GameObject enemy = GameObject.FindGameObjectWithTag("Enemy");
+
+                foreach (string tag in scenesTable[scene.name].gameObjectsTag)
+                    GameObject.FindGameObjectWithTag(tag).GetComponent<IObjectInitialize>().Initialize(ref player, ref enemy);
+            }
+
             GameManager.AudioController.InitializeSoundSources(scenesTable[scene.name].initSoundStructures);
             PlayMusic();
         }
@@ -56,6 +65,16 @@ public class SceneController : IChangeScene
     {
         if(scenesTable[currentScene].playMusic)
             GameManager.AudioController.PlayMusic(scenesTable[currentScene].music);
+    }
+
+    public List<string> GetInitializeTags(Scene scene)
+    {
+        return scenesTable[scene.name].gameObjectsTag;
+    }
+
+    public List<SoundStructure> GetInitSoundStructures(Scene scene)
+    {
+        return scenesTable[scene.name].initSoundStructures;
     }
 
     public void NextScene()

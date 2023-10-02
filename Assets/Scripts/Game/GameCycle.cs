@@ -1,28 +1,29 @@
 using UnityEngine;
 using System.Threading.Tasks;
 
-public class CombatEnd : MonoBehaviour
+public class GameCycle : MonoBehaviour, IObjectInitialize
 {
     private Player player;
     private Enemy enemy;
 
     [Header("Requirements")]
+    [SerializeField] private EnemyLoader enemyLoader;
     [SerializeField] private RewardGenerator rewardGenerator;
 
     [Header("Parameters")]
     [SerializeField] private float waitAfterDeath;
     [SerializeField] private float waitAfterReward;
 
-    private void Awake()
+    public void Initialize(ref GameObject player, ref GameObject enemy)
     {
-        player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
-        enemy = GameObject.FindGameObjectWithTag("Enemy").GetComponent<Enemy>();
-    }
+        enemyLoader.Initialize();
+        enemy = enemyLoader.LoadEnemy();
 
-    private void Start()
-    {
-        enemy.StateMachine.KOState.OnEnter += Victory;
-        player.StateMachine.KOState.OnEnter += Defeat;
+        this.player = player.GetComponent<Player>();
+        this.enemy = enemy.GetComponent<Enemy>();
+
+        this.enemy.StateMachine.KOState.OnEnter += Victory;
+        this.player.StateMachine.KOState.OnEnter += Defeat;
     }
 
     private void OnDestroy()
@@ -44,6 +45,8 @@ public class CombatEnd : MonoBehaviour
 
         await rewardGenerator.GenerateMove(enemy.EnemyDrops);
         await Task.Delay(System.TimeSpan.FromSeconds(waitAfterReward));
+
+        DataSaver.Game.enemyPrefabNames.RemoveAt(enemyLoader.GetActualEnemyId());
 
         TransitionPlayer.extraTime = 1;
         TransitionPlayer.text.text = "YOU LIVE";

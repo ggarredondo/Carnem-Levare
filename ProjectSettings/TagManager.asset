@@ -17,6 +17,7 @@ TagManager:
   - AUDIO/ENEMY_SOURCES
   - PARTICLES/PLAYER
   - PARTICLES/ENEMY
+  - GAME_LOGIC
   layers:
   - Default
   - TransparentFX
