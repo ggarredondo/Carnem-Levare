@@ -11,6 +11,8 @@ public class AudioController
     private Hashtable globalTable;
     private Dictionary<string, Hashtable> groupConnection;
 
+    public static System.Action InitializeSound;
+
     public AudioController()
     {
         globalTable = new();
@@ -18,44 +20,34 @@ public class AudioController
         groupConnection.Add(MAIN_GROUP_NAME, globalTable);
     }
 
-    public void InitializeSoundSources(List<SoundStructure> soundStructure)
+    public void InitializeSoundSources(ref List<SoundStructure> soundStructures, ref List<Hashtable> soundTables)
     {
-        for (int i = 0; i < soundStructure.Count; i++)
+        for (int i = 0; i < soundStructures.Count; i++)
         {
-            for (int j = 0; j < soundStructure[i].SoundGroups.GetLength(0); j++)
+            string structureName = soundStructures[i].GetStructureName();
+
+            if (!groupConnection.ContainsKey(structureName))
+                groupConnection.Add(structureName, new Hashtable());
+
+            foreach (DictionaryEntry entry in soundTables[i])
             {
-                soundStructure[i].SoundGroups[j].speakers = new GameObject[soundStructure[i].SoundGroups[j].speakersTag.GetLength(0)];
-
-                for (int k = 0; k < soundStructure[i].SoundGroups[j].speakersTag.GetLength(0); k++)
-                {
-                    GameObject speaker = GameObject.FindGameObjectWithTag(soundStructure[i].SoundGroups[j].speakersTag[k]);
-                    soundStructure[i].SoundGroups[j].speakers[k] = speaker;
-                }
-            }
-
-            if (!groupConnection.ContainsKey(soundStructure[i].GetGroupName()))
-            {
-                soundStructure[i].Initialize();
-
-                Hashtable soundsTable = soundStructure[i].GetSoundsTable();
-
-                groupConnection.Add(soundStructure[i].GetGroupName(), soundsTable);
-
-                foreach (DictionaryEntry entry in soundsTable)
-                    globalTable.Add(entry.Key, entry.Value);
+                globalTable.Add(entry.Key, entry.Value);
+                groupConnection[structureName].Add(entry.Key, entry.Value);
             }
         }
     }
 
-    public void DeleteSoundSources(List<SoundStructure> soundStructure)
+    public void DeleteSoundSources(ref List<SoundStructure> soundStructures, ref List<Hashtable> soundTables)
     {
-        for (int i = 0; i < soundStructure.Count; i++)
+        for (int i = 0; i < soundStructures.Count; i++)
         {
-            Hashtable soundsTable = soundStructure[i].GetSoundsTable();
-            groupConnection.Remove(soundStructure[i].GetGroupName());
+            string structureName = soundStructures[i].GetStructureName();
 
-            foreach (DictionaryEntry entry in soundsTable)
+            foreach (DictionaryEntry entry in soundTables[i])
+            {
                 globalTable.Remove(entry.Key);
+                groupConnection[structureName].Remove(entry.Key);
+            }
         }
     }
 

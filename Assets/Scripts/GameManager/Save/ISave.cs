@@ -5,4 +5,5 @@ public interface ISave
     public void ApplyChanges();
     public void ChangeGameSlot(int slot);
     public bool IsLoaded();
+    public void SetDefault();
 }

@@ -36,7 +36,7 @@ public class GameManager : MonoBehaviour
 
     private void Awake()
     {
-        DontDestroyOnLoad(gameObject);
+        if(firstSceneName != "") DontDestroyOnLoad(gameObject);
 
         //Audio Initialize
         audioController = new();

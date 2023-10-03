@@ -40,15 +40,14 @@ public class SceneController : IChangeScene
                     GameObject.FindGameObjectWithTag(tag).GetComponent<IObjectInitialize>().Initialize(ref player, ref enemy);
             }
 
-            GameManager.AudioController.InitializeSoundSources(scenesTable[scene.name].initSoundStructures);
+            AudioController.InitializeSound?.Invoke();
             PlayMusic();
         }
     }
 
     void OnSceneUnloaded(Scene scene)
     {
-        if (scene.name != currentLoadScene && scenesTable[scene.name].endSoundStructures.Count > 0)
-            GameManager.AudioController.DeleteSoundSources(scenesTable[scene.name].endSoundStructures);
+        AudioController.InitializeSound = null;
     }
 
     private void Initialize()
@@ -70,11 +69,6 @@ public class SceneController : IChangeScene
     public List<string> GetInitializeTags(Scene scene)
     {
         return scenesTable[scene.name].gameObjectsTag;
-    }
-
-    public List<SoundStructure> GetInitSoundStructures(Scene scene)
-    {
-        return scenesTable[scene.name].initSoundStructures;
     }
 
     public void NextScene()

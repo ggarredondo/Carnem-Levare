@@ -152,7 +152,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 131904453}
   - {fileID: 1938814318}
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -393,7 +392,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
-    m_TransformParent: {fileID: 71918041}
+    m_TransformParent: {fileID: 1938814318}
     m_Modifications:
     - target: {fileID: 9168311950741595994, guid: 654ed3f583879a2439f84e66d0a08ef7,
         type: 3}
@@ -2066,7 +2065,7 @@ PrefabInstance:
     - target: {fileID: 6159645281631079410, guid: a526d3cbc3f0aad47b0eff1d8297b4f4,
         type: 3}
       propertyPath: m_RootOrder
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6159645281631079410, guid: a526d3cbc3f0aad47b0eff1d8297b4f4,
         type: 3}
@@ -2918,9 +2917,10 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 131904453}
   - {fileID: 1159930456}
   m_Father: {fileID: 71918041}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1938814319
 MonoBehaviour:
@@ -2940,7 +2940,7 @@ MonoBehaviour:
   defaultGame: {fileID: 11400000, guid: 87c922c6b2f85b442823151aee62dd12, type: 2}
   firstSceneName: 
   scenes:
-  - {fileID: 11400000, guid: d7103e8790130184299394c23c8c0708, type: 2}
+  - {fileID: 11400000, guid: 55607cf643206fe41bb7ca5a6d3f1862, type: 2}
   transitionPlayer: {fileID: 1362530596}
   timeScale: 1
 --- !u!114 &1938814320

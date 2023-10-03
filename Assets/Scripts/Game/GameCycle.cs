@@ -37,22 +37,34 @@ public class GameCycle : MonoBehaviour, IObjectInitialize
         await Task.Delay(System.TimeSpan.FromSeconds(waitAfterDeath));
         GameManager.InputUtilities.EnablePlayerInput(false);
 
-        enemy.EnemyDrops.ForEach(m =>
-        {
-            DataSaver.Game.moves.Add(m);
-            DataSaver.Game.newMoves.Add(true);
-        });
-
-        await rewardGenerator.GenerateMove(enemy.EnemyDrops);
-        await Task.Delay(System.TimeSpan.FromSeconds(waitAfterReward));
-
         DataSaver.Game.enemyPrefabNames.RemoveAt(enemyLoader.GetActualEnemyId());
 
-        TransitionPlayer.extraTime = 1;
-        TransitionPlayer.text.text = "YOU LIVE";
+        if (DataSaver.Game.enemyPrefabNames.Count != 0)
+        {
+            enemy.EnemyDrops.ForEach(m =>
+            {
+                DataSaver.Game.moves.Add(m);
+                DataSaver.Game.newMoves.Add(true);
+            });
 
-        GameManager.AudioController.Play("PlayGame");
-        GameManager.Scene.NextScene();
+            await rewardGenerator.GenerateMove(enemy.EnemyDrops);
+            await Task.Delay(System.TimeSpan.FromSeconds(waitAfterReward));
+
+            TransitionPlayer.extraTime = 1;
+            TransitionPlayer.text.text = "YOU LIVE";
+
+            GameManager.AudioController.Play("PlayGame");
+            GameManager.Scene.NextScene();
+        }
+        else
+        {
+            TransitionPlayer.extraTime = 1;
+            TransitionPlayer.text.text = "YOU'RE THE CARNEM LEVARE";
+
+            GameManager.Save.SetDefault();
+            GameManager.AudioController.Play("PlayGame");
+            GameManager.Scene.PreviousScene();
+        }
     }
 
     private async void Defeat()

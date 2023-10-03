@@ -12,12 +12,18 @@ public class DataSaver : ISave
     private static List<GameSlot> games;
     private static int currentGameSlot;
 
+    private SaveGame defaultGameData;
+    private SaveOptions defaultOptionsData;
+
     public static GameSlot Game { get => games[currentGameSlot]; }
     public static OptionsSlot Options { get => options; }
 
     public DataSaver(in SaveOptions configOptions, in SaveGame configGame, in AudioMixer audioMixer)
     {
         serializer = new();
+
+        defaultOptionsData = configOptions;
+        defaultGameData = configGame;
 
         if (configOptions != null)
         {
@@ -65,5 +71,10 @@ public class DataSaver : ISave
     public bool IsLoaded()
     {
         return games != null;
+    }
+
+    public void SetDefault()
+    {
+        games[currentGameSlot] = (GameSlot)defaultGameData.defaultGame.Clone();
     }
 }

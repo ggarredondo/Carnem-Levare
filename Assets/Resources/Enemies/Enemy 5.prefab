@@ -421,8 +421,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7481606168508649711}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0.19}
   m_LocalScale: {x: 1.1, y: 1.1, z: 1.1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -432,7 +432,7 @@ Transform:
   - {fileID: 3669617491132979425}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
 --- !u!95 &7481606168508649708
 Animator:
   serializedVersion: 4
@@ -539,7 +539,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b8b6bc01c697e3b4693e9f790e66cd99, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enableDebug: 0
+  enableDebug: 1
   horizontal: 0
   vertical: 0
   block: 0
@@ -830,6 +830,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 9053374612500937825}
+  - component: {fileID: 5363187977146455599}
   m_Layer: 0
   m_Name: AudioSources
   m_TagString: AUDIO/ENEMY_SOURCES
@@ -852,6 +853,22 @@ Transform:
   m_Father: {fileID: 7481606168508649710}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5363187977146455599
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8581622639913374783}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 815bf9943c7e40f43a629ad628e8b6cd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ID: Enemy
+  soundStructures:
+  - {fileID: 11400000, guid: 7bb960d4926ae204ca58b6e854dceac3, type: 2}
+  destroySoundStructures: 1
 --- !u!1001 &7481606168323393295
 PrefabInstance:
   m_ObjectHideFlags: 0
