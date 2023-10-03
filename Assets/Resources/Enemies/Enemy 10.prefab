@@ -833,7 +833,7 @@ GameObject:
   - component: {fileID: 7482962995825636469}
   m_Layer: 0
   m_Name: AudioSources
-  m_TagString: AUDIO/ENEMY_SOURCES
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

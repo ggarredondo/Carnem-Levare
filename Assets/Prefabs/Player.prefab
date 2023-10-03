@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 1216391172}
   m_Layer: 0
   m_Name: InputManager
-  m_TagString: INPUT
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -812,7 +812,7 @@ GameObject:
   - component: {fileID: 952917201574695215}
   m_Layer: 0
   m_Name: AudioSources
-  m_TagString: AUDIO/PLAYER_SOURCES
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1387,20 +1387,10 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 38344641e0724194cbc9e0f20a7ca519, type: 2}
-    - target: {fileID: -4728426434207774260, guid: df8e8b4e49896f543828b277b6764350,
-        type: 3}
-      propertyPath: m_TagString
-      value: PARTICLES/PLAYER
-      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: df8e8b4e49896f543828b277b6764350,
         type: 3}
       propertyPath: m_Name
       value: Placeholder Character
-      objectReference: {fileID: 0}
-    - target: {fileID: 2715566404302941441, guid: df8e8b4e49896f543828b277b6764350,
-        type: 3}
-      propertyPath: m_TagString
-      value: PARTICLES/PLAYER
       objectReference: {fileID: 0}
     - target: {fileID: 5822821947120931875, guid: df8e8b4e49896f543828b277b6764350,
         type: 3}

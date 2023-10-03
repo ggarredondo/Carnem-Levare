@@ -4,19 +4,8 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - SFX
-  - MUSIC
-  - UI
   - Enemy
-  - TARGET_GROUP
   - CAMERA
-  - INPUT
-  - LOADING
-  - SAVE
-  - AUDIO/PLAYER_SOURCES
-  - AUDIO/ENEMY_SOURCES
-  - PARTICLES/PLAYER
-  - PARTICLES/ENEMY
   - GAME_LOGIC
   layers:
   - Default

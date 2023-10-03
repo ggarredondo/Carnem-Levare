@@ -833,7 +833,7 @@ GameObject:
   - component: {fileID: 7505896568428738206}
   m_Layer: 0
   m_Name: AudioSources
-  m_TagString: AUDIO/ENEMY_SOURCES
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -951,20 +951,10 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 7dcb53c09a1f8e54c99a9a394af20039, type: 2}
-    - target: {fileID: -4728426434207774260, guid: df8e8b4e49896f543828b277b6764350,
-        type: 3}
-      propertyPath: m_TagString
-      value: PARTICLES/ENEMY
-      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: df8e8b4e49896f543828b277b6764350,
         type: 3}
       propertyPath: m_Name
       value: Placeholder Character
-      objectReference: {fileID: 0}
-    - target: {fileID: 2715566404302941441, guid: df8e8b4e49896f543828b277b6764350,
-        type: 3}
-      propertyPath: m_TagString
-      value: PARTICLES/ENEMY
       objectReference: {fileID: 0}
     - target: {fileID: 5822821947120931875, guid: df8e8b4e49896f543828b277b6764350,
         type: 3}

@@ -561,7 +561,7 @@ GameObject:
   - component: {fileID: 2835685395184203564}
   m_Layer: 0
   m_Name: TargetGroup
-  m_TagString: TARGET_GROUP
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -756,6 +756,7 @@ MonoBehaviour:
   changeVirtualCamera: 0
   actualTransform: {fileID: 2437912868694387621}
   followObject: {fileID: 1913514060604836180}
+  targetGroup: {fileID: 2835685395184203564}
 --- !u!1 &2835685396104087961
 GameObject:
   m_ObjectHideFlags: 0

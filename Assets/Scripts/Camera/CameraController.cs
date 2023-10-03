@@ -8,13 +8,14 @@ public class CameraController : MonoBehaviour, IObjectInitialize
     public static CameraType currentVirtualCamera;
 
     private CameraTargets playerTargets, enemyTargets;
+
     [SerializeField] private Transform actualTransform;
     [SerializeField] private GameObject followObject;
+    [SerializeField] private CinemachineTargetGroup targetGroup;
 
     private Player player;
     private Enemy enemy;
 
-    private CinemachineTargetGroup targetGroup;
     private CinemachineVirtualCamera currentCinemachineCamera;
 
     public void Initialize(ref GameObject player, ref GameObject enemy)
@@ -24,8 +25,6 @@ public class CameraController : MonoBehaviour, IObjectInitialize
 
         this.player = player.GetComponent<Player>();
         this.enemy = enemy.GetComponent<Enemy>();
-
-        targetGroup = GameObject.FindGameObjectWithTag("TARGET_GROUP").GetComponent<CinemachineTargetGroup>();
 
         currentCinemachineCamera = GetComponentsInChildren<CinemachineVirtualCamera>()[0];
 

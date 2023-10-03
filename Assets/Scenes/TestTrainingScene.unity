@@ -152,7 +152,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 131904453}
   - {fileID: 1938814318}
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -393,7 +392,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
-    m_TransformParent: {fileID: 71918041}
+    m_TransformParent: {fileID: 1938814318}
     m_Modifications:
     - target: {fileID: 9168311950741595994, guid: 654ed3f583879a2439f84e66d0a08ef7,
         type: 3}
@@ -403,7 +402,7 @@ PrefabInstance:
     - target: {fileID: 9168311950741595995, guid: 654ed3f583879a2439f84e66d0a08ef7,
         type: 3}
       propertyPath: m_RootOrder
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 9168311950741595995, guid: 654ed3f583879a2439f84e66d0a08ef7,
         type: 3}
@@ -2222,11 +2221,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Transition
       objectReference: {fileID: 0}
-    - target: {fileID: 9012903158393686910, guid: a526d3cbc3f0aad47b0eff1d8297b4f4,
-        type: 3}
-      propertyPath: m_Alpha
-      value: 0
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a526d3cbc3f0aad47b0eff1d8297b4f4, type: 3}
 --- !u!224 &1159930456 stripped
@@ -2977,7 +2971,7 @@ GameObject:
   - component: {fileID: 1938814320}
   m_Layer: 0
   m_Name: SaveData
-  m_TagString: SAVE
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2995,8 +2989,9 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1159930456}
+  - {fileID: 131904453}
   m_Father: {fileID: 71918041}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1938814319
 MonoBehaviour:
