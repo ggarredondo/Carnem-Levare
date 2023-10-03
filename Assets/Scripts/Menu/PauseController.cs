@@ -48,16 +48,16 @@ public class PauseController : MonoBehaviour
         pauseMenuActivated = true;
         volume.SetActive(true);
         EnterPause?.Invoke();
-        GameManager.InputUtilities.SwitchActionMap("UI");
-        GameManager.AudioController.PauseGame(true);
+        GameManager.Input.SwitchActionMap("UI");
+        GameManager.Audio.PauseGame(true);
         await Lerp.Value_Unscaled(canvasGroup.alpha, 1,(a) => canvasGroup.alpha = a, 0.1f);
     }
 
     public async void ExitPauseMode(bool resumeSounds)
     {
         Time.timeScale = 1;
-        GameManager.AudioController.PauseGame(false && resumeSounds);
-        GameManager.InputUtilities.SwitchActionMap("Main Movement");
+        GameManager.Audio.PauseGame(false && resumeSounds);
+        GameManager.Input.SwitchActionMap("Main Movement");
         await Lerp.Value_Unscaled(canvasGroup.alpha, 0, (a) => canvasGroup.alpha = a, 0.1f);
         menuController.DisableMenus();
         pauseMenuActivated = false;

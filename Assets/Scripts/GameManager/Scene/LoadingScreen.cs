@@ -20,7 +20,7 @@ public class LoadingScreen : MonoBehaviour
 
     private void Start()
     {
-        GameManager.InputUtilities.ControlsChangedEvent += ChangeText;
+        GameManager.Input.ControlsChangedEvent += ChangeText;
         ChangeText();
     }
 
@@ -38,7 +38,7 @@ public class LoadingScreen : MonoBehaviour
 
     private void OnDestroy()
     {
-        GameManager.InputUtilities.ControlsChangedEvent -= ChangeText;
+        GameManager.Input.ControlsChangedEvent -= ChangeText;
     }
 
     private async void ProgressBar()
@@ -54,8 +54,8 @@ public class LoadingScreen : MonoBehaviour
         if (!isStopped)
         {
             isStopped = true;
-            GameManager.AudioController.Play("MaskAlert");
-            GameManager.InputUtilities.Rumble(0.2f, 1f, 1f);
+            GameManager.Audio.Play("MaskAlert");
+            GameManager.Input.Rumble(0.2f, 1f, 1f);
             maskAnim.speed = 6;
             maskAnim.SetBool("Stop", true);
         }
@@ -63,8 +63,8 @@ public class LoadingScreen : MonoBehaviour
 
     public void Activate()
     {
-        GameManager.InputUtilities.EnablePlayerInput(true);
-        GameManager.InputUtilities.SwitchActionMap("LoadingScreen");
+        GameManager.Input.EnablePlayerInput(true);
+        GameManager.Input.SwitchActionMap("LoadingScreen");
     }
 
     public bool UpdateProgess(float progress)
@@ -80,9 +80,9 @@ public class LoadingScreen : MonoBehaviour
             percentage.text = "Press " + continueAction + " to continue";
             loadingTextAnim.enabled = true;
 
-            if (GameManager.InputUtilities.FindAction("Continue").IsPressed())
+            if (GameManager.Input.FindAction("Continue").IsPressed())
             {
-                GameManager.AudioController.Play("ExitLoading");
+                GameManager.Audio.Play("ExitLoading");
                 result = true;
             }
         }
@@ -92,7 +92,7 @@ public class LoadingScreen : MonoBehaviour
 
     public void ChangeText()
     {
-        continueAction = GameManager.InputUtilities.FindAction("Continue").bindings[GameManager.InputUtilities.ControlSchemeIndex].path.Split("/")[1];
+        continueAction = GameManager.Input.FindAction("Continue").bindings[GameManager.Input.ControlSchemeIndex].path.Split("/")[1];
     }
 
 }

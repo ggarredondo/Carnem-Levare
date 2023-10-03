@@ -17,16 +17,16 @@ public abstract class AbstractMenu : MonoBehaviour
 
     protected virtual void OnDisable()
     {
-        if(EventSystem.current != null && GameManager.InputUtilities.ControlSchemeIndex == 0)
+        if(EventSystem.current != null && GameManager.Input.ControlSchemeIndex == 0)
             firstSelected = EventSystem.current.currentSelectedGameObject;
     }
 
     public void Initialized()
     {
-        if (GameManager.InputUtilities.ControlSchemeIndex == 0 || GameManager.InputUtilities.PreviousCustomControlScheme == InputDevice.KEYBOARD)
+        if (GameManager.Input.ControlSchemeIndex == 0 || GameManager.Input.PreviousCustomControlScheme == InputDevice.KEYBOARD)
             EventSystem.current.SetSelectedGameObject(firstSelected);
 
-        GameManager.InputUtilities.SetSelectedGameObject(firstSelected);
+        GameManager.Input.SetSelectedGameObject(firstSelected);
     }
 
     private void Start()
@@ -40,7 +40,7 @@ public abstract class AbstractMenu : MonoBehaviour
         transitions.ForEach(tuple => tuple.Item1.onClick.AddListener(() => 
         { 
             EventSystem.current.SetSelectedGameObject(tuple.Item2.gameObject);
-            GameManager.AudioController.Play("PressButton");
+            GameManager.Audio.Play("PressButton");
 
             if (tuple.Item2 is TMP_Dropdown item) actualDropDown = item;
         }));
@@ -60,7 +60,7 @@ public abstract class AbstractMenu : MonoBehaviour
         if (ActualDropDown != null)
         {
             ActualDropDown.Hide();
-            GameManager.AudioController.Play("SelectButton");
+            GameManager.Audio.Play("SelectButton");
             canReturn = true;
         }
 
@@ -80,28 +80,28 @@ public abstract class AbstractMenu : MonoBehaviour
     protected void Slider(ref float save, float value, bool hasSound)
     {
         save = value;
-        if(hasSound) GameManager.AudioController.Slider();
+        if(hasSound) GameManager.Audio.Slider();
         GameManager.Save.ApplyChanges();
     }
 
     protected void Toggle(ref bool save, bool value)
     {
         save = value;
-        GameManager.AudioController.Play("PressButton");
+        GameManager.Audio.Play("PressButton");
         GameManager.Save.ApplyChanges();
     }
 
     protected void Dropdown(ref string save, string value)
     {
         save = value;
-        GameManager.AudioController.Play("PressButton");
+        GameManager.Audio.Play("PressButton");
         GameManager.Save.ApplyChanges();
     }
 
     protected void Dropdown(ref int save, int value)
     {
         save = value;
-        GameManager.AudioController.Play("PressButton");
+        GameManager.Audio.Play("PressButton");
         GameManager.Save.ApplyChanges();
     }
 }

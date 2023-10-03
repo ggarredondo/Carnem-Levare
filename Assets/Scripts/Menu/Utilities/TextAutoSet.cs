@@ -19,21 +19,21 @@ public class TextAutoSet : MonoBehaviour
 
         if (inputButton)
         {
-            GameManager.InputUtilities.ControlsChangedEvent += ChangeInputFont;
+            GameManager.Input.ControlsChangedEvent += ChangeInputFont;
             ChangeInputFont();
         }
     }
 
     private void OnDestroy()
     {
-        if (inputButton) GameManager.InputUtilities.ControlsChangedEvent -= ChangeInputFont;
+        if (inputButton) GameManager.Input.ControlsChangedEvent -= ChangeInputFont;
     }
 
     private void ChangeInputFont()
     {
         tmpText.font = GlobalMenuVariables.Instance.ActualInputFont();
 
-        string mappingKey = GameManager.InputUtilities.ObtainMapping(gameObject.name);
+        string mappingKey = GameManager.Input.ObtainMapping(gameObject.name);
 
         if (mappingKey != "-" && mappingKey != "") tmpText.text = mappingKey;
         else

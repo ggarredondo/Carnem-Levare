@@ -70,7 +70,7 @@ public class InputDetection
                 if (Cursor.visible == true)
                 {
                     EventSystem.current.SetSelectedGameObject(selected);
-                    GameManager.AudioController.Play("SelectButton");
+                    GameManager.Audio.Play("SelectButton");
                     WaitGamepadDetection(GAMEPAD_DETECTION_TIME);
                     Cursor.visible = false;
                 }  
@@ -101,9 +101,9 @@ public class InputDetection
 
     private async void WaitGamepadDetection(float time)
     {
-        GameManager.InputUtilities.EnableUIModule(false);
+        GameManager.Input.EnableUIModule(false);
         await Task.Delay(System.TimeSpan.FromSeconds(time));
-        GameManager.InputUtilities.EnableUIModule(true);
+        GameManager.Input.EnableUIModule(true);
     }
 }
 

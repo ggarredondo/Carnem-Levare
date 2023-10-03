@@ -35,7 +35,7 @@ public class GameCycle : MonoBehaviour, IObjectInitialize
     private async void Victory()
     {
         await Task.Delay(System.TimeSpan.FromSeconds(waitAfterDeath));
-        GameManager.InputUtilities.EnablePlayerInput(false);
+        GameManager.Input.EnablePlayerInput(false);
 
         DataSaver.Game.enemyPrefabNames.RemoveAt(enemyLoader.GetActualEnemyId());
 
@@ -53,7 +53,7 @@ public class GameCycle : MonoBehaviour, IObjectInitialize
             TransitionPlayer.extraTime = 1;
             TransitionPlayer.text.text = "YOU LIVE";
 
-            GameManager.AudioController.Play("PlayGame");
+            GameManager.Audio.Play("PlayGame");
             GameManager.Scene.NextScene();
         }
         else
@@ -62,7 +62,7 @@ public class GameCycle : MonoBehaviour, IObjectInitialize
             TransitionPlayer.text.text = "YOU'RE THE CARNEM LEVARE";
 
             GameManager.Save.SetDefault();
-            GameManager.AudioController.Play("PlayGame");
+            GameManager.Audio.Play("PlayGame");
             GameManager.Scene.PreviousScene();
         }
     }
@@ -74,7 +74,7 @@ public class GameCycle : MonoBehaviour, IObjectInitialize
         TransitionPlayer.extraTime = 2;
         TransitionPlayer.text.text = "YOU DIED";
 
-        GameManager.AudioController.Play("BackMenu");
+        GameManager.Audio.Play("BackMenu");
         GameManager.Scene.PreviousScene();
     }
 }

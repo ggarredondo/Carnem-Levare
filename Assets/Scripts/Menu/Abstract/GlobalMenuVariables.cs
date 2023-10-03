@@ -32,6 +32,6 @@ public class GlobalMenuVariables : MonoBehaviour
 
     public TMP_FontAsset ActualInputFont()
     {
-        return inputFonts[GameManager.InputUtilities.ControlSchemeIndex];
+        return inputFonts[GameManager.Input.ControlSchemeIndex];
     }
 }

@@ -45,10 +45,10 @@ public class MoveAssignment : MonoBehaviour
     public void UpdateInput(ref List<MoveBlock> moves)
     {
         inputAssignments.Clear();
-        inputAssignments.Add(GameManager.InputUtilities.ObtainAllowedMapping("Action0"));
-        inputAssignments.Add(GameManager.InputUtilities.ObtainAllowedMapping("Action1"));
-        inputAssignments.Add(GameManager.InputUtilities.ObtainAllowedMapping("Action2"));
-        inputAssignments.Add(GameManager.InputUtilities.ObtainAllowedMapping("Action3"));
+        inputAssignments.Add(GameManager.Input.ObtainAllowedMapping("Action0"));
+        inputAssignments.Add(GameManager.Input.ObtainAllowedMapping("Action1"));
+        inputAssignments.Add(GameManager.Input.ObtainAllowedMapping("Action2"));
+        inputAssignments.Add(GameManager.Input.ObtainAllowedMapping("Action3"));
 
         moves.ForEach(m => m.GetComponent<MoveBlock>().Disable());
 
@@ -85,7 +85,7 @@ public class MoveAssignment : MonoBehaviour
 
         if (inputController.assigning)
         {
-            GameManager.AudioController.Play("ApplyMoveMenu");
+            GameManager.Audio.Play("ApplyMoveMenu");
             inputController.moveIndexes[newMove] = moveSelected;
         }
     }

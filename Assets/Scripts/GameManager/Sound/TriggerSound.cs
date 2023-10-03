@@ -8,7 +8,7 @@ public class TriggerSound : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        GameManager.AudioController.Play(sound);
+        GameManager.Audio.Play(sound);
         particleController.Play(particles.ID, particles.prefab);
     }
 }

@@ -51,7 +51,7 @@ public class SoundInitializer : MonoBehaviour
             soundTables.Add(hastable);
         }
 
-        GameManager.AudioController.InitializeSoundSources(ref soundStructures, ref soundTables);
+        GameManager.Audio.InitializeSoundSources(ref soundStructures, ref soundTables);
     }
 
 
@@ -65,6 +65,6 @@ public class SoundInitializer : MonoBehaviour
         AudioController.InitializeSound -= Initialize;
 
         if(destroySoundStructures)
-            GameManager.AudioController.DeleteSoundSources(ref soundStructures, ref soundTables);
+            GameManager.Audio.DeleteSoundSources(ref soundStructures, ref soundTables);
     }
 }

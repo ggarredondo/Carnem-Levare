@@ -8,9 +8,9 @@ public class InputRemapping
 
     public void Remapping(float rebindTimeDelay, PopUpMenu popUp, string name)
     {
-        GameManager.AudioController.Play("PressButton");
+        GameManager.Audio.Play("PressButton");
 
-        action = GameManager.InputUtilities.FindAction(name);
+        action = GameManager.Input.FindAction(name);
 
         if (action == null)
             Debug.Log("This action not exists");
@@ -18,7 +18,7 @@ public class InputRemapping
         {
             popUp.PopUpMessage("Waiting for input");
 
-            int controlSchemeIndex = GameManager.InputUtilities.ControlSchemeIndex;
+            int controlSchemeIndex = GameManager.Input.ControlSchemeIndex;
 
             originalAction = action.Clone();
 
@@ -40,9 +40,9 @@ public class InputRemapping
     {
         popUp.DisablePopUpMenu();
 
-        if (GameManager.InputUtilities.ObtainAllowedMapping(callback.action) != "")
+        if (GameManager.Input.ObtainAllowedMapping(callback.action) != "")
         {
-            GameManager.AudioController.Play("ApplyRebind");
+            GameManager.Audio.Play("ApplyRebind");
 
             InputAction result = CheckIfAsigned(callback.action, controlSchemeIndex);
             if (result != null && !result.bindings[controlSchemeIndex].isComposite)
@@ -52,9 +52,9 @@ public class InputRemapping
         }
         else callback.Cancel();
 
-        GameManager.InputUtilities.SaveUserRebinds();
+        GameManager.Input.SaveUserRebinds();
         callback.Dispose();
-        GameManager.InputUtilities.Configure();
+        GameManager.Input.Configure();
     }
 
     private InputAction CheckIfAsigned(InputAction action, int controlSchemeIndex)
@@ -72,7 +72,7 @@ public class InputRemapping
 
             if (binding.effectivePath == actualBinding.effectivePath)
             {
-                result = GameManager.InputUtilities.FindAction(binding.action);
+                result = GameManager.Input.FindAction(binding.action);
                 break;
             }
         }

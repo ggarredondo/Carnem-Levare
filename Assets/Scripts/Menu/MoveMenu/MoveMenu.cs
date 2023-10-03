@@ -19,7 +19,7 @@ public class MoveMenu : MonoBehaviour
         moveSelector.Initialize(ref moves, ref inputController);
         infoBox.Initialize(in moves[moveSelector.GetActualIndex()].StringData);
 
-        GameManager.InputUtilities.ControlsChangedEvent += moveSelector.ChangeInputMap;
+        GameManager.Input.ControlsChangedEvent += moveSelector.ChangeInputMap;
     }
 
     private void OnEnable()
@@ -34,7 +34,7 @@ public class MoveMenu : MonoBehaviour
 
     private void OnDestroy()
     {
-        GameManager.InputUtilities.ControlsChangedEvent -= moveSelector.ChangeInputMap;
+        GameManager.Input.ControlsChangedEvent -= moveSelector.ChangeInputMap;
     }
 
     private void DPad(Vector2 value)
@@ -44,12 +44,12 @@ public class MoveMenu : MonoBehaviour
             if (moveSelector.LeftMoveBlock())
             {
                 infoBox.UpdateInfoBox(in moves[moveSelector.GetActualIndex()].StringData);
-                GameManager.AudioController.Play("InteractMoveMenu");
+                GameManager.Audio.Play("InteractMoveMenu");
             }
             else
             {
                 infoBox.Movement(new Color(0.5f, 0.5f, 0.5f));
-                GameManager.AudioController.Play("NotInteractMoveMenu");
+                GameManager.Audio.Play("NotInteractMoveMenu");
             }
         }
         if (value == new Vector2(1, 0))
@@ -57,25 +57,25 @@ public class MoveMenu : MonoBehaviour
             if (moveSelector.RightMoveBlock())
             {
                 infoBox.UpdateInfoBox(in moves[moveSelector.GetActualIndex()].StringData);
-                GameManager.AudioController.Play("InteractMoveMenu");
+                GameManager.Audio.Play("InteractMoveMenu");
             }
             else
             {
                 infoBox.Movement(new Color(0.5f, 0.5f, 0.5f));
-                GameManager.AudioController.Play("NotInteractMoveMenu");
+                GameManager.Audio.Play("NotInteractMoveMenu");
             }
         }
 
         if (value == new Vector2(0, 1))
         {
             moveSelector.SelectBlock();
-            GameManager.AudioController.Play("SelectMoveMenu");
+            GameManager.Audio.Play("SelectMoveMenu");
         }
 
         if (value == new Vector2(0, -1))
         {
             moveSelector.DeselectBlock();
-            GameManager.AudioController.Play("InteractMoveMenu");
+            GameManager.Audio.Play("InteractMoveMenu");
         }
     }
 }

@@ -60,7 +60,7 @@ public class HoldText : MonoBehaviour
     {
         cancellationTokenSource.Dispose();
         hasTrigger = true;
-        GameManager.AudioController.Play("PlayGame");
+        GameManager.Audio.Play("PlayGame");
         GameManager.Scene.NextScene();
     }
 }

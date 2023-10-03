@@ -36,29 +36,29 @@ public class AutoSelect : MonoBehaviour, IPointerEnterHandler, ISelectHandler, I
     {
         if (inputButton)
         {
-            GameManager.InputUtilities.ControlsChangedEvent += ChangeInputFont;
+            GameManager.Input.ControlsChangedEvent += ChangeInputFont;
             ChangeInputFont();
         }
     }
 
     private void OnDestroy()
     {
-        if (inputButton) GameManager.InputUtilities.ControlsChangedEvent -= ChangeInputFont;
+        if (inputButton) GameManager.Input.ControlsChangedEvent -= ChangeInputFont;
     }
 
     public void OnSelect(BaseEventData eventData)
     {
-        if (GameManager.InputUtilities.ControlSchemeIndex == 0 || GameManager.InputUtilities.PreviousCustomControlScheme == InputDevice.KEYBOARD)
+        if (GameManager.Input.ControlSchemeIndex == 0 || GameManager.Input.PreviousCustomControlScheme == InputDevice.KEYBOARD)
         {
-            GameManager.InputUtilities.SetSelectedGameObject(EventSystem.current.currentSelectedGameObject);
-            GameManager.AudioController.Play("SelectButton");
+            GameManager.Input.SetSelectedGameObject(EventSystem.current.currentSelectedGameObject);
+            GameManager.Audio.Play("SelectButton");
         }
     }
 
     public void OnPointerEnter(PointerEventData eventData)
     {
         if (mouseCanSelect)
-            GameManager.AudioController.Play("SelectButton");
+            GameManager.Audio.Play("SelectButton");
     }
 
     public void OnPointerUp(PointerEventData eventData)
@@ -70,10 +70,10 @@ public class AutoSelect : MonoBehaviour, IPointerEnterHandler, ISelectHandler, I
     private void ChangeInputFont()
     {
         //Change Font
-        transform.GetChild(0).GetComponent<TMP_Text>().font = GlobalMenuVariables.Instance.inputFonts[GameManager.InputUtilities.ControlSchemeIndex];
+        transform.GetChild(0).GetComponent<TMP_Text>().font = GlobalMenuVariables.Instance.inputFonts[GameManager.Input.ControlSchemeIndex];
 
         //Asign the correct word
-        string mappingKey = GameManager.InputUtilities.ObtainAllowedMapping(gameObject.name);
+        string mappingKey = GameManager.Input.ObtainAllowedMapping(gameObject.name);
 
         if (mappingKey != "-" && mappingKey != "") transform.GetChild(0).GetComponent<TMP_Text>().text = mappingKey;
         else

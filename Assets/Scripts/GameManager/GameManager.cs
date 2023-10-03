@@ -29,8 +29,8 @@ public class GameManager : MonoBehaviour
 
     public static ref readonly ISave Save { get => ref saver; }
     public static ref readonly IChangeScene Scene { get => ref sceneController; }
-    public static ref readonly InputUtilities InputUtilities { get => ref inputUtilities; }
-    public static ref readonly AudioController AudioController { get => ref audioController; }
+    public static ref readonly InputUtilities Input { get => ref inputUtilities; }
+    public static ref readonly AudioController Audio { get => ref audioController; }
 
     public static int RANDOM_SEED => System.Guid.NewGuid().GetHashCode();
 
@@ -43,6 +43,7 @@ public class GameManager : MonoBehaviour
 
         //Scene Initialize
         SceneManager.sceneLoaded += OnSceneLoaded;
+        SceneManager.sceneUnloaded += OnSceneUnloaded;
         sceneController = new SceneController(SceneManager.GetActiveScene().name, scenes);
         transitionPlayer.Initialize();
 
@@ -79,5 +80,29 @@ public class GameManager : MonoBehaviour
         Time.timeScale = 1;
 
         inputUtilities.Configure();
+
+        if (scene.name != sceneController.GetCurrentLoadScene())
+        {
+            SceneLogic currentSceneLogic = sceneController.GetSceneLogic(scene.name);
+
+            if (currentSceneLogic.gameObjectsTag.Count > 0)
+            {
+                GameObject player = GameObject.FindGameObjectWithTag("Player");
+                GameObject enemy = GameObject.FindGameObjectWithTag("Enemy");
+
+                foreach (string tag in currentSceneLogic.gameObjectsTag)
+                    GameObject.FindGameObjectWithTag(tag).GetComponent<IObjectInitialize>().Initialize(ref player, ref enemy);
+            }
+
+            AudioController.InitializeSound?.Invoke();
+
+            if (currentSceneLogic.playMusic)
+                audioController.PlayMusic(currentSceneLogic.music);
+        }
+    }
+
+    void OnSceneUnloaded(Scene scene)
+    {
+        AudioController.InitializeSound = null;
     }
 }

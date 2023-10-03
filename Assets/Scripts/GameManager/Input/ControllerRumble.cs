@@ -13,7 +13,7 @@ public class ControllerRumble
 
     public void Rumble(float duration, float leftAmplitude, float rightAmplitude)
     {
-        if (gamepad != null && GameManager.InputUtilities.CurrentControlScheme() == "Gamepad" && !isRumbling && DataSaver.Options.rumble)
+        if (gamepad != null && GameManager.Input.CurrentControlScheme() == "Gamepad" && !isRumbling && DataSaver.Options.rumble)
         {
             gamepad.SetMotorSpeeds(leftAmplitude, rightAmplitude);
             isRumbling = true;

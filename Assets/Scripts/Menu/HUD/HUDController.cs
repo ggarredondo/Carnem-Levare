@@ -71,10 +71,10 @@ public class HUDController : MonoBehaviour
             player.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeRotation;
             cameraController.changeVirtualCamera = CameraType.DEFAULT;
             enemy.SetActive(true);
-            GameManager.AudioController.StopAllSounds("Game_Sfx");
+            GameManager.Audio.StopAllSounds("Game_Sfx");
         }
 
-        GameManager.AudioController.Play("CameraSwitch");
+        GameManager.Audio.Play("CameraSwitch");
         cameraChanged = !cameraChanged;
     }
 
@@ -84,7 +84,7 @@ public class HUDController : MonoBehaviour
 
         if (actualCanvas != null)
         {
-            GameManager.AudioController.Play("ExitMoveMenu");
+            GameManager.Audio.Play("ExitMoveMenu");
             await Lerp.Value(actualCanvas.alpha, 0, (a) => actualCanvas.alpha = a, lerpDuration);
         }
 
@@ -96,7 +96,7 @@ public class HUDController : MonoBehaviour
 
         if (actualCanvas != null)
         {
-            GameManager.AudioController.Play("EnterMoveMenu");
+            GameManager.Audio.Play("EnterMoveMenu");
             await Lerp.Value(actualCanvas.alpha, 1, (a) => actualCanvas.alpha = a, lerpDuration);
         }
     }    

@@ -15,9 +15,6 @@ public class SceneController : IChangeScene
     {
         Application.backgroundLoadingPriority = ThreadPriority.Low;
 
-        SceneManager.sceneLoaded += OnSceneLoaded;
-        SceneManager.sceneUnloaded += OnSceneUnloaded;
-
         sceneLoader = new();
         scenesTable = new();
 
@@ -25,29 +22,6 @@ public class SceneController : IChangeScene
 
         this.scenes = scenes;
         Initialize();
-    }
-
-    void OnSceneLoaded(Scene scene, LoadSceneMode mode)
-    {
-        if (scene.name != currentLoadScene)
-        {
-            if (scenesTable[scene.name].gameObjectsTag.Count > 0)
-            {
-                GameObject player = GameObject.FindGameObjectWithTag("Player");
-                GameObject enemy = GameObject.FindGameObjectWithTag("Enemy");
-
-                foreach (string tag in scenesTable[scene.name].gameObjectsTag)
-                    GameObject.FindGameObjectWithTag(tag).GetComponent<IObjectInitialize>().Initialize(ref player, ref enemy);
-            }
-
-            AudioController.InitializeSound?.Invoke();
-            PlayMusic();
-        }
-    }
-
-    void OnSceneUnloaded(Scene scene)
-    {
-        AudioController.InitializeSound = null;
     }
 
     private void Initialize()
@@ -58,12 +32,6 @@ public class SceneController : IChangeScene
     private void UpdateScene(string nextScene)
     {
         currentScene = nextScene;
-    }
-
-    private void PlayMusic()
-    {
-        if(scenesTable[currentScene].playMusic)
-            GameManager.AudioController.PlayMusic(scenesTable[currentScene].music);
     }
 
     public List<string> GetInitializeTags(Scene scene)
@@ -99,5 +67,15 @@ public class SceneController : IChangeScene
             sceneLoader.LoadScene(nextScene);
 
         UpdateScene(nextScene);
+    }
+
+    public string GetCurrentLoadScene()
+    {
+        return currentLoadScene;
+    }
+
+    public SceneLogic GetSceneLogic(string name)
+    {
+        return scenesTable[currentScene];
     }
 }

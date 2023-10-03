@@ -44,7 +44,7 @@ public class RewardGenerator : MonoBehaviour
 
             Move();
 
-            GameManager.AudioController.Play("NewMove1");
+            GameManager.Audio.Play("NewMove1");
             await tmp.GetComponent<MoveBlock>().LerpScale(new Vector3(1, 1, 0), zoomLerpDuration);
         }
     }
@@ -63,6 +63,6 @@ public class RewardGenerator : MonoBehaviour
             moveBlocks[i].LerpRectTransform(actualPosition, actualScale, moveLerpDuration);
         }
 
-        GameManager.AudioController.Play("NewMove2");
+        GameManager.Audio.Play("NewMove2");
     }
 }
