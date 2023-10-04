@@ -49,12 +49,12 @@ MonoBehaviour:
   hurtStun: 800
   blockedStun: 300
   hurtCameraShake:
-    targetShakeTime: 50
+    targetShakeTime: 25
     targetShakeIntensity: 10
     shakeType: {fileID: 11400000, guid: 69ce8388f6785dd4c8c39915efece2f4, type: 2}
-    screenShakeTime: 5
+    screenShakeTime: 200
     screenShakeFrequency: 200
-    screenShakeAmplitude: 1
+    screenShakeAmplitude: 0.2
   blockedCameraShake:
     targetShakeTime: 0
     targetShakeIntensity: 0

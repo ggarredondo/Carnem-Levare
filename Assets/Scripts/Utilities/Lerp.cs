@@ -2,6 +2,7 @@ using System.Threading.Tasks;
 using UnityEngine;
 using System.Threading;
 using System;
+using System.Collections;
 
 namespace LerpUtilities
 {
@@ -20,6 +21,24 @@ namespace LerpUtilities
                 setValue(interpolatedValue);
 
                 await Task.Yield();
+            }
+
+            setValue(targetValue);
+        }
+
+        public static IEnumerator Value_Math_Coroutine<T>(T startValue, T targetValue, Action<T> setValue, float speed, Func<float, float> function)
+        {
+            float elapsedTime = 0f;
+
+            while (elapsedTime < 1)
+            {
+                elapsedTime += speed * Time.deltaTime;
+                float value = function(Mathf.Clamp01(elapsedTime));
+
+                T interpolatedValue = LocalLerp(startValue, targetValue, value);
+                setValue(interpolatedValue);
+
+                yield return null;
             }
 
             setValue(targetValue);
@@ -55,6 +74,24 @@ namespace LerpUtilities
                 setValue(interpolatedValue);
 
                 await Task.Yield();
+            }
+
+            setValue(targetValue);
+        }
+
+        public static IEnumerator Value_Coroutine<T>(T startValue, T targetValue, Action<T> setValue, float duration)
+        {
+            float elapsedTime = 0f;
+
+            while (elapsedTime < duration)
+            {
+                elapsedTime += Time.deltaTime;
+                float t = Mathf.Clamp01(elapsedTime / duration);
+
+                T interpolatedValue = LocalLerp(startValue, targetValue, t);
+                setValue(interpolatedValue);
+
+                yield return null;
             }
 
             setValue(targetValue);

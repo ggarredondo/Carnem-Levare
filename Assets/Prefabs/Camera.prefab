@@ -769,6 +769,10 @@ GameObject:
   - component: {fileID: 2835685396104087952}
   - component: {fileID: 2809826132323349587}
   - component: {fileID: 2835685396104087955}
+  - component: {fileID: 4478565699119350135}
+  - component: {fileID: 5986730028844765429}
+  - component: {fileID: 4770599042027549078}
+  - component: {fileID: 7398569090886596986}
   - component: {fileID: 1441668154611142286}
   m_Layer: 0
   m_Name: Virtual Camera
@@ -856,10 +860,82 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cameraEffects:
-  - {fileID: 11400000, guid: c0ef79e48f3d5cc46adb9c5c31918ec2, type: 2}
-  - {fileID: 11400000, guid: e9c3a4d31ca76584cab921ddbf6f857e, type: 2}
-  - {fileID: 11400000, guid: 59aaaa083c81fd14c83fa5c71a74098b, type: 2}
-  - {fileID: 11400000, guid: 37488ead0d7e74446958aa80bc297412, type: 2}
+  - {fileID: 4478565699119350135}
+  - {fileID: 4770599042027549078}
+  - {fileID: 7398569090886596986}
+  - {fileID: 5986730028844765429}
+--- !u!114 &4478565699119350135
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2835685396104087961}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b7f2eca51ce4db448b94b70e9a49ff79, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  defaultFrequency: 0
+  defaultAmplitude: 0
+  defaultNoiseSettings: {fileID: 11400000, guid: a3dacaec0287d7444b4bd276816e1666,
+    type: 2}
+--- !u!114 &5986730028844765429
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2835685396104087961}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b48949f1a28583e4b8ca075f942b4aa5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  length:
+    Item1: 0.5
+    Item2: 0.5
+  frequency:
+    Item1: 0
+    Item2: 3
+  amplitude:
+    Item1: 0
+    Item2: 0.1
+--- !u!114 &4770599042027549078
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2835685396104087961}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dae92714987ac8743a60e9400c5e2d98, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed:
+    Item1: 2
+    Item2: 2
+  variation:
+    Item1: 1
+    Item2: 2
+--- !u!114 &7398569090886596986
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2835685396104087961}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1a5a034724bbc0e40b46cac15babf2f7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed:
+    Item1: 2
+    Item2: 2
+  responseTime: 200
+  offsetVariation: {x: 0, y: 0, z: 0.25}
 --- !u!114 &1441668154611142286
 MonoBehaviour:
   m_ObjectHideFlags: 0

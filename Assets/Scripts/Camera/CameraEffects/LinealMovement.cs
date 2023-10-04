@@ -3,9 +3,12 @@ using LerpUtilities;
 using System.Threading.Tasks;
 using UnityEngine;
 
-[CreateAssetMenu(menuName = "Scriptable Objects/CameraEffects/LinealMovement")]
 public class LinealMovement : CameraEffect
 {
+    [Header("Parameters")]
+
+    public Tuple<float> speed;
+    public float responseTime;
     public Vector3 offsetVariation;
 
     private Tuple<Vector3> positions;

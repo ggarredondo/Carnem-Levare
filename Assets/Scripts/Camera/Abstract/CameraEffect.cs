@@ -1,16 +1,10 @@
 using Cinemachine;
 using UnityEngine;
 
-public abstract class CameraEffect : ScriptableObject
+public abstract class CameraEffect : MonoBehaviour
 {
     protected CinemachineVirtualCamera vcam;
-
     protected bool applyCondition;
-
-    [Header("Parameters")]
-
-    public Tuple<float> speed;
-    public float responseTime;
 
     public abstract void Initialize(ref CinemachineVirtualCamera vcam);
 

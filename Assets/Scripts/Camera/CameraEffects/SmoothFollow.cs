@@ -2,9 +2,10 @@ using Cinemachine;
 using LerpUtilities;
 using UnityEngine;
 
-[CreateAssetMenu(menuName = "Scriptable Objects/CameraEffects/SmoothFollow")]
 public class SmoothFollow : CameraEffect
 {
+    [Header("Parameters")]
+    public Tuple<float> speed;
     public Tuple<float> variation;
 
     private CinemachineOrbitalTransposer transposer;

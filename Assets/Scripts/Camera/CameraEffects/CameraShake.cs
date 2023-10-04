@@ -1,23 +1,23 @@
 using Cinemachine;
 using UnityEngine;
-using LerpUtilities;
-using System.Threading.Tasks;
+using System.Collections;
 
-[CreateAssetMenu(menuName = "Scriptable Objects/CameraEffects/CameraShake")]
 public class CameraShake : CameraEffect
 {
     private CinemachineBasicMultiChannelPerlin noiseTransposer;
 
-    [SerializeField] private float startDuration;
-    [SerializeField] private float finishDuration;
-
-    private float defaultFrequency, defaultAmplitude;
-    private NoiseSettings defaultNoiseSettings;
+    public float defaultFrequency;
+    public float defaultAmplitude;
+    public NoiseSettings defaultNoiseSettings;
 
     public override void Initialize(ref CinemachineVirtualCamera vcam)
     {
         this.vcam = vcam;
         noiseTransposer = vcam.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>();
+
+        noiseTransposer.m_FrequencyGain = defaultFrequency;
+        noiseTransposer.m_AmplitudeGain = defaultAmplitude;
+        noiseTransposer.m_NoiseProfile = defaultNoiseSettings;
     }
 
     public override void UpdateCondition(ref Player player, ref Enemy enemy)
@@ -35,54 +35,57 @@ public class CameraShake : CameraEffect
 
     private void Shake(in Hitbox hitbox)
     {
-        defaultFrequency = noiseTransposer.m_FrequencyGain;
-        defaultAmplitude = noiseTransposer.m_AmplitudeGain;
-        defaultNoiseSettings = noiseTransposer.m_NoiseProfile;
+
+        StopCoroutine(nameof(HurtTime));
 
         noiseTransposer.m_NoiseProfile = hitbox.HurtCameraShake.shakeType;
-        HurtTime(hitbox.HurtCameraShake.screenShakeFrequency, hitbox.HurtCameraShake.screenShakeAmplitude, (float) hitbox.HurtCameraShake.screenShakeTime);
+        noiseTransposer.m_FrequencyGain = hitbox.HurtCameraShake.screenShakeFrequency;
+        noiseTransposer.m_AmplitudeGain = hitbox.HurtCameraShake.screenShakeAmplitude;
+
+        StartCoroutine(HurtTime((float) hitbox.HurtCameraShake.screenShakeTime));
     }
 
     private void BlockingShake(in Hitbox hitbox)
     {
-        defaultFrequency = noiseTransposer.m_FrequencyGain;
-        defaultAmplitude = noiseTransposer.m_AmplitudeGain;
-        defaultNoiseSettings = noiseTransposer.m_NoiseProfile;
+
+        StopCoroutine(nameof(HurtTime));
 
         noiseTransposer.m_NoiseProfile = hitbox.BlockedCameraShake.shakeType;
-        HurtTime(hitbox.BlockedCameraShake.screenShakeFrequency, hitbox.BlockedCameraShake.screenShakeAmplitude, (float)hitbox.BlockedCameraShake.screenShakeTime);
+        noiseTransposer.m_FrequencyGain = hitbox.BlockedCameraShake.screenShakeFrequency;
+        noiseTransposer.m_AmplitudeGain = hitbox.BlockedCameraShake.screenShakeAmplitude;
+
+        StartCoroutine(HurtTime((float)hitbox.BlockedCameraShake.screenShakeTime));
     }
 
     private void StaggerShake(in Hitbox hitbox)
     {
-        defaultFrequency = noiseTransposer.m_FrequencyGain;
-        defaultAmplitude = noiseTransposer.m_AmplitudeGain;
-        defaultNoiseSettings = noiseTransposer.m_NoiseProfile;
+
+        StopCoroutine(nameof(HurtTime));
 
         noiseTransposer.m_NoiseProfile = hitbox.StaggerCameraShake.shakeType;
-        HurtTime(hitbox.StaggerCameraShake.screenShakeFrequency, hitbox.StaggerCameraShake.screenShakeAmplitude, (float)hitbox.StaggerCameraShake.screenShakeTime);
+        noiseTransposer.m_FrequencyGain = hitbox.StaggerCameraShake.screenShakeFrequency;
+        noiseTransposer.m_AmplitudeGain = hitbox.StaggerCameraShake.screenShakeAmplitude;
+
+        StartCoroutine(HurtTime((float)hitbox.StaggerCameraShake.screenShakeTime));
     }
 
     private void KOShake(in Hitbox hitbox)
     {
-        defaultFrequency = noiseTransposer.m_FrequencyGain;
-        defaultAmplitude = noiseTransposer.m_AmplitudeGain;
-        defaultNoiseSettings = noiseTransposer.m_NoiseProfile;
+        StopCoroutine(nameof(HurtTime));
 
         noiseTransposer.m_NoiseProfile = hitbox.KOCameraShake.shakeType;
-        HurtTime(hitbox.KOCameraShake.screenShakeFrequency, hitbox.KOCameraShake.screenShakeAmplitude, (float)hitbox.KOCameraShake.screenShakeTime);
+        noiseTransposer.m_FrequencyGain = hitbox.KOCameraShake.screenShakeFrequency;
+        noiseTransposer.m_AmplitudeGain = hitbox.KOCameraShake.screenShakeAmplitude;
+
+        StartCoroutine(HurtTime((float)hitbox.KOCameraShake.screenShakeTime));
     }
 
-    private async void HurtTime(float frequency, float amplitude, float time)
+    private IEnumerator HurtTime(float time)
     {
-        await Task.WhenAll(Lerp.Value(noiseTransposer.m_FrequencyGain, frequency, f => noiseTransposer.m_FrequencyGain = f, startDuration),
-                           Lerp.Value(noiseTransposer.m_AmplitudeGain, amplitude, f => noiseTransposer.m_AmplitudeGain = f, startDuration));
+        yield return new WaitForSeconds((float) System.TimeSpan.FromMilliseconds(time).TotalSeconds);
 
-        await Task.Delay(System.TimeSpan.FromMilliseconds(time));
-
-        await Task.WhenAll(Lerp.Value(noiseTransposer.m_FrequencyGain, defaultFrequency, f => noiseTransposer.m_FrequencyGain = f, finishDuration),
-                           Lerp.Value(noiseTransposer.m_AmplitudeGain, defaultAmplitude, f => noiseTransposer.m_AmplitudeGain = f, finishDuration));
-
+        noiseTransposer.m_FrequencyGain = defaultFrequency;
+        noiseTransposer.m_AmplitudeGain = defaultAmplitude;
         noiseTransposer.m_NoiseProfile = defaultNoiseSettings;
     }
 }
