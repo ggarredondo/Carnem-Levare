@@ -1,23 +1,33 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 public class ScrollbarController : MonoBehaviour
 {
+    [Header("Requirements")]
     [SerializeField] private ScrollRect scrollRect;
     [SerializeField] private GameObject parentRequired;
     [SerializeField] private RectTransform scanner;
-    [SerializeField] private float sensitivity = 0.1f;
+    [SerializeField] private RectTransform content;
     [SerializeField] private InputReader inputReader;
 
+    [Header("Parameters")]
+    [SerializeField] private float joystickSensitivity;
+    [SerializeField] private float automaticSensitivity;
+    [SerializeField] [Range(-0.5f, 0)] private float clampMinValue;
+    [SerializeField] [Range(1, 1.5f)] private float clampMaxValue;
+
     private Vector2 direction;
-    private Rect boundsRect;
+    private Rect boundsRect, contentRect;
+    private float maxDistance;
 
     private void Awake()
     {
         direction = new Vector2(0, 0);
         boundsRect = GetWorldRect(scanner);
-
+        contentRect = GetWorldRect(content);
+        maxDistance = Mathf.Abs(boundsRect.yMin - contentRect.yMin);
         inputReader.ScrollbarEvent += UpdateDirection;
     }
 
@@ -31,10 +41,11 @@ public class ScrollbarController : MonoBehaviour
         this.direction = direction;
     }
 
-    private void MoveScrollbar(Vector2 direction)
+    private void MoveScrollbar(Vector2 direction, float sensitivity)
     {
         float newPosition = scrollRect.verticalNormalizedPosition + direction.y * sensitivity * Time.deltaTime;
-        newPosition = Mathf.Clamp(newPosition, -0.5f, 1.5f);
+        newPosition = Mathf.Clamp(newPosition, clampMinValue, clampMaxValue);
+
         scrollRect.verticalNormalizedPosition = newPosition;
     }
 
@@ -46,12 +57,20 @@ public class ScrollbarController : MonoBehaviour
 
         if (currentSelected.parent == parentRequired.transform)
         {
-            if (objectRect.yMin < boundsRect.yMin && scrollRect.verticalNormalizedPosition > 0 && direction == new Vector2(0, 0))
-                MoveScrollbar(new Vector2(0, -1));
+            if (objectRect.yMin < boundsRect.yMin && scrollRect.verticalNormalizedPosition > 0 && direction == new Vector2(0,0))
+            {
+                float distance = objectRect.yMin - boundsRect.yMin;
+                distance /= maxDistance;
+                MoveScrollbar(new Vector2(0, distance), automaticSensitivity);
+            }
             else if (objectRect.yMax > boundsRect.yMax && scrollRect.verticalNormalizedPosition < 1 && direction == new Vector2(0, 0))
-                MoveScrollbar(new Vector2(0, 1));
-            else
-                MoveScrollbar(direction);
+            {
+                float distance = objectRect.yMax - boundsRect.yMax;
+                distance /= maxDistance;
+                MoveScrollbar(new Vector2(0, distance), automaticSensitivity);
+            }
+            else 
+                MoveScrollbar(direction, joystickSensitivity);
         }
     }
 
@@ -65,8 +84,6 @@ public class ScrollbarController : MonoBehaviour
     private void Update()
     {
         if (GameManager.Input.ControlSchemeIndex == 0 || GameManager.Input.PreviousCustomControlScheme == InputDevice.KEYBOARD)
-        {
             AutomaticScrollbarMovement();
-        }
     }
 }

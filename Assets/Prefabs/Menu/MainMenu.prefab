@@ -5210,8 +5210,12 @@ MonoBehaviour:
   scrollRect: {fileID: 8750224397553760131}
   parentRequired: {fileID: 6263174357323391259}
   scanner: {fileID: 9126621218694022933}
-  sensitivity: 1
+  content: {fileID: 4146659586580010217}
   inputReader: {fileID: 11400000, guid: cb514f7bc969f1e4da23444266f585b7, type: 2}
+  joystickSensitivity: 1
+  automaticSensitivity: 5
+  clampMinValue: -0.1
+  clampMaxValue: 1.1
 --- !u!1 &6263174355695152453
 GameObject:
   m_ObjectHideFlags: 0
@@ -14248,7 +14252,7 @@ MonoBehaviour:
   m_Horizontal: 0
   m_Vertical: 1
   m_MovementType: 1
-  m_Elasticity: 0.025
+  m_Elasticity: 0.1
   m_Inertia: 1
   m_DecelerationRate: 0.135
   m_ScrollSensitivity: 2
