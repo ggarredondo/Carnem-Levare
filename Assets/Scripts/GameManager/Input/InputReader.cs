@@ -12,6 +12,7 @@ public class InputReader : ScriptableObject
     public event System.Action ChangeRightMenuEvent;
     public event System.Action ChangeLeftMenuEvent;
     public event System.Action StartPauseMenuEvent;
+    public event System.Action<Vector2> ScrollbarEvent;
 
     public event System.Action SelectMenuEvent;
     public event System.Action ChangeCamera;
@@ -28,6 +29,11 @@ public class InputReader : ScriptableObject
     {
         HoldEvents = new();
         holdInputActions.ForEach(a => HoldEvents.Add(a.action, null));
+    }
+
+    public void OnScrollbar(InputAction.CallbackContext context)
+    {
+        ScrollbarEvent?.Invoke(context.ReadValue<Vector2>());
     }
 
     public void OnMouseClick(InputAction.CallbackContext context)
