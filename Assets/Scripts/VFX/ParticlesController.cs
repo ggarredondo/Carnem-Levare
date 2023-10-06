@@ -12,6 +12,7 @@ public class ParticlesController : MonoBehaviour
     }
 
     [SerializeField] private List<Producer> producers;
+    [SerializeField] private bool disableParticles;
 
     private Dictionary<string, GameObject> producerTable;
     private Dictionary<GameObject, GameObject> producerParticlesTable;
@@ -29,11 +30,14 @@ public class ParticlesController : MonoBehaviour
 
     public void Play(string ID, in GameObject particles)
     {
-        GameObject parent = producerTable[ID];
+        if (!disableParticles)
+        {
+            GameObject parent = producerTable[ID];
 
-        ParticleSystem actualParticles = InstantiateParticles(parent, particles).GetComponent<ParticleSystem>();
+            ParticleSystem actualParticles = InstantiateParticles(parent, particles).GetComponent<ParticleSystem>();
 
-        actualParticles.Play();
+            actualParticles.Play();
+        }
     }
 
     private GameObject InstantiateParticles(in GameObject parent, in GameObject particles)

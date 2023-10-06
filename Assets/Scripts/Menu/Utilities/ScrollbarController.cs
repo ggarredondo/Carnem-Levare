@@ -1,4 +1,3 @@
-using System.Collections;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -51,26 +50,30 @@ public class ScrollbarController : MonoBehaviour
 
     private void AutomaticScrollbarMovement()
     {
-        RectTransform currentSelected = EventSystem.current.currentSelectedGameObject.GetComponent<RectTransform>();
+        GameObject currentSelected = EventSystem.current.currentSelectedGameObject;
 
-        Rect objectRect = GetWorldRect(currentSelected);
-
-        if (currentSelected.parent == parentRequired.transform)
+        if (currentSelected != null)
         {
-            if (objectRect.yMin < boundsRect.yMin && scrollRect.verticalNormalizedPosition > 0 && direction == new Vector2(0,0))
+            boundsRect = GetWorldRect(scanner);
+            Rect objectRect = GetWorldRect(currentSelected.GetComponent<RectTransform>());
+
+            if (currentSelected.transform.parent == parentRequired.transform)
             {
-                float distance = objectRect.yMin - boundsRect.yMin;
-                distance /= maxDistance;
-                MoveScrollbar(new Vector2(0, distance), automaticSensitivity);
+                if (objectRect.yMin < boundsRect.yMin && scrollRect.verticalNormalizedPosition > 0 && direction == new Vector2(0, 0))
+                {
+                    float distance = objectRect.yMin - boundsRect.yMin;
+                    distance /= maxDistance;
+                    MoveScrollbar(new Vector2(0, distance), automaticSensitivity);
+                }
+                else if (objectRect.yMax > boundsRect.yMax && scrollRect.verticalNormalizedPosition < 1 && direction == new Vector2(0, 0))
+                {
+                    float distance = objectRect.yMax - boundsRect.yMax;
+                    distance /= maxDistance;
+                    MoveScrollbar(new Vector2(0, distance), automaticSensitivity);
+                }
+                else
+                    MoveScrollbar(direction, joystickSensitivity);
             }
-            else if (objectRect.yMax > boundsRect.yMax && scrollRect.verticalNormalizedPosition < 1 && direction == new Vector2(0, 0))
-            {
-                float distance = objectRect.yMax - boundsRect.yMax;
-                distance /= maxDistance;
-                MoveScrollbar(new Vector2(0, distance), automaticSensitivity);
-            }
-            else 
-                MoveScrollbar(direction, joystickSensitivity);
         }
     }
 
@@ -83,7 +86,6 @@ public class ScrollbarController : MonoBehaviour
 
     private void Update()
     {
-        if (GameManager.Input.ControlSchemeIndex == 0 || GameManager.Input.PreviousCustomControlScheme == InputDevice.KEYBOARD)
-            AutomaticScrollbarMovement();
+        AutomaticScrollbarMovement();
     }
 }

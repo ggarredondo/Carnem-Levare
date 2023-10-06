@@ -240,6 +240,7 @@ MonoBehaviour:
     producerObject: {fileID: 7861743490557194619}
   - ID: Right_Foot
     producerObject: {fileID: 3079697173098840009}
+  disableParticles: 0
 --- !u!1 &4830288424506690251
 GameObject:
   m_ObjectHideFlags: 0
