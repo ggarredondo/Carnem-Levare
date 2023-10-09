@@ -383,7 +383,19 @@ MonoBehaviour:
     m_ActionId: 86c7ae0b-39d3-4ed7-ade8-84f2a8bd7c84
     m_ActionName: Main Movement/D-Pad
   - m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 11400000, guid: cb514f7bc969f1e4da23444266f585b7, type: 2}
+        m_TargetAssemblyTypeName: InputReader, Assembly-CSharp
+        m_MethodName: OnChangeCamera
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_ActionId: 72f2f0f8-5279-4a84-b3cd-fd13ab97abe9
     m_ActionName: Main Movement/ChangeCamera
   - m_PersistentCalls:
@@ -402,6 +414,22 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: 5615a560-70a5-4c6d-a0b0-edfa9c6ea921
     m_ActionName: Main Movement/StartHold[/XInputControllerWindows/start,/Keyboard/escape]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 11400000, guid: cb514f7bc969f1e4da23444266f585b7, type: 2}
+        m_TargetAssemblyTypeName: InputReader, Assembly-CSharp
+        m_MethodName: OnScrollbar
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 52967bb1-8153-4b1d-b029-11f14d4033bd
+    m_ActionName: UI/Scrollbar[/XInputControllerWindows/rightStick]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: Gamepad
   m_DefaultActionMap: Main Movement
@@ -735,6 +763,7 @@ MonoBehaviour:
     producerObject: {fileID: 1133088415450659919}
   - ID: Right_Foot
     producerObject: {fileID: 2174714693114535593}
+  disableParticles: 0
 --- !u!1 &2174714693114535593
 GameObject:
   m_ObjectHideFlags: 0

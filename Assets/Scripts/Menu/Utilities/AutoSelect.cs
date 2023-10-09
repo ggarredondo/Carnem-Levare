@@ -47,7 +47,7 @@ public class AutoSelect : MonoBehaviour, IPointerEnterHandler, ISelectHandler, I
     }
 
     public void OnSelect(BaseEventData eventData)
-    {
+    { 
         if (GameManager.Input.ControlSchemeIndex == 0 || GameManager.Input.PreviousCustomControlScheme == InputDevice.KEYBOARD)
         {
             GameManager.Input.SetSelectedGameObject(EventSystem.current.currentSelectedGameObject);
