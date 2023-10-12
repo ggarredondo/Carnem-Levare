@@ -1,34 +1,35 @@
 using UnityEngine;
-using UnityEngine.UI;
 using System.Collections.Generic;
 using TMPro;
-using UnityEngine.Rendering.Universal;
 
 public class VisualsMenu : AbstractMenu
 {
 
     [Header("UI Elements")]
-    [SerializeField] private Toggle fullscreenToggle;
-    [SerializeField] private Toggle vsyncToggle;
-    [SerializeField] private Button fullscreenButton;
-    [SerializeField] private Button vsyncButton;
+    [SerializeField] private ToggleData fullscreen;
+    [SerializeField] private ToggleData vsync;
     [SerializeField] private TMP_Dropdown resolutionDropdown;
     [SerializeField] private TMP_Dropdown qualityDropdown;
     [SerializeField] private TMP_Dropdown antiAliasingDropdown;
     [SerializeField] private TMP_Dropdown shadowDistanceDropdown;
+    [SerializeField] private TMP_Dropdown textureResolutionDropdown;
+    [SerializeField] private ToggleData anisotropic;
+    [SerializeField] private ToggleData softParticles;
 
     [Header("Visual Config")]
-    [SerializeField] private List<UniversalRenderPipelineAsset> urpQuality;
-    [SerializeField] private int customQualityIndex;
+    [SerializeField] private VisualOptionsApplier applier;
     [SerializeField] private List<string> qualityName;
     [SerializeField] private List<string> resolutions;
     [SerializeField] private List<string> antiAliasingOptions;
     [SerializeField] private List<string> shadowDistanceOptions;
+    [SerializeField] private List<string> textureResolutionOptions;
 
     protected override void Configure()
     {
-        fullscreenToggle.isOn = DataSaver.Options.fullscreen;
-        vsyncToggle.isOn = DataSaver.Options.vSync;
+        applier.Initialize();
+
+        fullscreen.toggle.isOn = DataSaver.Options.fullscreen;
+        vsync.toggle.isOn = DataSaver.Options.vSync;
 
         resolutionDropdown.ClearOptions();
         resolutionDropdown.AddOptions(resolutions);
@@ -44,14 +45,20 @@ public class VisualsMenu : AbstractMenu
         shadowDistanceDropdown.ClearOptions();
         shadowDistanceDropdown.AddOptions(shadowDistanceOptions);
 
+        textureResolutionDropdown.ClearOptions();
+        textureResolutionDropdown.AddOptions(textureResolutionOptions);
+
         UpdateCustomQualitySettings();
 
         //--------------------------------------------
 
-        vsyncToggle.onValueChanged.AddListener(Vsync);
-        fullscreenToggle.onValueChanged.AddListener(FullScreen);
-        fullscreenButton.onClick.AddListener(() => fullscreenToggle.isOn = !fullscreenToggle.isOn);
-        vsyncButton.onClick.AddListener(() => vsyncToggle.isOn = !vsyncToggle.isOn);
+        vsync.toggle.onValueChanged.AddListener(Vsync);
+        fullscreen.toggle.onValueChanged.AddListener(FullScreen);
+
+        fullscreen.button.onClick.AddListener(() => fullscreen.toggle.isOn = !fullscreen.toggle.isOn);
+        vsync.button.onClick.AddListener(() => vsync.toggle.isOn = !vsync.toggle.isOn);
+        anisotropic.button.onClick.AddListener(() => anisotropic.toggle.isOn = !anisotropic.toggle.isOn);
+        softParticles.button.onClick.AddListener(() => softParticles.toggle.isOn = !softParticles.toggle.isOn);
 
         resolutionDropdown.onValueChanged.AddListener(ChangeResolution);
         qualityDropdown.onValueChanged.AddListener(ChangeQuality);
@@ -82,29 +89,63 @@ public class VisualsMenu : AbstractMenu
     {
         antiAliasingDropdown.onValueChanged.RemoveAllListeners();
         shadowDistanceDropdown.onValueChanged.RemoveAllListeners();
-        antiAliasingDropdown.value = (int)Mathf.Log(urpQuality[DataSaver.Options.quality].msaaSampleCount, 2);
-        shadowDistanceDropdown.value = (int)(urpQuality[DataSaver.Options.quality].shadowDistance / 25) - 1;
+        textureResolutionDropdown.onValueChanged.RemoveAllListeners();
+        anisotropic.toggle.onValueChanged.RemoveAllListeners();
+        softParticles.toggle.onValueChanged.RemoveAllListeners();
+
+        antiAliasingDropdown.value = applier.ObtainAntialiasing();
+        shadowDistanceDropdown.value = applier.ObtainShadowDistance();
+        textureResolutionDropdown.value = applier.ObtainTextureResolution();
+        anisotropic.toggle.isOn = applier.ObtainAnisotropic();
+        softParticles.toggle.isOn = applier.ObtainSoftParticles();
+
         antiAliasingDropdown.onValueChanged.AddListener(ChangeAntiAliasing);
         shadowDistanceDropdown.onValueChanged.AddListener(ChangeShadowDistance);
+        textureResolutionDropdown.onValueChanged.AddListener(ChangeTextureResolution);
+        anisotropic.toggle.onValueChanged.AddListener(ChangeAnisotropic);
+        softParticles.toggle.onValueChanged.AddListener(ChangeAnisotropic);
     }
 
-    private void CheckQualityAsset()
+    private void ChangeToCustom()
     {
-        if(qualityDropdown.value != customQualityIndex)
-            qualityDropdown.value = customQualityIndex;
+        if (qualityDropdown.value != applier.customQualityIndex)
+            qualityDropdown.value = applier.customQualityIndex;
         else
             GameManager.Audio.Play("PressButton");
     }
 
     public void ChangeAntiAliasing(int value)
     {
-        urpQuality[customQualityIndex].msaaSampleCount = (int)Mathf.Pow(2, value);
-        CheckQualityAsset();
+        applier.ApplyAntialiasing(value);
+        Dropdown(ref DataSaver.Options.antialiasing, value);
+        ChangeToCustom();
     }
 
     public void ChangeShadowDistance(int value)
     {
-        urpQuality[customQualityIndex].shadowDistance = 25 * (value+1);
-        CheckQualityAsset();
+        applier.ApplyShadowDistance(value);
+        Dropdown(ref DataSaver.Options.shadowDistance, value);
+        ChangeToCustom();
+    }
+
+    public void ChangeTextureResolution(int value)
+    {
+        applier.ApplyTextureResolution(value);
+        Dropdown(ref DataSaver.Options.textureResolution, value);
+        ChangeToCustom();
+    }
+
+    public void ChangeAnisotropic(bool value)
+    {
+        applier.ApplyAnisotropic(value);
+        Toggle(ref DataSaver.Options.anisotropic, value);
+        ChangeToCustom();
+    }
+
+    public void ChangeSoftParticles(bool value)
+    {
+        applier.ApplySoftParticles(value);
+        Toggle(ref DataSaver.Options.softParticles, value);
+        ChangeToCustom();
     }
 }

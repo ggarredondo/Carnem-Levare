@@ -7,6 +7,13 @@ using TMPro;
 
 public abstract class AbstractMenu : MonoBehaviour
 {
+    [System.Serializable]
+    protected struct ToggleData
+    {
+        public Button button;
+        public Toggle toggle;
+    }
+
     private TMP_Dropdown actualDropDown;
 
     [Header("Requirements")]

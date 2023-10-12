@@ -59,28 +59,31 @@ public class ScrollbarController : MonoBehaviour
             if (currentSelected.transform.parent == parentRequired.transform)
                 this.currentSelected = currentSelected;
 
-            Rect boundsRect = GetWorldRect(scanner);
-            objectRect = GetWorldRect(this.currentSelected.GetComponent<RectTransform>());
+            if (this.currentSelected != null)
+            {
+                Rect boundsRect = GetWorldRect(scanner);
+                objectRect = GetWorldRect(this.currentSelected.GetComponent<RectTransform>());
 
-            if (boundsRect != this.boundsRect)
-            {
-                maxDistance *= boundsRect.height / this.boundsRect.height;
-                this.boundsRect = GetWorldRect(scanner);
-            }
+                if (boundsRect != this.boundsRect)
+                {
+                    maxDistance *= boundsRect.height / this.boundsRect.height;
+                    this.boundsRect = GetWorldRect(scanner);
+                }
 
-            if (objectRect.yMin < boundsRect.yMin && scrollRect.verticalNormalizedPosition > 0 && direction == new Vector2(0, 0))
-            {
-                float distance = objectRect.yMin - boundsRect.yMin;
-                distance /= maxDistance;
-                MoveScrollbar(new Vector2(0, distance), automaticSensitivity);
+                if (objectRect.yMin < boundsRect.yMin && scrollRect.verticalNormalizedPosition > 0 && direction == new Vector2(0, 0))
+                {
+                    float distance = objectRect.yMin - boundsRect.yMin;
+                    distance /= maxDistance;
+                    MoveScrollbar(new Vector2(0, distance), automaticSensitivity);
+                }
+                else if (objectRect.yMax > boundsRect.yMax && scrollRect.verticalNormalizedPosition < 1 && direction == new Vector2(0, 0))
+                {
+                    float distance = objectRect.yMax - boundsRect.yMax;
+                    distance /= maxDistance;
+                    MoveScrollbar(new Vector2(0, distance), automaticSensitivity);
+                }
+                else MoveScrollbar(direction, joystickSensitivity);
             }
-            else if (objectRect.yMax > boundsRect.yMax && scrollRect.verticalNormalizedPosition < 1 && direction == new Vector2(0, 0))
-            {
-                float distance = objectRect.yMax - boundsRect.yMax;
-                distance /= maxDistance;
-                MoveScrollbar(new Vector2(0, distance), automaticSensitivity);
-            }
-            else MoveScrollbar(direction, joystickSensitivity);   
         }
     }
 

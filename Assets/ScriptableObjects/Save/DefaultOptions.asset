@@ -20,7 +20,11 @@ MonoBehaviour:
     sfxVolume: 1
     vSync: 1
     fullscreen: 1
-    resolution: 1920x1080
+    resolution: 655x368
     quality: 0
+    antialiasing: 3
+    shadowDistance: 3
+    textureResolution: 3
+    anisotropic: 1
     rumble: 1
     rebinds: 
