@@ -1,8 +1,8 @@
 using System.Collections.Generic;
 
-public class AggresiveOwnTurnState : AIState
+public class AggressiveOwnTurnState : AIState
 {
-    private AggresiveAIStateMachine aiFSM;
+    private AggressiveAIStateMachine aiFSM;
     private AIController controller;
     private GameKnowledge gameKnowledge;
 
@@ -11,7 +11,7 @@ public class AggresiveOwnTurnState : AIState
     private List<MoveSequence> sequences;
     private int selectedSequence, selectedMove, sequencesCount;
 
-    public AggresiveOwnTurnState(in AggresiveAIStateMachine aiFSM, in AIController controller, in GameKnowledge gameKnowledge)
+    public AggressiveOwnTurnState(in AggressiveAIStateMachine aiFSM, in AIController controller, in GameKnowledge gameKnowledge)
     {
         this.aiFSM = aiFSM;
         this.controller = controller;
