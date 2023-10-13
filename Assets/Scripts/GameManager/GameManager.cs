@@ -13,6 +13,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private AudioMixer audioMixer;
     [SerializeField] private SaveOptions defaultOptions;
     [SerializeField] private SaveGame defaultGame;
+    [SerializeField] private VisualData visualOptionsData;
 
     [Header("SceneSettings")]
     [SerializeField] private string firstSceneName;
@@ -48,6 +49,7 @@ public class GameManager : MonoBehaviour
         transitionPlayer.Initialize();
 
         //Save Initialize
+        visualOptionsData.Initialize();
         saver = new DataSaver(defaultOptions, defaultGame, audioMixer);
         saver.Load();
 

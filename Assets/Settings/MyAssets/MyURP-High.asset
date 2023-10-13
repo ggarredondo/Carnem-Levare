@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b20c7bcb3a5c28449d4de977dedb187, type: 3}
+  m_Name: MyURP-High
+  m_EditorClassIdentifier: 
+  ID: 2
+  data: {fileID: 11400000, guid: 864ab56f5e489094a89374bca8f1b8bf, type: 2}
+  antiAliasing: 2
+  shadowDistance: 2
+  shadowResolution: 2
+  textureResolution: 2
+  anisotropic: 1
+  softParticles: 1
+  urpAsset: {fileID: 11400000, guid: e1260c1148f6143b28bae5ace5e9c5d1, type: 2}

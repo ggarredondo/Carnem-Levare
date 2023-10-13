@@ -24,6 +24,6 @@ public class OptionsApplier : IApplier
         string[] resolutionArray = options.resolution.Split('x');
         Screen.SetResolution(int.Parse(resolutionArray[0]), int.Parse(resolutionArray[1]), options.fullscreen);
 
-        QualitySettings.SetQualityLevel(options.quality, false);
+        QualitySettings.SetQualityLevel(options.quality, true);
     }
 }

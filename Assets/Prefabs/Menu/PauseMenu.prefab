@@ -1345,6 +1345,21 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2506615479569386992}
     m_Modifications:
+    - target: {fileID: 2282850572023066540, guid: a5e1a11c92d391c419e235c5ddd96acf,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2282850572023066540, guid: a5e1a11c92d391c419e235c5ddd96acf,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 4475407012079691485}
+    - target: {fileID: 2282850572023066540, guid: a5e1a11c92d391c419e235c5ddd96acf,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: ChangeSibling
+      objectReference: {fileID: 0}
     - target: {fileID: 2282850572209863312, guid: a5e1a11c92d391c419e235c5ddd96acf,
         type: 3}
       propertyPath: m_Name
@@ -1460,6 +1475,36 @@ PrefabInstance:
       propertyPath: menuController
       value: 
       objectReference: {fileID: 4475407012079691485}
+    - target: {fileID: 2282850572430231377, guid: a5e1a11c92d391c419e235c5ddd96acf,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 4475407012079691485}
+    - target: {fileID: 2282850572430231377, guid: a5e1a11c92d391c419e235c5ddd96acf,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: ChangeSibling
+      objectReference: {fileID: 0}
+    - target: {fileID: 2282850573582309236, guid: a5e1a11c92d391c419e235c5ddd96acf,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 4475407012079691485}
+    - target: {fileID: 2282850573582309236, guid: a5e1a11c92d391c419e235c5ddd96acf,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: ChangeSibling
+      objectReference: {fileID: 0}
+    - target: {fileID: 2282850573824114603, guid: a5e1a11c92d391c419e235c5ddd96acf,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 4475407012079691485}
+    - target: {fileID: 2282850573824114603, guid: a5e1a11c92d391c419e235c5ddd96acf,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: ChangeSibling
+      objectReference: {fileID: 0}
     - target: {fileID: 4024497241188648940, guid: a5e1a11c92d391c419e235c5ddd96acf,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target

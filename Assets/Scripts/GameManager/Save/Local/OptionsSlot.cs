@@ -12,12 +12,6 @@ public class OptionsSlot : SaveSlot
     public string resolution;
     public int quality;
 
-    public int antialiasing;
-    public int shadowDistance;
-    public int textureResolution;
-    public bool anisotropic;
-    public bool softParticles;
-
     public bool rumble;
     public string rebinds;
 }
