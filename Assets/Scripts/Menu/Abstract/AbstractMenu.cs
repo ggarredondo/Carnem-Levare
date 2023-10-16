@@ -18,7 +18,7 @@ public abstract class AbstractMenu : MonoBehaviour
 
     [Header("Requirements")]
     [SerializeField] protected GameObject firstSelected;
-    [SerializeField] private List<Tuple<Button, Selectable>> transitions;
+    [SerializeField] protected List<Tuple<Button, Selectable>> transitions;
 
     public TMP_Dropdown ActualDropDown { get => actualDropDown; set => actualDropDown = value; }
 
@@ -83,6 +83,31 @@ public abstract class AbstractMenu : MonoBehaviour
     }
 
     protected abstract void Configure();
+
+    protected void ChangeColor(ref Button selectable, Color32 color)
+    {
+        ColorBlock cb = selectable.colors;
+        cb.normalColor = color;
+        selectable.colors = cb;
+    }
+
+    protected void ChangeColor(ref Toggle selectable, Color32 color)
+    {
+        ColorBlock cb = selectable.colors;
+        cb.normalColor = color;
+        selectable.colors = cb;
+    }
+
+    protected void ChangeColorTransitions(int index, Color32 color)
+    {
+        ColorBlock cb1 = transitions[index].Item1.colors;
+        cb1.normalColor = color;
+        transitions[index].Item1.colors = cb1;
+
+        ColorBlock cb2 = transitions[index].Item2.colors;
+        cb2.normalColor = color;
+        transitions[index].Item2.colors = cb2;
+    }
 
     protected void Slider(ref float save, float value, bool hasSound)
     {

@@ -23,11 +23,13 @@ public class VisualData : ScriptableObject
 
     [SerializeField] private List<Tuple<QualityData, int>> shadowDistanceList;
     [SerializeField] private List<Tuple<QualityData, ShadowResolutionStruct>> shadowResolutionList;
+    [SerializeField] private List<Tuple<QualityData, int>> shadowCascadeList;
     [SerializeField] private List<Tuple<QualityData, int>> antialiasingList;
     [SerializeField] private List<Tuple<QualityData, int>> textureResolutionList;
 
     public Dictionary<int, int> shadowDistanceMap = new();
     public Dictionary<int, ShadowResolutionStruct> shadowResolutionMap = new();
+    public Dictionary<int, int> shadowCascadeMap = new();
     public Dictionary<int, int> antialiasingMap = new();
     public Dictionary<int, int> textureResolutionMap = new();
 
@@ -38,6 +40,9 @@ public class VisualData : ScriptableObject
 
         foreach (Tuple<QualityData, ShadowResolutionStruct> tuple in shadowResolutionList)
             shadowResolutionMap.Add((int)tuple.Item1, tuple.Item2);
+
+        foreach (Tuple<QualityData, int> tuple in shadowCascadeList)
+            shadowCascadeMap.Add((int)tuple.Item1, tuple.Item2);
 
         foreach (Tuple<QualityData, int> tuple in antialiasingList)
             antialiasingMap.Add((int)tuple.Item1, tuple.Item2);

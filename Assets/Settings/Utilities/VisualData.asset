@@ -46,6 +46,15 @@ MonoBehaviour:
       tierLow: 256
       tierMid: 512
       tierHigh: 1024
+  shadowCascadeList:
+  - Item1: 0
+    Item2: 1
+  - Item1: 1
+    Item2: 2
+  - Item1: 2
+    Item2: 3
+  - Item1: 3
+    Item2: 4
   antialiasingList:
   - Item1: 0
     Item2: 1

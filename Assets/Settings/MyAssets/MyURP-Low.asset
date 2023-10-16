@@ -15,8 +15,11 @@ MonoBehaviour:
   ID: 0
   data: {fileID: 11400000, guid: 864ab56f5e489094a89374bca8f1b8bf, type: 2}
   antiAliasing: 0
+  castShadows: 1
   shadowDistance: 0
+  shadowResolution: 0
   textureResolution: 0
+  softShadows: 0
   anisotropic: 0
   softParticles: 0
   urpAsset: {fileID: 11400000, guid: d0e2fc18fe036412f8223b3b3d9ad574, type: 2}
