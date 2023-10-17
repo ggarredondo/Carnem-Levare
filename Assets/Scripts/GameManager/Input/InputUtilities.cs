@@ -73,7 +73,8 @@ public class InputUtilities
 
     public void EnableUIModule(bool enable)
     {
-        uiInput.enabled = enable;
+        if(uiInput != null)
+            uiInput.enabled = enable;
     }
 
     public string CurrentControlScheme()

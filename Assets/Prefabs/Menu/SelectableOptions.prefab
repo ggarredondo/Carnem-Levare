@@ -4331,28 +4331,275 @@ MonoBehaviour:
   fullscreen:
     button: {fileID: 2282850571869247810}
     toggle: {fileID: 2282850572748322414}
+    trigger:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 2282850572077475555}
+          m_TargetAssemblyTypeName: VisualsMenu, Assembly-CSharp
+          m_MethodName: FullScreen
+          m_Mode: 0
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
   vsync:
     button: {fileID: 2282850572930779206}
     toggle: {fileID: 2282850572990292444}
+    trigger:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 2282850572077475555}
+          m_TargetAssemblyTypeName: VisualsMenu, Assembly-CSharp
+          m_MethodName: Vsync
+          m_Mode: 0
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
   castShadows:
     button: {fileID: 2007100879232891058}
     toggle: {fileID: 5086416305340082568}
+    trigger:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 2282850572077475555}
+          m_TargetAssemblyTypeName: VisualsMenu, Assembly-CSharp
+          m_MethodName: ChangeCastShadows
+          m_Mode: 0
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
   softShadows:
     button: {fileID: 442605491518470019}
     toggle: {fileID: 7533199678482469658}
+    trigger:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 2282850572077475555}
+          m_TargetAssemblyTypeName: VisualsMenu, Assembly-CSharp
+          m_MethodName: ChangeSoftShadows
+          m_Mode: 0
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
   anisotropic:
     button: {fileID: 4369101656116545812}
     toggle: {fileID: 6720957046165582464}
+    trigger:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 2282850572077475555}
+          m_TargetAssemblyTypeName: VisualsMenu, Assembly-CSharp
+          m_MethodName: ChangeAnisotropic
+          m_Mode: 0
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
   softParticles:
     button: {fileID: 2612386783684959503}
     toggle: {fileID: 1774165037946262960}
-  resolutionDropdown: {fileID: 2282850573777950915}
-  qualityDropdown: {fileID: 2282850573127609970}
-  antiAliasingDropdown: {fileID: 2959876871427851334}
-  shadowDistanceDropdown: {fileID: 5658953355866043481}
-  shadowResolutionDropdown: {fileID: 1405030191311277607}
-  shadowCascadeDropdown: {fileID: 4508944514419917490}
-  textureResolutionDropdown: {fileID: 2168440052988964752}
+    trigger:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 2282850572077475555}
+          m_TargetAssemblyTypeName: VisualsMenu, Assembly-CSharp
+          m_MethodName: ChangeSoftParticles
+          m_Mode: 0
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  resolution:
+    button: {fileID: 2282850572523472108}
+    dropdown: {fileID: 2282850573777950915}
+    options:
+    - 3840x2160
+    - 2560x1440
+    - 1920x1080
+    - 1280x720
+    - 960x540
+    - 640x480
+    trigger:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 2282850572077475555}
+          m_TargetAssemblyTypeName: VisualsMenu, Assembly-CSharp
+          m_MethodName: ChangeResolution
+          m_Mode: 0
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  quality:
+    button: {fileID: 2282850572443896166}
+    dropdown: {fileID: 2282850573127609970}
+    options:
+    - Low
+    - Medium
+    - High
+    - Ultra
+    - Custom
+    trigger:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 2282850572077475555}
+          m_TargetAssemblyTypeName: VisualsMenu, Assembly-CSharp
+          m_MethodName: ChangeQuality
+          m_Mode: 0
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  antiAliasing:
+    button: {fileID: 2111058880599755904}
+    dropdown: {fileID: 2959876871427851334}
+    options:
+    - Disabled
+    - 2x
+    - 4x
+    - 8x
+    trigger:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 2282850572077475555}
+          m_TargetAssemblyTypeName: VisualsMenu, Assembly-CSharp
+          m_MethodName: ChangeAntiAliasing
+          m_Mode: 0
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  shadowDistance:
+    button: {fileID: 3510394672316867944}
+    dropdown: {fileID: 5658953355866043481}
+    options:
+    - Low
+    - Medium
+    - High
+    - Ultra
+    trigger:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 2282850572077475555}
+          m_TargetAssemblyTypeName: VisualsMenu, Assembly-CSharp
+          m_MethodName: ChangeShadowDistance
+          m_Mode: 0
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  shadowResolution:
+    button: {fileID: 7892551937510930007}
+    dropdown: {fileID: 1405030191311277607}
+    options:
+    - Low
+    - Medium
+    - High
+    - Ultra
+    trigger:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 2282850572077475555}
+          m_TargetAssemblyTypeName: VisualsMenu, Assembly-CSharp
+          m_MethodName: ChangeShadowResolution
+          m_Mode: 0
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  shadowCascade:
+    button: {fileID: 3363726088742737643}
+    dropdown: {fileID: 4508944514419917490}
+    options:
+    - Low
+    - Medium
+    - High
+    - Ultra
+    trigger:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 2282850572077475555}
+          m_TargetAssemblyTypeName: VisualsMenu, Assembly-CSharp
+          m_MethodName: ChangeShadowCascade
+          m_Mode: 0
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  textureResolution:
+    button: {fileID: 4169310669316935882}
+    dropdown: {fileID: 2168440052988964752}
+    options:
+    - Low
+    - Medium
+    - High
+    - Ultra
+    trigger:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 2282850572077475555}
+          m_TargetAssemblyTypeName: VisualsMenu, Assembly-CSharp
+          m_MethodName: ChangeTextureResolution
+          m_Mode: 0
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
   applier: {fileID: 11400000, guid: f5f42efb3829ea64d89c7096c2eecf23, type: 2}
   qualityName:
   - Low
