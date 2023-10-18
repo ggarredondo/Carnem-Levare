@@ -4601,44 +4601,6 @@ MonoBehaviour:
             m_BoolArgument: 0
           m_CallState: 2
   applier: {fileID: 11400000, guid: f5f42efb3829ea64d89c7096c2eecf23, type: 2}
-  qualityName:
-  - Low
-  - Medium
-  - High
-  - Ultra
-  - Custom
-  resolutions:
-  - 3840x2160
-  - 2560x1440
-  - 1920x1080
-  - 1280x720
-  - 960x540
-  - 640x480
-  antiAliasingOptions:
-  - Disabled
-  - 2x
-  - 4x
-  - 8x
-  shadowDistanceOptions:
-  - Low
-  - Medium
-  - High
-  - Ultra
-  shadowResolutionOptions:
-  - Low
-  - Medium
-  - High
-  - Ultra
-  shadowCascadeOptions:
-  - Low
-  - Medium
-  - High
-  - Ultra
-  textureResolutionOptions:
-  - Low
-  - Medium
-  - High
-  - Ultra
 --- !u!114 &6389757871880623859
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7562,11 +7524,78 @@ MonoBehaviour:
     Item2: {fileID: 2282850573228062351}
   - Item1: {fileID: 2282850573006242747}
     Item2: {fileID: 2282850573503857619}
-  masterSlider: {fileID: 2282850571819006792}
-  musicSlider: {fileID: 2282850573228062351}
-  sfxSlider: {fileID: 2282850573503857619}
-  muteToggle: {fileID: 2282850573482993353}
-  muteButton: {fileID: 2282850573386834171}
+  master:
+    button: {fileID: 2282850573109895454}
+    slider: {fileID: 2282850571819006792}
+    trigger:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 2282850572661005058}
+          m_TargetAssemblyTypeName: SoundMenu, Assembly-CSharp
+          m_MethodName: ChangeMasterVolume
+          m_Mode: 0
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  music:
+    button: {fileID: 2282850572997985069}
+    slider: {fileID: 2282850573228062351}
+    trigger:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 2282850572661005058}
+          m_TargetAssemblyTypeName: SoundMenu, Assembly-CSharp
+          m_MethodName: ChangeMusicVolume
+          m_Mode: 0
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  sfx:
+    button: {fileID: 2282850573006242747}
+    slider: {fileID: 2282850573503857619}
+    trigger:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 2282850572661005058}
+          m_TargetAssemblyTypeName: SoundMenu, Assembly-CSharp
+          m_MethodName: ChangeSfxVolume
+          m_Mode: 0
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  mute:
+    button: {fileID: 2282850573386834171}
+    toggle: {fileID: 2282850573482993353}
+    trigger:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 2282850572661005058}
+          m_TargetAssemblyTypeName: SoundMenu, Assembly-CSharp
+          m_MethodName: Mute
+          m_Mode: 0
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1 &2282850572742078061
 GameObject:
   m_ObjectHideFlags: 0
@@ -9294,8 +9323,24 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   firstSelected: {fileID: 2282850572082208088}
   transitions: []
-  rumbleToggle: {fileID: 8485041640433281376}
-  rumbleButton: {fileID: 6490927357041565425}
+  rumble:
+    button: {fileID: 6490927357041565425}
+    toggle: {fileID: 8485041640433281376}
+    trigger:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 2282850573080158783}
+          m_TargetAssemblyTypeName: ControlsMenu, Assembly-CSharp
+          m_MethodName: Rumble
+          m_Mode: 0
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
   remapButtons:
   - {fileID: 2282850571992578899}
   - {fileID: 2282850573222410206}

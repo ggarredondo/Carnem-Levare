@@ -5,8 +5,7 @@ using UnityEngine.UI;
 public class ControlsMenu : AbstractMenu
 { 
     [Header("UI Elements")]
-    [SerializeField] private Toggle rumbleToggle;
-    [SerializeField] private Button rumbleButton;
+    [SerializeField] private MyToggle rumble;
     [SerializeField] private List<Button> remapButtons;
     [SerializeField] private PopUpMenu popUpMenu;
 
@@ -17,11 +16,10 @@ public class ControlsMenu : AbstractMenu
 
     protected override void Configure()
     {
-        rumbleToggle.isOn = DataSaver.Options.rumble;
+        rumble.Value = DataSaver.Options.rumble;
         inputRemapping = new();
         remapButtons.ForEach(button => button.onClick.AddListener(delegate { Remapping(button.name); } ));
-        rumbleToggle.onValueChanged.AddListener(Rumble);
-        rumbleButton.onClick.AddListener(() => rumbleToggle.isOn = !rumbleToggle.isOn);
+        rumble.AddListener();
     }
 
     public void Rumble(bool value)

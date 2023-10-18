@@ -4,25 +4,22 @@ using UnityEngine.UI;
 public class SoundMenu : AbstractMenu
 {
     [Header("UI Elements")]
-    [SerializeField] private Slider masterSlider;
-    [SerializeField] private Slider musicSlider;
-    [SerializeField] private Slider sfxSlider;
-    [SerializeField] private Toggle muteToggle;
-    [SerializeField] private Button muteButton;
+    [SerializeField] private MySlider master;
+    [SerializeField] private MySlider music;
+    [SerializeField] private MySlider sfx;
+    [SerializeField] private MyToggle mute;
 
     protected override void Configure()
     {
-        masterSlider.onValueChanged.AddListener(ChangeMasterVolume);
-        musicSlider.onValueChanged.AddListener(ChangeMusicVolume);
-        sfxSlider.onValueChanged.AddListener(ChangeSfxVolume);
-        muteToggle.onValueChanged.AddListener(Mute);
+        master.AddListener();
+        music.AddListener();
+        sfx.AddListener();
+        mute.AddListener();
 
-        muteButton.onClick.AddListener(() => muteToggle.isOn = !muteToggle.isOn);
-
-        masterSlider.value = DataSaver.Options.masterVolume;
-        musicSlider.value = DataSaver.Options.musicVolume;
-        sfxSlider.value = DataSaver.Options.sfxVolume;
-        muteToggle.isOn = DataSaver.Options.mute;
+        master.Value = DataSaver.Options.masterVolume;
+        music.Value = DataSaver.Options.musicVolume;
+        sfx.Value = DataSaver.Options.sfxVolume;
+        mute.Value = DataSaver.Options.mute;
     }
 
     public void ChangeMasterVolume(float value)

@@ -5,9 +5,8 @@ using UnityEngine;
 using System.Collections.Generic;
 
 [System.Serializable]
-public class MyDropdown : ISelectable
+public class MyDropdown : MySelectable
 {
-    [SerializeField] private Button button;
     [SerializeField] private TMP_Dropdown dropdown;
     [SerializeField] private List<string> options;
     [SerializeField] private UnityEvent<int> trigger;
@@ -21,20 +20,29 @@ public class MyDropdown : ISelectable
 
     public string GetText(int value) { return dropdown.options[value].text; }
 
-    public void Initialize()
+    public override void Initialize()
     {
         dropdown.ClearOptions();
         dropdown.AddOptions(options);
         AddListener();
     }
 
-    public void AddListener()
+    public override void AddListener()
     {
         dropdown.onValueChanged.AddListener((int value) => trigger.Invoke(value));
     }
 
-    public void RemoveListener()
+    public override void RemoveListener()
     {
         dropdown.onValueChanged.RemoveAllListeners();
+    }
+
+    public override void ChangeColor(Color32 color)
+    {
+        base.ChangeColor(color);
+
+        ColorBlock cb_dropdown = dropdown.colors;
+        cb_dropdown.normalColor = color;
+        dropdown.colors = cb_dropdown;
     }
 }

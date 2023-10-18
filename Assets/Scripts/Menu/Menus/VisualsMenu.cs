@@ -24,16 +24,16 @@ public class VisualsMenu : AbstractMenu
     [SerializeField] private VisualOptionsApplier applier;
 
 
-    private readonly List<ISelectable> elements = new();
+    private readonly List<MySelectable> elements = new();
 
     private void ObtainElementsByReflection()
     {
         FieldInfo[] fields = GetType().GetFields(BindingFlags.Instance | BindingFlags.NonPublic);
         foreach (FieldInfo field in fields)
         {
-            if (typeof(ISelectable).IsAssignableFrom(field.FieldType))
+            if (typeof(MySelectable).IsAssignableFrom(field.FieldType))
             {
-                elements.Add((ISelectable)field.GetValue(this));
+                elements.Add((MySelectable)field.GetValue(this));
             }
         }
     }
@@ -140,15 +140,17 @@ public class VisualsMenu : AbstractMenu
     {
         if (castShadows.Value)
         {
-            ChangeColorTransitions(3, new Color32(255, 255, 255, 255));
-            ChangeColorTransitions(5, new Color32(255, 255, 255, 255));
-            ChangeColorTransitions(6, new Color32(255, 255, 255, 255));
+            softShadows.ChangeColor(new Color32(255, 255, 255, 255));
+            shadowCascade.ChangeColor(new Color32(255, 255, 255, 255));
+            shadowDistance.ChangeColor(new Color32(255, 255, 255, 255));
+            shadowResolution.ChangeColor(new Color32(255, 255, 255, 255));  
         }
         else
         {
-            ChangeColorTransitions(3, new Color32(255, 255, 255, 100));
-            ChangeColorTransitions(5, new Color32(255, 255, 255, 100));
-            ChangeColorTransitions(6, new Color32(255, 255, 255, 100));
+            softShadows.ChangeColor(new Color32(255, 255, 255, 100));
+            shadowCascade.ChangeColor(new Color32(255, 255, 255, 100));
+            shadowDistance.ChangeColor(new Color32(255, 255, 255, 100));
+            shadowResolution.ChangeColor(new Color32(255, 255, 255, 100));
         }
     }
 

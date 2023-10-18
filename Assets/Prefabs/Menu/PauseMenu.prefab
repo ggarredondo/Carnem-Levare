@@ -1485,6 +1485,11 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: ChangeSibling
       objectReference: {fileID: 0}
+    - target: {fileID: 2282850573080158783, guid: a5e1a11c92d391c419e235c5ddd96acf,
+        type: 3}
+      propertyPath: popUpMenu
+      value: 
+      objectReference: {fileID: 2506615481664807990}
     - target: {fileID: 2282850573582309236, guid: a5e1a11c92d391c419e235c5ddd96acf,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target

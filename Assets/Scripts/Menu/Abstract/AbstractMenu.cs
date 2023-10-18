@@ -7,20 +7,11 @@ using TMPro;
 
 public abstract class AbstractMenu : MonoBehaviour
 {
-    [System.Serializable]
-    protected struct ToggleData
-    {
-        public Button button;
-        public Toggle toggle;
-    }
-
     private TMP_Dropdown actualDropDown;
 
     [Header("Requirements")]
     [SerializeField] protected GameObject firstSelected;
     [SerializeField] protected List<Tuple<Button, Selectable>> transitions;
-
-    public TMP_Dropdown ActualDropDown { get => actualDropDown; set => actualDropDown = value; }
 
     protected virtual void OnDisable()
     {
@@ -64,9 +55,9 @@ public abstract class AbstractMenu : MonoBehaviour
             canReturn = true;
         }
         
-        if (ActualDropDown != null)
+        if (actualDropDown != null)
         {
-            ActualDropDown.Hide();
+            actualDropDown.Hide();
             GameManager.Audio.Play("SelectButton");
             canReturn = true;
         }
