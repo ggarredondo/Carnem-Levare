@@ -30,11 +30,11 @@ public abstract class AbstractMenu : MonoBehaviour
 
     protected virtual void OnDisable()
     {
-        if(EventSystem.current != null && GameManager.Input.ControlSchemeIndex == 0)
+        if(EventSystem.current != null && (GameManager.Input.ControlSchemeIndex == 0 || GameManager.Input.PreviousCustomControlScheme == InputDevice.KEYBOARD))
             firstSelected = EventSystem.current.currentSelectedGameObject;
     }
 
-    public void Initialized()
+    public void Initialize()
     {
         if (GameManager.Input.ControlSchemeIndex == 0 || GameManager.Input.PreviousCustomControlScheme == InputDevice.KEYBOARD)
             EventSystem.current.SetSelectedGameObject(firstSelected);
@@ -45,13 +45,9 @@ public abstract class AbstractMenu : MonoBehaviour
     private void Start()
     {
         ObtainByReflection();
-        SetTransitions();
-        Configure();
-    }
+        elements.ForEach(element => element.Initialize());
 
-    private void SetTransitions()
-    {
-        newTransitions.ForEach(element => element.SetTransition());
+        Configure();
     }
 
     public bool HasTransition()

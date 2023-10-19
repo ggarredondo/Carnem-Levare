@@ -4313,22 +4313,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   firstSelected: {fileID: 2282850572930779257}
-  transitions:
-  - Item1: {fileID: 2282850572523472108}
-    Item2: {fileID: 2282850573777950915}
-  - Item1: {fileID: 2282850572443896166}
-    Item2: {fileID: 2282850573127609970}
-  - Item1: {fileID: 2111058880599755904}
-    Item2: {fileID: 2959876871427851334}
-  - Item1: {fileID: 3510394672316867944}
-    Item2: {fileID: 5658953355866043481}
-  - Item1: {fileID: 4169310669316935882}
-    Item2: {fileID: 2168440052988964752}
-  - Item1: {fileID: 7892551937510930007}
-    Item2: {fileID: 1405030191311277607}
-  - Item1: {fileID: 3363726088742737643}
-    Item2: {fileID: 4508944514419917490}
   fullscreen:
+    dependency: {fileID: 0}
     button: {fileID: 2282850571869247810}
     toggle: {fileID: 2282850572748322414}
     trigger:
@@ -4347,6 +4333,7 @@ MonoBehaviour:
             m_BoolArgument: 0
           m_CallState: 2
   vsync:
+    dependency: {fileID: 0}
     button: {fileID: 2282850572930779206}
     toggle: {fileID: 2282850572990292444}
     trigger:
@@ -4365,6 +4352,7 @@ MonoBehaviour:
             m_BoolArgument: 0
           m_CallState: 2
   castShadows:
+    dependency: {fileID: 0}
     button: {fileID: 2007100879232891058}
     toggle: {fileID: 5086416305340082568}
     trigger:
@@ -4383,6 +4371,7 @@ MonoBehaviour:
             m_BoolArgument: 0
           m_CallState: 2
   softShadows:
+    dependency: {fileID: 5086416305340082568}
     button: {fileID: 442605491518470019}
     toggle: {fileID: 7533199678482469658}
     trigger:
@@ -4401,6 +4390,7 @@ MonoBehaviour:
             m_BoolArgument: 0
           m_CallState: 2
   anisotropic:
+    dependency: {fileID: 0}
     button: {fileID: 4369101656116545812}
     toggle: {fileID: 6720957046165582464}
     trigger:
@@ -4419,6 +4409,7 @@ MonoBehaviour:
             m_BoolArgument: 0
           m_CallState: 2
   softParticles:
+    dependency: {fileID: 0}
     button: {fileID: 2612386783684959503}
     toggle: {fileID: 1774165037946262960}
     trigger:
@@ -4437,6 +4428,7 @@ MonoBehaviour:
             m_BoolArgument: 0
           m_CallState: 2
   resolution:
+    dependency: {fileID: 0}
     button: {fileID: 2282850572523472108}
     dropdown: {fileID: 2282850573777950915}
     options:
@@ -4462,6 +4454,7 @@ MonoBehaviour:
             m_BoolArgument: 0
           m_CallState: 2
   quality:
+    dependency: {fileID: 0}
     button: {fileID: 2282850572443896166}
     dropdown: {fileID: 2282850573127609970}
     options:
@@ -4486,6 +4479,7 @@ MonoBehaviour:
             m_BoolArgument: 0
           m_CallState: 2
   antiAliasing:
+    dependency: {fileID: 0}
     button: {fileID: 2111058880599755904}
     dropdown: {fileID: 2959876871427851334}
     options:
@@ -4509,6 +4503,7 @@ MonoBehaviour:
             m_BoolArgument: 0
           m_CallState: 2
   shadowDistance:
+    dependency: {fileID: 5086416305340082568}
     button: {fileID: 3510394672316867944}
     dropdown: {fileID: 5658953355866043481}
     options:
@@ -4532,6 +4527,7 @@ MonoBehaviour:
             m_BoolArgument: 0
           m_CallState: 2
   shadowResolution:
+    dependency: {fileID: 5086416305340082568}
     button: {fileID: 7892551937510930007}
     dropdown: {fileID: 1405030191311277607}
     options:
@@ -4555,6 +4551,7 @@ MonoBehaviour:
             m_BoolArgument: 0
           m_CallState: 2
   shadowCascade:
+    dependency: {fileID: 5086416305340082568}
     button: {fileID: 3363726088742737643}
     dropdown: {fileID: 4508944514419917490}
     options:
@@ -4578,6 +4575,7 @@ MonoBehaviour:
             m_BoolArgument: 0
           m_CallState: 2
   textureResolution:
+    dependency: {fileID: 0}
     button: {fileID: 4169310669316935882}
     dropdown: {fileID: 2168440052988964752}
     options:
@@ -7517,14 +7515,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   firstSelected: {fileID: 2282850573386834170}
-  transitions:
-  - Item1: {fileID: 2282850573109895454}
-    Item2: {fileID: 2282850571819006792}
-  - Item1: {fileID: 2282850572997985069}
-    Item2: {fileID: 2282850573228062351}
-  - Item1: {fileID: 2282850573006242747}
-    Item2: {fileID: 2282850573503857619}
   master:
+    dependency: {fileID: 0}
     button: {fileID: 2282850573109895454}
     slider: {fileID: 2282850571819006792}
     trigger:
@@ -7543,6 +7535,7 @@ MonoBehaviour:
             m_BoolArgument: 0
           m_CallState: 2
   music:
+    dependency: {fileID: 0}
     button: {fileID: 2282850572997985069}
     slider: {fileID: 2282850573228062351}
     trigger:
@@ -7561,6 +7554,7 @@ MonoBehaviour:
             m_BoolArgument: 0
           m_CallState: 2
   sfx:
+    dependency: {fileID: 0}
     button: {fileID: 2282850573006242747}
     slider: {fileID: 2282850573503857619}
     trigger:
@@ -7579,6 +7573,7 @@ MonoBehaviour:
             m_BoolArgument: 0
           m_CallState: 2
   mute:
+    dependency: {fileID: 0}
     button: {fileID: 2282850573386834171}
     toggle: {fileID: 2282850573482993353}
     trigger:
@@ -8271,7 +8266,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   firstSelected: {fileID: 4024497241463201462}
-  transitions: []
 --- !u!1 &2282850572927901378
 GameObject:
   m_ObjectHideFlags: 0
@@ -9322,8 +9316,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   firstSelected: {fileID: 2282850572082208088}
-  transitions: []
   rumble:
+    dependency: {fileID: 0}
     button: {fileID: 6490927357041565425}
     toggle: {fileID: 8485041640433281376}
     trigger:

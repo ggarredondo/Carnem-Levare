@@ -12,6 +12,9 @@ public class MyDropdown : MySelectable, ITransition
     [SerializeField] private List<string> options;
     [SerializeField] private UnityEvent<int> trigger;
 
+    private UnityAction<int> changeValue;
+    private UnityAction transition;
+
     public int Value { get => dropdown.value; set => dropdown.value = value; }
 
     public void SetValue(string value)
@@ -21,21 +24,57 @@ public class MyDropdown : MySelectable, ITransition
 
     public string GetText(int value) { return dropdown.options[value].text; }
 
+    private void SetActions()
+    {
+        changeValue = (int value) => trigger.Invoke(value);
+        transition = () =>
+        {
+            EventSystem.current.SetSelectedGameObject(dropdown.gameObject);
+            GameManager.Audio.Play("PressButton");
+        };
+    }
+
     public override void Initialize()
     {
         dropdown.ClearOptions();
         dropdown.AddOptions(options);
+        SetActions();
+        base.Initialize();
         AddListener();
     }
 
     public override void AddListener()
     {
-        dropdown.onValueChanged.AddListener((int value) => trigger.Invoke(value));
+        dropdown.onValueChanged.AddListener(changeValue);
     }
 
     public override void RemoveListener()
     {
-        dropdown.onValueChanged.RemoveAllListeners();
+        dropdown.onValueChanged.RemoveListener(changeValue);
+    }
+
+    public override void SetButtonAction()
+    {
+        button.onClick.AddListener(transition);
+    }
+
+    public override void SetDependency()
+    {
+        dependency.onValueChanged.AddListener((bool value) =>
+        {
+            if (value)
+            {
+                ChangeColor(ACTIVE_COLOR);
+                button.onClick.AddListener(transition);
+                dropdown.interactable = true;
+            }
+            else
+            {
+                ChangeColor(INACTIVE_COLOR);
+                button.onClick.RemoveListener(transition);
+                dropdown.interactable = false;
+            }
+        });
     }
 
     public override void ChangeColor(Color32 color)
@@ -45,15 +84,6 @@ public class MyDropdown : MySelectable, ITransition
         ColorBlock cb_dropdown = dropdown.colors;
         cb_dropdown.normalColor = color;
         dropdown.colors = cb_dropdown;
-    }
-
-    public void SetTransition()
-    {
-        button.onClick.AddListener(() =>
-        {
-            EventSystem.current.SetSelectedGameObject(dropdown.gameObject);
-            GameManager.Audio.Play("PressButton");
-        });
     }
 
     public void Return()

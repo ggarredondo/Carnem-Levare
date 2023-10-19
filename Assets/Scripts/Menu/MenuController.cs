@@ -97,7 +97,7 @@ public class MenuController : MonoBehaviour
     private void ApplyChanges()
     {
         DisableMenus();
-        tree.GetSelected().ForEach(id => { menuDictionary[id].GetComponent<AbstractMenu>()?.Initialized(); menuDictionary[id].SetActive(true); });
+        tree.GetSelected().ForEach(id => { menuDictionary[id].GetComponent<AbstractMenu>()?.Initialize(); menuDictionary[id].SetActive(true); });
     }
 
     public void DisableMenus()

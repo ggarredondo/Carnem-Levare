@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.UI;
 
 public class SoundMenu : AbstractMenu
 {
@@ -11,11 +10,6 @@ public class SoundMenu : AbstractMenu
 
     protected override void Configure()
     {
-        master.AddListener();
-        music.AddListener();
-        sfx.AddListener();
-        mute.AddListener();
-
         master.Value = DataSaver.Options.masterVolume;
         music.Value = DataSaver.Options.musicVolume;
         sfx.Value = DataSaver.Options.sfxVolume;

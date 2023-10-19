@@ -1,5 +1,3 @@
-using System.Collections.Generic;
-using System.Reflection;
 using UnityEngine;
 
 public class VisualsMenu : AbstractMenu
@@ -26,7 +24,6 @@ public class VisualsMenu : AbstractMenu
     protected override void Configure()
     {
         applier.Initialize();
-        elements.ForEach(element => element.Initialize());
 
         fullscreen.Value = DataSaver.Options.fullscreen;
         vsync.Value = DataSaver.Options.vSync;
@@ -101,7 +98,7 @@ public class VisualsMenu : AbstractMenu
         if (value == applier.CustomIndex) CustomUIUpdate();
         else UIUpdate(value);
 
-        CheckColor();
+        //CheckColor();
 
         elements.ForEach(element => element.AddListener());
     }
@@ -126,7 +123,7 @@ public class VisualsMenu : AbstractMenu
             softShadows.ChangeColor(new Color32(255, 255, 255, 255));
             shadowCascade.ChangeColor(new Color32(255, 255, 255, 255));
             shadowDistance.ChangeColor(new Color32(255, 255, 255, 255));
-            shadowResolution.ChangeColor(new Color32(255, 255, 255, 255));  
+            shadowResolution.ChangeColor(new Color32(255, 255, 255, 255));
         }
         else
         {
@@ -191,7 +188,7 @@ public class VisualsMenu : AbstractMenu
         applier.CustomCastShadows = value;
         ChangeToCustom();
         applier.ApplyChanges();
-        CheckColor();
+        //CheckColor();
     }
 
     public void ChangeSoftShadows(bool value)

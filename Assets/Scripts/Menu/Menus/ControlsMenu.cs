@@ -19,7 +19,6 @@ public class ControlsMenu : AbstractMenu
         rumble.Value = DataSaver.Options.rumble;
         inputRemapping = new();
         remapButtons.ForEach(button => button.onClick.AddListener(delegate { Remapping(button.name); } ));
-        rumble.AddListener();
     }
 
     public void Rumble(bool value)
