@@ -24,12 +24,8 @@ public class ScrollbarController : MonoBehaviour
 
     private void Awake()
     {
-        direction = new Vector2(0, 0);
-        objectRect = GetWorldRect(scanner);
-        boundsRect = GetWorldRect(scanner);
-        contentRect = GetWorldRect(content);
-        maxDistance = Mathf.Abs(boundsRect.yMin - contentRect.yMin);
         inputReader.ScrollbarEvent += UpdateDirection;
+        UpdateRects();
     }
 
     private void OnDestroy()
@@ -37,54 +33,82 @@ public class ScrollbarController : MonoBehaviour
         inputReader.ScrollbarEvent -= UpdateDirection;
     }
 
-    private void UpdateDirection(Vector2 direction)
+    private void UpdateDirection(Vector2 dir)
     {
-        this.direction = direction;
+        direction = dir;
     }
 
-    private void MoveScrollbar(Vector2 direction, float sensitivity)
+    private void MoveScrollbar(Vector2 dir, float sensitivity)
     {
-        float newPosition = scrollRect.verticalNormalizedPosition + direction.y * sensitivity * Time.unscaledDeltaTime;
-        newPosition = Mathf.Clamp(newPosition, clampMinValue, clampMaxValue);
+        float newPosition = scrollRect.verticalNormalizedPosition + dir.y * sensitivity * Time.unscaledDeltaTime;
+        scrollRect.verticalNormalizedPosition = Mathf.Clamp(newPosition, clampMinValue, clampMaxValue);
+    }
 
-        scrollRect.verticalNormalizedPosition = newPosition;
+    private void UpdateRects()
+    {
+        Rect newBoundsRect = GetWorldRect(scanner);
+        contentRect = GetWorldRect(content);
+
+        if(currentSelected != null)
+            objectRect = GetWorldRect(currentSelected.GetComponent<RectTransform>());
+
+        if (newBoundsRect != boundsRect)
+        {
+            maxDistance = Mathf.Abs(newBoundsRect.yMin - contentRect.yMin);
+            boundsRect = newBoundsRect;
+        }
     }
 
     private void AutomaticScrollbarMovement()
     {
-        GameObject currentSelected = EventSystem.current.currentSelectedGameObject;
+        GameObject selected = EventSystem.current.currentSelectedGameObject;
 
-        if (currentSelected != null)
+        if (selected == null) return;
+
+        if (IsObjectAncestorOf(parentRequired, selected, 5)) currentSelected = selected;
+
+        UpdateRects();
+
+        float distance = 0;
+
+        if (objectRect.yMin < boundsRect.yMin && scrollRect.verticalNormalizedPosition > 0 && direction == Vector2.zero)
         {
-            if (currentSelected.transform.parent == parentRequired.transform)
-                this.currentSelected = currentSelected;
-
-            if (this.currentSelected != null)
-            {
-                Rect boundsRect = GetWorldRect(scanner);
-                objectRect = GetWorldRect(this.currentSelected.GetComponent<RectTransform>());
-
-                if (boundsRect != this.boundsRect)
-                {
-                    maxDistance *= boundsRect.height / this.boundsRect.height;
-                    this.boundsRect = GetWorldRect(scanner);
-                }
-
-                if (objectRect.yMin < boundsRect.yMin && scrollRect.verticalNormalizedPosition > 0 && direction == new Vector2(0, 0))
-                {
-                    float distance = objectRect.yMin - boundsRect.yMin;
-                    distance /= maxDistance;
-                    MoveScrollbar(new Vector2(0, distance), automaticSensitivity);
-                }
-                else if (objectRect.yMax > boundsRect.yMax && scrollRect.verticalNormalizedPosition < 1 && direction == new Vector2(0, 0))
-                {
-                    float distance = objectRect.yMax - boundsRect.yMax;
-                    distance /= maxDistance;
-                    MoveScrollbar(new Vector2(0, distance), automaticSensitivity);
-                }
-                else MoveScrollbar(direction, joystickSensitivity);
-            }
+            distance = objectRect.yMin - boundsRect.yMin;
         }
+        else if (objectRect.yMax > boundsRect.yMax && scrollRect.verticalNormalizedPosition < 1 && direction == Vector2.zero)
+        {
+            distance = objectRect.yMax - boundsRect.yMax;
+        }
+
+        if (distance != 0)
+        {
+            distance /= maxDistance;
+            MoveScrollbar(new Vector2(0, distance), automaticSensitivity);
+        }
+        else
+        {
+            MoveScrollbar(direction, joystickSensitivity);
+        }
+    }
+
+    bool IsObjectAncestorOf(GameObject potentialAncestor, GameObject child, int maxDepth)
+    {
+        if (maxDepth < 0 || child == null)
+        {
+            return false;
+        }
+
+        if (child.transform.parent == potentialAncestor.transform)
+        {
+            return true;
+        }
+
+        if (child.transform.parent == null)
+        {
+            return false;
+        }
+
+        return IsObjectAncestorOf(potentialAncestor, child.transform.parent.gameObject, maxDepth - 1);
     }
 
     private Rect GetWorldRect(RectTransform rectTransform)

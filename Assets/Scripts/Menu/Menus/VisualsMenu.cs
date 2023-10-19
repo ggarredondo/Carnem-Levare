@@ -98,8 +98,6 @@ public class VisualsMenu : AbstractMenu
         if (value == applier.CustomIndex) CustomUIUpdate();
         else UIUpdate(value);
 
-        //CheckColor();
-
         elements.ForEach(element => element.AddListener());
     }
 
@@ -114,24 +112,6 @@ public class VisualsMenu : AbstractMenu
             quality.AddListener();
         }
         else GameManager.Audio.Play("PressButton");
-    }
-
-    private void CheckColor()
-    {
-        if (castShadows.Value)
-        {
-            softShadows.ChangeColor(new Color32(255, 255, 255, 255));
-            shadowCascade.ChangeColor(new Color32(255, 255, 255, 255));
-            shadowDistance.ChangeColor(new Color32(255, 255, 255, 255));
-            shadowResolution.ChangeColor(new Color32(255, 255, 255, 255));
-        }
-        else
-        {
-            softShadows.ChangeColor(new Color32(255, 255, 255, 100));
-            shadowCascade.ChangeColor(new Color32(255, 255, 255, 100));
-            shadowDistance.ChangeColor(new Color32(255, 255, 255, 100));
-            shadowResolution.ChangeColor(new Color32(255, 255, 255, 100));
-        }
     }
 
     public void ChangeAntiAliasing(int value)
@@ -188,7 +168,6 @@ public class VisualsMenu : AbstractMenu
         applier.CustomCastShadows = value;
         ChangeToCustom();
         applier.ApplyChanges();
-        //CheckColor();
     }
 
     public void ChangeSoftShadows(bool value)

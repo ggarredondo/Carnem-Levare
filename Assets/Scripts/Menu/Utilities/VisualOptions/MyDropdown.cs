@@ -62,6 +62,7 @@ public class MyDropdown : MySelectable, ITransition
     {
         dependency.onValueChanged.AddListener((bool value) =>
         {
+            Debug.Log("HOLA");
             if (value)
             {
                 ChangeColor(ACTIVE_COLOR);
