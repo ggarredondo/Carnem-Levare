@@ -23,25 +23,8 @@ public class VisualsMenu : AbstractMenu
     [Header("Visual Config")]
     [SerializeField] private VisualOptionsApplier applier;
 
-
-    private readonly List<MySelectable> elements = new();
-
-    private void ObtainElementsByReflection()
-    {
-        FieldInfo[] fields = GetType().GetFields(BindingFlags.Instance | BindingFlags.NonPublic);
-        foreach (FieldInfo field in fields)
-        {
-            if (typeof(MySelectable).IsAssignableFrom(field.FieldType))
-            {
-                elements.Add((MySelectable)field.GetValue(this));
-            }
-        }
-    }
-
     protected override void Configure()
     {
-        ObtainElementsByReflection();
-
         applier.Initialize();
         elements.ForEach(element => element.Initialize());
 

@@ -3,9 +3,10 @@ using TMPro;
 using UnityEngine.Events;
 using UnityEngine;
 using System.Collections.Generic;
+using UnityEngine.EventSystems;
 
 [System.Serializable]
-public class MyDropdown : MySelectable
+public class MyDropdown : MySelectable, ITransition
 {
     [SerializeField] private TMP_Dropdown dropdown;
     [SerializeField] private List<string> options;
@@ -44,5 +45,30 @@ public class MyDropdown : MySelectable
         ColorBlock cb_dropdown = dropdown.colors;
         cb_dropdown.normalColor = color;
         dropdown.colors = cb_dropdown;
+    }
+
+    public void SetTransition()
+    {
+        button.onClick.AddListener(() =>
+        {
+            EventSystem.current.SetSelectedGameObject(dropdown.gameObject);
+            GameManager.Audio.Play("PressButton");
+        });
+    }
+
+    public void Return()
+    {
+        EventSystem.current.SetSelectedGameObject(button.gameObject);
+    }
+
+    public bool HasTransition()
+    {
+        bool transition = EventSystem.current.currentSelectedGameObject == dropdown.gameObject;
+        bool isExpanded = dropdown.IsExpanded;
+
+        if (transition) Return();
+        if (isExpanded) { dropdown.Hide(); GameManager.Audio.Play("SelectButton"); }
+
+        return transition || isExpanded;
     }
 }

@@ -1,9 +1,10 @@
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 [System.Serializable]
-public class MySlider : MySelectable
+public class MySlider : MySelectable, ITransition
 {
     [SerializeField] private Slider slider;
     [SerializeField] private UnityEvent<float> trigger;
@@ -32,5 +33,28 @@ public class MySlider : MySelectable
         ColorBlock cb_slider = slider.colors;
         cb_slider.normalColor = color;
         slider.colors = cb_slider;
+    }
+
+    public void SetTransition()
+    {
+        button.onClick.AddListener(() =>
+        {
+            EventSystem.current.SetSelectedGameObject(slider.gameObject);
+            GameManager.Audio.Play("PressButton");
+        });
+    }
+
+    public void Return()
+    {
+        EventSystem.current.SetSelectedGameObject(button.gameObject);
+    }
+
+    public bool HasTransition()
+    {
+        bool transition = EventSystem.current.currentSelectedGameObject == slider.gameObject;
+
+        if (transition) Return();
+
+        return transition;
     }
 }

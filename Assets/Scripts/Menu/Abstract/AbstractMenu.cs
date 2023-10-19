@@ -1,17 +1,32 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
-using UnityEngine.UI;
-using System.Linq;
-using TMPro;
+using System.Reflection;
 
 public abstract class AbstractMenu : MonoBehaviour
 {
-    private TMP_Dropdown actualDropDown;
-
     [Header("Requirements")]
     [SerializeField] protected GameObject firstSelected;
-    [SerializeField] protected List<Tuple<Button, Selectable>> transitions;
+
+    protected List<ITransition> newTransitions = new();
+    protected readonly List<MySelectable> elements = new();
+
+    private void ObtainByReflection()
+    {
+        FieldInfo[] fields = GetType().GetFields(BindingFlags.Instance | BindingFlags.NonPublic);
+        foreach (FieldInfo field in fields)
+        {
+            if (typeof(MySelectable).IsAssignableFrom(field.FieldType))
+            {
+                elements.Add((MySelectable)field.GetValue(this));
+            }
+
+            if (typeof(ITransition).IsAssignableFrom(field.FieldType))
+            {
+                newTransitions.Add((ITransition)field.GetValue(this));
+            }
+        }
+    }
 
     protected virtual void OnDisable()
     {
@@ -29,76 +44,25 @@ public abstract class AbstractMenu : MonoBehaviour
 
     private void Start()
     {
+        ObtainByReflection();
         SetTransitions();
         Configure();
     }
 
     private void SetTransitions()
     {
-        transitions.ForEach(tuple => tuple.Item1.onClick.AddListener(() => 
-        { 
-            EventSystem.current.SetSelectedGameObject(tuple.Item2.gameObject);
-            GameManager.Audio.Play("PressButton");
-
-            if (tuple.Item2 is TMP_Dropdown item) actualDropDown = item;
-        }));
+        newTransitions.ForEach(element => element.SetTransition());
     }
 
-    public bool Return()
+    public bool HasTransition()
     {
-        bool canReturn = false;
+        foreach (ITransition transition in newTransitions)
+            if (transition.HasTransition()) return true;
 
-        if (HasTransition())
-        {
-            actualDropDown = null;
-            EventSystem.current.SetSelectedGameObject(transitions.FirstOrDefault(tuple => tuple.Item2.gameObject == EventSystem.current.currentSelectedGameObject).Item1.gameObject);
-            canReturn = true;
-        }
-        
-        if (actualDropDown != null)
-        {
-            actualDropDown.Hide();
-            GameManager.Audio.Play("SelectButton");
-            canReturn = true;
-        }
-
-        return canReturn;
-    }
-
-    protected bool HasTransition()
-    {
-        if (EventSystem.current.currentSelectedGameObject != null && transitions.Count > 0)
-            return transitions.Any(tuple => tuple.Item2.gameObject == EventSystem.current.currentSelectedGameObject);
-        else
-            return false;
+        return false;
     }
 
     protected abstract void Configure();
-
-    protected void ChangeColor(ref Button selectable, Color32 color)
-    {
-        ColorBlock cb = selectable.colors;
-        cb.normalColor = color;
-        selectable.colors = cb;
-    }
-
-    protected void ChangeColor(ref Toggle selectable, Color32 color)
-    {
-        ColorBlock cb = selectable.colors;
-        cb.normalColor = color;
-        selectable.colors = cb;
-    }
-
-    protected void ChangeColorTransitions(int index, Color32 color)
-    {
-        ColorBlock cb1 = transitions[index].Item1.colors;
-        cb1.normalColor = color;
-        transitions[index].Item1.colors = cb1;
-
-        ColorBlock cb2 = transitions[index].Item2.colors;
-        cb2.normalColor = color;
-        transitions[index].Item2.colors = cb2;
-    }
 
     protected void Slider(ref float save, float value, bool hasSound)
     {

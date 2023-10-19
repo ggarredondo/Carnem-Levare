@@ -91,10 +91,7 @@ public class MenuController : MonoBehaviour
     {
         AbstractMenu abs = menuDictionary[tree.CurrentId()].GetComponent<AbstractMenu>();
 
-        if(!abs.Return())
-        {
-            GoToParent();
-        } 
+        if(!abs.HasTransition()) GoToParent();
     }
 
     private void ApplyChanges()
