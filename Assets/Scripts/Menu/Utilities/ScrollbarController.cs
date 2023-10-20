@@ -120,6 +120,7 @@ public class ScrollbarController : MonoBehaviour
 
     private void Update()
     {
-        AutomaticScrollbarMovement();
+        if(GameManager.Input.NeedToSelect)
+            AutomaticScrollbarMovement();
     }
 }

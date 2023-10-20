@@ -30,13 +30,13 @@ public abstract class AbstractMenu : MonoBehaviour
 
     protected virtual void OnDisable()
     {
-        if(EventSystem.current != null && (GameManager.Input.ControlSchemeIndex == 0 || GameManager.Input.PreviousCustomControlScheme == InputDevice.KEYBOARD))
+        if(EventSystem.current != null && GameManager.Input.NeedToSelect)
             firstSelected = EventSystem.current.currentSelectedGameObject;
     }
 
     public void Initialize()
     {
-        if (GameManager.Input.ControlSchemeIndex == 0 || GameManager.Input.PreviousCustomControlScheme == InputDevice.KEYBOARD)
+        if (GameManager.Input.NeedToSelect)
             EventSystem.current.SetSelectedGameObject(firstSelected);
 
         GameManager.Input.SetSelectedGameObject(firstSelected);

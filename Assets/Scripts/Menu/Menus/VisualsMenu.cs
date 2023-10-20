@@ -75,6 +75,7 @@ public class VisualsMenu : AbstractMenu
         anisotropic.Value = applier.CustomAnisotropic;
         softParticles.Value = applier.CustomSoftParticles;
         castShadows.Value = applier.CustomCastShadows;
+        castShadows.Event.Invoke(applier.CustomCastShadows);
         softShadows.Value = applier.CustomSoftShadows;
     }
 
@@ -88,6 +89,7 @@ public class VisualsMenu : AbstractMenu
         anisotropic.Value = applier.GetQuality(value).anisotropic;
         softParticles.Value = applier.GetQuality(value).softParticles;
         castShadows.Value = applier.GetQuality(value).castShadows;
+        castShadows.Event.Invoke(applier.GetQuality(value).castShadows);
         softShadows.Value = applier.GetQuality(value).softShadows;
     }
 

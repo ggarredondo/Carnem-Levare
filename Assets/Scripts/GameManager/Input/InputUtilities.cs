@@ -60,6 +60,8 @@ public class InputUtilities
 
     public ref System.Action ControlsChangedEvent { get => ref inputDetection.controlsChangedEvent; }
 
+    public bool NeedToSelect { get => inputDetection.controlSchemeIndex == 0 || inputDetection.previousCustomControlScheme == InputDevice.KEYBOARD; }
+
     public void EnablePlayerInput(bool enable)
     {
         playerInput.enabled = enable;
