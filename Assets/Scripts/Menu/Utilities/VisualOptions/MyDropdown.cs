@@ -36,11 +36,16 @@ public class MyDropdown : MySelectable, ITransition
 
     public override void Initialize()
     {
-        dropdown.ClearOptions();
-        dropdown.AddOptions(options);
+        AddOptions();
         SetActions();
         base.Initialize();
         AddListener();
+    }
+
+    private void AddOptions()
+    {
+        dropdown.ClearOptions();
+        dropdown.AddOptions(options);
     }
 
     public override void AddListener()
@@ -62,6 +67,9 @@ public class MyDropdown : MySelectable, ITransition
     {
         dependency.onValueChanged.AddListener((bool value) =>
         {
+            if (inverseDependency)
+                value = !value;
+
             if (value)
             {
                 ChangeColor(ACTIVE_COLOR);

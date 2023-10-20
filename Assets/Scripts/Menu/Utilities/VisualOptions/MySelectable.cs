@@ -8,6 +8,7 @@ public abstract class MySelectable
     protected Color32 INACTIVE_COLOR = new(255, 255, 255, 100);
 
     [SerializeField] protected Toggle dependency;
+    [SerializeField] protected bool inverseDependency;
     [SerializeField] protected Button button;
 
     public virtual void Initialize()

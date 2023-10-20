@@ -12,6 +12,8 @@ public class MySlider : MySelectable, ITransition
     private UnityAction<float> changeValue;
     private UnityAction transition;
 
+    private CanvasGroup sliderCanvasGroup;
+
     public float Value { get => slider.value; set => slider.value = value; }
 
     private void SetActions()
@@ -26,6 +28,7 @@ public class MySlider : MySelectable, ITransition
 
     public override void Initialize()
     {
+        sliderCanvasGroup = slider.gameObject.GetComponent<CanvasGroup>();
         SetActions();
         base.Initialize();
         AddListener();
@@ -50,6 +53,9 @@ public class MySlider : MySelectable, ITransition
     {
         dependency.onValueChanged.AddListener((bool value) =>
         {
+            if(inverseDependency)
+                value = !value;
+
             if (value)
             {
                 ChangeColor(ACTIVE_COLOR);
@@ -69,9 +75,7 @@ public class MySlider : MySelectable, ITransition
     {
         base.ChangeColor(color);
 
-        ColorBlock cb_slider = slider.colors;
-        cb_slider.normalColor = color;
-        slider.colors = cb_slider;
+        sliderCanvasGroup.alpha = color.a / 255.0f;
     }
 
     public void Return()

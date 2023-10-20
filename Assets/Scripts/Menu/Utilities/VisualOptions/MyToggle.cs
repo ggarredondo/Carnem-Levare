@@ -11,6 +11,8 @@ public class MyToggle : MySelectable
     private UnityAction<bool> changeValue;
     private UnityAction click;
 
+    private CanvasGroup toggleCanvasGroup;
+
     public bool Value { get => toggle.isOn; set => toggle.isOn = value; }
     public Toggle.ToggleEvent Event { get => toggle.onValueChanged; }
 
@@ -22,6 +24,7 @@ public class MyToggle : MySelectable
 
     public override void Initialize()
     {
+        toggleCanvasGroup = toggle.gameObject.GetComponent<CanvasGroup>();
         SetActions();
         base.Initialize();
         AddListener();
@@ -46,6 +49,9 @@ public class MyToggle : MySelectable
     {
         dependency.onValueChanged.AddListener((bool value) =>
         {
+            if (inverseDependency)
+                value = !value;
+
             if (value)
             {
                 ChangeColor(ACTIVE_COLOR);
@@ -65,8 +71,6 @@ public class MyToggle : MySelectable
     {
         base.ChangeColor(color);
 
-        ColorBlock cb_toggle = toggle.colors;
-        cb_toggle.normalColor = color;
-        toggle.colors = cb_toggle;
+        toggleCanvasGroup.alpha = color.a / 255.0f;
     }
 }
