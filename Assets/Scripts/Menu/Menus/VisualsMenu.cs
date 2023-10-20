@@ -1,3 +1,4 @@
+using System.Reflection;
 using UnityEngine;
 
 public class VisualsMenu : AbstractMenu
@@ -54,33 +55,21 @@ public class VisualsMenu : AbstractMenu
 
     private void CustomDataUpdate()
     {
-        applier.CustomAntiAliasing = antiAliasing.Value;
-        applier.CustomShadowDistance = shadowDistance.Value;
-        applier.CustomShadowResolution = shadowResolution.Value;
-        applier.CustomShadowCascade = shadowCascade.Value;
-        applier.CustomTextureResolution = textureResolution.Value;
-        applier.CustomAnisotropic = anisotropic.Value;
-        applier.CustomSoftParticles = softParticles.Value;
-        applier.CustomCastShadows = castShadows.Value;
-        applier.CustomSoftShadows = softShadows.Value;
+        applier.GetCustomQuality().antiAliasing = antiAliasing.Value;
+        applier.GetCustomQuality().shadowDistance = shadowDistance.Value;
+        applier.GetCustomQuality().shadowResolution = shadowResolution.Value;
+        applier.GetCustomQuality().shadowCascade = shadowCascade.Value;
+        applier.GetCustomQuality().textureResolution = textureResolution.Value;
+        applier.GetCustomQuality().anisotropic = anisotropic.Value;
+        applier.GetCustomQuality().softParticles = softParticles.Value;
+        applier.GetCustomQuality().castShadows = castShadows.Value;
+        applier.GetCustomQuality().softShadows = softShadows.Value;
     }
 
-    private void CustomUIUpdate()
+    private void UIUpdateQualitySettings(int value)
     {
-        antiAliasing.Value = applier.CustomAntiAliasing;
-        shadowDistance.Value = applier.CustomShadowDistance;
-        shadowResolution.Value = applier.CustomShadowResolution;
-        shadowCascade.Value = applier.CustomShadowCascade;
-        textureResolution.Value = applier.CustomTextureResolution;
-        anisotropic.Value = applier.CustomAnisotropic;
-        softParticles.Value = applier.CustomSoftParticles;
-        castShadows.Value = applier.CustomCastShadows;
-        castShadows.Event.Invoke(applier.CustomCastShadows);
-        softShadows.Value = applier.CustomSoftShadows;
-    }
+        elements.ForEach(element => element.RemoveListener());
 
-    private void UIUpdate(int value)
-    {
         antiAliasing.Value = applier.GetQuality(value).antiAliasing;
         shadowDistance.Value = applier.GetQuality(value).shadowDistance;
         shadowResolution.Value = applier.GetQuality(value).shadowResolution;
@@ -91,14 +80,6 @@ public class VisualsMenu : AbstractMenu
         castShadows.Value = applier.GetQuality(value).castShadows;
         castShadows.Event.Invoke(applier.GetQuality(value).castShadows);
         softShadows.Value = applier.GetQuality(value).softShadows;
-    }
-
-    private void UIUpdateQualitySettings(int value)
-    {
-        elements.ForEach(element => element.RemoveListener());
-
-        if (value == applier.CustomIndex) CustomUIUpdate();
-        else UIUpdate(value);
 
         elements.ForEach(element => element.AddListener());
     }
@@ -118,63 +99,63 @@ public class VisualsMenu : AbstractMenu
 
     public void ChangeAntiAliasing(int value)
     {
-        applier.CustomAntiAliasing = value;
+        applier.GetCustomQuality().antiAliasing = value;
         ChangeToCustom();
         applier.ApplyChanges();
     }
 
     public void ChangeShadowDistance(int value)
     {
-        applier.CustomShadowDistance = value;
+        applier.GetCustomQuality().shadowDistance = value;
         ChangeToCustom();
         applier.ApplyChanges();
     }
 
     public void ChangeShadowResolution(int value)
     {
-        applier.CustomShadowResolution = value;
+        applier.GetCustomQuality().shadowResolution = value;
         ChangeToCustom();
         applier.ApplyChanges();
     }
 
     public void ChangeShadowCascade(int value)
     {
-        applier.CustomShadowCascade = value;
+        applier.GetCustomQuality().shadowCascade = value;
         ChangeToCustom();
         applier.ApplyChanges();
     }
 
     public void ChangeTextureResolution(int value)
     {
-        applier.CustomTextureResolution = value;
+        applier.GetCustomQuality().textureResolution = value;
         ChangeToCustom();
         applier.ApplyChanges();
     }
 
     public void ChangeAnisotropic(bool value)
     {
-        applier.CustomAnisotropic = value;
+        applier.GetCustomQuality().anisotropic = value;
         ChangeToCustom();
         applier.ApplyChanges();
     }
 
     public void ChangeSoftParticles(bool value)
     {
-        applier.CustomSoftParticles = value;
+        applier.GetCustomQuality().softParticles = value;
         ChangeToCustom();
         applier.ApplyChanges();
     }
 
     public void ChangeCastShadows(bool value)
     {
-        applier.CustomCastShadows = value;
+        applier.GetCustomQuality().castShadows = value;
         ChangeToCustom();
         applier.ApplyChanges();
     }
 
     public void ChangeSoftShadows(bool value)
     {
-        applier.CustomSoftShadows = value;
+        applier.GetCustomQuality().softShadows = value;
         ChangeToCustom();
         applier.ApplyChanges();
     }
