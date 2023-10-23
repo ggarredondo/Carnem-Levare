@@ -1,6 +1,6 @@
 using Cinemachine;
-using UnityEngine;
-using System.Collections;
+using System.Threading;
+using System.Threading.Tasks;
 
 public class CameraShake : CameraEffect
 {
@@ -10,6 +10,8 @@ public class CameraShake : CameraEffect
     public float defaultAmplitude;
     public NoiseSettings defaultNoiseSettings;
 
+    private CancellationTokenSource cancellationTokenSource;
+
     public override void Initialize(ref CinemachineVirtualCamera vcam)
     {
         this.vcam = vcam;
@@ -18,6 +20,8 @@ public class CameraShake : CameraEffect
         noiseTransposer.m_FrequencyGain = defaultFrequency;
         noiseTransposer.m_AmplitudeGain = defaultAmplitude;
         noiseTransposer.m_NoiseProfile = defaultNoiseSettings;
+
+        cancellationTokenSource = new();
     }
 
     public override void UpdateCondition(ref Player player, ref Enemy enemy)
@@ -27,65 +31,86 @@ public class CameraShake : CameraEffect
         player.StateMachine.StaggerState.OnEnterHitbox += (in Hitbox hitbox) => StaggerShake(hitbox);
         player.StateMachine.KOState.OnEnterHitbox += (in Hitbox hitbox) => KOShake(hitbox);
 
+        player.StateMachine.HurtState.OnExit += Cancel;
+        player.StateMachine.BlockedState.OnExit += Cancel;
+        player.StateMachine.StaggerState.OnExit += Cancel;
+        player.StateMachine.KOState.OnExit += Cancel;
+        player.StateMachine.MoveState.OnExit += Cancel;
+
         enemy.StateMachine.HurtState.OnEnterHitbox += (in Hitbox hitbox) => Shake(hitbox);
         enemy.StateMachine.BlockedState.OnEnterHitbox += (in Hitbox hitbox) => BlockingShake(hitbox);
         enemy.StateMachine.StaggerState.OnEnterHitbox += (in Hitbox hitbox) => StaggerShake(hitbox);
         enemy.StateMachine.KOState.OnEnterHitbox += (in Hitbox hitbox) => KOShake(hitbox);
     }
 
+    private void Cancel()
+    {
+        if (cancellationTokenSource != null)
+        {
+            cancellationTokenSource.Cancel();
+        }
+    }
+
     private void Shake(in Hitbox hitbox)
     {
-
-        StopCoroutine(nameof(HurtTime));
-
         noiseTransposer.m_NoiseProfile = hitbox.HurtCameraShake.shakeType;
         noiseTransposer.m_FrequencyGain = hitbox.HurtCameraShake.screenShakeFrequency;
         noiseTransposer.m_AmplitudeGain = hitbox.HurtCameraShake.screenShakeAmplitude;
 
-        StartCoroutine(HurtTime((float) hitbox.HurtCameraShake.screenShakeTime));
+        Hurt((float) hitbox.HurtCameraShake.screenShakeTime);
     }
 
     private void BlockingShake(in Hitbox hitbox)
     {
-
-        StopCoroutine(nameof(HurtTime));
-
         noiseTransposer.m_NoiseProfile = hitbox.BlockedCameraShake.shakeType;
         noiseTransposer.m_FrequencyGain = hitbox.BlockedCameraShake.screenShakeFrequency;
         noiseTransposer.m_AmplitudeGain = hitbox.BlockedCameraShake.screenShakeAmplitude;
 
-        StartCoroutine(HurtTime((float)hitbox.BlockedCameraShake.screenShakeTime));
+        Hurt((float)hitbox.BlockedCameraShake.screenShakeTime);
     }
 
     private void StaggerShake(in Hitbox hitbox)
     {
-
-        StopCoroutine(nameof(HurtTime));
-
         noiseTransposer.m_NoiseProfile = hitbox.StaggerCameraShake.shakeType;
         noiseTransposer.m_FrequencyGain = hitbox.StaggerCameraShake.screenShakeFrequency;
         noiseTransposer.m_AmplitudeGain = hitbox.StaggerCameraShake.screenShakeAmplitude;
 
-        StartCoroutine(HurtTime((float)hitbox.StaggerCameraShake.screenShakeTime));
+        Hurt((float)hitbox.StaggerCameraShake.screenShakeTime);
     }
 
     private void KOShake(in Hitbox hitbox)
     {
-        StopCoroutine(nameof(HurtTime));
-
         noiseTransposer.m_NoiseProfile = hitbox.KOCameraShake.shakeType;
         noiseTransposer.m_FrequencyGain = hitbox.KOCameraShake.screenShakeFrequency;
         noiseTransposer.m_AmplitudeGain = hitbox.KOCameraShake.screenShakeAmplitude;
 
-        StartCoroutine(HurtTime((float)hitbox.KOCameraShake.screenShakeTime));
+        Hurt((float)hitbox.KOCameraShake.screenShakeTime);
     }
 
-    private IEnumerator HurtTime(float time)
+    private void ResetCancellationTokenSource()
     {
-        yield return new WaitForSeconds((float) System.TimeSpan.FromMilliseconds(time).TotalSeconds);
+        cancellationTokenSource.Dispose();
+        cancellationTokenSource = new();
+    }
+
+    private async void Hurt(float time)
+    {
+        await HurtTime_Async(time);
 
         noiseTransposer.m_FrequencyGain = defaultFrequency;
         noiseTransposer.m_AmplitudeGain = defaultAmplitude;
         noiseTransposer.m_NoiseProfile = defaultNoiseSettings;
+    }
+
+    private async Task HurtTime_Async(float time)
+    {
+        ResetCancellationTokenSource();
+        CancellationToken cancellationToken = cancellationTokenSource.Token;
+
+        try
+        {
+            await Task.Delay(System.TimeSpan.FromMilliseconds(time), cancellationToken);
+        }
+        catch (TaskCanceledException) {}
     }
 }

@@ -16,7 +16,6 @@ public class GameManager : MonoBehaviour
     [SerializeField] private VisualData visualOptionsData;
 
     [Header("SceneSettings")]
-    [SerializeField] private string firstSceneName;
     [SerializeField] private List<SceneLogic> scenes;
     [SerializeField] private TransitionPlayer transitionPlayer;
 
@@ -37,7 +36,7 @@ public class GameManager : MonoBehaviour
 
     private void Awake()
     {
-        if(firstSceneName != "") DontDestroyOnLoad(gameObject);
+        DontDestroyOnLoad(gameObject);
 
         //Audio Initialize
         audioController = new();

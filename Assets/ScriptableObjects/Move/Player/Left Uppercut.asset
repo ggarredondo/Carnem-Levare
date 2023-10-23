@@ -63,12 +63,12 @@ MonoBehaviour:
     screenShakeFrequency: 0
     screenShakeAmplitude: 0
   staggerCameraShake:
-    targetShakeTime: 0
-    targetShakeIntensity: 0
+    targetShakeTime: 25
+    targetShakeIntensity: 10
     shakeType: {fileID: 0}
-    screenShakeTime: 0
-    screenShakeFrequency: 0
-    screenShakeAmplitude: 0
+    screenShakeTime: 400
+    screenShakeFrequency: 200
+    screenShakeAmplitude: 0.4
   koCameraShake:
     targetShakeTime: 0
     targetShakeIntensity: 0
