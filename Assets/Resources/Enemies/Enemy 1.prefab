@@ -240,6 +240,7 @@ MonoBehaviour:
     producerObject: {fileID: 7861743490557194619}
   - ID: Right_Foot
     producerObject: {fileID: 3079697173098840009}
+  disableParticles: 0
 --- !u!1 &4830288424506690251
 GameObject:
   m_ObjectHideFlags: 0
@@ -950,7 +951,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 7dcb53c09a1f8e54c99a9a394af20039, type: 2}
+      objectReference: {fileID: 2100000, guid: 38344641e0724194cbc9e0f20a7ca519, type: 2}
     - target: {fileID: -4728426434207774260, guid: df8e8b4e49896f543828b277b6764350,
         type: 3}
       propertyPath: m_TagString
