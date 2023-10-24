@@ -1013,6 +1013,8 @@ MonoBehaviour:
     maxHealth: 300
     stamina: 0
     maxStamina: 100
+    staminaRegen: 10
+    blockingStaminaRegen: 2
     damageToHealth: 10
     damageToStamina: 5
     comboDecay: 300

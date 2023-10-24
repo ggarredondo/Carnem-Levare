@@ -30,6 +30,7 @@ public class WalkingState : CharacterState
     public void Update() 
     {
         movement.MoveCharacter(controller.MovementVector, movement.WalkingDirectionSpeed);
+        stats.RegenStamina();
     }
     public void FixedUpdate() 
     {

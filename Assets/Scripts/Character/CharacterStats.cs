@@ -10,8 +10,12 @@ public class CharacterStats
     [Header("Resistance Values")]
     [SerializeField] private int health;
     [SerializeField] private int maxHealth;
-    [SerializeField] private int stamina, maxStamina;
-    [SerializeField] private int damageToHealth, damageToStamina;
+    [SerializeField] private float stamina, maxStamina;
+    [SerializeField] private float staminaRegen, blockingStaminaRegen;
+
+    [Header("Damage Values")]
+    [SerializeField] private int damageToHealth;
+    [SerializeField] private int damageToStamina;
 
     [Header("Stun Values")]
     [Tooltip("How quickly time stun decreases through consecutive hits given by decayFunction(comboDecay, number of hits)")]
@@ -61,7 +65,7 @@ public class CharacterStats
     public double HitCounterDecay(double stun, int hitNumber) => hitNumber < comboDecay ? stun : minStun;
 
     private void AddToHealth(float addend) => health = (int) Mathf.Clamp(health + addend, 0f + System.Convert.ToSingle(NODEATH_FLAG), maxHealth);
-    private void AddToStamina(float addend) => stamina = (int) Mathf.Clamp(stamina + addend, 0f, maxStamina);
+    private void AddToStamina(float addend) => stamina = Mathf.Clamp(stamina + addend, 0f, maxStamina);
 
     public void HurtDamage(in Hitbox hitbox)
     {
@@ -87,9 +91,20 @@ public class CharacterStats
 
     public int Health => health;
     public int MaxHealth => maxHealth;
-    public int Stamina => stamina;
+    public float Stamina => stamina;
     public void ResetStamina() => stamina = maxStamina;
-    public int MaxStamina => maxStamina;
+    public float MaxStamina => maxStamina;
+
+    /// <summary>
+    /// Use in Update.
+    /// </summary>
+    public void RegenStamina() => stamina = Mathf.MoveTowards(stamina, maxStamina, staminaRegen * Time.deltaTime);
+
+    /// <summary>
+    /// Use in Update.
+    /// </summary>
+    public void BlockingRegenStamina() => stamina = Mathf.MoveTowards(stamina, maxStamina, blockingStaminaRegen * Time.deltaTime);
+
     public double StaggerStun => staggerStun;
     public List<Move> MoveList { get => moveList;  set => moveList = value; }
     public ref readonly List<Hitbox> HitboxList => ref hitboxList;
