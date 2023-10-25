@@ -38,6 +38,9 @@ MonoBehaviour:
   transitionDuration: 0.1
   applyAnimationState: 0
   initSound: Player_Dash
+  initParticles:
+    ID: 
+    prefab: {fileID: 0}
   startUp: 100
   active: 100
   recovery: 500

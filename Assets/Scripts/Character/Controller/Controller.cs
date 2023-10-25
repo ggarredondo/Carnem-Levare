@@ -14,6 +14,6 @@ public abstract class Controller : MonoBehaviour
     }
 
     protected void DoBlock(bool done) { isBlocking = done; OnDoBlock?.Invoke(); }
-    protected void DoMove(int moveIndex) { OnDoMove?.Invoke(moveIndex); }
-    public ref readonly Vector2 MovementVector { get => ref movementVector; }
+    protected void DoMove(int moveIndex) => OnDoMove?.Invoke(moveIndex);
+    public ref readonly Vector2 MovementVector => ref movementVector;
 }

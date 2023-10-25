@@ -557,7 +557,7 @@ MonoBehaviour:
   move3: 0
   AIBehaviour: {fileID: 11400000, guid: d685f91f6ec7ecb44bc435195bb44e1f, type: 2}
   moveSequences:
-  - sequence: 0000000003000000020000000100000004000000
+  - sequence: 00000000010000000200000003000000
   minReactionTimeMs: 220
   maxReactionTimeMs: 320
 --- !u!54 &5975427957589119885
@@ -586,7 +586,7 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 0.3
+  m_Radius: 0.5
   m_Height: 1.4
   m_Direction: 1
   m_Center: {x: 0, y: 0.7, z: 0}
