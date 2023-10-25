@@ -238,6 +238,10 @@ MonoBehaviour:
     producerObject: {fileID: 1945484951096879880}
   - ID: Left_Foot
     producerObject: {fileID: 7861743490557194619}
+  - ID: left_hand
+    producerObject: {fileID: 6464143339468033731}
+  - ID: right_hand
+    producerObject: {fileID: 4790599007648852494}
   - ID: Right_Foot
     producerObject: {fileID: 3079697173098840009}
   disableParticles: 0
@@ -991,6 +995,12 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 7481606168323393295}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &4790599007648852494 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2715566404302941441, guid: df8e8b4e49896f543828b277b6764350,
+    type: 3}
+  m_PrefabInstance: {fileID: 7481606168323393295}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &4920006408200123047 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2563496969622287784, guid: df8e8b4e49896f543828b277b6764350,
@@ -1000,6 +1010,12 @@ Transform:
 --- !u!4 &5137640252035815742 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -6874584590210671055, guid: df8e8b4e49896f543828b277b6764350,
+    type: 3}
+  m_PrefabInstance: {fileID: 7481606168323393295}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &6464143339468033731 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: -4728426434207774260, guid: df8e8b4e49896f543828b277b6764350,
     type: 3}
   m_PrefabInstance: {fileID: 7481606168323393295}
   m_PrefabAsset: {fileID: 0}

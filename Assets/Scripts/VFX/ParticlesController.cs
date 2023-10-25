@@ -30,7 +30,7 @@ public class ParticlesController : MonoBehaviour
 
     public void Play(string ID, in GameObject particles)
     {
-        if (!disableParticles)
+        if (!disableParticles && ID != "")
         {
             GameObject parent = producerTable[ID];
 

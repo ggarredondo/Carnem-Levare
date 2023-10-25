@@ -763,6 +763,10 @@ MonoBehaviour:
     producerObject: {fileID: 1133088415450659919}
   - ID: Right_Foot
     producerObject: {fileID: 2174714693114535593}
+  - ID: High
+    producerObject: {fileID: 2744704787155521408}
+  - ID: Low
+    producerObject: {fileID: 4358286524601704675}
   disableParticles: 0
 --- !u!1 &2174714693114535593
 GameObject:
@@ -1454,6 +1458,12 @@ AudioListener:
 --- !u!4 &2848315111235744285 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -1812909498023395591, guid: df8e8b4e49896f543828b277b6764350,
+    type: 3}
+  m_PrefabInstance: {fileID: 4706402254103989476}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &4358286524601704675 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: -203856693384778745, guid: df8e8b4e49896f543828b277b6764350,
     type: 3}
   m_PrefabInstance: {fileID: 4706402254103989476}
   m_PrefabAsset: {fileID: 0}
