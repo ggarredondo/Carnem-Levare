@@ -979,6 +979,21 @@ PrefabInstance:
       propertyPath: enableDebug
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 1878726773391280501, guid: 597ff9b00a9e7804681f9e3db89066c3,
+        type: 3}
+      propertyPath: moveSequences.Array.data[0].sequence.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1878726773391280501, guid: 597ff9b00a9e7804681f9e3db89066c3,
+        type: 3}
+      propertyPath: moveSequences.Array.data[0].sequence.Array.data[1]
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1878726773391280501, guid: 597ff9b00a9e7804681f9e3db89066c3,
+        type: 3}
+      propertyPath: moveSequences.Array.data[0].sequence.Array.data[2]
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 3970715400252183340, guid: 597ff9b00a9e7804681f9e3db89066c3,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -997,7 +1012,7 @@ PrefabInstance:
     - target: {fileID: 7115871151908366452, guid: 597ff9b00a9e7804681f9e3db89066c3,
         type: 3}
       propertyPath: characterStats.moveList.Array.size
-      value: 4
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 7115871151908366452, guid: 597ff9b00a9e7804681f9e3db89066c3,
         type: 3}
@@ -1015,13 +1030,19 @@ PrefabInstance:
         type: 3}
       propertyPath: characterStats.moveList.Array.data[2]
       value: 
-      objectReference: {fileID: 11400000, guid: 782589e235ae07b419e8d364c98e490e,
+      objectReference: {fileID: 11400000, guid: 9f0084ef3672689438005f63931d6168,
         type: 2}
     - target: {fileID: 7115871151908366452, guid: 597ff9b00a9e7804681f9e3db89066c3,
         type: 3}
       propertyPath: characterStats.moveList.Array.data[3]
       value: 
       objectReference: {fileID: 11400000, guid: 2a511c4826c503d48831244e7b3bacb7,
+        type: 2}
+    - target: {fileID: 7115871151908366452, guid: 597ff9b00a9e7804681f9e3db89066c3,
+        type: 3}
+      propertyPath: characterStats.moveList.Array.data[4]
+      value: 
+      objectReference: {fileID: 11400000, guid: a440f9428d7de77479707c2cff914513,
         type: 2}
     - target: {fileID: 7481606168508649710, guid: 597ff9b00a9e7804681f9e3db89066c3,
         type: 3}
@@ -3492,7 +3513,7 @@ CanvasGroup:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4740496842887617656}
   m_Enabled: 1
-  m_Alpha: 1
+  m_Alpha: 0
   m_Interactable: 1
   m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0

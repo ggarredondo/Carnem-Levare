@@ -1,0 +1,114 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3b1f0431d7ca2da48a12ff07183273eb, type: 3}
+  m_Name: Enemy Left Overhand
+  m_EditorClassIdentifier: 
+  icon: {fileID: 21300000, guid: 91ce620d9fd37364ab39aeacea7a460b, type: 3}
+  moveName: Left Overhand
+  animations:
+  - animation: {fileID: 7400000, guid: a3c477dc764962f438799ed139eec673, type: 2}
+    motionSpeed: 1
+    position: {x: 0, y: 0}
+  fixedDirection: 0
+  directionSpeed: 1
+  animatorTrigger: leftOverhand
+  animatorController: {fileID: 9100000, guid: 9619750969b0cfd44ba028750f69a246, type: 2}
+  stateSpeed: 1
+  transitionDuration: 0.1
+  applyAnimationState: 0
+  initSound: Enemy_Whiff_Overhand
+  initParticles:
+    ID: left_hand
+    prefab: {fileID: 6041449915859805219, guid: 5dc4ea6d854b0f34c88e7230870f31e3,
+      type: 3}
+  startUp: 250
+  active: 200
+  recovery: 400
+  applyAnimationEvents: 0
+  hurtSound: Player_Hit_Overhand
+  blockedSound: Player_Blocked_Default
+  staggerSound: Player_Guard_Break
+  koSound: Player_Knockout_Default
+  hurtParticlesPrefab: {fileID: 6041449915859805219, guid: eca7c0413f9cde14ba8351a3a8030147,
+    type: 3}
+  blockedParticlesPrefab: {fileID: 6041449915859805219, guid: 266b0cab99ba20240ba01950da8efdb7,
+    type: 3}
+  staggerParticlesPrefab: {fileID: 6041449915859805219, guid: c85934e6b4723ab4986778bcb29ba6b6,
+    type: 3}
+  koParticlesPrefab: {fileID: 6041449915859805219, guid: 4df20e43bf505104f8673c3be3ddc55a,
+    type: 3}
+  hurtStun: 900
+  blockedStun: 400
+  hurtCameraShake:
+    targetShakeTime: 25
+    targetShakeIntensity: 10
+    shakeType: {fileID: 11400000, guid: 69ce8388f6785dd4c8c39915efece2f4, type: 2}
+    screenShakeTime: 200
+    screenShakeFrequency: 200
+    screenShakeAmplitude: 0.2
+  blockedCameraShake:
+    targetShakeTime: 0
+    targetShakeIntensity: 0
+    shakeType: {fileID: 0}
+    screenShakeTime: 0
+    screenShakeFrequency: 0
+    screenShakeAmplitude: 0
+  staggerCameraShake:
+    targetShakeTime: 25
+    targetShakeIntensity: 10
+    shakeType: {fileID: 11400000, guid: 69ce8388f6785dd4c8c39915efece2f4, type: 2}
+    screenShakeTime: 400
+    screenShakeFrequency: 200
+    screenShakeAmplitude: 0.2
+  koCameraShake:
+    targetShakeTime: 0
+    targetShakeIntensity: 0
+    shakeType: {fileID: 0}
+    screenShakeTime: 0
+    screenShakeFrequency: 0
+    screenShakeAmplitude: 0
+  hurtHitStop:
+    attackerAnimSpeed: 0.1
+    defenderAnimSpeed: 0.1
+    startTimeMS: 100
+    lengthMS: 100
+    amplitude: 0.3
+    frequency: 150
+  blockedHitStop:
+    attackerAnimSpeed: 0
+    defenderAnimSpeed: 0
+    startTimeMS: 0
+    lengthMS: 0
+    amplitude: 0
+    frequency: 0
+  staggerHitStop:
+    attackerAnimSpeed: 0.1
+    defenderAnimSpeed: 0.1
+    startTimeMS: 100
+    lengthMS: 500
+    amplitude: 0.3
+    frequency: 150
+  koHitStop:
+    attackerAnimSpeed: 0
+    defenderAnimSpeed: 0
+    startTimeMS: 0
+    lengthMS: 0
+    amplitude: 0
+    frequency: 0
+  hurtKnockback: {x: 0, y: 0, z: 5}
+  blockedKnockback: {x: 0, y: 0, z: 0}
+  hitbox: 0
+  hurtSide: -1
+  hurtPower: 2
+  damageToHealth: 20
+  damageToStamina: 15
+  hyperarmor: 1
