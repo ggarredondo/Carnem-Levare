@@ -22,6 +22,7 @@ public class InputReader : ScriptableObject
     public event System.Action<int> Action1;
     public event System.Action<int> Action2;
     public event System.Action<int> Action3;
+    public event System.Action<int> Action4;
 
     public Dictionary<InputAction, System.Action<InputAction.CallbackContext>> HoldEvents;
 
@@ -97,5 +98,9 @@ public class InputReader : ScriptableObject
     public void OnAction3(InputAction.CallbackContext context)
     {
         if (context.performed) Action3?.Invoke(3);
+    }
+    public void OnAction4(InputAction.CallbackContext context)
+    {
+        if (context.performed) Action4?.Invoke(4);
     }
 }

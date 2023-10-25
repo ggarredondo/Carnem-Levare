@@ -6,7 +6,7 @@ public class MoveAssignment : MonoBehaviour
 {
     [SerializeField] private InputReader inputReader;
 
-    private readonly List<string> inputAssignments = new(4);
+    private readonly List<string> inputAssignments = new(5);
 
     private InputController inputController;
     private int newMove;
@@ -17,6 +17,7 @@ public class MoveAssignment : MonoBehaviour
         inputReader.Action1 += ReadInput;
         inputReader.Action2 += ReadInput;
         inputReader.Action3 += ReadInput;
+        inputReader.Action4 += ReadInput;
     }
 
     private void OnDisable()
@@ -25,6 +26,7 @@ public class MoveAssignment : MonoBehaviour
         inputReader.Action1 -= ReadInput;
         inputReader.Action2 -= ReadInput;
         inputReader.Action3 -= ReadInput;
+        inputReader.Action4 -= ReadInput;
     }
 
     public void Initialize(ref List<MoveBlock> moves, ref InputController inputController)
@@ -49,6 +51,7 @@ public class MoveAssignment : MonoBehaviour
         inputAssignments.Add(GameManager.Input.ObtainAllowedMapping("Action1"));
         inputAssignments.Add(GameManager.Input.ObtainAllowedMapping("Action2"));
         inputAssignments.Add(GameManager.Input.ObtainAllowedMapping("Action3"));
+        inputAssignments.Add(GameManager.Input.ObtainAllowedMapping("Action4"));
 
         moves.ForEach(m => m.GetComponent<MoveBlock>().Disable());
 

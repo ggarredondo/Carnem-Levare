@@ -94,35 +94,6 @@ public class BehaviourTreeView : GraphView
         PopulateView(tree);
     }
 
-    private Color GetNewRainbowColor(float percentage)
-    {
-        Gradient gradient = new();
-        GradientColorKey[] colorKey;
-        GradientAlphaKey[] alphaKey;
-
-        colorKey = new GradientColorKey[5]; 
-        colorKey[0].color = Color.white;
-        colorKey[0].time = 0.0f;
-        colorKey[1].color = Color.red;
-        colorKey[1].time = 0.25f;
-        colorKey[2].color = Color.green;
-        colorKey[2].time = 0.50f;
-        colorKey[3].color = Color.blue;
-        colorKey[3].time = 0.75f;
-        colorKey[4].color = Color.magenta;
-        colorKey[4].time = 1f;
-
-        alphaKey = new GradientAlphaKey[2];
-        alphaKey[0].alpha = 1.0f;
-        alphaKey[0].time = 0.0f;
-        alphaKey[1].alpha = 1.0f;
-        alphaKey[1].time = 1.0f;
-
-        gradient.SetKeys(colorKey, alphaKey);
-
-        return gradient.Evaluate(percentage);
-    }
-
     private Color GetNewColor(float percentage)
     {
         Gradient gradient = new();
@@ -187,11 +158,25 @@ public class BehaviourTreeView : GraphView
 
     public override void BuildContextualMenu(ContextualMenuPopulateEvent evt)
     {
+        var currentBehaviourTreeType = tree.GetType();
+
         foreach (var type in TypeCache.GetTypesDerivedFrom<LeafNode>())
-            evt.menu.AppendAction($"[{type.BaseType.Name}] {type.Name}", (a) => CreateNode(type, localMousePosition));
+        {
+            var relevanceAttribute = (NodeRelevance)System.Attribute.GetCustomAttribute(type, typeof(NodeRelevance));
+            if (relevanceAttribute != null && relevanceAttribute.RelevantBehaviourTrees.Contains(currentBehaviourTreeType))
+            {
+                evt.menu.AppendAction($"[{type.BaseType.Name}] {type.Name}", (a) => CreateNode(type, localMousePosition));
+            }
+        }
 
         foreach (var type in TypeCache.GetTypesDerivedFrom<CompositeNode>())
-            evt.menu.AppendAction($"[{type.BaseType.Name}] {type.Name}", (a) => CreateNode(type, localMousePosition));     
+        {
+            var relevanceAttribute = (NodeRelevance)System.Attribute.GetCustomAttribute(type, typeof(NodeRelevance));
+            if (relevanceAttribute != null && relevanceAttribute.RelevantBehaviourTrees.Contains(currentBehaviourTreeType))
+            {
+                evt.menu.AppendAction($"[{type.BaseType.Name}] {type.Name}", (a) => CreateNode(type, localMousePosition));
+            }
+        }
     }
 
     void CreateNode(System.Type type, Vector2 position)

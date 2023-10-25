@@ -1,14 +1,16 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RootNode : Node, IHaveChildren
+public class DecoratorNode : Node, IHaveChildren, IHaveParent
 {
     [HideInInspector] public Node child;
+    [HideInInspector] public Node parent;
 
     public void AddChild(IHaveParent child)
     {
         child.SetParent(this);
-        this.child = (Node) child;
+        this.child = (Node)child;
     }
 
     public List<Node> GetChildren()
@@ -16,19 +18,14 @@ public class RootNode : Node, IHaveChildren
         return new List<Node>() { child };
     }
 
-    public void RemoveChild(IHaveParent child)
+    public Node GetParent()
     {
-        this.child = null;
+        return parent;
     }
 
     public bool HaveChildren()
     {
         return child != null;
-    }
-
-    public bool Static()
-    {
-        return false;
     }
 
     public void InitializeChildren()
@@ -43,5 +40,20 @@ public class RootNode : Node, IHaveChildren
             child.InitializeID(ID);
 
         return ID;
+    }
+
+    public void RemoveChild(IHaveParent child)
+    {
+        this.child = null;
+    }
+
+    public void SetParent(Node parent)
+    {
+        this.parent = parent;
+    }
+
+    public bool Static()
+    {
+        return false;
     }
 }

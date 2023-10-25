@@ -1,5 +1,6 @@
 using UnityEngine;
 
+[NodeRelevance(typeof(MenuTree))]
 public class SelectableMenu : CompositeNode, ICanSelect
 {
     [SerializeField] private int selectedChild;
