@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3b1f0431d7ca2da48a12ff07183273eb, type: 3}
-  m_Name: Left Leading Jab
+  m_Name: Enemy Left Jab
   m_EditorClassIdentifier: 
   icon: {fileID: 21300000, guid: 73f2e0e785a93fd4982fae306299f5e2, type: 3}
   moveName: Left Leading Jab
@@ -21,11 +21,11 @@ MonoBehaviour:
   fixedDirection: 0
   directionSpeed: 1
   animatorTrigger: leftLeadingJab
-  animatorController: {fileID: 9100000, guid: e70a87fc3a4fdb34cbeea71a01686f03, type: 2}
-  stateSpeed: 1.4
+  animatorController: {fileID: 9100000, guid: 9619750969b0cfd44ba028750f69a246, type: 2}
+  stateSpeed: 1
   transitionDuration: 0.1
   applyAnimationState: 0
-  initSound: Player_Whiff_Jab
+  initSound: Enemy_Whiff_Jab
   initParticles:
     ID: left_hand
     prefab: {fileID: 6041449915859805219, guid: d34d64bf69056334c9ad5027ad973661,
@@ -34,10 +34,10 @@ MonoBehaviour:
   active: 50
   recovery: 300
   applyAnimationEvents: 0
-  hurtSound: Enemy_Hit_Jab
-  blockedSound: Enemy_Blocked_Default
-  staggerSound: Enemy_Guard_Break
-  koSound: Enemy_Knockout_Default
+  hurtSound: Player_Hit_Jab
+  blockedSound: Player_Blocked_Default
+  staggerSound: Player_Guard_Break
+  koSound: Player_Knockout_Default
   hurtParticlesPrefab: {fileID: 6041449915859805219, guid: 39d3fbe12a8f682438be0a5a4249bf1b,
     type: 3}
   blockedParticlesPrefab: {fileID: 6041449915859805219, guid: 266b0cab99ba20240ba01950da8efdb7,

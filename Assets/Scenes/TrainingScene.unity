@@ -1002,25 +1002,25 @@ PrefabInstance:
     - target: {fileID: 7115871151908366452, guid: 597ff9b00a9e7804681f9e3db89066c3,
         type: 3}
       propertyPath: characterStats.moveList.Array.size
-      value: 4
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7115871151908366452, guid: 597ff9b00a9e7804681f9e3db89066c3,
         type: 3}
       propertyPath: characterStats.moveList.Array.data[0]
       value: 
-      objectReference: {fileID: 11400000, guid: cb8a3bef13b8ff948b45889b9d0268de,
+      objectReference: {fileID: 11400000, guid: 01ba2a5256110f24ab27bbe33fa13e4b,
         type: 2}
     - target: {fileID: 7115871151908366452, guid: 597ff9b00a9e7804681f9e3db89066c3,
         type: 3}
       propertyPath: characterStats.moveList.Array.data[1]
       value: 
-      objectReference: {fileID: 11400000, guid: b7b1f886209da504797687ffcf73dbca,
+      objectReference: {fileID: 11400000, guid: 98f8f83583ee5b4408d964c221c5feb5,
         type: 2}
     - target: {fileID: 7115871151908366452, guid: 597ff9b00a9e7804681f9e3db89066c3,
         type: 3}
       propertyPath: characterStats.moveList.Array.data[2]
       value: 
-      objectReference: {fileID: 11400000, guid: 83f2956d9afa6f24bb483f1182019ac8,
+      objectReference: {fileID: 11400000, guid: 98f8f83583ee5b4408d964c221c5feb5,
         type: 2}
     - target: {fileID: 7115871151908366452, guid: 597ff9b00a9e7804681f9e3db89066c3,
         type: 3}
