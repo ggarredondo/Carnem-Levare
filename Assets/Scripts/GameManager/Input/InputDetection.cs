@@ -70,7 +70,8 @@ public class InputDetection
                 if (Cursor.visible == true)
                 {
                     EventSystem.current.SetSelectedGameObject(selected);
-                    GameManager.Audio.Play("SelectButton");
+                    if(PlayerInput.all[0].currentActionMap == PlayerInput.all[0].actions.FindActionMap("UI"))
+                        GameManager.Audio.Play("SelectButton");
                     WaitGamepadDetection(GAMEPAD_DETECTION_TIME);
                     Cursor.visible = false;
                 }  
