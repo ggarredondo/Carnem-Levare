@@ -27,11 +27,7 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   soundGroups:
-  - ID:
-    - Sfx
-    speakersTag:
-    - SFX
-    sounds:
+  - sounds:
     - name: Slider
       clip: {fileID: 8300000, guid: 85a922d84d6434047a80a73c2fd9b288, type: 3}
       volume: 1
@@ -77,10 +73,7 @@ MonoBehaviour:
       volume: 1
       pitch: 1
       loop: 0
-  - ID: []
-    speakersTag:
-    - SFX
-    sounds:
+  - sounds:
     - name: InteractMoveMenu
       clip: {fileID: 8300000, guid: f212489be7147d44695be7d68564c8f2, type: 3}
       volume: 1

@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d66219019227eb34c927cb1bf1fd9889, type: 3}
+  m_Name: Debug
+  m_EditorClassIdentifier: 
+  sceneName: Debug
+  nextScene:
+    sceneName: 
+    withLoadScreen: 0
+    loadSceneName: 
+  previousScene:
+    sceneName: 
+    withLoadScreen: 0
+    loadSceneName: 
+  playMusic: 0
+  music: Intro
+  gameObjectsTag: []

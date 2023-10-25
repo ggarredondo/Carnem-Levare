@@ -68,7 +68,7 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
-        inputUtilities.Update();
+        //inputUtilities.Update();
     }
 
     private void OnValidate()
