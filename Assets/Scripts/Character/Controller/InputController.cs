@@ -10,7 +10,7 @@ public class InputController : Controller
     private Action bufferedAction;
     private bool BUFFER_FLAG;
 
-    public List<int> moveIndexes = new(4) { 0, 1, 2, 3 };
+    public List<int> moveIndexes = new(5) { 0, 1, 2, 3, 4 };
     [NonSerialized] public bool assigning;
 
     public void Reference(in CharacterStateMachine stateMachine)
@@ -62,5 +62,9 @@ public class InputController : Controller
     public void Action3(InputAction.CallbackContext context)
     {
         if (context.performed && !assigning) inputAction.Invoke(moveIndexes[3]);
+    }
+    public void Action4(InputAction.CallbackContext context)
+    {
+        if (context.performed && !assigning) inputAction.Invoke(moveIndexes[4]);
     }
 }

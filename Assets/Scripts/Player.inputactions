@@ -60,6 +60,15 @@
                     "initialStateCheck": false
                 },
                 {
+                    "name": "Action4",
+                    "type": "Button",
+                    "id": "8be192fa-c693-482b-b1f0-6ea82df29bda",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
                     "name": "Block",
                     "type": "Button",
                     "id": "d6656a04-0c7c-49b4-a8bb-803cfa729f0b",
@@ -497,6 +506,28 @@
                     "processors": "",
                     "groups": "Keyboard&Mouse",
                     "action": "StartHold",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "90826a10-c64b-4b8d-9d54-53afe987a2b8",
+                    "path": "<Gamepad>/buttonWest",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Gamepad",
+                    "action": "Action4",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "43eb303a-1138-4ee4-9f48-8ae3d3ae0d2c",
+                    "path": "<Keyboard>/leftShift",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard&Mouse",
+                    "action": "Action4",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
