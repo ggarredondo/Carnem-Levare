@@ -1042,10 +1042,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   characterStats:
     health: 0
-    maxHealth: 300
+    maxHealth: 150
     stamina: 0
-    maxStamina: 100
-    staminaRegen: 10
+    maxStamina: 50
+    staminaRegen: 5
     blockingStaminaRegen: 2
     damageToHealth: 10
     damageToStamina: 5
