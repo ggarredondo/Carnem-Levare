@@ -6,6 +6,7 @@ public class AggressiveNeutralState : AIState
     private GameKnowledge gameKnowledge;
 
     private CharacterStateMachine agentStateMachine;
+    private RNG movementRNG;
 
     public AggressiveNeutralState(in AggressiveAIStateMachine aiFSM, in AIController controller, in GameKnowledge gameKnowledge)
     {
@@ -14,6 +15,7 @@ public class AggressiveNeutralState : AIState
         this.gameKnowledge = gameKnowledge;
 
         agentStateMachine = gameKnowledge.AgentStateMachine;
+        movementRNG = new RNG(GameManager.RANDOM_SEED);
     }
 
     public void Enter() 
@@ -29,7 +31,7 @@ public class AggressiveNeutralState : AIState
         if (gameKnowledge.Distance <= aiFSM.MinDistanceToOpponent)
         {
             controller.PerformBlock(true);
-            controller.Movement(0f, 0f);
+            controller.Movement(movementRNG.RangeInt(-1, 1), 0f);
             if (aiFSM.waitTimer < UnityEngine.Time.time)
                 aiFSM.TransitionToOwnTurn();
         }
