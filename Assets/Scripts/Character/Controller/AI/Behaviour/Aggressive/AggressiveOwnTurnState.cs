@@ -6,7 +6,7 @@ public class AggressiveOwnTurnState : AIState
     private AIController controller;
     private GameKnowledge gameKnowledge;
 
-    private RNG sequenceRNG;
+    private RNG sequenceRNG, timerRNG;
     private CharacterStateMachine agentStateMachine;
     private List<MoveSequence> sequences;
     private int selectedSequence, selectedMove, sequencesCount;
@@ -18,6 +18,7 @@ public class AggressiveOwnTurnState : AIState
         this.gameKnowledge = gameKnowledge;
 
         sequenceRNG = new RNG(GameManager.RANDOM_SEED);
+        timerRNG = new RNG(GameManager.RANDOM_SEED);
         agentStateMachine = gameKnowledge.AgentStateMachine;
         sequences = controller.MoveSequences;
         sequencesCount = sequences.Count;
@@ -28,7 +29,10 @@ public class AggressiveOwnTurnState : AIState
         InitializeMove();
         agentStateMachine.WalkingState.OnEnter += NextMove;
         agentStateMachine.BlockingState.OnEnter += NextMove;
+
         agentStateMachine.HurtState.OnEnter += aiFSM.TransitionToOpponentTurn;
+        agentStateMachine.StaggerState.OnEnter += aiFSM.TransitionToOpponentTurn;
+
         NextMove();
     }
     public void React()
@@ -40,7 +44,9 @@ public class AggressiveOwnTurnState : AIState
     {
         agentStateMachine.WalkingState.OnEnter -= NextMove;
         agentStateMachine.BlockingState.OnEnter -= NextMove;
+
         agentStateMachine.HurtState.OnEnter -= aiFSM.TransitionToOpponentTurn;
+        agentStateMachine.StaggerState.OnEnter -= aiFSM.TransitionToOpponentTurn;
     }
 
     private void InitializeMove()
@@ -52,7 +58,12 @@ public class AggressiveOwnTurnState : AIState
     {
         controller.PerformMove(sequences[selectedSequence][selectedMove]);
         selectedMove++;
-        if (selectedMove >= sequences[selectedSequence].Count)
-            InitializeMove();
+
+        if (selectedMove >= sequences[selectedSequence].Count) {
+            aiFSM.waitTimer = UnityEngine.Time.time + (float) System.TimeSpan.FromMilliseconds(
+                timerRNG.RangeDouble(aiFSM.MinWaitTimeMS, aiFSM.MaxWaitTimeMS)).TotalSeconds;
+
+            aiFSM.TransitionToNeutral();
+        }
     }
 }

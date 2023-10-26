@@ -20,18 +20,28 @@ public class AggressiveNeutralState : AIState
     {
         controller.PerformBlock(false);
         controller.Movement(0f, 1f);
+
         agentStateMachine.HurtState.OnEnter += aiFSM.TransitionToOpponentTurn;
+        agentStateMachine.StaggerState.OnEnter += aiFSM.TransitionToOpponentTurn;
     }
     public void React() 
     {
         if (gameKnowledge.Distance <= aiFSM.MinDistanceToOpponent)
         {
+            controller.PerformBlock(true);
             controller.Movement(0f, 0f);
-            aiFSM.TransitionToOwnTurn();
+            if (aiFSM.waitTimer < UnityEngine.Time.time)
+                aiFSM.TransitionToOwnTurn();
+        }
+        else
+        {
+            controller.PerformBlock(false);
+            controller.Movement(0f, 1f);
         }
     }
     public void Exit() 
     {
         agentStateMachine.HurtState.OnEnter -= aiFSM.TransitionToOpponentTurn;
+        agentStateMachine.StaggerState.OnEnter -= aiFSM.TransitionToOpponentTurn;
     }
 }

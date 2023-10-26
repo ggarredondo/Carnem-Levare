@@ -19,11 +19,13 @@ public class AggressiveOpponentTurnState : AIState
     public void Enter() 
     {
         controller.PerformBlock(true);
-        agentStateMachine.BlockedState.OnEnter += aiFSM.TransitionToOwnTurn;
+        agentStateMachine.WalkingState.OnEnter += aiFSM.TransitionToNeutral;
+        agentStateMachine.BlockingState.OnEnter += aiFSM.TransitionToNeutral;
     }
     public void React() {}
     public void Exit() 
     {
-        agentStateMachine.BlockedState.OnEnter -= aiFSM.TransitionToOwnTurn;
+        agentStateMachine.WalkingState.OnEnter -= aiFSM.TransitionToNeutral;
+        agentStateMachine.BlockingState.OnEnter -= aiFSM.TransitionToNeutral;
     }
 }

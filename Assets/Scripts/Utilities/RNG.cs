@@ -15,4 +15,9 @@ public class RNG
     /// Lower and upper bounds are both inclusive.
     /// </summary>
     public float RangeFloat(float minValue, float maxValue) => ((float)random.NextDouble() * (maxValue - minValue)) + minValue;
+
+    /// <summary>
+    /// Lower and upper bounds are both inclusive.
+    /// </summary>
+    public double RangeDouble(double minValue, double maxValue) => (random.NextDouble() * (maxValue - minValue)) + minValue;
 }

@@ -13,3 +13,5 @@ MonoBehaviour:
   m_Name: Basic Aggressive
   m_EditorClassIdentifier: 
   minDistanceToOpponent: 2
+  minWaitTimeMS: 1000
+  maxWaitTimeMS: 3000

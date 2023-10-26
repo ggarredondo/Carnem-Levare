@@ -20,7 +20,9 @@ public class InputController : Controller
 
         stateMachine.MoveState.OnEnter += ClearBuffer;
         stateMachine.OnDeactivateMove += () => inputAction = BufferMove;
-        stateMachine.MoveState.OnExit += () => inputAction = DoMove;
+
+        stateMachine.WalkingState.OnEnter += () => inputAction = DoMove;
+        stateMachine.BlockingState.OnEnter += () => inputAction = DoMove;
     }
 
     private void BufferMove(int moveIndex)

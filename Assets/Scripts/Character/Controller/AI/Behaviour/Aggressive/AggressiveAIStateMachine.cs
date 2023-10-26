@@ -4,6 +4,8 @@ using UnityEngine;
 public class AggressiveAIStateMachine : AIStateMachine
 {
     [SerializeField] private float minDistanceToOpponent = 2f;
+    [SerializeField] private double minWaitTimeMS = 1000, maxWaitTimeMS = 3000;
+    [System.NonSerialized] public float waitTimer = 0f;
 
     public override void Reference(in AIController controller, in GameKnowledge gameKnowledge)
     {
@@ -14,4 +16,6 @@ public class AggressiveAIStateMachine : AIStateMachine
     }
 
     public ref readonly float MinDistanceToOpponent => ref minDistanceToOpponent;
+    public ref readonly double MinWaitTimeMS => ref minWaitTimeMS;
+    public ref readonly double MaxWaitTimeMS => ref maxWaitTimeMS;
 }
