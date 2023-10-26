@@ -5,7 +5,6 @@ public class Hitbox : MonoBehaviour
     private AttackMove attackMove;
     private int damageToHealth, damageToStamina;
     private HurtHeight hurtHeight;
-    private GameObject hitParticlesPrefab;
 
     private void Start()
     {
@@ -39,21 +38,20 @@ public class Hitbox : MonoBehaviour
     public ref readonly HitStopData StaggerHitStop => ref attackMove.StaggerHitStop;
     public ref readonly HitStopData KOHitStop => ref attackMove.KOHitStop;
 
+    public ref readonly GameObject HurtParticlesPrefab => ref attackMove.HurtParticlesPrefab;
+    public ref readonly GameObject BlockedParticlesPrefab => ref attackMove.BlockedParticlesPrefab;
+    public ref readonly GameObject StaggerParticlesPrefab => ref attackMove.StaggerParticlesPrefab;
+    public ref readonly GameObject KOParticlesPrefab => ref attackMove.KoParticlesPrefab;
+
     public ref readonly Vector3 HurtKnockback => ref attackMove.HurtKnockback;
     public ref readonly Vector3 BlockedKnockback => ref attackMove.BlockedKnockback;
 
     public float HurtSide => (float) attackMove.HurtSide;
     public float HurtPower => (float) attackMove.HurtPower;
-    public float HurtHeight => (float) hurtHeight;
+    public float HurtHeightFloat => (float) hurtHeight;
+    public HurtHeight HurtHeight => hurtHeight;
 
     public void SetHeight(HurtHeight hurtHeight) => this.hurtHeight = hurtHeight;
-
-    public void SetHurtParticles() => hitParticlesPrefab = attackMove.HurtParticlesPrefab;
-    public void SetBlockedParticles() => hitParticlesPrefab = attackMove.BlockedParticlesPrefab;
-    public void SetStaggerParticles() => hitParticlesPrefab = attackMove.StaggerParticlesPrefab;
-    public void SetKoParticles() => hitParticlesPrefab = attackMove.KoParticlesPrefab;
-
-    public ref readonly GameObject Particles => ref hitParticlesPrefab;
 
     public int DamageToHealth => damageToHealth;
     public int DamageToStamina => damageToStamina;

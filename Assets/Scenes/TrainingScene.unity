@@ -982,22 +982,22 @@ PrefabInstance:
     - target: {fileID: 1878726773391280501, guid: 597ff9b00a9e7804681f9e3db89066c3,
         type: 3}
       propertyPath: moveSequences.Array.data[0].sequence.Array.size
-      value: 2
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 1878726773391280501, guid: 597ff9b00a9e7804681f9e3db89066c3,
         type: 3}
       propertyPath: moveSequences.Array.data[0].sequence.Array.data[1]
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 1878726773391280501, guid: 597ff9b00a9e7804681f9e3db89066c3,
         type: 3}
       propertyPath: moveSequences.Array.data[0].sequence.Array.data[2]
-      value: 3
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1878726773391280501, guid: 597ff9b00a9e7804681f9e3db89066c3,
         type: 3}
       propertyPath: moveSequences.Array.data[0].sequence.Array.data[3]
-      value: 3
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 3970715400252183340, guid: 597ff9b00a9e7804681f9e3db89066c3,
         type: 3}

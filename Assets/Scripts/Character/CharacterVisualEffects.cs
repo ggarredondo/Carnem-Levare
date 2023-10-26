@@ -1,7 +1,9 @@
+using UnityEngine;
+
 [System.Serializable]
 public class CharacterVisualEffects
 {
-    public ParticlesController particlesController;
+    [SerializeField] ParticlesController particlesController;
 
     public void Reference(in CharacterStateMachine stateMachine, in CharacterStats stats)
     {
@@ -9,9 +11,9 @@ public class CharacterVisualEffects
         stateMachine.MoveState.OnEnterInteger += (int index) => particlesController.Play(statsValueLocal.MoveList[index].InitParticles.ID,
                                                                                          statsValueLocal.MoveList[index].InitParticles.prefab);
 
-        stateMachine.HurtState.OnEnterHitbox += (in Hitbox hitbox) => hitbox.SetHurtParticles();
-        stateMachine.BlockedState.OnEnterHitbox += (in Hitbox hitbox) => hitbox.SetBlockedParticles();
-        stateMachine.StaggerState.OnEnterHitbox += (in Hitbox hitbox) => hitbox.SetStaggerParticles();
-        stateMachine.KOState.OnEnterHitbox += (in Hitbox hitbox) => hitbox.SetKoParticles();
+        stateMachine.HurtState.OnEnterHitbox += (in Hitbox hitbox) => particlesController.Play(hitbox.HurtHeight.ToString(), hitbox.HurtParticlesPrefab);
+        stateMachine.BlockedState.OnEnterHitbox += (in Hitbox hitbox) => particlesController.Play(hitbox.HurtHeight.ToString(), hitbox.BlockedParticlesPrefab);
+        stateMachine.StaggerState.OnEnterHitbox += (in Hitbox hitbox) => particlesController.Play(hitbox.HurtHeight.ToString(), hitbox.StaggerParticlesPrefab);
+        stateMachine.KOState.OnEnterHitbox += (in Hitbox hitbox) => particlesController.Play(hitbox.HurtHeight.ToString(), hitbox.KOParticlesPrefab);
     }
 }

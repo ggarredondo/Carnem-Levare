@@ -32,7 +32,7 @@ public class CharacterAnimation
 
         stateMachine.HurtState.OnEnterHitbox += (in Hitbox hitbox) => {
             animator.SetBool("STATE_HURT", true);
-            TriggerHurtAnimation(hitbox.HurtSide, hitbox.HurtHeight, hitbox.HurtPower);
+            TriggerHurtAnimation(hitbox.HurtSide, hitbox.HurtHeightFloat, hitbox.HurtPower);
             hitstop.Trigger(hitbox.HurtHitStop);
         };
         stateMachine.HurtState.OnExit += () => animator.SetBool("STATE_HURT", false);
@@ -41,21 +41,21 @@ public class CharacterAnimation
 
         stateMachine.BlockedState.OnEnterHitbox += (in Hitbox hitbox) => {
             animator.SetBool("STATE_BLOCKED", true);
-            TriggerHurtAnimation(hitbox.HurtSide, hitbox.HurtHeight, hitbox.HurtPower);
+            TriggerHurtAnimation(hitbox.HurtSide, hitbox.HurtHeightFloat, hitbox.HurtPower);
             hitstop.Trigger(hitbox.BlockedHitStop);
         };
         stateMachine.BlockedState.OnExit += () => animator.SetBool("STATE_BLOCKED", false);
 
         stateMachine.StaggerState.OnEnterHitbox += (in Hitbox hitbox) => {
             animator.SetBool("STATE_STAGGER", true);
-            TriggerHurtAnimation(hitbox.HurtSide, hitbox.HurtHeight, hitbox.HurtPower);
+            TriggerHurtAnimation(hitbox.HurtSide, hitbox.HurtHeightFloat, hitbox.HurtPower);
             hitstop.Trigger(hitbox.StaggerHitStop);
         };
         stateMachine.StaggerState.OnExit += () => animator.SetBool("STATE_STAGGER", false);
 
         stateMachine.KOState.OnEnterHitbox += (in Hitbox hitbox) => {
             animator.SetFloat("hurt_side", hitbox.HurtSide);
-            animator.SetFloat("hurt_height", hitbox.HurtHeight);
+            animator.SetFloat("hurt_height", hitbox.HurtHeightFloat);
             animator.SetFloat("hurt_power", hitbox.HurtPower);
             animator.SetBool("STATE_KO", true);
             hitstop.Trigger(hitbox.KOHitStop);

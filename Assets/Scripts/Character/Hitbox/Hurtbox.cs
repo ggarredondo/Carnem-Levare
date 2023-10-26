@@ -17,6 +17,5 @@ public class Hurtbox : MonoBehaviour
         hitbox.SetActive(false);
         hitbox.SetHeight(hurtHeight);
         stateMachine.OnHurt?.Invoke(hitbox);
-        character.ParticlesController.Play(hurtHeight.ToString(), hitbox.Particles);
     }
 }

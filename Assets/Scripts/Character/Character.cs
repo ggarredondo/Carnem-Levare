@@ -39,12 +39,11 @@ public abstract class Character : MonoBehaviour
         CharacterStats.OnValidate(transform, GetComponent<Rigidbody>());
     }
 
-    public ref readonly CharacterStateMachine StateMachine { get => ref stateMachine; }
-    public ref readonly Controller Controller { get => ref controller; }
-    public ref readonly CharacterMovement CharacterMovement { get => ref characterMovement; }
-    public ref readonly CharacterStats CharacterStats { get => ref characterStats; }
-    public ref readonly CharacterAnimation CharacterAnimation { get => ref characterAnimation; }
-    public ref readonly CharacterAudio CharacterAudio { get => ref characterAudio; }
-
-    public ref readonly ParticlesController ParticlesController { get => ref characterVisualEffects.particlesController; }
+    public ref readonly CharacterStateMachine StateMachine => ref stateMachine;
+    public ref readonly Controller Controller => ref controller;
+    public ref readonly CharacterMovement CharacterMovement => ref characterMovement;
+    public ref readonly CharacterStats CharacterStats => ref characterStats;
+    public ref readonly CharacterAnimation CharacterAnimation => ref characterAnimation;
+    public ref readonly CharacterAudio CharacterAudio => ref characterAudio;
+    public ref readonly CharacterVisualEffects CharacterVisualEffects => ref characterVisualEffects;
 }
