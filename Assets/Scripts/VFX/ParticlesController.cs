@@ -30,13 +30,13 @@ public class ParticlesController : MonoBehaviour
 
     public void Play(string ID, in GameObject particles)
     {
-        if (!disableParticles && ID != "")
+        if (!disableParticles && ID != "" && particles != null)
         {
             GameObject parent = producerTable[ID];
 
-            ParticleSystem actualParticles = InstantiateParticles(parent, particles).GetComponent<ParticleSystem>();
+            ParticleSystem currentParticles = InstantiateParticles(parent, particles).GetComponent<ParticleSystem>();
 
-            actualParticles.Play();
+            currentParticles.Play();
         }
     }
 
