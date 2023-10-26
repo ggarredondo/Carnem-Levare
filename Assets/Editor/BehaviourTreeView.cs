@@ -91,7 +91,11 @@ public class BehaviourTreeView : GraphView
 
     public void OnUpdate()
     {
-        PopulateView(tree);
+        UpdateEdges();
+
+        tree.AsignID();
+
+        tree.nodes.ForEach(n => FindNodeView(n).UpdateStyle());
     }
 
     private Color GetNewColor(float percentage)
@@ -170,6 +174,15 @@ public class BehaviourTreeView : GraphView
         }
 
         foreach (var type in TypeCache.GetTypesDerivedFrom<CompositeNode>())
+        {
+            var relevanceAttribute = (NodeRelevance)System.Attribute.GetCustomAttribute(type, typeof(NodeRelevance));
+            if (relevanceAttribute != null && relevanceAttribute.RelevantBehaviourTrees.Contains(currentBehaviourTreeType))
+            {
+                evt.menu.AppendAction($"[{type.BaseType.Name}] {type.Name}", (a) => CreateNode(type, localMousePosition));
+            }
+        }
+
+        foreach (var type in TypeCache.GetTypesDerivedFrom<DecoratorNode>())
         {
             var relevanceAttribute = (NodeRelevance)System.Attribute.GetCustomAttribute(type, typeof(NodeRelevance));
             if (relevanceAttribute != null && relevanceAttribute.RelevantBehaviourTrees.Contains(currentBehaviourTreeType))

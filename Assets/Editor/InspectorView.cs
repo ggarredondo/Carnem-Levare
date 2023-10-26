@@ -7,6 +7,7 @@ public class InspectorView : VisualElement
     public new class UxmlFactory : UxmlFactory<InspectorView, UxmlTraits> { }
     public event System.Action UpdateEvent;
     Editor editor;
+    Editor specificEditor;
 
     public InspectorView()
     {
@@ -27,6 +28,7 @@ public class InspectorView : VisualElement
 
         Object.DestroyImmediate(editor);
         editor = Editor.CreateEditor(nodeView.node, typeof(NodeEditor));
+        specificEditor = Editor.CreateEditor(nodeView.node);
 
         IMGUIContainer container = new(() => 
         {
@@ -37,8 +39,9 @@ public class InspectorView : VisualElement
 
             if (editor.target)
             {
-                EditorGUILayout.BeginVertical(GUILayout.Width(200));
+                EditorGUILayout.BeginVertical(GUILayout.ExpandWidth(true), GUILayout.MaxWidth(300));
                 editor.OnInspectorGUI();
+                specificEditor.OnInspectorGUI();
                 EditorGUILayout.EndVertical();
             }
         });

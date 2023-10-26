@@ -1,5 +1,56 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-5017015415225561856
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 98a4674b589e068468069e1b3f84b699, type: 3}
+  m_Name: LeafLine
+  m_EditorClassIdentifier: 
+  currentName: LeafLine
+  backgroundColor: {r: 0, g: 0, b: 0, a: 0}
+  textColor: {r: 1, g: 1, b: 1, a: 1}
+  ID: 3
+  selected: 0
+  guid: 34db2a8feeb2afe4cb5bdb4e6c28ed2f
+  position: {x: 14, y: 346}
+  parent: {fileID: -3170873008346537753}
+  text: 
+  timeBetweenChars: 0
+  soundsName: []
+  soundType: 0
+  effectDistance: 0
+--- !u!114 &-3170873008346537753
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 05b0fa6716b59814db3d523579dd9642, type: 3}
+  m_Name: StandardLine
+  m_EditorClassIdentifier: 
+  currentName: StandardLine
+  backgroundColor: {r: 0.6886792, g: 0.23064259, b: 0.632668, a: 0.39215687}
+  textColor: {r: 1, g: 1, b: 1, a: 1}
+  ID: 2
+  selected: 0
+  guid: a71b4c03d26ff404787d6c2570bd7b64
+  position: {x: 14, y: 235}
+  child: {fileID: -5017015415225561856}
+  parent: {fileID: 4659675284117644668}
+  text: 
+  timeBetweenChars: 0.2
+  soundsName: []
+  soundType: 0
+  effectDistance: 0
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15,6 +66,35 @@ MonoBehaviour:
   rootNode: {fileID: 5965962191499046246}
   nodes:
   - {fileID: 5965962191499046246}
+  - {fileID: 4659675284117644668}
+  - {fileID: -3170873008346537753}
+  - {fileID: -5017015415225561856}
+--- !u!114 &4659675284117644668
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 05b0fa6716b59814db3d523579dd9642, type: 3}
+  m_Name: StandardLine
+  m_EditorClassIdentifier: 
+  currentName: Sans
+  backgroundColor: {r: 0.26049152, g: 0.6509434, b: 0.15659486, a: 0.39215687}
+  textColor: {r: 1, g: 1, b: 1, a: 1}
+  ID: 1
+  selected: 0
+  guid: ae4deaa4131d49845a5fdb5e4e5938b8
+  position: {x: 14, y: 133}
+  child: {fileID: -3170873008346537753}
+  parent: {fileID: 5965962191499046246}
+  text: 
+  timeBetweenChars: 0.2
+  soundsName: []
+  soundType: 0
+  effectDistance: 0
 --- !u!114 &5965962191499046246
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -27,8 +107,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ca4a74c2e47db2847a054984e3d5b680, type: 3}
   m_Name: RootNode
   m_EditorClassIdentifier: 
+  currentName: RootNode
+  backgroundColor: {r: 0, g: 0, b: 0, a: 0}
+  textColor: {r: 1, g: 1, b: 1, a: 1}
   ID: 0
   selected: 0
   guid: 6128501f0a3b4b142abc42f48afc950f
-  position: {x: 0, y: 0}
-  child: {fileID: 0}
+  position: {x: 14, y: 54}
+  child: {fileID: 4659675284117644668}

@@ -13,11 +13,13 @@ public class NodeView : UnityEditor.Experimental.GraphView.Node
     public NodeView(Node node) : base("Assets/Editor/NodeView.uxml")
     {
         this.node = node;
-        title = node.name;
+        title = node.currentName;
         viewDataKey = node.guid;
 
         style.left = node.position.x;
         style.top = node.position.y;
+        style.backgroundColor = node.backgroundColor;
+        style.color = node.textColor;
 
         CreateInputPorts();
         CreateOutputPorts();
@@ -33,6 +35,10 @@ public class NodeView : UnityEditor.Experimental.GraphView.Node
         else if(node is LeafNode)
         {
             AddToClassList("leaf");
+        }
+        else if(node is DecoratorNode)
+        {
+            AddToClassList("decorator");
         }
         else if(node is RootNode)
         {
@@ -61,6 +67,10 @@ public class NodeView : UnityEditor.Experimental.GraphView.Node
         {
             output = InstantiatePort(Orientation.Vertical, Direction.Output, Port.Capacity.Multi, typeof(bool));
         }
+        else if(node is DecoratorNode)
+        {
+            output = InstantiatePort(Orientation.Vertical, Direction.Output, Port.Capacity.Single, typeof(bool));
+        }
         else if (node is RootNode)
         {
             output = InstantiatePort(Orientation.Vertical, Direction.Output, Port.Capacity.Single, typeof(bool));
@@ -72,6 +82,13 @@ public class NodeView : UnityEditor.Experimental.GraphView.Node
             output.style.flexDirection = FlexDirection.ColumnReverse;
             outputContainer.Add(output);
         }
+    }
+
+    public void UpdateStyle()
+    {
+        title = node.currentName;
+        style.backgroundColor = node.backgroundColor;
+        style.color = node.textColor;
     }
 
     public override void SetPosition(Rect newPos)

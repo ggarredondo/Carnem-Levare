@@ -5,19 +5,22 @@ using UnityEngine;
 [CanEditMultipleObjects]
 public class NodeEditor : Editor
 {
+    SerializedProperty currentName;
+    SerializedProperty backgroundColor;
+    SerializedProperty textColor;
     SerializedProperty ID;
-    SerializedProperty isStatic;
     SerializedProperty guid;
     SerializedProperty position;
 
     private GUIStyle headerStyle;
     private GUIStyle labelStyle;
-    private GUIStyle buttonStyle;
 
     private void Initilize()
     {
+        currentName = serializedObject.FindProperty("currentName");
+        backgroundColor = serializedObject.FindProperty("backgroundColor");
+        textColor = serializedObject.FindProperty("textColor");
         ID = serializedObject.FindProperty("ID");
-        isStatic = serializedObject.FindProperty("isStatic");
         guid = serializedObject.FindProperty("guid");
         position = serializedObject.FindProperty("position");
 
@@ -32,13 +35,6 @@ public class NodeEditor : Editor
         {
             fontStyle = FontStyle.Italic,
             margin = new RectOffset(0, 0, 0, 5)
-        };
-
-        buttonStyle = new GUIStyle(GUI.skin.button)
-        {
-            fontSize = 12,
-            fixedHeight = 30,
-            margin = new RectOffset(0, 0, 10, 0)
         };
     }
 
@@ -85,13 +81,16 @@ public class NodeEditor : Editor
         Initilize();
         serializedObject.Update();
 
-        Header("General");
+        Header("Info");
         Label("ID: ", ID.intValue.ToString());
         Label("GUID: ", guid.stringValue);
         Label("Position: ", position.vector2Value.ToString());
+        Header("Style");
+        Property(ref currentName);
+        Property(ref backgroundColor);
+        Property(ref textColor);
         DrawHorizontalGUILine();
         Header("Specific");
-        Property(ref isStatic);
 
         serializedObject.ApplyModifiedProperties();
     }

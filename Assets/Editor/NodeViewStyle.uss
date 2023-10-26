@@ -79,6 +79,10 @@
     background-color: rgb(128, 147, 241);
 }
 
+.decorator #input {
+    background-color: rgba(250, 162, 117, 255);
+}
+
 .root #output {
     background-color: rgb(185, 226, 140);
 }
@@ -96,7 +100,7 @@
 }
 
 .selected #node-state {
-    background-color: rgba(35, 255, 0, 255);
+    background-color: rgb(35, 255, 0);
 }
 
 .not_selected #node-state {

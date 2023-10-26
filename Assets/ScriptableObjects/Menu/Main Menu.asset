@@ -12,6 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aee1ffaee59488c48a373caee62427d5, type: 3}
   m_Name: SelectableMenu
   m_EditorClassIdentifier: 
+  currentName: SelectableMenu
+  backgroundColor: {r: 0, g: 0, b: 0, a: 0}
+  textColor: {r: 1, g: 1, b: 1, a: 1}
   ID: 2
   selected: 0
   guid: 67ba99c6b6d6d2d49b96d4bdbf543dd4
@@ -36,6 +39,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 931b2b08cc23bed4e96e5471c6d7f220, type: 3}
   m_Name: LeafMenu
   m_EditorClassIdentifier: 
+  currentName: LeafMenu
+  backgroundColor: {r: 0, g: 0, b: 0, a: 0}
+  textColor: {r: 1, g: 1, b: 1, a: 1}
   ID: 5
   selected: 0
   guid: a885047e368220c4d9a21812bf7e70bc
@@ -53,6 +59,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4cd0ee1d78d28d4418662a63ef8ff17c, type: 3}
   m_Name: StandardMenu
   m_EditorClassIdentifier: 
+  currentName: StandardMenu
+  backgroundColor: {r: 0, g: 0, b: 0, a: 0}
+  textColor: {r: 1, g: 1, b: 1, a: 1}
   ID: 1
   selected: 1
   guid: d78b2d2f6ebaddc4a8d6f19181a448a7
@@ -73,10 +82,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ca4a74c2e47db2847a054984e3d5b680, type: 3}
   m_Name: RootNode
   m_EditorClassIdentifier: 
+  currentName: RootNode
+  backgroundColor: {r: 0, g: 0, b: 0, a: 0}
+  textColor: {r: 1, g: 1, b: 1, a: 1}
   ID: 0
   selected: 0
   guid: 711c24f957c7e424887f7edc15f78803
-  position: {x: 0, y: 1}
+  position: {x: 0, y: -6}
   child: {fileID: -6677758487912984073}
 --- !u!114 &-1064163247548762
 MonoBehaviour:
@@ -90,6 +102,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 931b2b08cc23bed4e96e5471c6d7f220, type: 3}
   m_Name: LeafMenu
   m_EditorClassIdentifier: 
+  currentName: LeafMenu
+  backgroundColor: {r: 0, g: 0, b: 0, a: 0}
+  textColor: {r: 1, g: 1, b: 1, a: 1}
   ID: 6
   selected: 0
   guid: 62cdd3a1fe850d542bd54fb3e0722880
@@ -128,6 +143,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 931b2b08cc23bed4e96e5471c6d7f220, type: 3}
   m_Name: LeafMenu
   m_EditorClassIdentifier: 
+  currentName: LeafMenu
+  backgroundColor: {r: 0, g: 0, b: 0, a: 0}
+  textColor: {r: 1, g: 1, b: 1, a: 1}
   ID: 4
   selected: 0
   guid: c1c68bb144b2b434ea51a9ab9b159378
@@ -145,6 +163,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 931b2b08cc23bed4e96e5471c6d7f220, type: 3}
   m_Name: LeafMenu
   m_EditorClassIdentifier: 
+  currentName: LeafMenu
+  backgroundColor: {r: 0, g: 0, b: 0, a: 0}
+  textColor: {r: 1, g: 1, b: 1, a: 1}
   ID: 3
   selected: 0
   guid: f4cfb461ab15bed40a11d03e764266d4

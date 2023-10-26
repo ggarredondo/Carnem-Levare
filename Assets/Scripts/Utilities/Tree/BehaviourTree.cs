@@ -12,6 +12,9 @@ public class BehaviourTree : ScriptableObject
         Node node = CreateInstance(type) as Node;
         node.position = position;
         node.name = type.Name;
+        node.currentName = node.name;
+        node.textColor = Color.white;
+
 #if UNITY_EDITOR
         node.guid = GUID.Generate().ToString();
         Undo.RecordObject(this, "Behaviour Tree (CreateNode)");
