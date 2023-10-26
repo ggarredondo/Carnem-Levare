@@ -64,8 +64,8 @@ public class CharacterStats
     public double StepDecay(double stun, int hitNumber) => System.Math.Max(minStun, stun - (hitNumber-1) * comboDecay);
     public double HitCounterDecay(double stun, int hitNumber) => hitNumber < comboDecay ? stun : minStun;
 
-    private void AddToHealth(float addend) => health = (int) Mathf.Clamp(health + addend, 0f + System.Convert.ToSingle(NODEATH_FLAG), maxHealth);
-    private void AddToStamina(float addend) => stamina = Mathf.Clamp(stamina + addend, 0f, maxStamina);
+    public void AddToHealth(float addend) => health = (int) Mathf.Clamp(health + addend, 0f + System.Convert.ToSingle(NODEATH_FLAG), maxHealth);
+    public void AddToStamina(float addend) => stamina = Mathf.Clamp(stamina + addend, 0f, maxStamina);
 
     public void HurtDamage(in Hitbox hitbox)
     {

@@ -32,6 +32,7 @@ public class MoveState : CharacterState
 
         stateMachine.OnHurt += stats.HurtDamage;
         currentMove = moveList[moveIndex];
+        stats.AddToStamina(-currentMove.StaminaCost);
 
         currentMove.InitMove(stats);
         stateMachine.OnActivateMove += ActivateMove;

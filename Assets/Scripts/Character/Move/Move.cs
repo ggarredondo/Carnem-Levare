@@ -13,6 +13,7 @@ public abstract class Move : ScriptableObject
 
     [SerializeField] protected Sprite icon;
     [SerializeField] protected string moveName;
+    [SerializeField] protected float staminaCost = 0f;
 
     [Header("Motion")]
     #if UNITY_EDITOR
@@ -127,6 +128,7 @@ public abstract class Move : ScriptableObject
     public abstract void DeactivateMove(in CharacterStats stats);
     public abstract void EndMove(in CharacterStats stats);
 
+    public ref readonly float StaminaCost => ref staminaCost;
     public ref readonly Sprite Icon => ref icon;
     public ref readonly string AnimatorTrigger => ref animatorTrigger;
     public bool FixedDirection => fixedDirection;
