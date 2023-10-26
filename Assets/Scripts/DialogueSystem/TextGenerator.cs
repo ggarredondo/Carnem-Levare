@@ -21,71 +21,104 @@ public class TextGenerator : MonoBehaviour
     [Header("Requirements")]
     [SerializeField] private TMP_Text textBox;
     [SerializeField] private TMP_Text textBoxDuplicate;
-    [SerializeField] private TMP_InputField inputField;
+    [SerializeField] private DialogueTree dialogueTree;
 
     [Header("Parameters")]
-    [SerializeField] [Range(0f,0.2f)]private float timeBetweenChars;
-    [SerializeField] private List<string> soundsName;
+    [SerializeField] [Range(1f,2f)] private float aceleration;
     [SerializeField] private SoundType soundType;
     [SerializeField] private List<SpecialCharacter> specialChars;
-    [SerializeField] private int effectDistance;
 
-    private string inputText;
     private RNG random;
     private Dictionary<char, float> specialCharsDictionary;
+    private Coroutine typing;
+    private float speedMultiplier;
 
     private void Awake()
     {
+        speedMultiplier = 1;
+
         random = new();
         specialCharsDictionary = new();
 
         foreach (SpecialCharacter special in specialChars) {
             specialCharsDictionary.Add(special.character, special.addition / 100f);
         }
+
+        dialogueTree.Initialize();
     }
 
     public void GenerateText()
     {
-        inputText = inputField.text;
-        StartCoroutine(TypeLine());
+        typing = StartCoroutine(TypeLine(dialogueTree.CurrentLine));
     }
 
-    private IEnumerator TypeLine()
+    private IEnumerator TypeLine(IHaveText line)
     {
-        for (int i = 0; i < inputText.Length + effectDistance; i++)
+        for (int i = 0; i < line.Text.Length + line.EffectDistance; i++)
         {
-            if(i < inputText.Length)
-                textBoxDuplicate.text += inputText[i];
+            if(i < line.Text.Length)
+                textBoxDuplicate.text += line.Text[i];
 
-            if (i - effectDistance >= 0)
+            if (i - line.EffectDistance >= 0)
             {
-                char effectDelayChar = inputText[i - effectDistance];
+                char effectDelayChar = line.Text[i - line.EffectDistance];
                 textBox.text += effectDelayChar;
 
                 if (soundType == SoundType.BY_CHARACTER)
-                    PlaySound();
+                    PlaySound(ref line);
 
                 if (specialCharsDictionary.ContainsKey(effectDelayChar))
                 {
-                    float newTime = Mathf.Clamp(timeBetweenChars + timeBetweenChars * specialCharsDictionary[effectDelayChar], 0f, 5f);
-                    yield return new WaitForSecondsRealtime(newTime);
+                    float newTime = Mathf.Clamp(line.TimeBetweenChars + line.TimeBetweenChars * specialCharsDictionary[effectDelayChar], 0f, 5f);
+                    yield return new WaitForSecondsRealtime(newTime / speedMultiplier);
                 }
                 else
                 {
-                    yield return new WaitForSecondsRealtime(timeBetweenChars);
+                    yield return new WaitForSecondsRealtime(line.TimeBetweenChars / speedMultiplier);
                 }
 
                 if (soundType == SoundType.BY_WORD && effectDelayChar == ' ')
-                    PlaySound();
+                    PlaySound(ref line);
             }
         }
+
+        typing = null;
+        speedMultiplier = 1;
     }
 
-    private void PlaySound()
+    private void PlaySound(ref IHaveText line)
     {
-        if (soundsName.Count > 1)
-            GameManager.Audio.Play(soundsName[random.RangeInt(0, soundsName.Count - 1)]);
+        if (line.SoundsName.Count > 1)
+            GameManager.Audio.Play(line.SoundsName[random.RangeInt(0, line.SoundsName.Count - 1)]);
         else
-            GameManager.Audio.Play(soundsName[0]);
+            GameManager.Audio.Play(line.SoundsName[0]);
+    }
+
+    private void ResetText()
+    {
+        textBox.text = "";
+        textBoxDuplicate.text = "";
+    }
+
+    public void NextLine()
+    {
+        if (typing == null)
+        {
+            dialogueTree.Next();
+            ResetText();
+            GenerateText();
+        }
+        else speedMultiplier *= aceleration;
+    }
+
+    public void PreviousLine()
+    {
+        if (typing == null)
+        {
+            dialogueTree.Previous();
+            ResetText();
+            GenerateText();
+        }
+        else speedMultiplier *= aceleration;
     }
 }

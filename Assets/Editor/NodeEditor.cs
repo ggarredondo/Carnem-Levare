@@ -90,7 +90,7 @@ public class NodeEditor : Editor
         Property(ref backgroundColor);
         Property(ref textColor);
         DrawHorizontalGUILine();
-        Header("Specific");
+        Header("Settings");
 
         serializedObject.ApplyModifiedProperties();
     }

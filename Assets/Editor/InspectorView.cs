@@ -1,6 +1,7 @@
 using UnityEngine.UIElements;
 using UnityEditor;
 using UnityEngine;
+using System.Linq;
 
 public class InspectorView : VisualElement
 {
@@ -28,7 +29,16 @@ public class InspectorView : VisualElement
 
         Object.DestroyImmediate(editor);
         editor = Editor.CreateEditor(nodeView.node, typeof(NodeEditor));
-        specificEditor = Editor.CreateEditor(nodeView.node);
+
+        var relevanceAttribute = (NodeRelevance)System.Attribute.GetCustomAttribute(nodeView.node.GetType(), typeof(NodeRelevance));
+        if (relevanceAttribute != null && relevanceAttribute.RelevantBehaviourTrees.Contains(typeof(DialogueTree)))
+        {
+            specificEditor = Editor.CreateEditor(nodeView.node, typeof(DialogueNodeEditor));
+        }
+        else
+        {
+            specificEditor = Editor.CreateEditor(nodeView.node);
+        }
 
         IMGUIContainer container = new(() => 
         {
