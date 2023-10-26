@@ -512,7 +512,13 @@ MonoBehaviour:
     height: 1.1
     mass: 1
     drag: 0
-    moveList: []
+    moveList:
+    - {fileID: 11400000, guid: 01ba2a5256110f24ab27bbe33fa13e4b, type: 2}
+    - {fileID: 11400000, guid: 2d9197890fe226648ac6913a5e085804, type: 2}
+    - {fileID: 11400000, guid: 9e48c00f5630b30409a2e0aa4cbf57f3, type: 2}
+    - {fileID: 11400000, guid: 9f0084ef3672689438005f63931d6168, type: 2}
+    - {fileID: 11400000, guid: 2a511c4826c503d48831244e7b3bacb7, type: 2}
+    - {fileID: 11400000, guid: a440f9428d7de77479707c2cff914513, type: 2}
     hitboxList:
     - {fileID: 3544833091616213104}
     - {fileID: 7922484474212002442}
@@ -557,7 +563,8 @@ MonoBehaviour:
   move3: 0
   AIBehaviour: {fileID: 11400000, guid: d685f91f6ec7ecb44bc435195bb44e1f, type: 2}
   moveSequences:
-  - sequence: 00000000010000000200000003000000
+  - sequence: 00000000020000000400000003000000
+  - sequence: 01000000030000000400000002000000
   minReactionTimeMs: 220
   maxReactionTimeMs: 320
 --- !u!54 &5975427957589119885
