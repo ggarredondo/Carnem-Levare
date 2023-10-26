@@ -496,7 +496,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   characterStats:
     health: 0
-    maxHealth: 400
+    maxHealth: 300
     stamina: 0
     maxStamina: 100
     staminaRegen: 10
