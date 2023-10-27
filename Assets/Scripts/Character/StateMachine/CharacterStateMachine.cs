@@ -40,7 +40,7 @@ public class CharacterStateMachine : MonoBehaviour
         hurtState.Reference(this, stats, movement);
         staggerState.Reference(this, stats, movement);
         blockedState.Reference (this, controller, stats, movement);
-        koState.Reference(this);
+        koState.Reference(this, movement);
     }
 
     private void Update() => currentState.Update();
