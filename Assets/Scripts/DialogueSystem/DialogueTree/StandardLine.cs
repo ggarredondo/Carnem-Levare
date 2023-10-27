@@ -28,4 +28,14 @@ public class StandardLine : DecoratorNode, IHaveText
     public List<string> SoundsName => soundsName;
 
     public int EffectDistance => effectDistance;
+
+    public override void Clone(Node node)
+    {
+        base.Clone(node);
+
+        fontSize = ((StandardLine)node).fontSize;
+        timeBetweenChars = ((StandardLine)node).timeBetweenChars;
+        effectDistance = ((StandardLine)node).effectDistance;
+        soundsName = new List<string>(((StandardLine)node).soundsName);
+    }
 }

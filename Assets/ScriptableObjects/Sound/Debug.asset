@@ -29,87 +29,12 @@ MonoBehaviour:
   soundGroups:
   - sounds:
     - name: TextGenerator1
-      clip: {fileID: 8300000, guid: 95dad0aa6bc261542b591e4c21cc4952, type: 3}
+      clip: {fileID: 8300000, guid: 3d4c26cf7521a0044bff5b2db52ad033, type: 3}
       volume: 1
       pitch: 1
       loop: 0
     - name: TextGenerator2
-      clip: {fileID: 8300000, guid: e4ef3e4546efdb94194c984b903688d0, type: 3}
-      volume: 1
-      pitch: 1
-      loop: 0
-    - name: TextGenerator3
-      clip: {fileID: 8300000, guid: d85ae7691f535f74aa40a2a7ee836e00, type: 3}
-      volume: 1
-      pitch: 1
-      loop: 0
-    - name: TextGenerator4
-      clip: {fileID: 8300000, guid: 06ae3731939b45345a471b7aa725a738, type: 3}
-      volume: 1
-      pitch: 1
-      loop: 0
-    - name: TextGenerator5
-      clip: {fileID: 8300000, guid: 0fab8ca4b5259474a81c7e6f3b61c945, type: 3}
-      volume: 1
-      pitch: 1
-      loop: 0
-    - name: TextGenerator6
-      clip: {fileID: 8300000, guid: 7100a491e8ff6dc45a1510412ba02a15, type: 3}
-      volume: 1
-      pitch: 1
-      loop: 0
-    - name: TextGenerator7
-      clip: {fileID: 8300000, guid: a7315813e98c39a4194ba8ec0dc94d0a, type: 3}
-      volume: 1
-      pitch: 1
-      loop: 0
-    - name: TextGenerator8
-      clip: {fileID: 8300000, guid: 0f06173c399dd294e891e82770d20f8c, type: 3}
-      volume: 1
-      pitch: 1
-      loop: 0
-    - name: TextGenerator9
-      clip: {fileID: 8300000, guid: a62969020a505d5498fefadf57e72dfa, type: 3}
-      volume: 1
-      pitch: 1
-      loop: 0
-    - name: TextGenerator10
-      clip: {fileID: 8300000, guid: bf709b7c6803dd7488559c680ce5f5a2, type: 3}
-      volume: 1
-      pitch: 1
-      loop: 0
-    - name: TextGenerator11
-      clip: {fileID: 8300000, guid: 8879b7f1ed1945d47b43cbef263b752d, type: 3}
-      volume: 1
-      pitch: 1
-      loop: 0
-    - name: TextGenerator12
-      clip: {fileID: 8300000, guid: 2a6fe7e869cadb4468edbdacffcc683e, type: 3}
-      volume: 1
-      pitch: 1
-      loop: 0
-    - name: TextGenerator13
-      clip: {fileID: 8300000, guid: ee676057b882bc7499d692aa795aa7d0, type: 3}
-      volume: 1
-      pitch: 1
-      loop: 0
-    - name: TextGenerator14
-      clip: {fileID: 8300000, guid: a2bdbe64d6742524997de77d2c69db52, type: 3}
-      volume: 1
-      pitch: 1
-      loop: 0
-    - name: TextGenerator15
-      clip: {fileID: 8300000, guid: 5080611525831b240830cfdb47262063, type: 3}
-      volume: 1
-      pitch: 1
-      loop: 0
-    - name: TextGenerator16
-      clip: {fileID: 8300000, guid: 613403a03a3515d4986ad93565b7df2b, type: 3}
-      volume: 1
-      pitch: 1
-      loop: 0
-    - name: TextGenerator17
-      clip: {fileID: 8300000, guid: f363811f64b0e9048a6264f264c44122, type: 3}
+      clip: {fileID: 8300000, guid: fde1d9ba7d56e5d4294a593dfd440807, type: 3}
       volume: 1
       pitch: 1
       loop: 0

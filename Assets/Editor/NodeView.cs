@@ -115,6 +115,4 @@ public class NodeView : UnityEditor.Experimental.GraphView.Node
             if (node.selected) AddToClassList("selected");
             else AddToClassList("not_selected");
     }
-
-
 }

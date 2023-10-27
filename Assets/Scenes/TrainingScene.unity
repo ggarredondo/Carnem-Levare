@@ -2948,7 +2948,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &810496797559386489
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3298,6 +3298,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: CombatInfo
+      objectReference: {fileID: 0}
+    - target: {fileID: 4760920767604004358, guid: f80adce726320cc429a97659b6107853,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4760920767604004359, guid: f80adce726320cc429a97659b6107853,
         type: 3}

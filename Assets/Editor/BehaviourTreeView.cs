@@ -192,6 +192,12 @@ public class BehaviourTreeView : GraphView
         }
     }
 
+    public void OnDuplicate(NodeView nodeView)
+    {
+        Node node = tree.CreateNode(nodeView.node);
+        CreateNodeView(ref node);
+    }
+
     void CreateNode(System.Type type, Vector2 position)
     {
         Node node = tree.CreateNode(type, position);

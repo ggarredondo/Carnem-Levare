@@ -7,6 +7,7 @@ public class InspectorView : VisualElement
 {
     public new class UxmlFactory : UxmlFactory<InspectorView, UxmlTraits> { }
     public event System.Action UpdateEvent;
+    public event System.Action<NodeView> DuplicateEvent;
     Editor editor;
     Editor specificEditor;
 
@@ -42,10 +43,10 @@ public class InspectorView : VisualElement
 
         IMGUIContainer container = new(() => 
         {
-            if (GUILayout.Button("UPDATE"))
-            {
-                UpdateEvent?.Invoke();
-            }
+            if (GUILayout.Button("UPDATE")) UpdateEvent?.Invoke();
+
+            if(nodeView.node.GetType() != typeof(RootNode))
+                if (GUILayout.Button("DUPLICATE")) DuplicateEvent?.Invoke(nodeView);
 
             if (editor.target)
             {

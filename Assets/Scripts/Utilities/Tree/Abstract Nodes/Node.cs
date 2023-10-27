@@ -30,4 +30,12 @@ public abstract class Node : ScriptableObject
         if (this is IHaveChildren n)
             n.InitializeChildren();
     }
+
+    public virtual void Clone(Node node)
+    {
+        currentName = node.currentName;
+        backgroundColor = node.backgroundColor;
+        textColor = node.textColor;
+        position = node.position;
+    }
 }

@@ -30,6 +30,26 @@ public class BehaviourTree : ScriptableObject
         return node;
     }
 
+    public Node CreateNode(Node copyNode)
+    {
+        Node node = CreateInstance(copyNode.GetType()) as Node;
+        node.Clone(copyNode);
+
+#if UNITY_EDITOR
+        node.guid = GUID.Generate().ToString();
+        Undo.RecordObject(this, "Behaviour Tree (CreateNode)");
+#endif
+        nodes.Add(node);
+
+#if UNITY_EDITOR
+        AssetDatabase.AddObjectToAsset(node, this);
+        Undo.RegisterCreatedObjectUndo(node, "Behaviour Tree (CreateNode)");
+        AssetDatabase.SaveAssets();
+#endif
+
+        return node;
+    }
+
     public void DeleteNode(Node node)
     {
 #if UNITY_EDITOR

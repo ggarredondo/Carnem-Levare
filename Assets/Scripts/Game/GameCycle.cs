@@ -74,6 +74,7 @@ public class GameCycle : MonoBehaviour, IObjectInitialize
         TransitionPlayer.extraTime = 2;
         TransitionPlayer.text.text = "YOU DIED";
 
+        GameManager.Save.SetDefault();
         GameManager.Audio.Play("BackMenu");
         GameManager.Scene.PreviousScene();
     }

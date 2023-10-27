@@ -49,7 +49,14 @@ public class TextGenerator : MonoBehaviour
 
     public void GenerateText()
     {
+        Configure(dialogueTree.CurrentLine);
         typing = StartCoroutine(TypeLine(dialogueTree.CurrentLine));
+    }
+
+    private void Configure(IHaveText line)
+    {
+        textBox.fontSize = line.FontSize;
+        textBoxDuplicate.fontSize = line.FontSize;
     }
 
     private IEnumerator TypeLine(IHaveText line)

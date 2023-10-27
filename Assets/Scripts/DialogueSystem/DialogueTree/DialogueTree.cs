@@ -17,6 +17,7 @@ public class DialogueTree : BehaviourTree
     private void UpdateCurrentNode()
     {
         currentNode = (IHaveText)nodeStack.Peek();
+        nodeStack.Peek().selected = true;
     }
 
     public IHaveText CurrentLine => currentNode;
@@ -29,7 +30,8 @@ public class DialogueTree : BehaviourTree
 
             if (children.Count == 1)
             {
-                nodeStack.Push(node.GetChildren()[0]);
+                nodeStack.Peek().selected = false;
+                nodeStack.Push(children[0]);
                 UpdateCurrentNode();
             }
         }
@@ -39,6 +41,7 @@ public class DialogueTree : BehaviourTree
     {
         if (nodeStack.Peek() is IHaveParent node && node.GetParent() is not RootNode)
         {
+            nodeStack.Peek().selected = false;
             nodeStack.Push(node.GetParent());
             UpdateCurrentNode();
         }

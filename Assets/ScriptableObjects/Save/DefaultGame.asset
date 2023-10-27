@@ -26,5 +26,4 @@ MonoBehaviour:
     enemyResourcesFolder: Enemies/
     enemyPrefabNames:
     - Enemy 1
-    - Enemy 6
-    - Enemy 7
+    - Enemy 2

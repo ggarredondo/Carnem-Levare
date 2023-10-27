@@ -28,4 +28,14 @@ public class LeafLine : LeafNode, IHaveText
     public List<string> SoundsName => soundsName;
 
     public int EffectDistance => effectDistance;
+
+    public override void Clone(Node node)
+    {
+        base.Clone(node);
+
+        fontSize = ((LeafLine)node).fontSize;
+        timeBetweenChars = ((LeafLine)node).timeBetweenChars;
+        effectDistance = ((LeafLine)node).effectDistance;
+        soundsName = new List<string>(((LeafLine)node).soundsName);
+    }
 }

@@ -44,6 +44,7 @@ public class BehaviourTreeEditor : EditorWindow
         inspectorView = root.Q<InspectorView>();
         treeView.OnNodeSelected = OnNodeSelectionChange;
         inspectorView.UpdateEvent += treeView.OnUpdate;
+        inspectorView.DuplicateEvent += treeView.OnDuplicate;
 
         OnSelectionChange();
     }
