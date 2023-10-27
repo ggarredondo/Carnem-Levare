@@ -14,9 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   icon: {fileID: 21300000, guid: 73f2e0e785a93fd4982fae306299f5e2, type: 3}
   moveName: Left Leading Jab
+  staminaCost: 0
   animations:
   - animation: {fileID: 7400000, guid: e652c0869035b6b418eef0c72bbb19c0, type: 2}
-    motionSpeed: 1
+    motionSpeed: 0.8
     position: {x: 0, y: 0}
   fixedDirection: 0
   directionSpeed: 1
