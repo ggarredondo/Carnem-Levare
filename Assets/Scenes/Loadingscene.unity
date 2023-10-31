@@ -416,8 +416,20 @@ MonoBehaviour:
   - m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 3855076179960377308}
-        m_TargetAssemblyTypeName: LoadingScreen, Assembly-CSharp
+        m_TargetAssemblyTypeName: LoadingMask, Assembly-CSharp
         m_MethodName: StopMask
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 3855076179960377308}
+        m_TargetAssemblyTypeName: LoadingMask, Assembly-CSharp
+        m_MethodName: ReproduceText
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -445,6 +457,14 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: 72f2f0f8-5279-4a84-b3cd-fd13ab97abe9
     m_ActionName: Main Movement/ChangeCamera[/XInputControllerWindows/buttonWest,/Keyboard/2]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 8be192fa-c693-482b-b1f0-6ea82df29bda
+    m_ActionName: Main Movement/Action4[/Keyboard/leftShift]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 52967bb1-8153-4b1d-b029-11f14d4033bd
+    m_ActionName: UI/Scrollbar
   m_NeverAutoSwitchControlSchemes: 1
   m_DefaultControlScheme: 
   m_DefaultActionMap: LoadingScreen
@@ -586,13 +606,13 @@ PrefabInstance:
   m_SourcePrefab: {fileID: 100100000, guid: 5885e7377946e014fb952b318795020d, type: 3}
 --- !u!114 &3855076179960377308 stripped
 MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 4242559467631803007, guid: 5885e7377946e014fb952b318795020d,
+  m_CorrespondingSourceObject: {fileID: 6863543809192894885, guid: 5885e7377946e014fb952b318795020d,
     type: 3}
   m_PrefabInstance: {fileID: 3855076179960377307}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 18b55797ef8abea458ef1ad8e7f83d77, type: 3}
+  m_Script: {fileID: 11500000, guid: 5d393805cea028d41beeb89e1b37ad0f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 

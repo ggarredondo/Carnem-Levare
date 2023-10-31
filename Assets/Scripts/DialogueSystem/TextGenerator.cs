@@ -47,7 +47,7 @@ public class TextGenerator : MonoBehaviour
         dialogueTree.Initialize();
     }
 
-    public void GenerateText()
+    private void GenerateText()
     {
         Configure(dialogueTree.CurrentLine);
         typing = StartCoroutine(TypeLine(dialogueTree.CurrentLine));
@@ -111,21 +111,25 @@ public class TextGenerator : MonoBehaviour
     {
         if (typing == null)
         {
-            dialogueTree.Next();
-            ResetText();
-            GenerateText();
+            if (dialogueTree.Next())
+            {
+                ResetText();
+                GenerateText();
+            }
         }
-        else speedMultiplier *= aceleration;
+        else speedMultiplier = Mathf.Clamp(speedMultiplier * aceleration, 1, 2);
     }
 
     public void PreviousLine()
     {
         if (typing == null)
         {
-            dialogueTree.Previous();
-            ResetText();
-            GenerateText();
+            if (dialogueTree.Previous())
+            {
+                ResetText();
+                GenerateText();
+            }
         }
-        else speedMultiplier *= aceleration;
+        else speedMultiplier = Mathf.Clamp(speedMultiplier * aceleration, 1, 2);
     }
 }

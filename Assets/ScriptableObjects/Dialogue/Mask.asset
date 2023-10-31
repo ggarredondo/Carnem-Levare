@@ -1,0 +1,148 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-5022440107907056062
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 98a4674b589e068468069e1b3f84b699, type: 3}
+  m_Name: LeafLine
+  m_EditorClassIdentifier: 
+  currentName: Mask 4
+  backgroundColor: {r: 1, g: 0.9019608, b: 0, a: 0.39215687}
+  textColor: {r: 1, g: 1, b: 1, a: 1}
+  ID: 4
+  selected: 1
+  guid: 666994e742193be41a63ae6f332dfc6a
+  position: {x: 14, y: 429}
+  parent: {fileID: 4207210451816425443}
+  text: :)
+  fontSize: 100
+  timeBetweenChars: 0.025
+  soundsName:
+  - MaskTalking
+  effectDistance: 0
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 80afe90bd00098b449ee1bf4893322a4, type: 3}
+  m_Name: Mask
+  m_EditorClassIdentifier: 
+  rootNode: {fileID: 5965962191499046246}
+  nodes:
+  - {fileID: 5965962191499046246}
+  - {fileID: 4659675284117644668}
+  - {fileID: 9208040949133887538}
+  - {fileID: 4207210451816425443}
+  - {fileID: -5022440107907056062}
+--- !u!114 &4207210451816425443
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 05b0fa6716b59814db3d523579dd9642, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentName: Mask 3
+  backgroundColor: {r: 1, g: 0.90202916, b: 0, a: 0.39215687}
+  textColor: {r: 1, g: 1, b: 1, a: 1}
+  ID: 3
+  selected: 0
+  guid: a50e379ef79b0da40bfa1c4c78453b9b
+  position: {x: 14, y: 324}
+  child: {fileID: -5022440107907056062}
+  parent: {fileID: 9208040949133887538}
+  text: Estaba mareao
+  fontSize: 60
+  timeBetweenChars: 0.1
+  soundsName:
+  - MaskTalking
+  effectDistance: 0
+--- !u!114 &4659675284117644668
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 05b0fa6716b59814db3d523579dd9642, type: 3}
+  m_Name: StandardLine
+  m_EditorClassIdentifier: 
+  currentName: Mask 1
+  backgroundColor: {r: 1, g: 0.90202916, b: 0, a: 0.39215687}
+  textColor: {r: 1, g: 1, b: 1, a: 1}
+  ID: 1
+  selected: 0
+  guid: ae4deaa4131d49845a5fdb5e4e5938b8
+  position: {x: 14, y: 127}
+  child: {fileID: 9208040949133887538}
+  parent: {fileID: 5965962191499046246}
+  text: Hola, me presento, soy el Carnem Levare
+  fontSize: 50
+  timeBetweenChars: 0.1
+  soundsName:
+  - MaskTalking
+  effectDistance: 0
+--- !u!114 &5965962191499046246
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ca4a74c2e47db2847a054984e3d5b680, type: 3}
+  m_Name: RootNode
+  m_EditorClassIdentifier: 
+  currentName: RootNode
+  backgroundColor: {r: 0, g: 0, b: 0, a: 0}
+  textColor: {r: 1, g: 1, b: 1, a: 1}
+  ID: 0
+  selected: 0
+  guid: 6128501f0a3b4b142abc42f48afc950f
+  position: {x: 14, y: 45}
+  child: {fileID: 4659675284117644668}
+--- !u!114 &9208040949133887538
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 05b0fa6716b59814db3d523579dd9642, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentName: Mask 2
+  backgroundColor: {r: 1, g: 0.90202916, b: 0, a: 0.39215687}
+  textColor: {r: 1, g: 1, b: 1, a: 1}
+  ID: 2
+  selected: 0
+  guid: 44dbc3a30143b884d83f588164bab7b3
+  position: {x: 14, y: 225}
+  child: {fileID: 4207210451816425443}
+  parent: {fileID: 4659675284117644668}
+  text: Gracias por hacer que pare de dar vueltas
+  fontSize: 50
+  timeBetweenChars: 0.1
+  soundsName:
+  - MaskTalking
+  effectDistance: 0

@@ -68,11 +68,6 @@ MonoBehaviour:
       volume: 1
       pitch: 1
       loop: 0
-    - name: MaskAlert
-      clip: {fileID: 8300000, guid: 977faa92ad1efc74fb101e3c36767b03, type: 3}
-      volume: 1
-      pitch: 1
-      loop: 0
   - sounds:
     - name: InteractMoveMenu
       clip: {fileID: 8300000, guid: f212489be7147d44695be7d68564c8f2, type: 3}
@@ -117,5 +112,16 @@ MonoBehaviour:
     - name: NewMove2
       clip: {fileID: 8300000, guid: 16fe2cf87ede87845beff9854ca59a03, type: 3}
       volume: 0.3
+      pitch: 1
+      loop: 0
+  - sounds:
+    - name: MaskAlert
+      clip: {fileID: 8300000, guid: 977faa92ad1efc74fb101e3c36767b03, type: 3}
+      volume: 1
+      pitch: 1
+      loop: 0
+    - name: MaskTalking
+      clip: {fileID: 8300000, guid: cdbe0b2531e7046468c541e9d60325ed, type: 3}
+      volume: 1
       pitch: 1
       loop: 0

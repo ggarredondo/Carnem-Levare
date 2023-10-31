@@ -15,12 +15,12 @@ public class ParticlesController : MonoBehaviour
     [SerializeField] private bool disableParticles;
 
     private Dictionary<string, GameObject> producerTable;
-    private Dictionary<GameObject, GameObject> producerParticlesTable;
+    private Dictionary<string, GameObject> instantiateParticlesTable;
 
     private void Awake()
     {
         producerTable = new();
-        producerParticlesTable = new();
+        instantiateParticlesTable = new();
 
         foreach(Producer producer in producers)
         {
@@ -33,26 +33,17 @@ public class ParticlesController : MonoBehaviour
         if (!disableParticles && ID != "" && particles != null)
         {
             GameObject parent = producerTable[ID];
-
             ParticleSystem currentParticles = InstantiateParticles(parent, particles).GetComponent<ParticleSystem>();
-
             currentParticles.Play();
         }
     }
 
     private GameObject InstantiateParticles(in GameObject parent, in GameObject particles)
     {
-        if (producerParticlesTable.ContainsKey(parent))
-        {
-            Destroy(producerParticlesTable[parent]);
-            producerParticlesTable.Remove(parent);
-        }
+        if (!instantiateParticlesTable.ContainsKey(particles.name))
+            instantiateParticlesTable.Add(particles.name, Instantiate(particles, parent.transform));
 
-        GameObject result = Instantiate(particles, parent.transform);
-
-        producerParticlesTable.Add(parent, result);
-
-        return result;
+        return instantiateParticlesTable[particles.name];
     }
 }
 

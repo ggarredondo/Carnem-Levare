@@ -11,12 +11,8 @@ public class LoadingScreen : MonoBehaviour
     [SerializeField] private float progressBarSpeed;
     [SerializeField] private Animator loadingTextAnim;
 
-    [Header("Mask")]
-    [SerializeField] private Animator maskAnim;
-
     private string continueAction;
     private float actualProgress;
-    private bool isStopped;
 
     private void Start()
     {
@@ -47,18 +43,6 @@ public class LoadingScreen : MonoBehaviour
                               (p) => progressBar.transform.localScale = new Vector3(p, progressBar.transform.localScale.y, progressBar.transform.localScale.z), 
                               progressBarSpeed,
                               CameraUtilities.Lineal);
-    }
-
-    public void StopMask()
-    {
-        if (!isStopped)
-        {
-            isStopped = true;
-            GameManager.Audio.Play("MaskAlert");
-            GameManager.Input.Rumble(0.2f, 1f, 1f);
-            maskAnim.speed = 6;
-            maskAnim.SetBool("Stop", true);
-        }
     }
 
     public void Activate()

@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Threading.Tasks;
+using LerpUtilities;
 
 public class GameCycle : MonoBehaviour, IObjectInitialize
 {
@@ -9,10 +10,14 @@ public class GameCycle : MonoBehaviour, IObjectInitialize
     [Header("Requirements")]
     [SerializeField] private EnemyLoader enemyLoader;
     [SerializeField] private RewardGenerator rewardGenerator;
+    [SerializeField] private Light ambientLight;
+    [SerializeField] private Light pointLight;
 
     [Header("Parameters")]
     [SerializeField] private float waitAfterDeath;
     [SerializeField] private float waitAfterReward;
+
+    private float localHealth;
 
     public void Initialize(ref GameObject player, ref GameObject enemy)
     {
@@ -24,12 +29,34 @@ public class GameCycle : MonoBehaviour, IObjectInitialize
 
         this.enemy.StateMachine.KOState.OnEnter += Victory;
         this.player.StateMachine.KOState.OnEnter += Defeat;
+        this.player.StateMachine.HurtState.OnEnter += HurtPlayer;
+        this.enemy.StateMachine.HurtState.OnEnter += HurtEnemy;
+    }
+
+    private async void HurtEnemy()
+    {
+        localHealth = enemy.CharacterStats.Health / (float)enemy.CharacterStats.MaxHealth;
+
+        await Lerp.Value(pointLight.intensity,
+                         20 + 30 * (1 - localHealth),
+                         (i) => pointLight.intensity = i, 2f);
+    }
+
+    private async void HurtPlayer()
+    {
+        localHealth = player.CharacterStats.Health / (float)player.CharacterStats.MaxHealth;
+
+        await Lerp.Value(ambientLight.color,
+                         new Color(localHealth, ambientLight.color.g, ambientLight.color.b, ambientLight.color.a),
+                         (c) => ambientLight.color = c, 2f);
     }
 
     private void OnDestroy()
     {
         enemy.StateMachine.KOState.OnEnter -= Victory;
         player.StateMachine.KOState.OnEnter -= Defeat;
+        this.player.StateMachine.HurtState.OnEnter -= HurtPlayer;
+        this.enemy.StateMachine.HurtState.OnEnter -= HurtEnemy;
     }
 
     private async void Victory()
