@@ -38,7 +38,7 @@ public class GameCycle : MonoBehaviour, IObjectInitialize
         localHealth = enemy.CharacterStats.Health / (float)enemy.CharacterStats.MaxHealth;
 
         await Lerp.Value(pointLight.intensity,
-                         20 + 30 * (1 - localHealth),
+                         20 + 20 * (1 - localHealth),
                          (i) => pointLight.intensity = i, 2f);
     }
 
@@ -55,8 +55,8 @@ public class GameCycle : MonoBehaviour, IObjectInitialize
     {
         enemy.StateMachine.KOState.OnEnter -= Victory;
         player.StateMachine.KOState.OnEnter -= Defeat;
-        this.player.StateMachine.HurtState.OnEnter -= HurtPlayer;
-        this.enemy.StateMachine.HurtState.OnEnter -= HurtEnemy;
+        player.StateMachine.HurtState.OnEnter -= HurtPlayer;
+        enemy.StateMachine.HurtState.OnEnter -= HurtEnemy;
     }
 
     private async void Victory()

@@ -282,12 +282,11 @@ MonoBehaviour:
   textBoxDuplicate: {fileID: 8005524684544177414}
   dialogueTree: {fileID: 11400000, guid: cde9516860a95bd4888e923400dc65cc, type: 2}
   aceleration: 1
-  soundType: 0
+  soundType: 2
   specialChars:
   - character: 44
-    addition: 600
-  - character: 46
-    addition: 1000
+    addition: 200
+  repeatLastLine: 1
 --- !u!114 &584079072466699806
 MonoBehaviour:
   m_ObjectHideFlags: 0

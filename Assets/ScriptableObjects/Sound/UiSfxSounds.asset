@@ -125,3 +125,23 @@ MonoBehaviour:
       volume: 1
       pitch: 1
       loop: 0
+    - name: MaskDialogue1
+      clip: {fileID: 8300000, guid: a65b9c38b346df243a2f39e3e65d1134, type: 3}
+      volume: 1
+      pitch: 1
+      loop: 0
+    - name: MaskDialogue2
+      clip: {fileID: 8300000, guid: dd077e1874d21f94e83efcb9712ce729, type: 3}
+      volume: 1
+      pitch: 1
+      loop: 0
+    - name: MaskDialogue3
+      clip: {fileID: 8300000, guid: c5e31b33ae602e94b8ebaa59a083b9fa, type: 3}
+      volume: 1
+      pitch: 1
+      loop: 0
+    - name: MaskDialogue4
+      clip: {fileID: 8300000, guid: 76b02bf3de4ded346abb776997088e43, type: 3}
+      volume: 1
+      pitch: 1
+      loop: 0

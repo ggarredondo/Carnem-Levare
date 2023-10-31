@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &-5022440107907056062
+--- !u!114 &-608482429323845504
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -12,19 +12,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 98a4674b589e068468069e1b3f84b699, type: 3}
   m_Name: LeafLine
   m_EditorClassIdentifier: 
-  currentName: Mask 4
+  currentName: Mask 5
   backgroundColor: {r: 1, g: 0.9019608, b: 0, a: 0.39215687}
   textColor: {r: 1, g: 1, b: 1, a: 1}
-  ID: 4
+  ID: 5
   selected: 1
-  guid: 666994e742193be41a63ae6f332dfc6a
-  position: {x: 14, y: 429}
-  parent: {fileID: 4207210451816425443}
-  text: :)
-  fontSize: 100
-  timeBetweenChars: 0.025
+  guid: eb901b132c221674589302a5d39d136c
+  position: {x: 14, y: 534}
+  parent: {fileID: 7130643456388243127}
+  text: ...
+  fontSize: 50
+  color: {r: 1, g: 1, b: 1, a: 1}
+  colorGradient: {fileID: 11400000, guid: e1bb4aac4d5dd3446b69da3d9bcda924, type: 2}
+  style: 0
+  characterSpacing: 0
+  wordSpacing: 0
+  timeBetweenChars: 0.3
   soundsName:
   - MaskTalking
+  soundGenerationType: 0
   effectDistance: 0
 --- !u!114 &11400000
 MonoBehaviour:
@@ -44,7 +50,8 @@ MonoBehaviour:
   - {fileID: 4659675284117644668}
   - {fileID: 9208040949133887538}
   - {fileID: 4207210451816425443}
-  - {fileID: -5022440107907056062}
+  - {fileID: 7130643456388243127}
+  - {fileID: -608482429323845504}
 --- !u!114 &4207210451816425443
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -63,14 +70,20 @@ MonoBehaviour:
   ID: 3
   selected: 0
   guid: a50e379ef79b0da40bfa1c4c78453b9b
-  position: {x: 14, y: 324}
-  child: {fileID: -5022440107907056062}
+  position: {x: 14, y: 327}
+  child: {fileID: 7130643456388243127}
   parent: {fileID: 9208040949133887538}
   text: Estaba mareao
   fontSize: 60
-  timeBetweenChars: 0.1
+  color: {r: 1, g: 1, b: 1, a: 1}
+  colorGradient: {fileID: 11400000, guid: 6fd61d082e8688d4d871068b85223d45, type: 2}
+  style: 3
+  characterSpacing: 10
+  wordSpacing: 0
+  timeBetweenChars: 0.05
   soundsName:
-  - MaskTalking
+  - MaskDialogue3
+  soundGenerationType: 2
   effectDistance: 0
 --- !u!114 &4659675284117644668
 MonoBehaviour:
@@ -95,9 +108,15 @@ MonoBehaviour:
   parent: {fileID: 5965962191499046246}
   text: Hola, me presento, soy el Carnem Levare
   fontSize: 50
-  timeBetweenChars: 0.1
+  color: {r: 1, g: 1, b: 1, a: 1}
+  colorGradient: {fileID: 11400000, guid: e1bb4aac4d5dd3446b69da3d9bcda924, type: 2}
+  style: 0
+  characterSpacing: 0
+  wordSpacing: 0
+  timeBetweenChars: 0.05
   soundsName:
-  - MaskTalking
+  - MaskDialogue1
+  soundGenerationType: 2
   effectDistance: 0
 --- !u!114 &5965962191499046246
 MonoBehaviour:
@@ -117,8 +136,41 @@ MonoBehaviour:
   ID: 0
   selected: 0
   guid: 6128501f0a3b4b142abc42f48afc950f
-  position: {x: 14, y: 45}
+  position: {x: 14, y: 44}
   child: {fileID: 4659675284117644668}
+--- !u!114 &7130643456388243127
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 05b0fa6716b59814db3d523579dd9642, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentName: Mask 4
+  backgroundColor: {r: 1, g: 0.90202916, b: 0, a: 0.39215687}
+  textColor: {r: 1, g: 1, b: 1, a: 1}
+  ID: 4
+  selected: 0
+  guid: cb209421b506fc34fbacac0ed0a5f329
+  position: {x: 14, y: 435}
+  child: {fileID: -608482429323845504}
+  parent: {fileID: 4207210451816425443}
+  text: Puedes continuar
+  fontSize: 50
+  color: {r: 1, g: 1, b: 1, a: 1}
+  colorGradient: {fileID: 11400000, guid: e1bb4aac4d5dd3446b69da3d9bcda924, type: 2}
+  style: 0
+  characterSpacing: 0
+  wordSpacing: 0
+  timeBetweenChars: 0.05
+  soundsName:
+  - MaskDialogue4
+  soundGenerationType: 2
+  effectDistance: 0
 --- !u!114 &9208040949133887538
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -135,14 +187,20 @@ MonoBehaviour:
   backgroundColor: {r: 1, g: 0.90202916, b: 0, a: 0.39215687}
   textColor: {r: 1, g: 1, b: 1, a: 1}
   ID: 2
-  selected: 0
+  selected: 1
   guid: 44dbc3a30143b884d83f588164bab7b3
-  position: {x: 14, y: 225}
+  position: {x: 14, y: 224}
   child: {fileID: 4207210451816425443}
   parent: {fileID: 4659675284117644668}
   text: Gracias por hacer que pare de dar vueltas
   fontSize: 50
-  timeBetweenChars: 0.1
+  color: {r: 1, g: 1, b: 1, a: 1}
+  colorGradient: {fileID: 11400000, guid: e1bb4aac4d5dd3446b69da3d9bcda924, type: 2}
+  style: 0
+  characterSpacing: 0
+  wordSpacing: 0
+  timeBetweenChars: 0.05
   soundsName:
-  - MaskTalking
+  - MaskDialogue2
+  soundGenerationType: 2
   effectDistance: 0

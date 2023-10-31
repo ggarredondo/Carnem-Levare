@@ -5,12 +5,6 @@ using TMPro;
 
 public class TextGenerator : MonoBehaviour
 {
-    private enum SoundType
-    {
-        BY_CHARACTER,
-        BY_WORD
-    }
-
     [System.Serializable]
     private struct SpecialCharacter
     {
@@ -25,13 +19,14 @@ public class TextGenerator : MonoBehaviour
 
     [Header("Parameters")]
     [SerializeField] [Range(1f,2f)] private float aceleration;
-    [SerializeField] private SoundType soundType;
     [SerializeField] private List<SpecialCharacter> specialChars;
+    [SerializeField] private bool repeatLastLine;
 
     private RNG random;
     private Dictionary<char, float> specialCharsDictionary;
     private Coroutine typing;
     private float speedMultiplier;
+    private SoundType soundType;
 
     private void Awake()
     {
@@ -53,44 +48,114 @@ public class TextGenerator : MonoBehaviour
         typing = StartCoroutine(TypeLine(dialogueTree.CurrentLine));
     }
 
+    public void NextLine()
+    {
+        if (typing == null)
+        {
+            if (dialogueTree.Next() || repeatLastLine)
+            {
+                ResetText();
+                GenerateText();
+            }
+        }
+        else speedMultiplier = Mathf.Clamp(speedMultiplier * aceleration, 1, 2);
+    }
+
+    public void PreviousLine()
+    {
+        if (typing == null)
+        {
+            if (dialogueTree.Previous() || repeatLastLine)
+            {
+                ResetText();
+                GenerateText();
+            }
+        }
+        else speedMultiplier = Mathf.Clamp(speedMultiplier * aceleration, 1, 2);
+    }
+
     private void Configure(IHaveText line)
     {
+        soundType = line.SoundGenerationType;
+
         textBox.fontSize = line.FontSize;
         textBoxDuplicate.fontSize = line.FontSize;
+
+        textBox.fontStyle = line.Style;
+        textBoxDuplicate.fontStyle = line.Style;
+
+        textBox.color = line.Color;
+        textBoxDuplicate.color = line.Color;
+
+        textBox.characterSpacing = line.CharacterSpacing;
+        textBoxDuplicate.characterSpacing = line.CharacterSpacing;
+
+        textBox.wordSpacing = line.WordSpacing;
+        textBoxDuplicate.wordSpacing = line.WordSpacing;
+
+        if (line.ColorGradient != null)
+        {
+            textBox.enableVertexGradient = true;
+            textBoxDuplicate.enableVertexGradient = true;
+
+            textBox.colorGradientPreset = line.ColorGradient;
+            textBoxDuplicate.colorGradientPreset = line.ColorGradient;
+        }
+        else
+        {
+            textBox.enableVertexGradient = false;
+            textBoxDuplicate.enableVertexGradient = false;
+        }
     }
 
     private IEnumerator TypeLine(IHaveText line)
     {
-        for (int i = 0; i < line.Text.Length + line.EffectDistance; i++)
-        {
-            if(i < line.Text.Length)
-                textBoxDuplicate.text += line.Text[i];
+        var text = line.Text;
+        var effectDistance = line.EffectDistance;
 
-            if (i - line.EffectDistance >= 0)
+        if (soundType == SoundType.BY_LINE)
+            PlaySound(ref line);
+
+        for (int i = 0; i < text.Length + effectDistance; i++)
+        {
+            if (i < text.Length)
+                textBoxDuplicate.text += text[i];
+
+            if (i >= effectDistance)
             {
-                char effectDelayChar = line.Text[i - line.EffectDistance];
+                var effectDelayChar = text[i - effectDistance];
                 textBox.text += effectDelayChar;
 
-                if (soundType == SoundType.BY_CHARACTER)
-                    PlaySound(ref line);
+                SelectSound(ref effectDelayChar, ref line);
 
-                if (specialCharsDictionary.ContainsKey(effectDelayChar))
-                {
-                    float newTime = Mathf.Clamp(line.TimeBetweenChars + line.TimeBetweenChars * specialCharsDictionary[effectDelayChar], 0f, 5f);
-                    yield return new WaitForSecondsRealtime(newTime / speedMultiplier);
-                }
-                else
-                {
-                    yield return new WaitForSecondsRealtime(line.TimeBetweenChars / speedMultiplier);
-                }
-
-                if (soundType == SoundType.BY_WORD && effectDelayChar == ' ')
-                    PlaySound(ref line);
+                yield return StartCoroutine(WaitTime(effectDelayChar, line));
             }
         }
 
         typing = null;
         speedMultiplier = 1;
+    }
+
+    private IEnumerator WaitTime(char letter, IHaveText line)
+    {
+        if (specialCharsDictionary.ContainsKey(letter))
+        {
+            float newTime = Mathf.Clamp(line.TimeBetweenChars + line.TimeBetweenChars * specialCharsDictionary[letter], 0f, 5f);
+            yield return new WaitForSecondsRealtime(newTime / speedMultiplier);
+        }
+        else
+        {
+            yield return new WaitForSecondsRealtime(line.TimeBetweenChars / speedMultiplier);
+        }
+    }
+
+    private void SelectSound(ref char letter, ref IHaveText line)
+    {
+        if (soundType == SoundType.BY_CHARACTER)
+            PlaySound(ref line);
+
+        if (soundType == SoundType.BY_WORD && letter == ' ')
+            PlaySound(ref line);
     }
 
     private void PlaySound(ref IHaveText line)
@@ -106,30 +171,11 @@ public class TextGenerator : MonoBehaviour
         textBox.text = "";
         textBoxDuplicate.text = "";
     }
+}
 
-    public void NextLine()
-    {
-        if (typing == null)
-        {
-            if (dialogueTree.Next())
-            {
-                ResetText();
-                GenerateText();
-            }
-        }
-        else speedMultiplier = Mathf.Clamp(speedMultiplier * aceleration, 1, 2);
-    }
-
-    public void PreviousLine()
-    {
-        if (typing == null)
-        {
-            if (dialogueTree.Previous())
-            {
-                ResetText();
-                GenerateText();
-            }
-        }
-        else speedMultiplier = Mathf.Clamp(speedMultiplier * aceleration, 1, 2);
-    }
+public enum SoundType
+{
+    BY_CHARACTER,
+    BY_WORD,
+    BY_LINE
 }
