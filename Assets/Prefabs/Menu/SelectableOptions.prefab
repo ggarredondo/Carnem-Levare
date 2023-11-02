@@ -2003,6 +2003,7 @@ GameObject:
   - component: {fileID: 2282850572077475554}
   - component: {fileID: 2282850572077475555}
   - component: {fileID: 6389757871880623859}
+  - component: {fileID: 6881745240044308351}
   m_Layer: 5
   m_Name: Visuals
   m_TagString: Untagged
@@ -2044,6 +2045,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1c03dfcee737c084c952e37fb45be073, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  positionOffset: 0
+  alphaOffset: 1
+  transitionTime: 0.2
   firstSelected: {fileID: 2282850572930779257}
   fullscreen:
     dependency: {fileID: 0}
@@ -2365,6 +2369,18 @@ MonoBehaviour:
   automaticSensitivity: 6
   clampMinValue: -0.1
   clampMaxValue: 1.1
+--- !u!225 &6881745240044308351
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2282850572077475557}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &2282850572080894118
 GameObject:
   m_ObjectHideFlags: 0
@@ -3967,6 +3983,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2282850572661005061}
   - component: {fileID: 2282850572661005058}
+  - component: {fileID: 4479613025510818035}
   m_Layer: 5
   m_Name: Sound
   m_TagString: Untagged
@@ -4008,6 +4025,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2388a3314ea885447a7c9a931fd4c18f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  positionOffset: 50
+  alphaOffset: 1
+  transitionTime: 0.2
   firstSelected: {fileID: 2282850573386834170}
   master:
     dependency: {fileID: 3642772810086333615}
@@ -4089,6 +4109,18 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
+--- !u!225 &4479613025510818035
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2282850572661005060}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &2282850572889016468
 GameObject:
   m_ObjectHideFlags: 0
@@ -4371,6 +4403,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2282850572897292248}
   - component: {fileID: 2282850572897292249}
+  - component: {fileID: 2905470756752557882}
   m_Layer: 5
   m_Name: Accessibility
   m_TagString: Untagged
@@ -4412,7 +4445,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 914e197e3f8848b40aaf905678f51f16, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  positionOffset: 50
+  alphaOffset: 1
+  transitionTime: 0.25
   firstSelected: {fileID: 4024497241463201462}
+--- !u!225 &2905470756752557882
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2282850572897292251}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &2282850572930779257
 GameObject:
   m_ObjectHideFlags: 0
@@ -5017,6 +5065,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2282850573080158782}
   - component: {fileID: 2282850573080158783}
+  - component: {fileID: 3528708118432598178}
   m_Layer: 5
   m_Name: Controls
   m_TagString: Untagged
@@ -5059,6 +5108,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8b88de1ffbc964d4fa07e9f476b8e780, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  positionOffset: 50
+  alphaOffset: 1
+  transitionTime: 0.25
   firstSelected: {fileID: 2282850572082208088}
   rumble:
     dependency: {fileID: 0}
@@ -5089,6 +5141,18 @@ MonoBehaviour:
   - {fileID: 188306063292661749}
   popUpMenu: {fileID: 0}
   rebindTimeDelay: 0.25
+--- !u!225 &3528708118432598178
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2282850573080158769}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &2282850573109895441
 GameObject:
   m_ObjectHideFlags: 0

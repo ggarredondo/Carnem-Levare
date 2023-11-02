@@ -529,6 +529,7 @@ GameObject:
   - component: {fileID: 518473306548130837}
   - component: {fileID: 2022182715590496201}
   - component: {fileID: 518473306548130836}
+  - component: {fileID: 4317793226965087786}
   m_Layer: 5
   m_Name: Main
   m_TagString: Untagged
@@ -578,9 +579,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b92c87996da3ff848b9c3f19c930addb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  positionOffset: 0
+  alphaOffset: 1
+  transitionTime: 0.3
   firstSelected: {fileID: 518473305991601151}
   playButton: {fileID: 518473305991601149}
   quitButton: {fileID: 518473306130345171}
+--- !u!225 &4317793226965087786
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 518473306548130838}
+  m_Enabled: 1
+  m_Alpha: 0
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &518473307307578036
 GameObject:
   m_ObjectHideFlags: 0
@@ -1505,6 +1521,16 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: -73.672
       objectReference: {fileID: 0}
+    - target: {fileID: 2282850572077475555, guid: a5e1a11c92d391c419e235c5ddd96acf,
+        type: 3}
+      propertyPath: positionOffset
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 2282850572077475555, guid: a5e1a11c92d391c419e235c5ddd96acf,
+        type: 3}
+      propertyPath: transitionTime
+      value: 0.25
+      objectReference: {fileID: 0}
     - target: {fileID: 2282850572077475557, guid: a5e1a11c92d391c419e235c5ddd96acf,
         type: 3}
       propertyPath: m_IsActive
@@ -1724,6 +1750,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2282850572661005058, guid: a5e1a11c92d391c419e235c5ddd96acf,
+        type: 3}
+      propertyPath: transitionTime
+      value: 0.25
       objectReference: {fileID: 0}
     - target: {fileID: 2282850572930779205, guid: a5e1a11c92d391c419e235c5ddd96acf,
         type: 3}

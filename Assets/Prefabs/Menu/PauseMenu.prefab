@@ -624,6 +624,7 @@ GameObject:
   - component: {fileID: 4172736448670257313}
   - component: {fileID: 4172736448670257312}
   - component: {fileID: 2155775278020153816}
+  - component: {fileID: 6236366708399785548}
   m_Layer: 5
   m_Name: Main
   m_TagString: Untagged
@@ -673,8 +674,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ddcffc31c5f7d954cabb077a91ba1e26, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  positionOffset: 0
+  alphaOffset: 0
+  transitionTime: 0
   firstSelected: {fileID: 2506615481323144343}
-  transitions: []
   pauseController: {fileID: 5032696558048650697}
   resumeButton: {fileID: 2506615481323144341}
   backButton: {fileID: 2506615481454031803}
@@ -695,6 +698,18 @@ MonoBehaviour:
   blendDistance: 0
   weight: 1
   sharedProfile: {fileID: 11400000, guid: b740ffdee22ae214ab30f7c38fb1f311, type: 2}
+--- !u!225 &6236366708399785548
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2506615480835820414}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &2506615481323144343
 GameObject:
   m_ObjectHideFlags: 0

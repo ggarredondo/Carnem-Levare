@@ -2,14 +2,49 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using System.Reflection;
+using LerpUtilities;
+using System.Threading.Tasks;
 
 public abstract class AbstractMenu : MonoBehaviour
 {
+    [Header("Transition")]
+    [SerializeField] protected float positionOffset;
+    [SerializeField] [Range(0f, 1f)] protected float alphaOffset;
+    [SerializeField] [Range(0f,1f)] protected float transitionTime;
+
     [Header("Requirements")]
     [SerializeField] protected GameObject firstSelected;
 
     protected List<ITransition> newTransitions = new();
     protected readonly List<MySelectable> elements = new();
+
+    private CanvasGroup canvasGroup;
+    private float initialPosition;
+
+    private void Awake()
+    {
+        canvasGroup = GetComponent<CanvasGroup>();
+        initialPosition = transform.localPosition.x;
+    }
+
+    private void OnEnable()
+    {
+        EnableTransition();
+    }
+
+    protected virtual void OnDisable()
+    {
+        if (EventSystem.current != null && GameManager.Input.NeedToSelect)
+            firstSelected = EventSystem.current.currentSelectedGameObject;
+
+    }
+
+    private async void EnableTransition()
+    {
+        await Task.WhenAll(Lerp.Value_Unscaled(transform.localPosition.x - positionOffset, initialPosition,
+                                               (f) => transform.localPosition = new Vector3(f, transform.localPosition.y, transform.localPosition.z), transitionTime),
+                           Lerp.Value_Unscaled(1f - alphaOffset, 1f, (f) => canvasGroup.alpha = f, transitionTime));
+    }
 
     private void ObtainByReflection()
     {
@@ -26,12 +61,6 @@ public abstract class AbstractMenu : MonoBehaviour
                 newTransitions.Add((ITransition)field.GetValue(this));
             }
         }
-    }
-
-    protected virtual void OnDisable()
-    {
-        if(EventSystem.current != null && GameManager.Input.NeedToSelect)
-            firstSelected = EventSystem.current.currentSelectedGameObject;
     }
 
     public void Initialize()
