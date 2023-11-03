@@ -1,32 +1,36 @@
+using TreeUtilities;
 using UnityEngine;
 
-[NodeRelevance(typeof(MenuTree))]
-public class SelectableMenu : CompositeNode, ICanSelect
+namespace MenuTreeUtilities
 {
-    [SerializeField] private int selectedChild;
-
-    public int GetSelectedChild()
+    [NodeRelevance(typeof(MenuTree))]
+    public class SelectableMenu : CompositeNode, ICanSelect
     {
-        return selectedChild;
-    }
+        [SerializeField] private int selectedChild;
 
-    public void MoveLeftChild()
-    {
-        selectedChild = Mod(selectedChild - 1, children.Count);
-    }
+        public int GetSelectedChild()
+        {
+            return selectedChild;
+        }
 
-    public void MoveRightChild()
-    {
-        selectedChild = Mod(selectedChild + 1, children.Count);
-    }
+        public void MoveLeftChild()
+        {
+            selectedChild = Mod(selectedChild - 1, children.Count);
+        }
 
-    public void SelectChild(int child)
-    {
-        selectedChild = child;
-    }
+        public void MoveRightChild()
+        {
+            selectedChild = Mod(selectedChild + 1, children.Count);
+        }
 
-    private int Mod(int a, int b)
-    {
-        return (a % b + b) % b;
+        public void SelectChild(int child)
+        {
+            selectedChild = child;
+        }
+
+        private int Mod(int a, int b)
+        {
+            return (a % b + b) % b;
+        }
     }
 }

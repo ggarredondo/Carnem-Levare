@@ -2,58 +2,61 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DecoratorNode : Node, IHaveChildren, IHaveParent
+namespace TreeUtilities
 {
-    [HideInInspector] public Node child;
-    [HideInInspector] public Node parent;
-
-    public void AddChild(IHaveParent child)
+    public class DecoratorNode : Node, IHaveChildren, IHaveParent
     {
-        child.SetParent(this);
-        this.child = (Node)child;
-    }
+        [HideInInspector] public Node child;
+        [HideInInspector] public Node parent;
 
-    public List<Node> GetChildren()
-    {
-        return new List<Node>() { child };
-    }
+        public void AddChild(IHaveParent child)
+        {
+            child.SetParent(this);
+            this.child = (Node)child;
+        }
 
-    public Node GetParent()
-    {
-        return parent;
-    }
+        public List<Node> GetChildren()
+        {
+            return new List<Node>() { child };
+        }
 
-    public bool HaveChildren()
-    {
-        return child != null;
-    }
+        public Node GetParent()
+        {
+            return parent;
+        }
 
-    public void InitializeChildren()
-    {
-        if (HaveChildren())
-            child.Initialize();
-    }
+        public bool HaveChildren()
+        {
+            return child != null;
+        }
 
-    public int InitializeChildrenID()
-    {
-        if (HaveChildren())
-            child.InitializeID(ID);
+        public void InitializeChildren()
+        {
+            if (HaveChildren())
+                child.Initialize();
+        }
 
-        return ID;
-    }
+        public int InitializeChildrenID()
+        {
+            if (HaveChildren())
+                child.InitializeID(ID);
 
-    public void RemoveChild(IHaveParent child)
-    {
-        this.child = null;
-    }
+            return ID;
+        }
 
-    public void SetParent(Node parent)
-    {
-        this.parent = parent;
-    }
+        public void RemoveChild(IHaveParent child)
+        {
+            this.child = null;
+        }
 
-    public bool Static()
-    {
-        return false;
+        public void SetParent(Node parent)
+        {
+            this.parent = parent;
+        }
+
+        public bool Static()
+        {
+            return false;
+        }
     }
 }

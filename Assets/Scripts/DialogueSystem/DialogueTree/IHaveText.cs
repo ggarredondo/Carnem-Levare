@@ -2,27 +2,30 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
-public interface IHaveText
+namespace DialogueTreeUtilities
 {
-    public string Text { get; }
+    public interface IHaveText
+    {
+        public string Text { get; }
 
-    public int FontSize { get; }
+        public int FontSize { get; }
 
-    public FontStyles Style { get; }
+        public FontStyles Style { get; }
 
-    public Color Color { get; }
+        public Color Color { get; }
 
-    public float CharacterSpacing { get; }
+        public float CharacterSpacing { get; }
 
-    public float WordSpacing { get; }
+        public float WordSpacing { get; }
 
-    public TMP_ColorGradient ColorGradient { get; }
+        public TMP_ColorGradient ColorGradient { get; }
 
-    public float TimeBetweenChars { get; }
+        public float TimeBetweenChars { get; }
 
-    public List<string> SoundsName { get; }
+        public List<string> SoundsName { get; }
 
-    public SoundType SoundGenerationType { get; }
+        public SoundType SoundGenerationType { get; }
 
-    public int EffectDistance { get; }
+        public int EffectDistance { get; }
+    }
 }

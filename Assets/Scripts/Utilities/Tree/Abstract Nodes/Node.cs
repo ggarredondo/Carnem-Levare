@@ -1,41 +1,44 @@
 using UnityEngine;
 
-public abstract class Node : ScriptableObject
+namespace TreeUtilities
 {
-    [HideInInspector] public string currentName;
-    [HideInInspector] public Color backgroundColor;
-    [HideInInspector] public Color textColor;
-    [HideInInspector] public int ID;
-    [HideInInspector] public bool selected;
-    [HideInInspector] public string guid;
-    [HideInInspector] public Vector2 position;
-
-    public ref readonly int GetID { get => ref ID; }
-
-    public int InitializeID(int actualID)
+    public abstract class Node : ScriptableObject
     {
-        ID = actualID + 1;
-        int newID = ID;
+        [HideInInspector] public string currentName;
+        [HideInInspector] public Color backgroundColor;
+        [HideInInspector] public Color textColor;
+        [HideInInspector] public int ID;
+        [HideInInspector] public bool selected;
+        [HideInInspector] public string guid;
+        [HideInInspector] public Vector2 position;
 
-        if (this is IHaveChildren n)
-            newID = n.InitializeChildrenID();
+        public ref readonly int GetID { get => ref ID; }
 
-        return newID;
-    }
+        public int InitializeID(int actualID)
+        {
+            ID = actualID + 1;
+            int newID = ID;
 
-    public void Initialize()
-    {
-        selected = false;
+            if (this is IHaveChildren n)
+                newID = n.InitializeChildrenID();
 
-        if (this is IHaveChildren n)
-            n.InitializeChildren();
-    }
+            return newID;
+        }
 
-    public virtual void Clone(Node node)
-    {
-        currentName = node.currentName;
-        backgroundColor = node.backgroundColor;
-        textColor = node.textColor;
-        position = node.position;
+        public void Initialize()
+        {
+            selected = false;
+
+            if (this is IHaveChildren n)
+                n.InitializeChildren();
+        }
+
+        public virtual void Clone(Node node)
+        {
+            currentName = node.currentName;
+            backgroundColor = node.backgroundColor;
+            textColor = node.textColor;
+            position = node.position;
+        }
     }
 }

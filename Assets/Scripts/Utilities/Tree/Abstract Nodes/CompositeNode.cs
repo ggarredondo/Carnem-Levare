@@ -1,61 +1,64 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class CompositeNode : Node, IHaveChildren, IHaveParent
+namespace TreeUtilities
 {
-    public bool isStatic;
-    [HideInInspector] public List<Node> children = new();
-    [HideInInspector] public Node parent;
-
-    public void AddChild(IHaveParent child)
+    public abstract class CompositeNode : Node, IHaveChildren, IHaveParent
     {
-        child.SetParent(this);
-        children.Add((Node) child);
-    }
+        public bool isStatic;
+        [HideInInspector] public List<Node> children = new();
+        [HideInInspector] public Node parent;
 
-    public List<Node> GetChildren()
-    {
-        return children;
-    }
+        public void AddChild(IHaveParent child)
+        {
+            child.SetParent(this);
+            children.Add((Node)child);
+        }
 
-    public void RemoveChild(IHaveParent child)
-    {
-        children.Remove((Node) child);
-    }
+        public List<Node> GetChildren()
+        {
+            return children;
+        }
 
-    public void SetParent(Node parent)
-    {
-        this.parent = parent;
-    }
+        public void RemoveChild(IHaveParent child)
+        {
+            children.Remove((Node)child);
+        }
 
-    public Node GetParent()
-    {
-        return parent;
-    }
+        public void SetParent(Node parent)
+        {
+            this.parent = parent;
+        }
 
-    public bool HaveChildren()
-    {
-        return children.Count > 0;
-    }
+        public Node GetParent()
+        {
+            return parent;
+        }
 
-    public bool Static()
-    {
-        return isStatic;
-    }
+        public bool HaveChildren()
+        {
+            return children.Count > 0;
+        }
 
-    public void InitializeChildren()
-    {
-        if (HaveChildren())
-            children.ForEach(c => c.Initialize());
-    }
+        public bool Static()
+        {
+            return isStatic;
+        }
 
-    public int InitializeChildrenID()
-    {
-        int actualID = ID;
+        public void InitializeChildren()
+        {
+            if (HaveChildren())
+                children.ForEach(c => c.Initialize());
+        }
 
-        if (HaveChildren())
-            children.ForEach(c => actualID = c.InitializeID(actualID) );
+        public int InitializeChildrenID()
+        {
+            int actualID = ID;
 
-        return actualID;
+            if (HaveChildren())
+                children.ForEach(c => actualID = c.InitializeID(actualID));
+
+            return actualID;
+        }
     }
 }

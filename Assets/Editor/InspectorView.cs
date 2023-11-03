@@ -2,6 +2,8 @@ using UnityEngine.UIElements;
 using UnityEditor;
 using UnityEngine;
 using System.Linq;
+using TreeUtilities;
+using DialogueTreeUtilities;
 
 public class InspectorView : VisualElement
 {

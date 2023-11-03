@@ -70,7 +70,7 @@ MonoBehaviour:
   ID: 3
   selected: 0
   guid: a50e379ef79b0da40bfa1c4c78453b9b
-  position: {x: 14, y: 327}
+  position: {x: 14, y: 326}
   child: {fileID: 7130643456388243127}
   parent: {fileID: 9208040949133887538}
   text: Estaba mareao
@@ -103,7 +103,7 @@ MonoBehaviour:
   ID: 1
   selected: 0
   guid: ae4deaa4131d49845a5fdb5e4e5938b8
-  position: {x: 14, y: 127}
+  position: {x: 14, y: 126}
   child: {fileID: 9208040949133887538}
   parent: {fileID: 5965962191499046246}
   text: Hola, me presento, soy el Carnem Levare
@@ -136,7 +136,7 @@ MonoBehaviour:
   ID: 0
   selected: 0
   guid: 6128501f0a3b4b142abc42f48afc950f
-  position: {x: 14, y: 44}
+  position: {x: 14, y: 43}
   child: {fileID: 4659675284117644668}
 --- !u!114 &7130643456388243127
 MonoBehaviour:

@@ -1,53 +1,57 @@
 using System.Collections.Generic;
+using TreeUtilities;
 using UnityEngine;
 
-[CreateAssetMenu(menuName = "Scriptable Objects/Tree/DialogueTree")]
-public class DialogueTree : BehaviourTree
+namespace DialogueTreeUtilities
 {
-    private readonly Stack<Node> nodeStack = new();
-    private IHaveText currentNode;
-
-    public void Initialize()
+    [CreateAssetMenu(menuName = "Scriptable Objects/Tree/DialogueTree")]
+    public class DialogueTree : BehaviourTree
     {
-        nodeStack.Clear();
-        nodeStack.Push(rootNode);
-    }
+        private readonly Stack<Node> nodeStack = new();
+        private IHaveText currentNode;
 
-    private void UpdateCurrentNode()
-    {
-        currentNode = (IHaveText)nodeStack.Peek();
-        nodeStack.Peek().selected = true;
-    }
-
-    public IHaveText CurrentLine => currentNode;
-
-    public bool Next()
-    {
-        if (nodeStack.Peek() is IHaveChildren node && node.HaveChildren())
+        public void Initialize()
         {
-            List<Node> children = node.GetChildren();
+            nodeStack.Clear();
+            nodeStack.Push(rootNode);
+        }
 
-            if (children.Count == 1)
+        private void UpdateCurrentNode()
+        {
+            currentNode = (IHaveText)nodeStack.Peek();
+            nodeStack.Peek().selected = true;
+        }
+
+        public IHaveText CurrentLine => currentNode;
+
+        public bool Next()
+        {
+            if (nodeStack.Peek() is IHaveChildren node && node.HaveChildren())
+            {
+                List<Node> children = node.GetChildren();
+
+                if (children.Count == 1)
+                {
+                    nodeStack.Peek().selected = false;
+                    nodeStack.Push(children[0]);
+                    UpdateCurrentNode();
+                }
+                return true;
+            }
+            else return false;
+        }
+
+        public bool Previous()
+        {
+            if (nodeStack.Peek() is IHaveParent node && node.GetParent() is not RootNode)
             {
                 nodeStack.Peek().selected = false;
-                nodeStack.Push(children[0]);
+                nodeStack.Push(node.GetParent());
                 UpdateCurrentNode();
+
+                return true;
             }
-            return true;
+            else return false;
         }
-        else return false;
-    }
-
-    public bool Previous()
-    {
-        if (nodeStack.Peek() is IHaveParent node && node.GetParent() is not RootNode)
-        {
-            nodeStack.Peek().selected = false;
-            nodeStack.Push(node.GetParent());
-            UpdateCurrentNode();
-
-            return true;
-        }
-        else return false;
     }
 }

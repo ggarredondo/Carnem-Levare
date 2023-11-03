@@ -1,16 +1,19 @@
 using System.Collections.Generic;
 
-public interface IHaveChildren
+namespace TreeUtilities
 {
-    public void AddChild(IHaveParent child);
-    public void RemoveChild(IHaveParent child);
-    public List<Node> GetChildren();
+    public interface IHaveChildren
+    {
+        public void AddChild(IHaveParent child);
+        public void RemoveChild(IHaveParent child);
+        public List<Node> GetChildren();
 
-    public bool HaveChildren();
+        public bool HaveChildren();
 
-    public int InitializeChildrenID();
+        public int InitializeChildrenID();
 
-    public void InitializeChildren();
+        public void InitializeChildren();
 
-    public bool Static();
+        public bool Static();
+    }
 }

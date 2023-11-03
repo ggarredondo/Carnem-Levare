@@ -4,6 +4,7 @@ using UnityEditor.Experimental.GraphView;
 using System.Linq;
 using System.Collections.Generic;
 using UnityEngine;
+using TreeUtilities;
 
 public class BehaviourTreeView : GraphView
 {
@@ -34,7 +35,7 @@ public class BehaviourTreeView : GraphView
         AssetDatabase.SaveAssets();
     }
 
-    NodeView FindNodeView(Node node)
+    NodeView FindNodeView(TreeUtilities.Node node)
     {
         return GetNodeByGuid(node.guid) as NodeView;
     }
@@ -194,17 +195,17 @@ public class BehaviourTreeView : GraphView
 
     public void OnDuplicate(NodeView nodeView)
     {
-        Node node = tree.CreateNode(nodeView.node);
+        TreeUtilities.Node node = tree.CreateNode(nodeView.node);
         CreateNodeView(ref node);
     }
 
     void CreateNode(System.Type type, Vector2 position)
     {
-        Node node = tree.CreateNode(type, position);
+        TreeUtilities.Node node = tree.CreateNode(type, position);
         CreateNodeView(ref node);
     }
 
-    void CreateNodeView(ref Node node)
+    void CreateNodeView(ref TreeUtilities.Node node)
     {
         NodeView nodeView = new(node);
         nodeView.OnNodeSelected = OnNodeSelected;

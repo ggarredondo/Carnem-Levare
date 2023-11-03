@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Threading.Tasks;
 using LerpUtilities;
+using System.Threading;
 
 public class GameCycle : MonoBehaviour, IObjectInitialize
 {
@@ -18,6 +19,8 @@ public class GameCycle : MonoBehaviour, IObjectInitialize
     [SerializeField] private float waitAfterReward;
 
     private float localHealth;
+    private CancellationTokenSource playerCancellationTokenSource;
+    private CancellationTokenSource enemyCancellationTokenSource;
 
     public void Initialize(ref GameObject player, ref GameObject enemy)
     {
@@ -31,24 +34,48 @@ public class GameCycle : MonoBehaviour, IObjectInitialize
         this.player.StateMachine.KOState.OnEnter += Defeat;
         this.player.StateMachine.HurtState.OnEnter += HurtPlayer;
         this.enemy.StateMachine.HurtState.OnEnter += HurtEnemy;
+
+        playerCancellationTokenSource = new();
+        enemyCancellationTokenSource = new();
     }
 
     private async void HurtEnemy()
     {
-        localHealth = enemy.CharacterStats.Health / (float)enemy.CharacterStats.MaxHealth;
+        enemyCancellationTokenSource.Dispose();
+        enemyCancellationTokenSource = new();
+        CancellationToken cancellationToken = enemyCancellationTokenSource.Token;
 
-        await Lerp.Value(pointLight.intensity,
-                         20 + 20 * (1 - localHealth),
-                         (i) => pointLight.intensity = i, 2f);
+        localHealth = enemy.CharacterStats.Health / (float)enemy.CharacterStats.MaxHealth;
+        try 
+        { 
+        await Lerp.Value_Cancel(pointLight.intensity,
+                                20 + 20 * (1 - localHealth),
+                                (i) => pointLight.intensity = i, 2f, cancellationToken);
+        }
+        catch (TaskCanceledException) { }
     }
 
     private async void HurtPlayer()
     {
+        playerCancellationTokenSource.Dispose();
+        playerCancellationTokenSource = new();
+        CancellationToken cancellationToken = playerCancellationTokenSource.Token;
+
         localHealth = player.CharacterStats.Health / (float)player.CharacterStats.MaxHealth;
 
-        await Lerp.Value(ambientLight.color,
-                         new Color(localHealth, ambientLight.color.g, ambientLight.color.b, ambientLight.color.a),
-                         (c) => ambientLight.color = c, 2f);
+        try
+        { 
+        await Lerp.Value_Cancel(ambientLight.color,
+                                new Color(localHealth, ambientLight.color.g, ambientLight.color.b, ambientLight.color.a),
+                                (c) => ambientLight.color = c, 2f, cancellationToken);
+        }
+        catch (TaskCanceledException) { }
+    }
+
+    private void OnDisable()
+    {
+        playerCancellationTokenSource?.Cancel();
+        enemyCancellationTokenSource?.Cancel();
     }
 
     private void OnDestroy()

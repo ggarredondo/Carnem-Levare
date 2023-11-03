@@ -1,16 +1,19 @@
 using UnityEngine;
 
-public abstract class LeafNode : Node, IHaveParent
+namespace TreeUtilities
 {
-    [HideInInspector] public Node parent;
-
-    public Node GetParent()
+    public abstract class LeafNode : Node, IHaveParent
     {
-        return parent;
-    }
+        [HideInInspector] public Node parent;
 
-    public void SetParent(Node parent)
-    {
-        this.parent = parent;
+        public Node GetParent()
+        {
+            return parent;
+        }
+
+        public void SetParent(Node parent)
+        {
+            this.parent = parent;
+        }
     }
 }

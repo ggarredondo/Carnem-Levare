@@ -1,6 +1,9 @@
-public interface IHaveParent
+namespace TreeUtilities
 {
-    public void SetParent(Node parent);
+    public interface IHaveParent
+    {
+        public void SetParent(Node parent);
 
-    public Node GetParent();
+        public Node GetParent();
+    }
 }

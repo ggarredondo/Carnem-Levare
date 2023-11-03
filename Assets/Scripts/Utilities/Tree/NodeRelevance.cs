@@ -1,12 +1,15 @@
 using System;
 
-[AttributeUsage(AttributeTargets.Class, Inherited = false, AllowMultiple = true)]
-public sealed class NodeRelevance : Attribute
+namespace TreeUtilities
 {
-    public Type[] RelevantBehaviourTrees { get; }
-
-    public NodeRelevance(params Type[] relevantBehaviourTrees)
+    [AttributeUsage(AttributeTargets.Class, Inherited = false, AllowMultiple = true)]
+    public sealed class NodeRelevance : Attribute
     {
-        RelevantBehaviourTrees = relevantBehaviourTrees;
+        public Type[] RelevantBehaviourTrees { get; }
+
+        public NodeRelevance(params Type[] relevantBehaviourTrees)
+        {
+            RelevantBehaviourTrees = relevantBehaviourTrees;
+        }
     }
 }

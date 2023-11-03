@@ -1,47 +1,50 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RootNode : Node, IHaveChildren
+namespace TreeUtilities
 {
-    [HideInInspector] public Node child;
-
-    public void AddChild(IHaveParent child)
+    public class RootNode : Node, IHaveChildren
     {
-        child.SetParent(this);
-        this.child = (Node) child;
-    }
+        [HideInInspector] public Node child;
 
-    public List<Node> GetChildren()
-    {
-        return new List<Node>() { child };
-    }
+        public void AddChild(IHaveParent child)
+        {
+            child.SetParent(this);
+            this.child = (Node)child;
+        }
 
-    public void RemoveChild(IHaveParent child)
-    {
-        this.child = null;
-    }
+        public List<Node> GetChildren()
+        {
+            return new List<Node>() { child };
+        }
 
-    public bool HaveChildren()
-    {
-        return child != null;
-    }
+        public void RemoveChild(IHaveParent child)
+        {
+            this.child = null;
+        }
 
-    public bool Static()
-    {
-        return false;
-    }
+        public bool HaveChildren()
+        {
+            return child != null;
+        }
 
-    public void InitializeChildren()
-    {
-        if (HaveChildren())
-            child.Initialize();
-    }
+        public bool Static()
+        {
+            return false;
+        }
 
-    public int InitializeChildrenID()
-    {
-        if (HaveChildren())
-            child.InitializeID(ID);
+        public void InitializeChildren()
+        {
+            if (HaveChildren())
+                child.Initialize();
+        }
 
-        return ID;
+        public int InitializeChildrenID()
+        {
+            if (HaveChildren())
+                child.InitializeID(ID);
+
+            return ID;
+        }
     }
 }

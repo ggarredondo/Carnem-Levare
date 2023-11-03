@@ -2,15 +2,16 @@ using UnityEngine;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine.UIElements;
 using UnityEditor;
+using TreeUtilities;
 
 public class NodeView : UnityEditor.Experimental.GraphView.Node
 {
     public System.Action<NodeView> OnNodeSelected;
-    public Node node;
+    public TreeUtilities.Node node;
     public Port input;
     public Port output;
 
-    public NodeView(Node node) : base("Assets/Editor/NodeView.uxml")
+    public NodeView(TreeUtilities.Node node) : base("Assets/Editor/NodeView.uxml")
     {
         this.node = node;
         title = node.currentName;
