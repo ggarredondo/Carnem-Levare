@@ -45,8 +45,8 @@ public class TextGenerator : MonoBehaviour
 
     private void GenerateText()
     {
-        Configure(dialogueTree.CurrentLine);
-        typing = StartCoroutine(TypeLine(dialogueTree.CurrentLine));
+        Configure(dialogueTree.CurrentData);
+        typing = StartCoroutine(TypeLine(dialogueTree.CurrentData, dialogueTree.CurrentText));
     }
 
     public void NextLine()
@@ -75,32 +75,32 @@ public class TextGenerator : MonoBehaviour
         else speedMultiplier = Mathf.Clamp(speedMultiplier * aceleration, 1, 2);
     }
 
-    private void Configure(IHaveText line)
+    private void Configure(DialogueData line)
     {
-        soundType = line.SoundGenerationType;
+        soundType = line.soundGenerationType;
 
-        textBox.fontSize = line.FontSize;
-        textBoxDuplicate.fontSize = line.FontSize;
+        textBox.fontSize = line.fontSize;
+        textBoxDuplicate.fontSize = line.fontSize;
 
-        textBox.fontStyle = line.Style;
-        textBoxDuplicate.fontStyle = line.Style;
+        textBox.fontStyle = line.style;
+        textBoxDuplicate.fontStyle = line.style;
 
-        textBox.color = line.Color;
-        textBoxDuplicate.color = line.Color;
+        textBox.color = line.color;
+        textBoxDuplicate.color = line.color;
 
-        textBox.characterSpacing = line.CharacterSpacing;
-        textBoxDuplicate.characterSpacing = line.CharacterSpacing;
+        textBox.characterSpacing = line.characterSpacing;
+        textBoxDuplicate.characterSpacing = line.characterSpacing;
 
-        textBox.wordSpacing = line.WordSpacing;
-        textBoxDuplicate.wordSpacing = line.WordSpacing;
+        textBox.wordSpacing = line.wordSpacing;
+        textBoxDuplicate.wordSpacing = line.wordSpacing;
 
-        if (line.ColorGradient != null)
+        if (line.colorGradient != null)
         {
             textBox.enableVertexGradient = true;
             textBoxDuplicate.enableVertexGradient = true;
 
-            textBox.colorGradientPreset = line.ColorGradient;
-            textBoxDuplicate.colorGradientPreset = line.ColorGradient;
+            textBox.colorGradientPreset = line.colorGradient;
+            textBoxDuplicate.colorGradientPreset = line.colorGradient;
         }
         else
         {
@@ -109,13 +109,13 @@ public class TextGenerator : MonoBehaviour
         }
     }
 
-    private IEnumerator TypeLine(IHaveText line)
+    private IEnumerator TypeLine(DialogueData currentData, string currentText)
     {
-        var text = line.Text;
-        var effectDistance = line.EffectDistance;
+        var text = currentText;
+        var effectDistance = currentData.effectDistance;
 
         if (soundType == SoundType.BY_LINE)
-            PlaySound(ref line);
+            PlaySound(ref currentData);
 
         for (int i = 0; i < text.Length + effectDistance; i++)
         {
@@ -127,9 +127,9 @@ public class TextGenerator : MonoBehaviour
                 var effectDelayChar = text[i - effectDistance];
                 textBox.text += effectDelayChar;
 
-                SelectSound(ref effectDelayChar, ref line);
+                SelectSound(ref effectDelayChar, ref currentData);
 
-                yield return StartCoroutine(WaitTime(effectDelayChar, line));
+                yield return StartCoroutine(WaitTime(effectDelayChar, currentData));
             }
         }
 
@@ -137,20 +137,20 @@ public class TextGenerator : MonoBehaviour
         speedMultiplier = 1;
     }
 
-    private IEnumerator WaitTime(char letter, IHaveText line)
+    private IEnumerator WaitTime(char letter, DialogueData line)
     {
         if (specialCharsDictionary.ContainsKey(letter))
         {
-            float newTime = Mathf.Clamp(line.TimeBetweenChars + line.TimeBetweenChars * specialCharsDictionary[letter], 0f, 5f);
+            float newTime = Mathf.Clamp(line.timeBetweenChars + line.timeBetweenChars * specialCharsDictionary[letter], 0f, 5f);
             yield return new WaitForSecondsRealtime(newTime / speedMultiplier);
         }
         else
         {
-            yield return new WaitForSecondsRealtime(line.TimeBetweenChars / speedMultiplier);
+            yield return new WaitForSecondsRealtime(line.timeBetweenChars / speedMultiplier);
         }
     }
 
-    private void SelectSound(ref char letter, ref IHaveText line)
+    private void SelectSound(ref char letter, ref DialogueData line)
     {
         if (soundType == SoundType.BY_CHARACTER)
             PlaySound(ref line);
@@ -159,12 +159,12 @@ public class TextGenerator : MonoBehaviour
             PlaySound(ref line);
     }
 
-    private void PlaySound(ref IHaveText line)
+    private void PlaySound(ref DialogueData line)
     {
-        if (line.SoundsName.Count > 1)
-            GameManager.Audio.Play(line.SoundsName[random.RangeInt(0, line.SoundsName.Count - 1)]);
+        if (line.soundsName.Count > 1)
+            GameManager.Audio.Play(line.soundsName[random.RangeInt(0, line.soundsName.Count - 1)]);
         else
-            GameManager.Audio.Play(line.SoundsName[0]);
+            GameManager.Audio.Play(line.soundsName[0]);
     }
 
     private void ResetText()

@@ -22,7 +22,9 @@ namespace DialogueTreeUtilities
             nodeStack.Peek().selected = true;
         }
 
-        public IHaveText CurrentLine => currentNode;
+        public DialogueData CurrentData => currentNode.Data;
+
+        public string CurrentText => currentNode.Text;
 
         public bool Next()
         {

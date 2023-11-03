@@ -21,17 +21,18 @@ MonoBehaviour:
   position: {x: 14, y: 534}
   parent: {fileID: 7130643456388243127}
   text: ...
-  fontSize: 50
-  color: {r: 1, g: 1, b: 1, a: 1}
-  colorGradient: {fileID: 11400000, guid: e1bb4aac4d5dd3446b69da3d9bcda924, type: 2}
-  style: 0
-  characterSpacing: 0
-  wordSpacing: 0
-  timeBetweenChars: 0.3
-  soundsName:
-  - MaskTalking
-  soundGenerationType: 0
-  effectDistance: 0
+  data:
+    fontSize: 50
+    color: {r: 1, g: 1, b: 1, a: 1}
+    colorGradient: {fileID: 11400000, guid: e1bb4aac4d5dd3446b69da3d9bcda924, type: 2}
+    style: 0
+    characterSpacing: 0
+    wordSpacing: 0
+    timeBetweenChars: 0.3
+    soundsName:
+    - MaskTalking
+    soundGenerationType: 0
+    effectDistance: 0
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -74,17 +75,18 @@ MonoBehaviour:
   child: {fileID: 7130643456388243127}
   parent: {fileID: 9208040949133887538}
   text: Estaba mareao
-  fontSize: 60
-  color: {r: 1, g: 1, b: 1, a: 1}
-  colorGradient: {fileID: 11400000, guid: 6fd61d082e8688d4d871068b85223d45, type: 2}
-  style: 3
-  characterSpacing: 10
-  wordSpacing: 0
-  timeBetweenChars: 0.05
-  soundsName:
-  - MaskDialogue3
-  soundGenerationType: 2
-  effectDistance: 0
+  data:
+    fontSize: 60
+    color: {r: 1, g: 1, b: 1, a: 1}
+    colorGradient: {fileID: 11400000, guid: 6fd61d082e8688d4d871068b85223d45, type: 2}
+    style: 1
+    characterSpacing: 50
+    wordSpacing: 0
+    timeBetweenChars: 0.05
+    soundsName:
+    - MaskDialogue3
+    soundGenerationType: 2
+    effectDistance: 0
 --- !u!114 &4659675284117644668
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -107,17 +109,18 @@ MonoBehaviour:
   child: {fileID: 9208040949133887538}
   parent: {fileID: 5965962191499046246}
   text: Hola, me presento, soy el Carnem Levare
-  fontSize: 50
-  color: {r: 1, g: 1, b: 1, a: 1}
-  colorGradient: {fileID: 11400000, guid: e1bb4aac4d5dd3446b69da3d9bcda924, type: 2}
-  style: 0
-  characterSpacing: 0
-  wordSpacing: 0
-  timeBetweenChars: 0.05
-  soundsName:
-  - MaskDialogue1
-  soundGenerationType: 2
-  effectDistance: 0
+  data:
+    fontSize: 50
+    color: {r: 1, g: 1, b: 1, a: 1}
+    colorGradient: {fileID: 11400000, guid: e1bb4aac4d5dd3446b69da3d9bcda924, type: 2}
+    style: 0
+    characterSpacing: 0
+    wordSpacing: 0
+    timeBetweenChars: 0.05
+    soundsName:
+    - MaskDialogue1
+    soundGenerationType: 2
+    effectDistance: 0
 --- !u!114 &5965962191499046246
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -156,21 +159,22 @@ MonoBehaviour:
   ID: 4
   selected: 0
   guid: cb209421b506fc34fbacac0ed0a5f329
-  position: {x: 14, y: 435}
+  position: {x: 14, y: 433}
   child: {fileID: -608482429323845504}
   parent: {fileID: 4207210451816425443}
   text: Puedes continuar
-  fontSize: 50
-  color: {r: 1, g: 1, b: 1, a: 1}
-  colorGradient: {fileID: 11400000, guid: e1bb4aac4d5dd3446b69da3d9bcda924, type: 2}
-  style: 0
-  characterSpacing: 0
-  wordSpacing: 0
-  timeBetweenChars: 0.05
-  soundsName:
-  - MaskDialogue4
-  soundGenerationType: 2
-  effectDistance: 0
+  data:
+    fontSize: 50
+    color: {r: 1, g: 1, b: 1, a: 1}
+    colorGradient: {fileID: 11400000, guid: e1bb4aac4d5dd3446b69da3d9bcda924, type: 2}
+    style: 0
+    characterSpacing: 0
+    wordSpacing: 0
+    timeBetweenChars: 0.05
+    soundsName:
+    - MaskDialogue4
+    soundGenerationType: 2
+    effectDistance: 0
 --- !u!114 &9208040949133887538
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -187,20 +191,21 @@ MonoBehaviour:
   backgroundColor: {r: 1, g: 0.90202916, b: 0, a: 0.39215687}
   textColor: {r: 1, g: 1, b: 1, a: 1}
   ID: 2
-  selected: 1
+  selected: 0
   guid: 44dbc3a30143b884d83f588164bab7b3
   position: {x: 14, y: 224}
   child: {fileID: 4207210451816425443}
   parent: {fileID: 4659675284117644668}
   text: Gracias por hacer que pare de dar vueltas
-  fontSize: 50
-  color: {r: 1, g: 1, b: 1, a: 1}
-  colorGradient: {fileID: 11400000, guid: e1bb4aac4d5dd3446b69da3d9bcda924, type: 2}
-  style: 0
-  characterSpacing: 0
-  wordSpacing: 0
-  timeBetweenChars: 0.05
-  soundsName:
-  - MaskDialogue2
-  soundGenerationType: 2
-  effectDistance: 0
+  data:
+    fontSize: 50
+    color: {r: 1, g: 1, b: 1, a: 1}
+    colorGradient: {fileID: 11400000, guid: e1bb4aac4d5dd3446b69da3d9bcda924, type: 2}
+    style: 0
+    characterSpacing: 0
+    wordSpacing: 0
+    timeBetweenChars: 0.05
+    soundsName:
+    - MaskDialogue2
+    soundGenerationType: 2
+    effectDistance: 0
