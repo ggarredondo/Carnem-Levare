@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
@@ -19,7 +17,7 @@ namespace DialogueTreeUtilities {
         [Range(0f, 0.4f)] public float timeBetweenChars;
 
         [Header("Sound")]
-        public List<string> soundsName;
+        public string soundName;
         public SoundType soundGenerationType;
 
         [Header("Effecs")]
@@ -36,8 +34,24 @@ namespace DialogueTreeUtilities {
 
             timeBetweenChars = data.timeBetweenChars;
             effectDistance = data.effectDistance;
-            soundsName = new List<string>(data.soundsName);
+            soundName = data.soundName;
             soundGenerationType = data.soundGenerationType;
+        }
+
+        public void SetTMP(ref TMP_Text tmp)
+        {
+            tmp.fontSize = fontSize;
+            tmp.fontStyle = style;
+            tmp.color = color;
+            tmp.characterSpacing = characterSpacing;
+            tmp.wordSpacing = wordSpacing;
+
+            if (colorGradient != null)
+            {
+                tmp.enableVertexGradient = true;
+                tmp.colorGradientPreset = colorGradient;
+            }
+            else tmp.enableVertexGradient = false;
         }
     }
 }

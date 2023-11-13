@@ -28,13 +28,8 @@ MonoBehaviour:
     m_RotationOrder: 4
   soundGroups:
   - sounds:
-    - name: TextGenerator1
-      clip: {fileID: 8300000, guid: 3d4c26cf7521a0044bff5b2db52ad033, type: 3}
-      volume: 1
-      pitch: 1
-      loop: 0
-    - name: TextGenerator2
-      clip: {fileID: 8300000, guid: fde1d9ba7d56e5d4294a593dfd440807, type: 3}
+    - name: MaskTalking
+      clip: {fileID: 8300000, guid: cdbe0b2531e7046468c541e9d60325ed, type: 3}
       volume: 1
       pitch: 1
       loop: 0

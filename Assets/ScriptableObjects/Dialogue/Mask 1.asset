@@ -16,7 +16,7 @@ MonoBehaviour:
   backgroundColor: {r: 1, g: 0.9019608, b: 0, a: 0.39215687}
   textColor: {r: 1, g: 1, b: 1, a: 1}
   ID: 5
-  selected: 1
+  selected: 0
   guid: eb901b132c221674589302a5d39d136c
   position: {x: 14, y: 534}
   parent: {fileID: 7130643456388243127}
@@ -42,7 +42,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 80afe90bd00098b449ee1bf4893322a4, type: 3}
-  m_Name: Mask
+  m_Name: Mask 1
   m_EditorClassIdentifier: 
   rootNode: {fileID: 5965962191499046246}
   nodes:
@@ -68,9 +68,9 @@ MonoBehaviour:
   backgroundColor: {r: 1, g: 0.90202916, b: 0, a: 0.39215687}
   textColor: {r: 1, g: 1, b: 1, a: 1}
   ID: 3
-  selected: 0
+  selected: 1
   guid: a50e379ef79b0da40bfa1c4c78453b9b
-  position: {x: 14, y: 325}
+  position: {x: 14, y: 326}
   child: {fileID: 7130643456388243127}
   parent: {fileID: 9208040949133887538}
   text: Estaba mareao
@@ -82,9 +82,9 @@ MonoBehaviour:
     characterSpacing: 50
     wordSpacing: 0
     timeBetweenChars: 0.05
-    soundName: MaskDialogue3
-    soundGenerationType: 2
-    effectDistance: 0
+    soundName: MaskTalking
+    soundGenerationType: 0
+    effectDistance: 1
 --- !u!114 &4659675284117644668
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -115,9 +115,9 @@ MonoBehaviour:
     characterSpacing: 0
     wordSpacing: 0
     timeBetweenChars: 0.05
-    soundName: MaskDialogue1
-    soundGenerationType: 2
-    effectDistance: 0
+    soundName: MaskTalking
+    soundGenerationType: 0
+    effectDistance: 1
 --- !u!114 &5965962191499046246
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -136,7 +136,7 @@ MonoBehaviour:
   ID: 0
   selected: 0
   guid: 6128501f0a3b4b142abc42f48afc950f
-  position: {x: 14, y: 43}
+  position: {x: 14, y: 45}
   child: {fileID: 4659675284117644668}
 --- !u!114 &7130643456388243127
 MonoBehaviour:
@@ -168,9 +168,9 @@ MonoBehaviour:
     characterSpacing: 0
     wordSpacing: 0
     timeBetweenChars: 0.05
-    soundName: MaskDialogue4
-    soundGenerationType: 2
-    effectDistance: 0
+    soundName: MaskTalking
+    soundGenerationType: 0
+    effectDistance: 1
 --- !u!114 &9208040949133887538
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -187,7 +187,7 @@ MonoBehaviour:
   backgroundColor: {r: 1, g: 0.90202916, b: 0, a: 0.39215687}
   textColor: {r: 1, g: 1, b: 1, a: 1}
   ID: 2
-  selected: 0
+  selected: 1
   guid: 44dbc3a30143b884d83f588164bab7b3
   position: {x: 14, y: 224}
   child: {fileID: 4207210451816425443}
@@ -201,6 +201,6 @@ MonoBehaviour:
     characterSpacing: 0
     wordSpacing: 0
     timeBetweenChars: 0.05
-    soundName: MaskDialogue2
-    soundGenerationType: 2
-    effectDistance: 0
+    soundName: MaskTalking
+    soundGenerationType: 0
+    effectDistance: 1
